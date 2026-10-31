@@ -93,7 +93,9 @@ scores high here has drifted back to the default, whatever its subject.
 | 4 | Uppercase letter-spaced eyebrow label above headings | 6/7 | `text-transform: uppercase` + `letter-spacing` on a small label |
 | 5 | Pill-shaped chips or badges | 5/7 | `border-radius` ≥ 99px on small elements |
 
-Score 0–5. Re-measure when the model changes; this list went stale once already (C-001's
+Score 0–5. Traits 2 and 3 can fire falsely: IKEA's ink `#231F20` sits inside trait 2's
+range, and a status light that really is amber trips trait 3 (both happened in C-008).
+Check by eye before counting them. Re-measure when the model changes; this list went stale once already (C-001's
 Inter / purple / gradient list scored 0 on every page).
 
 ## Known weaknesses of this method

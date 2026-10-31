@@ -11,7 +11,7 @@ source_docs:
 problem: step-by-step-instructions
 also_teaches: [parts-inventory, multilingual-warnings, after-assembly-use]
 patterns: [picture-is-the-instruction, magnified-callout, right-wrong-pair, warn-at-point-of-use, id-repeated-at-point-of-use, device-only-when-needed, info-marker]
-art_style: technical line art, monochrome, isometric
+art_style: library/art-styles/technical-line-art-monochrome.md
 tested_in: [C-001, C-002, C-004]
 best_example: runs/c001/arm-b.html
 ---

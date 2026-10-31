@@ -6,7 +6,7 @@ source_docs:
 problem: <folder name under library/ — the problem this solves>
 also_teaches: [<other problems this source shows, which may get their own entries>]
 patterns: [<short kebab-case names for reusable ideas — reuse existing names where they fit>]
-art_style: <free text for now — see T-003>
+art_style: <path to a file in library/art-styles/ if one fits, else free text>
 tested_in: [<card IDs, or empty>]
 best_example: <path to the page that won a blind pick using this entry, or empty>
 ---

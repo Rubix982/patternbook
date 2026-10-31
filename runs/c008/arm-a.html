@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Router Troubleshooting</title>
+<style>
+:root{
+  --bg:#f4f1ea; --surface:#fffdf8; --surface-2:#ece7dc; --ink:#1d1f1c; --ink-2:#55584f; --line:#d8d1c2;
+  --accent:#1f6f5c; --accent-ink:#ffffff; --accent-soft:#d9ebe4;
+  --ok:#2f9a5d; --warn:#d99a1e; --bad:#c94a3a; --info:#3b78c4; --off:#b9b3a6;
+  --shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 24px -12px rgba(40,30,10,.18);
+  --radius:14px;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141614; --surface:#1c1f1c; --surface-2:#252925; --ink:#ecebe6; --ink-2:#a6a89f; --line:#343833;
+    --accent:#5fc3a6; --accent-ink:#0d1a16; --accent-soft:#1f3a32;
+    --off:#4a4d47; --shadow:0 1px 0 rgba(255,255,255,.03), 0 10px 30px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141614; --surface:#1c1f1c; --surface-2:#252925; --ink:#ecebe6; --ink-2:#a6a89f; --line:#343833;
+  --accent:#5fc3a6; --accent-ink:#0d1a16; --accent-soft:#1f3a32;
+  --off:#4a4d47; --shadow:0 1px 0 rgba(255,255,255,.03), 0 10px 30px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans)}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.top{border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.01em}
+.brand small{font-weight:500;color:var(--ink-2)}
+.theme-btn{background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+
+.hero{padding:40px 0 24px;display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center}
+.eyebrow{font:600 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}
+h1{font-size:clamp(28px,4.5vw,42px);line-height:1.1;margin:10px 0 12px;letter-spacing:-.02em}
+.lede{color:var(--ink-2);max-width:46ch;margin:0 0 18px}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px;text-decoration:none;color:var(--ink)}
+.chip:hover{border-color:var(--accent)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+section{padding:28px 0}
+h2{font-size:24px;letter-spacing:-.01em;margin:0 0 6px}
+.sub{color:var(--ink-2);margin:0 0 18px}
+
+/* router figure */
+.router-card{padding:18px}
+.router-card svg{width:100%;height:auto;display:block}
+.led-legend{display:flex;justify-content:space-between;gap:6px;margin-top:6px;font:600 11px/1.2 var(--mono);color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em}
+.led-btn{flex:1;background:none;border:1px solid transparent;border-radius:8px;padding:6px 2px;color:inherit;font:inherit;cursor:pointer}
+.led-btn[aria-pressed="true"]{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.led-info{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--surface-2);font-size:14px;min-height:84px}
+.led-info b{display:block;margin-bottom:4px}
+.state-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.state{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.blink{animation:blink 1s steps(2,start) infinite}
+.blink-fast{animation:blink .4s steps(2,start) infinite}
+@keyframes blink{to{visibility:hidden}}
+@media (prefers-reduced-motion: reduce){.blink,.blink-fast,.svg-blink{animation:none}}
+.svg-blink{animation:svgblink 1.2s steps(2,start) infinite}
+@keyframes svgblink{to{opacity:.15}}
+
+/* guided fixer */
+.fixer{display:grid;grid-template-columns:260px 1fr;gap:0;overflow:hidden}
+.symptoms{border-right:1px solid var(--line);padding:10px;background:var(--surface-2)}
+.sym{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;border-radius:10px;padding:10px;color:var(--ink);font:inherit;cursor:pointer}
+.sym:hover{background:var(--surface)}
+.sym[aria-selected="true"]{background:var(--surface);box-shadow:inset 3px 0 0 var(--accent)}
+.sym svg{flex:none;margin-top:2px;color:var(--accent)}
+.sym span small{display:block;color:var(--ink-2);font-size:13px}
+.steps-pane{padding:22px 24px}
+.progress{height:6px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin:10px 0 18px}
+.progress i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.meta{font:600 12px/1 var(--mono);color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:14px 0 14px 46px;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 14px/1 var(--mono);border:1.5px solid var(--line);color:var(--ink-2);background:var(--surface)}
+ol.steps li.current::before{border-color:var(--accent);color:var(--accent)}
+ol.steps li.done::before{content:"\2713";background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+ol.steps li.done .s-title{color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--line)}
+ol.steps li.later{opacity:.55}
+.s-title{font-weight:650;margin:0 0 4px}
+.s-body{color:var(--ink-2);margin:0;font-size:15px}
+.s-body code, .kbd{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:1px 6px;border-radius:5px;color:var(--ink)}
+.s-actions{display:none;gap:8px;margin-top:10px;flex-wrap:wrap}
+li.current .s-actions{display:flex}
+.btn{border-radius:9px;padding:8px 14px;font:600 14px/1.2 var(--sans);cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:focus-visible,.sym:focus-visible,.led-btn:focus-visible,.chip:focus-visible,.theme-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.result{display:none;margin-top:16px;padding:14px 16px;border-radius:10px;font-size:15px}
+.result.show{display:block}
+.result.good{background:var(--accent-soft)}
+.result.esc{background:color-mix(in srgb,var(--warn) 18%,var(--surface))}
+.reset-link{background:none;border:0;color:var(--ink-2);font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;padding:0;margin-top:14px}
+
+/* restart vs reset */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{padding:20px}
+.box h3{margin:6px 0 8px;font-size:18px}
+.box ol{margin:0;padding-left:20px;color:var(--ink-2)}
+.box ol li{margin:4px 0}
+.tag{font:700 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:6px;display:inline-block}
+.tag.safe{background:var(--accent-soft);color:var(--accent)}
+.tag.danger{background:color-mix(in srgb,var(--bad) 16%,var(--surface));color:var(--bad)}
+.note{margin-top:12px;font-size:14px;padding:10px 12px;border-left:3px solid var(--bad);background:var(--surface-2);border-radius:0 8px 8px 0}
+
+/* placement */
+.place{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;padding:20px}
+.place svg{width:100%;height:auto}
+.place ul{margin:0;padding:0;list-style:none}
+.place li{padding:8px 0 8px 28px;position:relative;border-top:1px solid var(--line);font-size:15px}
+.place li:first-child{border-top:0}
+.place li::before{content:"";position:absolute;left:4px;top:15px;width:10px;height:10px;border-radius:50%}
+.place li.y::before{background:var(--ok)}
+.place li.n::before{background:var(--bad)}
+
+/* faq */
+details{border-top:1px solid var(--line);padding:14px 4px}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 22px/1 var(--mono);color:var(--ink-2)}
+details[open] summary::after{content:"\2212"}
+details p{color:var(--ink-2);margin:8px 0 0}
+
+.support{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 24px;flex-wrap:wrap}
+.support h2{font-size:20px}
+.support p{margin:0;color:var(--ink-2)}
+.info-grid{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px;margin-top:10px}
+.info-grid dt{color:var(--ink-2)} .info-grid dd{margin:0;font-family:var(--mono)}
+footer{padding:28px 0 40px;color:var(--ink-2);font-size:13px}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;padding-top:28px}
+  .fixer{grid-template-columns:1fr}
+  .symptoms{border-right:0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:4px}
+  .sym span small{display:none}
+  .sym[aria-selected="true"]{box-shadow:inset 0 -3px 0 var(--accent)}
+  .two,.place{grid-template-columns:1fr}
+  .steps-pane{padding:18px 16px}
+}
+@media (max-width:420px){
+  .brand small{display:none}
+  ol.steps li{padding-left:40px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="19" r="2.4" fill="var(--accent)"/><path d="M6.5 13.5a9 9 0 0 1 13 0M3 10a14 14 0 0 1 20 0M9.8 16.6a4.6 4.6 0 0 1 6.4 0" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/></svg>
+      Fernhill R4 <small>&middot; Help Center</small>
+    </div>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">Theme</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Troubleshooting</div>
+      <h1>Let's get your Wi-Fi working again.</h1>
+      <p class="lede">Start by looking at the lights on the front of your router. They tell you where the problem is, usually before you have to try anything else.</p>
+      <div class="quick">
+        <a class="chip" href="#lights">Read the lights</a>
+        <a class="chip" href="#fixer">Step-by-step fixes</a>
+        <a class="chip" href="#reset">Restart or reset</a>
+        <a class="chip" href="#placement">Better coverage</a>
+      </div>
+    </div>
+
+    <div class="card router-card" id="lights">
+      <svg viewBox="0 0 400 210" role="img" aria-label="Front view of the router with five status lights">
+        <defs>
+          <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="var(--surface-2)"/>
+            <stop offset="1" stop-color="var(--line)"/>
+          </linearGradient>
+          <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+        <!-- antennas -->
+        <rect x="70" y="10" width="10" height="100" rx="5" fill="var(--ink-2)" opacity=".75" transform="rotate(-12 75 110)"/>
+        <rect x="320" y="10" width="10" height="100" rx="5" fill="var(--ink-2)" opacity=".75" transform="rotate(12 325 110)"/>
+        <!-- body -->
+        <path d="M40 112 Q40 98 56 98 H344 Q360 98 360 112 L372 168 Q374 182 358 182 H42 Q26 182 28 168 Z" fill="url(#body)" stroke="var(--ink-2)" stroke-opacity=".35"/>
+        <rect x="60" y="128" width="280" height="26" rx="13" fill="var(--bg)" opacity=".7"/>
+        <!-- feet -->
+        <rect x="70" y="182" width="40" height="7" rx="3" fill="var(--ink-2)" opacity=".5"/>
+        <rect x="290" y="182" width="40" height="7" rx="3" fill="var(--ink-2)" opacity=".5"/>
+        <!-- LEDs -->
+        <g id="leds"></g>
+        <text x="200" y="174" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="9" letter-spacing="3" fill="var(--ink-2)">FERNHILL</text>
+      </svg>
+      <div class="led-legend" id="ledLegend"></div>
+      <div class="led-info" id="ledInfo" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <section id="fixer">
+    <h2>What's going wrong?</h2>
+    <p class="sub">Pick the closest match. Work through the steps in order and stop as soon as it's fixed. Most problems are solved by step 2 or 3.</p>
+
+    <div class="card fixer">
+      <div class="symptoms" role="tablist" aria-label="Symptoms" id="symList"></div>
+      <div class="steps-pane" role="tabpanel" id="pane">
+        <div class="meta" id="paneMeta"></div>
+        <h3 style="margin:8px 0 0;font-size:20px" id="paneTitle"></h3>
+        <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+        <ol class="steps" id="steps"></ol>
+        <div class="result" id="result" aria-live="polite"></div>
+        <button class="reset-link" id="restartFlow" type="button">Start these steps over</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="reset">
+    <h2>Restart or factory reset?</h2>
+    <p class="sub">They sound alike but do very different things. Always try a restart first.</p>
+    <div class="two">
+      <div class="card box">
+        <span class="tag safe">Safe &middot; 3 minutes</span>
+        <h3>Restart (power cycle)</h3>
+        <ol>
+          <li>Unplug the power cable from the back of the router.</li>
+          <li>If you have a separate modem, unplug that too.</li>
+          <li>Wait a full 30 seconds.</li>
+          <li>Plug the modem in first and wait until its lights settle.</li>
+          <li>Plug the router in. Wait about 2 minutes for the Internet light to turn solid green.</li>
+        </ol>
+        <p style="color:var(--ink-2);font-size:14px;margin:12px 0 0">Your network name, password and settings stay exactly as they were.</p>
+      </div>
+      <div class="card box">
+        <span class="tag danger">Erases settings</span>
+        <h3>Factory reset</h3>
+        <ol>
+          <li>Leave the router powered on.</li>
+          <li>Find the small <b>RESET</b> hole on the back.</li>
+          <li>Press and hold it with a paperclip for <b>10 seconds</b>, until all lights flash amber.</li>
+          <li>Release. The router restarts in about 3 minutes.</li>
+          <li>Connect to the network printed on the sticker underneath and set it up again.</li>
+        </ol>
+        <div class="note">This removes your custom Wi-Fi name and password, parental controls and port settings. Every device in the house will need to reconnect.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="placement">
+    <h2>Where you put the router matters</h2>
+    <p class="sub">Wi-Fi gets weaker through walls, floors, water and metal. A better spot often beats any setting.</p>
+    <div class="card place">
+      <svg viewBox="0 0 360 240" role="img" aria-label="Floor plan showing the router in a central open spot with signal reaching every room">
+        <rect x="10" y="10" width="340" height="220" rx="6" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+        <line x1="150" y1="10" x2="150" y2="110" stroke="var(--ink-2)" stroke-width="3"/>
+        <line x1="150" y1="140" x2="150" y2="230" stroke="var(--ink-2)" stroke-width="3"/>
+        <line x1="10" y1="120" x2="110" y2="120" stroke="var(--ink-2)" stroke-width="3"/>
+        <line x1="250" y1="10" x2="250" y2="90" stroke="var(--ink-2)" stroke-width="3"/>
+        <line x1="250" y1="90" x2="350" y2="90" stroke="var(--ink-2)" stroke-width="3"/>
+        <g fill="var(--ok)">
+          <circle cx="200" cy="125" r="120" opacity=".07"/>
+          <circle cx="200" cy="125" r="80" opacity=".1"/>
+          <circle cx="200" cy="125" r="42" opacity=".16"/>
+        </g>
+        <rect x="186" y="116" width="28" height="16" rx="4" fill="var(--accent)"/>
+        <circle cx="194" cy="124" r="2" fill="var(--accent-ink)"/><circle cx="200" cy="124" r="2" fill="var(--accent-ink)"/><circle cx="206" cy="124" r="2" fill="var(--accent-ink)"/>
+        <!-- bad spot -->
+        <rect x="26" y="196" width="40" height="22" rx="3" fill="none" stroke="var(--bad)" stroke-width="2" stroke-dasharray="4 3"/>
+        <path d="M36 201 l20 12 M56 201 l-20 12" stroke="var(--bad)" stroke-width="2"/>
+        <g font-family="ui-monospace,Menlo,monospace" font-size="10" fill="var(--ink-2)">
+          <text x="30" y="36">Bedroom</text><text x="30" y="146">Kitchen</text>
+          <text x="166" y="36">Living room</text><text x="266" y="36">Office</text>
+          <text x="72" y="212" fill="var(--bad)">cabinet</text>
+          <text x="176" y="152" fill="var(--accent)">router</text>
+        </g>
+      </svg>
+      <ul>
+        <li class="y">Central in the home, about chest height, out in the open.</li>
+        <li class="y">Antennas pointing straight up, or one up and one sideways for multi-floor homes.</li>
+        <li class="n">Inside a cabinet, behind the TV, or on the floor.</li>
+        <li class="n">Next to a fish tank, mirror, microwave or cordless phone base.</li>
+        <li class="n">In a far corner or the basement, if most of the house is upstairs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Common questions</h2>
+    <div>
+      <details><summary>Where do I find my Wi-Fi name and password?</summary><p>If you've never changed them, they're printed on the sticker on the underside of the router, labelled <b>Network (SSID)</b> and <b>Wi-Fi key</b>. If you have changed them and forgotten, sign in to the router settings at <code class="kbd">192.168.1.1</code> from a connected device, or do a factory reset.</p></details>
+      <details><summary>What's the difference between the 2.4 GHz and 5 GHz networks?</summary><p>2.4 GHz reaches further and goes through walls better, but is slower and more crowded. 5 GHz is faster at short range. By default the R4 combines both under one name and moves devices between them automatically.</p></details>
+      <details><summary>Is the problem my router or my internet provider?</summary><p>Look at the Internet light. If it's red or off while the Power light is green, the router isn't receiving a connection from outside, which usually means the provider or the modem. If the Internet light is green but devices still can't load pages, the problem is more likely on the Wi-Fi side.</p></details>
+      <details><summary>How do I update the router's software?</summary><p>Updates install automatically overnight between 2 and 4 a.m. To check now, open the router settings, go to <b>System &rarr; Firmware</b> and press <b>Check for update</b>. Don't unplug the router while an update is running (Power light pulsing white).</p></details>
+      <details><summary>Should I restart the router regularly?</summary><p>You don't need to. If you find you're restarting it more than once a week to fix slowdowns, that's worth reporting to support, since it can point to overheating or a failing power adapter.</p></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="card support">
+      <div>
+        <h2>Still stuck?</h2>
+        <p>Have these ready when you contact support. It saves a lot of back-and-forth.</p>
+        <dl class="info-grid">
+          <dt>Model</dt><dd>Fernhill R4 (on sticker)</dd>
+          <dt>Serial</dt><dd>FH-R4-XXXXXXXX</dd>
+          <dt>Lights</dt><dd id="lightSummary">Tell us the colour of each light</dd>
+          <dt>Tried</dt><dd id="triedSummary">&mdash;</dd>
+        </dl>
+      </div>
+      <a class="btn primary" href="#fixer" style="text-decoration:none">Run the steps again</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">Fernhill R4 is a fictional product used for this help page. Steps are general guidance for home routers.</footer>
+
+<script>
+(function(){
+  /* ---------- theme ---------- */
+  var root=document.documentElement, tb=document.getElementById('themeBtn');
+  try{var saved=localStorage.getItem('rt-theme'); if(saved) root.setAttribute('data-theme',saved);}catch(e){}
+  function isDark(){var t=root.getAttribute('data-theme'); if(t) return t==='dark'; return window.matchMedia('(prefers-color-scheme: dark)').matches;}
+  function label(){tb.textContent=isDark()?'Light mode':'Dark mode';}
+  label();
+  tb.addEventListener('click',function(){var n=isDark()?'light':'dark'; root.setAttribute('data-theme',n); try{localStorage.setItem('rt-theme',n);}catch(e){} label();});
+
+  /* ---------- LEDs ---------- */
+  var C={ok:'var(--ok)',warn:'var(--warn)',bad:'var(--bad)',info:'var(--info)',off:'var(--off)',white:'#f4f4f0'};
+  var LEDS=[
+    {id:'power',name:'Power',icon:'M0-6v6M-4.5-3.5a6 6 0 1 0 9 0',states:[
+      ['ok','solid','Solid green','Powered on and working normally.'],
+      ['white','blink','Pulsing white','Starting up or updating. Leave it alone for up to 5 minutes.'],
+      ['off','solid','Off','No power. Check the adapter is plugged in firmly at both ends and the wall socket works.']]},
+    {id:'internet',name:'Internet',icon:'M-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0M-6 0h12M0-6c-3 3-3 9 0 12M0-6c3 3 3 9 0 12',states:[
+      ['ok','solid','Solid green','Connected to the internet.'],
+      ['warn','blink','Blinking amber','Trying to connect. Normal for up to 2 minutes after a restart.'],
+      ['bad','solid','Solid red','No internet signal coming in. Go to "No internet at all" below.']]},
+    {id:'wifi',name:'Wi-Fi',icon:'M0 5a1 1 0 1 0 .01 0M-5-1a7 7 0 0 1 10 0M-8-4a11 11 0 0 1 16 0',states:[
+      ['ok','solid','Solid green','Wi-Fi is broadcasting on both bands.'],
+      ['ok','blink','Flickering green','Data is moving. This is normal.'],
+      ['off','solid','Off','Wi-Fi is switched off. Press the Wi-Fi button on the side once.']]},
+    {id:'lan',name:'Ethernet',icon:'M-6-4h12v7h-12zM-3 3v3M3 3v3M-3-1h1M2-1h1',states:[
+      ['ok','solid','Solid green','A wired device is plugged in.'],
+      ['off','solid','Off','Nothing is plugged into the yellow ports. Fine if you only use Wi-Fi.']]},
+    {id:'wps',name:'WPS',icon:'M-5 0a5 5 0 1 0 10 0a5 5 0 1 0-10 0M0-5v-3M0 5v3M-5 0h-3M5 0h3',states:[
+      ['info','blink','Blinking blue','Pairing mode is on for 2 minutes. Press WPS on your device now.'],
+      ['ok','solid','Solid green (5 s)','A device paired successfully.'],
+      ['off','solid','Off','Normal. WPS is idle.']]}
+  ];
+  var cur={power:0,internet:0,wifi:0,lan:1,wps:2}; var sel='internet';
+  var g=document.getElementById('leds'), legend=document.getElementById('ledLegend'), info=document.getElementById('ledInfo');
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  LEDS.forEach(function(L,i){
+    var x=100+i*50, y=141;
+    var grp=el('g',{'data-id':L.id,style:'cursor:pointer'});
+    grp.appendChild(el('circle',{cx:x,cy:y,r:9,'class':'halo',filter:'url(#glow)',opacity:.7}));
+    grp.appendChild(el('circle',{cx:x,cy:y,r:5.5,'class':'core'}));
+    grp.appendChild(el('path',{d:L.icon,transform:'translate('+x+' 116) scale(.9)',fill:'none',stroke:'var(--ink-2)','stroke-width':1.6,'stroke-linecap':'round'}));
+    grp.addEventListener('click',function(){select(L.id);});
+    g.appendChild(grp);
+    var b=document.createElement('button'); b.type='button'; b.className='led-btn'; b.textContent=L.name; b.dataset.id=L.id;
+    b.addEventListener('click',function(){select(L.id);}); legend.appendChild(b);
+  });
+  function paint(){
+    LEDS.forEach(function(L){
+      var s=L.states[cur[L.id]], grp=g.querySelector('[data-id="'+L.id+'"]');
+      var col=C[s[0]];
+      grp.querySelector('.core').setAttribute('fill',col);
+      var h=grp.querySelector('.halo'); h.setAttribute('fill',col); h.setAttribute('opacity',s[0]==='off'?0:.7);
+      grp.setAttribute('class',s[1]==='blink'?'svg-blink':'');
+    });
+    legend.querySelectorAll('.led-btn').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.id===sel?'true':'false');});
+    var L=LEDS.filter(function(x){return x.id===sel;})[0];
+    var html='<b>'+L.name+' light &mdash; tap a colour to see what it means</b><div class="state-row">';
+    L.states.forEach(function(s,i){
+      html+='<button type="button" class="btn" data-si="'+i+'" style="padding:5px 10px;font-weight:500;'+(i===cur[sel]?'border-color:var(--accent)':'')+'"><span class="state"><span class="dot '+(s[1]==='blink'?'blink':'')+'" style="background:'+C[s[0]]+'"></span>'+s[2]+'</span></button>';
+    });
+    html+='</div><p style="margin:8px 0 0">'+L.states[cur[sel]][3]+'</p>';
+    info.innerHTML=html;
+    info.querySelectorAll('[data-si]').forEach(function(b){b.addEventListener('click',function(){cur[sel]=+b.dataset.si;paint();});});
+    document.getElementById('lightSummary').textContent=LEDS.map(function(L){return L.name+': '+L.states[cur[L.id]][2].toLowerCase();}).join(', ');
+  }
+  function select(id){sel=id;paint();}
+  paint();
+
+  /* ---------- guided fixer ---------- */
+  var ic={
+    globe:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c-3 3-3 12 0 15M10 2.5c3 3 3 12 0 15"/><path d="M4 16 16 4" stroke-width="2"/></svg>',
+    slow:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 14a7 7 0 1 1 14 0"/><path d="M10 14 6.5 9"/></svg>',
+    drop:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 7a12 12 0 0 1 16 0M5 10.5a7.5 7.5 0 0 1 10 0"/><path d="M8.5 14h3" stroke-dasharray="1.5 2"/></svg>',
+    find:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4.5 4.5"/></svg>',
+    key:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="6.5" cy="10" r="3.5"/><path d="M10 10h8M15 10v3M17.5 10v2"/></svg>',
+    phone:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="6" y="2.5" width="8" height="15" rx="2"/><path d="M9 14.5h2" stroke-linecap="round"/></svg>'
+  };
+  var FLOWS=[
+    {id:'none',icon:'globe',title:'No internet at all',hint:'Nothing loads on any device',steps:[
+      ['Check the Internet light','If it\'s <b>solid red</b>, the router isn\'t getting a signal from outside. If it\'s green, skip to step 4.'],
+      ['Check the cable from the wall','Make sure the cable in the blue <b>WAN</b> port is clicked in firmly at both ends, the router and the wall socket or modem.'],
+      ['Restart the modem and router','Unplug both, wait 30 seconds, plug the modem in first, then the router. Give it 2 full minutes.'],
+      ['Try a device on a cable','Plug a laptop into a yellow port. If that works, the problem is Wi-Fi, so pick "Wi-Fi keeps dropping" instead.'],
+      ['Check for an outage','Use mobile data to look at your internet provider\'s service status page, or call them. Outages are the most common cause when everything above looks fine.']]},
+    {id:'slow',icon:'slow',title:'Internet is slow',hint:'Pages load, but slowly',steps:[
+      ['Run a speed test near the router','Stand in the same room. If it\'s fast there but slow elsewhere, it\'s a coverage problem; see the placement tips below.'],
+      ['Look for heavy users','Big downloads, game updates, cloud backups and 4K streams on other devices can use most of your connection. Pause them and test again.'],
+      ['Restart the router','Unplug for 30 seconds. This clears a busy memory and picks a fresh, less crowded channel.'],
+      ['Connect to 5 GHz','If you\'ve split the bands, join the network ending in <code>-5G</code> when you\'re within a room or two of the router.'],
+      ['Compare to your plan','A wired speed test shows what your provider is really delivering. If it\'s well under what you pay for, contact them.']]},
+    {id:'drop',icon:'drop',title:'Wi-Fi keeps dropping',hint:'Connects, then cuts out',steps:[
+      ['Move closer and watch','If drops stop near the router, signal strength is the cause. Try a more central spot.'],
+      ['Move it away from interference','Microwaves, baby monitors, cordless phones and metal shelves all disrupt Wi-Fi. Give the router a metre of space.'],
+      ['Restart the router','Unplug for 30 seconds, then plug back in.'],
+      ['Check it isn\'t overheating','The top should feel warm, not hot. Make sure the vents aren\'t covered and it isn\'t stacked on other electronics.'],
+      ['Update the firmware','In the router settings go to <b>System &rarr; Firmware &rarr; Check for update</b>. Older versions have known stability fixes.']]},
+    {id:'find',icon:'find',title:'Can\'t see my network',hint:'Name missing from the list',steps:[
+      ['Check the Wi-Fi light','If it\'s <b>off</b>, press the Wi-Fi button on the side of the router once.'],
+      ['Wait for start-up to finish','After a restart the network takes about 2 minutes to appear. The Power light should be solid green, not pulsing.'],
+      ['Turn your device\'s Wi-Fi off and on','This makes it scan again. On phones, toggling airplane mode does the same.'],
+      ['Look for the sticker name','If the router was reset, the network is back to the name on the sticker underneath, not the one you chose.']]},
+    {id:'pass',icon:'key',title:'Wrong or forgotten password',hint:'Won\'t accept the password',steps:[
+      ['Check the sticker','If you never changed it, the password is the <b>Wi-Fi key</b> under the router. It\'s case-sensitive.'],
+      ['Forget the network and rejoin','On your device, remove the saved network, then connect again and type the password fresh.'],
+      ['Look it up on a connected device','Any computer already on the network can show it. Or sign in to <code>192.168.1.1</code> and open <b>Wi-Fi &rarr; Security</b>.'],
+      ['Factory reset as a last resort','This sets the password back to the sticker. It also erases your other settings, so read the reset section first.']]},
+    {id:'one',icon:'phone',title:'Only one device has trouble',hint:'Others work fine',steps:[
+      ['Restart the device','A full restart, not just locking the screen.'],
+      ['Forget the network and rejoin','Remove the saved Wi-Fi network on that device, then connect again.'],
+      ['Turn off private address / VPN briefly','Some VPNs and "private Wi-Fi address" settings conflict with home networks. Switch off to test.'],
+      ['Check it isn\'t blocked','In the router settings, look under <b>Devices</b> and <b>Parental controls</b> for a pause or block on that device.'],
+      ['Update the device','Install pending system updates. Older Wi-Fi drivers are a common cause on laptops.']]}
+  ];
+  var state={}; var active=FLOWS[0].id;
+  var list=document.getElementById('symList'), stepsEl=document.getElementById('steps'), result=document.getElementById('result');
+  FLOWS.forEach(function(f){
+    state[f.id]={i:0,done:false,esc:false};
+    var b=document.createElement('button'); b.type='button'; b.className='sym'; b.setAttribute('role','tab'); b.dataset.id=f.id;
+    b.innerHTML=ic[f.icon]+'<span>'+f.title+'<small>'+f.hint+'</small></span>';
+    b.addEventListener('click',function(){active=f.id;render();});
+    list.appendChild(b);
+  });
+  function render(){
+    var f=FLOWS.filter(function(x){return x.id===active;})[0], s=state[active];
+    list.querySelectorAll('.sym').forEach(function(b){b.setAttribute('aria-selected',b.dataset.id===active?'true':'false');});
+    document.getElementById('paneTitle').textContent=f.title;
+    var shown=s.done?s.i+1:s.esc?f.steps.length:s.i;
+    document.getElementById('paneMeta').textContent=s.done?'Fixed':'Step '+Math.min(s.i+1,f.steps.length)+' of '+f.steps.length;
+    document.getElementById('bar').style.width=(s.done?100:(shown/f.steps.length*100))+'%';
+    stepsEl.innerHTML='';
+    f.steps.forEach(function(st,i){
+      var li=document.createElement('li');
+      var cls=(i<s.i||(s.esc&&i<=s.i))?'done':(i===s.i&&!s.done&&!s.esc)?'current':(s.done&&i===s.i)?'done':'later';
+      if(s.done&&i>s.i) cls='later';
+      li.className=cls;
+      li.innerHTML='<p class="s-title">'+st[0]+'</p><p class="s-body">'+st[1]+'</p>'+
+        '<div class="s-actions"><button type="button" class="btn primary" data-a="yes">That fixed it</button><button type="button" class="btn" data-a="no">'+(i===f.steps.length-1?'Still not working':'Still not working, next step')+'</button></div>';
+      stepsEl.appendChild(li);
+    });
+    stepsEl.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){
+      if(b.dataset.a==='yes'){s.done=true;} else if(s.i>=f.steps.length-1){s.esc=true;} else {s.i++;}
+      render();
+      var c=stepsEl.querySelector('.current'); if(c){var bt=c.querySelector('.btn'); if(bt) bt.focus({preventScroll:true});}
+    });});
+    result.className='result'; result.innerHTML='';
+    if(s.done){result.className='result show good'; result.innerHTML='<b>Good, you\'re back online.</b> If it happens again, starting from step '+(s.i+1)+' will usually be quickest.';}
+    else if(s.esc){result.className='result show esc'; result.innerHTML='<b>Time to contact support.</b> You\'ve ruled out the common causes, which will make the call much shorter. The details they\'ll ask for are listed at the bottom of this page.';}
+    var tried=FLOWS.filter(function(x){var y=state[x.id];return y.i>0||y.done||y.esc;}).map(function(x){var y=state[x.id];return x.title+' ('+(y.esc?'all':(y.i+(y.done?1:0)))+' steps)';});
+    document.getElementById('triedSummary').textContent=tried.length?tried.join('; '):'—';
+  }
+  document.getElementById('restartFlow').addEventListener('click',function(){state[active]={i:0,done:false,esc:false};render();});
+  render();
+})();
+</script>
+</body>
+</html>

@@ -20,11 +20,11 @@ value is just *any* specific instruction, not human sources.
 
 ### T-003 · Should art style be its own axis, separate from the problem an entry solves?
 
-**Status:** open
+**Status:** answered
 **Parent:** C-001
 **Opened:** 2026-10-31
 **Question:** In C-001 the no-entry page had a coherent art style (Saif: retro, 1980s, "cool") that was wrong for the job (reads as a presentation, not a manual). Suggests purpose and art style vary independently: an entry should say which art style fits its problem and why, and the library may need art styles classified on their own (e.g. technical line art vs. editorial vs. retro print). Candidate `art_style` field in the T-002 header.
-**Answer:** —
+**Answer:** C-008 — yes. IKEA's visual system alone (library/art-styles/) won both blind questions on a router page, same length as the unguided one. Style pulled some structure with it (numbered picture panels).
 
 ### T-004 · Replace C-001's default-marker checklist with the current AI default
 
@@ -64,4 +64,4 @@ value is just *any* specific instruction, not human sources.
 **Parent:** C-007
 **Opened:** 2026-10-31
 **Question:** The unguided agent already applies symptom-first, cause-order, escalation and not-a-fault. Saif liked its "attempt of visualization" but called both pages AI-looking. Candidates the entry could carry instead: the visual language (both pages still look AI-made), and the medium choice (reference vs one-step-at-a-time). Needs a baseline-first pass (METHOD 2b) before rewriting.
-**Answer:** —
+**Answer:** — (C-008 suggests: pair the existing structure rules with an art-style file; test that pairing before adding more structure.)

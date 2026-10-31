@@ -23,3 +23,5 @@ Agent-run timings, because they matter for the effort confound:
 | c005/* (five briefs, no guidance) | ~1–3.5 min each | 17–44 KB |
 | c007/arm-a (no guidance) | ~2.5 min | 35 KB |
 | c007/arm-b (troubleshooting entry) | ~2.5 min | 40 KB |
+| c008/arm-a (no guidance) | ~2.5 min | 34 KB |
+| c008/arm-b (art style only) | ~3.5 min | 31 KB |

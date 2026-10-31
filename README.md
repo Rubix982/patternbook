@@ -13,8 +13,11 @@ or catalogue looks.
 
 ## For an agent using the library
 
-1. Find the folder in `library/` that matches the problem your page solves:
-   `step-by-step-instructions/` or `troubleshooting-by-symptom/`.
+1. Pick two things separately:
+   - a **problem entry**: the folder in `library/` that matches what your page has to do
+     (`step-by-step-instructions/`, `troubleshooting-by-symptom/`);
+   - an **art style** from `library/art-styles/` for how it looks. C-008 showed the style
+     alone can move a page off the AI look, even on a problem it wasn't drawn from.
 2. Read the entry. Follow **section 4 (rules)**, and check **section 5** to see whether
    your case is one where it doesn't apply.
 3. If the entry lists a `best_example`, that's a page an agent built from it which won
@@ -23,7 +26,8 @@ or catalogue looks.
 ## Layout
 
 ```
-library/<problem>/<source>.md   entries (template: library/_template.md)
+library/<problem>/<source>.md   problem entries (template: library/_template.md)
+library/art-styles/<style>.md   art styles, used alongside any problem entry
 METHOD.md                       how an entry is made and tested
 CARD.md                         the open card, and closed ones with results
 threads.md                      open questions, not yet worked on
@@ -60,6 +64,11 @@ sources/                        local copies of source documents (git-ignored)
   followed 5–6 of its 6 rules, one step at a time; the entry's page copied the printed
   manuals' exhaustive tables (6× the words) and was harder to use. Lesson now in METHOD.md
   step 2b: check what the agent already does before writing an entry.
+
+- **C-008:** IKEA's visual system on its own, as an art-style file with no structural rules,
+  given for the router page. It won both questions against an unguided page of the same
+  length (591 vs 609 words). So art style is its own axis, and in this case it was the part
+  that read as AI-made.
 
 One brief, one run per arm, and one judge. See each card's limits.
 

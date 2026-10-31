@@ -14,6 +14,111 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-008 · Does a human-sourced art style, given alone, stop a page looking AI-made?
+
+**Status:** closed
+**Opened:** 2026-10-31
+**From:** T-003
+
+**1. Where we are.**
+In C-007 the unguided router page already had the right troubleshooting structure, and Saif
+still called both pages AI-looking; IKEA's entry, whose rules are largely visual, won both
+of its blind tests.
+
+**2. What we are doing.**
+Give two fresh agents the C-007 router-troubleshooting brief: one with no guidance, one with
+only `library/art-styles/technical-line-art-monochrome.md` (IKEA's visual system, no
+structural rules). Then put the two pages in a blind pick.
+
+Both pages are new; Saif has seen C-007's.
+
+Measures:
+- **Blind pick:** (a) which looks less AI-made [primary]; (b) which would I rather have open
+  when my internet is down.
+- **Default checklist (0–5)** and `css-profile.py` on both.
+- **Style adherence (0–6)** on the styled page: white page; ink + ≤2 greys only (status-light
+  colour allowed per the file's exception); one sans family, two weights; line art with two
+  weights; circular callout with leader; square corners / no pills or shadows.
+- Words, time, size.
+
+**3. Why.**
+We don't know whether art style is a separate axis that can be moved from one problem to
+another. If it is, the library should hold art styles as their own entries, apart from the
+problem entries (T-003). If it isn't, IKEA's wins came from its style and structure together.
+
+**4. What is affected.**
+- Whether `library/art-styles/` stays as a separate axis, and the entry template's
+  `art_style` field.
+- T-008: whether the troubleshooting entry should borrow a visual style rather than more structure.
+- The README's account of what makes a page look AI-made.
+
+**5. Conclusion.**
+- **If** the styled page wins (a) → we claim *a human-sourced art style moves a page off the
+  AI look on its own, on a problem it wasn't drawn from*; art styles become their own axis.
+- **If** it ties or loses (a) → we claim *the visual system alone doesn't remove the AI look*;
+  what reads as AI-made lies elsewhere (layout patterns, copy, interaction), and the next card
+  asks Saif to point at it.
+- **If** it wins (a) but loses (b) → record that the style cost usability on this content
+  (likely candidate: colour-coded status lights).
+
+**6. If not done.**
+We'd keep guessing whether "looks AI-made" is about visuals or structure, and T-008 would be
+rewritten blind.
+
+**Limits (known before running):** n = 1 per arm; same judge, who knows the hypothesis; the
+art-style file's colour exception (for status lights) is mine, not from IKEA; the style file
+was derived from an entry that already won, so it isn't a random style.
+
+**Result (2026-10-31):** first branch. **The art-style page won both questions.**
+
+| | (a) less AI-made | (b) use while internet is down | Style adherence | Default checklist | Words | Time | Size |
+|---|---|---|---|---|---|---|---|
+| Art style only (`arm-b.html`, page 1) | **won** | **won** | 6/6 | 2/5\* | 591 | ~3.5 min | 31 KB |
+| No guidance (`arm-a.html`, page 2) | lost | lost | — | 5/5 | 609 | ~2.5 min | 34 KB |
+
+\* Both of the styled page's checklist hits are false positives. Its ink `#231F20` falls inside
+the "warm near-black" range because that range overlaps IKEA's ink, and its amber is the
+status-light colour the style file allows. Its real default score is 0/5.
+
+The two pages are nearly the same length (591 vs 609 words) and took similar time, so this
+result isn't about how much content or effort went in, unlike C-001.
+
+What the styled page did:
+- White page, `#231F20` ink, Helvetica in two weights. Colour (green `#2E9E4F`, amber
+  `#E59A0B`) appears **only on the drawn status-light dots**, which is the file's exception
+  as written.
+- Isometric line drawing of the router with a circular magnified callout joined by a leader
+  line; numbered picture panels for each fix; square frames (4px radius), no pills, no shadows,
+  no uppercase labels.
+- It also organised the page as "1 Find the four lights → 2 Match the pattern → go to
+  letter A/B/C/U", and each letter is a run of numbered picture panels. **The style file has
+  no structural rules**, so this came from the agent combining the drawing devices with the
+  task. Style and structure aren't fully separable: a visual system that's built around
+  numbered drawings pulls the page toward step-by-step panels.
+
+The unguided page again hit the full default: cream `#f4f1ea`, warm near-black text,
+uppercase "TROUBLESHOOTING" eyebrow, pill chips, rounded shadowed cards.
+
+**Claim:** for this brief, a visual system taken from a human source, with no structural
+guidance, moved the page off the AI look and made it the one Saif would use. Read with C-007,
+where the same problem with good *structure* still looked AI-made, the AI look here sat in
+the visual language, not the organisation.
+
+**What this doesn't show:** the style was taken from an entry that had already won, so a
+random human style might do less; n = 1; the colour exception was mine and it was needed
+(the page uses it); the styled agent couldn't screenshot its own work, and the unguided one's
+ability to wasn't checked.
+
+**Changes made:**
+- `library/art-styles/` is kept as its own axis: `tested_in: [C-008]`, best example recorded.
+- README: an agent picks a **problem entry and an art-style file**, separately.
+- Template: `art_style` now points to a file in `library/art-styles/` when one exists.
+- T-003 answered; T-008 updated (a troubleshooting page should pair structure with a style).
+
+**Closed:** 2026-10-31
+
+---
+
 ## C-007 · Does the troubleshooting entry beat the default on a router troubleshooting page?
 
 **Status:** closed
