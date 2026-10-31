@@ -17,9 +17,15 @@ is organised. Pair it with whatever entry fits the page's problem.
 Don't copy IKEA's logo, mascot, typeface or drawings. The system below is generic.
 
 > **Tested in C-008:** given alone (no structural entry) for a router-troubleshooting page, it
-> won both blind questions against an unguided page of the same length. The agent also
+> won both blind questions against an unguided page of the same length. That means *less
+> AI-made than the default*, not *reads as human* (see C-010). The agent also
 > pulled the page toward numbered picture panels, so expect this style to bring some
 > step-by-step structure with it.
+
+> **C-010:** shown again alongside other pages, the judge called this style's page cold and
+> empty ("neat and clean… unremarkable cold finish… very unhuman"; "Empty spaces"). Print's
+> generous white space reads as sterile on screen. Give the page a real header that orients
+> the reader, and don't leave large empty areas.
 
 ## Palette
 

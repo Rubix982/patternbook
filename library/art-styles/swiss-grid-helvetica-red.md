@@ -23,6 +23,11 @@ identity marks still aren't free to use.
 > page is itself a look agents already produce; the page also had no side margin. Add a side
 > gutter (at least 24px) if you use this file.
 
+> **C-010:** shown again alongside other pages, the judge called this style's page cold and
+> empty ("neat and clean… unremarkable cold finish… very unhuman"; "Empty spaces"). Print's
+> generous white space reads as sterile on screen. Give the page a real header that orients
+> the reader, and don't leave large empty areas.
+
 ## Palette
 
 Measured from the manual's colour-standard swatches (p. 1.5). It's a scan of a printed page,

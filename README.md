@@ -17,8 +17,9 @@ or catalogue looks.
    - a **problem entry**: the folder in `library/` that matches what your page has to do
      (`step-by-step-instructions/`, `troubleshooting-by-symptom/`);
    - an **art style** from `library/art-styles/` for how it looks. One of the two styles
-     so far (IKEA line art, C-008) moved a page off the AI look on its own; the other
-     (NASA typographic, C-009) didn't. Check a style's `tested_in` before relying on it.
+     so far (IKEA line art, C-008) made a page read *less* AI-made than the default; the
+     other (NASA typographic, C-009) didn't. Neither reads as human yet: in C-010 the judge
+     found both styled pages cold and empty. Check a style's `tested_in` before relying on it.
 2. Read the entry. Follow **section 4 (rules)**, and check **section 5** to see whether
    your case is one where it doesn't apply.
 3. If the entry lists a `best_example`, that's a page an agent built from it which won
@@ -75,6 +76,12 @@ sources/                        local copies of source documents (git-ignored)
   CLI-docs page. The agent followed it closely, but Saif called both pages AI-made and
   preferred the unguided one to use. So C-008 doesn't generalise to "any human style" yet.
   The palette checklist scored the pages 0/5 vs 5/5 and didn't predict the judgement.
+
+- **C-010:** the judge marked six judged pages for what reads AI-made. No palette trait was
+  named. What was named: cold, empty white space (on both human-style pages), a missing
+  header, enthusiastic copy, perfect vector drawings, too much text. That's now METHOD.md's
+  judge's checklist. The C-008 winner drew the most criticism, so "less AI-made than the
+  default" is as far as that result goes.
 
 One brief, one run per arm, and one judge. See each card's limits.
 

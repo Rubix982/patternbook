@@ -14,6 +14,104 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-010 · What does the human judge actually see as AI-made?
+
+**Status:** closed
+**Opened:** 2026-10-31
+**From:** T-009
+
+**1. Where we are.**
+The C-005 palette checklist failed to predict Saif's "AI-made" judgement twice (C-007, C-009):
+pages scoring 0/5 were still called AI-made.
+
+**2. What we are doing.**
+Saif writes, for each of six judged pages shown shuffled as A–F (`runs/c010/sheet.html`;
+mapping in `runs/c010/order.txt`, not shown), the specific elements that read as AI-made.
+I then sort every named element into "already on the C-005 checklist" or "not on it".
+
+The six: both arms of C-007, C-008 and C-009 (router ×4, CLI docs ×2), including the one
+page Saif judged *less* AI-made (C-008 line-art).
+
+**3. Why.**
+We don't know what the judge is reacting to. Every "less AI-made" result in this project
+rests on that judgement, and the only automated measure we have doesn't track it.
+
+**4. What is affected.**
+- METHOD.md's default checklist: kept, extended, or replaced by one drawn from the judge's words.
+- Candidate reasons in C-009 (typographic style reads as AI; broken margin; familiar docs layout).
+- What the next art-style file must avoid.
+
+**5. Conclusion.**
+- **If** at least half the elements Saif names are not on the C-005 checklist → we claim *the
+  palette checklist measures the wrong thing*, and build a new checklist from Saif's words
+  (elements named on ≥2 pages).
+- **If** most named elements are already on it → we claim *the checklist names the right
+  things but misses how they combine*, and keep it with a note.
+- Either way: if the C-008 line-art page gets the fewest named elements, that's consistent
+  with its blind win; if it doesn't, the C-008 win needs re-examining.
+
+**6. If not done.**
+Every "less AI-made" claim keeps resting on a measure we can't explain, and new styles get
+written to avoid tells nobody has named.
+
+**Limits (known before running):** one judge, who has already seen these pages and knows some
+results; written answers, so things that are hard to name may be missed; I do the sorting.
+
+**Result (2026-10-31):** first branch, and the side check went against C-008.
+
+Saif's notes, matched to pages after answering (`runs/c010/order.txt`):
+
+| | Page | Saif's words |
+|---|---|---|
+| A | C-008 IKEA line-art style (won C-008) | "the wide margins are so… neat and clean, it has an unremarkable cold finish that makes it very unhuman, the top part is always so empty and fragile, and little, the header section is almost non existent, and goes right off into the part assuming you know what you are looking for" |
+| B | C-008 unguided | "The language is very… enthusiastic, very unnatural and uncanny like" |
+| C | C-007 unguided (won "would use") | "Visuals are very polygon-ish, no streaks, no flares, none of that human-touch" |
+| D | C-009 NASA style | "Empty spaces" |
+| E | C-009 unguided | "Very standard — fitting perhaps, as a very technical page" |
+| F | C-007 troubleshooting entry | "Too much text!" |
+
+**Elements named, sorted:**
+
+| Element | Pages | On the C-005 checklist? |
+|---|---|---|
+| Too-clean, empty white space; cold, sterile finish | A, D | no |
+| Missing or weak header; no orientation before the content | A | no |
+| Enthusiastic, uncanny copy voice | B | no |
+| Perfect, geometric vector drawings with no texture or marks | C | no |
+| Too much text | F | no |
+| Generic, standard layout (but "fitting") | E | partly: that's what the checklist's five traits add up to |
+
+**Not one element Saif named is a palette trait.** Cream, terracotta, pills and eyebrows (the
+whole C-005 checklist) weren't mentioned on any page. So the checklist was measuring
+something real (the agent's default) but not what this judge reads as AI-made.
+
+**The element named twice is emptiness, and it was named on both human-style pages** (A IKEA
+line art, D NASA typographic). Both style files carried over print's generous white space.
+On screen, Saif reads that as cold and unhuman.
+
+**Side check: the C-008 line-art page got the *most* criticism (3 elements), not the fewest.**
+That doesn't contradict its blind win, which was relative ("less AI-made than the other
+page"), and the other page's uncanny copy may have decided it. But it means C-008 showed
+*less AI-made than the default*, not *reads as human*. The README and art-style file
+overstated it.
+
+**Claim:** for this judge, a page reads as AI-made through emptiness and sterility, copy voice,
+perfect vector drawing, and too much text, not through palette. The two human-sourced styles
+so far fixed the palette and brought emptiness with them.
+
+**Changes made:**
+- METHOD.md: a second checklist, **the judge's checklist**, from Saif's words; the palette
+  checklist is kept but relabelled as "the agent's default", not "AI-looking".
+- README and the line-art style file: C-008 restated as relative ("less AI-made than the
+  default"), with C-010's criticism attached.
+- Both style files: a note that print's white space read as cold and empty on screen.
+- T-010 opened: what does "human touch" look like on a web page? (Saif's words: streaks,
+  flares, a real header, a voice that isn't enthusiastic.)
+
+**Closed:** 2026-10-31
+
+---
+
 ## C-009 · Does a second, unrelated human art style also move a page off the AI look?
 
 **Status:** closed

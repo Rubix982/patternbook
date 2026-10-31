@@ -68,8 +68,16 @@ value is just *any* specific instruction, not human sources.
 
 ### T-009 · What, specifically, makes Saif read a page as AI-made?
 
-**Status:** open
+**Status:** answered
 **Parent:** C-009
 **Opened:** 2026-10-31
 **Question:** The palette checklist (C-005) didn't predict Saif's judgement in C-007 or C-009. Show Saif the pages judged so far (winners and losers) and have them mark what gives each away — specific elements, not overall impressions — then turn those into a checklist built from a human judge rather than from unguided output. Candidates already suggested: drawing-led vs. typographic styles (C-008 vs C-009), familiar docs furniture, broken layout.
+**Answer:** C-010 — judge's checklist in METHOD.md. No palette trait named; emptiness/cold finish named on both human-style pages.
+
+### T-010 · What does "human touch" look like on a web page, in a form an agent can follow?
+
+**Status:** open
+**Parent:** C-010
+**Opened:** 2026-10-31
+**Question:** Saif's tells point to what's missing: texture and marks in drawings ("streaks, flares"), a real header that orients you, a voice that isn't enthusiastic, density between empty and wall-of-text. Find human-made web or print sources that have these (e.g. hand-drawn or textured technical illustration, editorial headers, plain-spoken copy) and test whether adding them to the line-art style fixes the "cold and empty" reading.
 **Answer:** —

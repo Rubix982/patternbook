@@ -80,7 +80,26 @@ An entry isn't trusted until it beats something in a blind pick. Open a card in
    run showed was wrong with the card's measures. Update the entry's `tested_in` and
    `best_example`.
 
+## The judge's checklist (from Saif's notes, C-010, 2026-10-31)
+
+What the human judge named as reading AI-made, across six judged pages. **No palette trait
+was named.** Use this to predict "less AI-made"; use the default checklist below only to
+tell whether a page fell back to the agent's own house style.
+
+| # | Tell | Named on | Saif's words |
+|---|---|---|---|
+| 1 | Too-clean, empty white space; cold, sterile finish | 2 pages (both human-style pages) | "neat and clean… unremarkable cold finish… very unhuman"; "Empty spaces" |
+| 2 | Missing or weak header; the page starts without orienting you | 1 | "the header section is almost non existent… assuming you know what you are looking for" |
+| 3 | Enthusiastic, uncanny copy voice | 1 | "very enthusiastic, very unnatural and uncanny" |
+| 4 | Perfect geometric vector drawings, no texture or marks | 1 | "polygon-ish, no streaks, no flares, none of that human-touch" |
+| 5 | Too much text | 1 | "Too much text!" |
+
+One judge, six pages. Items named once are candidates, not established.
+
 ## The default checklist (measured in C-005, 2026-10-31)
+
+This measures **the agent's house style**, not "looks AI-made". In C-007 and C-009 it didn't
+predict the judge's call, and in C-010 the judge named none of its traits.
 
 What this agent builds when given no style, across 7 pages on 6 subjects. A page that
 scores high here has drifted back to the default, whatever its subject.
