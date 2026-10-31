@@ -1,3 +1,18 @@
+---
+source: IKEA assembly instructions (BILLY bookcase)
+source_family: IKEA
+source_docs:
+  - https://www.ikea.com/us/en/assembly_instructions/billy-bookcase__AA-1844854-6.pdf
+  - https://www.ikea.com/us/en/assembly_instructions/billy-bookcase__AA-2175344-3.pdf
+  - https://www.ikea.com/us/en/assembly_instructions/billy-bookcase__AA-2312999-2.pdf
+problem: step-by-step-instructions
+also_teaches: [parts-inventory, multilingual-warnings]
+patterns: [picture-is-the-instruction, magnified-callout, right-wrong-pair, warn-at-point-of-use, id-repeated-at-point-of-use]
+art_style: technical line art, monochrome, isometric
+tested_in: [C-001, C-002]
+best_example: runs/c001/arm-b.html
+---
+
 # Step-by-step instructions for a physical task — learned from IKEA assembly manuals
 
 **Problem this entry is for:** someone must carry out a physical task in order, with
@@ -23,9 +38,13 @@ That one constraint explains most of what follows.
 Measured from the PDFs, not recalled.
 
 **Page and color**
-- A4 portrait, white page. Lines are black (renders ~`#202020` when antialiased).
-- Exactly two greys, used only to shade a surface: `#D2D2D2` (lighter face) and
-  `#BCBCBC` (darker face). Most of each page is unshaded white.
+- A4 portrait, white page. Line ink is `#231F20`, a warm near-black.
+- Exactly two greys, used only to shade a surface: `#D3D2D2` (lighter face) and
+  `#BDBCBC` (darker face). Most of each page is unshaded white.
+  (Measured with `tools/measure-pdf.sh`, page 10 of AA-1844854-6. The first draft gave
+  `#202020` / `#D2D2D2` / `#BCBCBC`, because the page was converted to greyscale before
+  sampling. The tests in C-001 and C-002 used that first draft; a 1–3 point shift per
+  channel is unlikely to have changed either result.)
 - No color anywhere. Warnings are a black outlined triangle with `!`, not red.
 
 **Typography**

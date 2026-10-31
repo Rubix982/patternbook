@@ -12,11 +12,11 @@ value is just *any* specific instruction, not human sources.
 
 ### T-002 · How should the library be browsable by source ("everything from IKEA") as well as by problem?
 
-**Status:** open
+**Status:** answered
 **Parent:** C-001
 **Opened:** 2026-10-31
 **Question:** Entries are filed `library/<problem>/<source>.md`, which suits agent lookup but scatters one source across folders. Proposed: frontmatter (`source`, `source_family`, `problem`, `also_teaches`, `patterns`) and a generated index later; don't fix the problem/pattern lists until ~5 entries exist. Apply only after C-001 arm B finishes, so the entry isn't edited mid-test.
-**Answer:** —
+**Answer:** Header added to `library/_template.md` and the IKEA entry (2026-10-31). No generated index yet — wait for ~5 entries.
 
 ### T-003 · Should art style be its own axis, separate from the problem an entry solves?
 
