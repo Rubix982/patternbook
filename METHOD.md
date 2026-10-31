@@ -65,10 +65,28 @@ An entry isn't trusted until it beats something in a blind pick. Open a card in
 4. **Blind the pages:** `tools/blind.sh runs/<card> <page-x> <page-y>`. The judge
    answers the card's questions before anyone opens `.blind-key`.
 5. **Score what you can count:** rules applied (0–6), words outside drawings
-   (`python3 -I tools/words.py <pages>`), and anything else the card named.
+   (`python3 -I tools/words.py <pages>`), the default checklist below
+   (`python3 -I tools/css-profile.py <pages>` plus a look), and anything else the card
+   named.
 6. **Write the result in the card,** including the judge's own words and anything the
    run showed was wrong with the card's measures. Update the entry's `tested_in` and
    `best_example`.
+
+## The default checklist (measured in C-005, 2026-10-31)
+
+What this agent builds when given no style, across 7 pages on 6 subjects. A page that
+scores high here has drifted back to the default, whatever its subject.
+
+| # | Trait | Seen in | Check |
+|---|---|---|---|
+| 1 | Warm off-white background, not white | 7/7 | body bg in `#f3efe6`–`#f7f1e6` / `#f5f4ef` range (light, slightly orange/yellow) |
+| 2 | Warm near-black text, not black | 7/7 | body text around `#1d1b17`–`#3b2a20` |
+| 3 | Terracotta / orange accent | 7/7 | an accent at hue 15–45°, typically `#b4622d`–`#c8471a` |
+| 4 | Uppercase letter-spaced eyebrow label above headings | 6/7 | `text-transform: uppercase` + `letter-spacing` on a small label |
+| 5 | Pill-shaped chips or badges | 5/7 | `border-radius` ≥ 99px on small elements |
+
+Score 0–5. Re-measure when the model changes; this list went stale once already (C-001's
+Inter / purple / gradient list scored 0 on every page).
 
 ## Known weaknesses of this method
 
@@ -76,5 +94,5 @@ An entry isn't trusted until it beats something in a blind pick. Open a card in
 - The judge has so far been the person who commissioned the entry.
 - Agents that get an entry tend to spend more time and write more code (C-001: ~9×),
   and the method can't yet separate that from the entry's content.
-- The "AI default" moves. A checklist of AI tells goes stale (C-001's did), so build it
-  from current no-guidance runs (T-004).
+- The "AI default" moves. A checklist of AI tells goes stale (C-001's did), so it's
+  rebuilt from no-guidance runs (C-005) and should be re-measured when the model changes.

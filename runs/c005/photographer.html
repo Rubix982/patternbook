@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ines Varga — Wildlife Photography</title>
+<meta name="description" content="Portfolio of Ines Varga, wildlife photographer working in wetlands, tundra and open savanna.">
+<style>
+  :root{
+    --bg:#f3efe6; --surface:#e9e3d6; --ink:#1d1f1a; --muted:#5d6155; --line:#cfc7b5;
+    --accent:#a4552a; --accent-ink:#fff8f0; --moss:#4c5a3a;
+    --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans: ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#141612; --surface:#1d201a; --ink:#ebe6da; --muted:#a2a593; --line:#33372d;
+      --accent:#d98552; --accent-ink:#1a0f08; --moss:#9fb07f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#141612; --surface:#1d201a; --ink:#ebe6da; --muted:#a2a593; --line:#33372d;
+    --accent:#d98552; --accent-ink:#1a0f08; --moss:#9fb07f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+  @media(min-width:720px){.wrap{padding:0 32px}}
+
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+  .brand{font-family:var(--serif);font-size:1.15rem;letter-spacing:.01em;text-decoration:none;white-space:nowrap}
+  .brand span{color:var(--muted);font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;margin-left:10px}
+  nav.links{display:flex;gap:22px;font-size:.86rem}
+  nav.links a{text-decoration:none;color:var(--muted)}
+  nav.links a:hover{color:var(--ink)}
+  @media(max-width:640px){.brand span{display:none} nav.links{gap:14px;font-size:.8rem}}
+
+  /* hero */
+  .hero{position:relative;height:min(86vh,760px);min-height:460px;overflow:hidden;background:#2a1d1a}
+  .hero svg{position:absolute;inset:0;width:100%;height:100%}
+  .hero .cap{position:absolute;left:0;right:0;bottom:0;padding:0 0 40px}
+  .hero h1{font-family:var(--serif);font-weight:400;color:#fbf3e6;font-size:clamp(2.2rem,6vw,4.6rem);line-height:1.02;margin:0 0 14px;max-width:14ch;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+  .hero p{color:#f0e2cc;max-width:46ch;margin:0;font-size:1.02rem}
+  .hero .meta{position:absolute;top:22px;right:0;left:0}
+  .hero .meta .wrap{display:flex;justify-content:flex-end}
+  .exif{font:500 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#f4dcc0;opacity:.8}
+
+  section{padding:88px 0}
+  .eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;font-weight:600}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.1;margin:0 0 18px}
+  .lede{color:var(--muted);max-width:60ch;margin:0}
+
+  /* gallery */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 26px}
+  .filters button{font:inherit;font-size:.82rem;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+  .filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .tile{grid-column:span 2;margin:0;cursor:zoom-in;position:relative;border-radius:3px;overflow:hidden;background:var(--surface)}
+  .tile.wide{grid-column:span 4}
+  .tile svg{display:block;width:100%;height:auto;transition:transform .6s ease}
+  .tile:hover svg{transform:scale(1.03)}
+  .tile figcaption{display:flex;justify-content:space-between;gap:10px;padding:10px 2px 0;font-size:.84rem;background:var(--bg)}
+  .tile figcaption b{font-weight:500}
+  .tile figcaption i{font-style:normal;color:var(--muted);font-size:.76rem;white-space:nowrap}
+  .tile.hide{display:none}
+  .tile:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  @media(max-width:860px){.grid{grid-template-columns:repeat(2,1fr)} .tile,.tile.wide{grid-column:span 1} .tile.wide{grid-column:span 2}}
+  @media(max-width:520px){.grid{grid-template-columns:1fr} .tile,.tile.wide{grid-column:span 1}}
+
+  /* about */
+  .about{background:var(--surface)}
+  .about .cols{display:grid;grid-template-columns:5fr 6fr;gap:56px;align-items:center}
+  .about .portrait{border-radius:3px;overflow:hidden}
+  .about .portrait svg{display:block;width:100%;height:auto}
+  .about p{margin:0 0 14px;max-width:58ch}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px;border-top:1px solid var(--line);padding-top:22px}
+  .stats div b{display:block;font-family:var(--serif);font-weight:400;font-size:1.9rem;line-height:1}
+  .stats div span{font-size:.78rem;color:var(--muted)}
+  @media(max-width:860px){.about .cols{grid-template-columns:1fr;gap:32px}}
+
+  /* journal */
+  .journal{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:36px}
+  .entry{border-top:1px solid var(--ink);padding-top:16px}
+  .entry time{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .entry h3{font-family:var(--serif);font-weight:400;font-size:1.3rem;line-height:1.2;margin:8px 0 10px}
+  .entry p{color:var(--muted);margin:0;font-size:.94rem}
+  @media(max-width:860px){.journal{grid-template-columns:1fr}}
+
+  /* expeditions */
+  .trips{margin-top:32px;border-top:1px solid var(--line)}
+  .trip{display:grid;grid-template-columns:140px 1fr auto;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .trip .when{font-size:.82rem;color:var(--muted)}
+  .trip h3{margin:0;font-family:var(--serif);font-weight:400;font-size:1.25rem}
+  .trip p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
+  .tag{font-size:.74rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+  .tag.open{border-color:var(--moss);color:var(--moss)}
+  .tag.full{color:var(--muted)}
+  @media(max-width:640px){.trip{grid-template-columns:1fr;gap:6px}}
+
+  /* contact */
+  .contact .cols{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  form{display:grid;gap:14px}
+  label{font-size:.8rem;color:var(--muted);display:grid;gap:6px}
+  input,select,textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:11px 12px;width:100%}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+  textarea{min-height:120px;resize:vertical}
+  .btn{font:inherit;font-weight:600;font-size:.9rem;background:var(--accent);color:var(--accent-ink);border:0;border-radius:3px;padding:12px 20px;cursor:pointer;justify-self:start}
+  .btn:hover{filter:brightness(1.06)}
+  .sent{color:var(--moss);font-size:.9rem;min-height:1.4em;margin:0}
+  .contact dl{margin:28px 0 0;display:grid;grid-template-columns:auto 1fr;gap:8px 20px;font-size:.92rem}
+  .contact dt{color:var(--muted)}
+  .contact dd{margin:0}
+  @media(max-width:860px){.contact .cols{grid-template-columns:1fr;gap:36px}}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;font-size:.8rem;color:var(--muted)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:50;background:rgba(10,10,8,.94);display:none;align-items:center;justify-content:center;padding:56px 16px 24px}
+  .lb.open{display:flex}
+  .lb .stage{max-width:1100px;width:100%;display:grid;gap:14px}
+  .lb .stage svg{width:100%;height:auto;max-height:76vh;display:block}
+  .lb .info{display:flex;justify-content:space-between;gap:16px;color:#e8e0d0;font-size:.9rem;flex-wrap:wrap}
+  .lb .info b{font-family:var(--serif);font-weight:400;font-size:1.2rem}
+  .lb .info span{color:#a8a291}
+  .lb button{position:absolute;background:none;border:0;color:#e8e0d0;font-size:1.8rem;cursor:pointer;padding:10px 14px;line-height:1}
+  .lb .x{top:8px;right:8px}
+  .lb .prev{left:4px;top:50%;transform:translateY(-50%)}
+  .lb .next{right:4px;top:50%;transform:translateY(-50%)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Ines Varga <span>Wildlife Photography</span></a>
+    <nav class="links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#journal">Field notes</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO: savanna at first light -->
+<div class="hero">
+  <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2b2340"/>
+        <stop offset=".38" stop-color="#8a4b4f"/>
+        <stop offset=".62" stop-color="#e08a4e"/>
+        <stop offset=".78" stop-color="#f6c27a"/>
+      </linearGradient>
+      <radialGradient id="hsun" cx="1080" cy="640" r="380" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fff1c9" stop-opacity="1"/>
+        <stop offset=".12" stop-color="#ffd890" stop-opacity=".9"/>
+        <stop offset="1" stop-color="#f6a15a" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="hshade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity=".55"/>
+      </linearGradient>
+    </defs>
+    <rect width="1600" height="900" fill="url(#hsky)"/>
+    <circle cx="1080" cy="640" r="380" fill="url(#hsun)"/>
+    <circle cx="1080" cy="648" r="54" fill="#fff4d6"/>
+    <!-- haze bands -->
+    <rect y="560" width="1600" height="40" fill="#f9d6a0" opacity=".25"/>
+    <!-- distant hills -->
+    <path d="M0 640 Q200 600 380 625 T760 615 T1150 628 T1600 610 V900 H0Z" fill="#b5624a" opacity=".55"/>
+    <path d="M0 680 Q260 650 520 672 T1040 662 T1600 670 V900 H0Z" fill="#6e3434" opacity=".75"/>
+    <!-- birds -->
+    <g fill="none" stroke="#3a2027" stroke-width="2.4" stroke-linecap="round" opacity=".8">
+      <path d="M520 300 q10 -8 20 0 q10 -8 20 0"/>
+      <path d="M570 330 q7 -6 14 0 q7 -6 14 0"/>
+      <path d="M612 285 q8 -7 16 0 q8 -7 16 0"/>
+    </g>
+    <!-- ground -->
+    <path d="M0 720 Q400 700 800 712 T1600 705 V900 H0Z" fill="#241615"/>
+    <!-- acacia left -->
+    <g fill="#1c1110">
+      <path d="M300 715 L306 600 L280 560 L290 556 L310 590 L316 520 L326 520 L324 588 L352 548 L360 554 L330 606 L322 715Z"/>
+      <ellipse cx="320" cy="520" rx="150" ry="22"/>
+      <ellipse cx="260" cy="532" rx="70" ry="14"/>
+      <ellipse cx="390" cy="530" rx="80" ry="15"/>
+      <ellipse cx="320" cy="506" rx="96" ry="14"/>
+    </g>
+    <!-- giraffes -->
+    <g fill="#1c1110">
+      <!-- giraffe 1 -->
+      <path d="M760 712 l4 -92 l-10 0 l-4 92 h-8 l4 -96 q-6 -40 20 -50 l70 -8 q22 0 26 20 l2 4 l4 130 h-8 l-6 -100 l-14 0 l-4 100 h-8 l2 -102 l-50 4 l-6 98z"/>
+      <path d="M836 560 l40 -170 q6 -18 22 -14 l20 6 q8 3 3 10 l-22 4 l-36 170z"/>
+      <path d="M892 378 l-4 -14 l5 -1 l4 13z M902 380 l0 -15 l5 0 l0 15z"/>
+      <!-- giraffe 2 (smaller, farther) -->
+      <g transform="translate(980 600) scale(.62)">
+        <path d="M0 180 l4 -92 l-10 0 l-4 92 h-8 l4 -96 q-6 -40 20 -50 l70 -8 q22 0 26 20 l2 4 l4 130 h-8 l-6 -100 l-14 0 l-4 100 h-8 l2 -102 l-50 4 l-6 98z"/>
+        <path d="M76 28 l34 -150 q6 -18 22 -14 l20 6 q8 3 3 10 l-22 4 l-30 150z"/>
+      </g>
+    </g>
+    <!-- grass tufts -->
+    <g stroke="#1c1110" stroke-width="3" stroke-linecap="round">
+      <path d="M80 740 l6 -30 M92 740 l-2 -36 M100 740 l10 -28"/>
+      <path d="M1320 735 l6 -30 M1332 735 l-2 -38 M1342 735 l10 -26 M1354 736 l-6 -22"/>
+      <path d="M560 728 l4 -22 M570 728 l-2 -26 M578 728 l8 -20"/>
+    </g>
+    <rect width="1600" height="900" fill="url(#hshade)"/>
+  </svg>
+  <div class="meta"><div class="wrap"><span class="exif">Laikipia plateau · 06:12 · 400mm f/4</span></div></div>
+  <div class="cap"><div class="wrap">
+    <h1>Patience, and the light just before it changes.</h1>
+    <p>Ines Varga photographs animals in the places they would rather you weren't — wetlands, tundra edges and open grassland — usually from a hide, usually before dawn.</p>
+  </div></div>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <p class="eyebrow">Selected work, 2019 – 2026</p>
+    <h2>Portfolio</h2>
+    <p class="lede">Twelve frames from six years in the field. Each one is the keeper from a sitting that often lasted days. Click any image to view it larger.</p>
+
+    <div class="filters" role="group" aria-label="Filter by habitat">
+      <button aria-pressed="true" data-f="all">All</button>
+      <button aria-pressed="false" data-f="wetland">Wetland</button>
+      <button aria-pressed="false" data-f="cold">Snow &amp; ice</button>
+      <button aria-pressed="false" data-f="forest">Forest</button>
+      <button aria-pressed="false" data-f="sea">Sea</button>
+      <button aria-pressed="false" data-f="plains">Plains</button>
+    </div>
+
+    <div class="grid" id="grid">
+
+      <!-- 1 Heron at dusk -->
+      <figure class="tile wide" data-cat="wetland" tabindex="0" data-title="Grey heron, still water" data-meta="Danube delta · September 2024">
+        <svg viewBox="0 0 800 450" role="img" aria-label="A grey heron standing in still water at dusk">
+          <defs>
+            <linearGradient id="g1s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d4a63"/><stop offset=".55" stop-color="#c99a8a"/><stop offset="1" stop-color="#f0c9a0"/></linearGradient>
+            <linearGradient id="g1w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4b896"/><stop offset="1" stop-color="#3b4459"/></linearGradient>
+          </defs>
+          <rect width="800" height="290" fill="url(#g1s)"/>
+          <rect y="290" width="800" height="160" fill="url(#g1w)"/>
+          <path d="M0 290 Q120 270 220 284 T480 280 T800 286 V292 H0Z" fill="#3b3a46" opacity=".7"/>
+          <g stroke="#2a2a33" stroke-width="2" opacity=".85">
+            <path d="M40 292 l-4 -60 M52 292 l4 -74 M64 292 l-2 -50 M700 290 l3 -64 M712 290 l-4 -80 M724 290 l6 -54 M740 290 l-2 -40"/>
+          </g>
+          <g fill="#20222b">
+            <path d="M470 175 q-12 -30 8 -50 q10 -10 22 -8 l30 6 l-30 2 q-14 2 -14 18 q0 16 10 34 q16 30 14 52 q-2 30 -36 46 l-60 16 q-20 4 -36 -6 l30 -6 q10 -4 20 -16 q30 -40 42 -88z"/>
+            <path d="M452 285 l-2 52 l3 0 l3 -50z M470 280 l2 58 l3 0 l-1 -58z"/>
+          </g>
+          <g fill="#20222b" opacity=".35" transform="translate(0 676) scale(1 -1)">
+            <path d="M470 175 q-12 -30 8 -50 q10 -10 22 -8 l30 6 l-30 2 q-14 2 -14 18 q0 16 10 34 q16 30 14 52 q-2 30 -36 46 l-60 16 q-20 4 -36 -6 l30 -6 q10 -4 20 -16 q30 -40 42 -88z"/>
+          </g>
+          <g stroke="#f6dcc0" stroke-opacity=".35" stroke-width="1.5"><path d="M380 350 h170 M410 366 h110 M300 392 h90 M560 380 h70"/></g>
+        </svg>
+        <figcaption><b>Grey heron, still water</b><i>Danube delta</i></figcaption>
+      </figure>
+
+      <!-- 2 Owl -->
+      <figure class="tile" data-cat="forest" tabindex="0" data-title="Ural owl, roosting" data-meta="Białowieża edge · February 2023">
+        <svg viewBox="0 0 400 450" role="img" aria-label="An owl perched among dark forest trunks">
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f2b24"/><stop offset="1" stop-color="#3d4a36"/></linearGradient>
+          <radialGradient id="g2l" cx=".3" cy=".2" r=".7"><stop offset="0" stop-color="#b9c7a0" stop-opacity=".45"/><stop offset="1" stop-color="#b9c7a0" stop-opacity="0"/></radialGradient></defs>
+          <rect width="400" height="450" fill="url(#g2)"/>
+          <rect width="400" height="450" fill="url(#g2l)"/>
+          <rect x="30" width="34" height="450" fill="#18201a"/>
+          <rect x="330" width="44" height="450" fill="#141a15"/>
+          <rect x="250" width="14" height="450" fill="#2a352b" opacity=".7"/>
+          <path d="M0 290 Q140 270 400 300 L400 318 Q160 290 0 308Z" fill="#2b2119"/>
+          <g transform="translate(190 182)">
+            <ellipse cx="0" cy="44" rx="58" ry="78" fill="#a8a090"/>
+            <ellipse cx="0" cy="-10" rx="52" ry="46" fill="#b9b2a2"/>
+            <circle cx="-20" cy="-12" r="20" fill="#cfc8b8"/><circle cx="20" cy="-12" r="20" fill="#cfc8b8"/>
+            <circle cx="-20" cy="-12" r="7" fill="#1a1a16"/><circle cx="20" cy="-12" r="7" fill="#1a1a16"/>
+            <path d="M-4 4 l4 12 l4 -12z" fill="#d8b44a"/>
+            <g stroke="#6f685a" stroke-width="2" fill="none" opacity=".8"><path d="M-30 50 q6 6 12 0 M-6 66 q6 6 12 0 M18 50 q6 6 12 0 M-20 90 q6 6 12 0 M8 92 q6 6 12 0"/></g>
+            <path d="M-20 112 l-6 10 M-14 112 l0 12 M14 112 l0 12 M20 112 l6 10" stroke="#d8b44a" stroke-width="3"/>
+          </g>
+        </svg>
+        <figcaption><b>Ural owl, roosting</b><i>Białowieża</i></figcaption>
+      </figure>
+
+      <!-- 3 Arctic fox -->
+      <figure class="tile" data-cat="cold" tabindex="0" data-title="Arctic fox, curled" data-meta="Svalbard · March 2022">
+        <svg viewBox="0 0 400 450" role="img" aria-label="An arctic fox curled up in falling snow">
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c7d3dd"/><stop offset="1" stop-color="#eef2f4"/></linearGradient></defs>
+          <rect width="400" height="450" fill="url(#g3)"/>
+          <path d="M0 300 Q200 270 400 296 V450 H0Z" fill="#f7f9fa"/>
+          <path d="M0 300 Q200 270 400 296" fill="none" stroke="#b6c3ce" stroke-width="2"/>
+          <g transform="translate(200 300)">
+            <ellipse cx="0" cy="-8" rx="96" ry="46" fill="#ffffff"/>
+            <path d="M-96 -6 q-10 46 70 50 q80 4 112 -24 q-60 18 -120 6 q-40 -8 -62 -32z" fill="#e3e8ec"/>
+            <ellipse cx="-50" cy="-26" rx="32" ry="24" fill="#fbfcfd"/>
+            <path d="M-72 -44 l-6 -22 l16 14z M-48 -48 l2 -22 l10 18z" fill="#eef2f4" stroke="#c7d1d8"/>
+            <path d="M-66 -24 q6 -4 10 0" stroke="#2a2f33" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <circle cx="-80" cy="-14" r="4" fill="#2a2f33"/>
+          </g>
+          <g fill="#ffffff">
+            <circle cx="40" cy="60" r="3"/><circle cx="120" cy="110" r="2.4"/><circle cx="300" cy="50" r="3"/><circle cx="350" cy="160" r="2"/><circle cx="80" cy="200" r="2.6"/><circle cx="240" cy="140" r="2"/><circle cx="180" cy="40" r="2.2"/><circle cx="330" cy="240" r="3"/><circle cx="60" cy="270" r="2"/><circle cx="270" cy="220" r="2.4"/>
+          </g>
+        </svg>
+        <figcaption><b>Arctic fox, curled</b><i>Svalbard</i></figcaption>
+      </figure>
+
+      <!-- 4 Whale fluke -->
+      <figure class="tile" data-cat="sea" tabindex="0" data-title="Humpback, the dive" data-meta="Andenes, Norway · January 2025">
+        <svg viewBox="0 0 400 450" role="img" aria-label="A humpback whale tail rising out of a dark sea">
+          <defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e3b52"/><stop offset=".45" stop-color="#8e9fb2"/><stop offset=".5" stop-color="#4f5f76"/><stop offset="1" stop-color="#1a2232"/></linearGradient></defs>
+          <rect width="400" height="450" fill="url(#g4)"/>
+          <path d="M0 212 Q60 196 120 206 T260 200 T400 208 V220 H0Z" fill="#3a465a" opacity=".9"/>
+          <g transform="translate(200 300)">
+            <path d="M-12 40 q-4 -50 0 -80 q-60 -20 -120 -70 q20 0 40 6 q50 16 80 44 q12 -10 12 -10 q0 0 12 10 q30 -28 80 -44 q20 -6 40 -6 q-60 50 -120 70 q4 30 0 80z" fill="#14181f"/>
+            <path d="M-60 -64 q20 10 48 20 M60 -64 q-20 10 -48 20" stroke="#c8ced6" stroke-width="5" stroke-linecap="round" fill="none" opacity=".55"/>
+          </g>
+          <g stroke="#d8e2ec" stroke-width="2" stroke-linecap="round" opacity=".8">
+            <path d="M188 238 l-6 -20 M212 238 l6 -22 M200 236 l0 -26 M176 232 l-12 -10 M224 232 l12 -12"/>
+          </g>
+          <path d="M120 344 q80 -14 160 0" stroke="#d8e2ec" stroke-width="3" fill="none" opacity=".5"/>
+          <path d="M80 380 q120 -16 240 0" stroke="#d8e2ec" stroke-width="1.5" fill="none" opacity=".3"/>
+        </svg>
+        <figcaption><b>Humpback, the dive</b><i>Andenes</i></figcaption>
+      </figure>
+
+      <!-- 5 Wolf under moon -->
+      <figure class="tile wide" data-cat="cold" tabindex="0" data-title="Grey wolf on the ridge" data-meta="Abruzzo uplands · December 2023">
+        <svg viewBox="0 0 800 450" role="img" aria-label="A wolf silhouetted on a snowy ridge under the moon">
+          <defs>
+            <linearGradient id="g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f1626"/><stop offset="1" stop-color="#34466a"/></linearGradient>
+            <radialGradient id="g5m" cx="560" cy="130" r="160" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#e8eef8" stop-opacity=".5"/><stop offset="1" stop-color="#e8eef8" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect width="800" height="450" fill="url(#g5)"/>
+          <circle cx="560" cy="130" r="160" fill="url(#g5m)"/>
+          <circle cx="560" cy="130" r="52" fill="#eef2f8"/>
+          <circle cx="545" cy="118" r="9" fill="#d5dce8"/><circle cx="578" cy="146" r="6" fill="#d5dce8"/>
+          <g fill="#fff"><circle cx="90" cy="60" r="1.4"/><circle cx="200" cy="110" r="1"/><circle cx="320" cy="40" r="1.2"/><circle cx="720" cy="70" r="1.3"/><circle cx="660" cy="250" r="1"/><circle cx="140" cy="180" r="1"/><circle cx="420" cy="90" r="1.1"/></g>
+          <path d="M0 340 Q180 300 340 318 Q480 282 640 330 Q720 344 800 330 V450 H0Z" fill="#cfd8e6"/>
+          <path d="M0 370 Q220 352 440 372 T800 366 V450 H0Z" fill="#a9b6cb"/>
+          <g fill="#0c111b" transform="translate(360 238)">
+            <path d="M0 50 q4 -26 30 -34 q40 -10 90 -4 q20 2 30 -10 l10 -24 l6 0 l2 16 l8 -16 l6 2 l-4 24 q10 4 14 12 l-10 4 l-16 -2 q-6 10 -14 26 l-4 40 l-7 0 l-1 -34 q-20 6 -50 6 l-6 30 l-7 0 l0 -28 q-12 4 -24 -4 l-8 32 l-7 0 l2 -34 q-18 10 -34 14 q-20 4 -28 -6 q20 0 34 -10z"/>
+          </g>
+        </svg>
+        <figcaption><b>Grey wolf on the ridge</b><i>Abruzzo</i></figcaption>
+      </figure>
+
+      <!-- 6 Kingfisher -->
+      <figure class="tile" data-cat="wetland" tabindex="0" data-title="Kingfisher, reed perch" data-meta="Biebrza marshes · June 2021">
+        <svg viewBox="0 0 400 450" role="img" aria-label="A kingfisher on a reed stem against a soft green background">
+          <defs><radialGradient id="g6" cx=".5" cy=".45" r=".7"><stop offset="0" stop-color="#9cb27a"/><stop offset="1" stop-color="#3f5232"/></radialGradient></defs>
+          <rect width="400" height="450" fill="url(#g6)"/>
+          <circle cx="80" cy="90" r="40" fill="#c6d3a2" opacity=".25"/><circle cx="320" cy="340" r="60" fill="#c6d3a2" opacity=".18"/><circle cx="330" cy="80" r="26" fill="#e6edc8" opacity=".2"/>
+          <path d="M140 450 Q170 300 230 250 Q250 236 300 232" stroke="#6b5a34" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <g transform="translate(220 196)">
+            <path d="M-40 46 q-6 -40 26 -60 q30 -14 50 6 q14 16 6 44 q-10 24 -40 30 l-36 30 l-4 -6 l20 -26 q-20 -4 -22 -18z" fill="#1d7fa6"/>
+            <path d="M-36 34 q-4 -30 22 -46 q10 -4 18 -4 q-26 20 -26 54z" fill="#39b3d4"/>
+            <path d="M-4 40 q30 -2 40 -24 q4 26 -20 40 q-14 6 -24 -2z" fill="#e2742c"/>
+            <circle cx="20" cy="-6" r="13" fill="#e2742c"/>
+            <circle cx="22" cy="-8" r="4.5" fill="#14110d"/>
+            <path d="M30 -10 l52 4 l-52 6z" fill="#1a1612"/>
+            <path d="M8 4 q8 4 18 0 l-4 8 q-8 2 -14 -2z" fill="#f6efe0"/>
+            <path d="M0 76 l2 10 M10 74 l4 10" stroke="#e2742c" stroke-width="3"/>
+          </g>
+        </svg>
+        <figcaption><b>Kingfisher, reed perch</b><i>Biebrza</i></figcaption>
+      </figure>
+
+      <!-- 7 Elephants -->
+      <figure class="tile" data-cat="plains" tabindex="0" data-title="Elephants, dust hour" data-meta="Amboseli basin · August 2019">
+        <svg viewBox="0 0 400 450" role="img" aria-label="An elephant and calf walking through dust at golden hour">
+          <defs><linearGradient id="g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a35e"/><stop offset=".7" stop-color="#f1d09a"/><stop offset="1" stop-color="#b9844a"/></linearGradient></defs>
+          <rect width="400" height="450" fill="url(#g7)"/>
+          <path d="M0 300 Q200 280 400 300 V450 H0Z" fill="#a0703f"/>
+          <ellipse cx="200" cy="300" rx="230" ry="40" fill="#f6dcae" opacity=".45"/>
+          <g fill="#4a3424">
+            <path d="M80 300 l2 -50 q-10 -10 -8 -40 q4 -50 60 -56 q50 -4 80 14 q16 -16 40 -8 q24 10 22 40 q0 18 -8 30 l2 30 q2 24 -6 40 l-8 0 q4 -14 2 -34 q-4 -2 -6 -8 l-4 60 h-14 l-2 -50 q-20 8 -50 6 l-2 44 h-14 l-4 -46 q-14 -4 -24 -14 l-4 42z"/>
+            <path d="M262 240 q-30 -8 -26 -50 q6 4 12 4 q-4 30 18 40z" fill="#5e4430"/>
+            <g transform="translate(262 300) scale(.48)">
+              <path d="M0 0 l2 -50 q-10 -10 -8 -40 q4 -50 60 -56 q50 -4 80 14 q16 -16 40 -8 q24 10 22 40 q0 18 -8 30 l2 30 q2 24 -6 40 l-8 0 q4 -14 2 -34 l-4 60 h-14 l-2 -50 q-20 8 -50 6 l-2 44 h-14 l-4 -46 q-14 -4 -24 -14 l-4 42z"/>
+            </g>
+          </g>
+          <path d="M296 196 q8 4 6 18" stroke="#f6ead6" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+        <figcaption><b>Elephants, dust hour</b><i>Amboseli</i></figcaption>
+      </figure>
+
+      <!-- 8 Puffins -->
+      <figure class="tile" data-cat="sea" tabindex="0" data-title="Puffins, cliff top" data-meta="Mykines, Faroe Islands · July 2022">
+        <svg viewBox="0 0 400 450" role="img" aria-label="Two puffins on a grassy sea cliff">
+          <rect width="400" height="450" fill="#b8c9d4"/>
+          <rect y="200" width="400" height="80" fill="#6f8aa0"/>
+          <path d="M0 270 Q120 240 260 260 T400 250 V450 H0Z" fill="#5f7a3c"/>
+          <path d="M0 300 Q200 280 400 300 V450 H0Z" fill="#4a6230"/>
+          <g transform="translate(150 230)">
+            <ellipse cx="0" cy="40" rx="30" ry="44" fill="#16171a"/>
+            <ellipse cx="6" cy="50" rx="18" ry="30" fill="#f4f1ea"/>
+            <circle cx="6" cy="-6" r="22" fill="#16171a"/>
+            <ellipse cx="12" cy="-4" rx="14" ry="12" fill="#f4f1ea"/>
+            <circle cx="14" cy="-6" r="3" fill="#16171a"/>
+            <path d="M24 -10 q22 4 20 14 q-4 8 -20 6z" fill="#e4692a"/>
+            <path d="M28 -6 q8 2 12 6" stroke="#f0c040" stroke-width="2" fill="none"/>
+            <path d="M-6 84 l-6 6 h14z M10 84 l-4 6 h14z" fill="#e4692a"/>
+          </g>
+          <g transform="translate(270 246) scale(-.86 .86)">
+            <ellipse cx="0" cy="40" rx="30" ry="44" fill="#16171a"/>
+            <ellipse cx="6" cy="50" rx="18" ry="30" fill="#f4f1ea"/>
+            <circle cx="6" cy="-6" r="22" fill="#16171a"/>
+            <ellipse cx="12" cy="-4" rx="14" ry="12" fill="#f4f1ea"/>
+            <circle cx="14" cy="-6" r="3" fill="#16171a"/>
+            <path d="M24 -10 q22 4 20 14 q-4 8 -20 6z" fill="#e4692a"/>
+            <path d="M-6 84 l-6 6 h14z M10 84 l-4 6 h14z" fill="#e4692a"/>
+          </g>
+          <g stroke="#7f9a4c" stroke-width="2"><path d="M40 300 l4 -20 M50 300 l-2 -18 M340 300 l3 -22 M352 300 l-3 -16 M220 296 l2 -14"/></g>
+        </svg>
+        <figcaption><b>Puffins, cliff top</b><i>Mykines</i></figcaption>
+      </figure>
+
+      <!-- 9 Deer in mist -->
+      <figure class="tile wide" data-cat="forest" tabindex="0" data-title="Red deer stag in mist" data-meta="Scottish Highlands · October 2025">
+        <svg viewBox="0 0 800 450" role="img" aria-label="A red deer stag standing among pines in morning mist">
+          <defs>
+            <linearGradient id="g9" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d3c4"/><stop offset="1" stop-color="#9a9a86"/></linearGradient>
+            <linearGradient id="g9f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8e2d2" stop-opacity="0"/><stop offset=".5" stop-color="#e8e2d2" stop-opacity=".75"/><stop offset="1" stop-color="#e8e2d2" stop-opacity="0"/></linearGradient>
+          </defs>
+          <rect width="800" height="450" fill="url(#g9)"/>
+          <g fill="#8b8c7a" opacity=".55">
+            <path d="M80 340 l30 -200 l30 200z M170 340 l24 -160 l24 160z M560 340 l28 -190 l28 190z M660 340 l22 -150 l22 150z"/>
+          </g>
+          <g fill="#5d5f4e" opacity=".8">
+            <path d="M20 360 l40 -260 l40 260z M700 360 l40 -280 l40 280z"/>
+          </g>
+          <rect y="250" width="800" height="120" fill="url(#g9f)"/>
+          <path d="M0 360 Q400 340 800 362 V450 H0Z" fill="#5e5a3e"/>
+          <g fill="#2e2a22" transform="translate(330 196)">
+            <path d="M10 160 l4 -66 q-10 -26 10 -40 q40 -20 100 -14 q20 2 30 -10 l14 -40 l14 2 q4 20 -2 40 q-6 16 -18 26 l-10 40 l2 62 h-8 l-6 -54 l-10 4 l0 50 h-8 l-4 -50 q-40 8 -70 -2 l-6 52 h-8 l0 -52 l-10 -6 l-4 58z"/>
+            <path d="M170 0 q-6 -30 -30 -54 M156 -24 l-16 -10 M164 -40 l-14 -20 M172 2 q14 -34 4 -66 M176 -30 l16 -18 M178 -50 l-2 -20" stroke="#2e2a22" stroke-width="4" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <figcaption><b>Red deer stag in mist</b><i>Highlands</i></figcaption>
+      </figure>
+
+      <!-- 10 Flamingos -->
+      <figure class="tile wide" data-cat="wetland" tabindex="0" data-title="Flamingos, soda lake" data-meta="Lake Natron · November 2024">
+        <svg viewBox="0 0 800 450" role="img" aria-label="A line of flamingos wading across a pink soda lake">
+          <defs><linearGradient id="g10" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d6c8"/><stop offset=".5" stop-color="#eab7a8"/><stop offset="1" stop-color="#c97f77"/></linearGradient></defs>
+          <rect width="800" height="450" fill="url(#g10)"/>
+          <path d="M0 210 Q200 196 400 206 T800 202 V214 H0Z" fill="#b38677" opacity=".6"/>
+          <defs><g id="fl">
+            <path d="M0 0 q-24 -4 -28 12 q0 12 22 12 q16 0 22 -10 l14 -50 q4 -12 -6 -14 q-8 0 -8 6 l6 2 l-6 40z" fill="#e2605a"/>
+            <path d="M-8 24 l-2 56 M2 24 l6 56" stroke="#c4504a" stroke-width="2"/>
+            <path d="M14 -56 l6 6" stroke="#2a1a1a" stroke-width="3"/>
+          </g></defs>
+          <use href="#fl" x="140" y="250"/>
+          <use href="#fl" x="230" y="262"/>
+          <use href="#fl" x="300" y="246"/>
+          <use href="#fl" x="390" y="258"/>
+          <use href="#fl" x="470" y="248"/>
+          <use href="#fl" x="560" y="264"/>
+          <use href="#fl" x="640" y="252"/>
+          <g opacity=".25" transform="translate(0 680) scale(1 -1)">
+            <use href="#fl" x="140" y="250"/><use href="#fl" x="300" y="246"/><use href="#fl" x="470" y="248"/><use href="#fl" x="640" y="252"/>
+          </g>
+          <path d="M60 340 h680" stroke="#f6e0d6" stroke-width="1.5" opacity=".6"/>
+        </svg>
+        <figcaption><b>Flamingos, soda lake</b><i>Lake Natron</i></figcaption>
+      </figure>
+
+      <!-- 11 Hare -->
+      <figure class="tile" data-cat="plains" tabindex="0" data-title="Brown hare, alert" data-meta="Norfolk grazing marsh · April 2026">
+        <svg viewBox="0 0 400 450" role="img" aria-label="A hare sitting upright in a field at sunrise">
+          <defs><linearGradient id="g11" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2d9a8"/><stop offset="1" stop-color="#e4a868"/></linearGradient></defs>
+          <rect width="400" height="450" fill="url(#g11)"/>
+          <circle cx="200" cy="260" r="70" fill="#fbe8c0"/>
+          <path d="M0 300 Q200 286 400 300 V450 H0Z" fill="#6c5a32"/>
+          <g fill="#3a2c1c" transform="translate(196 300)">
+            <path d="M-60 0 q-6 -60 36 -84 q24 -12 40 0 q10 10 6 30 q30 20 34 54z"/>
+            <circle cx="20" cy="-72" r="22"/>
+            <path d="M14 -90 q-14 -60 -2 -98 q12 4 16 30 q4 34 -4 68z M28 -88 q4 -60 26 -90 q8 8 4 34 q-4 34 -20 58z"/>
+            <circle cx="30" cy="-76" r="3" fill="#f6c46a"/>
+          </g>
+          <g stroke="#4b3e22" stroke-width="2"><path d="M30 310 l4 -24 M44 310 l-2 -18 M350 310 l4 -26 M362 310 l-4 -18 M120 306 l2 -16 M280 306 l-3 -18"/></g>
+        </svg>
+        <figcaption><b>Brown hare, alert</b><i>Norfolk</i></figcaption>
+      </figure>
+
+      <!-- 12 Penguins -->
+      <figure class="tile" data-cat="cold" tabindex="0" data-title="Emperor penguins, blizzard" data-meta="Atka Bay · August 2025">
+        <svg viewBox="0 0 400 450" role="img" aria-label="Emperor penguins huddled in a blue blizzard">
+          <defs><linearGradient id="g12" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d93ab"/><stop offset="1" stop-color="#d7e1ea"/></linearGradient></defs>
+          <rect width="400" height="450" fill="url(#g12)"/>
+          <path d="M0 330 Q200 316 400 330 V450 H0Z" fill="#eef3f7"/>
+          <defs><g id="pg">
+            <path d="M0 0 q-28 0 -30 60 q-2 50 30 56 q32 -6 30 -56 q-2 -60 -30 -60z" fill="#1b2028"/>
+            <path d="M6 20 q-14 10 -14 44 q0 40 14 48 q16 -8 16 -48 q0 -34 -16 -44z" fill="#f2f0e8"/>
+            <path d="M4 6 q10 4 12 14 q-6 2 -12 -4z" fill="#f2b23a"/>
+            <path d="M8 -2 l18 6 l-18 2z" fill="#1b2028"/>
+          </g></defs>
+          <use href="#pg" x="120" y="218"/>
+          <use href="#pg" x="180" y="208"/>
+          <use href="#pg" x="250" y="222"/>
+          <use href="#pg" x="300" y="234" opacity=".6"/>
+          <use href="#pg" x="70" y="232" opacity=".6"/>
+          <g stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity=".75">
+            <path d="M30 40 l20 8 M120 80 l26 10 M260 50 l22 8 M340 120 l20 8 M60 160 l24 9 M200 140 l18 7 M310 200 l24 9 M20 260 l20 8 M160 30 l20 8 M370 290 l18 7"/>
+          </g>
+        </svg>
+        <figcaption><b>Emperor penguins, blizzard</b><i>Atka Bay</i></figcaption>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="wrap cols">
+    <div class="portrait">
+      <svg viewBox="0 0 500 560" role="img" aria-label="Illustration of the photographer sitting in a camouflage hide with a long lens">
+        <rect width="500" height="560" fill="#55603f"/>
+        <rect y="380" width="500" height="180" fill="#3c4530"/>
+        <g fill="#6a7550" opacity=".7"><circle cx="60" cy="80" r="60"/><circle cx="440" cy="120" r="80"/><circle cx="380" cy="40" r="40"/></g>
+        <!-- hide -->
+        <path d="M60 470 L120 210 Q250 150 380 210 L440 470Z" fill="#7a6b47"/>
+        <g fill="#5e5236"><circle cx="150" cy="300" r="26"/><circle cx="300" cy="260" r="30"/><circle cx="350" cy="380" r="34"/><circle cx="180" cy="420" r="28"/><circle cx="250" cy="360" r="18"/></g>
+        <g fill="#8c7d56"><circle cx="220" cy="240" r="16"/><circle cx="380" cy="300" r="16"/><circle cx="110" cy="380" r="18"/></g>
+        <!-- window -->
+        <rect x="160" y="270" width="190" height="80" rx="6" fill="#1f2219"/>
+        <!-- eyes / face hint -->
+        <path d="M200 316 q14 -10 28 0" stroke="#d6b99a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- lens -->
+        <g transform="translate(250 312)">
+          <rect x="0" y="-22" width="190" height="44" rx="6" fill="#d9d4c6"/>
+          <rect x="150" y="-28" width="56" height="56" rx="6" fill="#cfc9b8"/>
+          <rect x="40" y="-22" width="22" height="44" fill="#2b2b28"/>
+          <circle cx="206" cy="0" r="22" fill="#1a1c20"/>
+          <circle cx="206" cy="0" r="12" fill="#2e3a52"/>
+          <circle cx="200" cy="-5" r="4" fill="#9fb3d6" opacity=".7"/>
+        </g>
+        <path d="M0 470 Q250 450 500 470" stroke="#2c3322" stroke-width="3" fill="none"/>
+        <g stroke="#82905e" stroke-width="3" stroke-linecap="round"><path d="M30 480 l6 -30 M44 480 l-2 -36 M460 476 l8 -28 M472 476 l-4 -34 M240 476 l2 -20"/></g>
+      </svg>
+    </div>
+    <div>
+      <p class="eyebrow">About</p>
+      <h2>Most of the job is waiting.</h2>
+      <p>I grew up near the Hungarian plain and spent my twenties counting birds for a regional survey before I ever owned a long lens. That work taught me the thing I still care about most: knowing an animal's routine well enough that it forgets I'm there.</p>
+      <p>I work slowly, from hides and on foot, and I don't bait, call or use drones near nesting sites. If a picture would cost the animal its rest or its meal, I don't take it.</p>
+      <p>My images have run in natural history magazines and field guides, and I teach two small-group trips a year.</p>
+      <div class="stats">
+        <div><b>31</b><span>countries worked in</span></div>
+        <div><b>212</b><span>nights in a hide, 2025</span></div>
+        <div><b>6</b><span>guests per trip, max</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section id="journal">
+  <div class="wrap">
+    <p class="eyebrow">Field notes</p>
+    <h2>From the notebook</h2>
+    <div class="journal">
+      <article class="entry">
+        <time datetime="2026-09-14">14 September 2026</time>
+        <h3>Nine days for one heron</h3>
+        <p>The bird fished the same channel every evening but always with its back to the light. On day nine the wind turned and so did it. The frame on this page is from the final twenty minutes.</p>
+      </article>
+      <article class="entry">
+        <time datetime="2026-06-02">2 June 2026</time>
+        <h3>Why I stopped shooting at 1/4000</h3>
+        <p>Freezing every feather made the pictures look like specimens. A little motion in the wingtips says more about the bird than perfect sharpness does.</p>
+      </article>
+      <article class="entry">
+        <time datetime="2026-02-20">20 February 2026</time>
+        <h3>Cold batteries, warm hands</h3>
+        <p>Notes on working at minus thirty: which kit failed, what I'd pack differently, and the small ritual of swapping batteries inside your jacket every forty minutes.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- EXPEDITIONS -->
+<section id="trips" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Small-group trips</p>
+    <h2>Expeditions 2027</h2>
+    <p class="lede">Six guests, one guide, and a schedule built around the animals rather than the light-meter. Suitable for any level, as long as you can sit still.</p>
+    <div class="trips">
+      <div class="trip">
+        <span class="when">Feb 8 – 16</span>
+        <div><h3>Winter birds of the Hortobágy</h3><p>Cranes, eagles and long-eared owls from heated hides. 8 nights.</p></div>
+        <span class="tag full">Waitlist</span>
+      </div>
+      <div class="trip">
+        <span class="when">May 18 – 27</span>
+        <div><h3>Delta at first light</h3><p>Pelicans, herons and the reed-bed dawn chorus, by boat and on foot. 9 nights.</p></div>
+        <span class="tag open">2 places left</span>
+      </div>
+      <div class="trip">
+        <span class="when">Sep 3 – 14</span>
+        <div><h3>Northern rut</h3><p>Red deer and black grouse in the high glens, with a fieldcraft workshop. 11 nights.</p></div>
+        <span class="tag open">Open</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact" style="background:var(--surface)">
+  <div class="wrap cols">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2>Prints, licensing, trips.</h2>
+      <p class="lede">Limited-edition prints are made to order on cotton rag paper. For licensing, tell me where the image will run and for how long. I answer everything within a week, unless I'm in a hide.</p>
+      <dl>
+        <dt>Studio</dt><dd>Szeged, Hungary</dd>
+        <dt>Represented by</dt><dd>Independent</dd>
+        <dt>Currently</dt><dd>In the field until mid-November</dd>
+      </dl>
+    </div>
+    <form id="form" novalidate>
+      <label>Name<input name="name" required autocomplete="name"></label>
+      <label>Email<input name="email" type="email" required autocomplete="email"></label>
+      <label>About
+        <select name="topic">
+          <option>Print enquiry</option>
+          <option>Image licensing</option>
+          <option>Expedition booking</option>
+          <option>Something else</option>
+        </select>
+      </label>
+      <label>Message<textarea name="msg" required></textarea></label>
+      <button class="btn" type="submit">Send message</button>
+      <p class="sent" id="sent" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ines Varga. All images are illustrations for this page.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="x" aria-label="Close">×</button>
+  <button class="prev" aria-label="Previous image">‹</button>
+  <button class="next" aria-label="Next image">›</button>
+  <div class="stage">
+    <div id="lbimg"></div>
+    <div class="info"><b id="lbtitle"></b><span id="lbmeta"></span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const tiles=[...document.querySelectorAll('.tile')];
+  const btns=document.querySelectorAll('.filters button');
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    btns.forEach(x=>x.setAttribute('aria-pressed',x===b));
+    const f=b.dataset.f;
+    tiles.forEach(t=>t.classList.toggle('hide',f!=='all'&&t.dataset.cat!==f));
+  }));
+
+  const lb=document.getElementById('lb'),img=document.getElementById('lbimg'),
+        ti=document.getElementById('lbtitle'),me=document.getElementById('lbmeta');
+  let cur=0,last=null;
+  const visible=()=>tiles.filter(t=>!t.classList.contains('hide'));
+  function show(t){
+    const svg=t.querySelector('svg').cloneNode(true);
+    // de-duplicate ids in clone so gradients/uses still resolve
+    const map={};
+    svg.querySelectorAll('[id]').forEach(n=>{const o=n.id;n.id=o+'-lb';map[o]=n.id;});
+    svg.querySelectorAll('*').forEach(n=>{
+      ['fill','stroke','href'].forEach(a=>{
+        const v=n.getAttribute(a); if(!v) return;
+        const r=v.replace(/url\(#([^)]+)\)/,(m,id)=>map[id]?`url(#${map[id]})`:m).replace(/^#(.+)$/,(m,id)=>map[id]?'#'+map[id]:m);
+        if(r!==v) n.setAttribute(a,r);
+      });
+    });
+    img.replaceChildren(svg);
+    ti.textContent=t.dataset.title; me.textContent=t.dataset.meta;
+  }
+  function open(t){last=t;cur=visible().indexOf(t);show(t);lb.classList.add('open');document.body.style.overflow='hidden';lb.querySelector('.x').focus();}
+  function close(){lb.classList.remove('open');img.replaceChildren();document.body.style.overflow='';if(last)last.focus();}
+  function step(d){const v=visible();cur=(cur+d+v.length)%v.length;last=v[cur];show(v[cur]);}
+  tiles.forEach(t=>{
+    t.addEventListener('click',()=>open(t));
+    t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(t);}});
+  });
+  lb.querySelector('.x').onclick=close;
+  lb.querySelector('.prev').onclick=e=>{e.stopPropagation();step(-1)};
+  lb.querySelector('.next').onclick=e=>{e.stopPropagation();step(1)};
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')close(); if(e.key==='ArrowLeft')step(-1); if(e.key==='ArrowRight')step(1);
+  });
+
+  const form=document.getElementById('form'),sent=document.getElementById('sent');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!form.checkValidity()){sent.style.color='var(--accent)';sent.textContent='Please fill in your name, a valid email and a message.';return;}
+    sent.style.color='';sent.textContent='Thanks, '+form.elements.name.value.split(' ')[0]+'. This is a demo page, so nothing was sent.';
+    form.reset();
+  });
+})();
+</script>
+</body>
+</html>

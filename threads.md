@@ -28,11 +28,11 @@ value is just *any* specific instruction, not human sources.
 
 ### T-004 · Replace C-001's default-marker checklist with the current AI default
 
-**Status:** open
+**Status:** answered
 **Parent:** C-001
 **Opened:** 2026-10-31
 **Question:** The 2023-style tells (Inter, gradients, purple, centered hero) scored 0 on both arms. The no-entry default seen was cream + serif headline + one terracotta accent + pill badges. Need a list built from several no-entry runs, not one, before reusing the measure.
-**Answer:** —
+**Answer:** C-005 — 5-trait checklist in METHOD.md: cream bg 7/7, warm near-black text 7/7, terracotta accent 7/7, uppercase eyebrow 6/7, pills 5/7.
 
 ### T-005 · Do the C-003-revised rules still win a blind pick, and does "device only when needed" show up?
 

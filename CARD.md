@@ -14,6 +14,116 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-005 · What does an agent's page look like when nobody gives it a style?
+
+**Status:** closed
+**Opened:** 2026-10-31
+**From:** T-004
+
+**1. Where we are.**
+C-001's "AI tells" checklist (Inter, gradients, purple, centered hero, shadowed cards)
+scored 0/5 on both arms, and two runs (C-001 no-guidance, C-002 self-reference) instead
+landed on cream background + serif headline + one orange accent.
+
+**2. What we are doing.**
+Run five fresh agents with no style guidance on five unrelated briefs, then extract each
+page's colours, fonts, radii, shadows and gradients with a script, adding the two earlier
+unguided pages for 7 samples in total.
+
+Briefs, chosen so the subject would pull the palette different ways:
+1. a neighbourhood bakery (subject suggests warm)
+2. the docs homepage for an open-source command-line tool (suggests neutral/dark)
+3. a portfolio for a wildlife photographer (suggests the photos, so muted)
+4. a household energy-use dashboard (suggests green/blue)
+5. a recipe page for lentil soup (suggests warm)
+
+Same constraints as C-001: one self-contained HTML file, no external images, SVG/CSS for
+drawings, fresh agent, no access to the repo, no skills. Prompts saved verbatim.
+
+Measured per page (`tools/css-profile.py`): background colour; body text colour; accent
+colours (non-grey hexes by frequency) and their hue; font stacks for headings and body;
+border-radius values; box-shadow count; gradient count. Plus by eye from a screenshot:
+centered hero, card grid, pill badges, serif headline.
+
+**3. Why.**
+We don't know whether the cream/serif/orange look seen twice is a fixed default that
+appears whatever the subject, or a coincidence of two bike-chain pages. If it's fixed,
+it's the thing the library exists to push against, and it's the checklist later cards need.
+
+**4. What is affected.**
+- C-001's default-marker measure: replaced, or dropped.
+- METHOD.md's "known weaknesses" line about the AI default going stale.
+- The README's framing of the problem (currently a claim, not a measurement).
+
+**5. Conclusion.**
+- **If** at least 3 traits each appear in ≥5 of the 7 pages → we claim *this model has a
+  house style that holds across subjects*, write those traits as the new checklist, and
+  record the exact values (hexes, font stacks).
+- **If** fewer than 3 traits reach 5/7 → we claim *the unguided look follows the subject
+  more than a house style*, and drop the default-marker measure instead of rebuilding it.
+- Either way, record the accent hues of all 7 pages, so "always orange" can be checked
+  directly.
+
+**6. If not done.**
+Every later card that asks "did the entry move the page off the default?" has no working
+measure, and the project's founding complaint ("AI repeats the same palettes") stays
+anecdotal.
+
+**Limits (known before running):** one model (the same one that builds the test pages), so
+this measures *this* agent's default, not "AI" in general; one run per brief; 2 of the 7
+samples share a brief and one of those was told to be original; the trait threshold
+(5/7) is chosen by me.
+
+**Result (2026-10-31):** first branch. **5 traits reach ≥5 of 7 pages**, and two reach 7/7.
+Pages in `runs/c005/`, measurements in `runs/c005/profile.txt` (`tools/css-profile.py`),
+plus screenshots read by eye.
+
+| Page (brief) | Background | Text | Main accent (hue) | Orange present? | Serif headline | Uppercase eyebrow | Pills |
+|---|---|---|---|---|---|---|---|
+| bakery | `#f7f1e6` | `#3b2a20` | `#b4622d` orange | ✓ | ✓ | ✓ | ✓ |
+| CLI docs | `#f6f3ec` | `#1d1b17` | `#c2410c` orange | ✓ | — | ✓ | ✓ |
+| wildlife photographer | `#f3efe6` | `#1d1f1a` | `#a4552a` / `#e4692a` orange | ✓ | ✓ | ✓ | ✓ |
+| energy dashboard | `#f5f4ef` | `#1d1f1c` | `#2f6f4f` green | ✓ (`#b5562b` 2nd) | — | — | ✓ |
+| lentil soup recipe | `#f7f1e6` | `#2b2420` | `#c4552b` orange | ✓ | ✓ | ✓ | — |
+| C-001 bike chain, no guidance | `#f6f3ee` | `#1f1d1a` | `#c4501f` orange | ✓ | ✓ | ✓ | — |
+| C-002 bike chain, told to be original | `#f3efe6` | `#1e1c18` | `#c8471a` orange | ✓ | — | ✓ | ✓ |
+
+| Trait | Pages |
+|---|---|
+| Warm off-white background, never white (all within `#f3efe6`–`#f7f1e6`, plus `#f5f4ef`) | **7/7** |
+| Warm near-black text, never pure black (`#1d1b17`–`#3b2a20`) | **7/7** |
+| Orange/terracotta accent present (hue 15–45°, mostly `#b4…`–`#c8…`) | **7/7** (main accent in 6/7) |
+| Uppercase, letter-spaced "eyebrow" label above headings | **6/7** |
+| Pill-shaped chips/badges (radius ≥ 99px) | **5/7** |
+| Serif headline | 4/7 (below threshold) |
+| *Old C-001 tells:* Inter font | 0/7 |
+| *Old C-001 tells:* purple/indigo accent | 0/7 |
+| *Old C-001 tells:* gradients | 1/7 (bakery) |
+
+The subject didn't move it. The CLI-docs page, which I expected to go neutral or dark, got
+the cream paper and a `#c2410c` orange. The energy dashboard, which I expected to go
+green/blue, did pick green first, but on the same cream, with orange for its "peak" data.
+Being told to be original (C-002) changed none of the five traits.
+
+**Claim:** with no style given, this agent builds every page on the same base: cream paper
+(`#f3efe6`–`#f7f1e6`), warm near-black text, and a terracotta accent around `#c4501f`,
+usually with uppercase eyebrow labels and pill chips. This held across 7 pages on 6
+subjects. The 2023-era tells (Inter, purple, gradients) are gone, so a checklist built from
+them can't detect the default.
+
+**Changes made:**
+- New default checklist (5 traits above) written into `METHOD.md`, with the hex ranges.
+- `tools/css-profile.py` added; `profile.txt` saved with the run.
+- README: the founding complaint now cites this measurement.
+
+**Limits that matter for the claim:** all seven pages came from the same model that builds
+the test pages, so this is *this agent's* default, not AI in general. One run per brief.
+The subjects were chosen by me.
+
+**Closed:** 2026-10-31
+
+---
+
 ## C-004 · Do the C-003-revised rules still produce the better manual?
 
 **Status:** closed

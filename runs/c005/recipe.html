@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red Lentil Soup</title>
+<style>
+  :root {
+    --bg: #f7f1e6;
+    --paper: #fffaf1;
+    --ink: #2b2420;
+    --muted: #6d6158;
+    --line: #e3d6c3;
+    --accent: #c4552b;
+    --accent-soft: #f3dccd;
+    --green: #5f7a3a;
+    --check: #c4552b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1d1916;
+      --paper: #26211d;
+      --ink: #f1e8dc;
+      --muted: #b3a597;
+      --line: #3b332c;
+      --accent: #e57a4c;
+      --accent-soft: #3d2a20;
+      --green: #9bb86f;
+      --check: #e57a4c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 16px 64px; }
+
+  header.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .kicker {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 13px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.05;
+    margin: 0 0 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .lede { color: var(--muted); margin: 0 0 24px; font-size: 18px; }
+  .facts {
+    display: flex; flex-wrap: wrap; gap: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .fact { padding: 12px 20px 12px 0; margin-right: 20px; }
+  .fact + .fact { border-left: 1px solid var(--line); padding-left: 20px; }
+  .fact b { display: block; font-size: 20px; color: var(--ink); }
+  .fact span { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+
+  .bowl { width: 100%; height: auto; display: block; }
+  .steam path { animation: rise 4s ease-in-out infinite; opacity: .0; }
+  .steam path:nth-child(2) { animation-delay: 1.3s; }
+  .steam path:nth-child(3) { animation-delay: 2.6s; }
+  @keyframes rise {
+    0% { transform: translateY(10px); opacity: 0; }
+    30% { opacity: .55; }
+    100% { transform: translateY(-18px); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .steam path { animation: none; opacity: .4; }
+  }
+
+  .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 32px; align-items: start; }
+  section.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  h2 {
+    font-size: 24px;
+    margin: 0 0 4px;
+  }
+  .sub {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 13px; color: var(--muted); margin: 0 0 16px;
+  }
+  .servings {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px; margin-bottom: 16px;
+  }
+  .servings button {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+    font-size: 18px; line-height: 1; cursor: pointer;
+  }
+  .servings button:hover { border-color: var(--accent); color: var(--accent); }
+  .servings output { min-width: 2ch; text-align: center; font-weight: 600; }
+
+  ul.ingredients { list-style: none; margin: 0; padding: 0; }
+  ul.ingredients li { border-bottom: 1px dashed var(--line); }
+  ul.ingredients li:last-child { border-bottom: 0; }
+  ul.ingredients label {
+    display: flex; gap: 12px; align-items: baseline; padding: 9px 0; cursor: pointer;
+  }
+  ul.ingredients input { accent-color: var(--check); transform: translateY(2px); flex: none; }
+  .qty {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 600; font-size: 15px; min-width: 76px; flex: none;
+  }
+  ul.ingredients input:checked ~ span { color: var(--muted); text-decoration: line-through; }
+  .group {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--green); font-weight: 700; margin: 18px 0 2px;
+  }
+  .group:first-of-type { margin-top: 0; }
+
+  ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; }
+  ol.steps li {
+    counter-increment: s;
+    position: relative;
+    padding: 0 0 22px 52px;
+  }
+  ol.steps li::before {
+    content: counter(s);
+    position: absolute; left: 0; top: 0;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700; display: grid; place-items: center; font-size: 15px;
+  }
+  ol.steps li:not(:last-child)::after {
+    content: ""; position: absolute; left: 16.5px; top: 40px; bottom: 6px;
+    width: 1px; background: var(--line);
+  }
+  ol.steps h3 { margin: 4px 0 4px; font-size: 18px; }
+  ol.steps p { margin: 0; }
+  .time {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 12px; color: var(--muted); margin-left: 6px; font-weight: 400;
+  }
+
+  .notes { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .note {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px;
+  }
+  .note h4 {
+    margin: 0 0 4px; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px; text-transform: uppercase; letter-spacing: .06em;
+  }
+  .note p { margin: 0; font-size: 15px; color: var(--muted); }
+
+  footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 14px; }
+  .divider { display: block; margin: 0 auto 12px; }
+
+  @media (max-width: 760px) {
+    header.hero { grid-template-columns: 1fr; gap: 16px; }
+    .bowl-wrap { order: -1; max-width: 360px; margin: 0 auto; }
+    .grid { grid-template-columns: 1fr; }
+    .notes { grid-template-columns: 1fr; }
+    section.card { padding: 20px 16px; }
+    .fact { padding-right: 14px; margin-right: 14px; }
+    .fact + .fact { padding-left: 14px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .bowl-wrap, .servings, footer { display: none; }
+    section.card { border: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div>
+      <p class="kicker">Weeknight soup</p>
+      <h1>Red Lentil Soup with Cumin &amp; Lemon</h1>
+      <p class="lede">Red lentils fall apart as they cook, so the soup thickens on its own with no blender needed. Toasted spices go in at the start, and a squeeze of lemon at the end brightens it.</p>
+      <div class="facts">
+        <div class="fact"><b>15 min</b><span>Prep</span></div>
+        <div class="fact"><b>30 min</b><span>Cook</span></div>
+        <div class="fact"><b id="serveFact">4</b><span>Servings</span></div>
+      </div>
+    </div>
+
+    <div class="bowl-wrap">
+      <svg class="bowl" viewBox="0 0 400 320" role="img" aria-label="Illustration of a steaming bowl of lentil soup">
+        <defs>
+          <radialGradient id="soup" cx="50%" cy="45%" r="60%">
+            <stop offset="0%" stop-color="#e98a3c"/>
+            <stop offset="70%" stop-color="#d0632a"/>
+            <stop offset="100%" stop-color="#a94a1e"/>
+          </radialGradient>
+          <linearGradient id="bowlBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f4ede2"/>
+            <stop offset="100%" stop-color="#cfc2ad"/>
+          </linearGradient>
+          <linearGradient id="band" x1="0" x2="1">
+            <stop offset="0%" stop-color="#2f5d6b"/>
+            <stop offset="100%" stop-color="#3f7a88"/>
+          </linearGradient>
+        </defs>
+
+        <!-- table shadow -->
+        <ellipse cx="200" cy="290" rx="150" ry="16" fill="#000" opacity=".12"/>
+
+        <!-- steam -->
+        <g class="steam" fill="none" stroke="#b9a996" stroke-width="5" stroke-linecap="round">
+          <path d="M160 110 C 145 90, 175 75, 160 50"/>
+          <path d="M200 105 C 185 80, 215 65, 200 35"/>
+          <path d="M240 110 C 225 90, 255 75, 240 50"/>
+        </g>
+
+        <!-- bowl body -->
+        <path d="M60 150 Q 70 270 200 278 Q 330 270 340 150 Z" fill="url(#bowlBody)"/>
+        <path d="M78 205 Q 200 232 322 205 L 316 222 Q 200 250 84 222 Z" fill="url(#band)" opacity=".9"/>
+        <!-- foot -->
+        <path d="M150 272 Q 200 290 250 272 L 245 284 Q 200 296 155 284 Z" fill="#bfb19a"/>
+
+        <!-- rim and soup -->
+        <ellipse cx="200" cy="150" rx="140" ry="34" fill="#efe6d8"/>
+        <ellipse cx="200" cy="152" rx="126" ry="27" fill="url(#soup)"/>
+
+        <!-- lentil specks -->
+        <g fill="#f0a35a" opacity=".85">
+          <ellipse cx="140" cy="150" rx="4" ry="2.5"/>
+          <ellipse cx="170" cy="162" rx="4" ry="2.5"/>
+          <ellipse cx="230" cy="140" rx="4" ry="2.5"/>
+          <ellipse cx="262" cy="158" rx="4" ry="2.5"/>
+          <ellipse cx="205" cy="168" rx="4" ry="2.5"/>
+          <ellipse cx="118" cy="160" rx="3.5" ry="2"/>
+          <ellipse cx="285" cy="146" rx="3.5" ry="2"/>
+        </g>
+        <!-- carrot coins -->
+        <g fill="#f28a2e" stroke="#c9601a" stroke-width="1.5">
+          <ellipse cx="155" cy="140" rx="9" ry="5"/>
+          <ellipse cx="248" cy="166" rx="9" ry="5"/>
+        </g>
+        <!-- olive oil drizzle -->
+        <path d="M150 155 Q 185 140 215 152 T 270 150" fill="none" stroke="#e8c447" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+        <!-- parsley -->
+        <g fill="#5f8a32">
+          <path d="M196 146 q 6 -10 14 -4 q -6 8 -14 4z"/>
+          <path d="M210 150 q 10 -4 12 4 q -9 4 -12 -4z"/>
+          <path d="M186 152 q 2 -10 10 -8 q -2 8 -10 8z"/>
+        </g>
+        <!-- lemon wedge on rim -->
+        <g transform="translate(318 132) rotate(25)">
+          <path d="M0 0 A 22 22 0 0 1 44 0 Z" fill="#f4d23c" stroke="#d9b01f" stroke-width="2"/>
+          <path d="M5 0 A 17 17 0 0 1 39 0 Z" fill="#fbe98a"/>
+          <g stroke="#f4d23c" stroke-width="1.5">
+            <line x1="22" y1="0" x2="22" y2="-16"/>
+            <line x1="22" y1="0" x2="10" y2="-11"/>
+            <line x1="22" y1="0" x2="34" y2="-11"/>
+          </g>
+        </g>
+        <!-- rim highlight -->
+        <path d="M80 140 Q 120 122 170 118" fill="none" stroke="#fff" stroke-width="3" opacity=".6" stroke-linecap="round"/>
+
+        <!-- spoon -->
+        <g transform="translate(40 200) rotate(-18)">
+          <rect x="-10" y="0" width="90" height="8" rx="4" fill="#9a8f84"/>
+          <ellipse cx="-28" cy="4" rx="22" ry="12" fill="#b4aaa0"/>
+          <ellipse cx="-30" cy="2" rx="12" ry="5" fill="#d8d0c8" opacity=".7"/>
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="card" aria-labelledby="ing-h">
+      <h2 id="ing-h">Ingredients</h2>
+      <p class="sub">Tick items off as you gather them.</p>
+      <div class="servings">
+        <button type="button" id="minus" aria-label="Fewer servings">&minus;</button>
+        <output id="serves" aria-live="polite">4</output> servings
+        <button type="button" id="plus" aria-label="More servings">+</button>
+      </div>
+
+      <p class="group">Base</p>
+      <ul class="ingredients">
+        <li><label><input type="checkbox"><span class="qty" data-q="2" data-u="tbsp"></span><span>olive oil, plus more to serve</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="1" data-u="large"></span><span>yellow onion, diced</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="2" data-u="medium"></span><span>carrots, diced</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="3" data-u="cloves"></span><span>garlic, minced</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="1" data-u="tbsp"></span><span>tomato paste</span></label></li>
+      </ul>
+
+      <p class="group">Spices</p>
+      <ul class="ingredients">
+        <li><label><input type="checkbox"><span class="qty" data-q="2" data-u="tsp"></span><span>ground cumin</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="1" data-u="tsp"></span><span>sweet paprika</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="0.25" data-u="tsp"></span><span>chili flakes (optional)</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="1" data-u="tsp"></span><span>salt, more to taste</span></label></li>
+      </ul>
+
+      <p class="group">Pot</p>
+      <ul class="ingredients">
+        <li><label><input type="checkbox"><span class="qty" data-q="1" data-u="cup"></span><span>red lentils (200 g), rinsed</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="5" data-u="cups"></span><span>vegetable stock or water</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="1" data-u=""></span><span>lemon, juiced</span></label></li>
+        <li><label><input type="checkbox"><span class="qty" data-q="0.25" data-u="cup"></span><span>parsley or cilantro, chopped</span></label></li>
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="steps-h">
+      <h2 id="steps-h">Method</h2>
+      <p class="sub">One pot, about 45 minutes start to finish.</p>
+      <ol class="steps">
+        <li>
+          <h3>Soften the vegetables <span class="time">8 min</span></h3>
+          <p>Warm the oil in a large pot over medium heat. Add the onion and carrot with a pinch of salt and cook, stirring now and then, until the onion is soft and translucent.</p>
+        </li>
+        <li>
+          <h3>Toast the aromatics <span class="time">2 min</span></h3>
+          <p>Stir in the garlic, tomato paste, cumin, paprika and chili flakes. Cook until the paste darkens a shade and the spices smell toasted. Don't let the garlic brown.</p>
+        </li>
+        <li>
+          <h3>Simmer the lentils <span class="time">20&ndash;25 min</span></h3>
+          <p>Add the rinsed lentils and stock. Bring to a boil, then lower to a gentle simmer, partly covered. Stir every few minutes; the lentils are done when they've collapsed and the soup looks creamy.</p>
+        </li>
+        <li>
+          <h3>Adjust the texture <span class="time">2 min</span></h3>
+          <p>For a smoother soup, blend about a third of it and stir it back in. If it's too thick, add a splash of water. It will keep thickening as it sits.</p>
+        </li>
+        <li>
+          <h3>Finish and serve</h3>
+          <p>Take the pot off the heat and stir in the lemon juice. Taste for salt. Ladle into bowls and top with herbs and a drizzle of olive oil.</p>
+        </li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <h4>Storage</h4>
+      <p>Keeps 4 days in the fridge and 3 months frozen. Thin with water when reheating.</p>
+    </div>
+    <div class="note">
+      <h4>Swaps</h4>
+      <p>Yellow lentils work the same way. Brown or green lentils hold their shape and need about 10 more minutes.</p>
+    </div>
+    <div class="note">
+      <h4>Make it richer</h4>
+      <p>Stir in a handful of spinach at the end, or swap a cup of the stock for coconut milk.</p>
+    </div>
+  </div>
+
+  <footer>
+    <svg class="divider" width="120" height="16" viewBox="0 0 120 16" aria-hidden="true">
+      <g fill="var(--accent)">
+        <ellipse cx="40" cy="8" rx="5" ry="3.2"/>
+        <ellipse cx="60" cy="8" rx="5" ry="3.2"/>
+        <ellipse cx="80" cy="8" rx="5" ry="3.2"/>
+      </g>
+      <line x1="0" y1="8" x2="28" y2="8" stroke="var(--line)" stroke-width="1.5"/>
+      <line x1="92" y1="8" x2="120" y2="8" stroke="var(--line)" stroke-width="1.5"/>
+    </svg>
+    Serve with crusty bread or warm flatbread.
+  </footer>
+</div>
+
+<script>
+(function () {
+  var base = 4, n = 4;
+  var out = document.getElementById('serves');
+  var fact = document.getElementById('serveFact');
+  var qtys = document.querySelectorAll('.qty');
+  var fracs = [[0.125,'⅛'],[0.25,'¼'],[0.333,'⅓'],[0.5,'½'],[0.667,'⅔'],[0.75,'¾']];
+
+  function fmt(x) {
+    var whole = Math.floor(x + 0.02);
+    var rem = x - whole;
+    if (rem < 0.06) return String(whole);
+    var best = fracs[0], d = 1;
+    for (var i = 0; i < fracs.length; i++) {
+      var dd = Math.abs(fracs[i][0] - rem);
+      if (dd < d) { d = dd; best = fracs[i]; }
+    }
+    if (rem > 0.9) return String(whole + 1);
+    return (whole ? whole + ' ' : '') + best[1];
+  }
+  function plural(u, q) {
+    if (u === 'cup' && q > 1.01) return 'cups';
+    if (u === 'cups' && q <= 1.01) return 'cup';
+    if (u === 'cloves' && q <= 1.01) return 'clove';
+    return u;
+  }
+  function render() {
+    out.textContent = n;
+    fact.textContent = n;
+    qtys.forEach(function (el) {
+      var q = parseFloat(el.dataset.q) * n / base;
+      var u = plural(el.dataset.u, q);
+      el.textContent = fmt(q) + (u ? ' ' + u : '');
+    });
+  }
+  document.getElementById('minus').addEventListener('click', function () { if (n > 1) { n--; render(); } });
+  document.getElementById('plus').addEventListener('click', function () { if (n < 16) { n++; render(); } });
+  render();
+})();
+</script>
+</body>
+</html>
