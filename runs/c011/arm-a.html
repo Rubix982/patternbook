@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Router Troubleshooting</title>
+<style>
+  :root{
+    --page:#FFFFFF; --ink:#231F20; --g1:#D3D2D2; --g2:#BDBCBC;
+    --led-green:#2E9E4F; --led-amber:#E59A00;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--page);color:var(--ink)}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.45;font-weight:400}
+  b,strong,h1,h2,h3{font-weight:700}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+  svg{display:block;max-width:100%;height:auto}
+  .ol{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+  .il{fill:none;stroke:var(--ink);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
+  .w{fill:var(--page)}
+  .s1{fill:var(--g1)} .s2{fill:var(--g2)}
+  .ink{fill:var(--ink)}
+  .dash{stroke-dasharray:4 3}
+  .t{font-family:inherit;font-size:11px;fill:var(--ink)}
+  .tb{font-family:inherit;font-size:13px;font-weight:700;fill:var(--ink)}
+
+  /* header */
+  header{border-bottom:2px solid var(--ink);padding:20px 0 18px}
+  .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:18px}
+  .hgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center}
+  h1{font-size:36px;line-height:1.1;margin:0 0 10px}
+  .lede{margin:0 0 14px;max-width:34em}
+  .need{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);border-radius:3px}
+  .need div{flex:1 1 140px;padding:8px 10px;font-size:14px;border-right:1px solid var(--ink)}
+  .need div:last-child{border-right:0}
+  .need b{display:block;font-size:13px}
+
+  /* index */
+  section{padding:22px 0}
+  h2{font-size:22px;margin:0 0 4px}
+  .sub{margin:0 0 14px;font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--ink);vertical-align:middle}
+  th{font-size:13px;border-bottom:2px solid var(--ink)}
+  td.go{font-weight:700;font-size:20px;white-space:nowrap;width:1%}
+  td.go a{color:var(--ink);text-decoration:none;border:2px solid var(--ink);border-radius:3px;padding:0 8px;display:inline-block}
+  td.go a:hover{background:var(--g1)}
+  .lights{display:inline-flex;gap:5px;vertical-align:middle}
+  .led{width:12px;height:12px;border:1.5px solid var(--ink);border-radius:50%;display:inline-block;background:var(--page)}
+  .led.g{background:var(--led-green)} .led.a{background:var(--led-amber)}
+  .led.blink{background:var(--led-amber);outline:1.5px dashed var(--ink);outline-offset:2px}
+  .key{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;margin-top:10px}
+  .key span{display:inline-flex;align-items:center;gap:6px}
+
+  /* panels */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:2px solid var(--ink);border-left:1px solid var(--ink)}
+  .panel{border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:16px 18px 18px;display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-content:start}
+  .num{font-size:44px;font-weight:700;line-height:1;grid-row:span 2}
+  .panel h3{font-size:18px;margin:4px 0 0;line-height:1.2}
+  .code{font-size:12px;margin:2px 0 0}
+  .panel .fig{grid-column:1/-1;margin:12px 0 10px}
+  .panel ol,.panel p{grid-column:1/-1;margin:0;font-size:15px}
+  .panel ol{padding-left:20px}
+  .panel li{margin-bottom:4px}
+  .panel.wide{grid-column:1/-1}
+  .warn{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;border-top:1px solid var(--ink);margin-top:10px;padding-top:10px;font-size:14px}
+  .warn svg{flex:0 0 26px}
+  .split{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+  .split .fig,.split ol{grid-column:auto}
+  .split .fig{margin:8px 0}
+  @media (max-width:760px){.split{grid-template-columns:1fr}}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  /* footer */
+  .call{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--ink);border-radius:3px}
+  .call > div{padding:14px 16px}
+  .call > div + div{border-left:1px solid var(--ink)}
+  .call ul{margin:6px 0 0;padding-left:18px;font-size:15px}
+  footer{border-top:2px solid var(--ink);padding:12px 0 28px;font-size:13px;margin-top:10px}
+
+  @media (max-width:760px){
+    .hgrid,.grid,.call{grid-template-columns:1fr}
+    .call > div + div{border-left:0;border-top:1px solid var(--ink)}
+    h1{font-size:28px}
+    .num{font-size:36px}
+    th.hide,td.hide{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable drawings -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="router" viewBox="0 0 240 130">
+      <!-- antennas -->
+      <path class="ol w" d="M46 54 L41 8 L48 7 L53 52"/>
+      <path class="ol w" d="M186 52 L191 6 L198 7 L193 51"/>
+      <!-- body -->
+      <path class="ol w" d="M20 60 L140 30 L220 60 L100 90 Z"/>
+      <path class="ol w" d="M20 60 L100 90 L100 110 L20 80 Z"/>
+      <path class="ol w" d="M100 90 L220 60 L220 80 L100 110 Z"/>
+      <!-- vent detail on top -->
+      <path class="il" d="M90 52 L150 37 M98 56 L158 41 M106 60 L166 45"/>
+      <!-- LEDs, front face -->
+      <ellipse class="il w" cx="36" cy="76" rx="3" ry="2.4"/>
+      <ellipse class="il w" cx="52" cy="82" rx="3" ry="2.4"/>
+      <ellipse class="il w" cx="68" cy="88" rx="3" ry="2.4"/>
+      <ellipse class="il w" cx="84" cy="94" rx="3" ry="2.4"/>
+      <!-- ports, side face -->
+      <path class="il" d="M118 95 l12 -3 v7 l-12 3 z M136 90.5 l12 -3 v7 l-12 3 z M154 86 l12 -3 v7 l-12 3 z"/>
+      <path class="il s1" d="M182 79 l14 -3.5 v8 l-14 3.5 z"/>
+      <circle class="il w" cx="210" cy="72" r="3.5"/>
+    </symbol>
+    <marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#231F20"/>
+    </marker>
+    <symbol id="warn" viewBox="0 0 26 24">
+      <path d="M13 2 L24.5 22 H1.5 Z" fill="none" stroke="#231F20" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M13 9 V15" stroke="#231F20" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="13" cy="18.6" r="1.3" fill="#231F20"/>
+    </symbol>
+    <symbol id="ok" viewBox="0 0 30 30">
+      <circle cx="15" cy="15" r="13" fill="none" stroke="#231F20" stroke-width="2"/>
+      <path d="M8.5 15.5 L13 20 L21.5 10.5" fill="none" stroke="#231F20" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="no" viewBox="0 0 30 30">
+      <circle cx="15" cy="15" r="13" fill="none" stroke="#231F20" stroke-width="2"/>
+      <path d="M6 6 L24 24" stroke="#231F20" stroke-width="2.4"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap">
+    <div class="top"><b>Home Wi-Fi Router, model HR-200</b><span>Troubleshooting guide · rev. 3</span></div>
+    <div class="hgrid">
+      <div>
+        <h1>Troubleshooting your Wi-Fi router</h1>
+        <p class="lede">Look at the four lights on the front of the router, find the row below that matches, and go to that numbered panel. Work through panels in order if you're not sure. Panel 2 (a restart) fixes most problems on its own.</p>
+        <div class="need">
+          <div><b>You need</b>a phone or laptop</div>
+          <div><b>For panel 7</b>a straightened paperclip</div>
+          <div><b>Time</b>5 to 10 minutes</div>
+        </div>
+      </div>
+      <figure style="margin:0" aria-label="Router with its four front lights labelled">
+        <svg viewBox="0 0 360 200" role="img">
+          <use href="#router" x="40" y="40" width="240" height="130"/>
+          <!-- leaders to LEDs (router offset 40,40) -->
+          <g class="il">
+            <path d="M76 116 Q60 150 40 170"/>
+            <path d="M92 122 Q90 160 92 182"/>
+            <path d="M108 128 Q128 160 150 180"/>
+            <path d="M124 134 Q170 150 210 176"/>
+          </g>
+          <g>
+            <text class="tb" x="20" y="186">1</text><text class="t" x="30" y="186">Power</text>
+            <text class="tb" x="80" y="196">2</text><text class="t" x="90" y="196">Internet</text>
+            <text class="tb" x="150" y="194">3</text><text class="t" x="160" y="194">Wi-Fi</text>
+            <text class="tb" x="212" y="186">4</text><text class="t" x="222" y="186">Cable (LAN)</text>
+          </g>
+          <!-- port labels -->
+          <g class="il"><path d="M229 123 Q260 110 290 100"/><path d="M250 112 Q280 70 300 62"/></g>
+          <text class="t" x="292" y="104">WAN port</text>
+          <text class="t" x="302" y="66">Power in</text>
+        </svg>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <h2>What are the lights doing?</h2>
+    <p class="sub">Lights read left to right: 1 Power, 2 Internet, 3 Wi-Fi, 4 Cable.</p>
+    <table>
+      <thead><tr><th>Lights 1–4</th><th>What you notice</th><th class="hide">Likely cause</th><th>Go to</th></tr></thead>
+      <tbody>
+        <tr><td><span class="lights"><i class="led"></i><i class="led"></i><i class="led"></i><i class="led"></i></span></td><td>Nothing is lit</td><td class="hide">No power reaching the router</td><td class="go"><a href="#p1">1</a></td></tr>
+        <tr><td><span class="lights"><i class="led g"></i><i class="led a"></i><i class="led g"></i><i class="led"></i></span></td><td>Wi-Fi connects, but no pages load</td><td class="hide">Router can't reach your provider</td><td class="go"><a href="#p2">2</a> <a href="#p3">3</a></td></tr>
+        <tr><td><span class="lights"><i class="led g"></i><i class="led blink"></i><i class="led g"></i><i class="led"></i></span></td><td>Internet light keeps flashing amber</td><td class="hide">Still trying to connect, or provider outage</td><td class="go"><a href="#p2">2</a></td></tr>
+        <tr><td><span class="lights"><i class="led g"></i><i class="led g"></i><i class="led"></i><i class="led"></i></span></td><td>Your network name isn't in the list</td><td class="hide">Wi-Fi switched off</td><td class="go"><a href="#p4">4</a></td></tr>
+        <tr><td><span class="lights"><i class="led g"></i><i class="led g"></i><i class="led g"></i><i class="led"></i></span></td><td>Slow, or drops out in some rooms</td><td class="hide">Router placement or interference</td><td class="go"><a href="#p5">5</a></td></tr>
+        <tr><td><span class="lights"><i class="led g"></i><i class="led g"></i><i class="led g"></i><i class="led"></i></span></td><td>Asks for a password you don't know</td><td class="hide">Using the default password</td><td class="go"><a href="#p6">6</a></td></tr>
+      </tbody>
+    </table>
+    <div class="key">
+      <span><i class="led g"></i> green, steady</span>
+      <span><i class="led a"></i> amber, steady</span>
+      <span><i class="led blink"></i> amber, flashing</span>
+      <span><i class="led"></i> off</span>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:6px">
+  <div class="wrap">
+    <div class="grid">
+
+      <!-- 1 -->
+      <article class="panel" id="p1">
+        <div class="num">1</div>
+        <h3>No lights at all</h3>
+        <p class="code">Lights 1–4 off</p>
+        <div class="fig">
+          <svg viewBox="0 0 440 190" role="img" aria-label="Power adapter pushed into wall socket and into router; power switch shown magnified">
+            <use href="#router" x="0" y="40" width="240" height="130"/>
+            <!-- cable from power in (210,72 scaled -> 210,112) -->
+            <path class="il" d="M212 110 C250 100 260 150 300 150"/>
+            <!-- wall socket -->
+            <path class="ol w" d="M330 110 h60 v80 h-60 z" transform="translate(0,-20)"/>
+            <rect class="il" x="342" y="102" width="36" height="36" rx="3"/>
+            <circle class="ink" cx="354" cy="120" r="2.5"/><circle class="ink" cx="366" cy="120" r="2.5"/>
+            <!-- plug -->
+            <path class="ol s1" d="M298 140 h22 v20 h-22 z"/>
+            <path class="ol" d="M296 172 L338 132" marker-end="url(#ah)" style="stroke-width:2.5"/>
+            <!-- callout of power switch -->
+            <circle class="ol w" cx="310" cy="44" r="38"/>
+            <path class="il" d="M213 106 Q240 70 274 56"/>
+            <path class="ol s1" d="M296 30 h28 v28 h-28 z"/>
+            <path class="il" d="M304 36 h12 v16 h-12 z"/>
+            <text class="t" x="292" y="74">I / O</text>
+          </svg>
+        </div>
+        <ol>
+          <li>Check the adapter is pushed fully into the wall and into the round <b>Power in</b> socket.</li>
+          <li>If there's a switch next to the socket, press it to <b>I</b>.</li>
+          <li>Try a different wall socket, one you know works (plug a lamp in).</li>
+          <li>Still dark? Use only the adapter that came with the router (12 V, 1.5 A). Other adapters can look identical.</li>
+        </ol>
+      </article>
+
+      <!-- 2 -->
+      <article class="panel" id="p2">
+        <div class="num">2</div>
+        <h3>Restart, in the right order</h3>
+        <p class="code">Light 2 amber or flashing · fixes most problems</p>
+        <div class="fig">
+          <svg viewBox="0 0 440 170" role="img" aria-label="Unplug modem and router, wait 30 seconds, plug in modem first and wait 2 minutes, then router">
+            <!-- step a: modem (tall box) and router unplugged -->
+            <path class="ol w" d="M20 50 L50 40 L80 50 L50 60 Z"/>
+            <path class="ol w" d="M20 50 L50 60 L50 130 L20 120 Z"/>
+            <path class="ol s1" d="M50 60 L80 50 L80 120 L50 130 Z"/>
+            <text class="t" x="24" y="150">Modem</text>
+            <path class="il dash" d="M80 115 Q100 120 100 140"/>
+            <path class="ol w" d="M92 140 h16 v12 h-16 z"/>
+            <path class="ol" d="M120 118 L120 150" marker-end="url(#ah)" style="stroke-width:2.5"/>
+            <text class="t" x="126" y="140">unplug</text>
+            <!-- clock 30s -->
+            <circle class="ol w" cx="170" cy="85" r="34"/>
+            <path class="il" d="M170 85 V60 M170 85 L188 95"/>
+            <path class="ol s1" d="M170 51 A34 34 0 0 1 170 119 Z" style="stroke-width:1"/>
+            <text class="tb" x="152" y="140">30 s</text>
+            <!-- chained circles: 1 then 2 -->
+            <circle class="ol w" cx="270" cy="85" r="34"/>
+            <text class="tb" x="246" y="76">Modem</text>
+            <text class="t" x="257" y="96">first,</text>
+            <text class="t" x="244" y="110">then 2 min</text>
+            <path class="il" d="M304 85 H330" marker-end="url(#ah)"/>
+            <circle class="ol w" cx="372" cy="85" r="34"/>
+            <text class="tb" x="348" y="80">Router</text>
+            <text class="t" x="354" y="100">second</text>
+            <path class="il" d="M204 85 H230" marker-end="url(#ah)"/>
+            <text class="tb" x="258" y="30">a</text><text class="tb" x="368" y="30">b</text>
+          </svg>
+        </div>
+        <ol>
+          <li>Unplug the power from both the router and your provider's modem (if you have a separate box).</li>
+          <li>Wait 30 seconds.</li>
+          <li>Plug the modem in first. Wait about 2 minutes until its lights settle.</li>
+          <li>Plug the router in. Light 2 should turn green within 3 minutes.</li>
+        </ol>
+        <div class="warn"><svg viewBox="0 0 26 24"><use href="#warn"/></svg><span>Still amber after two tries? Check your provider's outage page from your phone's mobile data before going on to panel 3.</span></div>
+      </article>
+
+      <!-- 3 -->
+      <article class="panel" id="p3">
+        <div class="num">3</div>
+        <h3>Check the internet cable</h3>
+        <p class="code">Light 2 amber, light 4 off</p>
+        <div class="fig">
+          <div class="pair">
+            <svg viewBox="0 0 210 170" role="img" aria-label="Correct: cable from modem in the grey WAN port">
+              <use href="#router" x="-60" y="30" width="240" height="130"/>
+              <circle class="ol w" cx="150" cy="58" r="44"/>
+              <path class="il" d="M128 110 Q120 104 118 96"/>
+              <!-- magnified ports -->
+              <path class="il" d="M112 70 l18 -5 v12 l-18 5 z"/>
+              <path class="ol s1" d="M150 58 l26 -7 v16 l-26 7 z"/>
+              <path class="ol w" d="M160 38 l10 -3 v22 l-10 3 z"/>
+              <path class="il" d="M165 36 C168 20 180 18 186 22"/>
+              <text class="t" x="136" y="92">WAN</text>
+              <svg x="4" y="4" width="26" height="26" viewBox="0 0 30 30"><use href="#ok"/></svg>
+            </svg>
+            <svg viewBox="0 0 210 170" role="img" aria-label="Wrong: cable from modem in a LAN port">
+              <use href="#router" x="-60" y="30" width="240" height="130"/>
+              <circle class="ol w" cx="150" cy="58" r="44"/>
+              <path class="il" d="M128 110 Q120 104 118 96"/>
+              <path class="ol w" d="M112 70 l18 -5 v12 l-18 5 z"/>
+              <path class="ol w" d="M116 50 l10 -3 v22 l-10 3 z"/>
+              <path class="il" d="M121 48 C124 30 136 26 146 28"/>
+              <path class="il s1" d="M150 58 l26 -7 v16 l-26 7 z"/>
+              <text class="t" x="108" y="94">LAN</text>
+              <svg x="4" y="4" width="26" height="26" viewBox="0 0 30 30"><use href="#no"/></svg>
+            </svg>
+          </div>
+        </div>
+        <ol>
+          <li>The cable from your modem or wall socket goes into the <b>WAN</b> port only. It's the one set apart from the other three.</li>
+          <li>Push the plug in until it clicks. A loose plug can still look seated.</li>
+          <li>Try a different cable if you have one. Then repeat panel 2.</li>
+        </ol>
+      </article>
+
+      <!-- 4 -->
+      <article class="panel" id="p4">
+        <div class="num">4</div>
+        <h3>Network name not showing</h3>
+        <p class="code">Light 3 off</p>
+        <div class="fig">
+          <svg viewBox="0 0 440 170" role="img" aria-label="Press and hold the Wi-Fi button on the side for 2 seconds; light 3 turns green">
+            <use href="#router" x="0" y="30" width="240" height="130"/>
+            <!-- button on front-left face near left edge -->
+            <circle class="ol s1" cx="26" cy="100" r="4"/>
+            <path class="il" d="M26 104 Q40 150 90 156"/>
+            <!-- callout -->
+            <circle class="ol w" cx="300" cy="80" r="56"/>
+            <path class="il" d="M30 96 Q120 10 246 62"/>
+            <circle class="ol s1" cx="300" cy="86" r="16"/>
+            <path class="il" d="M292 86 q8 -8 16 0 M295 90 q5 -5 10 0"/>
+            <circle class="ink" cx="300" cy="94" r="1.4"/>
+            <!-- finger press arrow -->
+            <path class="ol" d="M300 34 V62" marker-end="url(#ah)" style="stroke-width:3"/>
+            <text class="tb" x="318" y="48">2 s</text>
+            <!-- LED 3 green -->
+            <ellipse cx="68" cy="118" rx="3" ry="2.4" fill="#2E9E4F" stroke="#231F20" stroke-width="1"/>
+            <text class="t" x="96" y="160">Wi-Fi button</text>
+          </svg>
+        </div>
+        <ol>
+          <li>Press and hold the <b>Wi-Fi</b> button on the front-left corner for 2 seconds. Light 3 turns green.</li>
+          <li>On your phone, turn Wi-Fi off and on again, then look for the name printed on the router's label (panel 6).</li>
+          <li>Two names, one ending <b>-5G</b>? Both work. The 5G one is faster up close, the other reaches further.</li>
+        </ol>
+      </article>
+
+      <!-- 5 -->
+      <article class="panel wide" id="p5">
+        <div class="num">5</div>
+        <h3>Slow, or drops out in some rooms</h3>
+        <p class="code">All lights normal</p>
+        <div class="fig">
+          <div class="pair">
+            <svg viewBox="0 0 420 180" role="img" aria-label="Good: router high on an open shelf, central, antennas upright">
+              <svg x="6" y="6" width="28" height="28" viewBox="0 0 30 30"><use href="#ok"/></svg>
+              <!-- shelf -->
+              <path class="ol w" d="M90 110 L300 110 L340 125 L130 125 Z"/>
+              <path class="ol w" d="M130 125 L340 125 L340 133 L130 133 Z"/>
+              <path class="il" d="M110 133 V178 M320 133 V178"/>
+              <use href="#router" x="140" y="34" width="150" height="81"/>
+              <!-- signal rings -->
+              <g class="il dash"><path d="M120 40 A100 100 0 0 1 310 40"/><path d="M90 60 A140 140 0 0 1 340 60"/></g>
+              <path class="il dash" d="M20 110 H80"/>
+              <text class="t" x="20" y="104">about 1.5 m</text>
+              <text class="t" x="128" y="172">High, central, in the open</text>
+            </svg>
+            <svg viewBox="0 0 420 180" role="img" aria-label="Wrong: router on the floor inside a cabinet next to a microwave">
+              <svg x="6" y="6" width="28" height="28" viewBox="0 0 30 30"><use href="#no"/></svg>
+              <!-- cabinet -->
+              <path class="ol w" d="M110 50 L290 50 L290 170 L110 170 Z"/>
+              <path class="il" d="M110 50 L140 36 L320 36 L290 50 M320 36 L320 156 L290 170"/>
+              <path class="il s1" d="M200 56 V164 H116 V56 Z"/>
+              <use href="#router" x="118" y="110" width="100" height="54"/>
+              <!-- microwave -->
+              <path class="ol w" d="M330 100 h70 v50 h-70 z"/>
+              <path class="il" d="M336 106 h44 v38 h-44 z M390 110 v30"/>
+              <text class="t" x="330" y="166">microwave</text>
+              <text class="t" x="20" y="150">Floor, cupboard,</text>
+              <text class="t" x="20" y="164">behind the TV</text>
+            </svg>
+          </div>
+        </div>
+        <ol>
+          <li>Put the router out in the open, about chest height, as near the middle of the home as the cable allows. Signal spreads outward and slightly down.</li>
+          <li>Keep it a metre or more from microwaves, baby monitors, fish tanks and big mirrors. Water and metal block Wi-Fi more than walls do.</li>
+          <li>Stand both antennas straight up. If one floor is weak, tilt one antenna to point sideways.</li>
+          <li>Try standing next to the router. If it's fast there, the problem is distance, not the router. A mesh point or extender helps more than another restart.</li>
+        </ol>
+      </article>
+
+      <!-- 6 -->
+      <article class="panel" id="p6">
+        <div class="num">6</div>
+        <h3>Find the Wi-Fi password</h3>
+        <p class="code">Printed under the router</p>
+        <div class="fig">
+          <svg viewBox="0 0 440 190" role="img" aria-label="Flip the router over to read the label with network name and password">
+            <use href="#router" x="0" y="50" width="200" height="108"/>
+            <!-- flip arrow -->
+            <path class="ol" d="M30 60 C40 10 160 6 180 50" marker-end="url(#ah)" style="stroke-width:2.5"/>
+            <!-- label callout -->
+            <path class="il" d="M120 140 Q190 170 232 140"/>
+            <rect class="ol w" x="232" y="34" width="196" height="132" rx="3"/>
+            <text class="tb" x="244" y="56">HR-200</text>
+            <text class="t" x="340" y="56">S/N 41820735</text>
+            <path class="il" d="M244 64 H416"/>
+            <text class="t" x="244" y="82">Network (SSID)</text>
+            <rect class="s1" x="242" y="88" width="176" height="20"/>
+            <text class="tb" x="248" y="103">HOME-7F3A</text>
+            <text class="t" x="244" y="126">Wi-Fi password</text>
+            <rect class="s1" x="242" y="132" width="176" height="20"/>
+            <text class="tb" x="248" y="147">wren-4417-oak</text>
+          </svg>
+        </div>
+        <ol>
+          <li>Turn the router over. The sticker shows the network name and password (shaded on the drawing).</li>
+          <li>Type the password exactly, including dashes. It's case-sensitive.</li>
+          <li>If someone changed the password and nobody remembers it, the sticker won't work. Go to panel 7.</li>
+        </ol>
+      </article>
+
+      <!-- 7 -->
+      <article class="panel" id="p7">
+        <div class="num">7</div>
+        <h3>Factory reset (last resort)</h3>
+        <p class="code">Only if panels 1–6 didn't help</p>
+        <div class="fig">
+          <svg viewBox="0 0 440 190" role="img" aria-label="Push a paperclip into the reset hole and hold for 10 seconds">
+            <use href="#router" x="0" y="50" width="240" height="130"/>
+            <!-- reset hole near ports: in symbol coords at about (172,80) -->
+            <circle class="ink" cx="174" cy="132" r="1.8"/>
+            <path class="il" d="M174 132 Q220 150 262 120"/>
+            <circle class="ol w" cx="330" cy="90" r="74"/>
+            <!-- magnified panel surface -->
+            <path class="il s1" d="M268 120 L392 88 L392 120 L268 152 Z"/>
+            <circle class="ol w" cx="330" cy="120" r="6"/>
+            <text class="t" x="340" y="138">RESET</text>
+            <!-- paperclip -->
+            <path class="ol" d="M330 114 V72 C330 56 352 56 352 72 V96 C352 104 342 104 342 96 V66" style="stroke-width:1.6"/>
+            <path class="ol" d="M300 40 V64" marker-end="url(#ah)" style="stroke-width:3"/>
+            <text class="tb" x="356" y="44">10 s</text>
+          </svg>
+        </div>
+        <ol>
+          <li>With the router on, push a paperclip into the small <b>RESET</b> hole beside the ports.</li>
+          <li>Hold it for 10 seconds, until all four lights flash once.</li>
+          <li>Wait 3 minutes. Connect using the name and password on the sticker (panel 6).</li>
+        </ol>
+        <div class="warn"><svg viewBox="0 0 26 24"><use href="#warn"/></svg><span>This erases everything you set up: your own network name and password, parental controls, port settings. Every device in the home will need to reconnect.</span></div>
+      </article>
+
+      <!-- 8: what to note -->
+      <article class="panel wide" id="p8">
+        <div class="num">8</div>
+        <h3>Before you call for help</h3>
+        <p class="code">Saves a long phone call</p>
+        <div class="split">
+        <div class="fig">
+          <svg viewBox="0 0 440 150" role="img" aria-label="Note the light pattern, model and serial number from the label">
+            <rect class="ol w" x="20" y="14" width="150" height="122" rx="3"/>
+            <path class="il" d="M34 40 H156 M34 62 H156 M34 84 H130 M34 106 H140"/>
+            <text class="tb" x="34" y="32">Notes</text>
+            <path class="ol" d="M180 120 L230 30 L242 36 L192 126 Z" style="fill:#fff"/>
+            <path class="il" d="M180 120 L184 134 L192 126"/>
+            <g transform="translate(270,40)">
+              <circle cx="14" cy="30" r="9" fill="#2E9E4F" stroke="#231F20" stroke-width="1.5"/>
+              <circle cx="40" cy="30" r="9" fill="#E59A00" stroke="#231F20" stroke-width="1.5"/>
+              <circle cx="66" cy="30" r="9" fill="#2E9E4F" stroke="#231F20" stroke-width="1.5"/>
+              <circle cx="92" cy="30" r="9" fill="#fff" stroke="#231F20" stroke-width="1.5"/>
+              <text class="t" x="10" y="60">1</text><text class="t" x="36" y="60">2</text><text class="t" x="62" y="60">3</text><text class="t" x="88" y="60">4</text>
+            </g>
+          </svg>
+        </div>
+        <ol>
+          <li>Which lights are on, and what colour. Flashing or steady.</li>
+          <li>The model and serial number from the sticker (panel 6).</li>
+          <li>When it started, and anything that changed: a storm, a move, new cable.</li>
+          <li>Which panels you've already tried. Support will usually ask you to do panel 2 again, so say you did.</li>
+        </ol>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">HR-200 home Wi-Fi router · troubleshooting guide. Lights, ports and buttons as shown on the drawings above; your router's label is the final reference for its name and password.</div>
+</footer>
+
+</body>
+</html>

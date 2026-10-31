@@ -14,6 +14,92 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-011 · Does a "human touch" style from PS Magazine fix what the judge called cold and empty?
+
+**Status:** closed
+**Opened:** 2026-10-31
+**From:** T-010
+
+**1. Where we are.**
+In C-010 the judge called the C-008 line-art page (our only style win) "cold… very unhuman"
+with an "almost non existent" header, and named enthusiastic copy and "polygon-ish" drawings
+as AI tells on others.
+
+**2. What we are doing.**
+Give two fresh agents the C-007/C-008 router-troubleshooting brief, one with the line-art style
+(`technical-line-art-monochrome.md`, including its C-010 note) and one with the new
+`hand-inked-two-colour-field-magazine.md` (from PS Magazine 1953 and 1961), then blind-pick.
+The comparison arm is the best style we have, not the default, so the bar is higher than in C-008.
+
+Measures:
+- **Blind pick:** (a) which looks less AI-made; (b) which would I rather have open when my
+  internet is down.
+- **Judge's tells** (METHOD.md, from C-010): Saif writes one line per page on what gives it
+  away, and I count how many of the five C-010 tells each page gets.
+- Words, time, size; style adherence by eye.
+
+**3. Why.**
+We don't know whether the things the judge said were missing (marks and texture in drawings,
+a real header, a plain voice, density) can be supplied by a written style, or whether "human
+touch" is something an agent can't produce from instructions.
+
+**4. What is affected.**
+- Whether the hand-inked style joins the library as a tested style.
+- The judge's checklist: confirmed as something a style can act on, or not.
+- T-010's answer.
+
+**5. Conclusion.**
+- **If** the PS-style page wins (a) and gets fewer judge's tells than the line-art page →
+  we claim *a written style can supply some of the human touch the judge found missing*.
+- **If** it wins (a) but the judge still names tells like "polygon-ish" or "uncanny voice" →
+  we claim *it moved the needle but agents can't yet carry the hand-made qualities*;
+  record which tells survived.
+- **If** it loses (a) → we claim *this style didn't help*, and say whether the drawing,
+  the voice or the layout is the likely reason, from the judge's notes.
+
+**6. If not done.**
+The library's style axis stays at "less AI-made than the default", with no attempt at what
+the judge actually asked for.
+
+**Limits (known before running):** n = 1 per arm; same judge, who wrote the tells this style
+targets (risk of rewarding the style for matching the judge's words); agents can't really
+hand-ink; PS's voice was written for 1950s soldiers.
+
+**Result (2026-10-31):** first branch on the picks. **The PS-style page won both questions**
+against the line-art style, our previous best.
+
+| | (a) less AI-made | (b) use while internet is down | Words | Time | Size |
+|---|---|---|---|---|---|
+| PS Magazine style (`arm-b.html`, page 1) | **won** | **won** | 1,450 | ~4 min | 52 KB |
+| Line-art style (`arm-a.html`, page 2) | lost | lost | 730 | ~4 min | 28 KB |
+
+Saif on (b): "Page 1! But it is bit harder to navigate the technical details, unlike page 2."
+
+The PS page did what the file asked: white page, `#1A1A1A` ink, one spot blue `#3F6E96` (46
+uses, plus its tint `#C9D6E2`), a Century Schoolbook body serif, 5 SVG hatch patterns, and 4
+roughening filters (`feTurbulence`/`feDisplacementMap`) so lines aren't perfect. It's about twice
+as dense in words as the line-art page, which is the density the file asked for.
+
+**Not collected:** Saif's per-page tells. The session ended here, so the card's second
+measure ("fewer judge's tells") is unanswered, and so is whether any of the five C-010 tells
+survived.
+
+**Claim:** for this brief, a style file written to supply what the judge said was missing
+(marked, textured drawing; a real header; a plain voice; density) produced a page the judge
+found less AI-made *and* preferred to use, against the best previous style. The cost Saif
+named is navigation: technical details were harder to find than on the cleaner page.
+
+**Limits that matter:** n = 1; the judge wrote the tells the style was built against; tells
+weren't collected; 2× the words, so density and style aren't separated.
+
+**Changes made:**
+- Hand-inked style: `tested_in: [C-011]`, `best_example`, a note on the navigation cost.
+- T-010 partly answered; T-011 opened (keep the human touch, fix navigation).
+
+**Closed:** 2026-10-31
+
+---
+
 ## C-010 · What does the human judge actually see as AI-made?
 
 **Status:** closed

@@ -27,3 +27,5 @@ Agent-run timings, because they matter for the effort confound:
 | c008/arm-b (art style only) | ~3.5 min | 31 KB |
 | c009/arm-a (no guidance) | ~1.5 min | 25 KB |
 | c009/arm-b (NASA-derived style) | ~1.5 min | 24 KB |
+| c011/arm-a (line-art style) | ~4 min | 28 KB |
+| c011/arm-b (PS Magazine style) | ~4 min | 52 KB |

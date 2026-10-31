@@ -17,9 +17,8 @@ or catalogue looks.
    - a **problem entry**: the folder in `library/` that matches what your page has to do
      (`step-by-step-instructions/`, `troubleshooting-by-symptom/`);
    - an **art style** from `library/art-styles/` for how it looks. One of the two styles
-     so far (IKEA line art, C-008) made a page read *less* AI-made than the default; the
-     other (NASA typographic, C-009) didn't. Neither reads as human yet: in C-010 the judge
-     found both styled pages cold and empty. Check a style's `tested_in` before relying on it.
+     so far: PS Magazine hand-inked (C-011) beat IKEA line art, which had beaten the default
+     (C-008); NASA typographic (C-009) didn't help. Check a style's `tested_in` before relying on it.
 2. Read the entry. Follow **section 4 (rules)**, and check **section 5** to see whether
    your case is one where it doesn't apply.
 3. If the entry lists a `best_example`, that's a page an agent built from it which won
@@ -82,6 +81,11 @@ sources/                        local copies of source documents (git-ignored)
   header, enthusiastic copy, perfect vector drawings, too much text. That's now METHOD.md's
   judge's checklist. The C-008 winner drew the most criticism, so "less AI-made than the
   default" is as far as that result goes.
+
+- **C-011:** a third style, from the US Army's PS Magazine (1953/1961), written to supply what
+  the judge said was missing: hand-inked, textured drawing, a real header, a plain voice, dense
+  pages. It won both blind questions against the line-art style, the previous best. Cost: harder
+  to navigate the technical details.
 
 One brief, one run per arm, and one judge. See each card's limits.
 

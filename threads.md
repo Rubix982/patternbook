@@ -76,8 +76,16 @@ value is just *any* specific instruction, not human sources.
 
 ### T-010 · What does "human touch" look like on a web page, in a form an agent can follow?
 
-**Status:** open
+**Status:** answered (partly)
 **Parent:** C-010
 **Opened:** 2026-10-31
 **Question:** Saif's tells point to what's missing: texture and marks in drawings ("streaks, flares"), a real header that orients you, a voice that isn't enthusiastic, density between empty and wall-of-text. Find human-made web or print sources that have these (e.g. hand-drawn or textured technical illustration, editorial headers, plain-spoken copy) and test whether adding them to the line-art style fixes the "cold and empty" reading.
+**Answer:** C-011 — PS Magazine style won both picks vs line art. Per-page tells not yet collected.
+
+### T-011 · Can the PS-style page keep its human touch and still be easy to navigate?
+
+**Status:** open
+**Parent:** C-011
+**Opened:** 2026-10-31
+**Question:** Saif preferred the PS page but found its technical details "a bit harder to navigate" than the clean line-art page. Also still owed: Saif's per-page tells for C-011 (runs/c011/blind/), to see which C-010 tells survived.
 **Answer:** —
