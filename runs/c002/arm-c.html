@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Replacing Your Chain</title>
+<style>
+:root{
+  --bg:#F3EFE6; --surface:#FBF9F4; --ink:#1E1C18; --ink-2:#5A554B; --line:#D8D1C2;
+  --act:#C8471A; --warn-ink:#8A5A00; --warn-bg:#F6E7C4;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16150F; --surface:#1F1D17; --ink:#EDE8DC; --ink-2:#A8A194; --line:#3A362D;
+    --act:#F07A45; --warn-ink:#F0C46A; --warn-bg:#3A2E12; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16150F; --surface:#1F1D17; --ink:#EDE8DC; --ink-2:#A8A194; --line:#3A362D;
+  --act:#F07A45; --warn-ink:#F0C46A; --warn-bg:#3A2E12; color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:19px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
+@media (min-width:640px){.wrap{padding:0 32px 96px}}
+header{padding:40px 0 8px}
+.kicker{font-size:15px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin:0 0 6px}
+h1{font-size:40px;line-height:1.1;font-weight:800;margin:0 0 14px;letter-spacing:-.01em}
+@media (min-width:640px){h1{font-size:48px}}
+.lede{margin:0 0 18px;max-width:62ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0 0 24px;padding:0;list-style:none;font-size:16px;color:var(--ink-2)}
+.facts b{color:var(--ink);font-weight:650}
+.mono{font-family:var(--mono);font-size:.92em;white-space:nowrap}
+h2{font-size:27px;line-height:1.2;font-weight:750;margin:0 0 12px}
+section.block{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px 18px;margin:0 0 20px}
+@media (min-width:640px){section.block{padding:28px 30px}}
+.tools{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+@media (min-width:560px){.tools{grid-template-columns:1fr 1fr}}
+.tools label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:6px 0}
+.tools input{width:24px;height:24px;margin:2px 0 0;accent-color:var(--act);flex:none}
+.tools small{display:block;color:var(--ink-2);font-size:15px;line-height:1.4}
+.index{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;padding:0;list-style:none}
+.index a{display:inline-flex;gap:8px;align-items:baseline;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:16px;background:var(--surface)}
+.index a:hover,.index a:focus-visible{border-color:var(--act)}
+.index a b{color:var(--act);font-variant-numeric:tabular-nums}
+.index a.is-done{opacity:.55;text-decoration:line-through}
+.step{position:relative;transition:opacity .2s}
+.step-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:10px}
+.num{font-size:64px;line-height:.9;font-weight:800;color:var(--act);font-variant-numeric:tabular-nums;flex:none;min-width:1.1ch}
+.step-head h2{margin:6px 0 0}
+.step-head p{margin:4px 0 0;color:var(--ink-2);font-size:17px}
+figure{margin:16px 0 18px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:15px;color:var(--ink-2);margin-top:6px;line-height:1.45}
+ol.do{margin:0 0 14px;padding-left:1.3em}
+ol.do li{margin:0 0 8px;padding-left:.2em}
+ol.do li::marker{font-weight:700;color:var(--ink-2)}
+strong{font-weight:650}
+.done-when{border-top:1px solid var(--line);padding-top:12px;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.done-when p{margin:0;flex:1 1 280px}
+.done-when p b{font-weight:700}
+.mark{font:inherit;font-size:16px;font-weight:650;padding:10px 16px;min-height:44px;border-radius:8px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.mark[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.step.is-done > :not(.done-when){opacity:.45}
+.caution{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:14px 16px;margin:16px 0;font-size:17px;line-height:1.5}
+.caution b{display:block;font-size:14px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:2px}
+.caution span{color:var(--ink)}
+.two{display:grid;gap:14px}
+@media (min-width:600px){.two{grid-template-columns:1fr 1fr}}
+.two div{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.two h3{margin:0 0 4px;font-size:18px;font-weight:700}
+.two p{margin:0;font-size:17px}
+table.wear{border-collapse:collapse;width:100%;font-size:17px;margin:4px 0 14px}
+table.wear th,table.wear td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+table.wear th{font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);font-weight:650}
+footer{color:var(--ink-2);font-size:15px;margin-top:28px}
+.theme-toggle{position:absolute;top:16px;right:16px;font:inherit;font-size:14px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink-2);cursor:pointer}
+/* svg tokens */
+.ln{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fl{fill:var(--surface);stroke:var(--ink);stroke-width:2}
+.thin{fill:none;stroke:var(--ink-2);stroke-width:1.25}
+.act{stroke:var(--act)}
+.actf{fill:var(--act)}
+.lbl{fill:var(--ink-2);font-family:var(--sans);font-size:15px}
+.lbl-a{fill:var(--act);font-family:var(--sans);font-size:15px;font-weight:700}
+.lbl-m{fill:var(--ink);font-family:var(--mono);font-size:14px}
+.chain-base{fill:none;stroke:var(--ink);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+.chain-rollers{fill:none;stroke:var(--surface);stroke-width:4;stroke-dasharray:3 7;stroke-linecap:round}
+.chain-act{stroke:var(--act)}
+.wrapper{position:relative}
+</style>
+</head>
+<body>
+<div class="wrapper">
+<button class="theme-toggle" type="button" id="themeBtn" aria-label="Switch colour theme">Theme</button>
+<div class="wrap">
+
+<header>
+  <p class="kicker">Bike repair, at home</p>
+  <h1>Replace your bike chain</h1>
+  <p class="lede">Check the old chain, take it off, size the new one to your bike, thread it through the gears, and join it. Eight steps. The only move you can't undo is cutting the new chain to length, and step 4 covers it.</p>
+  <ul class="facts">
+    <li><b>Time</b> 30–45 min the first time</li>
+    <li><b>Difficulty</b> moderate</li>
+    <li><b>Cost</b> one chain, one quick link</li>
+  </ul>
+</header>
+
+<ol class="index" id="index"></ol>
+
+<section class="block" aria-labelledby="tools-h">
+  <h2 id="tools-h">What you need</h2>
+  <ul class="tools" id="tools">
+    <li><label><input type="checkbox" data-key="t-chain"><span>New chain<small>Same gear count as your bike (see below)</small></span></label></li>
+    <li><label><input type="checkbox" data-key="t-tool"><span>Chain tool<small>Pushes pins out to shorten a chain</small></span></label></li>
+    <li><label><input type="checkbox" data-key="t-link"><span>Quick link<small>Often in the box with the chain; must match gear count</small></span></label></li>
+    <li><label><input type="checkbox" data-key="t-pliers"><span>Quick-link pliers<small>Optional, but they make removal easy</small></span></label></li>
+    <li><label><input type="checkbox" data-key="t-check"><span>Chain checker or a ruler<small>A steel ruler in inches works</small></span></label></li>
+    <li><label><input type="checkbox" data-key="t-rag"><span>Rag, gloves, chain lube<small>And somewhere to hang or flip the bike</small></span></label></li>
+  </ul>
+</section>
+
+<section class="block" aria-labelledby="before-h">
+  <h2 id="before-h">Before you buy: two facts about your bike</h2>
+  <figure>
+    <svg viewBox="0 0 640 210" role="img" aria-labelledby="fig0t">
+      <title id="fig0t">A chain is alternating inner and outer links. A quick link replaces one outer link.</title>
+      <!-- inner plates -->
+      <rect class="fl" x="52" y="79" width="156" height="52" rx="26"/>
+      <rect class="fl" x="252" y="79" width="156" height="52" rx="26"/>
+      <rect class="fl" x="452" y="79" width="156" height="52" rx="26"/>
+      <!-- outer plates -->
+      <rect class="fl" x="150" y="75" width="160" height="60" rx="30"/>
+      <rect class="fl act" style="stroke-width:3" x="350" y="75" width="160" height="60" rx="30"/>
+      <!-- rollers (seen inside inner plates) -->
+      <circle class="fl" cx="80" cy="105" r="17"/>
+      <circle class="ln" cx="80" cy="105" r="7"/>
+      <circle class="fl" cx="580" cy="105" r="17"/>
+      <circle class="ln" cx="580" cy="105" r="7"/>
+      <!-- pin heads on outer plates -->
+      <circle class="fl" cx="180" cy="105" r="10"/>
+      <circle class="fl" cx="280" cy="105" r="10"/>
+      <circle class="fl act" cx="380" cy="105" r="10"/>
+      <circle class="fl act" cx="480" cy="105" r="10"/>
+      <!-- brackets -->
+      <path class="thin" d="M252 60 V52 H408 V60"/>
+      <text class="lbl" x="330" y="44" text-anchor="middle">inner link</text>
+      <path class="ln act" d="M350 150 V158 H510 V150"/>
+      <text class="lbl-a" x="430" y="180" text-anchor="middle">quick link (replaces an outer link)</text>
+      <path class="thin" d="M150 60 V52 H310"/>
+      <text class="lbl" x="150" y="44">outer link</text>
+      <line class="thin" x1="80" y1="122" x2="80" y2="170"/>
+      <text class="lbl" x="80" y="188" text-anchor="middle">roller</text>
+      <line class="thin" x1="180" y1="115" x2="180" y2="170"/>
+      <text class="lbl" x="180" y="188" text-anchor="middle">pin</text>
+    </svg>
+    <figcaption>The chain alternates inner and outer links. One inner plus one outer link is exactly 1 inch long.</figcaption>
+  </figure>
+  <div class="two">
+    <div>
+      <h3>1. How many gears at the back?</h3>
+      <p>Count the cogs on the rear wheel. 8, 9, 10, 11 or 12 cogs means you need an 8-, 9-, 10-, 11- or 12-speed chain. Higher counts use narrower chains, so they don't mix.</p>
+    </div>
+    <div>
+      <h3>2. How is the chain joined?</h3>
+      <p>Most chains join with a <strong>quick link</strong>, which you open by hand or with pliers. Some use a <strong>joining pin</strong> pressed in with a chain tool. The new chain's box tells you which.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 1 -->
+<section class="block step" id="s1" data-step="1" aria-labelledby="s1h">
+  <div class="step-head"><span class="num" aria-hidden="true">1</span><div><h2 id="s1h">Check the old chain is worn</h2><p>A chain stretches as its pins wear. A worn chain then wears the cogs.</p></div></div>
+  <figure>
+    <svg viewBox="0 0 640 230" role="img" aria-labelledby="fig1t">
+      <title id="fig1t">Measuring 12 inches of chain: a new chain's pin lines up with the 12 inch mark; a worn chain's pin sits past it.</title>
+      <defs>
+        <pattern id="rollNew" x="40" y="20" width="22" height="40" patternUnits="userSpaceOnUse">
+          <circle cx="0" cy="20" r="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+          <circle cx="22" cy="20" r="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+        </pattern>
+        <pattern id="rollWorn" x="40" y="20" width="22.5" height="40" patternUnits="userSpaceOnUse">
+          <circle cx="0" cy="20" r="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+          <circle cx="22.5" cy="20" r="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+        </pattern>
+      </defs>
+      <text class="lbl" x="40" y="22">new chain</text>
+      <rect class="fl" x="30" y="30" width="548" height="20" rx="10"/>
+      <rect x="32" y="20" width="544" height="40" fill="url(#rollNew)"/>
+      <text class="lbl" x="40" y="94">worn chain</text>
+      <rect class="fl" x="30" y="102" width="560" height="20" rx="10"/>
+      <g transform="translate(0,72)"><rect x="32" y="20" width="556" height="40" fill="url(#rollWorn)"/></g>
+      <!-- ruler -->
+      <rect class="fl" x="30" y="150" width="580" height="30" rx="3"/>
+      <g class="thin">
+        <line x1="40" y1="150" x2="40" y2="172"/>
+        <line x1="84" y1="150" x2="84" y2="160"/><line x1="128" y1="150" x2="128" y2="164"/>
+        <line x1="172" y1="150" x2="172" y2="160"/><line x1="216" y1="150" x2="216" y2="164"/>
+        <line x1="260" y1="150" x2="260" y2="160"/><line x1="304" y1="150" x2="304" y2="168"/>
+        <line x1="348" y1="150" x2="348" y2="160"/><line x1="392" y1="150" x2="392" y2="164"/>
+        <line x1="436" y1="150" x2="436" y2="160"/><line x1="480" y1="150" x2="480" y2="164"/>
+        <line x1="524" y1="150" x2="524" y2="160"/>
+        <line x1="568" y1="150" x2="568" y2="172"/>
+      </g>
+      <text class="lbl-m" x="40" y="200" text-anchor="middle">0</text>
+      <text class="lbl-m" x="568" y="200" text-anchor="middle">12 in</text>
+      <line class="thin" x1="40" y1="30" x2="40" y2="150" stroke-dasharray="3 4"/>
+      <line class="thin" x1="568" y1="30" x2="568" y2="150" stroke-dasharray="3 4"/>
+      <!-- gap -->
+      <line class="ln act" x1="568" y1="136" x2="580" y2="136" style="stroke-width:3"/>
+      <line class="ln act" x1="580" y1="122" x2="580" y2="150" style="stroke-width:3"/>
+      <text class="lbl-a" x="600" y="222" text-anchor="end">gap = wear</text>
+    </svg>
+    <figcaption>Line a pin up with zero and look at the pin 24 half-links along. The gap is exaggerated here; in real life it is about the thickness of a coin.</figcaption>
+  </figure>
+  <ol class="do">
+    <li>With a <strong>chain checker</strong>: drop both ends into the chain. If the gauge sinks in fully at the marked limit, the chain is worn.</li>
+    <li>With a <strong>ruler</strong>: rest it along the top run, put a pin on <span class="mono">0</span>, and find the pin nearest <span class="mono">12 in</span>.</li>
+  </ol>
+  <table class="wear">
+    <thead><tr><th>Pin at 12 in mark sits…</th><th>What it means</th></tr></thead>
+    <tbody>
+      <tr><td><span class="mono">on the mark</span></td><td>Chain is fine. Clean and lube it; no need to replace.</td></tr>
+      <tr><td><span class="mono">+1/16 in</span> (0.5%)</td><td>Replace now on 11- and 12-speed bikes. On 8–10 speed, replace soon.</td></tr>
+      <tr><td><span class="mono">+3/32 in</span> (0.75%)</td><td>Replace now on any bike.</td></tr>
+      <tr><td><span class="mono">+1/8 in</span> (1%) or more</td><td>The rear cogs are probably worn too. A new chain may skip on them; plan to replace the cassette as well.</td></tr>
+    </tbody>
+  </table>
+  <div class="done-when"><p><b>Done when:</b> you know the chain is past its limit, or you've decided it can stay.</p><button class="mark" type="button" aria-pressed="false">Mark done</button></div>
+</section>
+
+<!-- STEP 2 -->
+<section class="block step" id="s2" data-step="2" aria-labelledby="s2h">
+  <div class="step-head"><span class="num" aria-hidden="true">2</span><div><h2 id="s2h">Shift down and find the joint</h2><p>Slack chain is easier to open.</p></div></div>
+  <ol class="do">
+    <li>Turn the pedals by hand and shift to the <strong>smallest cog at the back</strong> and the <strong>smallest ring at the front</strong>.</li>
+    <li>Hang the bike on a stand, or flip it onto its seat and bars.</li>
+    <li>Turn the pedals backwards slowly and look along the chain for one outer link that looks different: a different colour, an arrow, or small oval slots. That is the quick link.</li>
+    <li>No quick link? The chain was joined with a pin. You'll push out any pin with the chain tool in the next step.</li>
+  </ol>
+  <div class="done-when"><p><b>Done when:</b> the chain hangs loose and you have the joint (or a spot to break it) under your fingers.</p><button class="mark" type="button" aria-pressed="false">Mark done</button></div>
+</section>
+
+<!-- STEP 3 -->
+<section class="block step" id="s3" data-step="3" aria-labelledby="s3h">
+  <div class="step-head"><span class="num" aria-hidden="true">3</span><div><h2 id="s3h">Take the old chain off</h2><p>Before it comes off, take a phone photo of how it runs through the rear derailleur.</p></div></div>
+  <figure>
+    <svg viewBox="0 0 640 200" role="img" aria-labelledby="fig3t">
+      <title id="fig3t">Opening a quick link: push the two rollers on either side of it toward each other.</title>
+      <!-- chain neighbours -->
+      <rect class="fl" x="40" y="74" width="170" height="52" rx="26"/>
+      <rect class="fl" x="430" y="74" width="170" height="52" rx="26"/>
+      <circle class="fl" cx="70" cy="100" r="16"/><circle class="fl" cx="570" cy="100" r="16"/>
+      <!-- quick link plate with keyhole slots -->
+      <rect class="fl act" style="stroke-width:3" x="170" y="68" width="300" height="64" rx="32"/>
+      <path class="ln act" d="M196 100 a10 10 0 1 1 20 0 v0 a10 10 0 0 1 -20 0z" />
+      <path class="ln act" d="M212 92 h40 a8 8 0 0 1 0 16 h-40" />
+      <path class="ln act" d="M424 100 a10 10 0 1 1 20 0 a10 10 0 0 1 -20 0z" />
+      <path class="ln act" d="M428 92 h-40 a8 8 0 0 0 0 16 h40" />
+      <circle class="fl" cx="206" cy="100" r="7"/><circle class="fl" cx="434" cy="100" r="7"/>
+      <!-- arrows -->
+      <path class="ln" style="stroke-width:3" d="M110 160 H190 M178 150 L190 160 L178 170"/>
+      <path class="ln" style="stroke-width:3" d="M530 160 H450 M462 150 L450 160 L462 170"/>
+      <text class="lbl" x="320" y="166" text-anchor="middle">squeeze together</text>
+      <text class="lbl-a" x="320" y="50" text-anchor="middle">quick link</text>
+      <line class="thin" x1="320" y1="56" x2="320" y2="68"/>
+    </svg>
+    <figcaption>Pushing the rollers together slides the pins into the wide end of each slot, and the two halves of the link come apart.</figcaption>
+  </figure>
+  <ol class="do">
+    <li><strong>Quick link:</strong> fit the pliers' tips into the rollers on either side of the quick link and squeeze. No pliers: grab the chain either side and push the two ends toward each other until it gives.</li>
+    <li><strong>No quick link:</strong> set any link in the chain tool, wind the handle until the pin is <em>almost</em> out, then flex the chain to free it. You're throwing this chain away, so any link will do.</li>
+    <li>Pull the chain off the cogs and out of the rear derailleur. Keep it nearby: it is your guide for length in the next step.</li>
+  </ol>
+  <div class="done-when"><p><b>Done when:</b> the old chain is in your hand and the derailleur hangs empty.</p><button class="mark" type="button" aria-pressed="false">Mark done</button></div>
+</section>
+
+<!-- STEP 4 -->
+<section class="block step" id="s4" data-step="4" aria-labelledby="s4h">
+  <div class="step-head"><span class="num" aria-hidden="true">4</span><div><h2 id="s4h">Find the right length</h2><p>New chains come long. You'll remove links so it fits your gears.</p></div></div>
+  <figure>
+    <svg viewBox="0 0 640 260" role="img" aria-labelledby="fig4t">
+      <title id="fig4t">Wrap the new chain around the largest front ring and the largest rear cog, skipping the derailleur, then add one inch where the ends meet.</title>
+      <circle class="ln" cx="150" cy="130" r="80"/>
+      <circle class="thin" cx="150" cy="130" r="18"/>
+      <circle class="ln" cx="480" cy="130" r="50"/>
+      <circle class="thin" cx="480" cy="130" r="12"/>
+      <text class="lbl" x="150" y="134" text-anchor="middle" dy="0" style="font-size:13px" transform="translate(0,48)">largest ring</text>
+      <text class="lbl" x="480" y="110" text-anchor="middle" style="font-size:13px">largest cog</text>
+      <!-- chain path: end A on bottom run at x=330 -->
+      <path class="chain-base" d="M320 194.5 L480 180 A50 50 0 0 0 480 80 L150 50 A80 80 0 0 0 150 210 L320 194.5"/>
+      <path class="chain-rollers" d="M320 194.5 L480 180 A50 50 0 0 0 480 80 L150 50 A80 80 0 0 0 150 210 L320 194.5"/>
+      <line class="ln" x1="320" y1="180" x2="320" y2="209" style="stroke-width:2.5"/>
+      <!-- extra inch drawn below the meeting point -->
+      <path class="thin" d="M320 209 V222 M372 204 V217" stroke-dasharray="2 3"/>
+      <path class="chain-base chain-act" d="M320 222 L372 217.3"/>
+      <text class="lbl-a" x="320" y="250" text-anchor="middle">then add 1 inch (one inner + one outer link)</text>
+      <text class="lbl" x="320" y="172" text-anchor="middle">ends meet here</text>
+      <text class="lbl" x="560" y="222" text-anchor="end" style="font-size:13px">rear derailleur skipped</text>
+    </svg>
+    <figcaption>The chain goes straight round the two biggest gears, not through the derailleur. Where the ends meet, add one inch, then cut.</figcaption>
+  </figure>
+  <ol class="do">
+    <li><strong>Easiest: count links.</strong> Lay the old and new chains side by side on the floor and match them link for link, not by length (the old one has stretched). Mark the matching link on the new chain.</li>
+    <li><strong>If the old chain was the wrong length, or you changed gears:</strong> shift the front derailleur to the big ring, then wrap the new chain around the <strong>largest front ring</strong> and the <strong>largest rear cog</strong>, skipping the rear derailleur. Pull it snug where the ends meet, then add <span class="mono">1 in</span>: one inner and one outer link.</li>
+    <li>Remember that the quick link counts as an outer link. If you're using one, the chain must end in an <strong>inner link at both ends</strong>.</li>
+    <li>Some single-front-ring bikes and full-suspension bikes need a different allowance. If the derailleur's instructions give a length method, use theirs.</li>
+  </ol>
+  <div class="caution" role="note"><b>Stop and check</b><span>Count again before step 5. You can always take out one more link, but you cannot put a cut one back. If in doubt, leave it one inch long.</span></div>
+  <div class="done-when"><p><b>Done when:</b> one link on the new chain is marked (tape or a marker) as the place to cut, and both ends of the kept part will be inner links.</p><button class="mark" type="button" aria-pressed="false">Mark done</button></div>
+</section>
+
+<!-- STEP 5 -->
+<section class="block step" id="s5" data-step="5" aria-labelledby="s5h">
+  <div class="step-head"><span class="num" aria-hidden="true">5</span><div><h2 id="s5h">Cut the new chain</h2><p>The chain tool pushes a pin out of an outer link.</p></div></div>
+  <figure>
+    <svg viewBox="0 0 640 230" role="img" aria-labelledby="fig5t">
+      <title id="fig5t">The chain tool's driving pin pushes the chain pin out sideways through the far plate.</title>
+      <!-- tool body (top-down cross-section) -->
+      <path class="fl" d="M90 60 H520 a10 10 0 0 1 10 10 V170 a10 10 0 0 1 -10 10 H90 a10 10 0 0 1 -10 -10 V70 a10 10 0 0 1 10 -10z"/>
+      <rect class="fl" x="250" y="80" width="190" height="80" rx="4" style="fill:var(--bg)"/>
+      <!-- chain cross-section: two outer plates and roller -->
+      <rect class="fl" x="296" y="70" width="12" height="100"/>
+      <rect class="fl" x="372" y="70" width="12" height="100"/>
+      <rect class="fl" x="308" y="96" width="64" height="48" rx="6"/>
+      <!-- chain pin being pushed -->
+      <rect class="fl act" style="stroke-width:3" x="330" y="110" width="86" height="20" rx="4"/>
+      <!-- driving screw -->
+      <rect class="fl" x="96" y="112" width="234" height="16" rx="3"/>
+      <path class="thin" d="M130 112 l-6 16 M150 112 l-6 16 M170 112 l-6 16 M190 112 l-6 16 M210 112 l-6 16 M230 112 l-6 16"/>
+      <rect class="fl" x="30" y="96" width="50" height="48" rx="8"/>
+      <path class="ln act" style="stroke-width:3" d="M420 120 H500 M488 110 L500 120 L488 130"/>
+      <text class="lbl" x="55" y="200" text-anchor="middle">handle</text>
+      <line class="thin" x1="55" y1="146" x2="55" y2="184"/>
+      <text class="lbl" x="200" y="50" text-anchor="middle">driving pin</text>
+      <line class="thin" x1="200" y1="56" x2="200" y2="110"/>
+      <text class="lbl" x="340" y="200" text-anchor="middle">chain plates</text>
+      <line class="thin" x1="340" y1="184" x2="378" y2="172"/><line class="thin" x1="340" y1="184" x2="302" y2="172"/>
+      <text class="lbl-a" x="540" y="44" text-anchor="middle">chain pin out</text>
+      <line class="thin act" x1="520" y1="50" x2="490" y2="112"/>
+    </svg>
+    <figcaption>Seen from above. Turn the handle clockwise; the driving pin presses the chain pin through and out of the far side plate.</figcaption>
+  </figure>
+  <ol class="do">
+    <li>Seat the pin you're removing in the tool's outer cradle (the one farther from the handle), with the chain's rollers sitting in the cradle teeth.</li>
+    <li>Wind the handle until the driving pin touches the chain pin. Check it's centred, then keep winding until the pin comes fully out.</li>
+    <li>Lift away the cut-off piece. Check that the chain you kept ends in an inner link at each end (for a quick link).</li>
+  </ol>
+  <div class="done-when"><p><b>Done when:</b> the chain is at the length you marked and both ends are narrow inner links.</p><button class="mark" type="button" aria-pressed="false">Mark done</button></div>
+</section>
+
+<!-- STEP 6 -->
+<section class="block step" id="s6" data-step="6" aria-labelledby="s6h">
+  <div class="step-head"><span class="num" aria-hidden="true">6</span><div><h2 id="s6h">Thread the chain through the gears</h2><p>Work from the front of the bike to the back, on the drive side.</p></div></div>
+  <figure>
+    <svg viewBox="0 0 640 320" role="img" aria-labelledby="fig6t">
+      <title id="fig6t">Chain path seen from the drive side: over the chainring, back to the cassette, round it, then forward of the upper pulley, round the back of the lower pulley, and forward to the chainring.</title>
+      <!-- frame hints -->
+      <path class="thin" d="M130 150 L470 120" stroke-dasharray="4 5"/>
+      <!-- chainring -->
+      <circle class="ln" cx="130" cy="150" r="70"/>
+      <circle class="thin" cx="130" cy="150" r="16"/>
+      <path class="ln" d="M130 150 L70 250" style="stroke-width:6;opacity:.35"/>
+      <!-- cassette -->
+      <circle class="ln" cx="470" cy="120" r="40"/>
+      <circle class="thin" cx="470" cy="120" r="30"/>
+      <circle class="thin" cx="470" cy="120" r="10"/>
+      <!-- derailleur cage + hanger -->
+      <path class="thin" d="M470 120 L520 170 L470 195"/>
+      <!-- chain -->
+      <path id="route" class="chain-base chain-act" d="M130 80 L470 80 A40 40 0 0 1 470 160 C452 162 443 178 443 195 A12 12 0 0 0 455 207 L492 255 A12 12 0 0 1 480 267 L130 220 A70 70 0 0 1 130 80"/>
+      <path class="chain-rollers" d="M130 80 L470 80 A40 40 0 0 1 470 160 C452 162 443 178 443 195 A12 12 0 0 0 455 207 L492 255 A12 12 0 0 1 480 267 L130 220 A70 70 0 0 1 130 80"/>
+      <!-- pulleys drawn over chain -->
+      <circle class="fl" cx="455" cy="195" r="9"/>
+      <circle class="fl" cx="480" cy="255" r="9"/>
+      <rect class="ln" x="432" y="178" width="72" height="104" rx="30" transform="rotate(-25 467 230)"/>
+      <!-- direction arrows -->
+      <path class="ln" style="stroke-width:2.5" d="M290 64 h40 m-10 -7 l10 7 l-10 7"/>
+      <path class="ln" style="stroke-width:2.5" d="M330 258 h-40 m10 -7 l-10 7 l10 7"/>
+      <!-- labels -->
+      <text class="lbl" x="130" y="40" text-anchor="middle">front chainring</text>
+      <line class="thin" x1="130" y1="46" x2="130" y2="74"/>
+      <text class="lbl" x="560" y="70" text-anchor="start">cassette</text>
+      <line class="thin" x1="556" y1="74" x2="510" y2="104"/>
+      <text class="lbl" x="360" y="188" text-anchor="end">upper pulley:</text>
+      <text class="lbl" x="360" y="206" text-anchor="end">chain on its front side</text>
+      <line class="thin" x1="364" y1="196" x2="438" y2="195"/>
+      <text class="lbl" x="420" y="296" text-anchor="end">lower pulley:</text>
+      <text class="lbl" x="420" y="314" text-anchor="end">chain round its back</text>
+      <line class="thin" x1="424" y1="296" x2="472" y2="264"/>
+    </svg>
+    <figcaption>Drive side, front of the bike on the left. The rear derailleur cage holds the chain in an S-bend. Arrows show the way the chain moves when you pedal.</figcaption>
+  </figure>
+  <ol class="do">
+    <li>If the chain has writing on the plates, or the box says it is <strong>directional</strong>, keep the writing facing out, away from the wheel.</li>
+    <li>Feed one end through the <strong>front derailleur cage</strong> and lay it over the <strong>smallest front ring</strong>, letting it hang off the front.</li>
+    <li>At the back, lay it over the <strong>smallest cog</strong>, then down through the <strong>rear derailleur</strong>: in front of the upper pulley, then round the back of the lower pulley, forming an S.</li>
+    <li>Check the chain sits between both cage plates of the rear derailleur and isn't caught on the small metal tab between the pulleys. Compare against your photo from step 3.</li>
+    <li>Bring both ends together on the lower run, below the chainstay.</li>
+  </ol>
+  <div class="done-when"><p><b>Done when:</b> both ends meet on the lower run and the chain follows the S through the derailleur, with no twist.</p><button class="mark" type="button" aria-pressed="false">Mark done</button></div>
+</section>
+
+<!-- STEP 7 -->
+<section class="block step" id="s7" data-step="7" aria-labelledby="s7h">
+  <div class="step-head"><span class="num" aria-hidden="true">7</span><div><h2 id="s7h">Join the ends</h2><p>Lift the chain off the front ring onto the frame first, so you have slack to work with.</p></div></div>
+  <figure>
+    <svg viewBox="0 0 640 220" role="img" aria-labelledby="fig7t">
+      <title id="fig7t">Each half of the quick link goes into one chain end from opposite sides; pulling the chain taut locks the pins into the narrow ends of the slots.</title>
+      <!-- chain ends -->
+      <rect class="fl" x="40" y="94" width="150" height="52" rx="26"/>
+      <circle class="fl" cx="70" cy="120" r="16"/><circle class="fl" cx="160" cy="120" r="16"/>
+      <rect class="fl" x="450" y="94" width="150" height="52" rx="26"/>
+      <circle class="fl" cx="480" cy="120" r="16"/><circle class="fl" cx="570" cy="120" r="16"/>
+      <!-- half A, coming from behind (upper) -->
+      <rect class="fl act" style="stroke-width:3" x="140" y="20" width="200" height="44" rx="22"/>
+      <circle class="actf" cx="162" cy="42" r="7"/>
+      <path class="ln act" d="M300 34 h20 a8 8 0 0 1 0 16 h-20 a8 8 0 0 1 0 -16z"/>
+      <path class="ln" style="stroke-width:2.5" d="M162 70 V96 m-7 -10 l7 10 l7 -10"/>
+      <!-- half B, coming from the front (lower) -->
+      <rect class="fl act" style="stroke-width:3" x="300" y="176" width="200" height="44" rx="22" transform="translate(0,-10)"/>
+      <circle class="actf" cx="478" cy="188" r="7"/>
+      <path class="ln act" d="M320 180 h20 a8 8 0 0 1 0 16 h-20 a8 8 0 0 1 0 -16z"/>
+      <path class="ln" style="stroke-width:2.5" d="M478 162 V144 m-7 10 l7 -10 l7 10"/>
+      <text class="lbl" x="360" y="48">half from the back</text>
+      <text class="lbl" x="110" y="196">half from the front</text>
+      <path class="ln" style="stroke-width:2.5" d="M240 120 h-30 m10 -7 l-10 7 l10 7 M400 120 h30 m-10 -7 l10 7 l-10 7"/>
+      <text class="lbl-a" x="320" y="125" text-anchor="middle">pull taut to lock</text>
+    </svg>
+    <figcaption>Each half carries one pin. Push one half through each chain end, hook the free pins into the opposite plate's slots, then pull.</figcaption>
+  </figure>
+  <ol class="do">
+    <li><strong>Quick link:</strong> push one half through one chain end from the back, the other through the other end from the front. Hook each pin into the opposite plate's slot.</li>
+    <li>Pull the chain apart either side of the link until the pins slide to the narrow end of the slots.</li>
+    <li>Lift the chain back onto the small front ring. Put the quick link on the top run, hold the rear brake, and press down firmly on a pedal. You should hear or feel a click.</li>
+    <li><strong>Joining pin instead:</strong> push the special new pin in by hand, press it through with the chain tool until it stands out the same amount as its neighbours, then snap off the guide with pliers.</li>
+  </ol>
+  <div class="caution" role="note"><b>Stop and check</b><span>Never rejoin a chain with the original pin you pushed out; it will not hold. Some quick links are single-use: if yours says so, use a new one each time the chain is opened.</span></div>
+  <div class="done-when"><p><b>Done when:</b> the joint flexes freely, the pins sit at the narrow ends of both slots, and the link looks like its neighbours from both sides.</p><button class="mark" type="button" aria-pressed="false">Mark done</button></div>
+</section>
+
+<!-- STEP 8 -->
+<section class="block step" id="s8" data-step="8" aria-labelledby="s8h">
+  <div class="step-head"><span class="num" aria-hidden="true">8</span><div><h2 id="s8h">Test before you ride</h2><p>Turn the pedals by hand, then ride slowly.</p></div></div>
+  <ol class="do">
+    <li><strong>Stiff links:</strong> pedal backwards slowly and watch the chain pass through the rear derailleur. A link that makes the lower pulley jump is stiff. Flex it side to side until it moves freely.</li>
+    <li><strong>Biggest gears:</strong> shift to the largest front ring and largest rear cog. The derailleur cage should still have some forward travel left; it must not be pulled straight.</li>
+    <li><strong>Smallest gears:</strong> shift to the smallest ring and smallest cog. The chain should not sag or touch itself at the lower pulley.</li>
+    <li><strong>All gears:</strong> run through every gear on the stand, then ride a short way and push hard on the pedals in a middle gear. No slipping, no jumping.</li>
+    <li>Add a drop of lube to each roller, turn the pedals, and wipe off the excess from the outside.</li>
+  </ol>
+  <p style="font-size:17px;color:var(--ink-2);margin:0 0 4px">If it slips under hard pedalling with a new chain, the rear cogs are likely worn (see the 1% row in step 1).</p>
+  <div class="done-when"><p><b>Done when:</b> it shifts into every gear cleanly and holds when you stand on the pedals.</p><button class="mark" type="button" aria-pressed="false">Mark done</button></div>
+</section>
+
+<footer>
+  <p>Drawings are simplified side views and not to scale. Your parts may look different, but the path and the order of steps are the same on most derailleur bikes.</p>
+</footer>
+
+</div>
+</div>
+<script>
+(function(){
+  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  // index
+  var idx=document.getElementById('index');
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  steps.forEach(function(s){
+    var li=document.createElement('li'),a=document.createElement('a');
+    a.href='#'+s.id;a.innerHTML='<b>'+s.dataset.step+'</b>'+s.querySelector('h2').textContent;
+    a.id='ix-'+s.id;li.appendChild(a);idx.appendChild(li);
+  });
+  function apply(s,on){
+    s.classList.toggle('is-done',on);
+    var b=s.querySelector('.mark');b.setAttribute('aria-pressed',on?'true':'false');b.textContent=on?'Done ✓':'Mark done';
+    var a=document.getElementById('ix-'+s.id);if(a)a.classList.toggle('is-done',on);
+  }
+  steps.forEach(function(s){
+    var key='chain-step-'+s.dataset.step;
+    apply(s,get(key)==='1');
+    s.querySelector('.mark').addEventListener('click',function(){
+      var on=!s.classList.contains('is-done');apply(s,on);set(key,on?'1':'0');
+      if(on){var n=s.nextElementSibling;if(n&&n.classList.contains('step')){n.scrollIntoView({behavior:'smooth',block:'start'});}}
+    });
+  });
+  // tools
+  [].forEach.call(document.querySelectorAll('#tools input'),function(i){
+    var k='chain-'+i.dataset.key;i.checked=get(k)==='1';
+    i.addEventListener('change',function(){set(k,i.checked?'1':'0')});
+  });
+  // theme
+  var root=document.documentElement,btn=document.getElementById('themeBtn');
+  var saved=get('chain-theme');if(saved)root.setAttribute('data-theme',saved);
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark';root.setAttribute('data-theme',next);set('chain-theme',next);
+  });
+})();
+</script>
+</body>
+</html>
