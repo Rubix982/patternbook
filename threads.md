@@ -33,3 +33,11 @@ value is just *any* specific instruction, not human sources.
 **Opened:** 2026-10-31
 **Question:** The 2023-style tells (Inter, gradients, purple, centered hero) scored 0 on both arms. The no-entry default seen was cream + serif headline + one terracotta accent + pill badges. Need a list built from several no-entry runs, not one, before reusing the measure.
 **Answer:** —
+
+### T-005 · Do the C-003-revised rules still win a blind pick, and does "device only when needed" show up?
+
+**Status:** open
+**Parent:** C-003
+**Opened:** 2026-10-31
+**Question:** Rules 2, 3, 5 were narrowed after C-003 but never blind-tested. Rerun C-001's brief with the revised entry against `runs/c001/arm-b.html`: does it still look like a manual, and does it drop devices where the bike-chain task doesn't need them (e.g. part IDs on a 3-item inventory)?
+**Answer:** —

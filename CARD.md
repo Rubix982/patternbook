@@ -14,6 +14,126 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-003 · Are the IKEA entry's observed facts IKEA habits, or BILLY habits?
+
+**Status:** closed
+**Opened:** 2026-10-31
+
+**1. Where we are.**
+The IKEA entry has won two blind picks (C-001, C-002), but every fact in its section 2
+was observed in three manuals for one product family, BILLY bookcases.
+
+**2. What we are doing.**
+Check each of the 14 facts below against three official IKEA manuals for products that
+aren't bookcases — a chair (POÄNG), a chest of drawers (MALM), and a lamp with wiring
+(any IKEA lamp needing assembly) — marking each fact *holds* / *varies* / *absent* per
+manual.
+
+Facts to check (from the entry, section 2):
+1. No colour; warnings are a black outlined triangle, not red.
+2. At most two greys, used only to shade a surface.
+3. One type family, two weights only.
+4. Step pages have no words.
+5. Step number is the largest element on the page, top-left.
+6. Cover: product name large and bold, line drawing of the product.
+7. A "before you start" page of panels (tools, protect floor, get help, wall).
+8. Parts inventory: every loose part drawn, with `Nx` and a part number.
+9. About two steps per page.
+10. Circular magnified callout with a leader line, carrying quantity and part number.
+11. Right/wrong insets, the wrong one crossed with an X, at the step where the mistake happens.
+12. A safety warning repeated right before the step it applies to.
+13. Drawn hand with pointing finger = by hand; circular arrow = turn.
+14. Two line weights: silhouettes heavier than inner detail.
+
+Also record any device the three manuals share that BILLY doesn't use (e.g. a
+two-person icon, electrical warnings).
+
+**3. Why.**
+We don't know which of the entry's facts describe IKEA's general practice and which
+are just how bookcases happen to be drawn. Rules built on a bookcase quirk would
+mislead an agent applying them to other tasks.
+
+**4. What is affected.**
+- Section 2 of the IKEA entry: each fact is kept, narrowed, or moved to "varies".
+- Section 4: any of the 6 rules that depends on a fact that doesn't hold.
+- The entry's `source` header (BILLY only → IKEA assembly instructions in general).
+- `METHOD.md` step 1's "one document shows a choice; three show a habit" — this card
+  checks whether three documents of *one product* were enough.
+
+**5. Conclusion.**
+- **If** ≥12 of 14 facts hold in all three manuals → we claim *the entry describes
+  IKEA's general practice*, widen the `source` header, and keep the rules unchanged.
+- **If** fewer than 12 hold → we split section 2 into IKEA-wide and product-specific
+  facts, and revise any rule that rested on a product-specific one. METHOD.md then says
+  sources must span different products, not just different documents.
+- New shared devices found → added as facts. They don't become rules unless one
+  replaces an existing rule on evidence; rules stay at 6.
+
+**6. If not done.**
+The library's only tested entry might be teaching agents bookcase habits as
+universal rules, and every later entry would copy a method that never checked for that.
+
+**Limits (known before running):** three products, one observer, and IKEA manuals are
+centrally produced, so agreement may be high. That's a fact about IKEA, not a flaw in
+the check.
+
+**Result (2026-10-31):** second branch. **6 of 14 facts hold in all three manuals**
+(below the 12 threshold).
+
+Manuals: POÄNG `AA-2615392-1` (16 pp), MALM 6-drawer US `AA-2398382-2` (40 pp, 57 steps),
+SKAFTET floor lamp `AA-2168957-4` (16 pp). Local copies in `sources/ikea/`.
+
+| # | Fact | POÄNG | MALM | SKAFTET |
+|---|---|---|---|---|
+| 1 | No colour; warnings not red | holds | holds | holds |
+| 2 | ≤2 greys, surface shading only | holds (`#BDBCBC`) | holds (`#D3D2D2`) | holds (little shading) |
+| 3 | One family, two weights | holds | **varies** (+VerdanaIKEA) | holds |
+| 4 | Step pages have no words | holds | **varies** (step 37 wall-type text) | holds |
+| 5 | Step number largest, top-left | holds | holds | holds |
+| 6 | Cover: name + drawing | holds | holds | holds |
+| 7 | "Before you start" panels | holds (no wall panel) | holds (+two-person) | **varies** (help only) |
+| 8 | Inventory with `Nx` + part no. | holds | holds | **varies** (no part nos.) |
+| 9 | ~2 steps per page | **varies** (mostly 1) | **varies** (1–3) | **varies** (1) |
+| 10 | Circular callout + leader | holds | holds | holds |
+| 11 | Right/wrong X insets | holds | holds | **absent** |
+| 12 | Warning repeated before its step | **absent** | holds | **absent** |
+| 13 | Pointing hand; circular arrow | holds | holds | arrow only |
+| 14 | Two line weights | holds | holds | holds |
+
+Holding in all three: 1, 2, 5, 6, 10, 14.
+
+**What the misses have in common.** Most of the misses aren't IKEA being inconsistent.
+Facts 7, 8, 11, 12 and 13 are missing exactly where the product doesn't have the problem
+they solve. SKAFTET has 6 distinct part types, so it needs no part numbers and no
+right/wrong pairs. POÄNG has no tip-over risk, so it has no repeated warning. MALM is the
+one product with a step where the reader must choose by their wall type, and it's the one
+with text inside a step. So the entry now sorts facts into **constant**, **conditional**
+(with the condition named) and **varies**, rather than listing them all as habits.
+
+**Claim:** for these four IKEA products, the house style is constant in its visual
+system: no colour, the same two greys (`#D3D2D2`, `#BDBCBC`) in products made years apart,
+big step numbers, callouts and line weights. The instructional devices are conditional
+on the task. Three BILLY manuals weren't enough to tell the two apart.
+
+**Changes made:**
+- Entry section 2 rewritten into constant / conditional / varies, with a per-product table.
+- Rule 2 narrowed: text is allowed where the reader must choose from their own situation,
+  as a short labelled choice.
+- Rule 3 narrowed: IDs only where items could be confused.
+- Rule 5 tightened: right/wrong pairs and warnings *only* at a real risk.
+- Rules 1, 4, 6 unchanged.
+- Entry `source` widened and a version note added. **The changed rules haven't been
+  blind-tested**; C-001/C-002 tested the BILLY-only version (`a1b6df2`).
+- `METHOD.md` step 1: sources must span different products/tasks, not just documents.
+
+**Also found:** after-assembly "how to use it" pages in all three, and an ⓘ info marker
+for guidance panels in all three. MALM-only devices (numbered bags, branch tracks, page
+cross-references, QR code) appear with its complexity (57 steps).
+
+**Closed:** 2026-10-31
+
+---
+
 ## C-002 · Does the human-sourced entry beat a reference the agent writes for itself?
 
 **Status:** closed

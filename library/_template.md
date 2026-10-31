@@ -27,12 +27,17 @@ shaped the source, if there is one (IKEA: no shared language).>
 
 Measured from the source, not recalled. Say how each number was measured.
 
-**Page and color** — hex values from `tools/measure-pdf.sh` or a screenshot sample.
-**Typography** — families and weights (embedded fonts, or inspected CSS), sizes relative
-to each other, where type appears and where it doesn't.
-**Sequence** — what comes first, second, last, and how long each part is.
-**Inside a unit** (a step, a card, an entry) — every recurring device, described so
-someone could draw it without seeing the source.
+Cover: page and colour (hex, from `tools/measure-pdf.sh` or a screenshot sample);
+typography (families, weights, relative sizes, where type appears and where it
+doesn't); sequence (what comes first, second, last); and every recurring device inside
+a unit (a step, a card, an entry), described so someone could draw it unseen.
+
+Sort them (see METHOD.md step 1):
+
+### Constant: in every document checked
+### Conditional: appears only when the task calls for it
+A table works well: device | present when… | one column per document.
+### Varies freely
 
 ## 3. Why it works (the part that transfers)
 

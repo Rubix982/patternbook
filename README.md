@@ -36,6 +36,10 @@ sources/                        local copies of source documents (git-ignored)
 - **C-002:** it also beat a page built from a reference the agent wrote for itself in
   the same format, on both questions (less AI-made; better to use while working). It
   had 414 words outside drawings, against 1,649 for the self-reference page.
+- **C-003:** checked against a chair, a chest of drawers and a lamp, only 6 of the
+  entry's 14 BILLY-based facts held everywhere. Most of the rest turned out to be
+  *conditional*: IKEA uses a device only when the task has the problem it solves. The
+  entry and rules 2, 3, 5 were revised; the revised version isn't blind-tested yet.
 
 One brief, one run per arm, and one judge. See each card's limits.
 

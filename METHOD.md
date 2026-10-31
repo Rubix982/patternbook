@@ -14,8 +14,17 @@ Get the **primary** document (the official PDF, the printed page), not a blog po
 about it. Keep local copies in `sources/<family>/` (git-ignored: they're not ours to
 redistribute) and put every URL in the entry's `source_docs`.
 
-Look at more than one document from the same source. One document shows a choice;
-three show a habit.
+Look at several documents from the same source, **and make them cover different
+products or tasks**, not three versions of one thing. C-003 found that three BILLY
+bookcase manuals agreed on facts that half-failed on a chair, a chest of drawers and a
+lamp. Sort what you find into:
+
+- **constant**: present in every document;
+- **conditional**: present only when the task has a specific problem. Name the
+  condition. Most of a good source's devices turn out to be this kind;
+- **varies**: differs without a clear reason.
+
+Rules come from constant facts and from conditional ones, stated with their condition.
 
 ## 2. Observe and measure
 

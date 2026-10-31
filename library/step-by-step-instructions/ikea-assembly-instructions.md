@@ -1,13 +1,16 @@
 ---
-source: IKEA assembly instructions (BILLY bookcase)
+source: IKEA assembly instructions (bookcase, chair, chest of drawers, floor lamp)
 source_family: IKEA
 source_docs:
   - https://www.ikea.com/us/en/assembly_instructions/billy-bookcase__AA-1844854-6.pdf
   - https://www.ikea.com/us/en/assembly_instructions/billy-bookcase__AA-2175344-3.pdf
   - https://www.ikea.com/us/en/assembly_instructions/billy-bookcase__AA-2312999-2.pdf
+  - https://www.ikea.com/us/en/assembly_instructions/poang-armchair__AA-2615392-1.pdf
+  - https://www.ikea.com/us/en/assembly_instructions/malm-chest-of-6-drawers__AA-2398382-2.pdf
+  - https://www.ikea.com/us/en/assembly_instructions/skaftet-floor-lamp__AA-2168957-4.pdf
 problem: step-by-step-instructions
-also_teaches: [parts-inventory, multilingual-warnings]
-patterns: [picture-is-the-instruction, magnified-callout, right-wrong-pair, warn-at-point-of-use, id-repeated-at-point-of-use]
+also_teaches: [parts-inventory, multilingual-warnings, after-assembly-use]
+patterns: [picture-is-the-instruction, magnified-callout, right-wrong-pair, warn-at-point-of-use, id-repeated-at-point-of-use, device-only-when-needed, info-marker]
 art_style: technical line art, monochrome, isometric
 tested_in: [C-001, C-002]
 best_example: runs/c001/arm-b.html
@@ -22,92 +25,115 @@ cost; a wrong step is expensive to undo.
 **Use for:** assembly, setup, repair, maintenance, any procedure where the state of a
 physical thing changes step by step.
 
+> **Version note.** C-001 and C-002 tested the BILLY-only version of this entry (git
+> `a1b6df2`). C-003 checked it against three more products and narrowed rules 2 and 3.
+> The current rules haven't been blind-tested yet.
+
 ## 1. Source
 
-IKEA assembly instructions, three official BILLY bookcase manuals:
-- `AA-1844854-6` (16 pp, © 2015, rev. 2021-02-16)
-- `AA-2175344-3` (12 pp)
-- `AA-2312999-2` (20 pp)
+Six official IKEA manuals, four product types:
 
-From `https://www.ikea.com/us/en/assembly_instructions/billy-bookcase__<code>.pdf`.
-IKEA ships the same booklet in every market, so it can't rely on the reader's language.
-That one constraint explains most of what follows.
+| Product | Document | Pages | Page size |
+|---|---|---|---|
+| BILLY bookcase | `AA-1844854-6`, `AA-2175344-3`, `AA-2312999-2` | 16, 12, 20 | A4 |
+| POÄNG armchair | `AA-2615392-1` (2025) | 16 | A5 |
+| MALM chest of 6 drawers, US | `AA-2398382-2` (2023) | 40 | A4 |
+| SKAFTET floor lamp | `AA-2168957-4` (2019) | 16 | A5 |
+
+The URL slug before `__` is ignored by ikea.com; only the `AA-` code matters.
+
+The assembly pictures are the same in every market, so they can't rely on the reader's
+language. That one constraint explains most of what follows. The safety *text* does vary
+by market: MALM's US edition has English, French and Spanish only, while BILLY's and
+SKAFTET's carry about 30 languages.
 
 ## 2. Observed facts
 
-Measured from the PDFs, not recalled.
+Measured from the PDFs (`tools/measure-pdf.sh` for fonts and colours), not recalled.
+C-003 sorted the facts into three groups after checking them across all four products.
 
-**Page and color**
-- A4 portrait, white page. Line ink is `#231F20`, a warm near-black.
-- Exactly two greys, used only to shade a surface: `#D3D2D2` (lighter face) and
-  `#BDBCBC` (darker face). Most of each page is unshaded white.
-  (Measured with `tools/measure-pdf.sh`, page 10 of AA-1844854-6. The first draft gave
-  `#202020` / `#D2D2D2` / `#BCBCBC`, because the page was converted to greyscale before
-  sampling. The tests in C-001 and C-002 used that first draft; a 1–3 point shift per
-  channel is unlikely to have changed either result.)
-- No color anywhere. Warnings are a black outlined triangle with `!`, not red.
+### Constant: in every manual checked
 
-**Typography**
-- One family, `NotoIKEALatin`, in two weights only: Bold and Regular (from embedded
-  fonts). Other scripts use matching Noto IKEA cuts.
-- On step pages the only type is: the step number (Bold, by far the largest element
-  on the page, top-left), the quantity `4x` (Regular, beside the callout), part
-  numbers like `118331` (small, set vertically next to the part), page number.
-- Words appear only on the safety pages: a 3-column grid, one block per language,
-  each block = small language label → large bold caps headline (`WARNING!`) → bold
-  sentence → regular fine print.
+- **No colour.** Line ink `#231F20`. Warnings and prohibitions (no TV on top, no
+  climbing) are black symbols, never red.
+- **The same two greys, in every product:** `#D3D2D2` and `#BDBCBC`, used only to
+  shade a surface (a rug under the work, a panel being placed, fabric). Most of each
+  page is unshaded white. (BILLY p10, POÄNG p7, MALM p22. First draft of this entry
+  sampled a greyscale render and gave `#202020`/`#D2D2D2`/`#BCBCBC`.)
+- **Step number** in Bold, top-left, the largest type on the page.
+- **Cover:** product name very large in bold, line drawing of the finished product.
+- **Circular magnified callout** joined to its location by a thin curved leader line,
+  carrying the quantity (`4x`) and, where parts have numbers, the part number. When a
+  detail is a sequence (insert, then turn), two circles are chained or stacked.
+- **Circular arrow** around a tool shaft for "turn"; curved arrow over the whole
+  object for "flip it"; solid black arrows for push/slide/drop.
+- **Two line weights:** silhouettes heavier than inner edges and detail.
 
-**Sequence**
-1. Cover: product name huge and bold, line drawing of the finished product.
-2. Safety text pages (the only text-heavy pages).
-3. One page of "before you start" panels: tools needed, protect the floor, if
-   confused call the store, anchor to the wall. Each panel is a rounded rectangle
-   containing one idea, usually as a wrong/right pair.
-4. Parts inventory: every loose part drawn, quantity `8x` under it, part number
-   beside it. Large parts (brackets, rails) drawn bigger, on their own.
-5. Numbered steps, usually two per page.
+### Conditional: appears only when the task calls for it
 
-**Inside a step**
-- Each step shows one change to the object: something is inserted, turned, joined,
-  flipped.
-- Detail is shown in a **circular magnified callout** connected to its location on
-  the object by a thin curved leader line. The callout carries the quantity and part
-  number for that step.
-- Motion: solid black arrows for push/slide/drop; a circular arrow around a
-  screwdriver shaft for "turn"; a curved arrow over the whole object for "flip it".
-- A drawn hand with pointing finger means "press by hand, no tool".
-- Right vs wrong: two small square insets side by side, the wrong one crossed with
-  a single X. Shown at the step where that mistake is possible.
-- Large mistakes (tip-over, assembling on a hard floor) are crossed out with two big
-  curved strokes over the whole scene, with the correct scene beside it.
-- Alignment and hole rows: dotted/dashed lines. A dashed outline shows where the
-  object will end up.
-- The tip-over warning panel is **repeated** directly before the wall-anchoring step,
-  not only at the start.
-- Line weight: object silhouettes are drawn heavier than inner edges and detail —
-  two weights, consistently.
+This group was the main finding of C-003. These devices aren't IKEA decoration; each
+one shows up exactly when the task has the problem it solves, and is left out otherwise.
+
+| Device | Present when… | BILLY | POÄNG | MALM | SKAFTET |
+|---|---|---|---|---|---|
+| Right/wrong insets, wrong one crossed with X | two parts look alike, or a part fits two ways | ✓ | ✓ nearly every step | ✓ | — few, distinct parts |
+| Part numbers in inventory and callouts | similar parts could be confused | ✓ | ✓ | ✓ | — 6 part types, no numbers |
+| Safety warning repeated before a step | a hazard belongs to a specific step (tip-over at wall anchoring) | ✓ | — no hazard | ✓ before steps 41, 48 | — cable warning is general |
+| Pointing hand = "by hand" | a step uses no tool | ✓ | ✓ | ✓ thumb on lever | — |
+| "Before you start" panels: tools, floor, help, wall | tools / a large flat piece / tip-over risk exist | all four | tools, floor, help (+ "no power drill", crossed out) | tools, floor, help, wall, **two people** | help only |
+| Text inside a step | the reader must choose based on something only they know (their wall type) | — | — | ✓ step 37, wall types A/B/C | — |
+
+### Varies freely
+
+- **Steps per page:** 1–3. BILLY about 2; POÄNG mostly 1; MALM 1–3; SKAFTET 1.
+- **Page size:** A4 (BILLY, MALM) or A5 (POÄNG, SKAFTET).
+- **Typefaces:** `NotoIKEALatin` Bold and Regular everywhere; MALM also embeds
+  `VerdanaIKEA` (IKEA's previous typeface) for printed part labels like "IKEA CR".
+
+### Shared devices BILLY didn't show
+
+- **ⓘ info marker** (POÄNG, MALM, SKAFTET): a circled *i* marks a panel of guidance
+  rather than an action. It's used for the correct half of a right/wrong pair, a
+  look-ahead view of the finished object, or tips.
+- **After-assembly pages** (all three): what to do once it's built. POÄNG says
+  re-tighten 6 bolts later; MALM shows how to release the drawer interlock; SKAFTET
+  shows the switch and how to angle the bulb.
+- **Dashed outline for what isn't in the box** (SKAFTET's shade and bulb), alongside
+  BILLY's dashed outline for where an object will end up.
+- MALM only, likely because it's the most complex: parts split into numbered bags,
+  with the bag's number shown at the step where you open it; two parallel build
+  tracks for two drawer sizes, joined by a branch arrow; "turn to page 19" with a hand
+  turning a page; a QR code to a wall-anchoring web page.
 
 ## 3. Why it works (the part that transfers)
 
-- **The picture is the instruction.** Because there's no shared language, every step
-  has to be understandable from the drawing alone. A side effect is that it's faster
-  for everyone: you compare the drawing with the object in your hands and don't
-  translate from words.
+- **The picture is the instruction.** The pictures have to work without a shared
+  language, so every step must be understandable from the drawing alone. A side effect
+  is that it's faster for everyone: you compare the drawing with the object in your
+  hands and don't translate from words.
+- **Words appear when the page can't know the answer.** The one place MALM puts text
+  inside a step is where the reader must decide based on their own wall. That's
+  something no drawing can show in advance. Words carry information about the reader's
+  situation, and pictures carry the action.
 - **The step number is the anchor.** Hands and eyes leave the page constantly. A
-  huge numeral is what you find again when you look back. Nothing else on the page
-  competes with it.
+  large numeral is what you find again when you look back.
 - **One change per step** means you can check you're done: does my object now look
-  like the drawing? Steps that bundle several changes can't be checked that way.
-- **Inventory first, then the same ID at point of use.** You verify you have
-  everything before committing, and you never have to guess which of two similar
-  screws a step means — the count and number tell you, right in the callout.
+  like the drawing?
+- **A device only appears where its problem does.** Right/wrong pairs only where two
+  parts look alike; part numbers only where parts could be confused; warnings only
+  at the step that has the hazard. Because nothing is there by habit, everything on
+  the page signals "pay attention here". A page that uses every device everywhere
+  loses that.
+- **Inventory first, then the same ID at point of use** — when IDs are needed. You
+  verify you have everything before committing, and you never have to guess which of
+  two similar screws a step means.
 - **Magnify where the risk is.** The whole-object view tells you *where*; the callout
-  tells you *how*. The leader line connects the two so you don't have to.
-- **Warn at the moment of action.** A warning on page 2 is forgotten by step 9. The
-  tip-over warning is repeated exactly when you're about to need it.
-- **Monochrome keeps meaning in shape, not color.** With no color, nothing is
-  decorative, so anything drawn is meaningful. Grey marks "the surface that matters
-  here" and nothing else. It also survives cheap printing and photocopying.
+  tells you *how*. The leader line connects the two.
+- **Monochrome keeps meaning in shape, not colour.** With no colour, nothing is
+  decorative. The two greys mark "the surface that matters here" and nothing else.
+  It also survives cheap printing and photocopying. That IKEA uses the exact same two
+  greys across products made years apart suggests this is a fixed house standard, not
+  a per-manual choice.
 
 ## 4. Transferable rules (for an agent building a page)
 
@@ -117,19 +143,23 @@ logo, font, or product drawings.
 1. **One numbered step = one visible change.** The step number is the largest type in
    the step. If a step needs "and", split it. Each step should be checkable against
    its picture.
-2. **Lead with the visual, not the sentence.** Every step has a diagram that carries
-   the instruction on its own; any text is one short line under it, never a paragraph.
-3. **Inventory before step 1.** List every part/tool/requirement with a quantity
-   (`4×`) and a short stable ID. Repeat that ID and the quantity inside the step that
-   uses it.
+2. **Lead with the visual; use words only for what the page can't know.** Every step has
+   a diagram that carries the action on its own, with at most one short line of text. A
+   longer block of words is allowed only where the reader must choose based on their
+   own situation (which model they have, what their wall is made of), and then as a
+   short labelled choice (A / B / C), not a paragraph.
+3. **Inventory before step 1.** List every part, tool and requirement with a quantity
+   (`4×`). Give each item a short stable ID **when two items could be confused**, and
+   repeat that ID inside the step that uses it.
 4. **Magnified callout for the risky detail,** connected to where it applies on the
    overview by a visible leader line. The callout is where the quantity goes.
-5. **Right/wrong pairs at the point of the mistake.** Show the wrong version crossed
-   with one X next to the right one, in the step where the mistake can happen — and
-   repeat safety warnings right before the step they apply to.
+5. **Right/wrong pairs only at a real mistake.** Where two parts look alike or a part
+   fits two ways, show the wrong version crossed with one X next to the right one, in
+   that step. Repeat a safety warning right before the step it belongs to. Don't add
+   either where the step has no such risk.
 6. **Monochrome by default.** Black line on white, at most two greys, used only to
    mark the surface or part that matters in this step. Warnings use a symbol, not a
-   color. No decorative color, gradients, or shadows.
+   colour. No decorative colour, gradients, or shadows.
 
 ## 5. When it doesn't apply
 
@@ -139,8 +169,9 @@ logo, font, or product drawings.
 - **The reader needs reasons, not just actions.** IKEA never says *why*. A training
   manual or anything where judgment is required needs explanation this pattern
   deliberately leaves out.
-- **Legal or safety text that must be in words.** Even IKEA falls back to dense text
-  for its warnings. Don't force those into pictures.
+- **Legal or safety text that must be in words.** All four products put their
+  regulatory warnings in dense text (SKAFTET's cable warning is text only, with no
+  picture). Don't force those into pictures.
 - **Non-sequential use.** Reference material people jump around in (spec sheets,
   troubleshooting by symptom) needs a different structure.
 - **Practical limit for agents:** good isometric line drawings are hard to make in
