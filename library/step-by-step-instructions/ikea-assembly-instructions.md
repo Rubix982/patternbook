@@ -12,7 +12,7 @@ problem: step-by-step-instructions
 also_teaches: [parts-inventory, multilingual-warnings, after-assembly-use]
 patterns: [picture-is-the-instruction, magnified-callout, right-wrong-pair, warn-at-point-of-use, id-repeated-at-point-of-use, device-only-when-needed, info-marker]
 art_style: technical line art, monochrome, isometric
-tested_in: [C-001, C-002]
+tested_in: [C-001, C-002, C-004]
 best_example: runs/c001/arm-b.html
 ---
 
@@ -26,8 +26,10 @@ cost; a wrong step is expensive to undo.
 physical thing changes step by step.
 
 > **Version note.** C-001 and C-002 tested the BILLY-only version of this entry (git
-> `a1b6df2`). C-003 checked it against three more products and narrowed rules 2 and 3.
-> The current rules haven't been blind-tested yet.
+> `a1b6df2`). C-003 checked it against three more products and narrowed rules 2, 3 and 5.
+> C-004 blind-tested that version against the old one: it won "less AI-made" and lost
+> "which would you use", and rule 2 was tightened after that (choice settled in one
+> place). That last change hasn't been blind-tested.
 
 ## 1. Source
 
@@ -147,7 +149,11 @@ logo, font, or product drawings.
    a diagram that carries the action on its own, with at most one short line of text. A
    longer block of words is allowed only where the reader must choose based on their
    own situation (which model they have, what their wall is made of), and then as a
-   short labelled choice (A / B / C), not a paragraph.
+   short labelled choice (A / B / C), not a paragraph. **Settle the choice in one place**
+   (before step 1, or inside the one step where it matters), and keep every step after
+   it on one path. Don't make the reader track "if B…" across several steps. (MALM
+   confines its wall-type choice to step 37; C-004 showed a page that spread its choice
+   over steps 7–8 lost "which would you use".)
 3. **Inventory before step 1.** List every part, tool and requirement with a quantity
    (`4×`). Give each item a short stable ID **when two items could be confused**, and
    repeat that ID inside the step that uses it.

@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Replace a Bicycle Chain</title>
+<style>
+  :root{
+    --ink:#202020;
+    --g1:#D2D2D2;   /* lighter face */
+    --g2:#BCBCBC;   /* darker face */
+    --paper:#ffffff;
+    --heavy:2.6px;
+    --light:1.3px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink)}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;font-weight:400;line-height:1.35}
+  b,strong,h1,h2,.num{font-weight:700}
+  main{max-width:1120px;margin:0 auto;padding:0 16px 64px}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+
+  /* line weights: silhouette heavy, detail light */
+  .o{fill:none;stroke:var(--ink);stroke-width:var(--heavy);stroke-linejoin:round;stroke-linecap:round}
+  .d{fill:none;stroke:var(--ink);stroke-width:var(--light);stroke-linejoin:round;stroke-linecap:round}
+  .dash{fill:none;stroke:var(--ink);stroke-width:var(--light);stroke-dasharray:6 5}
+  .w{fill:var(--paper)}
+  .g1{fill:var(--g1)}
+  .g2{fill:var(--g2)}
+  .ink{fill:var(--ink)}
+  .x{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+  svg text{font-family:inherit;fill:var(--ink)}
+
+  /* cover */
+  .cover{padding:48px 0 32px;border-bottom:var(--heavy) solid var(--ink)}
+  .cover h1{font-size:clamp(44px,9vw,104px);line-height:.95;margin:0 0 8px;letter-spacing:-.02em}
+  .cover svg{max-width:720px;margin:24px auto 0}
+
+  section{padding:40px 0;border-bottom:var(--light) solid var(--ink)}
+  h2{font-size:15px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 20px}
+
+  /* safety */
+  .safety{max-width:560px}
+  .safety .lang{font-size:12px;margin:0 0 4px}
+  .safety .head{font-size:30px;font-weight:700;margin:0 0 8px}
+  .safety .bold{font-weight:700;margin:0 0 8px}
+  .safety .fine{font-size:14px;margin:0}
+
+  /* before-you-start panels */
+  .panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .panel{border:var(--heavy) solid var(--ink);border-radius:18px;padding:16px}
+  .panel p{margin:10px 0 0;font-size:15px}
+
+  /* inventory */
+  .inv{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px 16px}
+  .part{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px}
+  .part .qty{grid-column:1;font-size:22px;text-align:center}
+  .part .id{grid-row:1 / span 2;grid-column:2;writing-mode:vertical-rl;font-size:13px;letter-spacing:.06em}
+  .part .name{grid-column:1 / span 2;font-size:13px;text-align:center;margin-top:2px}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+  .step{padding:28px 0 32px;border-top:var(--light) solid var(--ink)}
+  .step.full{grid-column:1 / -1}
+  .num{font-size:clamp(72px,11vw,120px);line-height:.85;margin:0 0 8px;letter-spacing:-.03em}
+  .line{font-size:17px;margin:14px 0 0;max-width:42ch}
+  .pair{display:flex;gap:12px;margin-top:16px}
+  .pair figure{margin:0;flex:1;max-width:200px}
+  .pair .box{border:var(--light) solid var(--ink);border-radius:6px;padding:6px;aspect-ratio:4/3}
+  .pair .box svg{height:100%}
+  .pair figcaption{font-size:13px;margin-top:6px}
+
+  .warn{grid-column:1 / -1;display:flex;gap:20px;align-items:center;border:var(--heavy) solid var(--ink);border-radius:18px;padding:16px 20px;margin:24px 0 4px}
+  .warn .tri{flex:0 0 64px;width:64px}
+  .warn .body{flex:1}
+  .warn p{margin:0 0 10px;font-weight:700;font-size:17px}
+  .warn .pair{margin-top:0}
+
+  .done{font-size:15px;margin-top:24px}
+
+  @media (max-width:760px){
+    .steps{grid-template-columns:1fr}
+    .warn{flex-direction:column;align-items:flex-start}
+  }
+  @media print{
+    .step,.warn,.panel{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<!-- Shared drawings -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <marker id="mh" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#202020"/>
+    </marker>
+
+    <!-- fat motion arrow, pointing right, tail at origin -->
+    <path id="fa" d="M0 -5H22V-12L40 0L22 12V5H0Z" fill="#202020"/>
+
+    <!-- chain links: roller centres at x=0 and x=30 -->
+    <g id="li" stroke="#202020" stroke-width="1.5">
+      <rect x="-11" y="-11" width="52" height="22" rx="11"/>
+      <circle cx="0" r="6"/><circle cx="30" r="6"/>
+    </g>
+    <g id="lo" stroke="#202020" stroke-width="2.4">
+      <rect x="-14" y="-14" width="58" height="28" rx="14"/>
+      <circle cx="0" r="2.6" fill="#202020" stroke="none"/>
+      <circle cx="30" r="2.6" fill="#202020" stroke="none"/>
+    </g>
+    <g id="lo-end" stroke="#202020" stroke-width="2.4">
+      <rect x="-14" y="-14" width="58" height="28" rx="14"/>
+      <circle cx="0" r="2.6" fill="#202020" stroke="none"/>
+      <circle cx="30" r="4.5" fill="#ffffff" stroke-width="1.3"/>
+    </g>
+    <!-- quick link, closed (pins at slot ends) and open (pins near centre) -->
+    <g id="ql-shut">
+      <rect x="-14" y="-14" width="58" height="28" rx="14" fill="#D2D2D2" stroke="#202020" stroke-width="2.4"/>
+      <rect x="-3.5" y="-3.5" width="16" height="7" rx="3.5" fill="#fff" stroke="#202020" stroke-width="1.2"/>
+      <rect x="17.5" y="-3.5" width="16" height="7" rx="3.5" fill="#fff" stroke="#202020" stroke-width="1.2"/>
+      <circle cx="0" r="3" fill="#202020"/><circle cx="30" r="3" fill="#202020"/>
+    </g>
+    <g id="ql-open">
+      <rect x="-14" y="-14" width="58" height="28" rx="14" fill="#D2D2D2" stroke="#202020" stroke-width="2.4"/>
+      <rect x="-3.5" y="-3.5" width="16" height="7" rx="3.5" fill="#fff" stroke="#202020" stroke-width="1.2"/>
+      <rect x="17.5" y="-3.5" width="16" height="7" rx="3.5" fill="#fff" stroke="#202020" stroke-width="1.2"/>
+      <circle cx="9.5" r="3" fill="#202020"/><circle cx="20.5" r="3" fill="#202020"/>
+    </g>
+
+    <!-- drivetrain, drive side, front of bike to the right -->
+    <g id="drive">
+      <!-- frame tubes -->
+      <path class="d" d="M230 130L40 120M230 130L203 66M40 120L104 62M230 130L292 76"/>
+      <!-- chainring -->
+      <circle cx="230" cy="130" r="55" class="o w"/>
+      <circle cx="230" cy="130" r="58" fill="none" stroke="#202020" stroke-width="4" stroke-dasharray="3 3.4"/>
+      <circle cx="230" cy="130" r="38" class="d"/>
+      <g class="d">
+        <circle cx="230" cy="96" r="3"/><circle cx="262" cy="119" r="3"/><circle cx="250" cy="157" r="3"/>
+        <circle cx="210" cy="157" r="3"/><circle cx="198" cy="119" r="3"/>
+      </g>
+      <!-- crank + pedal -->
+      <path d="M230 130L268 212" stroke="#202020" stroke-width="13" stroke-linecap="round"/>
+      <path d="M230 130L268 212" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="230" cy="130" r="7" class="o w"/>
+      <rect x="244" y="207" width="52" height="13" rx="3" class="o w"/>
+      <!-- cassette -->
+      <circle cx="40" cy="120" r="34" class="o w"/>
+      <circle cx="40" cy="120" r="29" class="d"/>
+      <circle cx="40" cy="120" r="24" class="d"/>
+      <circle cx="40" cy="120" r="20" class="d"/>
+      <circle cx="40" cy="120" r="16" class="d"/>
+      <circle cx="40" cy="120" r="4" class="ink"/>
+      <!-- rear derailleur -->
+      <path d="M44 118L18 140L26 152L48 128Z" class="o w"/>
+      <path d="M42 150C28 150 28 170 40 172L50 202C56 208 68 200 64 190L52 158C50 152 46 150 42 150Z" class="o w"/>
+      <circle cx="68" cy="187" r="2.6" class="ink"/>
+      <circle cx="42" cy="160" r="7" class="o w"/><circle cx="42" cy="160" r="1.8" class="ink"/>
+      <circle cx="55" cy="192" r="7" class="o w"/><circle cx="55" cy="192" r="1.8" class="ink"/>
+      <!-- front derailleur cage -->
+      <rect x="186" y="62" width="26" height="22" rx="4" class="d" transform="rotate(-6 199 73)"/>
+    </g>
+
+    <path id="cpath" d="M230 73L40 104A16 16 0 0 0 24 120L35 160A7 7 0 0 0 49 160L62 192A7 7 0 0 1 55 199L230 187A57 57 0 0 0 230 73Z"/>
+    <g id="chain" fill="none">
+      <use href="#cpath" stroke="#202020" stroke-width="6" stroke-linejoin="round"/>
+      <use href="#cpath" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>
+    </g>
+
+    <!-- rear view of cassette: big cog inboard (left), small outboard (right) -->
+    <g id="cass-rear">
+      <rect x="446" y="70" width="9" height="110" rx="2" class="o w"/>
+      <rect x="461" y="75" width="9" height="100" rx="2" class="o w"/>
+      <rect x="476" y="80" width="9" height="90" rx="2" class="o w"/>
+      <rect x="491" y="85" width="9" height="80" rx="2" class="o w"/>
+      <rect x="506" y="90" width="9" height="70" rx="2" class="o w"/>
+      <rect x="521" y="95" width="9" height="60" rx="2" class="o w"/>
+      <path d="M420 125H446" class="d"/>
+    </g>
+
+    <!-- pointing hand, fingertip at origin, pointing down -->
+    <g id="hand">
+      <path d="M-5 -4A5 5 0 0 0 5 -4V-28H18Q26 -28 26 -36V-52Q26 -62 16 -62H-10Q-20 -62 -20 -52V-36Q-20 -30 -12 -28H-5Z" class="o w"/>
+      <path d="M-6 -40H20M-6 -48H20M-5 -28V-36" class="d"/>
+    </g>
+
+    <!-- warning triangle -->
+    <g id="tri">
+      <path d="M32 6L60 56H4Z" fill="#fff" stroke="#202020" stroke-width="3.4" stroke-linejoin="round"/>
+      <path d="M32 22V40" stroke="#202020" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="32" cy="48" r="3" fill="#202020"/>
+    </g>
+  </defs>
+</svg>
+
+<main>
+
+  <!-- COVER -->
+  <header class="cover">
+    <h1>Replace a<br>bicycle chain</h1>
+    <svg viewBox="0 0 600 300" role="img" aria-label="Line drawing of a bicycle, drive side">
+      <!-- rear wheel -->
+      <circle cx="140" cy="200" r="90" class="o"/>
+      <circle cx="140" cy="200" r="80" class="d"/>
+      <circle cx="140" cy="200" r="6" class="o w"/>
+      <!-- front wheel -->
+      <circle cx="460" cy="200" r="90" class="o"/>
+      <circle cx="460" cy="200" r="80" class="d"/>
+      <circle cx="460" cy="200" r="6" class="o w"/>
+      <!-- frame -->
+      <path class="o" d="M140 200L290 210L255 80M140 200L255 80M255 80L410 92M290 210L410 92L416 70M410 92L460 200"/>
+      <path class="o" d="M228 66H282M255 80V66M400 62Q414 56 428 62M416 70V60"/>
+      <!-- drivetrain, the subject: grey -->
+      <path d="M140 188L290 182M140 212L290 238" stroke="#202020" stroke-width="5"/>
+      <path d="M140 188L290 182M140 212L290 238" stroke="#fff" stroke-width="1.8" stroke-dasharray="4 3"/>
+      <circle cx="290" cy="210" r="28" class="o g1"/>
+      <circle cx="140" cy="200" r="12" class="o g1"/>
+      <path d="M290 210L310 250" stroke="#202020" stroke-width="5" stroke-linecap="round"/>
+      <rect x="296" y="248" width="30" height="8" rx="2" class="o w"/>
+    </svg>
+  </header>
+
+  <!-- SAFETY -->
+  <section aria-labelledby="h-safety">
+    <h2 id="h-safety">Safety</h2>
+    <div class="safety">
+      <p class="lang">EN</p>
+      <p class="head">WARNING!</p>
+      <p class="bold">A chain that is not joined correctly can come apart while you ride, and you can fall.</p>
+      <p class="fine">Use a chain and quick link made for the number of gears on your bike. Do not reuse a quick link unless its maker says you can. Check that the link is fully closed (step 8) and test the bike at walking pace before riding in traffic. If you are not sure the job is right, have a bike shop check it before you ride.</p>
+    </div>
+  </section>
+
+  <!-- BEFORE YOU START -->
+  <section aria-labelledby="h-before">
+    <h2 id="h-before">Before you start</h2>
+    <div class="panels">
+
+      <div class="panel">
+        <div class="pair" style="margin-top:0">
+          <figure>
+            <div class="box"><svg viewBox="0 0 160 120" aria-label="11 cogs, 11-speed chain: correct">
+              <g class="d"><path d="M14 20V100M22 24V96M30 28V92M38 32V88M46 36V84M54 40V80M62 44V76M70 48V72M78 52V68M86 55V65M94 57V63"/></g>
+              <text x="54" y="116" font-size="13" text-anchor="middle">11</text>
+              <g transform="translate(130 20) rotate(90) scale(.6)"><use href="#li" class="w"/><use href="#lo" x="30" class="w"/><use href="#li" x="60" class="w"/></g>
+              <text x="130" y="116" font-size="13" text-anchor="middle">11</text>
+            </svg></div>
+          </figure>
+          <figure>
+            <div class="box"><svg viewBox="0 0 160 120" aria-label="11 cogs, 10-speed chain: wrong">
+              <g class="d"><path d="M14 20V100M22 24V96M30 28V92M38 32V88M46 36V84M54 40V80M62 44V76M70 48V72M78 52V68M86 55V65M94 57V63"/></g>
+              <text x="54" y="116" font-size="13" text-anchor="middle">11</text>
+              <g transform="translate(130 20) rotate(90) scale(.6)"><use href="#li" class="w"/><use href="#lo" x="30" class="w"/><use href="#li" x="60" class="w"/></g>
+              <text x="130" y="116" font-size="13" text-anchor="middle">10</text>
+              <path class="x" d="M8 8L152 112M152 8L8 112"/>
+            </svg></div>
+          </figure>
+        </div>
+        <p>Chain speed = number of rear cogs.</p>
+      </div>
+
+      <div class="panel">
+        <div class="pair" style="margin-top:0">
+          <figure>
+            <div class="box"><svg viewBox="0 0 160 120" aria-label="New quick link P2: correct">
+              <use href="#ql-shut" transform="translate(52 52) scale(1.4)"/>
+              <text x="80" y="104" font-size="14" text-anchor="middle">P2</text>
+            </svg></div>
+          </figure>
+          <figure>
+            <div class="box"><svg viewBox="0 0 160 120" aria-label="Old quick link from the old chain: wrong">
+              <g transform="translate(38 52) scale(.7)"><use href="#li" class="w" x="-30"/><use href="#ql-shut" x="30"/><use href="#li" class="w" x="60"/><use href="#lo" class="w" x="90"/></g>
+              <text x="80" y="104" font-size="14" text-anchor="middle">old</text>
+              <path class="x" d="M8 8L152 112M152 8L8 112"/>
+            </svg></div>
+          </figure>
+        </div>
+        <p>Use the new quick link. Most are one-use only.</p>
+      </div>
+
+      <div class="panel">
+        <svg viewBox="0 0 320 120" aria-label="Rag and gloves">
+          <path class="o w" d="M30 30Q55 22 80 30T130 30L126 95Q100 104 76 95T26 95Z"/>
+          <path class="d" d="M40 48Q70 42 112 50M38 70Q72 64 114 72"/>
+          <text x="78" y="116" font-size="13" text-anchor="middle">T3</text>
+          <g transform="translate(192 4) scale(.92)">
+            <path class="o w" d="M20 100V50L8 34Q4 26 12 24L28 40V14Q28 8 34 8T40 14V36V8Q40 2 46 2T52 8V36V12Q52 6 58 6T64 12V38V20Q64 14 70 14T76 20V100Z"/>
+            <path class="d" d="M22 86H74"/>
+          </g>
+          <text x="238" y="116" font-size="13" text-anchor="middle">T4</text>
+        </svg>
+        <p>Chains are greasy. Gloves on, rag ready.</p>
+      </div>
+
+      <div class="panel">
+        <svg viewBox="0 0 320 120" aria-label="Rear wheel lifted off the ground in a stand">
+          <path class="o" d="M10 112H310"/>
+          <circle cx="110" cy="58" r="42" class="o"/>
+          <circle cx="110" cy="58" r="4" class="o w"/>
+          <path class="o" d="M110 58L190 64L160 8M110 58L160 8M190 64L250 30"/>
+          <path class="o" d="M160 8V-2" />
+          <!-- stand -->
+          <path class="o" d="M222 18H246M234 18V112M214 112L234 96L254 112"/>
+          <circle cx="234" cy="18" r="6" class="o g1"/>
+          <path class="dash" d="M68 104H152"/>
+        </svg>
+        <p>Lift the rear wheel so the cranks turn freely.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INVENTORY -->
+  <section aria-labelledby="h-inv">
+    <h2 id="h-inv">Parts and tools</h2>
+    <div class="inv">
+      <div class="part">
+        <svg viewBox="0 0 200 90" aria-hidden="true"><g transform="translate(22 45) scale(.8)">
+          <use href="#li" class="w" x="0"/><use href="#li" class="w" x="60"/><use href="#li" class="w" x="120"/>
+          <use href="#lo" class="w" x="30"/><use href="#lo" class="w" x="90"/><use href="#lo" class="w" x="150"/>
+        </g></svg>
+        <span class="id">P1</span><span class="qty">1×</span><span class="name">new chain</span>
+      </div>
+      <div class="part">
+        <svg viewBox="0 0 200 90" aria-hidden="true"><use href="#ql-shut" transform="translate(80 45) scale(1.4)"/></svg>
+        <span class="id">P2</span><span class="qty">1×</span><span class="name">quick link</span>
+      </div>
+      <div class="part">
+        <svg viewBox="0 0 200 90" aria-hidden="true">
+          <path class="o w" d="M30 24H140V66H30Z"/>
+          <path class="o w" d="M62 36H96V54H62Z"/>
+          <path class="d" d="M140 45H176M70 45H140"/>
+          <path d="M176 18V72" stroke="#202020" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="78" cy="45" r="5" class="o g1"/>
+        </svg>
+        <span class="id">T1</span><span class="qty">1×</span><span class="name">chain tool</span>
+      </div>
+      <div class="part">
+        <svg viewBox="0 0 200 90" aria-hidden="true">
+          <path class="o" d="M16 30Q70 34 112 43M16 62Q70 58 112 49"/>
+          <path class="o" d="M112 43L168 26L174 34M112 49L168 66L174 58"/>
+          <circle cx="112" cy="46" r="5" class="o w"/>
+        </svg>
+        <span class="id">T2</span><span class="qty">1×</span><span class="name">quick-link pliers</span>
+      </div>
+      <div class="part">
+        <svg viewBox="0 0 200 90" aria-hidden="true">
+          <path class="o w" d="M60 14Q85 8 110 14T150 14L146 76Q120 84 96 76T56 76Z"/>
+          <path class="d" d="M70 32Q100 26 140 34M68 54Q100 48 142 56"/>
+        </svg>
+        <span class="id">T3</span><span class="qty">1×</span><span class="name">rag</span>
+      </div>
+      <div class="part">
+        <svg viewBox="0 0 200 90" aria-hidden="true">
+          <g transform="translate(40 -6) scale(.9)"><path class="o w" d="M20 100V50L8 34Q4 26 12 24L28 40V14Q28 8 34 8T40 14V36V8Q40 2 46 2T52 8V36V12Q52 6 58 6T64 12V38V20Q64 14 70 14T76 20V100Z"/></g>
+          <g transform="translate(96 -6) scale(.9)"><path class="o w" d="M20 100V50L8 34Q4 26 12 24L28 40V14Q28 8 34 8T40 14V36V8Q40 2 46 2T52 8V36V12Q52 6 58 6T64 12V38V20Q64 14 70 14T76 20V100Z"/></g>
+        </svg>
+        <span class="id">T4</span><span class="qty">2×</span><span class="name">gloves</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <div class="steps">
+
+    <!-- 1 -->
+    <article class="step" id="s1">
+      <div class="num">1</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="Shift the chain onto the smallest rear cog">
+        <clipPath id="c1"><circle cx="505" cy="115" r="84"/></clipPath>
+        <use href="#drive"/><use href="#chain"/>
+        <circle cx="40" cy="120" r="40" class="dash"/>
+        <path class="d" d="M60 86C130 -20 360 -10 430 75"/>
+        <circle cx="505" cy="115" r="85" class="w"/>
+        <g clip-path="url(#c1)">
+          <use href="#cass-rear"/>
+          <rect x="536" y="100" width="9" height="50" rx="2" class="o g2"/>
+          <path d="M540.5 40V100M540.5 150V210" stroke="#202020" stroke-width="7"/>
+          <path d="M540.5 40V100M540.5 150V210" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/>
+          <use href="#fa" transform="translate(462 48) scale(1.4)"/>
+        </g>
+        <circle cx="505" cy="115" r="85" class="o"/>
+      </svg>
+      <p class="line">Shift to the smallest rear cog.</p>
+    </article>
+
+    <!-- 2 -->
+    <article class="step" id="s2">
+      <div class="num">2</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="Squeeze the quick link open with pliers T2">
+        <clipPath id="c2"><circle cx="505" cy="115" r="84"/></clipPath>
+        <use href="#drive"/><use href="#chain"/>
+        <circle cx="150" cy="193" r="12" class="d"/>
+        <path class="d" d="M162 196C250 232 380 214 421 130"/>
+        <circle cx="505" cy="115" r="85" class="w"/>
+        <g clip-path="url(#c2)">
+          <g transform="translate(505 130) scale(1.15)">
+            <use href="#li" class="w" x="-105"/><use href="#li" class="w" x="-45"/><use href="#li" class="w" x="15"/><use href="#li" class="w" x="75"/>
+            <use href="#lo" class="w" x="-75"/><use href="#lo" class="w" x="45"/>
+            <use href="#ql-shut" x="-15"/>
+            <!-- pliers jaws hooked on the rollers either side -->
+            <path d="M-60 -90L-48 -14Q-46 -6 -40 -8" fill="none" stroke="#202020" stroke-width="6" stroke-linecap="round"/>
+            <path d="M60 -90L48 -14Q46 -6 40 -8" fill="none" stroke="#202020" stroke-width="6" stroke-linecap="round"/>
+            <use href="#fa" transform="translate(-38 -40) scale(.55)"/>
+            <use href="#fa" transform="translate(38 -40) rotate(180) scale(.55)"/>
+          </g>
+        </g>
+        <circle cx="505" cy="115" r="85" class="o"/>
+        <text x="505" y="224" font-size="16" text-anchor="middle">T2</text>
+      </svg>
+      <p class="line">Squeeze the quick link open with T2.</p>
+      <p class="line" style="font-size:14px;margin-top:6px">No quick link? Push out any pin with T1, as in step 5.</p>
+    </article>
+
+    <!-- 3 -->
+    <article class="step" id="s3">
+      <div class="num">3</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="Lift the old chain off the bike">
+        <use href="#drive"/>
+        <use href="#cpath" class="dash"/>
+        <use href="#fa" transform="translate(305 110) scale(1.5)"/>
+        <g transform="translate(400 110) scale(.6)">
+          <use href="#li" class="w" x="0"/><use href="#li" class="w" x="60"/><use href="#li" class="w" x="120"/><use href="#li" class="w" x="180"/><use href="#li" class="w" x="240"/>
+          <use href="#lo" class="w" x="30"/><use href="#lo" class="w" x="90"/><use href="#lo" class="w" x="150"/><use href="#lo" class="w" x="210"/><use href="#lo-end" class="w" x="270"/>
+        </g>
+      </svg>
+      <p class="line">Lift the old chain off.</p>
+    </article>
+
+    <!-- 4 -->
+    <article class="step" id="s4">
+      <div class="num">4</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="Lay new chain P1 beside the old chain; the grey links beyond the old chain's end are extra">
+        <text x="14" y="85" font-size="14">old</text>
+        <g transform="translate(70 80) scale(.9)">
+          <use href="#li" class="w" x="0"/><use href="#li" class="w" x="60"/><use href="#li" class="w" x="120"/><use href="#li" class="w" x="180"/><use href="#li" class="w" x="240"/><use href="#li" class="w" x="300"/><use href="#li" class="w" x="360"/>
+          <use href="#lo" class="w" x="30"/><use href="#lo" class="w" x="90"/><use href="#lo" class="w" x="150"/><use href="#lo" class="w" x="210"/><use href="#lo" class="w" x="270"/><use href="#lo" class="w" x="330"/>
+        </g>
+        <text x="14" y="175" font-size="14">P1</text>
+        <g transform="translate(70 170) scale(.9)">
+          <use href="#li" class="w" x="0"/><use href="#li" class="w" x="60"/><use href="#li" class="w" x="120"/><use href="#li" class="w" x="180"/><use href="#li" class="w" x="240"/><use href="#li" class="w" x="300"/>
+          <use href="#li" class="w" x="360"/><use href="#li" class="g1" x="420"/><use href="#li" class="g1" x="480"/>
+          <use href="#lo" class="w" x="30"/><use href="#lo" class="w" x="90"/><use href="#lo" class="w" x="150"/><use href="#lo" class="w" x="210"/><use href="#lo" class="w" x="270"/><use href="#lo" class="w" x="330"/>
+          <use href="#lo" class="g1" x="390"/><use href="#lo" class="g1" x="450"/>
+        </g>
+        <!-- alignment: end of old chain -->
+        <path class="dash" d="M421 40V214"/>
+      </svg>
+      <p class="line">Lay P1 beside the old chain. Grey links are extra.</p>
+    </article>
+
+    <!-- 5 -->
+    <article class="step" id="s5">
+      <div class="num">5</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="Push out the pin at the mark with chain tool T1">
+        <clipPath id="c5"><circle cx="505" cy="115" r="84"/></clipPath>
+        <g transform="translate(40 150) scale(.7)">
+          <use href="#li" class="w" x="0"/><use href="#li" class="w" x="60"/><use href="#li" class="w" x="120"/><use href="#li" class="w" x="180"/><use href="#li" class="w" x="240"/><use href="#li" class="w" x="300"/>
+          <use href="#li" class="g1" x="360"/>
+          <use href="#lo" class="w" x="30"/><use href="#lo" class="w" x="90"/><use href="#lo" class="w" x="150"/><use href="#lo" class="w" x="210"/><use href="#lo" class="w" x="270"/>
+          <use href="#lo" class="g1" x="330"/><use href="#lo" class="g1" x="390"/>
+        </g>
+        <circle cx="271" cy="150" r="16" class="d"/>
+        <path class="d" d="M284 141C340 110 380 120 421 128"/>
+        <circle cx="505" cy="115" r="85" class="w"/>
+        <g clip-path="url(#c5)">
+          <g transform="translate(505 112)">
+            <!-- chain seen from above -->
+            <rect x="-95" y="-26" width="190" height="8" class="o w"/>
+            <rect x="-95" y="18" width="190" height="8" class="o w"/>
+            <rect x="-95" y="-18" width="190" height="5" class="d w"/>
+            <rect x="-95" y="13" width="190" height="5" class="d w"/>
+            <g class="d"><path d="M-60 -28V28M-30 -28V28M30 -28V28M60 -28V28"/></g>
+            <!-- pin being pushed out -->
+            <rect x="-3.5" y="-12" width="7" height="56" class="o g2"/>
+            <!-- tool: driver, T-handle, anvil -->
+            <rect x="-5" y="-82" width="10" height="66" class="o w"/>
+            <path d="M-42 -82H42" stroke="#202020" stroke-width="7" stroke-linecap="round"/>
+            <path class="o" d="M-20 -54A20 7 0 1 0 20 -54" marker-end="url(#mh)"/>
+            <path class="o" d="M-34 34V50H-8M8 50H34V34"/>
+            <use href="#fa" transform="translate(16 54) rotate(90) scale(.55)"/>
+          </g>
+        </g>
+        <circle cx="505" cy="115" r="85" class="o"/>
+        <text x="505" y="224" font-size="16" text-anchor="middle">T1</text>
+      </svg>
+      <p class="line">Turn T1 until the pin at the mark comes out.</p>
+      <div class="pair">
+        <figure>
+          <div class="box"><svg viewBox="0 0 160 120" aria-label="Chain ends in an inner link with rollers: correct">
+            <g transform="translate(18 60) scale(.9)">
+              <use href="#li" class="w" x="30"/><use href="#li" class="w" x="90"/>
+              <use href="#lo" class="w" x="0"/><use href="#lo" class="w" x="60"/>
+            </g>
+          </svg></div>
+          <figcaption>Each end: a narrow inner link.</figcaption>
+        </figure>
+        <figure>
+          <div class="box"><svg viewBox="0 0 160 120" aria-label="Chain ends in outer plates: wrong">
+            <g transform="translate(18 60) scale(.9)">
+              <use href="#li" class="w" x="0"/><use href="#li" class="w" x="60"/>
+              <use href="#lo" class="w" x="30"/><use href="#lo-end" class="w" x="90"/>
+            </g>
+            <path class="x" d="M8 8L152 112M152 8L8 112"/>
+          </svg></div>
+          <figcaption>Wide outer plates at the end.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="step" id="s6">
+      <div class="num">6</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="Thread the chain through the front derailleur, over the smallest cog, and around both rear derailleur pulleys">
+        <clipPath id="c6"><circle cx="505" cy="115" r="84"/></clipPath>
+        <use href="#drive"/><use href="#chain"/>
+        <use href="#fa" transform="translate(170 72) rotate(171) scale(.8)"/>
+        <use href="#fa" transform="translate(6 132) rotate(78) scale(.8)"/>
+        <use href="#fa" transform="translate(110 214) rotate(-4) scale(.8)"/>
+        <circle cx="46" cy="178" r="30" class="d"/>
+        <path class="d" d="M70 196C150 262 360 252 430 155"/>
+        <circle cx="505" cy="115" r="85" class="w"/>
+        <g clip-path="url(#c6)">
+          <g transform="translate(505 115) scale(2.2) translate(-46 -176)">
+            <use href="#drive"/><use href="#chain"/>
+          </g>
+        </g>
+        <circle cx="505" cy="115" r="85" class="o"/>
+      </svg>
+      <p class="line">Thread P1: front cage, smallest cog, both rear pulleys.</p>
+      <div class="pair">
+        <figure>
+          <div class="box"><svg viewBox="0 0 160 120" aria-label="Chain wraps the pulley, clear of the cage tab: correct">
+            <path class="o w" d="M44 20H100Q120 20 120 40V80Q120 104 96 104H48Q24 104 24 80V40Q24 20 44 20Z"/>
+            <circle cx="70" cy="62" r="22" class="o w"/>
+            <circle cx="70" cy="62" r="3" class="ink"/>
+            <circle cx="108" cy="34" r="5" class="ink"/>
+            <path d="M92 0V62A22 22 0 0 1 70 84H0" fill="none" stroke="#202020" stroke-width="7"/>
+            <path d="M92 0V62A22 22 0 0 1 70 84H0" fill="none" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/>
+          </svg></div>
+          <figcaption>On the pulley, inside the tab.</figcaption>
+        </figure>
+        <figure>
+          <div class="box"><svg viewBox="0 0 160 120" aria-label="Chain caught outside the cage tab: wrong">
+            <path class="o w" d="M44 20H100Q120 20 120 40V80Q120 104 96 104H48Q24 104 24 80V40Q24 20 44 20Z"/>
+            <circle cx="70" cy="62" r="22" class="o w"/>
+            <circle cx="70" cy="62" r="3" class="ink"/>
+            <circle cx="108" cy="34" r="5" class="ink"/>
+            <path d="M118 0V36Q118 46 104 54L70 84H0" fill="none" stroke="#202020" stroke-width="7"/>
+            <path d="M118 0V36Q118 46 104 54L70 84H0" fill="none" stroke="#fff" stroke-width="2.4" stroke-dasharray="4 3"/>
+            <path class="x" d="M8 8L152 112M152 8L8 112"/>
+          </svg></div>
+          <figcaption>Over the tab, off the pulley.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="step" id="s7">
+      <div class="num">7</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="Join the two chain ends with quick link P2">
+        <clipPath id="c7"><circle cx="505" cy="115" r="84"/></clipPath>
+        <use href="#drive"/><use href="#chain"/>
+        <circle cx="150" cy="193" r="12" class="d"/>
+        <path class="d" d="M162 196C250 232 380 214 421 130"/>
+        <circle cx="505" cy="115" r="85" class="w"/>
+        <g clip-path="url(#c7)">
+          <g transform="translate(505 135) scale(1.1)">
+            <use href="#li" class="w" x="-105"/><use href="#li" class="w" x="-45"/><use href="#li" class="w" x="15"/><use href="#li" class="w" x="75"/>
+            <use href="#lo" class="w" x="-75"/><use href="#lo" class="w" x="45"/>
+            <rect x="-29" y="-14" width="58" height="28" rx="14" class="dash"/>
+            <use href="#ql-shut" x="-15" y="-66"/>
+            <use href="#fa" transform="translate(0 -46) rotate(90) scale(.5)"/>
+          </g>
+        </g>
+        <circle cx="505" cy="115" r="85" class="o"/>
+        <text x="505" y="224" font-size="16" text-anchor="middle">1× P2</text>
+      </svg>
+      <p class="line">Join the two ends with P2.</p>
+    </article>
+
+    <!-- warning, repeated right before the step that needs it -->
+    <aside class="warn" aria-label="Warning">
+      <svg class="tri" viewBox="0 0 64 60" aria-hidden="true"><use href="#tri"/></svg>
+      <div class="body">
+        <p>Hand on the pedal only. Never on the chain or chainring.</p>
+        <div class="pair">
+          <figure>
+            <div class="box"><svg viewBox="0 0 160 120" aria-label="Hand on pedal: correct">
+              <circle cx="72" cy="52" r="36" class="o w"/>
+              <circle cx="72" cy="52" r="39" fill="none" stroke="#202020" stroke-width="3" stroke-dasharray="3 3"/>
+              <path d="M72 52L108 92" stroke="#202020" stroke-width="8" stroke-linecap="round"/>
+              <rect x="96" y="90" width="40" height="10" rx="2" class="o w"/>
+              <use href="#hand" transform="translate(120 88) scale(.55)"/>
+            </svg></div>
+          </figure>
+          <figure>
+            <div class="box"><svg viewBox="0 0 160 120" aria-label="Fingers on chainring: wrong">
+              <circle cx="72" cy="52" r="36" class="o w"/>
+              <circle cx="72" cy="52" r="39" fill="none" stroke="#202020" stroke-width="3" stroke-dasharray="3 3"/>
+              <path d="M72 52L108 92" stroke="#202020" stroke-width="8" stroke-linecap="round"/>
+              <rect x="96" y="90" width="40" height="10" rx="2" class="o w"/>
+              <use href="#hand" transform="translate(32 52) rotate(-90) scale(.48)"/>
+              <path class="x" d="M8 8L152 112M152 8L8 112"/>
+            </svg></div>
+          </figure>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 8 -->
+    <article class="step" id="s8">
+      <div class="num">8</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="With the rear brake on, press the pedal down hard so the quick link snaps closed">
+        <clipPath id="c8"><circle cx="505" cy="115" r="84"/></clipPath>
+        <use href="#drive"/><use href="#chain"/>
+        <use href="#hand" transform="translate(272 205)"/>
+        <use href="#fa" transform="translate(318 150) rotate(90) scale(.9)"/>
+        <circle cx="150" cy="193" r="12" class="d"/>
+        <path class="d" d="M162 196C250 232 380 214 421 130"/>
+        <circle cx="505" cy="115" r="85" class="w"/>
+        <g clip-path="url(#c8)">
+          <g transform="translate(505 120) scale(1.3)">
+            <use href="#li" class="w" x="-75"/><use href="#li" class="w" x="-15"/><use href="#li" class="w" x="45"/>
+            <use href="#lo" class="w" x="-45"/><use href="#lo" class="w" x="75"/>
+            <use href="#ql-open" x="15" transform="translate(-30 0)"/>
+            <path class="o" d="M-10 -26H-26" marker-end="url(#mh)"/>
+            <path class="o" d="M10 -26H26" marker-end="url(#mh)"/>
+          </g>
+        </g>
+        <circle cx="505" cy="115" r="85" class="o"/>
+      </svg>
+      <p class="line">Rear brake on. Press the pedal down hard until the link snaps shut.</p>
+      <div class="pair">
+        <figure>
+          <div class="box"><svg viewBox="0 0 160 120" aria-label="Pins at the ends of the slots: closed, correct">
+            <g transform="translate(56 60) scale(1.1)"><use href="#li" class="w" x="-30"/><use href="#li" class="w" x="30"/><use href="#ql-shut" x="30" transform="translate(-30 0)"/></g>
+          </svg></div>
+          <figcaption>Pins at the ends of the slots.</figcaption>
+        </figure>
+        <figure>
+          <div class="box"><svg viewBox="0 0 160 120" aria-label="Pins in the middle of the slots: not closed, wrong">
+            <g transform="translate(56 60) scale(1.1)"><use href="#li" class="w" x="-30"/><use href="#li" class="w" x="30"/><use href="#ql-open" x="30" transform="translate(-30 0)"/></g>
+            <path class="x" d="M8 8L152 112M152 8L8 112"/>
+          </svg></div>
+          <figcaption>Pins halfway: not closed.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 9 -->
+    <article class="step" id="s9">
+      <div class="num">9</div>
+      <svg viewBox="0 0 600 240" role="img" aria-label="Backpedal, then shift through every gear">
+        <clipPath id="c9"><circle cx="505" cy="115" r="84"/></clipPath>
+        <use href="#drive"/><use href="#chain"/>
+        <path d="M292 166A72 72 0 0 0 194 68" fill="none" stroke="#202020" stroke-width="4" marker-end="url(#mh)"/>
+        <circle cx="40" cy="120" r="40" class="dash"/>
+        <path class="d" d="M60 86C130 -20 360 -10 430 75"/>
+        <circle cx="505" cy="115" r="85" class="w"/>
+        <g clip-path="url(#c9)">
+          <use href="#cass-rear"/>
+          <rect x="536" y="100" width="9" height="50" rx="2" class="o w"/>
+          <path class="o" d="M452 52H540" marker-start="url(#mh)" marker-end="url(#mh)"/>
+        </g>
+        <circle cx="505" cy="115" r="85" class="o"/>
+      </svg>
+      <p class="line">Backpedal, then shift through every gear. Nothing should skip.</p>
+    </article>
+
+  </div>
+
+</main>
+</body>
+</html>

@@ -39,7 +39,11 @@ sources/                        local copies of source documents (git-ignored)
 - **C-003:** checked against a chair, a chest of drawers and a lamp, only 6 of the
   entry's 14 BILLY-based facts held everywhere. Most of the rest turned out to be
   *conditional*: IKEA uses a device only when the task has the problem it solves. The
-  entry and rules 2, 3, 5 were revised; the revised version isn't blind-tested yet.
+  entry and rules 2, 3, 5 were revised.
+- **C-004:** the revised entry against the old one, both fresh pages. Split: revised won
+  "less AI-made", old won "which would you use" ("more concise… step by step"). The
+  revised page had spread a reader's choice across steps; rule 2 now keeps choices in
+  one place (not yet re-tested).
 
 One brief, one run per arm, and one judge. See each card's limits.
 

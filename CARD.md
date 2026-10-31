@@ -14,6 +14,125 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-004 · Do the C-003-revised rules still produce the better manual?
+
+**Status:** closed
+**Opened:** 2026-10-31
+**From:** T-005
+
+**1. Where we are.**
+C-003 narrowed rules 2, 3 and 5 of the IKEA entry, and the revised entry hasn't been
+blind-tested; the version that won C-001 and C-002 is `a1b6df2`.
+
+**2. What we are doing.**
+Run two fresh agents on the C-001 bike-chain brief, one with the old entry
+(`runs/c004/entry-old.md`, from `a1b6df2`) and one with the revised entry
+(`runs/c004/entry-new.md`, frozen copy), and put the two pages in a blind pick.
+
+Both pages are new because Saif has seen `c001/arm-b.html` twice and would likely
+recognise it.
+
+Measures:
+- **Blind pick, two questions** (same as C-002): (a) which looks less AI-made;
+  (b) which would I rather have open while changing the chain with greasy hands.
+- **Words outside drawings** (`tools/words.py`). Rule 2 now allows some text, so watch
+  whether text creeps back. C-001's old-entry page had 414.
+- **Devices at real risks.** Fixed now, before running: the real mistakes in replacing a
+  chain are (i) routing it wrong through the rear derailleur, (ii) wrong chain length,
+  (iii) quick link not fully seated/locked, (iv) chain on the wrong side of the
+  derailleur tab or guide. For each page, count right/wrong pairs and step warnings,
+  and how many sit at one of (i)–(iv). Devices elsewhere count as "no real risk".
+
+**3. Why.**
+We don't know whether narrowing rules 2, 3 and 5 kept what made the entry win, or
+whether "use words where the reader must choose" and "devices only where needed" let
+the page slide back toward text and lose its manual feel.
+
+**4. What is affected.**
+- Rules 2, 3, 5 of the IKEA entry: kept, or reverted to the `a1b6df2` wording.
+- The entry's version note and `tested_in`.
+- C-003's claim that the conditional reading is the better rule (it's only a reading
+  of IKEA until an agent page shows it helps).
+
+**5. Conclusion.**
+- **If** the revised-entry page wins or ties both questions, has ≤ 2× the old page's
+  words, and has no more "no real risk" devices than the old page → we claim *the
+  revision is safe*. Keep it; mark it tested.
+- **If** the revised-entry page loses both questions, or has > 2× the old page's
+  words → we claim *the narrowing cost the entry what made it work*. Revert the
+  narrowed rules to the `a1b6df2` wording, keeping C-003's facts in section 2.
+- **If** the questions split → keep the revision, record the split, and look at
+  which rule caused it before changing anything.
+
+**6. If not done.**
+The public entry's rules stay untested, and the only evidence that they work belongs
+to a version that no longer exists.
+
+**Limits (known before running):** n = 1 per arm; same judge as before; the revised
+entry is ~40% longer (179 vs 129 lines), so length is mixed in with content; the
+"real risks" list is mine, written from general bike-repair knowledge, not a source.
+
+**Result (2026-10-31):** third branch: **the questions split.** Outputs in `runs/c004/`.
+
+| | (a) less AI-made | (b) use while working | Words | Time | Size |
+|---|---|---|---|---|---|
+| Old entry (`arm-d.html`, page 1) | lost | **won** | 261 | ~9 min | 36 KB |
+| Revised entry (`arm-e.html`, page 2) | **won** | lost | 324 (1.24×) | ~9 min | 98 KB |
+
+Devices inside the steps, against the pre-stated risks (i) routing, (ii) length,
+(iii) quick link locked, (iv) derailleur tab:
+
+| | Right/wrong pairs | Step warnings | At a listed risk | Not at a listed risk |
+|---|---|---|---|---|
+| Old entry | 3 (steps 5, 6, 8) | 1 (before 8: hand on pedal, not chain) | 2: step 6 (iv), step 8 (iii) | 2: step 5 chain-end pair, pinch warning |
+| Revised entry | 2 (steps 5, 6) | 1 (before 8: unlocked link can open) | 2: step 6 (i/iv), warning (iii) | 1: step 5 chain-end pair |
+
+Both step-5 pairs (narrow vs wide chain end) guard a real mistake that my list missed,
+and so does the old page's pinch warning. Counted strictly, as pre-registered.
+
+So the revision passed the two counted checks: words stayed under 2×, and it had fewer
+devices away from a listed risk (1 vs 2). It won (a) and lost (b).
+
+**What differs between the pages** (observed; *which* rule caused the split is not yet known):
+- The revised page turned the reader's choice (quick link vs connecting pin) into labelled
+  branches (`B` / `C`) that run through steps 7–8 ("Join the ends: B or C", "only B"),
+  plus a "which chain to buy" panel. That is rule 2's new allowance doing what it says.
+  The old page handled the same choice as one line under step 2 ("No quick link? Push
+  out any pin with T1, as in step 5").
+- The revised page packs 10 steps into a dense 3-column boxed grid with ID boxes in
+  most captions (`A` ×8, `B` ×6, `C` ×5, `T1` ×5). The old page uses 2 roomier columns,
+  9 steps, and fewer IDs.
+- The revised page adds an "After" section (oil it, check wear), from C-003's
+  after-assembly finding.
+
+**Saif's reason for (b):** "It was more concise, to me, but also laid it out step by step."
+
+Read against the differences above: "step by step" fits the branching. The revised page
+made the reader track a B/C path across steps 7–8, so the sequence stopped being one
+line. "Concise" fits the word count (261 vs 324) and the fewer ID boxes. The source
+backs this: MALM's only reader choice (wall type A/B/C) is confined to **one step**
+(step 37), and the next step returns to a single path. The revised page spread its
+choice over several steps, which IKEA doesn't do.
+
+**Claim:** in this test, rule 2's new allowance for words at a reader's choice helped the
+page look less AI-made, but letting that choice branch across several steps cost it
+being the page Saif would use. The cause is inferred from one judge's sentence. It
+wasn't isolated.
+
+**Changes made:**
+- Rule 2 tightened: a reader's choice is settled in one place (before step 1, or inside the
+  single step where it matters, as a short A/B/C), and the steps after it follow one
+  path. Not tested yet.
+- Rules 3 and 5 kept as revised in C-003. The device count gave no reason to revert them.
+- Entry `tested_in` gets C-004; version note updated.
+- Density / roominess of the step layout isn't covered by any rule, so it goes to a thread (T-006)
+  rather than becoming a rule on one comment.
+
+**Closed:** 2026-10-31
+**Closed:** —
+
+---
+
 ## C-003 · Are the IKEA entry's observed facts IKEA habits, or BILLY habits?
 
 **Status:** closed

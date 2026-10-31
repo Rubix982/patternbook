@@ -36,8 +36,16 @@ value is just *any* specific instruction, not human sources.
 
 ### T-005 · Do the C-003-revised rules still win a blind pick, and does "device only when needed" show up?
 
-**Status:** open
+**Status:** answered
 **Parent:** C-003
 **Opened:** 2026-10-31
 **Question:** Rules 2, 3, 5 were narrowed after C-003 but never blind-tested. Rerun C-001's brief with the revised entry against `runs/c001/arm-b.html`: does it still look like a manual, and does it drop devices where the bike-chain task doesn't need them (e.g. part IDs on a 3-item inventory)?
+**Answer:** C-004 — split. Revised won "less AI-made", old won "would use" ("more concise… step by step"). Rule 2 tightened: settle a reader's choice in one place.
+
+### T-006 · Does step-layout density (columns, boxes, ID tags per caption) change which page people would use?
+
+**Status:** open
+**Parent:** C-004
+**Opened:** 2026-10-31
+**Question:** C-004's preferred page used 2 roomy columns and few ID tags; the other used a dense 3-column boxed grid with IDs in most captions. No rule covers layout density, and one comment ("more concise") isn't enough to write one.
 **Answer:** —

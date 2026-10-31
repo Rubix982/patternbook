@@ -18,3 +18,5 @@ Agent-run timings, because they matter for the effort confound:
 | c001/arm-a (no guidance) | ~1.5 min | 22 KB |
 | c001/arm-b (IKEA entry) | ~13 min | 202 KB |
 | c002/arm-c (self-reference) | ~6 min | 36 KB |
+| c004/arm-d (old entry) | ~9 min | 36 KB |
+| c004/arm-e (revised entry) | ~9 min | 98 KB |
