@@ -16,8 +16,9 @@ or catalogue looks.
 1. Pick two things separately:
    - a **problem entry**: the folder in `library/` that matches what your page has to do
      (`step-by-step-instructions/`, `troubleshooting-by-symptom/`);
-   - an **art style** from `library/art-styles/` for how it looks. C-008 showed the style
-     alone can move a page off the AI look, even on a problem it wasn't drawn from.
+   - an **art style** from `library/art-styles/` for how it looks. One of the two styles
+     so far (IKEA line art, C-008) moved a page off the AI look on its own; the other
+     (NASA typographic, C-009) didn't. Check a style's `tested_in` before relying on it.
 2. Read the entry. Follow **section 4 (rules)**, and check **section 5** to see whether
    your case is one where it doesn't apply.
 3. If the entry lists a `best_example`, that's a page an agent built from it which won
@@ -69,6 +70,11 @@ sources/                        local copies of source documents (git-ignored)
   given for the router page. It won both questions against an unguided page of the same
   length (591 vs 609 words). So art style is its own axis, and in this case it was the part
   that read as AI-made.
+
+- **C-009:** a second art style, from NASA's 1976 Graphics Standards Manual, given alone for a
+  CLI-docs page. The agent followed it closely, but Saif called both pages AI-made and
+  preferred the unguided one to use. So C-008 doesn't generalise to "any human style" yet.
+  The palette checklist scored the pages 0/5 vs 5/5 and didn't predict the judgement.
 
 One brief, one run per arm, and one judge. See each card's limits.
 

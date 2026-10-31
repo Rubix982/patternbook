@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sift Documentation</title>
+<style>
+  :root {
+    --page: #FFFFFF;
+    --ink: #000000;
+    --red: #CC273D;
+    --grey: #797669;
+    --rule: 1px solid var(--ink);
+    --gutter: 32px;
+    --margin: 48px;
+    --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--font);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+  }
+  a { color: inherit; }
+  h1, h2, h3, h4 { font-weight: 500; margin: 0; line-height: 1.1; letter-spacing: normal; }
+  p { margin: 0 0 1em; }
+  code, pre, kbd {
+    font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.88em;
+  }
+  strong { font-weight: 500; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 var(--margin); }
+
+  /* Grid: 6 units, used as 2 or 3 columns */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: start;
+  }
+  .c2 { grid-column: span 2; }
+  .c3 { grid-column: span 3; }
+  .c4 { grid-column: span 4; }
+  .c6 { grid-column: span 6; }
+
+  /* Top band: breathing space with folios */
+  .band {
+    padding-top: 20px;
+    padding-bottom: 72px;
+  }
+  .folio {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--grey);
+    padding-bottom: 10px;
+    border-bottom: var(--rule);
+  }
+  .folio .name { color: var(--ink); font-weight: 500; }
+
+  /* Navigation: solid black panel */
+  nav.signs {
+    background: var(--ink);
+    color: var(--page);
+  }
+  nav.signs ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+  nav.signs a {
+    display: block;
+    padding: 16px 0 18px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  nav.signs a:hover, nav.signs a:focus-visible { text-decoration: underline; text-underline-offset: 4px; outline: none; }
+  nav.signs .num { display: block; font-size: 13px; font-weight: 400; color: #BDBBB3; margin-bottom: 2px; }
+
+  /* Hero */
+  .hero { padding: 72px 0 80px; }
+  .hero h1 {
+    font-size: clamp(64px, 12vw, 168px);
+    font-weight: 700;
+    line-height: 0.9;
+    margin-left: -0.04em;
+  }
+  .hero .lede {
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 300;
+    line-height: 1.25;
+    margin-top: 32px;
+  }
+  .hero .meta { font-size: 15px; color: var(--grey); margin-top: 28px; }
+  .hero .meta span + span::before { content: "  /  "; white-space: pre; }
+
+  .install {
+    border-top: var(--rule);
+    padding-top: 14px;
+  }
+  .install h2 { font-size: 18px; margin-bottom: 14px; }
+  .action {
+    display: block;
+    background: var(--red);
+    color: var(--page);
+    padding: 18px 20px 20px;
+    text-decoration: none;
+  }
+  .action .label { display: block; font-weight: 500; font-size: 22px; }
+  .action .arrow { display: inline-block; width: 0.72em; height: 0.72em; vertical-align: baseline; margin-left: 6px; }
+  .action .sub { display: block; font-size: 14px; margin-top: 4px; }
+  .cmd {
+    margin-top: 16px;
+    border: var(--rule);
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: baseline;
+    font-size: 15px;
+  }
+  .cmd code { font-size: 14px; overflow-wrap: anywhere; }
+  .cmd .prompt { color: var(--grey); user-select: none; }
+  .copy {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--ink);
+    color: var(--page);
+    border: 0;
+    border-radius: 0;
+    padding: 5px 10px 6px;
+    cursor: pointer;
+    flex: none;
+  }
+  .copy:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  .alt { font-size: 14px; color: var(--grey); margin-top: 12px; }
+  .alt code { color: var(--ink); }
+
+  /* Sections */
+  section.part { border-top: var(--rule); padding: 18px 0 88px; }
+  .part-head { margin-bottom: 40px; }
+  .part-head .marker {
+    font-size: 96px;
+    font-weight: 700;
+    line-height: 0.85;
+  }
+  .part-head h2 { font-size: clamp(36px, 4.4vw, 56px); font-weight: 500; }
+  .part-head p { margin-top: 14px; color: var(--grey); font-size: 17px; max-width: 34em; }
+
+  /* Steps */
+  .step { border-top: var(--rule); padding-top: 12px; }
+  .step .n { font-size: 56px; font-weight: 700; line-height: 1; display: block; margin-bottom: 14px; }
+  .step h3 { font-size: 22px; margin-bottom: 10px; }
+  .step p { font-size: 16px; }
+
+  pre {
+    margin: 0;
+    background: var(--ink);
+    color: var(--page);
+    padding: 16px 18px;
+    overflow-x: auto;
+    line-height: 1.55;
+    font-size: 13.5px;
+  }
+  pre .c { color: #A9A69C; }
+  pre .r { color: #FF6B7D; }
+  pre.light { background: var(--page); color: var(--ink); border: var(--rule); }
+  pre.light .c { color: var(--grey); }
+  pre.light .r { color: var(--red); }
+
+  /* Diagram */
+  figure { margin: 0; }
+  .diagram { border: var(--rule); padding: 24px; }
+  .diagram svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 14px; color: var(--grey); padding-top: 10px; }
+  figcaption strong { color: var(--ink); }
+
+  /* Command reference table */
+  table { width: 100%; border-collapse: collapse; font-size: 16px; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-top: 1px solid var(--ink); }
+  thead th { font-weight: 500; font-size: 14px; color: var(--grey); border-top: 0; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+  td:first-child { white-space: nowrap; font-weight: 500; }
+  td code { font-size: 14px; }
+  tbody tr:last-child td { border-bottom: var(--rule); }
+
+  /* Flags list */
+  dl.flags { margin: 0; }
+  dl.flags div { border-top: var(--rule); padding: 10px 0 12px; display: grid; grid-template-columns: 9em 1fr; gap: 16px; }
+  dl.flags dt { font-weight: 500; }
+  dl.flags dt code { font-size: 14px; }
+  dl.flags dd { margin: 0; font-size: 15px; }
+
+  /* Warning sign */
+  .sign {
+    background: var(--ink);
+    color: var(--page);
+    padding: 18px 20px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .sign svg { width: 40px; height: 40px; }
+  .sign h3 { font-size: 22px; margin-bottom: 6px; }
+  .sign p { margin: 0; font-size: 15px; }
+  .sign code { background: #2A2A2A; padding: 0 4px; }
+
+  /* Guides index */
+  .guides { list-style: none; margin: 0; padding: 0; }
+  .guides li { border-top: var(--rule); }
+  .guides li:last-child { border-bottom: var(--rule); }
+  .guides a {
+    display: grid;
+    grid-template-columns: 3.2em 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 14px 0 16px;
+    text-decoration: none;
+  }
+  .guides .gn { font-weight: 700; font-size: 28px; line-height: 1; }
+  .guides .gt { font-weight: 500; font-size: 20px; display: block; }
+  .guides .gd { font-size: 15px; color: var(--grey); display: block; margin-top: 2px; }
+  .guides .ga { width: 18px; height: 18px; }
+  .guides a:hover .gt, .guides a:focus-visible .gt { text-decoration: underline; text-underline-offset: 4px; }
+  .guides a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+  /* Silhouette illustration */
+  .art { border: 0; }
+  .art svg { display: block; width: 100%; height: auto; }
+
+  footer { border-top: 2px solid var(--ink); padding: 18px 0 56px; font-size: 14px; color: var(--grey); }
+  footer h4 { font-size: 15px; color: var(--ink); margin-bottom: 8px; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer li { padding: 2px 0; }
+  footer a { text-decoration: none; color: var(--ink); }
+  footer a:hover { text-decoration: underline; }
+
+  .sp-top { margin-top: 48px; }
+  .sp-top-s { margin-top: 24px; }
+
+  @media (max-width: 960px) {
+    :root { --gutter: 24px; --margin: 32px; }
+    .c2 { grid-column: span 3; }
+    .steps .c2 { grid-column: span 6; margin-bottom: 32px; }
+    nav.signs ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 680px) {
+    :root { --gutter: 16px; --margin: 16px; }
+    .c2, .c3, .c4 { grid-column: span 6; }
+    .grid > * + * { margin-top: 32px; }
+    nav.signs ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    nav.signs a { padding: 12px 0 14px; font-size: 16px; }
+    .band { padding-bottom: 40px; }
+    .hero { padding: 40px 0 56px; }
+    .part-head .marker { font-size: 72px; }
+    dl.flags div { grid-template-columns: 1fr; gap: 2px; }
+    td:first-child { white-space: normal; }
+    .diagram { padding: 12px; }
+    .folio .hide-s { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap band">
+  <div class="folio grid">
+    <div class="c2"><span class="name">Sift</span> Documentation</div>
+    <div class="c2 hide-s">Version 2.4.0</div>
+    <div class="c2 hide-s">Reference manual, section 0</div>
+  </div>
+</header>
+
+<nav class="signs" aria-label="Documentation sections">
+  <div class="wrap">
+    <ul>
+      <li><a href="#install"><span class="num">0</span>Install</a></li>
+      <li><a href="#start"><span class="num">1</span>Get started</a></li>
+      <li><a href="#how"><span class="num">2</span>How it works</a></li>
+      <li><a href="#commands"><span class="num">3</span>Commands</a></li>
+      <li><a href="#guides"><span class="num">4</span>Guides</a></li>
+      <li><a href="#help"><span class="num">5</span>Help</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<div class="wrap hero" id="install">
+  <div class="grid">
+    <div class="c4">
+      <h1>Sift</h1>
+      <p class="lede">A command-line tool for querying structured logs. Point it at JSON, logfmt or CSV, write a filter in one line, and get back only the records you asked for.</p>
+      <p class="meta"><span>MIT licence</span><span>Linux, macOS, Windows</span><span>Single static binary, 6 MB</span></p>
+    </div>
+    <div class="c2 install">
+      <h2>Install</h2>
+      <a class="action" href="#start">
+        <span class="label">Download 2.4.0
+          <svg class="arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 0 L10 5 L3 10 Z" fill="currentColor"/></svg>
+        </span>
+        <span class="sub">Released 14 October 2026</span>
+      </a>
+      <div class="cmd">
+        <code><span class="prompt">$ </span><span id="install-cmd">curl -fsSL sift.sh/install | sh</span></code>
+        <button class="copy" type="button" data-copy="install-cmd">Copy</button>
+      </div>
+      <p class="alt">Or with a package manager:<br><code>brew install sift</code><br><code>cargo install sift-cli</code><br><code>scoop install sift</code></p>
+    </div>
+  </div>
+</div>
+
+<section class="part wrap" id="start">
+  <div class="grid part-head">
+    <div class="c2"><span class="marker" aria-hidden="true">1</span></div>
+    <div class="c4">
+      <h2>Get started</h2>
+      <p>Three commands take you from a raw log file to a filtered, readable result. Each one builds on the last.</p>
+    </div>
+  </div>
+
+  <div class="grid steps">
+    <div class="c2 step">
+      <span class="n">1.1</span>
+      <h3>Look at the shape</h3>
+      <p>Sift reads the first records and reports which fields exist and what type each one has.</p>
+<pre><span class="c">$</span> sift schema app.log
+<span class="c">ts       time    1,000 of 1,000</span>
+<span class="c">level    string  1,000 of 1,000</span>
+<span class="c">status   int       812 of 1,000</span>
+<span class="c">path     string    812 of 1,000</span></pre>
+    </div>
+    <div class="c2 step">
+      <span class="n">1.2</span>
+      <h3>Filter the records</h3>
+      <p>Write a condition with the field names you just saw. Comparisons, ranges and regular expressions all work.</p>
+<pre><span class="c">$</span> sift <span class="r">'status &gt;= 500'</span> app.log
+<span class="c">09:14:02 error 503 /api/orders</span>
+<span class="c">09:14:07 error 502 /api/orders</span>
+<span class="c">09:20:51 error 500 /api/cart</span></pre>
+    </div>
+    <div class="c2 step">
+      <span class="n">1.3</span>
+      <h3>Count and group</h3>
+      <p>Pipe the result into an aggregation. Output is a plain table, or JSON with <code>--json</code>.</p>
+<pre><span class="c">$</span> sift <span class="r">'status &gt;= 500'</span> app.log \
+    | sift count by path
+<span class="c">path          count</span>
+<span class="c">/api/orders      41</span>
+<span class="c">/api/cart         6</span></pre>
+    </div>
+  </div>
+</section>
+
+<section class="part wrap" id="how">
+  <div class="grid part-head">
+    <div class="c2"><span class="marker" aria-hidden="true">2</span></div>
+    <div class="c4">
+      <h2>How it works</h2>
+      <p>Sift streams. It never loads a whole file into memory, so a 40 GB log costs the same memory as a 40 KB one.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <figure class="c4">
+      <div class="diagram">
+        <svg viewBox="0 0 760 260" role="img" aria-labelledby="dg-title">
+          <title id="dg-title">Data flow: input files are parsed, filtered, then aggregated or printed</title>
+          <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" fill="none" stroke="#000" stroke-width="1.5">
+            <!-- inputs -->
+            <rect x="10" y="30" width="120" height="44"/>
+            <rect x="10" y="108" width="120" height="44"/>
+            <rect x="10" y="186" width="120" height="44"/>
+            <!-- parse -->
+            <rect x="200" y="80" width="140" height="100"/>
+            <!-- filter -->
+            <rect x="410" y="80" width="140" height="100" stroke-width="3"/>
+            <!-- outputs -->
+            <rect x="620" y="50" width="130" height="64"/>
+            <rect x="620" y="146" width="130" height="64"/>
+            <!-- connectors -->
+            <path d="M130 52 H165 V130 H190"/>
+            <path d="M130 130 H190"/>
+            <path d="M130 208 H165 V130"/>
+            <path d="M340 130 H400"/>
+            <path d="M550 130 H585 V82 H610"/>
+            <path d="M585 130 V178 H610"/>
+          </g>
+          <g fill="#000">
+            <path d="M190 124 L200 130 L190 136 Z"/>
+            <path d="M400 124 L410 130 L400 136 Z"/>
+            <path d="M610 76 L620 82 L610 88 Z"/>
+            <path d="M610 172 L620 178 L610 184 Z"/>
+          </g>
+          <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#000">
+            <text x="22" y="57">app.log</text>
+            <text x="22" y="135">stdin</text>
+            <text x="22" y="213">*.csv.gz</text>
+            <text x="214" y="112" font-weight="500" font-size="18">Parse</text>
+            <text x="214" y="136" fill="#797669" font-size="13">detect format</text>
+            <text x="214" y="154" fill="#797669" font-size="13">infer field types</text>
+            <text x="424" y="112" font-weight="500" font-size="18">Filter</text>
+            <text x="424" y="136" fill="#797669" font-size="13">compiled once</text>
+            <text x="424" y="154" fill="#797669" font-size="13">one pass per record</text>
+            <text x="632" y="78" font-weight="500">Print</text>
+            <text x="632" y="98" fill="#797669" font-size="13">table, JSON, raw</text>
+            <text x="632" y="174" font-weight="500">Aggregate</text>
+            <text x="632" y="194" fill="#797669" font-size="13">count, sum, p95</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><strong>Figure 2.1</strong> Records move left to right one at a time. The filter is compiled before the first record is read, which is why a syntax error stops Sift before it touches your data.</figcaption>
+    </figure>
+    <div class="c2">
+      <dl class="flags">
+        <div><dt>Formats</dt><dd>JSON lines, logfmt, CSV, TSV. Gzip and zstd are decompressed on the fly.</dd></div>
+        <div><dt>Throughput</dt><dd>About 900 MB per second per core on JSON lines, measured on a 2024 laptop.</dd></div>
+        <div><dt>Memory</dt><dd>Constant for filtering. Grouping grows with the number of distinct keys, not records.</dd></div>
+        <div><dt>Exit codes</dt><dd><code>0</code> matches found, <code>1</code> no matches, <code>2</code> error. Safe to use in scripts.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="part wrap" id="commands">
+  <div class="grid part-head">
+    <div class="c2"><span class="marker" aria-hidden="true">3</span></div>
+    <div class="c4">
+      <h2>Commands</h2>
+      <p>Every command reads files named on the command line, or standard input when none are given.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="c4">
+      <table>
+        <thead><tr><th scope="col">Command</th><th scope="col">What it does</th><th scope="col">Example</th></tr></thead>
+        <tbody>
+          <tr><td>sift</td><td>Print records that match a filter</td><td><code>sift 'level == "error"'</code></td></tr>
+          <tr><td>sift schema</td><td>List fields, types and how often each appears</td><td><code>sift schema app.log</code></td></tr>
+          <tr><td>sift count</td><td>Count records, optionally grouped</td><td><code>sift count by host</code></td></tr>
+          <tr><td>sift stats</td><td>Min, max, mean and percentiles of a number field</td><td><code>sift stats latency_ms</code></td></tr>
+          <tr><td>sift pick</td><td>Keep only the named fields</td><td><code>sift pick ts,path</code></td></tr>
+          <tr><td>sift tail</td><td>Follow a growing file and filter new lines</td><td><code>sift tail -f app.log</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="c2">
+      <h3 style="font-size:20px;margin-bottom:12px;">Common flags</h3>
+      <dl class="flags">
+        <div><dt><code>--json</code></dt><dd>Write output as JSON lines.</dd></div>
+        <div><dt><code>--since</code></dt><dd>Only records after a time, e.g. <code>--since 2h</code>.</dd></div>
+        <div><dt><code>--format</code></dt><dd>Skip detection and name the format.</dd></div>
+        <div><dt><code>--limit</code></dt><dd>Stop after this many matches.</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="grid sp-top">
+    <div class="c4">
+      <div class="sign" role="note">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 L38 36 H2 Z" fill="#CC273D"/><rect x="18.2" y="14" width="3.6" height="12" fill="#fff"/><rect x="18.2" y="29" width="3.6" height="3.6" fill="#fff"/></svg>
+        <div>
+          <h3>Quote your filters</h3>
+          <p>Shells treat <code>&gt;</code> as redirection. <code>sift status &gt; 500 app.log</code> creates a file called <code>500</code> instead of filtering. Wrap the filter in single quotes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="part wrap" id="guides">
+  <div class="grid part-head">
+    <div class="c2"><span class="marker" aria-hidden="true">4</span></div>
+    <div class="c4">
+      <h2>Guides</h2>
+      <p>Longer walk-throughs for specific jobs.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="c4">
+      <ul class="guides">
+        <li><a href="#guides"><span class="gn">4.1</span><span><span class="gt">Filter syntax in full</span><span class="gd">Operators, precedence, regular expressions and nested fields</span></span><svg class="ga" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 0 L10 5 L3 10 Z"/></svg></a></li>
+        <li><a href="#guides"><span class="gn">4.2</span><span><span class="gt">Working with timestamps</span><span class="gd">Time zones, relative ranges and bucketing by minute or hour</span></span><svg class="ga" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 0 L10 5 L3 10 Z"/></svg></a></li>
+        <li><a href="#guides"><span class="gn">4.3</span><span><span class="gt">Sift in CI pipelines</span><span class="gd">Fail a build when an error pattern appears in test output</span></span><svg class="ga" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 0 L10 5 L3 10 Z"/></svg></a></li>
+        <li><a href="#guides"><span class="gn">4.4</span><span><span class="gt">Saved queries</span><span class="gd">Name a filter once in <code>sift.toml</code> and reuse it across projects</span></span><svg class="ga" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 0 L10 5 L3 10 Z"/></svg></a></li>
+        <li><a href="#guides"><span class="gn">4.5</span><span><span class="gt">Moving from grep and jq</span><span class="gd">Side-by-side translations of the commands you already use</span></span><svg class="ga" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 0 L10 5 L3 10 Z"/></svg></a></li>
+      </ul>
+    </div>
+    <figure class="c2 art">
+      <svg viewBox="0 0 300 360" role="img" aria-labelledby="art-title">
+        <title id="art-title">A sieve: many marks enter at the top, few pass through</title>
+        <!-- scattered records above -->
+        <g fill="#797669">
+          <rect x="30" y="20" width="44" height="10"/><rect x="96" y="12" width="70" height="10"/><rect x="190" y="24" width="52" height="10"/>
+          <rect x="54" y="48" width="60" height="10"/><rect x="140" y="44" width="36" height="10"/><rect x="206" y="56" width="62" height="10"/>
+          <rect x="20" y="78" width="38" height="10"/><rect x="88" y="76" width="54" height="10"/><rect x="170" y="84" width="44" height="10"/>
+        </g>
+        <!-- sieve -->
+        <path d="M20 120 H280 L180 230 H120 Z" fill="#000"/>
+        <rect x="140" y="230" width="20" height="40" fill="#000"/>
+        <!-- one record through -->
+        <rect x="124" y="296" width="52" height="10" fill="#CC273D"/>
+        <rect x="124" y="322" width="52" height="10" fill="#000"/>
+      </svg>
+      <figcaption><strong>Figure 4.1</strong> Many records in, few out.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="part wrap" id="help">
+  <div class="grid part-head">
+    <div class="c2"><span class="marker" aria-hidden="true">5</span></div>
+    <div class="c4">
+      <h2>Help</h2>
+      <p>Built-in help is the fastest route. Every command accepts <code>--help</code>, and <code>sift explain</code> describes what a filter will do before you run it.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="c3">
+<pre class="light"><span class="c">$</span> sift explain <span class="r">'status &gt;= 500 and path ~ "^/api"'</span>
+<span class="c">keep records where</span>
+<span class="c">  status is a number at least 500</span>
+<span class="c">  and path starts with "/api"</span></pre>
+    </div>
+    <div class="c3">
+      <dl class="flags">
+        <div><dt>Questions</dt><dd>Ask in the project discussion forum. Search closed threads first.</dd></div>
+        <div><dt>Bugs</dt><dd>Open an issue with the output of <code>sift --version --verbose</code>.</dd></div>
+        <div><dt>Contributing</dt><dd>See <code>CONTRIBUTING.md</code> in the repository. Good first issues are labelled.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <div class="grid">
+    <div class="c2">
+      <h4>Sift</h4>
+      <p>Open source under the MIT licence. Built by its contributors.</p>
+    </div>
+    <div class="c2">
+      <h4>Documentation</h4>
+      <ul>
+        <li><a href="#start">Get started</a></li>
+        <li><a href="#commands">Command reference</a></li>
+        <li><a href="#guides">Guides</a></li>
+      </ul>
+    </div>
+    <div class="c2">
+      <h4>Project</h4>
+      <ul>
+        <li><a href="#help">Changelog</a></li>
+        <li><a href="#help">Source code</a></li>
+        <li><a href="#help">Report a bug</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      if (!el) return;
+      var text = el.textContent;
+      var done = function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1600);
+      };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () {});
+        }
+      } catch (e) {}
+    });
+  });
+</script>
+</body>
+</html>

@@ -25,3 +25,5 @@ Agent-run timings, because they matter for the effort confound:
 | c007/arm-b (troubleshooting entry) | ~2.5 min | 40 KB |
 | c008/arm-a (no guidance) | ~2.5 min | 34 KB |
 | c008/arm-b (art style only) | ~3.5 min | 31 KB |
+| c009/arm-a (no guidance) | ~1.5 min | 25 KB |
+| c009/arm-b (NASA-derived style) | ~1.5 min | 24 KB |

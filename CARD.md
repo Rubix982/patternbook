@@ -14,6 +14,110 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-009 · Does a second, unrelated human art style also move a page off the AI look?
+
+**Status:** closed
+**Opened:** 2026-10-31
+
+**1. Where we are.**
+C-008's art style (IKEA line art) won both blind questions on its own, but it was taken from an
+entry that had already won twice, so we have one style and it was picked for success.
+
+**2. What we are doing.**
+Write an art-style file from the NASA Graphics Standards Manual (NHB 1430.2, January 1976,
+public domain), then give two fresh agents C-005's CLI-docs brief, one with that style file
+and one with no guidance, and blind-pick the two pages.
+
+The CLI-docs brief is chosen because its unguided page in C-005 was the clearest case of the
+default overriding the subject (cream `#f6f3ec` + orange `#c2410c` for a command-line tool).
+
+Measures:
+- **Blind pick:** (a) which looks less AI-made [primary]; (b) which would I rather use to
+  learn and look up this tool.
+- **Default checklist (0–5)**, by eye for false hits.
+- **Style adherence (0–6)**, fixed before the run from `swiss-grid-helvetica-red.md`:
+  (1) white page; (2) only black, one red near `#CC273D`, warm grey, with no pastels;
+  (3) Helvetica, headings Medium/Bold, upper and lower case, no all-caps labels;
+  (4) flush left, nothing centred; (5) a visible column grid with thin rules and a white
+  top band; (6) square corners, no shadows, gradients or pills.
+- Words, time, size.
+
+**3. Why.**
+We don't know whether "a human-sourced art style moves the page off the default" holds in
+general, or only for IKEA's line art, which happens to come with drawing devices that also
+pulled in structure (C-008).
+
+**4. What is affected.**
+- C-008's claim: widened to human-sourced styles in general, or kept to that one style.
+- `library/art-styles/` gets a second entry, or a note that only one has been shown to work.
+- The README's claim about the art-style axis.
+
+**5. Conclusion.**
+- **If** the NASA-style page wins (a) → we claim *two unrelated human design systems each
+  moved a page off the AI look on a subject they weren't made for*; the style axis is worth
+  growing.
+- **If** it ties or loses (a) → we claim *C-008's result may be specific to the IKEA style*,
+  and the next card has to work out what that style has that this one doesn't.
+- (b) is recorded either way. A win on (a) with a loss on (b) means the style hurt
+  usability for docs.
+
+**6. If not done.**
+The style axis rests on one style that was chosen because it had already won.
+
+**Limits (known before running):** n = 1 per arm; same judge; NASA's manual is about
+identity (logo, stationery, vehicles, signage), not web pages, so the style file is my
+translation. Its logo and "worm" logotype must not appear, and the page must not imitate NASA.
+
+**Result (2026-10-31):** second branch. **(a) a tie: "Both look AI-made". (b) the unguided
+page won.**
+
+| | (a) less AI-made | (b) learn and look up | Style adherence | Default checklist | Words | Time | Size |
+|---|---|---|---|---|---|---|---|
+| NASA-derived style (`arm-b.html`, page 2) | tie | lost | ~5.5/6 | 0/5 | 627 | ~1.5 min | 24 KB |
+| No guidance (`arm-a.html`, page 1) | tie | **won** | — | 5/5 | 650 | ~1.5 min | 25 KB |
+
+Same length, same time, same size, so effort isn't the explanation.
+
+**The styled page followed the file closely.** It had a white page, black ink, red `#CC273D` only
+on the download panel and code highlights, Helvetica Light/Bold in upper and lower case, flush
+left, a black navigation bar with numbered sections, a box diagram in an outline, thin rules,
+and square corners throughout. It lost half a point because its code blocks used a lighter
+pink `#FF6B7D` for red on black. It also had a **layout flaw the style file didn't cause**:
+`body { margin: 0 }` with no side gutter, so the giant "Sift" heading and the body text run
+right up against the left edge of the window.
+
+**The unguided page was the full default again:** cream `#f7f5f0`, warm near-black text,
+terracotta `#b4521f`, a monospace orange eyebrow, pills, rounded cards, and its font stack
+names Inter.
+
+So the checklist scored the two pages 0/5 and 5/5, and Saif called both AI-made and preferred
+the default one to use. **The palette checklist doesn't predict Saif's judgement** (also seen in
+C-007).
+
+**Claim:** for this brief, a second human-sourced style (NASA's 1976 typographic system) didn't
+move the page off the AI look, unlike IKEA's line-art style in C-008. So C-008 doesn't
+generalise to "any human style" yet.
+
+**Candidate reasons, none tested:**
+1. IKEA's style is **drawing-led**, so the page's main content became custom illustration. NASA's
+   is **typographic**, and big Helvetica with black bars and a red block is itself a look agents
+   produce when asked to be "bold" or "Swiss". It may read as a known AI alternative rather than
+   as human work.
+2. The missing side margin made the styled page look broken, which might read as "generated".
+3. For (b), the unguided page had docs conventions Saif may simply be used to (search box, top
+   nav, rounded quickstart steps). That's familiarity, not style.
+
+The next card has to ask Saif *what* reads as AI-made on each page, rather than guessing.
+
+**Changes made:**
+- `swiss-grid-helvetica-red.md` is kept, with `tested_in: [C-009]` and a note that it lost.
+- README: the art-style claim narrowed to "one of two styles has worked".
+- T-009 opened: ask Saif to point at what reads as AI-made.
+
+**Closed:** 2026-10-31
+
+---
+
 ## C-008 · Does a human-sourced art style, given alone, stop a page looking AI-made?
 
 **Status:** closed

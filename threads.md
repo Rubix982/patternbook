@@ -65,3 +65,11 @@ value is just *any* specific instruction, not human sources.
 **Opened:** 2026-10-31
 **Question:** The unguided agent already applies symptom-first, cause-order, escalation and not-a-fault. Saif liked its "attempt of visualization" but called both pages AI-looking. Candidates the entry could carry instead: the visual language (both pages still look AI-made), and the medium choice (reference vs one-step-at-a-time). Needs a baseline-first pass (METHOD 2b) before rewriting.
 **Answer:** — (C-008 suggests: pair the existing structure rules with an art-style file; test that pairing before adding more structure.)
+
+### T-009 · What, specifically, makes Saif read a page as AI-made?
+
+**Status:** open
+**Parent:** C-009
+**Opened:** 2026-10-31
+**Question:** The palette checklist (C-005) didn't predict Saif's judgement in C-007 or C-009. Show Saif the pages judged so far (winners and losers) and have them mark what gives each away — specific elements, not overall impressions — then turn those into a checklist built from a human judge rather than from unguided output. Candidates already suggested: drawing-led vs. typographic styles (C-008 vs C-009), familiar docs furniture, broken layout.
+**Answer:** —
