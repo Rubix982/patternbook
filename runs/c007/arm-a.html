@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Router Troubleshooting</title>
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efede7; --ink:#1d2024; --ink-2:#555b63; --line:#dcd9d1;
+  --accent:#1f6f5c; --accent-ink:#ffffff; --accent-soft:#dcefe8;
+  --led-green:#22c55e; --led-amber:#f59e0b; --led-red:#ef4444; --led-blue:#3b82f6; --led-off:#9ca3af;
+  --device:#2a2e33; --device-2:#3a3f45; --device-hi:#4b5158;
+  --warn-bg:#fff4e0; --warn-ink:#7a4b00; --warn-line:#f1d29a;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121417; --surface:#1b1e22; --surface-2:#23272c; --ink:#e9eaec; --ink-2:#a2a8b0; --line:#30353b;
+    --accent:#4fc3a1; --accent-ink:#0c1a16; --accent-soft:#16332b;
+    --device:#0d0f11; --device-2:#1f2328; --device-hi:#2d3238;
+    --warn-bg:#2e2410; --warn-ink:#f3cf8b; --warn-line:#5a4518;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121417; --surface:#1b1e22; --surface-2:#23272c; --ink:#e9eaec; --ink-2:#a2a8b0; --line:#30353b;
+  --accent:#4fc3a1; --accent-ink:#0c1a16; --accent-soft:#16332b;
+  --device:#0d0f11; --device-2:#1f2328; --device-hi:#2d3238;
+  --warn-bg:#2e2410; --warn-ink:#f3cf8b; --warn-line:#5a4518;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+header.top{border-bottom:1px solid var(--line);background:var(--surface)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;padding-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:.01em}
+.brand small{display:block;font-weight:400;color:var(--ink-2);font-size:13px}
+.theme-btn{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:36px 0 8px;letter-spacing:-.01em}
+h2{font-size:22px;margin:0 0 6px}
+h3{font-size:17px;margin:0 0 4px}
+.lede{color:var(--ink-2);max-width:60ch;margin:0 0 24px}
+section{margin:40px 0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.muted{color:var(--ink-2)}
+
+/* quick checks */
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.quick label{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;cursor:pointer}
+.quick input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:none}
+.quick label:has(input:checked){background:var(--accent-soft);border-color:var(--accent)}
+.quick label:has(input:checked) strong{text-decoration:line-through;text-decoration-color:var(--ink-2)}
+.quick span{display:block;font-size:14px;color:var(--ink-2)}
+
+/* lights */
+.lights{display:grid;grid-template-columns:1fr;gap:20px}
+.router-svg{width:100%;height:auto;display:block}
+.led-btn{cursor:pointer}
+.led-btn:focus{outline:none}
+.led-btn:focus-visible .ring{stroke:var(--accent);stroke-width:3}
+.led-btn .ring{fill:transparent;stroke:transparent}
+.led-btn[aria-pressed="true"] .ring{stroke:var(--accent);stroke-width:2.5}
+.state-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.dot{width:12px;height:12px;border-radius:50%;flex:none;box-shadow:0 0 6px currentColor}
+.dot.off{box-shadow:none;background:transparent!important;border:2px solid var(--led-off)}
+.blink{animation:blink 1s steps(2,start) infinite}
+.blink-slow{animation:blink 2s ease-in-out infinite}
+@keyframes blink{50%{opacity:.15}}
+@media (prefers-reduced-motion: reduce){.blink,.blink-slow{animation:none}}
+.meaning{border-left:4px solid var(--accent);padding:4px 0 4px 14px}
+.meaning p{margin:4px 0}
+.meaning .do{font-weight:600}
+
+/* symptoms */
+.symptoms{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:18px}
+.sym{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:var(--radius);padding:14px;font:inherit;cursor:pointer}
+.sym svg{flex:none;width:28px;height:28px;color:var(--accent)}
+.sym[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.sym:hover{border-color:var(--accent)}
+.wizard{min-height:220px}
+.progress{display:flex;gap:4px;margin:10px 0 16px}
+.progress i{flex:1;height:5px;border-radius:3px;background:var(--surface-2)}
+.progress i.done{background:var(--accent)}
+.step-n{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.step-body ul{padding-left:20px;margin:8px 0}
+.step-body li{margin:4px 0}
+.why{font-size:14px;color:var(--ink-2);background:var(--surface-2);border-radius:10px;padding:10px 12px;margin-top:10px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btn{border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:focus-visible,.chip:focus-visible,.sym:focus-visible,.theme-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.done-box{text-align:center;padding:20px 8px}
+.done-box svg{width:56px;height:56px;color:var(--accent)}
+
+/* reset */
+.two{display:grid;grid-template-columns:1fr;gap:12px}
+.warn{background:var(--warn-bg);color:var(--warn-ink);border:1px solid var(--warn-line);border-radius:10px;padding:10px 12px;font-size:14px;margin-top:10px}
+ol.steps{padding-left:22px;margin:8px 0}
+ol.steps li{margin:6px 0}
+kbd{font:13px ui-monospace,Menlo,monospace;background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+
+/* table */
+.specs{width:100%;border-collapse:collapse;font-size:15px}
+.specs th,.specs td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.specs th{font-weight:600;width:42%}
+code{font:14px ui-monospace,Menlo,monospace;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+
+footer{border-top:1px solid var(--line);margin-top:56px;padding:24px 0 40px;color:var(--ink-2);font-size:14px}
+
+@media (min-width:760px){
+  .lights{grid-template-columns:1.25fr 1fr;align-items:center}
+  .two{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="3" y="17" width="26" height="10" rx="3" fill="currentColor" opacity=".9"/>
+        <circle cx="9" cy="22" r="1.6" fill="var(--led-green)"/><circle cx="14" cy="22" r="1.6" fill="var(--led-green)"/>
+        <path d="M10 11a8.5 8.5 0 0 1 12 0M13 14a4 4 0 0 1 6 0" stroke="var(--accent)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div>Home Router Help<small>Troubleshooting guide</small></div>
+    </div>
+    <button class="theme-btn" id="themeBtn" type="button">Dark mode</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Something not working?</h1>
+  <p class="lede">Most Wi-Fi problems are fixed by one of a few simple steps. Start with the quick checks, read the lights on the front of your router, then pick the problem you're seeing for a step-by-step fix.</p>
+
+  <!-- QUICK CHECKS -->
+  <section aria-labelledby="qc">
+    <h2 id="qc">1. Quick checks (2 minutes)</h2>
+    <p class="muted">Tick these off as you go. They fix a surprising share of problems.</p>
+    <div class="quick">
+      <label><input type="checkbox"><div><strong>Router is plugged in and on</strong><span>The Power light should be solid green.</span></div></label>
+      <label><input type="checkbox"><div><strong>Cables are pushed in firmly</strong><span>Especially the cable from the modem or wall into the Internet port.</span></div></label>
+      <label><input type="checkbox"><div><strong>Restart the router</strong><span>Unplug it, wait 30 seconds, plug back in, then give it 3 minutes.</span></div></label>
+      <label><input type="checkbox"><div><strong>Check for an outage</strong><span>Your internet provider's status page or app, using mobile data.</span></div></label>
+    </div>
+  </section>
+
+  <!-- LIGHTS -->
+  <section aria-labelledby="lt">
+    <h2 id="lt">2. What are the lights telling you?</h2>
+    <p class="muted">Tap a light on the router, then choose what it's doing.</p>
+    <div class="lights card">
+      <svg class="router-svg" viewBox="0 0 520 260" role="group" aria-label="Front of router with five status lights">
+        <defs>
+          <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="var(--device-hi)"/><stop offset="1" stop-color="var(--device)"/>
+          </linearGradient>
+          <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+        <!-- antennas -->
+        <g fill="var(--device-2)">
+          <rect x="70" y="18" width="14" height="120" rx="7" transform="rotate(-8 77 138)"/>
+          <rect x="436" y="18" width="14" height="120" rx="7" transform="rotate(8 443 138)"/>
+          <rect x="190" y="40" width="12" height="98" rx="6"/>
+          <rect x="318" y="40" width="12" height="98" rx="6"/>
+        </g>
+        <!-- body -->
+        <path d="M40 140 Q40 124 58 122 L462 122 Q480 124 480 140 L492 200 Q494 220 472 222 L48 222 Q26 220 28 200 Z" fill="url(#body)"/>
+        <rect x="60" y="126" width="400" height="3" rx="1.5" fill="#ffffff" opacity=".08"/>
+        <!-- feet -->
+        <rect x="70" y="222" width="40" height="8" rx="3" fill="var(--device)"/>
+        <rect x="410" y="222" width="40" height="8" rx="3" fill="var(--device)"/>
+        <!-- light strip -->
+        <rect x="96" y="158" width="328" height="44" rx="22" fill="#000" opacity=".28"/>
+        <g id="leds"></g>
+      </svg>
+      <div>
+        <h3 id="ledName">Power</h3>
+        <div class="state-row" id="stateRow" role="group" aria-label="Light state"></div>
+        <div class="meaning" id="meaning" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYMPTOMS -->
+  <section aria-labelledby="sy">
+    <h2 id="sy">3. What's the problem?</h2>
+    <p class="muted">Pick the closest match. We'll go one step at a time and stop as soon as it's fixed.</p>
+    <div class="symptoms" id="symptoms"></div>
+    <div class="card wizard" id="wizard" aria-live="polite">
+      <p class="muted" style="margin:0">Choose a problem above to begin.</p>
+    </div>
+  </section>
+
+  <!-- RESET -->
+  <section aria-labelledby="rs">
+    <h2 id="rs">Restart vs. reset</h2>
+    <p class="muted">These are different. A restart is safe and fixes most things. A reset erases your settings.</p>
+    <svg viewBox="0 0 520 150" class="router-svg card" style="padding:12px;margin-bottom:12px" role="img" aria-label="Back of router: power socket, power button, internet port, four home ports, and a small reset hole">
+      <rect x="16" y="20" width="488" height="100" rx="14" fill="var(--device)"/>
+      <!-- power socket -->
+      <circle cx="56" cy="66" r="13" fill="var(--device-2)"/><circle cx="56" cy="66" r="4" fill="var(--device)"/>
+      <!-- power button -->
+      <rect x="86" y="56" width="26" height="20" rx="5" fill="var(--device-2)"/>
+      <!-- reset -->
+      <circle cx="140" cy="66" r="5" fill="#000" stroke="var(--led-amber)" stroke-width="2"/>
+      <!-- WAN -->
+      <g><rect x="170" y="50" width="44" height="34" rx="4" fill="#1e4fa8"/><rect x="178" y="58" width="28" height="20" rx="2" fill="#0a1a38"/></g>
+      <!-- LAN -->
+      <g fill="#c9a227"><rect x="236" y="50" width="44" height="34" rx="4"/><rect x="290" y="50" width="44" height="34" rx="4"/><rect x="344" y="50" width="44" height="34" rx="4"/><rect x="398" y="50" width="44" height="34" rx="4"/></g>
+      <g fill="#2a2108"><rect x="244" y="58" width="28" height="20" rx="2"/><rect x="298" y="58" width="28" height="20" rx="2"/><rect x="352" y="58" width="28" height="20" rx="2"/><rect x="406" y="58" width="28" height="20" rx="2"/></g>
+      <!-- USB -->
+      <rect x="458" y="60" width="30" height="12" rx="2" fill="var(--device-2)"/>
+      <g fill="var(--ink-2)" font-size="11" font-family="ui-sans-serif,system-ui,sans-serif" text-anchor="middle">
+        <text x="56" y="140">Power</text><text x="99" y="140">On/Off</text>
+        <text x="140" y="14" fill="var(--led-amber)" font-weight="600">Reset</text>
+        <text x="192" y="140">Internet</text><text x="339" y="140">Home devices (1–4)</text><text x="473" y="140">USB</text>
+      </g>
+      <path d="M140 18 V57" stroke="var(--led-amber)" stroke-width="1.5" stroke-dasharray="3 3"/>
+    </svg>
+    <div class="two">
+      <div class="card">
+        <h3>Restart (safe)</h3>
+        <ol class="steps">
+          <li>Unplug the router's power cable. If you have a separate modem, unplug that too.</li>
+          <li>Wait 30 seconds.</li>
+          <li>Plug the modem in first and wait until its lights settle (about 2 minutes).</li>
+          <li>Plug the router in. Wait about 3 minutes for the Internet light to turn solid green.</li>
+        </ol>
+        <p class="muted" style="margin:0;font-size:14px">Your network name, password and settings are kept.</p>
+      </div>
+      <div class="card">
+        <h3>Factory reset (last resort)</h3>
+        <ol class="steps">
+          <li>With the router on, press and hold the <strong>Reset</strong> hole with a straightened paperclip for <kbd>10 seconds</kbd>, until all lights flash.</li>
+          <li>Release and wait 3 minutes.</li>
+          <li>Join the default network printed on the sticker under the router.</li>
+          <li>Open <code>http://192.168.1.1</code> and run setup again.</li>
+        </ol>
+        <div class="warn"><strong>This erases everything:</strong> your Wi-Fi name and password, parental controls, port forwarding, and any login details your provider asked you to enter. Have those ready first.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND DETAILS -->
+  <section aria-labelledby="dt">
+    <h2 id="dt">Where to find your details</h2>
+    <div class="card">
+      <table class="specs">
+        <tr><th>Default Wi-Fi name and password</th><td>Sticker on the bottom of the router</td></tr>
+        <tr><th>Settings page</th><td><code>http://192.168.1.1</code> from a device connected to the router</td></tr>
+        <tr><th>Default admin login</th><td>On the same sticker. You'll be asked to change it on first sign-in.</td></tr>
+        <tr><th>Serial number and model</th><td>Sticker on the bottom, or <em>Settings → About</em></td></tr>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink)">Still stuck?</strong> Write down which lights are on and what you've already tried, then contact your internet provider or the router's support line. That note will save you from repeating every step on the phone.
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- theme ---------- */
+  var root=document.documentElement, tb=document.getElementById('themeBtn');
+  function isDark(){var t=root.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
+  function label(){tb.textContent=isDark()?'Light mode':'Dark mode'}
+  try{var s=localStorage.getItem('rt-theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
+  label();
+  tb.addEventListener('click',function(){var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('rt-theme',n)}catch(e){}label()});
+
+  /* ---------- lights ---------- */
+  var C={green:'var(--led-green)',amber:'var(--led-amber)',red:'var(--led-red)',blue:'var(--led-blue)',off:'var(--led-off)'};
+  var LEDS=[
+    {id:'power',name:'Power',icon:'power',states:[
+      {k:'Solid green',c:'green',m:'The router is on and working normally.',d:'Nothing to do.'},
+      {k:'Blinking green',c:'green',b:1,m:'Starting up or installing an update.',d:'Wait up to 5 minutes. Don\'t unplug it during an update.'},
+      {k:'Solid amber',c:'amber',m:'The router started but found a fault.',d:'Restart it. If amber returns, do a factory reset.'},
+      {k:'Off',c:'off',m:'No power is reaching the router.',d:'Check the power adapter, the wall socket, and the On/Off button on the back.'}]},
+    {id:'net',name:'Internet',icon:'globe',states:[
+      {k:'Solid green',c:'green',m:'Connected to your internet provider.',d:'If things still don\'t work, the problem is likely Wi-Fi or one device. See section 3.'},
+      {k:'Blinking green',c:'green',b:1,m:'Connecting to your provider.',d:'Give it 3 minutes.'},
+      {k:'Solid red',c:'red',m:'A cable is connected, but there\'s no internet coming in.',d:'Check for an outage, then restart the modem and router. If it stays red, call your provider.'},
+      {k:'Off',c:'off',m:'Nothing is plugged into the Internet port, or the cable is faulty.',d:'Push the cable from the modem/wall firmly into the blue Internet port. Try a different cable.'}]},
+    {id:'w24',name:'Wi-Fi 2.4 GHz',icon:'wifi',tag:'2.4',states:[
+      {k:'Solid green',c:'green',m:'The long-range Wi-Fi band is on.',d:'Nothing to do.'},
+      {k:'Blinking green',c:'green',b:1,m:'Data is moving over Wi-Fi.',d:'Normal. It flickers when devices are busy.'},
+      {k:'Off',c:'off',m:'This Wi-Fi band is turned off.',d:'Turn it back on in Settings → Wireless, or check whether a Wi-Fi schedule is switching it off.'}]},
+    {id:'w5',name:'Wi-Fi 5 GHz',icon:'wifi',tag:'5',states:[
+      {k:'Solid green',c:'green',m:'The fast, shorter-range Wi-Fi band is on.',d:'Nothing to do.'},
+      {k:'Blinking green',c:'green',b:1,m:'Data is moving over Wi-Fi.',d:'Normal.'},
+      {k:'Off',c:'off',m:'This Wi-Fi band is turned off.',d:'Turn it back on in Settings → Wireless.'}]},
+    {id:'wps',name:'WPS',icon:'lock',states:[
+      {k:'Off',c:'off',m:'Normal. WPS is only used when pairing a device with the button.',d:'Nothing to do.'},
+      {k:'Blinking blue',c:'blue',b:2,m:'Waiting for a device to pair (up to 2 minutes).',d:'Press WPS on your printer or extender now.'},
+      {k:'Solid blue',c:'blue',m:'A device just paired successfully.',d:'It turns off on its own after a few minutes.'},
+      {k:'Blinking red',c:'red',b:1,m:'Pairing failed or timed out.',d:'Try again, standing closer to the router, or connect with the password instead.'}]}
+  ];
+  var ICON={
+    power:'<path d="M0 -7 V-1 M-5 -4.5 A6.5 6.5 0 1 0 5 -4.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>',
+    globe:'<circle r="6.5" stroke="currentColor" stroke-width="1.6" fill="none"/><ellipse rx="2.8" ry="6.5" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M-6.5 0 H6.5" stroke="currentColor" stroke-width="1.4"/>',
+    wifi:'<path d="M-7 -2 A10 10 0 0 1 7 -2 M-4.2 1.2 A6 6 0 0 1 4.2 1.2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/><circle cy="4.5" r="1.6" fill="currentColor"/>',
+    lock:'<rect x="-5" y="-1" width="10" height="8" rx="1.5" fill="currentColor"/><path d="M-3 -1 V-3.5 A3 3 0 0 1 3 -3.5 V-1" stroke="currentColor" stroke-width="1.7" fill="none"/>'
+  };
+  var ledG=document.getElementById('leds'), sel={led:0,state:{}};
+  LEDS.forEach(function(l,i){sel.state[l.id]=0});
+  var NS='http://www.w3.org/2000/svg';
+  LEDS.forEach(function(l,i){
+    var x=132+i*64;
+    var g=document.createElementNS(NS,'g');
+    g.setAttribute('class','led-btn');g.setAttribute('tabindex','0');g.setAttribute('role','button');
+    g.setAttribute('aria-label',l.name+' light');g.dataset.i=i;
+    g.innerHTML='<circle class="ring" cx="'+x+'" cy="180" r="19"/>'+
+      '<circle class="halo" cx="'+x+'" cy="180" r="9" filter="url(#glow)"/>'+
+      '<circle class="bulb" cx="'+x+'" cy="180" r="6"/>'+
+      '<g transform="translate('+x+' 106)" style="color:var(--ink-2)">'+ICON[l.icon]+(l.tag?'<text y="-11" text-anchor="middle" font-size="8.5" font-weight="700" fill="currentColor" font-family="ui-sans-serif,system-ui,sans-serif">'+l.tag+'</text>':'')+'</g>'+
+      '<text x="'+x+'" y="248" text-anchor="middle" font-size="12" fill="var(--ink-2)" font-family="ui-sans-serif,system-ui,sans-serif">'+l.name.replace('Wi-Fi ','')+'</text>';
+    g.addEventListener('click',function(){pickLed(i)});
+    g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pickLed(i)}});
+    ledG.appendChild(g);
+  });
+  // move icon label row above the body: icons sit on the body face
+  function paintLeds(){
+    [].forEach.call(ledG.children,function(g,i){
+      var l=LEDS[i], s=l.states[sel.state[l.id]];
+      var bulb=g.querySelector('.bulb'), halo=g.querySelector('.halo');
+      bulb.setAttribute('fill',C[s.c]); halo.setAttribute('fill',s.c==='off'?'transparent':C[s.c]);
+      if(s.c==='off'){bulb.setAttribute('fill','#555b63');bulb.setAttribute('opacity','.7')}else bulb.removeAttribute('opacity');
+      var cls=s.b===1?'blink':s.b===2?'blink-slow':'';
+      bulb.setAttribute('class','bulb '+cls); halo.setAttribute('class','halo '+cls);
+      g.setAttribute('aria-pressed',i===sel.led?'true':'false');
+    });
+  }
+  function pickLed(i){sel.led=i;render()}
+  function render(){
+    var l=LEDS[sel.led];
+    document.getElementById('ledName').textContent=l.name+' light';
+    var row=document.getElementById('stateRow');row.innerHTML='';
+    l.states.forEach(function(s,j){
+      var b=document.createElement('button');b.type='button';b.className='chip';
+      b.setAttribute('aria-pressed',j===sel.state[l.id]?'true':'false');
+      var cls='dot'+(s.c==='off'?' off':'')+(s.b===1?' blink':s.b===2?' blink-slow':'');
+      b.innerHTML='<span class="'+cls+'" style="background:'+C[s.c]+';color:'+C[s.c]+'"></span>'+s.k;
+      b.addEventListener('click',function(){sel.state[l.id]=j;render()});
+      row.appendChild(b);
+    });
+    var s=l.states[sel.state[l.id]];
+    document.getElementById('meaning').innerHTML='<p>'+s.m+'</p><p class="do">'+s.d+'</p>';
+    paintLeds();
+  }
+  render();
+
+  /* ---------- symptom wizard ---------- */
+  var SI={
+    none:'<path d="M3 9a13 13 0 0 1 22 0M7 13a8 8 0 0 1 14 0M11 17a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M4 4l20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+    slow:'<path d="M4 20a10 10 0 0 1 20 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M14 20l-5-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="14" cy="20" r="2" fill="currentColor"/>',
+    drop:'<path d="M3 10a13 13 0 0 1 22 0M8 14a7.5 7.5 0 0 1 12 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/><circle cx="14" cy="20" r="2.2" fill="currentColor"/>',
+    find:'<circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M17 17l6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M10 11v-.5a2 2 0 1 1 3 1.7c-.6.4-1 .8-1 1.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
+    one:'<rect x="8" y="3" width="12" height="22" rx="2.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M11 11l6 6M17 11l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+    pass:'<circle cx="9" cy="14" r="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M14 14h11M21 14v4M25 14v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+    weak:'<path d="M4 23h3v-3H4zM10 23h3v-7h-3z" fill="currentColor"/><path d="M16 23h3V12h-3zM22 23h3V7h-3z" fill="none" stroke="currentColor" stroke-width="1.6"/>'
+  };
+  var SYM=[
+    {id:'none',t:'No internet at all',steps:[
+      {h:'Look at the Internet light',b:'<ul><li><strong>Red or off:</strong> the problem is between the router and your provider. Continue to the next step.</li><li><strong>Solid green:</strong> the internet is reaching the router. Try a second device. If that works, jump to "One device won\'t connect".</li></ul>',w:'This tells you which half of the connection is broken.'},
+      {h:'Check for an outage',b:'Using mobile data, open your internet provider\'s status page or app. If there\'s an outage in your area, the only fix is to wait for them.'},
+      {h:'Restart the modem, then the router',b:'<ul><li>Unplug both. Wait 30 seconds.</li><li>Plug in the <strong>modem first</strong> and wait 2 minutes.</li><li>Then plug in the router and wait 3 minutes.</li></ul>',w:'Order matters. The router asks the modem for an address when it starts, so the modem has to be ready.'},
+      {h:'Reseat the Internet cable',b:'Unplug the cable from the blue <strong>Internet</strong> port on the back and from the modem, then push both ends back in until they click. If you have a spare cable, try it.'},
+      {h:'Call your provider',b:'Tell them the Internet light is red and you have already restarted both boxes. They can test the line from their side.'}]},
+    {id:'slow',t:'Internet is slow',steps:[
+      {h:'Run a speed test near the router',b:'Stand in the same room as the router and run a speed test in your browser. Compare the result with the speed on your plan.',w:'If it\'s fast next to the router but slow elsewhere, the problem is signal, not your connection. See "Weak signal in some rooms".'},
+      {h:'Restart the router',b:'Unplug it for 30 seconds. Routers that have been on for weeks can slow down.'},
+      {h:'Look for heavy users',b:'Large downloads, game updates, cloud backups and 4K streaming on other devices can use up most of your speed. Pause them and test again.'},
+      {h:'Use the 5 GHz network',b:'If your network shows two names (for example one ending in <code>-5G</code>), connect to that one when you\'re in the same room or nearby. It\'s faster at shorter range.'},
+      {h:'Test with a cable',b:'Plug a laptop into one of the yellow home ports. If speed is still well below your plan with a cable, contact your provider.'}]},
+    {id:'drop',t:'Wi-Fi keeps dropping',steps:[
+      {h:'Restart the router',b:'Unplug for 30 seconds, then plug back in and wait 3 minutes.'},
+      {h:'Move the router into the open',b:'<ul><li>Raise it off the floor, ideally to shelf height.</li><li>Keep it out of cupboards and away from metal, mirrors, fish tanks and microwaves.</li><li>Stand the antennas upright.</li></ul>'},
+      {h:'Forget the network and rejoin',b:'On the affected device, open Wi-Fi settings, choose "Forget this network", then reconnect with the password.',w:'This clears old connection details that sometimes cause repeated drop-outs.'},
+      {h:'Update the router',b:'Open <code>http://192.168.1.1</code>, sign in, and go to <em>Settings → Firmware update</em>. Install anything available. Don\'t unplug during the update.'},
+      {h:'Change the Wi-Fi channel',b:'In <em>Settings → Wireless</em>, set the channel to <strong>Auto</strong>, or try 1, 6 or 11 for 2.4 GHz. Neighbouring networks on the same channel can cause interference.'}]},
+    {id:'find',t:'Can\'t find my network',steps:[
+      {h:'Check the Wi-Fi lights',b:'Both Wi-Fi lights should be green. If one is off, that band has been switched off. See section 2 above.'},
+      {h:'Check the name',b:'Your network name may have been changed. The original name is on the sticker under the router. If you recently reset the router, look for that original name.'},
+      {h:'Turn your device\'s Wi-Fi off and on',b:'Toggle Wi-Fi on your phone or laptop, or turn on airplane mode for 10 seconds and then off again.'},
+      {h:'Check whether the network is hidden',b:'If the name is hidden, choose "Other network" or "Add network" on your device and type the name in exactly, including capitals.'},
+      {h:'Restart the router',b:'If none of the above helped, unplug it for 30 seconds and wait 3 minutes after plugging it back in.'}]},
+    {id:'one',t:'One device won\'t connect',steps:[
+      {h:'Restart that device',b:'Fully restart the phone, laptop or TV, not just sleep and wake.'},
+      {h:'Check the password',b:'Passwords are case-sensitive. Make sure caps lock is off and you\'re joining the right network. Use the "show password" option while typing.'},
+      {h:'Forget the network and rejoin',b:'In the device\'s Wi-Fi settings, choose "Forget this network", then reconnect.'},
+      {h:'Try the 2.4 GHz network',b:'Older devices, printers and smart-home gadgets often can\'t see the 5 GHz network. Join the network name without <code>-5G</code>.'},
+      {h:'Check the blocked list',b:'In <code>http://192.168.1.1</code>, open <em>Devices</em> and make sure the device isn\'t blocked or paused by parental controls.'}]},
+    {id:'pass',t:'Forgot the Wi-Fi password',steps:[
+      {h:'Check the sticker',b:'If you never changed it, the password is on the sticker under the router, labelled "Wi-Fi key" or "Password".'},
+      {h:'Look on a device that\'s already connected',b:'<ul><li><strong>iPhone/iPad:</strong> Settings → Wi-Fi → tap ⓘ next to the network → Password.</li><li><strong>Android:</strong> Settings → Wi-Fi → your network → Share (shows a QR code and often the password).</li><li><strong>Windows/Mac:</strong> the saved network in Wi-Fi or Keychain settings.</li></ul>'},
+      {h:'Set a new one in settings',b:'From a connected device, open <code>http://192.168.1.1</code>, sign in, go to <em>Settings → Wireless</em> and set a new password. Every device will need to reconnect with it.'},
+      {h:'Factory reset',b:'If nothing is connected and you can\'t sign in, a factory reset restores the password on the sticker. See "Restart vs. reset" below. This erases all your settings.'}]},
+    {id:'weak',t:'Weak signal in some rooms',steps:[
+      {h:'Move the router to the middle of your home',b:'Wi-Fi spreads out in all directions, so a router in a corner or by an outside wall wastes half its range. Higher up is better.'},
+      {h:'Remove obstacles',b:'Thick walls, floors, metal shelving, mirrors and water (aquariums, radiators) block the signal. Even a few feet of movement can help.'},
+      {h:'Use the 2.4 GHz network far away',b:'2.4 GHz is slower but reaches further and through more walls than 5 GHz. In distant rooms, connect to the name without <code>-5G</code>.'},
+      {h:'Add an extender or mesh unit',b:'Place it about halfway between the router and the weak area, where the signal is still good. Pair it with the WPS button, then check the WPS light turns solid blue.'}]}
+  ];
+  var symBox=document.getElementById('symptoms'), wiz=document.getElementById('wizard'), cur=null, idx=0;
+  SYM.forEach(function(s){
+    var b=document.createElement('button');b.type='button';b.className='sym';b.setAttribute('aria-pressed','false');
+    b.innerHTML='<svg viewBox="0 0 28 28" aria-hidden="true">'+SI[s.id]+'</svg><span>'+s.t+'</span>';
+    b.addEventListener('click',function(){
+      [].forEach.call(symBox.children,function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');cur=s;idx=0;drawStep();
+      if(innerWidth<760)wiz.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    symBox.appendChild(b);
+  });
+  function bar(n,of){var h='<div class="progress" aria-hidden="true">';for(var i=0;i<of;i++)h+='<i class="'+(i<n?'done':'')+'"></i>';return h+'</div>'}
+  function drawStep(){
+    var st=cur.steps[idx], last=idx===cur.steps.length-1;
+    wiz.innerHTML='<div class="step-n">'+cur.t+' · Step '+(idx+1)+' of '+cur.steps.length+'</div>'+bar(idx+1,cur.steps.length)+
+      '<h3>'+st.h+'</h3><div class="step-body">'+st.b+'</div>'+(st.w?'<div class="why">'+st.w+'</div>':'')+
+      '<div class="actions"><button class="btn" data-a="fixed" type="button">That fixed it</button>'+
+      '<button class="btn ghost" data-a="next" type="button">'+(last?'Still not working':'Didn\'t help, next step')+'</button>'+
+      (idx>0?'<button class="btn ghost" data-a="back" type="button">Back</button>':'')+'</div>';
+    wire();
+  }
+  function end(ok){
+    wiz.innerHTML='<div class="done-box">'+(ok
+      ?'<svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="25" fill="none" stroke="currentColor" stroke-width="3"/><path d="M17 29l7 7 15-16" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Glad that sorted it.</h3><p class="muted">If it happens again often, try updating the router\'s firmware and moving it somewhere more open.</p>'
+      :'<svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="25" fill="none" stroke="currentColor" stroke-width="3"/><path d="M20 22a8 8 0 1 1 11 7.4c-2 .8-3 2-3 4.1V35" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><circle cx="28" cy="42" r="2.2" fill="currentColor"/></svg><h3>Time to get help.</h3><p class="muted">You\'ve tried everything we\'d suggest for this. Contact your internet provider or the router\'s support line and tell them:</p><p style="text-align:left;max-width:460px;margin:12px auto" class="why">Problem: '+cur.t+'<br>Already tried: '+cur.steps.map(function(s){return s.h.toLowerCase()}).join('; ')+'.<br>Lights: '+LEDS.map(function(l){return l.name+' '+l.states[sel.state[l.id]].k.toLowerCase()}).join(', ')+' (as set in section 2).</p>')+
+      '<div class="actions" style="justify-content:center"><button class="btn ghost" data-a="restart" type="button">Start this guide again</button></div></div>';
+    wire();
+  }
+  function wire(){
+    [].forEach.call(wiz.querySelectorAll('[data-a]'),function(b){
+      b.addEventListener('click',function(){
+        var a=b.dataset.a;
+        if(a==='fixed')end(true);
+        else if(a==='next'){if(idx<cur.steps.length-1){idx++;drawStep()}else end(false)}
+        else if(a==='back'){idx--;drawStep()}
+        else if(a==='restart'){idx=0;drawStep()}
+        var f=wiz.querySelector('h3');if(f){f.setAttribute('tabindex','-1');f.focus({preventScroll:true})}
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>

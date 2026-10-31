@@ -55,7 +55,11 @@ sources/                        local copies of source documents (git-ignored)
 - **C-006:** entry #2, troubleshooting by symptom, from four makers with no shared style
   (Miele, Brother, Toyota, Garmin). Six devices were constant across all four (symptom
   first; cause separate from fix; several causes per symptom; escalation last; long fixes
-  linked out; imperative actions). Not blind-tested yet.
+  linked out; imperative actions).
+- **C-007:** entry #2 lost its blind test. The page built with no guidance already
+  followed 5–6 of its 6 rules, one step at a time; the entry's page copied the printed
+  manuals' exhaustive tables (6× the words) and was harder to use. Lesson now in METHOD.md
+  step 2b: check what the agent already does before writing an entry.
 
 One brief, one run per arm, and one judge. See each card's limits.
 

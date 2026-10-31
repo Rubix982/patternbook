@@ -10,7 +10,7 @@ problem: troubleshooting-by-symptom
 also_teaches: [error-message-reference, urgency-tiers]
 patterns: [symptom-first, symptom-as-displayed, cause-then-action, cheapest-cause-first, escalation-last, not-a-fault, link-out-long-fixes]
 art_style: typographic tables, mostly monochrome with one maker colour for navigation
-tested_in: []
+tested_in: [C-007]
 best_example:
 ---
 
@@ -23,7 +23,11 @@ They want to fix it themselves if they can, and to know quickly when they can't.
 **Use for:** troubleshooting pages, error-message references, "something's wrong" help,
 FAQ-style support pages for products and software.
 
-> **Version note.** Written in C-006. Not blind-tested yet.
+> **Version note.** Written in C-006. **C-007 blind test: lost** "which would you use" to a page
+> built with no guidance. That page already followed rules 1, 3, 4, 5 and 6 unprompted, and
+> delivered them interactively (one check at a time), while the entry's page copied the
+> printed manuals' exhaustive index and tables (2,466 words vs 399). Treat rules 1 and 3–6 as
+> things the agent already does; the entry's added value is unproven. See T-008.
 
 ## 1. Source
 
@@ -148,6 +152,11 @@ icon set.
   Miele both send these to service.
 - **Safety-critical emergencies.** Toyota's "Stop the vehicle immediately" tier is a
   different kind of page: one action, no diagnosis. Don't bury it in a cause table.
+- **An interactive page where the reader is mid-problem.** The printed manuals list every
+  symptom and cause at once because paper can't ask questions. On a web page, the same
+  convention (symptom → cheapest cause → fix → escalation) can be asked one step at a time,
+  and in C-007 that version was preferred. Don't copy the printed page's exhaustiveness
+  onto an interactive one; keep it for a reference/lookup page.
 - **Very long symptom lists without a search.** Brother needs an alphabetical order and
   a routing page; on the web, a filter or search is the equivalent. Without one, 40
   symptoms in a list fail rule 1.

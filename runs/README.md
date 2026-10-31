@@ -20,3 +20,6 @@ Agent-run timings, because they matter for the effort confound:
 | c002/arm-c (self-reference) | ~6 min | 36 KB |
 | c004/arm-d (old entry) | ~9 min | 36 KB |
 | c004/arm-e (revised entry) | ~9 min | 98 KB |
+| c005/* (five briefs, no guidance) | ~1–3.5 min each | 17–44 KB |
+| c007/arm-a (no guidance) | ~2.5 min | 35 KB |
+| c007/arm-b (troubleshooting entry) | ~2.5 min | 40 KB |

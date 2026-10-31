@@ -52,8 +52,16 @@ value is just *any* specific instruction, not human sources.
 
 ### T-007 · Does the troubleshooting entry beat the default on a software troubleshooting page?
 
-**Status:** open
+**Status:** answered
 **Parent:** C-006
 **Opened:** 2026-10-31
 **Question:** Blind-test entry #2 the way C-001 tested entry #1, on a brief the sources don't cover (e.g. a troubleshooting page for a web app or a home Wi-Fi router), against a no-guidance page; score with the C-005 default checklist too, since AI troubleshooting pages are typically accordions on cream.
+**Answer:** C-007 — entry page lost "would use"; (a) tie ("both look AI generated"). Unguided page already followed 5–6/6 rules, interactively; the entry added printed-manual exhaustiveness (6× words).
+
+### T-008 · What does a troubleshooting entry need to carry that the agent doesn't already do?
+
+**Status:** open
+**Parent:** C-007
+**Opened:** 2026-10-31
+**Question:** The unguided agent already applies symptom-first, cause-order, escalation and not-a-fault. Saif liked its "attempt of visualization" but called both pages AI-looking. Candidates the entry could carry instead: the visual language (both pages still look AI-made), and the medium choice (reference vs one-step-at-a-time). Needs a baseline-first pass (METHOD 2b) before rewriting.
 **Answer:** —

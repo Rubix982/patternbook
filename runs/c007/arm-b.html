@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Router Troubleshooting</title>
+<style>
+:root{
+  --ink:#1f1f1f;
+  --ink-2:#555;
+  --paper:#ffffff;
+  --rule:#d6d6d6;
+  --head:#e6e6e6;
+  --tint:#f4f4f4;
+  --nav:#0b6e6e;          /* the one navigation colour */
+  --nav-soft:#d5ecec;
+  --led-white:#f7f7f7;
+  --led-amber:#e8a317;
+  --led-red:#d83a2e;
+  --led-off:#9a9a9a;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e8e8e8; --ink-2:#a8a8a8; --paper:#161616; --rule:#3a3a3a;
+    --head:#2a2a2a; --tint:#1f1f1f; --nav:#5cc4c4; --nav-soft:#163434;
+    --led-off:#5a5a5a;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#e8e8e8; --ink-2:#a8a8a8; --paper:#161616; --rule:#3a3a3a;
+  --head:#2a2a2a; --tint:#1f1f1f; --nav:#5cc4c4; --nav-soft:#163434;
+  --led-off:#5a5a5a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 var(--sans)}
+a{color:var(--nav)}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+
+/* chapter band: navigation colour lives here */
+.band{border-top:6px solid var(--nav);border-bottom:1px solid var(--rule)}
+.band .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
+.band .product{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.band .tab{background:var(--nav);color:var(--paper);font-weight:700;font-size:13px;padding:3px 10px;letter-spacing:.06em;text-transform:uppercase}
+
+h1{font-size:30px;line-height:1.15;margin:28px 0 8px}
+h2{font-size:21px;margin:44px 0 6px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+h3{font-size:17px;margin:28px 0 8px}
+p{margin:0 0 12px}
+.lede{max-width:44em;color:var(--ink-2)}
+.small{font-size:14px;color:var(--ink-2)}
+
+.msg{font-family:var(--mono);font-size:.92em;background:var(--tint);border:1px solid var(--rule);padding:1px 5px;white-space:nowrap}
+
+/* safety box */
+.before{border:1px solid var(--ink);padding:12px 14px;margin:18px 0;max-width:44em}
+.before strong{display:block;margin-bottom:4px}
+.before ul{margin:0;padding-left:20px}
+
+/* stop now */
+.stop{border:3px solid var(--ink);padding:16px;margin:22px 0}
+.stop .label{display:inline-block;background:var(--ink);color:var(--paper);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;margin-bottom:8px}
+.stop .act{font-size:20px;font-weight:700;margin:4px 0 8px}
+.stop ul{margin:0 0 8px;padding-left:20px}
+
+/* search + index */
+.finder{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--rule);padding:10px 0;margin-top:24px}
+.finder label{font-size:13px;font-weight:700;display:block;margin-bottom:4px}
+.finder input{width:100%;font:16px var(--sans);padding:10px 12px;border:2px solid var(--nav);background:var(--paper);color:var(--ink);border-radius:0}
+.finder input:focus{outline:3px solid var(--nav-soft);outline-offset:0}
+.finder .count{font-size:13px;color:var(--ink-2);margin-top:4px;min-height:1.2em}
+
+.index{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 28px;margin:16px 0 0;padding:0;list-style:none}
+.index .grp{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-top:12px}
+.index a{text-decoration:none;display:block;padding:3px 0 3px 10px;border-left:3px solid var(--nav-soft)}
+.index a:hover{border-left-color:var(--nav)}
+
+/* tier tags */
+.tier{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:1px 6px;border:1px solid var(--ink);vertical-align:2px;margin-left:6px;white-space:nowrap}
+.tier.soon{background:var(--ink);color:var(--paper)}
+.tier.ok{border-style:dashed;color:var(--ink-2);border-color:var(--ink-2)}
+
+/* tables */
+table{width:100%;border-collapse:collapse;margin:6px 0 4px;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--rule)}
+thead th{background:var(--head);font-size:13px;font-weight:700;border-bottom:1px solid var(--ink)}
+td.cause{width:42%}
+td ol,td ul{margin:0;padding-left:18px}
+tr.esc td{background:var(--tint);border-bottom:1px solid var(--ink)}
+tr.esc td:first-child{font-weight:700}
+.n{font-variant-numeric:tabular-nums;color:var(--ink-2);font-size:13px;width:1.6em;padding-right:0}
+
+.entry{scroll-margin-top:110px}
+.entry h3 .q{font-weight:700}
+.notfault{border-left:4px solid var(--ink-2);padding:8px 12px;background:var(--tint);margin:6px 0}
+.notfault b{font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+/* LED drawing */
+.led{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.dot{width:14px;height:14px;border-radius:50%;border:1px solid #777;display:inline-block;flex:none}
+.dot.white{background:var(--led-white);box-shadow:0 0 6px 1px rgba(255,255,255,.8),inset 0 0 0 1px #bbb}
+.dot.amber{background:var(--led-amber);border-color:#a87106;box-shadow:0 0 6px 1px rgba(232,163,23,.6)}
+.dot.red{background:var(--led-red);border-color:#8f1f17;box-shadow:0 0 6px 1px rgba(216,58,46,.6)}
+.dot.off{background:transparent;border:1px dashed var(--led-off)}
+.dot.blink{animation:blink 1s steps(1) infinite}
+.dot.pulse{animation:pulse 2s ease-in-out infinite}
+@keyframes blink{50%{opacity:.15}}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion: reduce){.dot.blink,.dot.pulse{animation:none}.dot.blink{outline:2px dotted var(--ink-2);outline-offset:2px}}
+.icon{width:22px;height:22px;vertical-align:-6px;color:var(--ink)}
+
+/* front-panel drawing */
+.panel{margin:18px 0 8px;max-width:520px}
+.panel svg{width:100%;height:auto;display:block}
+
+.proc{border-top:1px solid var(--rule);padding-top:4px}
+.proc ol{padding-left:22px;max-width:44em}
+.proc li{margin-bottom:6px}
+.back{font-size:13px}
+
+.hidden{display:none !important}
+footer{margin:56px 0 40px;padding-top:14px;border-top:2px solid var(--ink);font-size:14px;color:var(--ink-2)}
+
+@media (max-width:640px){
+  h1{font-size:24px}
+  table, thead, tbody, tr, td, th{display:block;width:100%}
+  thead{display:none}
+  tr{border-bottom:1px solid var(--rule);padding:6px 0}
+  td{border:0;padding:3px 0}
+  td.cause{width:100%;font-weight:600}
+  td.n{display:none}
+  tr.esc{background:var(--tint);padding:8px}
+  tr.esc td{background:none;border:0}
+  .msg{white-space:normal;word-break:break-word}
+}
+</style>
+</head>
+<body>
+
+<div class="band"><div class="wrap">
+  <span class="product">Halden AX3000 home router &middot; Owner's guide</span>
+  <span class="tab">Troubleshooting</span>
+</div></div>
+
+<main class="wrap">
+
+<h1>Something's wrong with your Wi-Fi</h1>
+<p class="lede">Find what you can see: a light on the router, a message in the Halden app, or a problem on your phone or computer. Each entry lists the likely causes, quickest to check first. Work down the rows and stop when it's fixed.</p>
+<p class="lede">This section only lists problems you can fix yourself. If you reach the last row of an entry and the problem is still there, contact Halden Support with the details that row asks for.</p>
+
+<div class="before">
+  <strong>Before you start</strong>
+  <ul>
+    <li>Unplug the router's power adapter before moving it or changing cables at the back.</li>
+    <li>Don't open the router case. There are no parts inside you can repair.</li>
+    <li>Use only the power adapter that came in the box (12 V, 2 A).</li>
+  </ul>
+</div>
+
+<section class="stop" id="stop" aria-labelledby="stop-h">
+  <span class="label">Stop now</span>
+  <h2 id="stop-h" style="border:0;margin:0;padding:0;font-size:18px">If any of these happen</h2>
+  <ul>
+    <li>You smell burning, or see smoke or sparks from the router or its adapter.</li>
+    <li>The case is too hot to keep your hand on.</li>
+    <li>Liquid has been spilled on the router, or it has been dropped and the case is cracked.</li>
+    <li>The power cable or adapter is damaged, swollen or melted.</li>
+  </ul>
+  <p class="act">Unplug the adapter from the wall socket. Don't plug it back in.</p>
+  <p>Don't try a restart or reset. Contact Halden Support and say which of the above happened. Your devices will need a different internet connection (for example a phone hotspot) until the router is replaced.</p>
+</section>
+
+<div class="finder" role="search">
+  <label for="q">Search by what you see: a message, a light colour, or a few words</label>
+  <input id="q" type="search" placeholder="e.g. amber, Incorrect password, slow, drops" autocomplete="off">
+  <div class="count" id="count" aria-live="polite"></div>
+</div>
+
+<nav aria-label="Symptom index">
+  <ul class="index" id="index">
+    <li class="grp">Lights on the router</li>
+    <li class="grp" style="visibility:hidden" aria-hidden="true">.</li>
+    <li class="grp" style="visibility:hidden" aria-hidden="true">.</li>
+  </ul>
+</nav>
+
+<!-- ============ LIGHTS ============ -->
+<h2 id="lights">Lights on the router</h2>
+<p class="small">The three lights on the front, left to right. Find the light and its state.</p>
+
+<figure class="panel" aria-label="Front panel of the router showing three lights: Power, Internet, Wi-Fi">
+<svg viewBox="0 0 520 120" role="img">
+  <title>Router front panel: Power, Internet and Wi-Fi lights</title>
+  <rect x="6" y="20" width="508" height="70" rx="14" fill="none" stroke="currentColor" stroke-width="2"/>
+  <line x1="40" y1="90" x2="40" y2="104" stroke="currentColor" stroke-width="2"/>
+  <line x1="480" y1="90" x2="480" y2="104" stroke="currentColor" stroke-width="2"/>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="13" fill="currentColor" text-anchor="middle">
+    <!-- power -->
+    <circle cx="170" cy="48" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <g transform="translate(170,74)" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <path d="M-4.5,-4 A6,6 0 1 0 4.5,-4"/><line x1="0" y1="-7" x2="0" y2="-1"/>
+    </g>
+    <text x="170" y="116">Power</text>
+    <!-- internet -->
+    <circle cx="260" cy="48" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <g transform="translate(260,74)" fill="none" stroke="currentColor" stroke-width="1.4">
+      <circle r="6"/><ellipse rx="2.6" ry="6"/><line x1="-6" y1="0" x2="6" y2="0"/>
+    </g>
+    <text x="260" y="116">Internet</text>
+    <!-- wifi -->
+    <circle cx="350" cy="48" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <g transform="translate(350,78)" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <path d="M-7,-6 A10,10 0 0 1 7,-6"/><path d="M-4,-3 A5.5,5.5 0 0 1 4,-3"/><circle cy="0" r="1" fill="currentColor"/>
+    </g>
+    <text x="350" y="116">Wi-Fi</text>
+  </g>
+</svg>
+</figure>
+
+<table class="lights">
+<thead><tr><th>Light</th><th>State</th><th>What it means</th><th>Tier / go to</th></tr></thead>
+<tbody>
+<tr data-s="power off no light dead"><td>Power</td><td><span class="led"><span class="dot off"></span>Off</span></td><td>No power is reaching the router.</td><td><a href="#s-nolights">All lights are off</a></td></tr>
+<tr data-s="power white solid normal"><td>Power</td><td><span class="led"><span class="dot white"></span>Solid white</span></td><td>Normal. Router is on.</td><td><span class="tier ok">Not a fault</span></td></tr>
+<tr data-s="power white pulsing starting up boot"><td>Power</td><td><span class="led"><span class="dot white pulse"></span>Pulsing white</span></td><td>Starting up or installing an update. Takes up to 3 minutes; up to 8 during an update.</td><td><a href="#s-pulsing">Pulsing for a long time</a></td></tr>
+<tr data-s="power red solid fault hardware"><td>Power</td><td><span class="led"><span class="dot red"></span>Solid red</span></td><td>The router found a fault during start-up.</td><td><a href="#s-redpower">Power light red</a></td></tr>
+<tr data-s="internet white solid connected normal"><td>Internet</td><td><span class="led"><span class="dot white"></span>Solid white</span></td><td>Connected to the internet.</td><td><span class="tier ok">Not a fault</span></td></tr>
+<tr data-s="internet amber solid no internet modem"><td>Internet</td><td><span class="led"><span class="dot amber"></span>Solid amber</span></td><td>Cable to the modem is connected, but no internet.</td><td><a href="#s-nointernet">No internet on any device</a></td></tr>
+<tr data-s="internet amber blinking flashing cable unplugged wan"><td>Internet</td><td><span class="led"><span class="dot amber blink"></span>Blinking amber</span></td><td>No cable detected in the Internet port.</td><td><a href="#m-wan">Message: Internet cable unplugged</a></td></tr>
+<tr data-s="internet off"><td>Internet</td><td><span class="led"><span class="dot off"></span>Off</span></td><td>Router is still starting, or the light is turned off in settings.</td><td><a href="#s-lightsoff">Lights off but Wi-Fi works</a></td></tr>
+<tr data-s="wifi white solid normal"><td>Wi-Fi</td><td><span class="led"><span class="dot white"></span>Solid white</span></td><td>Wi-Fi is on.</td><td><span class="tier ok">Not a fault</span></td></tr>
+<tr data-s="wifi white blinking flashing wps pairing"><td>Wi-Fi</td><td><span class="led"><span class="dot white blink"></span>Blinking white</span></td><td>WPS pairing is open for 2 minutes after the WPS button is pressed. Stops by itself.</td><td><span class="tier ok">Not a fault</span></td></tr>
+<tr data-s="wifi off no wifi network missing"><td>Wi-Fi</td><td><span class="led"><span class="dot off"></span>Off</span></td><td>Wi-Fi is switched off, or a schedule has turned it off.</td><td><a href="#s-nonetwork">My Wi-Fi name doesn't appear</a></td></tr>
+</tbody>
+</table>
+
+<!-- ============ SYMPTOMS ============ -->
+<h2 id="symptoms">Problems you can see or notice</h2>
+<p class="small">Tier tells you how soon to deal with it. <span class="tier soon">Fix soon</span> means some or all devices are offline. <span class="tier">When convenient</span> means it works, but badly. <span class="tier ok">Not a fault</span> means this is normal behaviour.</p>
+
+<article class="entry" id="s-nolights" data-s="all lights off nothing dead no power power off">
+<h3><span class="q">All the lights are off and nothing connects</span><span class="tier soon">Fix soon</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">The adapter is not pushed fully into the router or the wall socket.</td><td>Push both ends in firmly. Wait 3 minutes.</td></tr>
+<tr><td class="n">2</td><td class="cause">The wall socket has no power (switched off, or on a tripped circuit or power strip).</td><td>Plug a lamp into the same socket to test it. Use a different socket if needed.</td></tr>
+<tr><td class="n">3</td><td class="cause">The adapter isn't the one supplied with the router.</td><td>Use the Halden 12 V, 2 A adapter from the box.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still no lights</td><td>Contact Halden Support. Have the serial number from the label underneath ready.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="s-nointernet" data-s="no internet any device connected to wifi but no internet amber internet light offline">
+<h3><span class="q">Devices connect to Wi-Fi, but nothing loads on any of them</span><span class="tier soon">Fix soon</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">Your internet provider has an outage in your area.</td><td>Check your provider's outage page or app using mobile data. If there's an outage, wait.</td></tr>
+<tr><td class="n">2</td><td class="cause">The modem and router lost sync after a power cut or line drop.</td><td>Restart both, modem first. <a href="#p-restart-both">See Restarting the modem and router</a>.</td></tr>
+<tr><td class="n">3</td><td class="cause">The cable between modem and router is in the wrong port.</td><td>On the router, the cable from the modem must be in the port marked with the globe (<svg class="icon" viewBox="-8 -8 16 16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.3"><circle r="6"/><ellipse rx="2.6" ry="6"/><line x1="-6" x2="6"/></g></svg>), not ports 1–3.</td></tr>
+<tr><td class="n">4</td><td class="cause">Your provider needs a username and password (PPPoE), and it isn't set or has changed.</td><td>See message <a href="#m-ppp"><span class="msg">PPPoE sign-in failed</span></a>.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still no internet</td><td>Connect a computer directly to the modem with a cable. If it still has no internet, contact your internet provider. If it does, contact Halden Support.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="s-onedevice" data-s="one device only single phone laptop can't connect cannot join wifi">
+<h3><span class="q">One device can't connect, but the others can</span><span class="tier soon">Fix soon</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">The device's Wi-Fi or airplane mode is set wrong.</td><td>Turn the device's Wi-Fi off and on again. Check airplane mode is off.</td></tr>
+<tr><td class="n">2</td><td class="cause">The device saved an old password for your network.</td><td>On the device, choose "Forget this network", then join again with the current password.</td></tr>
+<tr><td class="n">3</td><td class="cause">The device is blocked or paused in the Halden app (parental controls).</td><td>In the app, open <b>Devices</b>, find it, and choose <b>Unpause</b> or <b>Unblock</b>.</td></tr>
+<tr><td class="n">4</td><td class="cause">The device is older and doesn't support WPA3 security.</td><td>In the app, set <b>Wi-Fi &rsaquo; Security</b> to <b>WPA2/WPA3 mixed</b>.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still can't connect</td><td>Restart the device. If it still fails, contact the device's maker; the router is working for your other devices.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="s-nonetwork" data-s="wifi name doesn't appear network missing ssid not listed can't see wifi light off">
+<h3><span class="q">My Wi-Fi name doesn't appear in the list of networks</span><span class="tier soon">Fix soon</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">The router is still starting (Power light pulsing).</td><td>Wait until the Power light is solid white.</td></tr>
+<tr><td class="n">2</td><td class="cause">A Wi-Fi schedule has turned Wi-Fi off for the night.</td><td>In the app, open <b>Wi-Fi &rsaquo; Schedule</b> and turn it off or change the times.</td></tr>
+<tr><td class="n">3</td><td class="cause">The network name is set to hidden.</td><td>In the app, open <b>Wi-Fi &rsaquo; Network name</b> and turn on <b>Show network name</b>.</td></tr>
+<tr><td class="n">4</td><td class="cause">The device only supports 2.4 GHz and the 2.4 GHz band is switched off.</td><td>In the app, open <b>Wi-Fi &rsaquo; Bands</b> and turn on 2.4 GHz.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still not listed</td><td>Restart the router (<a href="#p-restart">see Restarting the router</a>). If the Wi-Fi light stays off, contact Halden Support.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="s-slow" data-s="slow speed sluggish buffering video slow internet bad speed test">
+<h3><span class="q">The internet is slow</span><span class="tier">When convenient</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">Another device is downloading or uploading something large (backups, game updates).</td><td>In the app, open <b>Devices</b> and sort by <b>Usage</b>. Pause the busy device or wait.</td></tr>
+<tr><td class="n">2</td><td class="cause">You're far from the router or there are thick walls between you.</td><td>Test next to the router. If it's fast there, the problem is range. <a href="#p-place">See Choosing where the router sits</a>.</td></tr>
+<tr><td class="n">3</td><td class="cause">You're on the 2.4 GHz band, which is slower.</td><td>In the app, check <b>Devices &rsaquo; [your device] &rsaquo; Band</b>. Move closer so it can switch to 5 GHz.</td></tr>
+<tr><td class="n">4</td><td class="cause">Neighbouring networks are using the same channel.</td><td>In the app, open <b>Wi-Fi &rsaquo; Channel</b> and choose <b>Auto</b>, then <b>Rescan now</b>.</td></tr>
+<tr><td class="n">5</td><td class="cause">Your plan's speed is lower than you expect.</td><td>Run a speed test with a computer plugged into the router by cable. Compare it with the speed on your bill.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still slow next to the router, by cable</td><td>Contact your internet provider with the cable speed-test result. If cable speed is fine but Wi-Fi next to the router is under half of it, contact Halden Support.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="s-drops" data-s="drops disconnects keeps dropping cuts out every few minutes unstable intermittent">
+<h3><span class="q">Wi-Fi keeps dropping out every so often</span><span class="tier">When convenient</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">The router is in a cupboard, behind a TV, or next to a microwave or cordless phone base.</td><td>Move it into the open, away from those. <a href="#p-place">See Choosing where the router sits</a>.</td></tr>
+<tr><td class="n">2</td><td class="cause">The router is overheating because its vents are covered.</td><td>Leave 10 cm clear on all sides. Don't stack anything on top.</td></tr>
+<tr><td class="n">3</td><td class="cause">The router's software is out of date.</td><td>Install the latest update. <a href="#p-update">See Updating the router's software</a>.</td></tr>
+<tr><td class="n">4</td><td class="cause">The internet itself is dropping (Internet light turns amber when it happens).</td><td>Treat it as an internet problem: <a href="#s-nointernet">see No internet on any device</a>.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still dropping</td><td>In the app, open <b>Help &rsaquo; Send diagnostics</b> just after a drop, then contact Halden Support with the reference number it shows.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="s-forgot" data-s="forgot password wifi password lost don't know password admin">
+<h3><span class="q">I don't know the Wi-Fi password</span><span class="tier">When convenient</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">It was never changed from the one the router came with.</td><td>Read the password on the label underneath the router, next to <b>Wi-Fi key</b>.</td></tr>
+<tr><td class="n">2</td><td class="cause">It was changed, and you have the Halden app signed in on a phone.</td><td>In the app, open <b>Wi-Fi &rsaquo; Share</b>. The password is shown and can be shared as a QR code.</td></tr>
+<tr class="esc"><td class="n"></td><td>Neither works</td><td>Reset the router to factory settings. This erases all your settings. <a href="#p-reset">See Resetting to factory settings</a>.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="s-pulsing" data-s="power pulsing white long time stuck starting update boot loop">
+<h3><span class="q">The Power light has been pulsing white for more than 10 minutes</span><span class="tier soon">Fix soon</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">A large software update is still installing.</td><td>Wait 10 more minutes. Don't unplug it during this time.</td></tr>
+<tr><td class="n">2</td><td class="cause">Start-up stalled.</td><td>Restart the router once. <a href="#p-restart">See Restarting the router</a>.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still pulsing after a restart</td><td>Contact Halden Support. Say how long it has been pulsing and whether an update was running.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="s-redpower" data-s="power red solid fault hardware red light">
+<h3><span class="q">The Power light is solid red</span><span class="tier soon">Fix soon</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">A one-off start-up error.</td><td>Restart the router once. <a href="#p-restart">See Restarting the router</a>.</td></tr>
+<tr><td class="n">2</td><td class="cause">The router is too hot (it shows red to protect itself).</td><td>Unplug it, let it cool for 30 minutes in an open spot, then plug it in again. If the case was too hot to touch, follow <a href="#stop">Stop now</a> instead.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still red</td><td>Contact Halden Support. The router needs to be replaced; resetting won't help.</td></tr>
+</tbody></table>
+</article>
+
+<!-- not-a-fault entries live in the same list so searches find them -->
+<article class="entry" id="s-warm" data-s="warm hot top of router warm to touch heat">
+<h3><span class="q">The top of the router feels warm</span><span class="tier ok">Not a fault</span></h3>
+<div class="notfault"><b>Normal</b><br>The router uses the top of its case to get rid of heat, so warm to the touch is expected, especially when it's busy. If it's too hot to keep your hand on, follow <a href="#stop">Stop now</a>.</div>
+</article>
+
+<article class="entry" id="s-restartnight" data-s="restarts at night reboots by itself 3am lights blink overnight drops at night">
+<h3><span class="q">The router seems to restart by itself during the night</span><span class="tier ok">Not a fault</span></h3>
+<div class="notfault"><b>Normal</b><br>Automatic updates install between 2 and 4 a.m. and restart the router, which takes about 5 minutes. To change the time, open <b>Settings &rsaquo; Updates</b> in the app.</div>
+</article>
+
+<article class="entry" id="s-twonetworks" data-s="two networks names duplicate 5g 2.4 band appear twice">
+<h3><span class="q">My network appears twice, or with "-5G" on the end</span><span class="tier ok">Not a fault</span></h3>
+<div class="notfault"><b>Normal</b><br>The router broadcasts on two bands. You can join either. To show one name that switches band automatically, turn on <b>Wi-Fi &rsaquo; Bands &rsaquo; Combine bands</b> in the app.</div>
+</article>
+
+<article class="entry" id="s-lowerwifi" data-s="speed lower on wifi than plan less than advertised wifi slower than cable">
+<h3><span class="q">Wi-Fi speed is a bit lower than my plan, even next to the router</span><span class="tier ok">Not a fault</span></h3>
+<div class="notfault"><b>Normal, within limits</b><br>Wi-Fi usually gives 70–90% of the speed you get by cable. Below half by cable speed is a fault: <a href="#s-slow">see The internet is slow</a>.</div>
+</article>
+
+<article class="entry" id="s-lightsoff" data-s="lights off but wifi works internet light off dark mode lights led">
+<h3><span class="q">The lights are off, but the Wi-Fi works</span><span class="tier ok">Not a fault</span></h3>
+<div class="notfault"><b>Normal</b><br><b>Settings &rsaquo; Lights</b> is set to <b>Off</b> or <b>Night only</b>. Press the Power light once to show the lights for 30 seconds.</div>
+</article>
+
+<!-- ============ MESSAGES ============ -->
+<h2 id="messages">Messages in the Halden app</h2>
+<p class="small">Messages as they appear in the app, in alphabetical order. Match the text exactly; the code in brackets helps Support.</p>
+
+<article class="entry" id="m-addr" data-s="another device is using this ip address ip conflict e-21">
+<h3><span class="q"><span class="msg">Another device is using this IP address (E-21)</span></span><span class="tier">When convenient</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">A device was given a fixed address by hand that the router also gives out.</td><td>In the app, open <b>Devices</b>, tap the device named in the message, and choose <b>Use automatic address</b>.</td></tr>
+<tr><td class="n">2</td><td class="cause">There are two routers on the same network (for example, your provider's modem also has routing on).</td><td>Ask your provider to set their modem to <b>bridge mode</b>.</td></tr>
+<tr class="esc"><td class="n"></td><td>Message comes back</td><td>Contact Halden Support with the two device names shown in the message.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="m-update" data-s="couldn't install update update failed firmware e-12">
+<h3><span class="q"><span class="msg">Couldn't install update (E-12)</span></span><span class="tier">When convenient</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">The internet dropped during the download.</td><td>Tap <b>Try again</b> once the Internet light is solid white.</td></tr>
+<tr><td class="n">2</td><td class="cause">The router was unplugged or restarted during the update.</td><td>Leave it plugged in and tap <b>Try again</b>. Your settings are kept.</td></tr>
+<tr class="esc"><td class="n"></td><td>Fails twice</td><td>Contact Halden Support. The router keeps running on its current software in the meantime.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="m-wan" data-s="internet cable unplugged wan e-01 blinking amber cable">
+<h3><span class="q"><span class="msg">Internet cable unplugged (E-01)</span></span><span class="tier soon">Fix soon</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">The cable from the modem is loose or out.</td><td>Push it into the globe port until it clicks. Do the same at the modem end.</td></tr>
+<tr><td class="n">2</td><td class="cause">The modem is off.</td><td>Check the modem's lights. Turn it on and wait 3 minutes.</td></tr>
+<tr><td class="n">3</td><td class="cause">The cable is damaged (bent pins, broken clip).</td><td>Try a different network cable.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still shows the message</td><td>Contact Halden Support. Say whether the small light next to the globe port is on.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="m-pw" data-s="incorrect password wrong password e-31 can't join">
+<h3><span class="q"><span class="msg">Incorrect password (E-31)</span></span><span class="tier">When convenient</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">A letter is in the wrong case, or <b>0</b> and <b>O</b>, <b>l</b> and <b>1</b> were mixed up.</td><td>Type it again, checking each character. Passwords are case-sensitive.</td></tr>
+<tr><td class="n">2</td><td class="cause">The password was changed and the device remembers the old one.</td><td>Forget the network on the device and join again.</td></tr>
+<tr class="esc"><td class="n"></td><td>Don't know the current password</td><td><a href="#s-forgot">See I don't know the Wi-Fi password</a>.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="m-offline" data-s="no response from router router offline can't reach router app e-40">
+<h3><span class="q"><span class="msg">No response from router (E-40)</span></span><span class="tier">When convenient</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">Your phone is on mobile data or a different Wi-Fi network.</td><td>Join your home Wi-Fi, then reopen the app.</td></tr>
+<tr><td class="n">2</td><td class="cause">The router is restarting.</td><td>Wait until the Power light is solid white, then pull down to refresh.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still no response</td><td>Restart the router (<a href="#p-restart">see Restarting the router</a>). If the app still can't reach it, contact Halden Support.</td></tr>
+</tbody></table>
+</article>
+
+<article class="entry" id="m-ppp" data-s="pppoe sign-in failed authentication username provider e-05">
+<h3><span class="q"><span class="msg">PPPoE sign-in failed (E-05)</span></span><span class="tier soon">Fix soon</span></h3>
+<table><thead><tr><th class="n">#</th><th>Cause</th><th>What to do</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="cause">The username or password from your provider was typed wrong.</td><td>In the app, open <b>Internet &rsaquo; Connection type</b> and re-enter them from your provider's letter or account page.</td></tr>
+<tr><td class="n">2</td><td class="cause">Your provider doesn't use PPPoE.</td><td>Set <b>Connection type</b> to <b>Automatic (DHCP)</b>.</td></tr>
+<tr class="esc"><td class="n"></td><td>Still fails</td><td>Contact your internet provider and ask them to confirm your PPPoE username and password.</td></tr>
+</tbody></table>
+</article>
+
+<!-- ============ PROCEDURES ============ -->
+<h2 id="procedures">Procedures</h2>
+<p class="small">The longer fixes that the tables above point to.</p>
+
+<section class="proc entry" id="p-restart" data-s="restart reboot router procedure">
+<h3>Restarting the router</h3>
+<ol>
+  <li>Unplug the power adapter from the back of the router.</li>
+  <li>Wait 30 seconds.</li>
+  <li>Plug it back in. Wait until the Power light is solid white (up to 3 minutes).</li>
+</ol>
+<p class="small">Your settings are kept. Don't use the Reset hole for a restart; that erases settings.</p>
+</section>
+
+<section class="proc entry" id="p-restart-both" data-s="restart modem and router order procedure">
+<h3>Restarting the modem and router</h3>
+<ol>
+  <li>Unplug the router, then unplug the modem.</li>
+  <li>Wait 1 minute.</li>
+  <li>Plug in the modem only. Wait until its internet or online light is steady (up to 5 minutes).</li>
+  <li>Plug in the router. Wait until its Internet light is solid white.</li>
+</ol>
+</section>
+
+<section class="proc entry" id="p-place" data-s="placement move router where to put position range coverage procedure">
+<h3>Choosing where the router sits</h3>
+<ol>
+  <li>Put it near the middle of your home, at shelf height or higher, in the open.</li>
+  <li>Keep it at least 1 m from microwaves, cordless phone bases, baby monitors, fish tanks and large mirrors.</li>
+  <li>Stand it upright with 10 cm clear on all sides.</li>
+  <li>After moving it, open <b>Wi-Fi &rsaquo; Coverage check</b> in the app and walk to the rooms you use most.</li>
+</ol>
+</section>
+
+<section class="proc entry" id="p-update" data-s="update firmware software procedure">
+<h3>Updating the router's software</h3>
+<ol>
+  <li>In the app, open <b>Settings &rsaquo; Updates</b> and tap <b>Check now</b>.</li>
+  <li>If an update is listed, tap <b>Install</b>. The Power light pulses while it installs.</li>
+  <li>Don't unplug the router until the Power light is solid white again (up to 8 minutes).</li>
+</ol>
+</section>
+
+<section class="proc entry" id="p-reset" data-s="factory reset erase settings reset hole procedure">
+<h3>Resetting to factory settings</h3>
+<p><b>This erases your network name, password and all settings.</b> Every device will need to join again.</p>
+<ol>
+  <li>With the router on, find the small hole marked <b>Reset</b> on the back.</li>
+  <li>Press and hold inside it with a straightened paper clip for 10 seconds, until the Power light flashes red.</li>
+  <li>Let go. Wait until the Power light is solid white (up to 5 minutes).</li>
+  <li>Join the network printed on the label underneath, and set it up again in the Halden app.</li>
+</ol>
+</section>
+
+<footer>
+  <p><b>Halden Support.</b> Before you contact us, have ready: the serial number from the label underneath the router, the colour and state of each light, any message text and its E-code, and what you've already tried from this page.</p>
+  <p>Halden is a fictional brand used for this example page.</p>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  var entries = Array.prototype.slice.call(document.querySelectorAll('article.entry'));
+  var procs = Array.prototype.slice.call(document.querySelectorAll('section.proc'));
+  var lightRows = Array.prototype.slice.call(document.querySelectorAll('table.lights tbody tr'));
+  var index = document.getElementById('index');
+  var q = document.getElementById('q');
+  var count = document.getElementById('count');
+
+  // Build symptom index grouped by section
+  index.innerHTML = '';
+  var groups = [
+    ['Problems you notice', entries.filter(function(e){return e.id.indexOf('s-')===0;})],
+    ['App messages (A–Z)', entries.filter(function(e){return e.id.indexOf('m-')===0;})],
+    ['Procedures', procs]
+  ];
+  var links = [];
+  groups.forEach(function(g){
+    var col = document.createElement('li');
+    var head = document.createElement('div'); head.className='grp'; head.textContent=g[0];
+    col.appendChild(head);
+    g[1].forEach(function(el){
+      var a = document.createElement('a');
+      a.href = '#'+el.id;
+      var h = el.querySelector('h3');
+      var q = h.querySelector('.q');
+      a.textContent = (q||h).textContent;
+      if (el.id.indexOf('m-')===0) a.style.fontFamily = 'var(--mono)', a.style.fontSize='14px';
+      a.dataset.target = el.id;
+      col.appendChild(a);
+      links.push(a);
+    });
+    index.appendChild(col);
+  });
+  var lightLink = document.createElement('li');
+  lightLink.innerHTML = '<div class="grp">Lights on the router</div><a href="#lights">Power, Internet and Wi-Fi light states</a>';
+  index.insertBefore(lightLink, index.firstChild);
+
+  function text(el){ return ((el.dataset.s||'') + ' ' + el.textContent).toLowerCase(); }
+
+  function run(){
+    var term = q.value.trim().toLowerCase();
+    var words = term.split(/\s+/).filter(Boolean);
+    function match(el){ if(!words.length) return true; var t=text(el); return words.every(function(w){return t.indexOf(w)>-1;}); }
+    var n=0;
+    entries.concat(procs).forEach(function(el){ var m=match(el); el.classList.toggle('hidden',!m); if(m && el.tagName==='ARTICLE') n++; });
+    links.forEach(function(a){ var el=document.getElementById(a.dataset.target); a.classList.toggle('hidden', el.classList.contains('hidden')); });
+    var ln=0;
+    lightRows.forEach(function(r){ var m=match(r); r.classList.toggle('hidden',!m); if(m) ln++; });
+    document.querySelector('table.lights').classList.toggle('hidden', ln===0);
+    document.querySelector('.panel').classList.toggle('hidden', !!words.length);
+    ['lights','symptoms','messages','procedures'].forEach(function(id){
+      var h=document.getElementById(id); var next=h.nextElementSibling; var any=false;
+      while(next && next.tagName!=='H2' && next.tagName!=='FOOTER'){
+        if((next.classList.contains('entry')||next.tagName==='TABLE') && !next.classList.contains('hidden')) any=true;
+        next=next.nextElementSibling;
+      }
+      h.classList.toggle('hidden', !any);
+      var p=h.nextElementSibling; if(p && p.tagName==='P') p.classList.toggle('hidden', !any);
+    });
+    if(!words.length){ count.textContent=''; return; }
+    count.textContent = (n+ln) ? (n+' problem'+(n===1?'':'s')+' and '+ln+' light state'+(ln===1?'':'s')+' match “'+q.value.trim()+'”.')
+      : 'Nothing matches. Try one word, such as a light colour (amber, red) or a word from the message. If your problem isn’t listed, contact Halden Support.';
+  }
+  q.addEventListener('input', run);
+})();
+</script>
+</body>
+</html>

@@ -14,6 +14,104 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-007 · Does the troubleshooting entry beat the default on a router troubleshooting page?
+
+**Status:** closed
+**Opened:** 2026-10-31
+**From:** T-007
+
+**1. Where we are.**
+Entry #2 (troubleshooting by symptom) found 6 devices constant across four makers in
+C-006, and hasn't been tested on an agent.
+
+**2. What we are doing.**
+Give two fresh agents the same brief, a troubleshooting page for a home Wi-Fi router
+(a product none of the four sources covers), one with entry #2 and one with no guidance,
+and put the two pages in a blind pick.
+
+Measures:
+- **Blind pick, two questions:** (a) which looks less AI-made; (b) which would I rather
+  have open when my internet is down and I'm trying to fix it.
+- **Rules applied (0–6)** from entry #2's section 4, on both pages.
+- **Default checklist (0–5)** from METHOD.md / C-005, on both pages.
+- **Words outside drawings**, time, size.
+
+**3. Why.**
+We don't know whether the method works on a second problem. Entry #1's rules are mostly
+visual (pictures, callouts, monochrome); entry #2's are mostly about structure (symptom
+first, cause rows, escalation). It's possible that structural rules get followed and
+still look like the default.
+
+**4. What is affected.**
+- Entry #2's `tested_in` / `best_example`, or a rewrite.
+- The claim that the method transfers beyond its first problem.
+- Whether entries need a visual section of their own when the source's rules are structural.
+
+**5. Conclusion.**
+- **If** the entry page wins both questions and applies ≥4/6 rules → we claim *the method
+  works on a second problem*, and keep entry #2 as written.
+- **If** it applies ≥4/6 rules but scores ≥3/5 on the default checklist, or loses (a) →
+  we claim *structural rules carried, but the page still looks like the default*: entries
+  whose source rules are structural need explicit visual guidance too.
+- **If** it loses (b) → we claim *the structure the four makers share didn't make the page
+  more usable for this reader*, and look at which rule got in the way.
+
+**6. If not done.**
+Entry #2 sits in a public library untested, and we don't know whether the method only
+works for picture-heavy problems.
+
+**Limits (known before running):** n = 1 per arm; same judge; the judge knows a test is
+running and what the entry is about.
+
+**Result (2026-10-31):** third branch: **the entry page lost (b)**, and (a) was a tie.
+
+| | (a) less AI-made | (b) use while internet is down | Rules applied | Default checklist | Words | Time | Size |
+|---|---|---|---|---|---|---|---|
+| No guidance (`arm-a.html`, page 1) | tie | **won** | 5–6/6 | 4/5 | 399 | ~2.5 min | 35 KB |
+| Entry #2 (`arm-b.html`, page 2) | tie | lost | 6/6 | 2/5 | 2,466 (6.2×) | ~2.5 min | 40 KB |
+
+Saif: on (a), "Page 2 has way more detail, but I like the attempt of visualization on page 1.
+Both look AI generated." On (b): page 1.
+
+**The surprise was the no-guidance page, which already followed most of the entry.** Without
+seeing the entry, it:
+- led with symptoms in the reader's words ("No internet at all", "Internet is slow");
+- showed the router's lights as they look, and you tap one to see what each state means (rule 2);
+- went through causes cheapest first, one step at a time, stopping when fixed (rule 3);
+- ended with a named escalation ("call your provider… tell them the Internet light is red")
+  (rule 4);
+- had not-a-fault states ("The router is on and working normally. Nothing to do.") (rule 5);
+- kept restart and reset as separate procedures (rule 6).
+
+So for this problem, most of what four makers share is something the agent already does.
+That's unlike C-002, where the agent reached only 2 of 6 IKEA rules on its own. What the
+entry *added* was what the printed manuals have because they're paper: an exhaustive symptom
+index (19 symptoms), a light-state table, 6 error codes A–Z, an urgency tier. That came to
+6× the words, and Saif found it heavier to use. The unguided page instead delivered the same
+convention interactively: pick a symptom, get one check at a time.
+
+**Claim:** for troubleshooting, entry #2 mostly restated what the agent already does, and its
+paper-only parts (exhaustive index and tables) made the page worse to use in the moment. The
+convention transferred; the printed form shouldn't have. This is inferred from one test and one
+judge's comments.
+
+**Other findings:**
+- The default checklist scored the *less* preferred page lower (2/5 vs 4/5), and Saif called
+  both AI-looking. A low checklist score doesn't mean "not AI-looking". The checklist catches the
+  palette, not everything that reads as AI-made.
+- Method gap: C-002's convergence check (what does the agent do unprompted?) should have come
+  **before** writing entry #2, not after. An entry should carry what the agent doesn't already do.
+
+**Changes made:**
+- METHOD.md: a new step before writing an entry. Run one no-guidance baseline on a brief for
+  the problem and list which candidate rules it already follows.
+- Entry #2: version note and a section-5 limit (printed exhaustiveness doesn't carry to an
+  interactive page); `tested_in: [C-007]`. Rules not rewritten on one test; T-008 opened.
+
+**Closed:** 2026-10-31
+
+---
+
 ## C-006 · Is there a cross-maker convention for troubleshooting-by-symptom in printed manuals?
 
 **Status:** closed

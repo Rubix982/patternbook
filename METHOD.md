@@ -38,6 +38,14 @@ Go page by page. Write down what's there before deciding why.
 - Note where the source breaks its own pattern (IKEA uses dense text only for safety
   warnings). These go in section 5 of the entry.
 
+## 2b. Check what the agent already does
+
+Before writing rules, give one fresh agent a brief for the problem with **no guidance**, and
+list which of your candidate rules its page already follows. An entry should carry what the
+agent *doesn't* already do. C-002 found the agent reached 2 of 6 IKEA rules on its own, so
+that entry had a lot to add. C-007 found it already followed 5 of 6 troubleshooting rules,
+and the entry's extra parts (copied from print) made the page worse.
+
 ## 3. Write the entry
 
 Copy `library/_template.md` to `library/<problem>/<source>.md`. The template says what
@@ -94,5 +102,7 @@ Inter / purple / gradient list scored 0 on every page).
 - The judge has so far been the person who commissioned the entry.
 - Agents that get an entry tend to spend more time and write more code (C-001: ~9×),
   and the method can't yet separate that from the entry's content.
+- The default checklist measures palette and a few shapes. In C-007 the page Saif called
+  AI-looking scored 2/5, so a low score doesn't mean the page has escaped the AI look.
 - The "AI default" moves. A checklist of AI tells goes stale (C-001's did), so it's
   rebuilt from no-guidance runs (C-005) and should be re-measured when the model changes.
