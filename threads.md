@@ -49,3 +49,11 @@ value is just *any* specific instruction, not human sources.
 **Opened:** 2026-10-31
 **Question:** C-004's preferred page used 2 roomy columns and few ID tags; the other used a dense 3-column boxed grid with IDs in most captions. No rule covers layout density, and one comment ("more concise") isn't enough to write one.
 **Answer:** —
+
+### T-007 · Does the troubleshooting entry beat the default on a software troubleshooting page?
+
+**Status:** open
+**Parent:** C-006
+**Opened:** 2026-10-31
+**Question:** Blind-test entry #2 the way C-001 tested entry #1, on a brief the sources don't cover (e.g. a troubleshooting page for a web app or a home Wi-Fi router), against a no-guidance page; score with the C-005 default checklist too, since AI troubleshooting pages are typically accordions on cream.
+**Answer:** —

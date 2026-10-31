@@ -14,6 +14,93 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-006 · Is there a cross-maker convention for troubleshooting-by-symptom in printed manuals?
+
+**Status:** closed
+**Opened:** 2026-10-31
+
+**1. Where we are.**
+The library has one entry (step-by-step instructions, IKEA), and C-003 showed that one
+maker's manuals share a fixed visual system; we haven't looked at a second problem or at
+whether *different* makers converge.
+
+**2. What we are doing.**
+Read the troubleshooting sections of official manuals from at least four different
+manufacturers and product types, and sort every recurring device into constant /
+conditional / varies, as METHOD.md step 1 says.
+
+Candidate sources (official PDFs, chosen for spread): a dishwasher or washing machine,
+a car owner's manual, a printer, and a router or other electronics. Final list recorded
+in the result.
+
+**3. Why.**
+We don't know whether troubleshooting has a convention that holds across makers, the way
+assembly has one inside IKEA. If it doesn't, an entry for it would just describe one
+company's taste.
+
+**4. What is affected.**
+- Whether `library/troubleshooting-by-symptom/` gets an entry, and from how many sources.
+- METHOD.md: whether "constant across makers" is a usable bar, or only "constant within a
+  maker".
+- T-003 gets a second art style to compare with IKEA's line art.
+
+**5. Conclusion.**
+- **If** ≥4 devices are constant across all four makers → we claim *troubleshooting-by-
+  symptom has a cross-maker convention*, and write entry #2 from all four sources.
+- **If** fewer than 4 are → we claim *troubleshooting design is maker-specific*, and write
+  entry #2 from the one best source only, saying so in its section 1.
+
+**6. If not done.**
+The library stays one entry deep, and we don't learn whether the method works on a
+problem where no single house style exists.
+
+**Limits (known before running):** four documents; English-language editions; I choose
+the sources, and "different product types" is only a rough guard against picking makers
+who copy each other.
+
+**Result (2026-10-31):** first branch. **6 devices are constant across all four makers.**
+
+Sources: Miele dishwasher operating instructions (HG07, en-CA, pp 65–72); Brother
+DCP-J152W Basic User's Guide (pp 39–46); Toyota Tacoma 2015 owner's manual OM04009U
+(pp 476–480, 585–586); Garmin GPSMAP Touch online owner's manual (Troubleshooting + 2
+topics). Local copies of the PDFs in `sources/troubleshooting/`. I couldn't get a router
+manual: Netgear's download server returned 403, so the electronics slot is Garmin.
+
+Constant in all four:
+1. Entry point is the symptom in observable terms (never the component or cause).
+2. Cause stated separately from the action.
+3. Several causes under one symptom, each with its own fix.
+4. Escalation is the last step, named ("Contact Miele Service", "your Toyota dealer"…).
+5. Long fixes linked out to a full procedure instead of repeated.
+6. Actions written as short imperatives (the weakest; most instructions do this).
+
+Conditional (with condition named in the entry): symptom quoted exactly in its own
+typeface (Miele `Z_NUM` display font for `F11`, Brother Courier New for LCD text, Toyota
+icons; Garmin has no codes); causes ordered cheapest first (3/4); "not a fault" entries
+(3/4, Brother partial); urgency tiers (Toyota only, the one product where a symptom can
+be dangerous); scope statement; safety step before the fix; symptom index.
+
+Varies: table vs. topic layout; grouping (by kind, alphabet, urgency, or flat); colour
+(each maker uses at most one, for navigation only: Brother blue `#004FFF`, Toyota pink
+`#F465BA`, Miele none); typeface (all plain sans: Helvetica Neue, Arial, Trade Gothic).
+
+**Claim:** four makers with no shared house style organise troubleshooting the same way:
+symptom first, as the reader observes it; one cause per row, then its fix; a named
+escalation at the end; long fixes linked out. That convention comes from the problem,
+not from a brand.
+
+Even without the weakest constant (imperatives), 5 of 6 remain, so the result doesn't
+hang on it.
+
+**Changes made:**
+- Entry #2: `library/troubleshooting-by-symptom/appliance-and-device-manuals.md`. Not
+  blind-tested; that's the next card (T-007).
+- T-003 gets a second art style: typographic tables, near-monochrome, one navigation colour.
+
+**Closed:** 2026-10-31
+
+---
+
 ## C-005 · What does an agent's page look like when nobody gives it a style?
 
 **Status:** closed

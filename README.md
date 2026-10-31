@@ -13,8 +13,8 @@ or catalogue looks.
 
 ## For an agent using the library
 
-1. Find the folder in `library/` that matches the problem your page solves (e.g.
-   `step-by-step-instructions/`).
+1. Find the folder in `library/` that matches the problem your page solves:
+   `step-by-step-instructions/` or `troubleshooting-by-symptom/`.
 2. Read the entry. Follow **section 4 (rules)**, and check **section 5** to see whether
    your case is one where it doesn't apply.
 3. If the entry lists a `best_example`, that's a page an agent built from it which won
@@ -51,6 +51,11 @@ sources/                        local copies of source documents (git-ignored)
 - **C-005:** the unguided default, measured on 7 pages: cream background 7/7, warm
   near-black text 7/7, terracotta accent 7/7, uppercase eyebrow labels 6/7, pill chips
   5/7; Inter, purple and gradients 0–1/7. This is the new default checklist in METHOD.md.
+
+- **C-006:** entry #2, troubleshooting by symptom, from four makers with no shared style
+  (Miele, Brother, Toyota, Garmin). Six devices were constant across all four (symptom
+  first; cause separate from fix; several causes per symptom; escalation last; long fixes
+  linked out; imperative actions). Not blind-tested yet.
 
 One brief, one run per arm, and one judge. See each card's limits.
 
