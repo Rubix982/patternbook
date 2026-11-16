@@ -14,7 +14,7 @@ All 214 of **Lumenary**'s treatments, by Mursal Furqan Kumbhar, run here too, us
 permission. His engine and theory data, unchanged and trimmed of the website, are in `../vendor/lumenary/`
 (see its `NOTICE.md` for what was kept), and `lumenary/` holds our bridge:
 
-- `lumenary.html`: pick any of his treatments and turn its dials, or open the **contact sheet** to see every
+- `lumenary.html` (live: https://rubix982.github.io/patternbook/treatments/lumenary.html): pick any of his treatments and turn its dials, or open the **contact sheet** to see every
   still treatment on one picture (Lumenary's still life, our router drawing, or your own file).
 - `lumenary/lumenary.js`: his engine bundled into one script, which sets `window.Lumenary`. Rebuild with
   `node treatments/lumenary/build.mjs` (uses `npx esbuild@0.24.0`).

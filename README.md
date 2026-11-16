@@ -69,16 +69,21 @@ spend time on each of them than on its no-engine version, but only the bakery re
 AI-made. The pictures changed; the cream background, serif type and small uppercase labels around
 them didn't.*
 
-GitHub can't run these pages. To try them, clone the repo and open the files in a browser:
+**Try them live** (GitHub Pages, served from `main`):
 
-- `treatments/lumenary.html`: all 214 Lumenary treatments, plus the contact sheet.
-- `treatments/demo.html`: our own treatments (`press`, `riso`, `halftone`, `hatch`).
+- [Lumenary treatments](https://rubix982.github.io/patternbook/treatments/lumenary.html): all 214, with their dials.
+- [Contact sheet](https://rubix982.github.io/patternbook/treatments/lumenary.html?mode=sheet): every still treatment on one picture.
+- [Our print treatments](https://rubix982.github.io/patternbook/treatments/demo.html): `press`, `riso`, `halftone`, `hatch`.
+- [All demos](https://rubix982.github.io/patternbook/), including the C-008 and C-011 winning pages.
+
+Or clone the repo and open the same files from disk: `treatments/lumenary.html`, `treatments/demo.html`.
 - On a page: load `treatments/lumenary/lumenary.js` and `treatments/treatments.js`, then
   `Treatments.treatAll('svg[role=img]', { treatment: 'lumenary:halftone' })`, or
   `{ treatment: 'press' }` for one of ours. More in `treatments/README.md`.
 
-The two subject-aware Lumenary treatments need a local web server (`python3 -m http.server` from
-the repo root); everything else opens straight from disk.
+The two subject-aware Lumenary treatments (Type Behind, Split Treatment) load a model, so from disk they
+need a local web server (`python3 -m http.server` from the repo root). They haven't been confirmed to
+work yet, on the live site or locally. Everything else opens straight from disk.
 
 ## Layout
 
