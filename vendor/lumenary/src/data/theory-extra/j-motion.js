@@ -1,0 +1,216 @@
+// src/data/theory-extra/j-motion.js
+// Section J, motion and live: the fuller story of each treatment.
+export const EXTRA_MOTION = {
+  'rain-on-glass': {
+    facts: { from: 'Weather, physics and cinema', era: 'Timeless, a shader favourite since the 2010s', bestOn: 'Cityscapes and landscapes with soft colour' },
+    why: 'A misted window hides the world behind a soft blur, and a drop of water that runs down it clears a trail of sharp glass. Each drop is also a tiny lens, which shows the scene behind it upside down. The mood is one of shelter: the weather outside, a quiet view in, and your finger drawing a line through the fog.',
+    how: [
+      'Make the mist from the picture shrunk to a tenth of its size and enlarged again, tinted pale blue-grey, with opacity from 0.12 to 0.62 set by the mist slider.',
+      'Keep a hidden mask of where the glass has been cleared, and draw the sharp picture over the mist wherever the mask is white.',
+      'Let small drops sit still and larger ones run down in jerks, leaving a trail that clears the mask.',
+      'Draw each drop as a little lens that shows the scene upside down, with a highlight and a shadow.',
+      'Every 0.12 seconds reduce the mask by 3.5 percent so the mist slowly returns, and wipe a soft stroke 7 percent of the width wide where the pointer moves.',
+    ],
+    history: 'Condensation and raindrops on windows are as old as glass, and photographers have long used them to frame a mood, from film noir streets to the wet neon cities of science fiction. In computer graphics, a rain-on-glass shader became a popular exercise in the late 2010s because it combines lenses, blur and simple physics in a few lines.',
+    uses: ['Film and game atmospheres', 'Calming screensavers and backgrounds', 'Photo and video overlays', 'Teaching refraction with water drops'],
+    tips: [
+      { text: 'Heavy rain on thick mist hides the view almost completely.', set: { rain: 90, fog: 90 } },
+      { text: 'Big, slow drops show the upside-down scene clearly.', set: { size: 150, run: 20 } },
+      { text: 'Wind slants the trails like a storm.', set: { wind: 35, rain: 80 } },
+    ],
+    terms: [['Condensation', 'Water vapour turning to liquid on a cool surface.'], ['Refraction', 'The bending of light as it passes from one material to another.'], ['Mask', 'A hidden layer that says where an effect is applied.']],
+    related: ['frosted-ice', 'glass-refraction', 'ink-in-water'],
+  },
+
+  'heat-haze': {
+    facts: { from: 'Optics and atmospheric science', era: 'Understood since the 17th century', bestOn: 'Landscapes, roads and skylines' },
+    why: 'Warm air is thinner than cool air, and thinner air bends light a little less. Over a hot road the air is a shifting mix of slightly different densities, so the rays of light that cross it are bent from moment to moment and the view wobbles. The ripples rise because the warm air itself rises.',
+    how: [
+      'Use the Gladstone-Dale relation n − 1 = Kρ: the refractive index depends on density, and density depends on temperature, ρ ∝ 1/T at constant pressure.',
+      'Build a displacement field from fractal noise stretched vertically (horizontal frequency 1.3 times the vertical 0.45, in units of ripple size).',
+      'Scroll the noise upward as time passes, so the ripples rise.',
+      'Read the picture at each pixel’s displaced position, stronger near the heat source (the bottom, the centre, or everywhere).',
+      'Shift the red and blue channels slightly apart for colour fringes, and add a warm tint where it is hottest.',
+    ],
+    history: 'In the seventeenth century Robert Hooke noticed that hot air rising from a candle bends light, and in 1864 August Toepler built the schlieren method to photograph such invisible flows. Mirages on deserts and roads are the same effect on a bigger scale. Stars twinkle for a similar reason, and astronomers call the blur the seeing.',
+    uses: ['Heat shimmer over roads, engines and fires in film and games', 'Schlieren photography of airflow and shock waves', 'Teaching refraction and mirages', 'Dreamy or desert atmospheres'],
+    tips: [
+      { text: 'Heat from everywhere shakes the whole picture.', set: { source: 'all', strength: 70 } },
+      { text: 'Fine, quick ripples look like a desert road.', set: { scale: 15, speed: 80 } },
+      { text: 'Strong colour fringes and a warm tint make a fierce furnace.', set: { split: 85, warm: 90 } },
+    ],
+    terms: [['Refractive index', 'A number that says how much a material slows and bends light.'], ['Mirage', 'An image bent by layers of air at different temperatures.'], ['Schlieren', 'A method of photographing changes in air density.']],
+    related: ['rain-on-glass', 'chromatic-aberration', 'domain-warp'],
+  },
+
+  fireflies: {
+    facts: { from: 'Nature and folklore', era: 'Timeless', bestOn: 'Landscapes, gardens and night pictures' },
+    why: 'A firefly makes light by chemistry, with almost no heat, and blinks it as a signal. The sky of a summer night, the quiet and a few drifting sparks give a special mood, and a picture seen only by these points of light becomes a place you discover bit by bit. Each one lights the patch beneath it.',
+    how: [
+      'Give each firefly a position, heading and its own rhythm, and let the heading drift smoothly: its rate of change is 5 × (n − ½) where n is slow noise.',
+      'Move it at the speed set by the slider with a slight upward float, and let it re-enter at the opposite edge.',
+      'When the pointer is in the picture, pull fireflies in: within half the picture’s width the pull is 55 px per second at the pointer, falling off linearly.',
+      'Blink each on its own period of 1.4 to 3.8 seconds and its own phase, with brightness b = lerp(1, w^2.2, blink).',
+      'Darken the picture by the night value and add a soft glow from each firefly, revealing the picture beneath.',
+    ],
+    history: 'Fireflies produce light with luciferin and the enzyme luciferase in a reaction that gives off very little heat. In Japan, hotaru-gari, going to watch fireflies, has been a summer pastime for centuries. Some species in Southeast Asia and in the Great Smoky Mountains blink together, a synchrony that biologists and mathematicians such as Steven Strogatz have studied as an example of coupled oscillators.',
+    uses: ['Atmospheric scenes in film, games and websites', 'Teaching bioluminescence and synchrony', 'Summer and fairytale designs', 'Ambient screensavers'],
+    tips: [
+      { text: 'A few amber fireflies on a very dark night feel like embers.', set: { count: 20, night: 95, colour: 'amber' } },
+      { text: 'A big swarm with strong blinking gives a festival.', set: { count: 150, blink: 100 } },
+      { text: 'Pink and wide glow looks like a fairytale.', set: { colour: 'pink', glow: 130 } },
+    ],
+    terms: [['Bioluminescence', 'Light produced by a living thing through chemistry.'], ['Luciferase', 'The enzyme that makes fireflies glow.'], ['Coupled oscillators', 'Rhythms that influence each other and can fall into step.']],
+    related: ['bokeh', 'neon-glow', 'snowfall'],
+  },
+
+  'ink-in-water': {
+    facts: { from: 'Fluid dynamics and Japanese marbling', era: 'Suminagashi, 12th century, curl noise 2007', bestOn: 'Colourful pictures, where the ink takes colour' },
+    why: 'Ink in still water does two things at once. Slow currents carry it along, and diffusion spreads it out. Real water moves without bunching up or leaving gaps, so the ink curls and blooms in long wisps. The program uses a flow with that same property, and each wisp carries the colour of the picture where it was released.',
+    how: [
+      'Release a drop as a burst of about 380 particles (times the ink slider) in a disc 9 px across, each with a small outward push.',
+      'Carry every particle with a flow from curl noise: if ψ is smooth noise, the velocity v = (∂ψ/∂y, −∂ψ/∂x) has zero divergence, so the flow is incompressible.',
+      'Measure the gradient by central differences over 6 px and damp the velocity by 0.9 per step so particles follow the current.',
+      'Give each particle the colour of the picture where it was released and draw up to 6,500 of them as translucent, soft sprites.',
+      'Fade the ink slowly, by the linger value, so old wisps thin out.',
+    ],
+    history: 'Suminagashi, the Japanese art of floating ink on water and lifting the pattern onto paper, dates to the twelfth century. In 1883 Osborne Reynolds released a thread of dye in a glass pipe to show how smooth flow turns into turbulence. Robert Bridson, Jim Hourihan and Marcus Nordenstam introduced curl noise to computer graphics in 2007 as a cheap way to make convincing fluid motion.',
+    uses: ['Smoke, fluid and magic effects in film and games', 'Marbling and paper art', 'Flow visualisation in engineering', 'Calming backgrounds'],
+    tips: [
+      { text: 'Strong currents and long lingering ink make dramatic ribbons.', set: { flow: 90, linger: 95 } },
+      { text: 'Tiny curls feel like smoke.', set: { scale: 12, amount: 40 } },
+      { text: 'Ink on a dark pool glows.', set: { water: 'dark', rate: 70 } },
+    ],
+    terms: [['Advection', 'Being carried along by a flow.'], ['Diffusion', 'Spreading out from a crowded place to an emptier one.'], ['Curl noise', 'Noise turned into a flow that never bunches up.']],
+    related: ['domain-warp', 'liquid-morph', 'watercolour'],
+  },
+
+  snowfall: {
+    facts: { from: 'Photography, animation and weather', era: 'Multiplane camera 1937', bestOn: 'Landscapes with depth, houses and trees' },
+    why: 'A few flakes at three depths make a room of space. Near flakes are big, fast and soft, because they are out of focus, while far ones are small, slow, sharp and faint. That mix of motion parallax and atmospheric perspective is what the brain uses to judge distance, so the snow makes the picture feel deep, with a cold light settling on it.',
+    how: [
+      'Give each flake a depth z between 0 and 1, drawn as u^1.6 so most are far away.',
+      'Make near flakes larger (radius 2.2 + 14 z² px), faster (0.35 + 1.1 z times the base speed) and more transparent and soft, with opacity from 0.45 to 0.95.',
+      'Move each downward at (14 + 90 × fall) × (0.35 + 1.1 z) px per second, with a sideways drift from the wind and a gentle sway.',
+      'Steer the wind with the cursor and wrap flakes at the edges.',
+      'Tint the picture with a cold light and add a drift of snow along the ground.',
+    ],
+    history: 'The Walt Disney studio built a multiplane camera and used it for The Old Mill in 1937, placing painted glass layers at different distances to make parallax in animation. Wilson Bentley photographed snowflakes under a microscope from 1885, and Ukichiro Nakaya classified snow crystals in the 1930s. The snow globe, a favourite souvenir, goes back to the nineteenth century.',
+    uses: ['Winter scenes in games, film and websites', 'Holiday cards and greetings', 'Teaching depth cues and parallax', 'Calming backgrounds'],
+    tips: [
+      { text: 'A blizzard needs heavy snow and strong wind.', set: { amount: 100, wind: 80, fall: 70 } },
+      { text: 'Few, large, slow flakes feel quiet and dreamy.', set: { amount: 20, size: 150, fall: 15 } },
+      { text: 'Strong frost and ground snow make a deep winter.', set: { frost: 90, drift: 90 } },
+    ],
+    terms: [['Motion parallax', 'Near things appear to move faster than far things.'], ['Atmospheric perspective', 'Distant things look paler and less sharp.'], ['Multiplane camera', 'A camera that shoots layers at different distances to create depth.']],
+    related: ['fireflies', 'rain-on-glass', 'depth-parallax'],
+  },
+  'night-sky': {
+    facts: { from: 'Star charts and astrophotography', era: 'Antiquity onward', bestOn: 'Bright subjects on a dark background' },
+    why: 'People have always drawn pictures in the stars by joining a few bright points and letting the mind fill in the rest. This treatment runs that backwards. It starts with the picture, scatters stars most thickly where it is bright, and joins points along its outlines into constellations. Twinkle, a faint glow and the odd meteor make it a sky.',
+    how: [
+      'Place stars at random, keeping each with a chance that grows with the picture’s brightness there.',
+      'Give each star a size, and a brightness read from the picture under it.',
+      'Make each star twinkle on its own period.',
+      'Pick the strongest outline point in each cell of a coarse grid and join neighbours with thin lines.',
+      'Lay a dark, soft, blue copy of the picture behind everything.',
+      'Brighten stars near the cursor, and send a meteor across now and then.',
+    ],
+    history: 'Ptolemy listed 48 constellations in the Almagest in the second century, and most are still in use. In 1922 the International Astronomical Union fixed the modern list at 88, and in 1930 it published exact boundaries so that every star belongs to one of them. Stars twinkle because their light is bent by moving air on its way down, which is why they are steady when seen from space.',
+    uses: ['Anniversary and memorial keepsakes', 'Space-themed posters and invitations', 'Planetarium and science club graphics', 'Calm animated backgrounds'],
+    tips: [
+      { text: 'Many stars and no lines give a dense star field.', set: { stars: 6000, lines: 0 } },
+      { text: 'Few stars and many constellations look like a chart.', set: { stars: 1200, lines: 100, haze: 15 } },
+      { text: 'Starlight in the picture’s own colours keeps its mood.', set: { tint: 'picture', twinkle: 80 } },
+    ],
+    terms: [['Rejection sampling', 'Proposing random points and keeping each with a chance set by a rule.'], ['Constellation', 'A named pattern of stars, or the region of sky around it.'], ['Scintillation', 'The twinkling of stars, caused by turbulence in the air.']],
+    related: ['fireflies', 'poisson-stippling', 'particles'],
+  },
+
+  underwater: {
+    facts: { from: 'Diving and underwater photography', era: 'First underwater photograph 1856', bestOn: 'Bright, colourful scenes with some red in them' },
+    why: 'Water changes light in three ways at once. It bends it, so the view sways with the swell. It absorbs it by colour, red first and blue last, so the deeper you go the bluer and dimmer everything gets. And its rippling surface focuses sunlight into bright moving nets called caustics. Add rays and rising bubbles and the picture is under the sea.',
+    how: [
+      'Read each pixel from a position pushed about by slow bent waves.',
+      'Remove red quickly, green slowly and blue hardly at all, more toward the bottom.',
+      'Fog the result toward the colour of the water.',
+      'Add three sets of bent ripples and put light where their sum crosses zero.',
+      'Draw slanted shafts of sunlight and drifting specks.',
+      'Simulate bubbles that rise and wobble, more of them under the cursor.',
+    ],
+    history: 'William Thompson took the first underwater photograph in 1856 by lowering a camera in a box into Weymouth Bay. Seventy years later, in 1926, Longley and Martin made the first colour photographs under water for National Geographic, firing magnesium flash powder on a raft because so little red light survives below a few metres. Caustics have been rendered by computer since the 1980s and are still a test of a renderer.',
+    uses: ['Travel and diving posts', 'Aquarium and swim school graphics', 'Dreamlike music visuals', 'Animated backgrounds for calm apps'],
+    tips: [
+      { text: 'Open sea at full depth leaves almost only blue.', set: { water: 'deep', depth: 100, rays: 20 } },
+      { text: 'Strong nets of light in shallow water look like a pool.', set: { depth: 20, caustics: 100 } },
+      { text: 'A lake is green, still and full of bubbles.', set: { water: 'green', waves: 20, bubbles: 100 } },
+    ],
+    terms: [['Caustic', 'A bright line or patch where a curved surface gathers light.'], ['Absorption', 'The loss of light as it passes through a material.'], ['Displacement map', 'A field that says how far, and which way, to move where each pixel is read from.']],
+    related: ['rain-on-glass', 'heat-haze', 'ink-in-water'],
+  },
+
+  'flying-cards': {
+    facts: { from: 'Playing cards and motion graphics', era: 'Cards from the 9th century, card interfaces from the 2010s', bestOn: 'Any picture; faces look best with few cards' },
+    why: 'Cut a picture into cards and it gains a third dimension for free. Each card can tilt, rise and turn over on its own, and because we know what a card is, a simple squeeze reads as a rotation and a shadow reads as height. The picture stays whole in the mind while it comes apart on the table.',
+    how: [
+      'Cut the picture into a grid of cards.',
+      'Deal them in a shuffled order from below the frame, each easing into place.',
+      'Tilt and lift every card with sine waves of its own speed and phase.',
+      'Draw a tilt as a squeeze by the cosine of the angle, and darken a card as it turns away.',
+      'Put a shadow under each card, further away and fainter the higher it floats.',
+      'Turn over the cards near the cursor to show their backs.',
+    ],
+    history: 'Playing cards are first recorded in China in the ninth century and reached Europe by the 1370s; the French suits of hearts, spades, diamonds and clubs date from about 1480. Patterned backs became usual in the nineteenth century so that marks and stains could not give a card away. On computers, the cascade of bouncing cards at the end of Solitaire in 1990 made card animation a small tradition of its own.',
+    uses: ['Photo collage and gallery intros', 'Game night and casino invitations', 'Portfolio and product reveals', 'Animated social posts'],
+    tips: [
+      { text: 'Few large cards with a strong tilt feel like a magician’s spread.', set: { cols: 4, tilt: 90 } },
+      { text: 'Many small cards with no gap rebuild the picture as a mosaic.', set: { cols: 14, gap: 2, border: false } },
+      { text: 'A midnight table and a high float make the shadows the subject.', set: { table: 'night', float: 100, shadow: 100 } },
+    ],
+    terms: [['Easing', 'Starting or ending a movement gradually instead of at a constant speed.'], ['Phase', 'How far through its cycle a repeating motion is at a given moment.'], ['Orthographic projection', 'Drawing a 3D object with no perspective, as if seen from very far away.']],
+    related: ['particles', 'collage-art', 'depth-parallax'],
+  },
+
+  'pixel-dissolve': {
+    facts: { from: 'Film transitions and computer graphics', era: 'Dissolves from the 1900s, pixel effects from the 1980s', bestOn: 'Bold pictures that still read at low resolution' },
+    why: 'A picture on a screen is already a grid of squares, held in place only by agreement. Let the squares go and the picture becomes dust, and bringing them home restores it exactly. The pleasure is in the moment between, when enough has left to break the image and enough remains to remember it by.',
+    how: [
+      'Reduce the picture to square blocks of one colour each.',
+      'Give every block an order: mostly its place along the wind, with some disorder.',
+      'Run a cycle: hold, sweep the blocks away in order, let them drift, sweep them back.',
+      'Fly each block along the wind by its own distance, with a slow sideways drift.',
+      'Shrink and fade a block as it travels.',
+      'Let the cursor blow nearby blocks outward.',
+    ],
+    history: 'The dissolve, one picture fading into another, is among the oldest film transitions and was in use by 1900. Computers made it granular. Early Macintosh software such as HyperCard (1987) offered a “dissolve” that swapped pixels a scatter at a time, and Wolfenstein 3D (1992) faded its screen to red one pseudo-random pixel after another. Films later made the body that blows away as dust a familiar image.',
+    uses: ['Intro and outro animations', 'Reveal posts and countdowns', 'Game and tech event visuals', 'Looping backgrounds'],
+    tips: [
+      { text: 'Small pixels falling slowly look like sand.', set: { size: 5, wind: 'fall', speed: 25 } },
+      { text: 'A burst from the middle on white is an explosion in reverse.', set: { wind: 'burst', ground: 'white', scatter: 90 } },
+      { text: 'Big blocks that barely travel just shuffle in place.', set: { size: 24, scatter: 15 } },
+    ],
+    terms: [['Dissolve', 'A transition in which one image gives way to another gradually.'], ['Closed form', 'A formula that gives the answer for any moment directly, with no step-by-step simulation.'], ['Phase', 'How far through its cycle a repeating motion is.']],
+    related: ['particles', 'pixel-art', 'pixel-sorting'],
+  },
+
+  'dust-snap': {
+    facts: { from: 'Cinema’s picture of things turning to dust', era: 'Particle effects in film since the 1980s, an internet staple since 2018', bestOn: 'Bold pictures, portraits and shapes with a clear edge' },
+    why: 'A picture that falls apart grain by grain is more unsettling than one that simply fades, because each grain keeps its own colour and its place in the order. The viewer follows a front of loss moving across the picture with a ragged edge, and the dust it leaves carries the picture’s colours away on the wind. The return, played backwards along the same paths, is what makes it feel like a loop of loss and relief.',
+    how: [
+      'Divide the picture into small square grains and give each the moment it will let go: mostly its place along the sweep, with noise and chance added.',
+      'Run a cycle: hold the picture, snap it, rest on the empty page, then play the snap backwards.',
+      'Grains that have not gone yet are the picture itself, copied pixel for pixel.',
+      'A grain that has let go flies along the wind at its own speed, curls a little and shrinks.',
+      'Fade each grain near the end of its flight, and leave a dark, white or ghostly page where the picture was.',
+    ],
+    history: 'Things that turn to dust have a long place in film, from the sand faces of The Mummy (1999) to the drifting ash of Avengers: Infinity War (2018), which made the disappearance a shared image. In computer graphics it is done with particle systems, introduced by William Reeves at Lucasfilm in the early 1980s to make the wall of fire in Star Trek II. Each grain is a particle with its own start time, velocity and life.',
+    uses: ['Intro and outro animations', 'Reveal posts and film teasers', 'Short loops for social posts', 'Title cards and transitions'],
+    tips: [
+      { text: 'Wind from the lower left and big grains look like ash in a draught.', set: { wind: 215, grain: 6 } },
+      { text: 'Start the snap from the middle and keep the page white for a bright burst.', set: { from: 'centre', left: 'paper', spread: 80 } },
+      { text: 'Leave a faint ghost of the picture behind and slow the snap right down.', set: { left: 'ghost', speed: 15 } },
+    ],
+    terms: [['Particle system', 'A group of many small objects, each with its own position, velocity and lifetime, used for smoke, fire and dust.'], ['Easing', 'Starting or ending a movement gradually instead of at a constant speed.'], ['Turbulence', 'Irregular, swirling variation added to a movement so that it does not look mechanical.']],
+    related: ['pixel-dissolve', 'particles', 'snowfall'],
+  },
+};

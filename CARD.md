@@ -14,6 +14,176 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-013 · Does Lumenary's risograph ink model read as less "filtered" than our press?
+
+**Status:** closed
+**Opened:** 2026-11-16
+**From:** T-013
+
+**1. Where we are.**
+In C-012 our `press` treatment made C-011's drawings read as printed and the page as less
+AI-made, but Saif said the treated drawings looked filtered.
+
+**2. What we are doing.**
+Make a copy of `runs/c011/arm-b.html` with its 10 drawn elements printed by `riso` (our colour
+separation plus Lumenary's risograph ink model and constants, default dials, same two inks
+`#1a1a1a` / `#3f6e96`), and blind-pick it against C-012's `press`-treated page. Only the
+printing model differs.
+
+Measures:
+- **(a)** which page looks less AI-made; **(b)** on which are the drawings more convincingly
+  printed or hand-made; **(c)** which page's drawings look more filtered (or neither / both).
+
+**3. Why.**
+We don't know whether "filtered" came from *our* choice of imperfections (wobbling edges, ink
+spread, dot-screened tints) or would come from any procedural print model. Lumenary's model
+keeps edges where they are and uses only grain, uneven density and misregistration.
+
+**4. What is affected.**
+- Which print model the PS style file names as its candidate (`press`, `riso`, or neither).
+- T-013: whether "filtered" is about the kind of imperfection, or about procedural imperfection itself.
+
+**5. Conclusion.**
+- **If** `riso` wins (c), with Saif calling the press page the more filtered one or neither
+  filtered → we claim *the edge-distorting imperfections caused the filtered look*; `riso`
+  replaces `press` as the PS style's candidate.
+- **If** both still read as filtered, or `press` is less filtered → we claim *switching to
+  Lumenary's ink model didn't fix it*; the next test is one of T-013's other candidates
+  (uneven strength, treating text too, plain drawings).
+- (a) and (b) are recorded either way.
+
+**6. If not done.**
+The PS style keeps a candidate treatment that the judge called filtered, and we don't learn
+whether a second, independently built model avoids it.
+
+**Limits (known before running):** n = 1; Saif has seen C-012's press page, so it may be
+recognised; the two pages differ in more than one imperfection (no wobble or spread in `riso`;
+grain instead of dot screen; ink density under 100%), so a result can't say *which* of those
+mattered; `riso`'s light tints print sparser than their nominal coverage.
+
+**Result (2026-11-16):** second branch. **`press` was the less filtered of the two; (a) and (b)
+were ties.**
+
+| | (a) less AI-made | (b) drawings convincingly printed | Looks more filtered |
+|---|---|---|---|
+| `riso` (`arm-b.html`, page 1) | tie | tie | **yes** |
+| `press`, C-012 dials (`arm-a.html`, page 2) | tie | tie | no |
+
+Saif: "Both are really good! One has darker lines, one has lighter lines." On (b): "Both are good!"
+(The first blind pair opened only page 1 in Saif's browser; `tools/blind.sh` now opens the pages
+one at a time and prints both links. The judgement above was made with both pages open.)
+
+**What changed between them** (by construction, not tested separately): `riso` keeps edges where
+they are, has no ink spread, lays tints as random grain instead of a dot screen, and never prints
+ink fully solid (lines at about 80–95% black). That last one is the "lighter lines" Saif noticed.
+Which of these made `riso` read as more filtered isn't known.
+
+**Claim:** for this page, Lumenary's risograph ink model read as *more* filtered than our press,
+while looking as good on the other two questions. So C-012's "filtered" wasn't caused only by
+press's edge wobble and ink spread: a model without those still read as an effect, more so.
+
+Read together with C-012, "filtered" is relative. The press page was the filtered one next to the
+untreated page, and the less filtered one next to `riso`.
+
+**Changes made:**
+- `press` stays the PS style's candidate treatment (still not adopted: C-012's filtered finding stands).
+- `riso` kept as a treatment, with this result in `treatments/theory/riso.md`.
+- T-013 stays open, with a new candidate: solid ink. Lines printed below full density may read as
+  processing (Saif's "lighter lines").
+
+**Closed:** 2026-11-16
+
+---
+
+## C-012 · Does a press treatment on the drawings remove the "polygon-ish" tell?
+
+**Status:** closed
+**Opened:** 2026-11-16
+**From:** T-012
+
+**1. Where we are.**
+C-011's PS-style page won both blind questions, but its drawings are crisp vector SVG, the kind
+C-010's judge called "polygon-ish, no streaks, no flares"; the new `treatments/press` treatment
+(two-colour letterpress: ink spread, edge wobble, misregistration, screened tints, grain) hasn't
+been tested.
+
+**2. What we are doing.**
+Make a copy of `runs/c011/arm-b.html` whose 10 drawn elements (the title lettering and 9 drawings) are run through
+`Treatments.treatAll('svg[role=img]', { treatment: 'press' })` with the page's own two inks
+(`#1a1a1a`, `#3f6e96`), and blind-pick it against the untreated original. Nothing else differs.
+
+Measures:
+- **Blind pick:** (a) which page looks less AI-made; (b) on which page do the drawings look
+  printed or hand-made rather than computer-drawn.
+- **One more question:** does either page's drawings look "filtered", like an effect laid on top?
+- Treatment time on load.
+
+**3. Why.**
+We don't know whether the top layer can fix the one C-010 tell that the guides can't, or
+whether a procedural imitation of printing just reads as a new kind of filter.
+
+**4. What is affected.**
+- Whether `treatments/` becomes a tested part of the library, and whether the PS style file
+  names `press` as its treatment.
+- METHOD.md's two-layer claim (that the drawing tell belongs to a separate layer).
+- T-012's answer.
+
+**5. Conclusion.**
+- **If** the treated page wins (a) and (b), and Saif doesn't call it filtered → we claim *a
+  treatment derived from the printing process removes the drawing tell on top of a page the
+  guides already got right*. The PS style file names `press`.
+- **If** it wins (b) but Saif calls it filtered → we claim *it reads as printed, but as an
+  effect*; tune the dials down and retest before adopting.
+- **If** it loses (a) or (b) → we claim *this treatment didn't help*; the drawing tell needs
+  something other than print imperfections (better drawing, not better printing).
+
+**6. If not done.**
+The top layer stays an idea, and the PS winner keeps its polygon-ish drawings.
+
+**Limits (known before running):** n = 1; Saif has seen the untreated page in C-011, so it may
+be recognised; the treatment was written by me, so I chose its strength (dials used: wobble 0.45, spread
+0.35, grain 0.25, starve 0.2, others default; set gentler than the defaults after a look, before
+the pick); same judge who named the tell. Seen before the pick: the smallest lettering inside
+drawings ("30 SECONDS") thickens with the ink spread and gets harder to read.
+
+**Result (2026-11-16):** second branch. **The treated page won both looks questions, and
+Saif called its drawings filtered.**
+
+| | (a) less AI-made | (b) drawings look printed / hand-made | Looks filtered? |
+|---|---|---|---|
+| Press-treated (`arm-b.html`, page 2) | **won** | **won** | **yes** |
+| Untreated C-011 winner (`arm-a.html`, page 1) | lost | lost | no |
+
+Treatment cost on load: about 100 ms for 10 elements in headless Chromium.
+
+So the top layer did what the guides couldn't: on this page, it moved the drawings away from
+"computer-drawn" and the whole page with them. But it's visible *as* a treatment. The judge can
+see that an effect was applied, which is the risk METHOD.md's two-layer note named (the same
+filter everywhere becomes its own look).
+
+**Candidate reasons it reads as filtered** (from looking at the pages; not tested):
+1. **Everything got the same treatment, equally.** A real press run is uneven across a sheet;
+   here every drawing has the same wobble, grain and speckle density.
+2. **The drawings were already "hand-drawn" vectors.** C-011's agent drew wobbly, hatched SVG,
+   and printing it adds a second layer of fake imperfection on top of the first.
+3. **The small lettering inside drawings thickened**, which looks like processing more than
+   like ink.
+4. **The text around the drawings is untreated.** On a real printed page the body type would
+   carry the same ink spread, so treated drawings beside crisp text stand out.
+
+**Claim:** for this page, a press treatment derived from the printing process made the
+drawings and the page read as less AI-made, but as treated. It isn't adopted into the PS style
+file yet; per the card, tune it and retest first.
+
+**Changes made:**
+- PS style file: `press` named as a *candidate* treatment with the C-012 result, not as adopted.
+- `treatments/README.md`: the C-012 result.
+- T-012 answered (partly); T-013 opened: what stops it reading as filtered.
+
+**Closed:** 2026-11-16
+
+---
+
 ## C-011 · Does a "human touch" style from PS Magazine fix what the judge called cold and empty?
 
 **Status:** closed

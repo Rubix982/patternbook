@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treatments demo</title>
+<style>
+  :root { --ink: #1a1a1a; --rule: #d8d8d8; --muted: #555; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; background: #fff; color: var(--ink);
+         font: 15px/1.45 -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { margin: 0 0 20px; color: var(--muted); max-width: 70ch; }
+  .bar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end;
+         padding: 12px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  label { display: grid; gap: 2px; font-size: 13px; color: var(--muted); }
+  label span.v { color: var(--ink); font-variant-numeric: tabular-nums; }
+  select, input[type=color] { font: inherit; }
+  .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 20px; }
+  figure { margin: 0; }
+  figcaption { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--rule); }
+  #status { font-size: 13px; color: var(--muted); min-height: 1.4em; }
+  #srcSvg { position: absolute; left: -9999px; top: 0; width: 520px; height: 360px; }
+</style>
+</head>
+<body>
+<h1>Treatments</h1>
+<p class="lede">The top layer: procedures that make a page's drawings and photos look printed
+or inked rather than drawn by a machine. Each one comes from the process that made the look;
+the maths is in <code>theory/</code>. Pick a treatment and turn the dials.</p>
+
+<div class="bar">
+  <label>Treatment
+    <select id="treatment">
+      <option value="press">Two-colour press (for drawings)</option>
+      <option value="riso">Two-colour risograph (for drawings; Lumenary's ink model)</option>
+      <option value="halftone">Halftone (for photos)</option>
+      <option value="hatch">Pen hatching (for photos)</option>
+    </select>
+  </label>
+  <label>Source
+    <select id="source">
+      <option value="drawing">Sample drawing (SVG)</option>
+      <option value="photo">Sample still life</option>
+    </select>
+  </label>
+  <div id="dials" style="display:contents"></div>
+  <label>Seed <input id="seed" type="number" value="7" min="1" max="9999" style="width:6em"></label>
+</div>
+<div id="status"></div>
+
+<div class="pair">
+  <figure><figcaption>Original</figcaption><canvas id="before"></canvas></figure>
+  <figure><figcaption>Treated</figcaption><canvas id="after"></canvas></figure>
+</div>
+
+<!-- The sample drawing: crisp vector art, the "polygon-ish" kind C-010's judge named. -->
+<svg id="srcSvg" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A router on a shelf with a power plug">
+  <rect x="20" y="20" width="480" height="320" fill="#c9d6e2"/>
+  <rect x="40" y="250" width="440" height="14" fill="#1a1a1a"/>
+  <rect x="120" y="170" width="280" height="80" rx="6" fill="#ffffff" stroke="#1a1a1a" stroke-width="5"/>
+  <line x1="170" y1="170" x2="150" y2="70" stroke="#1a1a1a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="350" y1="170" x2="370" y2="70" stroke="#1a1a1a" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="190" cy="212" r="10" fill="#3f6e96"/>
+  <circle cx="230" cy="212" r="10" fill="#3f6e96"/>
+  <circle cx="270" cy="212" r="10" fill="#ffffff" stroke="#1a1a1a" stroke-width="3"/>
+  <circle cx="310" cy="212" r="10" fill="#3f6e96"/>
+  <path d="M400 230 C 450 230, 450 300, 480 300" fill="none" stroke="#1a1a1a" stroke-width="5"/>
+  <path d="M260 60 a 60 60 0 0 1 0 0" fill="none"/>
+  <path d="M215 120 q 45 -40 90 0" fill="none" stroke="#3f6e96" stroke-width="6" stroke-linecap="round"/>
+  <path d="M195 100 q 65 -60 130 0" fill="none" stroke="#3f6e96" stroke-width="6" stroke-linecap="round"/>
+  <text x="40" y="320" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#1a1a1a">Lights on the front</text>
+</svg>
+
+<script src="treatments.js"></script>
+<script>
+(function () {
+  var DIALS = {
+    press: [['misregister', 0, 4, 0.1, 'Plates off (px)'], ['spread', 0, 2, 0.1, 'Ink spread (px)'],
+            ['wobble', 0, 3, 0.1, 'Edge wobble (px)'], ['grain', 0, 1, 0.05, 'Grain'],
+            ['starve', 0, 1, 0.05, 'Ink starvation'], ['screen', 2, 8, 0.2, 'Tint screen (px)'],
+            ['fibre', 0, 1, 0.05, 'Paper fibre']],
+    riso: [['grain', 0, 100, 1, 'Grain'], ['miss', 0, 100, 1, 'Misregistration'],
+           ['density', 40, 130, 1, 'Ink density']],
+    halftone: [['screen', 2, 14, 0.5, 'Dot spacing (px)'], ['angle', 0, 90, 1, 'Screen angle (°)'],
+               ['contrast', -0.6, 0.8, 0.05, 'Contrast'], ['wobble', 0, 2, 0.1, 'Wobble (px)'],
+               ['grain', 0, 1, 0.05, 'Grain'], ['starve', 0, 1, 0.05, 'Ink starvation']],
+    hatch: [['spacing', 2, 10, 0.25, 'Line spacing (px)'], ['contrast', -0.6, 0.8, 0.05, 'Contrast'],
+            ['outline', 0.05, 0.9, 0.05, 'Outline threshold'], ['wobble', 0, 3, 0.1, 'Wobble (px)'],
+            ['fibre', 0, 1, 0.05, 'Paper fibre']]
+  };
+  var $ = function (id) { return document.getElementById(id); };
+  var SCALE = 2, CSS_W = 520, CSS_H = 360, W = CSS_W * SCALE, H = CSS_H * SCALE;
+  var before = $('before'), after = $('after');
+  before.width = after.width = W; before.height = after.height = H;
+  var sourceData = null, timer = null;
+
+  function buildDials() {
+    var name = $('treatment').value, box = $('dials'), d = Treatments.defaults[name];
+    box.innerHTML = '';
+    DIALS[name].forEach(function (spec) {
+      var key = spec[0], lab = document.createElement('label');
+      lab.innerHTML = spec[4] + ' <span class="v"></span>';
+      var inp = document.createElement('input');
+      inp.type = 'range'; inp.min = spec[1]; inp.max = spec[2]; inp.step = spec[3]; inp.value = d[key];
+      inp.dataset.key = key;
+      var show = function () { lab.querySelector('.v').textContent = inp.value; };
+      inp.addEventListener('input', function () { show(); schedule(); });
+      show(); lab.appendChild(inp); box.appendChild(lab);
+    });
+    var colourKeys = (name === 'press' || name === 'riso') ? [['ink', 'Key ink'], ['spot', 'Spot ink']] : [['ink', 'Ink']];
+    colourKeys.forEach(function (c) {
+      var lab = document.createElement('label'); lab.textContent = c[1];
+      var inp = document.createElement('input'); inp.type = 'color'; inp.value = d[c[0]]; inp.dataset.key = c[0];
+      inp.addEventListener('input', schedule); lab.appendChild(inp); box.appendChild(lab);
+    });
+  }
+
+  function drawStillLife(ctx) {
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, '#d9d4cc'); g.addColorStop(1, '#8f8a83');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#5c5852'; ctx.fillRect(0, H * 0.68, W, H * 0.32);
+    function sphere(cx, cy, r) {
+      var s = ctx.createRadialGradient(cx - r * 0.4, cy - r * 0.45, r * 0.08, cx, cy, r);
+      s.addColorStop(0, '#f4f2ee'); s.addColorStop(0.55, '#9c978f'); s.addColorStop(1, '#2d2a27');
+      ctx.fillStyle = s; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.fillStyle = 'rgba(0,0,0,0.35)';
+    ctx.beginPath(); ctx.ellipse(W * 0.36, H * 0.79, W * 0.15, H * 0.04, 0, 0, Math.PI * 2); ctx.fill();
+    sphere(W * 0.36, H * 0.58, H * 0.2);
+    var c = ctx.createLinearGradient(W * 0.6, 0, W * 0.74, 0);
+    c.addColorStop(0, '#3a3732'); c.addColorStop(0.35, '#e9e6e0'); c.addColorStop(1, '#4a4640');
+    ctx.fillStyle = c; ctx.fillRect(W * 0.6, H * 0.3, W * 0.14, H * 0.48);
+    ctx.fillStyle = '#d7d3cc'; ctx.beginPath(); ctx.ellipse(W * 0.67, H * 0.3, W * 0.07, H * 0.025, 0, 0, Math.PI * 2); ctx.fill();
+  }
+
+  function loadSource() {
+    var ctx = before.getContext('2d', { willReadFrequently: true });
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+    if ($('source').value === 'photo') {
+      drawStillLife(ctx);
+      sourceData = ctx.getImageData(0, 0, W, H);
+      return Promise.resolve();
+    }
+    var svg = $('srcSvg').cloneNode(true);
+    svg.removeAttribute('id'); svg.setAttribute('width', W); svg.setAttribute('height', H);
+    svg.removeAttribute('style');
+    var url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)], { type: 'image/svg+xml' }));
+    return new Promise(function (resolve) {
+      var im = new Image();
+      im.onload = function () { ctx.drawImage(im, 0, 0, W, H); URL.revokeObjectURL(url); sourceData = ctx.getImageData(0, 0, W, H); resolve(); };
+      im.src = url;
+    });
+  }
+
+  function render() {
+    if (!sourceData) return;
+    var o = { unit: SCALE, seed: +$('seed').value };
+    [].forEach.call(document.querySelectorAll('#dials input'), function (inp) {
+      o[inp.dataset.key] = inp.type === 'range' ? +inp.value : inp.value;
+    });
+    var t0 = performance.now();
+    var copy = new ImageData(new Uint8ClampedArray(sourceData.data), W, H);
+    var out = Treatments.apply(copy, $('treatment').value, o);
+    after.getContext('2d').putImageData(out, 0, 0);
+    $('status').textContent = 'Rendered in ' + Math.round(performance.now() - t0) + ' ms at ' + W + ' × ' + H + ' px.';
+  }
+  function schedule() { clearTimeout(timer); timer = setTimeout(render, 60); }
+
+  $('treatment').addEventListener('change', function () {
+    var t = $('treatment').value;
+    $('source').value = (t === 'press' || t === 'riso') ? 'drawing' : 'photo';
+    buildDials(); loadSource().then(render);
+  });
+  $('source').addEventListener('change', function () { loadSource().then(render); });
+  $('seed').addEventListener('input', schedule);
+  var q = new URLSearchParams(location.search);
+  if (q.get('t') && Treatments.defaults[q.get('t')]) {
+    $('treatment').value = q.get('t');
+    $('source').value = (q.get('t') === 'press' || q.get('t') === 'riso') ? 'drawing' : 'photo';
+  }
+  if (q.get('src')) $('source').value = q.get('src');
+  buildDials(); loadSource().then(render);
+})();
+</script>
+</body>
+</html>

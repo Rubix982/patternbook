@@ -89,3 +89,19 @@ value is just *any* specific instruction, not human sources.
 **Opened:** 2026-10-31
 **Question:** Saif preferred the PS page but found its technical details "a bit harder to navigate" than the clean line-art page. Also still owed: Saif's per-page tells for C-011 (runs/c011/blind/), to see which C-010 tells survived.
 **Answer:** —
+
+### T-012 · Could procedural "mark-making" treatments (like Lumenary's) supply the texture agents can't draw by hand?
+
+**Status:** answered (partly)
+**Parent:** T-010
+**Opened:** 2026-11-16
+**Question:** Top-layer test (METHOD.md "Two layers"). Take a page the bottom layer already got right (C-011's PS-style winner) and run its drawings through a matching treatment (ink/hatching, spot-colour print). Does the "polygon-ish, no streaks, no flares" tell go away in a blind pick, without the page reading as filtered? Inspiration: Lumenary (lumenary-studio.vercel.app, Mursal Furqan Kumbhar), 214 browser-only treatments with the maths written out.
+**Answer:** C-012 — treated page won both looks questions, but the judge called its drawings filtered.
+
+### T-013 · What stops the press treatment reading as "filtered"?
+
+**Status:** open
+**Parent:** C-012
+**Opened:** 2026-11-16
+**Question:** C-012's treated drawings read as printed and also as an effect. Candidates to test one at a time against the C-012 treated page: (1) uneven strength across drawings, as across a real press sheet; (2) treating the body text too, so nothing on the page is crisper than the ink; (3) protecting small lettering from ink spread; (4) giving the agent a plain flat drawing to print, instead of printing art that already fakes hand-made wobble.
+**Answer:** — (C-013: Lumenary's risograph model read as *more* filtered than `press`, equal on the other questions. Added candidate (5): print ink at full density; `riso`'s lighter lines may read as processing.)

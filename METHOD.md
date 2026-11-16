@@ -46,6 +46,30 @@ agent *doesn't* already do. C-002 found the agent reached 2 of 6 IKEA rules on i
 that entry had a lot to add. C-007 found it already followed 5 of 6 troubleshooting rules,
 and the entry's extra parts (copied from print) made the page worse.
 
+## 2c. Derive the look from the process that made it
+
+Learned from Lumenary's theory pages (lumenary-studio.vercel.app/theory, Mursal Furqan
+Kumbhar). Don't describe a look ("grainy, two-colour, slightly off"); work out **why** it
+looks that way, then turn each cause into a number. Five steps:
+
+1. **The process.** What physically made it? Two-colour letterpress on cheap paper; a
+   stencil duplicator; resist paste on cotton; a brush loaded with ink.
+2. **Its constraints.** What could that process *not* do? A press can only ink or leave
+   paper bare, so it can't make grey. A risograph prints one ink per pass. A spot-colour
+   job has exactly two inks.
+3. **Its imperfections.** What does it always get slightly wrong? Plates don't line up
+   (misregistration); ink spreads into paper (dot gain); inking is uneven (speckle, grain);
+   a brush stroke thins at its ends. **The human touch lives here**, and it's what C-010's
+   judge missed ("no streaks, no flares").
+4. **Equations with seeded noise.** Each constraint and imperfection becomes a formula,
+   and every random choice comes from a seeded generator, so the same settings always give
+   the same result.
+5. **Dials.** Expose only the quantities a person would actually vary: how far off the
+   plates are, how much ink spreads, how coarse the grain is.
+
+Use it for both layers. For an art-style file, steps 1–3 say what the page should get wrong
+*on purpose*. For a treatment, all five steps become code (see `treatments/`).
+
 ## 3. Write the entry
 
 Copy `library/_template.md` to `library/<problem>/<source>.md`. The template says what
@@ -79,6 +103,21 @@ An entry isn't trusted until it beats something in a blind pick. Open a card in
 6. **Write the result in the card,** including the judge's own words and anything the
    run showed was wrong with the card's measures. Update the entry's `tested_in` and
    `best_example`.
+
+## Two layers (2026-11-16)
+
+A page is built in two layers, and each fixes different tells:
+
+1. **Guides (bottom):** the problem entries and art-style files in `library/`. They set
+   structure, layout, palette, type and voice. Four of the five judge's tells below live
+   here: empty space, a missing header, enthusiastic copy, too much text. No filter fixes these.
+2. **Treatments (top):** procedures applied to the page's photos and drawings (ink,
+   halftone, grain, engraving), in the spirit of Lumenary (lumenary-studio.vercel.app).
+   The fifth tell lives here: "polygon-ish, no streaks, no flares".
+
+Get the bottom layer right first. A style file should name the treatment and settings that
+match it, so the filter doesn't fight the palette. Treatments get blind-tested too: the same
+filter over everything becomes its own recognisable look.
 
 ## The judge's checklist (from Saif's notes, C-010, 2026-10-31)
 

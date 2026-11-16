@@ -11,5 +11,11 @@ if [ $((RANDOM % 2)) -eq 0 ]; then first="$x"; second="$y"; else first="$y"; sec
 cp "$first" "$dir/blind/page-1.html"
 cp "$second" "$dir/blind/page-2.html"
 printf 'page-1=%s\npage-2=%s\n' "$first" "$second" > "$dir/.blind-key"
-open "$dir/blind/page-1.html" "$dir/blind/page-2.html" 2>/dev/null || true
-echo "Blind pages ready in $dir/blind/"
+# Open them one at a time: some browsers drop the second file when both arrive in one call.
+open "$dir/blind/page-1.html" 2>/dev/null || true
+sleep 1
+open "$dir/blind/page-2.html" 2>/dev/null || true
+abs="$(cd "$dir/blind" && pwd)"
+echo "Blind pages ready:"
+echo "  file://$abs/page-1.html"
+echo "  file://$abs/page-2.html"

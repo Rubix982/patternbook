@@ -29,6 +29,11 @@ one is excluded on its own terms, not only for copyright.
 > best) on a router page. The judge's one complaint: technical details were "a bit harder to
 > navigate". Add a clear index or jump links when you use the dense layout.
 
+> **Candidate treatment (C-012):** `treatments/` `press`, with `ink #1a1a1a`, `spot #3f6e96`,
+> `wobble 0.45`, `spread 0.35`, `grain 0.25`, `starve 0.2`. On C-011's winning page it made the
+> drawings and the page read as less AI-made, but the judge said the drawings looked filtered.
+> Not adopted until a retuned version passes (T-013).
+
 ## Palette
 
 Black plus **one** flat spot colour, on white. Each issue picked one spot ink: red in
