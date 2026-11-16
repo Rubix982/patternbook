@@ -1,0 +1,1617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red Lentil Soup</title>
+<meta name="description" content="Red lentil soup with cumin, lemon and chilli butter. Serves 4, about 45 minutes.">
+<style>
+  :root {
+    --paper: #f3eee1;
+    --paper-2: #e9e1cf;
+    --ink: #2a1712;
+    --ink-soft: #634c42;
+    --red: #a3160f;
+    --orange: #ef5423;
+    --yellow: #f3ba57;
+    --rule: rgba(42, 23, 18, 0.22);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: "Gill Sans", "Gill Sans MT", Seravek, "Avenir Next", "Trebuchet MS", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 18px/1.55 var(--serif);
+    font-variant-numeric: oldstyle-nums;
+  }
+  .page { max-width: 1180px; margin: 0 auto; padding: 0 16px 56px; }
+  @media (min-width: 720px) { .page { padding: 0 32px 72px; } }
+
+  h1, h2, h3 { font-weight: 700; margin: 0; }
+  p { margin: 0 0 0.9em; }
+  button { font: inherit; color: inherit; }
+
+  .smallcaps {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* running head */
+  .runhead {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 0 10px;
+    border-bottom: 1.5px solid var(--ink);
+    color: var(--red);
+  }
+
+  /* opening spread */
+  .spread {
+    display: grid;
+    gap: 28px;
+    padding-top: 28px;
+  }
+  .spread .titleblock .sub { margin-bottom: 0; }
+  @media (min-width: 900px) {
+    .spread {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      grid-template-areas: "title plate" "body plate";
+      grid-template-rows: auto 1fr;
+      gap: 24px 44px;
+      padding-top: 40px;
+    }
+    .spread .titleblock { grid-area: title; }
+    .spread .hero { grid-area: plate; }
+    .spread .intro { grid-area: body; }
+  }
+  h1 {
+    font-size: clamp(2.7rem, 7vw, 4.9rem);
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+  }
+  .sub {
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+    color: var(--red);
+    margin: 0.35em 0 1.1em;
+  }
+  .intro p { max-width: 34em; }
+
+  .facts {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    margin: 1.4em 0 0;
+    border-top: 1px solid var(--rule);
+  }
+  .facts dt, .facts dd { padding: 9px 0; border-bottom: 1px solid var(--rule); margin: 0; }
+  .facts dt { padding-right: 18px; color: var(--ink-soft); padding-top: 12px; }
+  .facts dd { font-size: 1rem; }
+
+  /* pictures */
+  .plate { margin: 0; }
+  .plate .frame {
+    position: relative;
+    background: var(--paper-2);
+    overflow: hidden;
+  }
+  .plate .frame > canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .plate.ready .frame > canvas { opacity: 1; }
+  .plate figcaption {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    padding-top: 8px;
+  }
+  .hero .frame { aspect-ratio: 3 / 2; }
+
+  /* ingredient spread with hand labels */
+  .layout {
+    margin-top: 56px;
+  }
+  .spread-ing { max-width: 920px; margin: 0 auto; }
+  .spread-ing .frame { aspect-ratio: 1200 / 560; }
+  .spread-ing .tag {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-style: italic;
+    font-size: clamp(0.8rem, 1.5vw, 1.05rem);
+    line-height: 1.1;
+    white-space: nowrap;
+    color: var(--ink);
+    opacity: 0;
+    transition: opacity 0.6s ease 0.2s;
+  }
+  .spread-ing.ready .tag { opacity: 1; }
+  .spread-ing figcaption { display: none; }
+  @media (max-width: 640px) {
+    .spread-ing .tag { display: none; }
+    .spread-ing figcaption { display: block; }
+  }
+
+  .cook {
+    display: grid;
+    gap: 44px;
+    margin-top: 40px;
+  }
+  @media (min-width: 900px) {
+    .cook { grid-template-columns: minmax(300px, 4fr) minmax(0, 7fr); gap: 56px; }
+    .ingredients-inner { position: sticky; top: 20px; }
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  h2 { font-size: 1.9rem; line-height: 1.1; }
+
+  /* servings */
+  .serves {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+  }
+  .serves button {
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    border-radius: 50%;
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .serves button:hover { background: var(--yellow); }
+  .serves button:disabled { opacity: 0.3; cursor: default; background: transparent; }
+  .serves output {
+    min-width: 1.6em;
+    text-align: center;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-variant-numeric: lining-nums;
+  }
+
+  .group-title {
+    margin: 22px 0 4px;
+    color: var(--red);
+  }
+  .ing { list-style: none; margin: 0; padding: 0; }
+  .ing li { border-bottom: 1px solid var(--rule); }
+  .ing label {
+    display: grid;
+    grid-template-columns: 22px 5.2em 1fr;
+    gap: 10px;
+    align-items: baseline;
+    padding: 8px 0;
+    cursor: pointer;
+  }
+  .ing input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    background: transparent;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+  }
+  .ing input:checked { background: var(--red); border-color: var(--red); }
+  .ing input:checked::after {
+    content: "";
+    position: absolute;
+    left: 3.5px; top: 0.5px;
+    width: 4px; height: 8px;
+    border: solid var(--paper);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .ing input:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  .ing .q {
+    color: var(--red);
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: 0.98rem;
+    font-weight: 700;
+  }
+  .ing .n { font-size: 1rem; line-height: 1.4; }
+  .ing .n em { color: var(--ink-soft); }
+  .ing li:has(input:checked) .q,
+  .ing li:has(input:checked) .n { opacity: 0.45; text-decoration: line-through; text-decoration-thickness: 1px; }
+
+  .tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    margin-top: 16px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+  }
+  .linkish {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-family: var(--sans);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--orange);
+    cursor: pointer;
+  }
+  .linkish[aria-pressed="true"] { color: var(--red); text-decoration-color: var(--red); }
+
+  /* time strip */
+  .timeline { margin: 18px 0 8px; }
+  .timeline .bar { display: flex; height: 12px; gap: 3px; }
+  .timeline .seg { background: var(--red); }
+  .timeline .seg.wait {
+    background: repeating-linear-gradient(135deg, var(--yellow) 0 5px, transparent 5px 8px);
+    box-shadow: inset 0 0 0 1px var(--yellow);
+  }
+  .timeline .labels { display: flex; gap: 3px; margin-top: 6px; }
+  .timeline .labels span { font-family: var(--sans); font-size: 0.78rem; line-height: 1.25; color: var(--ink-soft); padding-right: 6px; }
+  .timeline .labels b { display: block; color: var(--ink); font-weight: 600; }
+
+  .hint { font-size: 0.92rem; font-style: italic; color: var(--ink-soft); margin: 10px 0 0; }
+
+  /* method */
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step {
+    display: grid;
+    grid-template-columns: 3.1rem 1fr;
+    gap: 6px 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: opacity 0.3s;
+  }
+  .step .num {
+    width: 2.6rem;
+    height: 2.6rem;
+    border: 0;
+    background: none;
+    padding: 0;
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--red);
+    font-variant-numeric: lining-nums;
+    cursor: pointer;
+    text-align: left;
+  }
+  .step .num:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  .step h3 {
+    font-size: 1.12rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 12px;
+    margin: 0.35rem 0 0.3rem;
+  }
+  .step h3 .time { color: var(--red); font-weight: 400; }
+  .step p { margin: 0; }
+  .step p + p { margin-top: 0.6em; }
+  .step.done { opacity: 0.4; }
+  .step.done .num { text-decoration: line-through; text-decoration-thickness: 3px; }
+
+  .pot { margin: 26px 0 8px; }
+  .pot .frame { aspect-ratio: 10 / 7; }
+  @media (min-width: 900px) {
+    .pot { display: grid; grid-template-columns: 3fr 2fr; gap: 20px; align-items: end; }
+    .pot figcaption { padding-bottom: 4px; }
+  }
+
+  /* notes */
+  .notes { margin-top: 64px; }
+  .notes-grid {
+    display: grid;
+    gap: 6px 36px;
+    margin-top: 6px;
+  }
+  @media (min-width: 720px) { .notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1060px) { .notes-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .note { padding: 16px 0 6px; border-bottom: 1px solid var(--rule); }
+  .note h3 { font-size: 1.05rem; margin-bottom: 0.25em; }
+  .note p { font-size: 1rem; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 12px;
+    border-top: 1.5px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    color: var(--ink-soft);
+  }
+  footer p { margin: 0; font-size: 0.92rem; }
+
+  @media print {
+    body { background: #fff; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .hero, .spread-ing, .pot, .tools, .hint, .serves button, .timeline { display: none !important; }
+    .spread { grid-template-columns: 1fr; padding-top: 12pt; }
+    .cook { grid-template-columns: 2fr 3fr; gap: 24pt; margin-top: 12pt; }
+    .ingredients-inner { position: static; }
+    .ing input { display: none; }
+    .ing label { grid-template-columns: 5.2em 1fr; padding: 3pt 0; }
+    .step { padding: 8pt 0; break-inside: avoid; }
+    .step.done { opacity: 1; }
+    .step.done .num { text-decoration: none; }
+    .notes { margin-top: 18pt; }
+    .note { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="runhead smallcaps">
+    <span>Soups</span>
+    <span>Vegetarian &middot; Freezes well</span>
+  </header>
+
+  <section class="spread" aria-labelledby="title">
+    <div class="titleblock">
+      <h1 id="title">Red lentil soup</h1>
+      <p class="sub">with cumin, lemon and chilli butter</p>
+    </div>
+
+    <figure class="plate hero" id="plate-hero">
+      <div class="frame" role="img" aria-label="Overhead view of a teal bowl of orange lentil soup topped with yoghurt, red chilli butter and parsley, with lemon wedges, a spoon, bread and a dish of chilli flakes on a linen cloth."></div>
+      <figcaption>Finished with a spoon of yoghurt and chilli butter, with lemon on the side.</figcaption>
+    </figure>
+
+    <div class="intro">
+      <p>Red lentils are the quickest of the dried pulses. They need no soaking, and after twenty minutes at a simmer they fall apart completely, which is what makes this soup thick without any cream or potato.</p>
+      <p>The lemon goes in at the end and does more than it seems it should. Taste the soup before and after you add it: without it the soup tastes flat and a little muddy, with it the cumin comes forward.</p>
+
+      <dl class="facts">
+        <dt class="smallcaps">Serves</dt><dd>4 as a main, 6 as a starter</dd>
+        <dt class="smallcaps">Hands-on</dt><dd>About 20 minutes</dd>
+        <dt class="smallcaps">Start to finish</dt><dd>45 minutes</dd>
+        <dt class="smallcaps">Keeps</dt><dd>4 days in the fridge, 3 months frozen</dd>
+      </dl>
+    </div>
+  </section>
+
+  <div class="layout">
+    <figure class="plate spread-ing" id="plate-ing">
+      <div class="frame" role="img" aria-label="The main ingredients laid out on a board: two carrots with their tops, a brown onion and a halved one, a garlic bulb and two cloves, a pile of red lentils, a whole and a halved lemon, and a small heap of cumin seeds.">
+        <span class="tag" style="left:30%;top:9%">carrots</span>
+        <span class="tag" style="left:55%;top:48%">onion</span>
+        <span class="tag" style="left:80%;top:4%">garlic</span>
+        <span class="tag" style="left:25%;top:95%">red lentils</span>
+        <span class="tag" style="left:57%;top:95%">lemon</span>
+        <span class="tag" style="left:84%;top:92%">cumin seeds</span>
+      </div>
+      <figcaption>Carrots, onion, garlic, red lentils, lemon and cumin.</figcaption>
+    </figure>
+
+    <div class="cook">
+      <section class="ingredients" aria-labelledby="ing-title">
+        <div class="ingredients-inner">
+          <div class="section-head">
+            <h2 id="ing-title">Ingredients</h2>
+            <div class="serves" role="group" aria-label="Servings">
+              <span>Serves</span>
+              <button type="button" id="less" aria-label="Fewer servings">&minus;</button>
+              <output id="servings" aria-live="polite">4</output>
+              <button type="button" id="more" aria-label="More servings">+</button>
+            </div>
+          </div>
+
+          <p class="group-title smallcaps">For the soup</p>
+          <ul class="ing">
+            <li><label><input type="checkbox"><span class="q" data-n="3" data-u="tbsp">3 tbsp</span><span class="n">olive oil</span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="1" data-u="">1</span><span class="n" data-one="large onion" data-many="large onions">large onion</span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="2" data-u="" data-round="1">2</span><span class="n" data-one="medium carrot" data-many="medium carrots">medium carrots</span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="3" data-u="" data-round="1">3</span><span class="n" data-one="garlic clove" data-many="garlic cloves">garlic cloves</span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="2" data-u="tsp">2 tsp</span><span class="n">ground cumin</span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="1" data-u="tsp">1 tsp</span><span class="n">sweet paprika</span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="1" data-u="tbsp">1 tbsp</span><span class="n">tomato paste</span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="250" data-u="g">250 g</span><span class="n">red lentils <em>(<span class="q2" data-n="1.25" data-u="cup">1¼ cups</span>)</em></span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="1.5" data-u="l">1.5 litres</span><span class="n">vegetable stock or water <em>(<span class="q2" data-n="6" data-u="cup">6 cups</span>)</em></span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="1" data-u="tsp">1 tsp</span><span class="n">fine salt, <em>more to taste</em></span></label></li>
+          </ul>
+
+          <p class="group-title smallcaps">To finish</p>
+          <ul class="ing">
+            <li><label><input type="checkbox"><span class="q" data-n="1" data-u="">1</span><span class="n" data-one="lemon" data-many="lemons">lemon</span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="30" data-u="g">30 g</span><span class="n">butter, <em>or <span class="q2" data-n="2" data-u="tbsp">2 tbsp</span> olive oil</em></span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="1" data-u="tsp">1 tsp</span><span class="n">Aleppo pepper, <em>or half as much chilli flakes</em></span></label></li>
+            <li><label><input type="checkbox"><span class="q" data-n="4" data-u="tbsp">4 tbsp</span><span class="n">thick plain yoghurt</span></label></li>
+            <li><label><input type="checkbox"><span class="q">a handful</span><span class="n">parsley or mint, <em>chopped</em></span></label></li>
+          </ul>
+
+          <div class="tools">
+            <button type="button" class="linkish" id="clear">Clear ticks</button>
+            <button type="button" class="linkish" id="wake" aria-pressed="false" hidden>Keep the screen on</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="method" aria-labelledby="method-title">
+        <div class="section-head">
+          <h2 id="method-title">Method</h2>
+          <span class="smallcaps" style="color:var(--ink-soft)">7 steps &middot; 45 min</span>
+        </div>
+
+        <div class="timeline" aria-label="Where the time goes: 14 minutes at the stove, 25 minutes simmering on its own, 6 minutes to finish.">
+          <div class="bar">
+            <div class="seg" style="flex:14"></div>
+            <div class="seg wait" style="flex:25"></div>
+            <div class="seg" style="flex:6"></div>
+          </div>
+          <div class="labels" aria-hidden="true">
+            <span style="flex:14"><b>14 min</b>at the stove</span>
+            <span style="flex:25"><b>25 min</b>simmering, stir now and then</span>
+            <span style="flex:6"><b>6 min</b>finish</span>
+          </div>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <button type="button" class="num" aria-pressed="false" aria-label="Step 1, mark as done">1</button>
+            <div>
+              <h3>Rinse the lentils <span class="time smallcaps">3 min</span></h3>
+              <p>Tip them into a sieve and rinse under cold water, rubbing them between your fingers, until the water runs nearly clear. Pick out any small stones. Leave them to drain.</p>
+            </div>
+          </li>
+          <li class="step">
+            <button type="button" class="num" aria-pressed="false" aria-label="Step 2, mark as done">2</button>
+            <div>
+              <h3>Soften the vegetables <span class="time smallcaps">8&ndash;10 min</span></h3>
+              <p>Chop the onion finely and dice the carrot small, about the size of a pea, so it cooks in the same time as the lentils. Warm the oil in a large, heavy pot over a medium heat. Add the onion, carrot and a pinch of the salt, and cook, stirring now and then, until the onion is soft and translucent and just starting to colour at the edges.</p>
+            </div>
+          </li>
+          <li class="step">
+            <button type="button" class="num" aria-pressed="false" aria-label="Step 3, mark as done">3</button>
+            <div>
+              <h3>Cook the spices <span class="time smallcaps">1 min</span></h3>
+              <p>Slice the garlic thinly and add it with the cumin, paprika and tomato paste. Stir for about a minute, until the garlic smells sweet and the paste has darkened a shade. Don&rsquo;t let the garlic brown; it turns bitter.</p>
+            </div>
+          </li>
+          <li class="step">
+            <button type="button" class="num" aria-pressed="false" aria-label="Step 4, mark as done">4</button>
+            <div>
+              <h3>Simmer <span class="time smallcaps">20&ndash;25 min</span></h3>
+              <p>Add the lentils, the stock and the rest of the salt. Bring to the boil and skim off the grey foam that rises, then turn the heat down until the surface just bubbles. Partly cover the pot.</p>
+              <p>It is ready when the lentils have collapsed into the liquid and a piece of carrot crushes easily against the side of the pot. Stir every five minutes or so and scrape the bottom: red lentils stick as they thicken.</p>
+            </div>
+          </li>
+        </ol>
+
+        <figure class="plate pot" id="plate-pot">
+          <div class="frame" role="img" aria-label="An orange enamel pot of soup steaming on the stove, a wooden spoon standing in it and the lid propped against the tiled wall."></div>
+          <figcaption>Partly covered, so steam can escape and the soup reduces a little. With the lid on tight it boils over.</figcaption>
+        </figure>
+
+        <ol class="steps" start="5">
+          <li class="step">
+            <button type="button" class="num" aria-pressed="false" aria-label="Step 5, mark as done">5</button>
+            <div>
+              <h3>Blend <span class="time smallcaps">2 min</span></h3>
+              <p>Take the pot off the heat. Blend with a stick blender until smooth, or blend about half and leave the rest rough. In a jug blender, fill it no more than halfway and hold the lid down with a folded towel, because hot soup pushes the lid up.</p>
+            </div>
+          </li>
+          <li class="step">
+            <button type="button" class="num" aria-pressed="false" aria-label="Step 6, mark as done">6</button>
+            <div>
+              <h3>Loosen and season <span class="time smallcaps">2 min</span></h3>
+              <p>The soup should run off a ladle like thick cream. If it is heavier than that, stir in hot water a splash at a time. Squeeze in half the lemon and taste. Add more salt and more lemon until it tastes bright rather than flat.</p>
+            </div>
+          </li>
+          <li class="step">
+            <button type="button" class="num" aria-pressed="false" aria-label="Step 7, mark as done">7</button>
+            <div>
+              <h3>Chilli butter, and serve <span class="time smallcaps">2 min</span></h3>
+              <p>Melt the butter in a small pan until it foams. Take it off the heat and stir in the Aleppo pepper; the butter turns red within a few seconds. Ladle the soup into warm bowls, add a spoon of yoghurt to each, spoon the butter over and scatter with the herbs.</p>
+            </div>
+          </li>
+        </ol>
+        <p class="hint">Tap a step number to cross it off. Ticks and servings are remembered on this device.</p>
+      </section>
+    </div>
+  </div>
+
+  <section class="notes" aria-labelledby="notes-title">
+    <div class="section-head">
+      <h2 id="notes-title">Good to know</h2>
+    </div>
+    <div class="notes-grid">
+      <div class="note">
+        <h3>Other lentils</h3>
+        <p>Brown and green lentils hold their shape. They take 35 to 45 minutes and give a thinner, grainier soup that never blends quite smooth. Yellow split peas work but need about an hour.</p>
+      </div>
+      <div class="note">
+        <h3>It thickens as it stands</h3>
+        <p>By the next day it is nearly a pur&eacute;e. Reheat it gently with a splash of water, then taste again; it will want more salt and lemon than it did the first time.</p>
+      </div>
+      <div class="note">
+        <h3>Stock or water</h3>
+        <p>Water is fine; the cumin and lemon carry it. If your stock is already salted, start with half the salt and add the rest at the end.</p>
+      </div>
+      <div class="note">
+        <h3>Freezing</h3>
+        <p>Cool it, then freeze in portions for up to 3 months. Freeze it before the lemon and the toppings go in, and add those after reheating.</p>
+      </div>
+      <div class="note">
+        <h3>Without dairy</h3>
+        <p>Make the chilli oil with olive oil instead of butter. Leave out the yoghurt or use a thick unsweetened plant yoghurt.</p>
+      </div>
+      <div class="note">
+        <h3>A little more heat</h3>
+        <p>Add a pinch of chilli flakes with the cumin in step 3, or a teaspoon of harissa with the tomato paste.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Pictures made with Lumenary by Mursal Furqan Kumbhar.</p>
+  </footer>
+</div>
+
+<script src="../../treatments/lumenary/lumenary.js"></script>
+<script>
+/* Source drawings. Each scene is painted on a plain canvas with shapes,
+   gradients and soft shadows, then handed to a Lumenary treatment. */
+const Scenes = (() => {
+  const TAU = Math.PI * 2;
+
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function canvas(w, h) {
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    return c;
+  }
+
+  function ell(ctx, x, y, rx, ry, rot) {
+    ctx.beginPath();
+    ctx.ellipse(x, y, Math.max(rx, 0.1), Math.max(ry, 0.1), rot || 0, 0, TAU);
+  }
+
+  function shadow(ctx, blur, color, pathFn) {
+    ctx.save();
+    ctx.filter = 'blur(' + blur + 'px)';
+    ctx.fillStyle = color;
+    pathFn();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // a random point inside an ellipse
+  function inEllipse(r, cx, cy, rx, ry) {
+    const a = r() * TAU, d = Math.sqrt(r());
+    return [cx + Math.cos(a) * rx * d, cy + Math.sin(a) * ry * d];
+  }
+
+  // irregular closed blob through n jittered points
+  function blob(ctx, r, cx, cy, rx, ry, jitter, n, rot) {
+    n = n || 14;
+    const pts = [];
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * TAU;
+      const k = 1 + (r() - 0.5) * jitter;
+      let x = Math.cos(a) * rx * k, y = Math.sin(a) * ry * k;
+      if (rot) { const c = Math.cos(rot), s = Math.sin(rot); [x, y] = [x * c - y * s, x * s + y * c]; }
+      pts.push([cx + x, cy + y]);
+    }
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const p0 = pts[i], p1 = pts[(i + 1) % n];
+      const mx = (p0[0] + p1[0]) / 2, my = (p0[1] + p1[1]) / 2;
+      if (i === 0) ctx.moveTo(mx, my);
+      else ctx.quadraticCurveTo(p0[0], p0[1], mx, my);
+    }
+    const p0 = pts[0], p1 = pts[1];
+    ctx.quadraticCurveTo(p0[0], p0[1], (p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2);
+    ctx.closePath();
+  }
+
+  /* ---------- surfaces ---------- */
+
+  function linenTable(ctx, w, h, r) {
+    const g = ctx.createLinearGradient(0, 0, w * 0.5, h);
+    g.addColorStop(0, '#f1eadc');
+    g.addColorStop(1, '#e0d5c0');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+    ctx.globalAlpha = 0.07;
+    ctx.fillStyle = '#5d4c36';
+    for (let i = 0; i < w; i += 3) ctx.fillRect(i + (r() < 0.1 ? 1 : 0), 0, 1, h);
+    for (let j = 0; j < h; j += 3) ctx.fillRect(0, j, w, 1);
+    ctx.globalAlpha = 1;
+    // a few soft creases in the cloth
+    for (let i = 0; i < 5; i++) {
+      const y = h * (0.1 + r() * 0.8), x = w * (0.1 + r() * 0.8);
+      shadow(ctx, 18, 'rgba(90,70,45,0.18)', () => ell(ctx, x, y, 260 + r() * 200, 10 + r() * 8, (r() - 0.5) * 0.5));
+      shadow(ctx, 14, 'rgba(255,255,255,0.25)', () => ell(ctx, x + 6, y - 14, 220 + r() * 160, 6, (r() - 0.5) * 0.5));
+    }
+  }
+
+  // warm light from one corner, falling off toward the far edges
+  function lightPass(ctx, w, h, lx, ly, dark) {
+    const g = ctx.createRadialGradient(lx, ly, 0, lx, ly, Math.max(w, h) * 0.95);
+    g.addColorStop(0, 'rgba(255,236,200,0.22)');
+    g.addColorStop(0.5, 'rgba(255,236,200,0.0)');
+    g.addColorStop(1, 'rgba(0,0,0,' + dark + ')');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  /* ---------- objects ---------- */
+
+  function napkin(ctx, r, x, y, w, h, rot, cols) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    shadow(ctx, 14, 'rgba(10,5,0,0.5)', () => { ctx.beginPath(); ctx.rect(10, 14, w, h); });
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, cols[0]);
+    g.addColorStop(1, cols[1]);
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+    // weave
+    ctx.globalAlpha = 0.08;
+    ctx.fillStyle = '#6b5b45';
+    for (let i = 0; i < w; i += 3) ctx.fillRect(i, 0, 1, h);
+    for (let j = 0; j < h; j += 3) ctx.fillRect(0, j, w, 1);
+    ctx.globalAlpha = 1;
+    // two stripes near the edge
+    ctx.fillStyle = cols[2];
+    ctx.fillRect(0, h * 0.08, w, h * 0.035);
+    ctx.fillRect(0, h * 0.14, w, h * 0.012);
+    // fold
+    const f = ctx.createLinearGradient(0, h * 0.55, 0, h * 0.62);
+    f.addColorStop(0, 'rgba(255,255,255,0.0)');
+    f.addColorStop(0.5, 'rgba(90,70,45,0.22)');
+    f.addColorStop(1, 'rgba(255,255,255,0.18)');
+    ctx.fillStyle = f;
+    ctx.fillRect(0, h * 0.55, w, h * 0.07);
+    ctx.restore();
+  }
+
+  // a bowl seen from three-quarters above; fill(ctx, cx, cy, rx, ry) paints the contents
+  function bowl(ctx, cx, cy, rx, ry, glaze, fill) {
+    shadow(ctx, 24, 'rgba(8,4,0,0.62)', () => ell(ctx, cx + rx * 0.14, cy + ry * 1.0, rx * 0.98, ry * 0.5, 0));
+    const depth = ry * 1.25;
+    ctx.beginPath();
+    ctx.moveTo(cx - rx, cy);
+    ctx.bezierCurveTo(cx - rx, cy + depth * 0.75, cx - rx * 0.55, cy + depth, cx, cy + depth);
+    ctx.bezierCurveTo(cx + rx * 0.55, cy + depth, cx + rx, cy + depth * 0.75, cx + rx, cy);
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI, false);
+    ctx.closePath();
+    const body = ctx.createLinearGradient(cx - rx, 0, cx + rx, 0);
+    body.addColorStop(0, glaze[0]);
+    body.addColorStop(0.35, glaze[1]);
+    body.addColorStop(1, glaze[2]);
+    ctx.fillStyle = body;
+    ctx.fill();
+    // glaze highlight
+    ctx.save();
+    ctx.clip();
+    shadow(ctx, 10, 'rgba(255,255,255,0.45)', () => ell(ctx, cx - rx * 0.55, cy + depth * 0.45, rx * 0.08, depth * 0.35, -0.35));
+    shadow(ctx, 18, 'rgba(0,0,0,0.25)', () => ell(ctx, cx, cy + depth * 1.05, rx * 0.9, depth * 0.25, 0));
+    ctx.restore();
+    // rim
+    ell(ctx, cx, cy, rx, ry, 0);
+    ctx.fillStyle = glaze[3];
+    ctx.fill();
+    // interior
+    const irx = rx * 0.94, iry = ry * 0.91;
+    ell(ctx, cx, cy + ry * 0.02, irx, iry, 0);
+    const inner = ctx.createLinearGradient(0, cy - iry, 0, cy + iry);
+    inner.addColorStop(0, glaze[2]);
+    inner.addColorStop(0.5, glaze[1]);
+    inner.addColorStop(1, glaze[0]);
+    ctx.fillStyle = inner;
+    ctx.fill();
+    ctx.save();
+    ell(ctx, cx, cy + ry * 0.02, irx, iry, 0);
+    ctx.clip();
+    fill(ctx, cx, cy + ry * 0.12, irx * 0.93, iry * 0.84);
+    ctx.restore();
+    // rim light on the near-left edge, shade on the far edge
+    ctx.save();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx - 1.5, ry - 1.5, 0, Math.PI * 0.55, Math.PI * 1.05);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function soup(r) {
+    return function (ctx, cx, cy, rx, ry) {
+      ell(ctx, cx, cy, rx, ry, 0);
+      const g = ctx.createRadialGradient(cx - rx * 0.3, cy - ry * 0.25, 0, cx, cy, rx * 1.05);
+      g.addColorStop(0, '#f7b860');
+      g.addColorStop(0.45, '#e2832f');
+      g.addColorStop(1, '#a64d1a');
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.save();
+      ell(ctx, cx, cy, rx, ry, 0);
+      ctx.clip();
+      // shadow of the back wall falling on the surface
+      shadow(ctx, 16, 'rgba(60,20,4,0.55)', () => ell(ctx, cx + rx * 0.05, cy - ry * 1.05, rx * 1.05, ry * 0.45, 0));
+      // texture of broken-down lentils
+      for (let i = 0; i < 1400; i++) {
+        const [x, y] = inEllipse(r, cx, cy, rx, ry);
+        const s = 1.5 + r() * 4.5;
+        ell(ctx, x, y, s, s * 0.7, r() * 3);
+        const k = r();
+        ctx.fillStyle = k < 0.4 ? 'rgba(255,205,130,0.35)' : k < 0.75 ? 'rgba(150,62,16,0.28)' : 'rgba(255,160,70,0.4)';
+        ctx.fill();
+      }
+      // yoghurt, off centre
+      const yx = cx - rx * 0.18, yy = cy - ry * 0.05;
+      shadow(ctx, 10, 'rgba(90,30,5,0.6)', () => blob(ctx, r, yx + 10, yy + 12, rx * 0.30, ry * 0.30, 0.35, 12));
+      const yr = rng(77);
+      blob(ctx, yr, yx, yy, rx * 0.30, ry * 0.30, 0.35, 12);
+      const yg = ctx.createRadialGradient(yx - rx * 0.1, yy - ry * 0.12, 4, yx, yy, rx * 0.34);
+      yg.addColorStop(0, '#fffdf7');
+      yg.addColorStop(0.6, '#efe7d8');
+      yg.addColorStop(1, '#bfae95');
+      ctx.fillStyle = yg;
+      ctx.fill();
+      // swirl in the yoghurt
+      ctx.strokeStyle = 'rgba(160,140,110,0.55)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let t = 0; t < TAU * 1.6; t += 0.08) {
+        const rr = 6 + t * 7;
+        const x = yx + Math.cos(t) * rr, y = yy + Math.sin(t) * rr * 0.7;
+        t === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // chilli butter: a broken red spiral and pooled drops
+      for (let t = 0.4; t < TAU * 2.1; t += 0.05) {
+        if (Math.sin(t * 3.1) > 0.75) continue;
+        const rr = rx * 0.34 + t * rx * 0.075;
+        const x = yx + Math.cos(t) * rr, y = yy + Math.sin(t) * rr * 0.68;
+        ell(ctx, x, y, 3 + r() * 5, 2 + r() * 3, t);
+        ctx.fillStyle = 'rgba(150,24,8,' + (0.55 + r() * 0.35) + ')';
+        ctx.fill();
+        if (r() < 0.25) { ell(ctx, x - 1.5, y - 1.5, 1.6, 1, 0); ctx.fillStyle = 'rgba(255,230,190,0.9)'; ctx.fill(); }
+      }
+      for (let i = 0; i < 26; i++) {
+        const [x, y] = inEllipse(r, cx + rx * 0.1, cy, rx * 0.8, ry * 0.75);
+        ell(ctx, x, y, 4 + r() * 10, 3 + r() * 6, r() * 3);
+        ctx.fillStyle = 'rgba(170,40,10,' + (0.4 + r() * 0.3) + ')';
+        ctx.fill();
+        ell(ctx, x - 2, y - 2, 2, 1.2, 0);
+        ctx.fillStyle = 'rgba(255,236,200,0.85)';
+        ctx.fill();
+      }
+      // parsley
+      for (let i = 0; i < 46; i++) {
+        const [x, y] = inEllipse(r, yx + rx * 0.05, yy, rx * 0.55, ry * 0.5);
+        parsley(ctx, r, x, y, 5 + r() * 6, r() * TAU);
+      }
+      // chilli flakes
+      for (let i = 0; i < 120; i++) {
+        const [x, y] = inEllipse(r, yx, yy, rx * 0.6, ry * 0.55);
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(r() * TAU);
+        ctx.fillStyle = r() < 0.5 ? '#6e1108' : '#9a2410';
+        ctx.fillRect(-2, -1, 3 + r() * 3, 2 + r() * 1.5);
+        ctx.restore();
+      }
+      ctx.restore();
+      // sheen on the surface
+      shadow(ctx, 14, 'rgba(255,240,210,0.35)', () => ell(ctx, cx + rx * 0.35, cy + ry * 0.45, rx * 0.25, ry * 0.08, -0.2));
+    };
+  }
+
+  function parsley(ctx, r, x, y, s, rot) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    ctx.fillStyle = r() < 0.5 ? '#2c4a1c' : '#3f6526';
+    for (let k = -1; k <= 1; k++) {
+      ell(ctx, k * s * 0.55, -Math.abs(k) * s * 0.2, s * 0.5, s * 0.36, k * 0.6);
+      ctx.fill();
+    }
+    ctx.strokeStyle = 'rgba(150,190,90,0.6)';
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.moveTo(0, s * 0.3);
+    ctx.lineTo(0, -s * 0.2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function lemonWedge(ctx, r, x, y, s, rot) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    shadow(ctx, 10, 'rgba(10,5,0,0.55)', () => {
+      ctx.beginPath(); ctx.ellipse(8, 10, s, s * 0.62, 0, Math.PI, TAU); ctx.closePath();
+    });
+    // rind
+    ctx.beginPath();
+    ctx.ellipse(0, 0, s, s * 0.62, 0, Math.PI, TAU);
+    ctx.closePath();
+    const rg = ctx.createLinearGradient(0, -s * 0.62, 0, 0);
+    rg.addColorStop(0, '#f2c62a');
+    rg.addColorStop(1, '#b88a10');
+    ctx.fillStyle = rg;
+    ctx.fill();
+    // pith
+    ctx.beginPath();
+    ctx.ellipse(0, -1, s * 0.9, s * 0.54, 0, Math.PI, TAU);
+    ctx.closePath();
+    ctx.fillStyle = '#f6edc6';
+    ctx.fill();
+    // flesh
+    ctx.beginPath();
+    ctx.ellipse(0, -2, s * 0.84, s * 0.49, 0, Math.PI, TAU);
+    ctx.closePath();
+    const fg = ctx.createRadialGradient(0, -2, 2, 0, -2, s * 0.8);
+    fg.addColorStop(0, '#fbe68a');
+    fg.addColorStop(1, '#eec43a');
+    ctx.fillStyle = fg;
+    ctx.fill();
+    // segment walls
+    ctx.strokeStyle = 'rgba(255,250,225,0.95)';
+    ctx.lineWidth = 2.2;
+    for (let i = 1; i < 6; i++) {
+      const a = Math.PI + (i / 6) * Math.PI;
+      ctx.beginPath();
+      ctx.moveTo(0, -2);
+      ctx.lineTo(Math.cos(a) * s * 0.82, -2 + Math.sin(a) * s * 0.48);
+      ctx.stroke();
+    }
+    // juice glints
+    for (let i = 0; i < 14; i++) {
+      const a = Math.PI + r() * Math.PI, d = 0.25 + r() * 0.5;
+      ell(ctx, Math.cos(a) * s * 0.8 * d, -2 + Math.sin(a) * s * 0.45 * d, 1.8, 1.1, a);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function spoon(ctx, x, y, rot, len) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    const path = () => {
+      ctx.beginPath();
+      ctx.ellipse(0, 0, len * 0.2, len * 0.13, 0, 0, TAU);
+      ctx.moveTo(len * 0.17, -len * 0.035);
+      ctx.quadraticCurveTo(len * 0.5, -len * 0.018, len, -len * 0.04);
+      ctx.quadraticCurveTo(len * 1.03, 0, len, len * 0.04);
+      ctx.quadraticCurveTo(len * 0.5, len * 0.018, len * 0.17, len * 0.035);
+      ctx.closePath();
+    };
+    ctx.save();
+    ctx.translate(12, 16);
+    shadow(ctx, 8, 'rgba(8,4,0,0.6)', path);
+    ctx.restore();
+    path();
+    const g = ctx.createLinearGradient(0, -len * 0.13, 0, len * 0.13);
+    g.addColorStop(0, '#f4f4f1');
+    g.addColorStop(0.45, '#a9a9a6');
+    g.addColorStop(0.55, '#6d6c69');
+    g.addColorStop(1, '#d6d5d0');
+    ctx.fillStyle = g;
+    ctx.fill();
+    // hollow of the spoon
+    ell(ctx, -len * 0.01, len * 0.01, len * 0.16, len * 0.1, 0);
+    const h = ctx.createRadialGradient(-len * 0.06, -len * 0.04, 2, 0, 0, len * 0.18);
+    h.addColorStop(0, '#ffffff');
+    h.addColorStop(0.4, '#8f8e8a');
+    h.addColorStop(1, '#3d3c3a');
+    ctx.fillStyle = h;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(len * 0.25, -len * 0.012);
+    ctx.lineTo(len * 0.95, -len * 0.022);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function bread(ctx, r, x, y, s, rot) {
+    shadow(ctx, 16, 'rgba(8,4,0,0.6)', () => blob(ctx, rng(5), x + 16, y + 20, s, s * 0.7, 0.2, 12, rot));
+    blob(ctx, rng(5), x, y, s, s * 0.7, 0.2, 12, rot);
+    const g = ctx.createRadialGradient(x - s * 0.3, y - s * 0.3, 4, x, y, s * 1.1);
+    g.addColorStop(0, '#d39a55');
+    g.addColorStop(0.6, '#9c5d24');
+    g.addColorStop(1, '#5b310f');
+    ctx.fillStyle = g;
+    ctx.fill();
+    // flour and scoring
+    ctx.save();
+    blob(ctx, rng(5), x, y, s, s * 0.7, 0.2, 12, rot);
+    ctx.clip();
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath();
+      const ox = x - s * 0.5 + i * s * 0.42;
+      ctx.moveTo(ox, y - s * 0.45);
+      ctx.quadraticCurveTo(ox + s * 0.25, y, ox + s * 0.05, y + s * 0.45);
+      ctx.strokeStyle = 'rgba(240,215,170,0.75)';
+      ctx.lineWidth = 7;
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(70,35,10,0.6)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+    for (let i = 0; i < 160; i++) {
+      const [px, py] = inEllipse(r, x, y, s, s * 0.7);
+      ctx.fillStyle = 'rgba(245,235,215,' + (r() * 0.3) + ')';
+      ctx.fillRect(px, py, 2, 2);
+    }
+    ctx.restore();
+    // torn face showing crumb
+    blob(ctx, rng(9), x + s * 0.62, y + s * 0.18, s * 0.34, s * 0.5, 0.35, 10, 0.3);
+    ctx.fillStyle = '#ecd6a6';
+    ctx.fill();
+    ctx.save();
+    ctx.clip();
+    for (let i = 0; i < 40; i++) {
+      const [px, py] = inEllipse(r, x + s * 0.62, y + s * 0.18, s * 0.32, s * 0.48);
+      ell(ctx, px, py, 1.5 + r() * 4, 1 + r() * 3, r() * 3);
+      ctx.fillStyle = 'rgba(150,110,55,0.55)';
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function flakesFill(r) {
+    return function (ctx, cx, cy, rx, ry) {
+      ell(ctx, cx, cy, rx, ry, 0);
+      ctx.fillStyle = '#6a160b';
+      ctx.fill();
+      for (let i = 0; i < 520; i++) {
+        const [x, y] = inEllipse(r, cx, cy, rx, ry);
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(r() * TAU);
+        const k = r();
+        ctx.fillStyle = k < 0.3 ? '#c03a17' : k < 0.6 ? '#8c1f0c' : k < 0.85 ? '#4a0d05' : '#e9c49a';
+        ctx.fillRect(-3, -1.5, 3 + r() * 5, 2 + r() * 2);
+        ctx.restore();
+      }
+      shadow(ctx, 10, 'rgba(0,0,0,0.45)', () => ell(ctx, cx, cy - ry * 0.95, rx, ry * 0.4, 0));
+    };
+  }
+
+  function redLentil(ctx, r, x, y, s) {
+    ell(ctx, x, y, s, s * 0.82, r() * 3);
+    const k = r();
+    ctx.fillStyle = k < 0.33 ? '#e8865a' : k < 0.66 ? '#d9703f' : '#f0a07a';
+    ctx.fill();
+    ell(ctx, x - s * 0.3, y - s * 0.3, s * 0.35, s * 0.22, 0);
+    ctx.fillStyle = 'rgba(255,230,210,0.55)';
+    ctx.fill();
+  }
+
+  /* ---------- scenes ---------- */
+
+  function hero(w, h) {
+    const c = canvas(w, h), ctx = c.getContext('2d'), r = rng(11);
+    const S = w / 1200;
+    ctx.scale(S, S);
+    const W = 1200, H = h / S;
+    linenTable(ctx, W, H, r);
+    napkin(ctx, r, 40, 470, 560, 380, -0.12, ['#d6b277', '#b88b4c', '#7a3519']);
+    // spilled lentils by the small dish
+    for (let i = 0; i < 26; i++) redLentil(ctx, r, 260 + r() * 120, 250 + r() * 50, 4 + r() * 1.5);
+    bowl(ctx, 175, 145, 108, 72, ['#efe6d4', '#d9cdb5', '#8a7f6c', '#f5eee0'], flakesFill(rng(3)));
+    bread(ctx, r, 1030, 140, 150, -0.2);
+    bowl(ctx, 610, 380, 330, 228, ['#3f7c80', '#2a5e63', '#14343a', '#e6dcc8'], soup(rng(21)));
+    lemonWedge(ctx, r, 175, 650, 95, -0.35);
+    lemonWedge(ctx, r, 330, 700, 85, 0.25);
+    spoon(ctx, 1035, 610, -0.95, 300);
+    for (let i = 0; i < 9; i++) parsley(ctx, r, 900 + r() * 220, 380 + r() * 120, 7 + r() * 5, r() * TAU);
+    lightPass(ctx, W, H, 220, 80, 0.2);
+    return c;
+  }
+
+  function onion(ctx, r, x, y, s) {
+    shadow(ctx, 14, 'rgba(40,25,10,0.55)', () => ell(ctx, x + 14, y + 18, s, s * 0.92, 0));
+    ell(ctx, x, y, s, s * 0.92, 0);
+    const g = ctx.createRadialGradient(x - s * 0.35, y - s * 0.4, 4, x, y, s * 1.1);
+    g.addColorStop(0, '#e6a764');
+    g.addColorStop(0.55, '#b0612a');
+    g.addColorStop(1, '#5e2c0e');
+    ctx.fillStyle = g;
+    ctx.fill();
+    ctx.save();
+    ell(ctx, x, y, s, s * 0.92, 0);
+    ctx.clip();
+    for (let i = -6; i <= 6; i++) {
+      ctx.beginPath();
+      ctx.moveTo(x + i * 2, y - s);
+      ctx.bezierCurveTo(x + i * s * 0.22, y - s * 0.4, x + i * s * 0.22, y + s * 0.4, x + i * 2, y + s);
+      ctx.strokeStyle = 'rgba(70,30,8,' + (0.25 + r() * 0.25) + ')';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+    ctx.restore();
+    // papery tip
+    ctx.beginPath();
+    ctx.moveTo(x - 6, y - s * 0.86);
+    ctx.quadraticCurveTo(x + 4, y - s * 1.25, x + 16, y - s * 1.35);
+    ctx.quadraticCurveTo(x + 6, y - s * 1.1, x + 7, y - s * 0.86);
+    ctx.fillStyle = '#7a4219';
+    ctx.fill();
+  }
+
+  function halfOnion(ctx, r, x, y, s) {
+    shadow(ctx, 12, 'rgba(40,25,10,0.5)', () => ell(ctx, x + 12, y + 14, s, s * 0.9, 0));
+    ell(ctx, x, y, s, s * 0.9, 0);
+    ctx.fillStyle = '#9a5424';
+    ctx.fill();
+    ell(ctx, x, y, s * 0.94, s * 0.85, 0);
+    ctx.fillStyle = '#f3ead3';
+    ctx.fill();
+    for (let k = 1; k < 8; k++) {
+      ell(ctx, x + k * 1.5, y + k * 0.8, s * (0.94 - k * 0.11), s * (0.85 - k * 0.1), 0);
+      ctx.strokeStyle = 'rgba(170,140,95,0.85)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+    shadow(ctx, 12, 'rgba(120,90,50,0.35)', () => ell(ctx, x + s * 0.4, y + s * 0.4, s * 0.4, s * 0.3, 0));
+  }
+
+  function carrot(ctx, r, x, y, len, rot) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    const body = () => {
+      ctx.beginPath();
+      ctx.moveTo(0, -len * 0.085);
+      ctx.bezierCurveTo(len * 0.4, -len * 0.08, len * 0.8, -len * 0.04, len, 0);
+      ctx.bezierCurveTo(len * 0.8, len * 0.04, len * 0.4, len * 0.08, 0, len * 0.085);
+      ctx.quadraticCurveTo(-len * 0.03, 0, 0, -len * 0.085);
+      ctx.closePath();
+    };
+    ctx.save();
+    ctx.translate(10, 16);
+    shadow(ctx, 10, 'rgba(40,25,10,0.55)', body);
+    ctx.restore();
+    body();
+    const g = ctx.createLinearGradient(0, -len * 0.09, 0, len * 0.09);
+    g.addColorStop(0, '#fbb062');
+    g.addColorStop(0.5, '#e7701f');
+    g.addColorStop(1, '#94400c');
+    ctx.fillStyle = g;
+    ctx.fill();
+    ctx.save();
+    body();
+    ctx.clip();
+    for (let i = 0; i < 16; i++) {
+      const px = len * (0.05 + r() * 0.85);
+      ctx.beginPath();
+      ctx.moveTo(px, -len * 0.09);
+      ctx.quadraticCurveTo(px + 4, 0, px, len * 0.03 * (r() - 0.5));
+      ctx.strokeStyle = 'rgba(120,50,10,0.5)';
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+    }
+    ctx.restore();
+    // greens
+    for (let i = 0; i < 9; i++) {
+      const a = Math.PI + (r() - 0.5) * 1.1;
+      const l = len * (0.25 + r() * 0.25);
+      ctx.beginPath();
+      ctx.moveTo(-2, (r() - 0.5) * 8);
+      ctx.quadraticCurveTo(Math.cos(a) * l * 0.5, Math.sin(a) * l * 0.3, Math.cos(a) * l, Math.sin(a) * l);
+      ctx.strokeStyle = r() < 0.5 ? '#3c6a24' : '#56872f';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      for (let k = 0.4; k < 1; k += 0.15) {
+        parsley(ctx, r, Math.cos(a) * l * k, Math.sin(a) * l * k, 7, a + 1.2);
+      }
+    }
+    ctx.restore();
+  }
+
+  function garlic(ctx, r, x, y, s) {
+    shadow(ctx, 12, 'rgba(40,25,10,0.5)', () => ell(ctx, x + 12, y + 16, s, s * 0.85, 0));
+    for (let k = -2; k <= 2; k++) {
+      ell(ctx, x + k * s * 0.32, y + Math.abs(k) * 3, s * 0.42, s * 0.82, k * 0.18);
+      const g = ctx.createLinearGradient(x + k * s * 0.32 - s * 0.4, 0, x + k * s * 0.32 + s * 0.4, 0);
+      g.addColorStop(0, '#fbf6ec');
+      g.addColorStop(0.6, '#e4d8c6');
+      g.addColorStop(1, '#a89a87');
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(140,110,120,0.55)';
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.moveTo(x - 5, y - s * 0.75);
+    ctx.lineTo(x - 2, y - s * 1.15);
+    ctx.lineTo(x + 5, y - s * 1.15);
+    ctx.lineTo(x + 6, y - s * 0.75);
+    ctx.fillStyle = '#cbb89e';
+    ctx.fill();
+  }
+
+  function clove(ctx, x, y, s, rot) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    shadow(ctx, 6, 'rgba(40,25,10,0.5)', () => ell(ctx, 6, 8, s, s * 0.5, 0));
+    ctx.beginPath();
+    ctx.moveTo(-s, 0);
+    ctx.quadraticCurveTo(-s * 0.2, -s * 0.9, s, -s * 0.1);
+    ctx.quadraticCurveTo(0, s * 0.6, -s, 0);
+    const g = ctx.createLinearGradient(0, -s * 0.6, 0, s * 0.4);
+    g.addColorStop(0, '#fffaf0');
+    g.addColorStop(1, '#bfae96');
+    ctx.fillStyle = g;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function lemon(ctx, r, x, y, s) {
+    shadow(ctx, 14, 'rgba(40,25,10,0.5)', () => ell(ctx, x + 14, y + 16, s * 1.2, s * 0.9, 0));
+    ctx.beginPath();
+    ctx.ellipse(x, y, s * 1.12, s * 0.88, 0, 0, TAU);
+    ctx.moveTo(x - s * 1.08, y - 6);
+    ctx.quadraticCurveTo(x - s * 1.32, y, x - s * 1.08, y + 6);
+    ctx.moveTo(x + s * 1.08, y - 6);
+    ctx.quadraticCurveTo(x + s * 1.3, y, x + s * 1.08, y + 6);
+    const g = ctx.createRadialGradient(x - s * 0.4, y - s * 0.4, 4, x, y, s * 1.2);
+    g.addColorStop(0, '#fff1a0');
+    g.addColorStop(0.5, '#f0c92a');
+    g.addColorStop(1, '#a37d06');
+    ctx.fillStyle = g;
+    ctx.fill();
+    for (let i = 0; i < 200; i++) {
+      const [px, py] = inEllipse(r, x, y, s * 1.05, s * 0.82);
+      ctx.fillStyle = 'rgba(150,110,0,0.25)';
+      ctx.fillRect(px, py, 1.5, 1.5);
+    }
+  }
+
+  function halfLemon(ctx, r, x, y, s) {
+    shadow(ctx, 12, 'rgba(40,25,10,0.5)', () => ell(ctx, x + 12, y + 14, s, s * 0.95, 0));
+    ell(ctx, x, y, s, s * 0.95, 0);
+    ctx.fillStyle = '#e3b51d';
+    ctx.fill();
+    ell(ctx, x, y, s * 0.9, s * 0.86, 0);
+    ctx.fillStyle = '#f7efcf';
+    ctx.fill();
+    ell(ctx, x, y, s * 0.82, s * 0.78, 0);
+    ctx.fillStyle = '#f1cf43';
+    ctx.fill();
+    ctx.strokeStyle = '#fbf3d2';
+    ctx.lineWidth = 3;
+    for (let i = 0; i < 9; i++) {
+      const a = (i / 9) * TAU;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(a) * s * 0.82, y + Math.sin(a) * s * 0.78);
+      ctx.stroke();
+    }
+    ell(ctx, x, y, s * 0.1, s * 0.1, 0);
+    ctx.fillStyle = '#fbf3d2';
+    ctx.fill();
+    for (let i = 0; i < 20; i++) {
+      const [px, py] = inEllipse(r, x, y, s * 0.7, s * 0.68);
+      ell(ctx, px, py, 2, 1.3, r() * 3);
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.fill();
+    }
+  }
+
+  function lentilHeap(ctx, r, x, y, s) {
+    shadow(ctx, 14, 'rgba(40,25,10,0.32)', () => ell(ctx, x + 18, y + s * 0.2, s * 0.95, s * 0.22, 0));
+    // loose lentils that rolled off the pile
+    for (let i = 0; i < 70; i++) {
+      const a = r() * TAU, d = 1.0 + r() * 0.45;
+      const px = x + Math.cos(a) * s * d, py = y + Math.sin(a) * s * 0.36 * d;
+      shadow(ctx, 2, 'rgba(60,30,10,0.4)', () => ell(ctx, px + 2, py + 3, 6, 5, 0));
+      redLentil(ctx, r, px, py, 5.5 + r() * 1.5);
+    }
+    const pts = [];
+    for (let i = 0; i < 1300; i++) {
+      // a low cone: taller in the middle, ragged at the edge
+      const u = r() * 2 - 1;
+      const half = Math.pow(Math.max(0, 1 - u * u), 0.8);
+      const px = x + u * s * (0.92 + r() * 0.12);
+      const top = y - half * s * 0.5, bot = y + half * s * 0.2;
+      pts.push([px + (r() - 0.5) * 8, top + r() * (bot - top)]);
+    }
+    pts.sort((a, b) => a[1] - b[1]);
+    for (const [px, py] of pts) {
+      redLentil(ctx, r, px, py, 6 + r() * 1.5);
+      const shade = Math.min(0.32, Math.max(0, (px - x) / s) * 0.22 + Math.max(0, (py - y) / (s * 0.2)) * 0.12);
+      if (shade > 0.02) {
+        ell(ctx, px, py, 7, 6, 0);
+        ctx.fillStyle = 'rgba(90,30,8,' + shade + ')';
+        ctx.fill();
+      }
+    }
+  }
+
+  function cumin(ctx, r, x, y, s) {
+    shadow(ctx, 8, 'rgba(40,25,10,0.18)', () => ell(ctx, x + 8, y + 10, s * 0.9, s * 0.4, 0));
+    for (let i = 0; i < 170; i++) {
+      const [px, py] = inEllipse(r, x, y, s, s * 0.42);
+      ctx.save();
+      ctx.translate(px, py);
+      ctx.rotate(r() * TAU);
+      ell(ctx, 0, 0, 5, 1.7, 0);
+      ctx.fillStyle = r() < 0.5 ? '#8c7146' : '#b59a68';
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function board(ctx, w, h, r) {
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, '#efe7d7');
+    g.addColorStop(1, '#ebe2d0');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 70; i++) {
+      let y = r() * h;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      for (let x = 0; x <= w; x += 40) { y += (r() - 0.5) * 2; ctx.lineTo(x, y); }
+      ctx.strokeStyle = 'rgba(150,120,80,' + (0.03 + r() * 0.06) + ')';
+      ctx.lineWidth = 0.6 + r() * 1.5;
+      ctx.stroke();
+    }
+  }
+
+  function ingredients(w, h) {
+    const c = canvas(w, h), ctx = c.getContext('2d'), r = rng(31);
+    const S = w / 1200;
+    ctx.scale(S, S);
+    const W = 1200, H = h / S;
+    board(ctx, W, H, r);
+    carrot(ctx, r, 120, 150, 380, 0.12);
+    carrot(ctx, r, 150, 235, 340, 0.2);
+    onion(ctx, r, 650, 140, 92);
+    halfOnion(ctx, r, 800, 230, 78);
+    lentilHeap(ctx, r, 300, 420, 170);
+    garlic(ctx, r, 960, 120, 62);
+    clove(ctx, 1080, 215, 26, 0.6);
+    clove(ctx, 1040, 255, 24, -0.4);
+    lemon(ctx, r, 590, 400, 82);
+    halfLemon(ctx, r, 770, 430, 76);
+    cumin(ctx, r, 1010, 420, 92);
+    lightPass(ctx, W, H, 180, 60, 0.0);
+    return c;
+  }
+
+  function pot(w, h) {
+    const c = canvas(w, h), ctx = c.getContext('2d'), r = rng(41);
+    const S = w / 1000;
+    ctx.scale(S, S);
+    const W = 1000, H = h / S;
+    // tiled wall
+    ctx.fillStyle = '#2c3536';
+    ctx.fillRect(0, 0, W, H);
+    const tile = 92;
+    for (let ty = 0; ty < H * 0.62; ty += tile * 0.5) {
+      for (let tx = ((ty / (tile * 0.5)) % 2) * tile * 0.5 - tile; tx < W; tx += tile) {
+        const g = ctx.createLinearGradient(tx, ty, tx + tile, ty + tile * 0.5);
+        const v = 46 + Math.floor(r() * 16);
+        g.addColorStop(0, 'rgb(' + (v + 40) + ',' + (v + 58) + ',' + (v + 56) + ')');
+        g.addColorStop(1, 'rgb(' + v + ',' + (v + 14) + ',' + (v + 14) + ')');
+        ctx.fillStyle = g;
+        ctx.fillRect(tx + 2, ty + 2, tile - 4, tile * 0.5 - 4);
+      }
+    }
+    // stove top
+    const st = ctx.createLinearGradient(0, H * 0.62, 0, H);
+    st.addColorStop(0, '#1b1b1b');
+    st.addColorStop(1, '#2e2e2c');
+    ctx.fillStyle = st;
+    ctx.fillRect(0, H * 0.62, W, H * 0.38);
+    ctx.fillStyle = 'rgba(255,255,255,0.12)';
+    ctx.fillRect(0, H * 0.62, W, 3);
+    // flame glow under the pot
+    shadow(ctx, 30, 'rgba(80,140,255,0.55)', () => ell(ctx, 470, H * 0.86, 230, 30, 0));
+    // pot body
+    const cx = 470, top = H * 0.36, bot = H * 0.86, rx = 300, ry = 70;
+    shadow(ctx, 20, 'rgba(0,0,0,0.7)', () => ell(ctx, cx + 30, bot + 10, rx * 1.02, ry * 0.6, 0));
+    ctx.beginPath();
+    ctx.moveTo(cx - rx, top);
+    ctx.lineTo(cx - rx * 0.97, bot - ry * 0.3);
+    ctx.ellipse(cx, bot - ry * 0.3, rx * 0.97, ry, 0, Math.PI, 0, true);
+    ctx.lineTo(cx + rx, top);
+    ctx.closePath();
+    const pg = ctx.createLinearGradient(cx - rx, 0, cx + rx, 0);
+    pg.addColorStop(0, '#d9632a');
+    pg.addColorStop(0.25, '#f39a5a');
+    pg.addColorStop(0.45, '#c9501d');
+    pg.addColorStop(1, '#4e1806');
+    ctx.fillStyle = pg;
+    ctx.fill();
+    // handles
+    for (const side of [-1, 1]) {
+      ctx.beginPath();
+      ctx.ellipse(cx + side * (rx + 26), top + 60, 38, 18, 0, 0, TAU);
+      ctx.fillStyle = side < 0 ? '#e0773a' : '#4a1605';
+      ctx.fill();
+    }
+    // rim and contents
+    ell(ctx, cx, top, rx, ry, 0);
+    ctx.fillStyle = '#262220';
+    ctx.fill();
+    ell(ctx, cx, top + 4, rx * 0.95, ry * 0.86, 0);
+    ctx.fillStyle = '#111';
+    ctx.fill();
+    ctx.save();
+    ell(ctx, cx, top + 4, rx * 0.95, ry * 0.86, 0);
+    ctx.clip();
+    ell(ctx, cx, top + 16, rx * 0.93, ry * 0.8, 0);
+    const sg = ctx.createRadialGradient(cx - 60, top + 10, 4, cx, top + 16, rx);
+    sg.addColorStop(0, '#f7b25c');
+    sg.addColorStop(1, '#9d4716');
+    ctx.fillStyle = sg;
+    ctx.fill();
+    for (let i = 0; i < 60; i++) {
+      const [bx, by] = inEllipse(r, cx, top + 18, rx * 0.85, ry * 0.65);
+      const bs = 3 + r() * 9;
+      ell(ctx, bx, by, bs, bs * 0.6, 0);
+      ctx.strokeStyle = 'rgba(255,225,170,0.8)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+    shadow(ctx, 14, 'rgba(0,0,0,0.6)', () => ell(ctx, cx, top - ry * 0.55, rx, ry * 0.5, 0));
+    ctx.restore();
+    ctx.strokeStyle = 'rgba(255,210,170,0.6)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.ellipse(cx, top, rx - 2, ry - 2, 0, Math.PI * 0.55, Math.PI * 1.1);
+    ctx.stroke();
+    // wooden spoon leaning out
+    ctx.save();
+    ctx.translate(cx + 90, top + 20);
+    ctx.rotate(-1.05);
+    const wg = ctx.createLinearGradient(0, -10, 0, 10);
+    wg.addColorStop(0, '#e9c48d');
+    wg.addColorStop(1, '#8c5a2b');
+    ctx.fillStyle = wg;
+    ctx.beginPath();
+    ctx.moveTo(0, -9);
+    ctx.lineTo(330, -12);
+    ctx.quadraticCurveTo(342, 0, 330, 12);
+    ctx.lineTo(0, 9);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+    // lid leaning against the wall on the right
+    ctx.save();
+    ctx.translate(880, H * 0.5);
+    ctx.rotate(0.18);
+    shadow(ctx, 18, 'rgba(0,0,0,0.6)', () => ell(ctx, -24, 10, 70, 190, 0));
+    ell(ctx, 0, 0, 62, 185, 0);
+    const lg = ctx.createLinearGradient(-62, 0, 62, 0);
+    lg.addColorStop(0, '#f08a4c');
+    lg.addColorStop(0.5, '#c24c1c');
+    lg.addColorStop(1, '#5a1c07');
+    ctx.fillStyle = lg;
+    ctx.fill();
+    ell(ctx, -20, 0, 16, 40, 0);
+    ctx.fillStyle = '#2a1a12';
+    ctx.fill();
+    ctx.restore();
+    // steam
+    for (let i = 0; i < 9; i++) {
+      const sx = cx - 180 + i * 45 + (r() - 0.5) * 30;
+      ctx.save();
+      ctx.filter = 'blur(' + (10 + r() * 10) + 'px)';
+      ctx.strokeStyle = 'rgba(245,245,240,' + (0.35 + r() * 0.3) + ')';
+      ctx.lineWidth = 16 + r() * 22;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(sx, top - 10);
+      const ph = r() * TAU;
+      for (let yy = top - 10; yy > 10; yy -= 12) {
+        ctx.lineTo(sx + Math.sin(yy / 40 + ph) * (20 + (top - yy) * 0.12), yy);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+    lightPass(ctx, W, H, 300, 120, 0.42);
+    return c;
+  }
+
+  return { hero, ingredients, pot };
+})();
+
+
+/* ---------- pictures ---------- */
+(function () {
+  const plates = [
+    { id: 'plate-hero', scene: () => Scenes.hero(1200, 800), params: { palette: 'sunset', seed: 1 } },
+    { id: 'plate-ing', scene: () => Scenes.ingredients(1200, 560), params: { palette: 'sunset', seed: 2 } },
+    { id: 'plate-pot', scene: () => Scenes.pot(1000, 700), params: { palette: 'sunset', seed: 3 } }
+  ];
+
+  function paint(p) {
+    const fig = document.getElementById(p.id);
+    if (!fig) return;
+    const frame = fig.querySelector('.frame');
+    const src = p.scene();
+    let out = src;
+    if (window.Lumenary) {
+      try { out = Lumenary.render('screen-print', src, p.params); }
+      catch (e) { console.error('Lumenary render failed for ' + p.id, e); out = src; }
+    }
+    out.setAttribute('aria-hidden', 'true');
+    frame.prepend(out);
+    requestAnimationFrame(() => fig.classList.add('ready'));
+  }
+
+  function run() {
+    let i = 0;
+    (function next() {
+      if (i >= plates.length) return;
+      paint(plates[i++]);
+      setTimeout(next, 30);
+    })();
+  }
+
+  if (document.readyState === 'complete') run();
+  else window.addEventListener('load', run);
+})();
+
+/* ---------- servings, ticks, steps ---------- */
+(function () {
+  const BASE = 4, MIN = 2, MAX = 12;
+  const KEY = 'red-lentil-soup';
+  let state = { serves: BASE, ticks: [], done: [] };
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved && typeof saved.serves === 'number') state = Object.assign(state, saved);
+  } catch (e) { /* storage unavailable: start fresh */ }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
+  }
+
+  const FRACS = [[0, ''], [0.25, '¼'], [1 / 3, '⅓'], [0.5, '½'], [2 / 3, '⅔'], [0.75, '¾'], [1, '']];
+  function frac(x) {
+    let whole = Math.floor(x), rest = x - whole, best = FRACS[0];
+    for (const f of FRACS) if (Math.abs(rest - f[0]) < Math.abs(rest - best[0])) best = f;
+    if (best[0] === 1) { whole += 1; best = FRACS[0]; }
+    if (whole === 0 && !best[1]) return '¼';
+    return (whole ? String(whole) : '') + best[1];
+  }
+  function fmt(n, unit, round) {
+    if (round) return String(Math.max(1, Math.round(n)));
+    switch (unit) {
+      case 'g': return Math.max(5, Math.round(n / 5) * 5) + ' g';
+      case 'l':
+        if (n < 1) return Math.round(n * 1000 / 50) * 50 + ' ml';
+        return (Math.round(n * 100) / 100).toString() + ' litres';
+      case 'cup': { const s = frac(n); return s + (n > 1.01 ? ' cups' : ' cup'); }
+      case 'tbsp':
+        if (n < 0.75) return frac(n * 3) + ' tsp';
+        return frac(n) + ' tbsp';
+      case 'tsp':
+        // whole and half tablespoons read better than piles of teaspoons
+        if (n >= 3 && Math.abs(n / 1.5 - Math.round(n / 1.5)) < 0.01) return frac(n / 3) + ' tbsp';
+        return frac(n) + ' tsp';
+      default: return frac(n);
+    }
+  }
+
+  const out = document.getElementById('servings');
+  const less = document.getElementById('less');
+  const more = document.getElementById('more');
+
+  function applyServings() {
+    const k = state.serves / BASE;
+    out.textContent = state.serves;
+    less.disabled = state.serves <= MIN;
+    more.disabled = state.serves >= MAX;
+    document.querySelectorAll('.q[data-n], .q2[data-n]').forEach(el => {
+      const n = parseFloat(el.dataset.n) * k;
+      el.textContent = fmt(n, el.dataset.u, el.dataset.round);
+      const name = el.parentElement.querySelector('.n[data-one]');
+      if (name && el.classList.contains('q')) name.textContent = n > 1.01 ? name.dataset.many : name.dataset.one;
+    });
+  }
+  less.addEventListener('click', () => { state.serves = Math.max(MIN, state.serves - 2); applyServings(); save(); });
+  more.addEventListener('click', () => { state.serves = Math.min(MAX, state.serves + 2); applyServings(); save(); });
+
+  const boxes = Array.from(document.querySelectorAll('.ing input'));
+  boxes.forEach((b, i) => {
+    b.checked = state.ticks.includes(i);
+    b.addEventListener('change', () => {
+      state.ticks = boxes.map((x, j) => x.checked ? j : -1).filter(j => j >= 0);
+      save();
+    });
+  });
+
+  const steps = Array.from(document.querySelectorAll('.step'));
+  function setDone(i, on) {
+    const li = steps[i], btn = li.querySelector('.num');
+    li.classList.toggle('done', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  steps.forEach((li, i) => {
+    setDone(i, state.done.includes(i));
+    li.querySelector('.num').addEventListener('click', () => {
+      const on = !li.classList.contains('done');
+      setDone(i, on);
+      state.done = steps.map((x, j) => x.classList.contains('done') ? j : -1).filter(j => j >= 0);
+      save();
+    });
+  });
+
+  document.getElementById('clear').addEventListener('click', () => {
+    boxes.forEach(b => { b.checked = false; });
+    steps.forEach((li, i) => setDone(i, false));
+    state.ticks = []; state.done = [];
+    save();
+  });
+
+  // keep the screen awake while cooking, where the browser allows it
+  const wake = document.getElementById('wake');
+  if ('wakeLock' in navigator) {
+    let lock = null, want = false;
+    wake.hidden = false;
+    async function acquire() {
+      try {
+        lock = await navigator.wakeLock.request('screen');
+        lock.addEventListener('release', () => { lock = null; if (!want) label(); });
+      } catch (e) { want = false; }
+      label();
+    }
+    function label() {
+      const on = want && lock;
+      wake.setAttribute('aria-pressed', on ? 'true' : 'false');
+      wake.textContent = on ? 'Screen will stay on' : 'Keep the screen on';
+    }
+    wake.addEventListener('click', () => {
+      want = !want;
+      if (want) acquire(); else if (lock) { lock.release(); lock = null; label(); }
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (want && !lock && document.visibilityState === 'visible') acquire();
+    });
+  }
+
+  applyServings();
+})();
+</script>
+</body>
+</html>

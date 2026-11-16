@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuller's Bakery, Wren Street</title>
+<meta name="description" content="A neighbourhood bakery on the corner of Wren Street and Cole Lane. Sourdough, croissants and cakes, baked on the premises from half past four every morning.">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #f4ecdc;
+    --paper-deep: #ebdfc7;
+    --ink: #341614;
+    --ink-soft: #5e4038;
+    --rule: #d6c6aa;
+    --red: #f05a48;
+    --red-text: #b2372a;
+    --mustard: #f4bc5c;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: "Gill Sans", "Gill Sans MT", "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+    --wrap: 1160px;
+    --gutter: clamp(16px, 4vw, 40px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .08 0 0 0 0 .07 0 0 0 -.9 .56'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--red-text); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  .label {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  h1, h2, h3 { font-weight: 700; line-height: 1.08; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: clamp(30px, 4.4vw, 48px); }
+  h3 { font-size: 23px; }
+  p { margin: 0 0 1em; }
+  .num { font-variant-numeric: tabular-nums lining-nums; }
+
+  /* ---------- top strip and masthead ---------- */
+  .strip { background: var(--ink); color: var(--paper); }
+  .strip .wrap { display: flex; flex-wrap: wrap; gap: 6px 22px; align-items: center; justify-content: space-between; padding-top: 9px; padding-bottom: 9px; }
+  .strip a { color: var(--paper); text-decoration: none; }
+  .strip a:hover { color: var(--mustard); }
+  .status { display: inline-flex; align-items: center; gap: 9px; }
+  .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--mustard); flex: none; }
+  .status.closed::before { background: transparent; border: 1.5px solid var(--paper); }
+  .strip-right { display: flex; gap: 22px; flex-wrap: wrap; }
+
+  header.mast .wrap { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 32px; padding-top: 28px; padding-bottom: 22px; background: linear-gradient(var(--ink), var(--ink)) no-repeat center bottom / calc(100% - 2 * var(--gutter)) 2px; }
+  .wordmark { text-decoration: none; color: var(--ink); display: block; line-height: .9; }
+  .wordmark b { display: block; font-size: clamp(46px, 8vw, 78px); font-style: italic; letter-spacing: -.02em; text-shadow: 2px 1px 0 rgba(240, 90, 72, .5); }
+  .wordmark span { display: block; margin-top: 8px; color: var(--ink-soft); }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 26px; }
+  nav a { color: var(--ink); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+  nav a:hover { color: var(--red-text); border-bottom-color: var(--red); }
+
+  /* ---------- pictures ---------- */
+  .plate { position: relative; background: var(--paper-deep); overflow: hidden; }
+  .plate canvas { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; }
+  .plate canvas.in { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .plate canvas { transition: none; } }
+  .plate.hero { aspect-ratio: 1200 / 780; }
+  .plate.item { aspect-ratio: 4 / 3; }
+  .plate.shop { aspect-ratio: 1200 / 680; }
+  .plate.stamp { aspect-ratio: 4 / 3; background: #efe9dc; transform: rotate(1.6deg); box-shadow: 0 1px 1px rgba(52, 22, 20, .12), 0 18px 30px -16px rgba(52, 22, 20, .45); }
+  figure { margin: 0; }
+  figcaption { font-size: 15px; color: var(--ink-soft); margin-top: 10px; font-style: italic; }
+
+  /* ---------- hero ---------- */
+  .hero-wrap { padding-top: 48px; padding-bottom: 76px; }
+  .hero-wrap h1 { font-size: clamp(38px, 5.6vw, 66px); margin: 14px 0 36px; max-width: 15em; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 44px; align-items: end; }
+  .eyebrow { color: var(--red-text); }
+  .lede { font-size: 20px; color: var(--ink-soft); max-width: 34em; }
+  .hero-wrap .lede { margin-bottom: 0; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .btn {
+    display: inline-block; text-decoration: none; font-family: var(--sans); font-weight: 600; font-size: 16px;
+    padding: 13px 20px 12px; border: 2px solid var(--ink); color: var(--ink); background: transparent;
+  }
+  .btn.solid { background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 var(--red); }
+  .btn:hover { background: var(--red); border-color: var(--red); color: var(--ink); box-shadow: none; }
+  .hero-hours { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 16px; color: var(--ink-soft); }
+
+  /* ---------- sections ---------- */
+  section { padding: 76px 0; }
+  .sec-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 48px; align-items: end; margin-bottom: 40px; }
+  .sec-head p { margin: 0; color: var(--ink-soft); max-width: 32em; }
+  .sec-head .label { color: var(--red-text); display: block; margin-bottom: 12px; }
+  section.ruled { padding-top: 0; }
+  .ruled > .wrap::before { content: ""; display: block; border-top: 2px solid var(--ink); margin-bottom: 64px; }
+
+  /* today's three */
+  .three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
+  .item-name { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 18px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .item-name .price { font-size: 20px; font-weight: 700; white-space: nowrap; }
+  .item p { font-size: 17px; color: var(--ink-soft); margin-bottom: 10px; }
+  .when { color: var(--red-text); font-size: 12px; }
+
+  /* price list */
+  .counter { margin-top: 72px; padding-top: 30px; border-top: 1px solid var(--rule); }
+  .counter-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 32px; margin-bottom: 26px; }
+  .counter-head p { margin: 0; color: var(--ink-soft); font-size: 16px; max-width: 34em; }
+  .menu { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+  .menu h4 { margin: 0 0 12px; color: var(--red-text); }
+  .menu ul { list-style: none; margin: 0; padding: 0; }
+  .menu li { display: flex; align-items: baseline; gap: 8px; padding: 5px 0; font-size: 17px; }
+  .menu li .dots { flex: 1; border-bottom: 1.5px dotted var(--rule); transform: translateY(-4px); min-width: 12px; }
+  .menu li small { display: block; font-size: 13px; color: var(--ink-soft); font-family: var(--sans); letter-spacing: .02em; }
+
+  /* the day */
+  .day { background: var(--ink); color: var(--paper); }
+  .day .sec-head p { color: #d9c9b6; }
+  .day .sec-head .label { color: var(--mustard); }
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 2px solid var(--paper); }
+  .timeline li { position: relative; padding: 26px 18px 0 0; }
+  .timeline li::before { content: ""; position: absolute; top: -8px; left: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); border: 2px solid var(--paper); }
+  .timeline li.hot::before { background: var(--red); border-color: var(--red); }
+  .timeline time { display: block; font-size: 30px; font-weight: 700; line-height: 1; margin-bottom: 10px; }
+  .timeline li.hot time { color: var(--red); }
+  .timeline p { font-size: 16px; color: #e3d5c3; margin: 0; }
+
+  /* orders */
+  .orders { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: center; }
+  .orders h2 { margin: 12px 0 20px; }
+  .orders .label { color: var(--red-text); }
+  .orders .lede { font-size: 19px; }
+  .cakes { list-style: none; margin: 26px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+  .cakes li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .cakes li span:last-child { font-weight: 700; white-space: nowrap; }
+  .cakes small { color: var(--ink-soft); font-size: 15px; }
+  .phone { font-size: clamp(26px, 3.4vw, 34px); font-weight: 700; text-decoration: none; color: var(--ink); white-space: nowrap; }
+  .phone:hover { color: var(--red-text); }
+
+  /* visit */
+  .visit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; align-items: start; margin-top: 40px; }
+  .visit h3 { font-size: 20px; margin-bottom: 14px; }
+  .address { font-size: 22px; line-height: 1.35; margin: 0 0 22px; }
+  .hours { width: 100%; border-collapse: collapse; font-size: 17px; margin-bottom: 26px; }
+  .hours th, .hours td { text-align: left; padding: 7px 0; border-bottom: 1px solid var(--rule); font-weight: 400; }
+  .hours td { text-align: right; }
+  .hours tr.today th, .hours tr.today td { font-weight: 700; }
+  .hours tr.today th::after { content: "today"; margin-left: 10px; font-family: var(--sans); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--paper); background: var(--red-text); padding: 2px 6px 1px; vertical-align: 2px; }
+  .getting { font-size: 17px; color: var(--ink-soft); }
+  .map { border: 2px solid var(--ink); background: var(--paper-deep); }
+  .map svg { display: block; width: 100%; height: auto; }
+
+  footer { background: var(--ink); color: #e3d5c3; padding: 46px 0 40px; font-size: 16px; }
+  footer .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px 48px; }
+  footer b { color: var(--paper); font-size: 30px; font-style: italic; display: block; line-height: 1; margin-bottom: 10px; }
+  footer a { color: var(--paper); }
+  footer a:hover { color: var(--mustard); }
+  footer .credit { grid-column: 1 / -1; padding-top: 18px; border-top: 1px solid #5e4038; font-size: 14px; color: #c9b7a3; }
+
+  /* ---------- narrower screens ---------- */
+  @media (max-width: 960px) {
+    .menu { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .timeline { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 36px; border-top: 0; }
+    .timeline li { border-top: 2px solid var(--paper); }
+    .visit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .visit .map-col { grid-column: 1 / -1; max-width: 560px; }
+  }
+  @media (max-width: 820px) {
+    .hero-grid, .orders, .sec-head, footer .wrap { grid-template-columns: minmax(0, 1fr); }
+    .hero-wrap { padding-top: 30px; padding-bottom: 52px; }
+    .hero-wrap h1 { margin-bottom: 26px; }
+    .hero-grid { gap: 28px; }
+    .three { grid-template-columns: minmax(0, 1fr); gap: 44px; }
+    .plate.stamp { max-width: 420px; }
+    section { padding: 56px 0; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 17px; }
+    .menu { grid-template-columns: minmax(0, 1fr); }
+    .visit { grid-template-columns: minmax(0, 1fr); }
+    .timeline { grid-template-columns: minmax(0, 1fr); row-gap: 0; border-left: 2px solid var(--paper); margin-left: 7px; }
+    .timeline li { border-top: 0; padding: 0 0 26px 26px; }
+    .timeline li::before { top: 4px; left: -9px; }
+    .timeline time { font-size: 24px; margin-bottom: 6px; }
+    .strip .wrap { font-size: 12px; }
+    .strip-right { gap: 14px; }
+    nav ul { gap: 4px 18px; }
+    .lede { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="strip">
+  <div class="wrap label">
+    <span class="status" id="status">Tuesday to Sunday from 7:00</span>
+    <span class="strip-right"><span>14 Wren Street</span><a href="tel:+441632960418">01632 960 418</a></span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap">
+    <a class="wordmark" href="#top" id="top" aria-label="Tuller's Bakery, home"><b>Tuller&rsquo;s</b><span class="label">Bakery &middot; Wren Street</span></a>
+    <nav aria-label="Sections">
+      <ul class="label">
+        <li><a href="#today">Today&rsquo;s bake</a></li>
+        <li><a href="#day">A day here</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="#visit">Find us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero-wrap">
+    <span class="label eyebrow">Wren Street, since 2009</span>
+    <h1>Bread out of the oven at seven, and mostly gone by two.</h1>
+    <div class="hero-grid">
+    <figure>
+      <div class="plate hero" id="pic-hero" data-alt="A country loaf, a baguette, a cut seeded rye with a slice beside it, two cardamom knots and a bread knife on a wooden board, printed in two inks."></div>
+      <figcaption>This morning&rsquo;s board: country loaf, baguette, seeded rye and two cardamom knots.</figcaption>
+    </figure>
+    <div>
+      <p class="lede">Tuller&rsquo;s is one deck oven, three bakers and a counter. Everything on the shelves was mixed the day before and baked in the room behind the till, starting at half past four in the morning.</p>
+      <div class="actions">
+        <a class="btn solid" href="#today">What&rsquo;s on today</a>
+        <a class="btn" href="#orders">Order a whole cake</a>
+      </div>
+      <p class="hero-hours">Open Tuesday to Sunday. Closed on Mondays, when the oven gets cleaned and the bakers sleep.</p>
+    </div>
+    </div>
+  </div>
+
+  <section id="today" class="ruled">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Today&rsquo;s bake</span><h2>On the counter every day we&rsquo;re open</h2></div>
+        <p>The shelves change through the morning as trays come out. These three are always there, at least until they sell out.</p>
+      </div>
+
+      <div class="three">
+        <article class="item">
+          <div class="plate item" id="pic-loaf" data-alt="A round country sourdough loaf with one long scored ear, dusted with flour."></div>
+          <div class="item-name"><h3>Country loaf</h3><span class="price num">&pound;5.20</span></div>
+          <p>Our everyday sourdough: white flour, a little wholemeal rye, and a long cold rise overnight. It keeps for four days in a paper bag. Half loaves are &pound;2.80.</p>
+          <span class="label when">Out at 7:00</span>
+        </article>
+        <article class="item">
+          <div class="plate item" id="pic-croissant" data-alt="A butter croissant, its rolled layers curving into a crescent."></div>
+          <div class="item-name"><h3>Butter croissant</h3><span class="price num">&pound;2.60</span></div>
+          <p>Laminated over two days with cultured butter, rolled by hand at five, baked in two batches. Best eaten before lunch.</p>
+          <span class="label when">Out at 7:00 and 10:30</span>
+        </article>
+        <article class="item">
+          <div class="plate item" id="pic-sponge" data-alt="A Victoria sponge cake with a slice cut and set beside it, showing the jam and cream between two sponges."></div>
+          <div class="item-name"><h3>Victoria sponge</h3><span class="price num">&pound;3.80</span></div>
+          <p>Two butter sponges with raspberry jam and whipped cream, and icing sugar on top. By the slice from eleven, or whole to order.</p>
+          <span class="label when">Cut at 11:00</span>
+        </article>
+      </div>
+
+      <div class="counter">
+        <div class="counter-head">
+          <h3>The rest of the counter</h3>
+          <p>Rye and focaccia go first. If you want something kept back, ring before ten and we&rsquo;ll put your name on it.</p>
+        </div>
+        <div class="menu num">
+          <div>
+            <h4 class="label">Bread</h4>
+            <ul>
+              <li><span>Country loaf</span><span class="dots"></span><span>&pound;5.20</span></li>
+              <li><span>Seeded rye</span><span class="dots"></span><span>&pound;5.60</span></li>
+              <li><span>Baguette</span><span class="dots"></span><span>&pound;2.40</span></li>
+              <li><span>White tin loaf</span><span class="dots"></span><span>&pound;3.90</span></li>
+              <li><span>Focaccia<small>Fridays and Saturdays</small></span><span class="dots"></span><span>&pound;4.50</span></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="label">Pastry and buns</h4>
+            <ul>
+              <li><span>Butter croissant</span><span class="dots"></span><span>&pound;2.60</span></li>
+              <li><span>Pain au chocolat</span><span class="dots"></span><span>&pound;2.90</span></li>
+              <li><span>Cardamom knot</span><span class="dots"></span><span>&pound;3.10</span></li>
+              <li><span>Cinnamon bun</span><span class="dots"></span><span>&pound;3.10</span></li>
+              <li><span>Morning bun<small>Saturdays only</small></span><span class="dots"></span><span>&pound;3.40</span></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="label">Cake by the slice</h4>
+            <ul>
+              <li><span>Victoria sponge</span><span class="dots"></span><span>&pound;3.80</span></li>
+              <li><span>Plum and almond</span><span class="dots"></span><span>&pound;3.60</span></li>
+              <li><span>Lemon drizzle</span><span class="dots"></span><span>&pound;3.20</span></li>
+              <li><span>Brown butter brownie</span><span class="dots"></span><span>&pound;2.80</span></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="label">To drink</h4>
+            <ul>
+              <li><span>Filter coffee</span><span class="dots"></span><span>&pound;2.20</span></li>
+              <li><span>Flat white</span><span class="dots"></span><span>&pound;3.10</span></li>
+              <li><span>Pot of tea</span><span class="dots"></span><span>&pound;1.90</span></li>
+              <li><span>Hot chocolate</span><span class="dots"></span><span>&pound;3.00</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="day" class="day">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">A day here</span><h2>When things come out of the oven</h2></div>
+        <p>Same order every day, give or take ten minutes. The two red times are the big bakes, when the bread on the shelf is still warm.</p>
+      </div>
+      <ol class="timeline">
+        <li><time>4:30</time><p>Oven on. Yesterday&rsquo;s dough comes out of the fridge.</p></li>
+        <li class="hot"><time>7:00</time><p>Doors open. Country loaves, baguettes and the first croissants.</p></li>
+        <li><time>9:00</time><p>Cardamom knots and cinnamon buns.</p></li>
+        <li class="hot"><time>10:30</time><p>Second tray of croissants. The rye comes out.</p></li>
+        <li><time>11:00</time><p>Cakes are cut and go on the counter.</p></li>
+        <li><time>14:00</time><p>Whatever&rsquo;s left is half price.</p></li>
+        <li><time>15:00</time><p>Closed. Leftover bread goes to the Cole Lane community fridge.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="orders">
+    <div class="wrap orders">
+      <div>
+        <span class="label">Orders</span>
+        <h2>Whole cakes and bigger orders</h2>
+        <p class="lede">We need 48 hours for anything whole. Ring us between 7:00 and 15:00, or ask at the counter and we&rsquo;ll write it in the book.</p>
+        <a class="phone num" href="tel:+441632960418">01632 960 418</a>
+        <ul class="cakes num">
+          <li><span>Victoria sponge <small>serves 12</small></span><span>&pound;28</span></li>
+          <li><span>Plum and almond cake <small>serves 10</small></span><span>&pound;30</span></li>
+          <li><span>Lemon drizzle loaf <small>serves 8</small></span><span>&pound;16</span></li>
+          <li><span>Ten country loaves or more, for a party</span><span>10% off</span></li>
+          <li><span>Standing orders for caf&eacute;s and offices within a mile, delivered by bike before 8:00</span><span>Ask us</span></li>
+        </ul>
+      </div>
+      <div class="plate stamp" id="pic-stamp" data-alt="A red rubber stamp of a layered cake on a cake stand, with the words 48 hours notice."></div>
+    </div>
+  </section>
+
+  <section id="visit" class="ruled">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Find us</span><h2>Look for the striped awning</h2></div>
+        <p>There&rsquo;s a bench outside the window and two small tables inside. Dogs are welcome; there&rsquo;s a water bowl by the door.</p>
+      </div>
+      <figure>
+        <div class="plate shop" id="pic-shop" data-alt="The bakery's shopfront: a green sign reading Tuller's Bakery, a red and cream striped awning, a window of loaves on shelves, a bicycle with bread in its basket and a chalk board on the pavement."></div>
+        <figcaption>14 Wren Street, seen from across the road.</figcaption>
+      </figure>
+      <div class="visit">
+        <div>
+          <p class="address">14 Wren Street<br>on the corner of Cole Lane</p>
+          <table class="hours num" id="hours">
+            <caption class="label" style="text-align:left;padding-bottom:8px;color:var(--red-text)">Opening hours</caption>
+            <tr data-day="1"><th>Monday</th><td>Closed</td></tr>
+            <tr data-day="2"><th>Tuesday</th><td>7:00 &ndash; 15:00</td></tr>
+            <tr data-day="3"><th>Wednesday</th><td>7:00 &ndash; 15:00</td></tr>
+            <tr data-day="4"><th>Thursday</th><td>7:00 &ndash; 15:00</td></tr>
+            <tr data-day="5"><th>Friday</th><td>7:00 &ndash; 15:00</td></tr>
+            <tr data-day="6"><th>Saturday</th><td>7:30 &ndash; 16:00</td></tr>
+            <tr data-day="0"><th>Sunday</th><td>8:00 &ndash; 13:00</td></tr>
+          </table>
+        </div>
+        <div>
+          <h3>Getting here</h3>
+          <p class="getting">The 12 and 38 buses stop on Cole Lane, a minute&rsquo;s walk north of the door. There&rsquo;s a bike rack outside the window.</p>
+          <p class="getting">The entrance has no step and the door is wide enough for a double pram.</p>
+        </div>
+        <div class="map-col">
+          <div class="map">
+            <svg viewBox="0 0 400 260" role="img" aria-labelledby="map-t">
+              <title id="map-t">Street map: the bakery is on the corner of Wren Street and Cole Lane, with the bus stop on Cole Lane just north of it and Wren Gardens to the east.</title>
+              <rect width="400" height="260" fill="#ebdfc7"/>
+              <rect x="262" y="30" width="118" height="86" rx="6" fill="#d9cfae"/>
+              <g fill="#5e4038" opacity=".5">
+                <circle cx="288" cy="54" r="6"/><circle cx="318" cy="70" r="7"/><circle cx="350" cy="50" r="6"/><circle cx="300" cy="94" r="6"/><circle cx="356" cy="92" r="7"/>
+              </g>
+              <g stroke="#f4ecdc" stroke-linecap="round" fill="none">
+                <path d="M-10 150 H410" stroke-width="26"/>
+                <path d="M176 -10 V270" stroke-width="22"/>
+                <path d="M-10 40 L120 150" stroke-width="14"/>
+                <path d="M176 220 H410" stroke-width="12"/>
+              </g>
+              <g stroke="#341614" stroke-width="1" stroke-dasharray="4 5" fill="none" opacity=".45">
+                <path d="M-10 150 H410"/><path d="M176 -10 V270"/>
+              </g>
+              <g font-family="Gill Sans, Avenir Next, Trebuchet MS, sans-serif" font-size="12" letter-spacing="1.6" fill="#5e4038">
+                <text x="22" y="154">WREN STREET</text>
+                <text x="181" y="252" transform="rotate(-90 181 252)">COLE LANE</text>
+                <text x="10" y="22" transform="rotate(40 10 22)">MARKET ROAD</text>
+                <text x="270" y="134">WREN GARDENS</text>
+                <text x="300" y="214">ASH ROW</text>
+              </g>
+              <g>
+                <rect x="150" y="76" width="16" height="16" rx="3" fill="#341614"/>
+                <text x="158" y="88" text-anchor="middle" font-family="Gill Sans, Avenir Next, Trebuchet MS, sans-serif" font-size="11" font-weight="700" fill="#f4ecdc">B</text>
+                <text x="140" y="88" text-anchor="end" font-family="Gill Sans, Avenir Next, Trebuchet MS, sans-serif" font-size="11" fill="#341614">12, 38</text>
+              </g>
+              <g>
+                <circle cx="204" cy="124" r="13" fill="#b2372a" stroke="#f4ecdc" stroke-width="3"/>
+                <circle cx="204" cy="124" r="4" fill="#f4ecdc"/>
+                <text x="224" y="110" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="17" font-style="italic" font-weight="700" fill="#341614">Tuller&#8217;s</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b>Tuller&rsquo;s</b>
+      14 Wren Street, on the corner of Cole Lane<br>
+      <a href="tel:+441632960418">01632 960 418</a>
+    </div>
+    <div>Leftover bread goes to the Cole Lane community fridge every afternoon. If you run a food bank nearby and could use it, come and talk to us.</div>
+    <p class="credit">Pictures made with Lumenary by Mursal Furqan Kumbhar.</p>
+  </div>
+</footer>
+
+<script src="../../treatments/lumenary/lumenary.js"></script>
+<script>
+/* Source scenes for the bakery page, drawn on canvas before Lumenary treats them. */
+const Scenes = (() => {
+  const TAU = Math.PI * 2;
+
+  function rng(seed) {
+    return () => {
+      seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function canvas(w, h) {
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    return c;
+  }
+
+  function softShadow(g, cx, cy, rx, ry, alpha) {
+    g.save();
+    g.translate(cx, cy);
+    g.scale(1, ry / rx);
+    const r = g.createRadialGradient(0, 0, 0, 0, 0, rx);
+    r.addColorStop(0, `rgba(20,10,4,${alpha})`);
+    r.addColorStop(0.6, `rgba(20,10,4,${alpha * 0.55})`);
+    r.addColorStop(1, 'rgba(20,10,4,0)');
+    g.fillStyle = r;
+    g.beginPath(); g.arc(0, 0, rx, 0, TAU); g.fill();
+    g.restore();
+  }
+
+  function domePath(g, cx, by, rx, h, drop) {
+    g.beginPath();
+    g.moveTo(cx - rx, by);
+    g.bezierCurveTo(cx - rx, by - h * 0.78, cx - rx * 0.55, by - h, cx, by - h);
+    g.bezierCurveTo(cx + rx * 0.55, by - h, cx + rx, by - h * 0.78, cx + rx, by);
+    g.bezierCurveTo(cx + rx * 0.7, by + drop, cx - rx * 0.7, by + drop, cx - rx, by);
+    g.closePath();
+  }
+
+  function crust(g, x, y, r, stops) {
+    const gr = g.createRadialGradient(x, y, r * 0.04, x, y, r);
+    (stops || [[0, '#f7da9e'], [0.28, '#dba35a'], [0.62, '#9b5824'], [1, '#3a1d0b']])
+      .forEach(([o, c]) => gr.addColorStop(o, c));
+    return gr;
+  }
+
+  function flour(g, rand, x0, y0, w, h, n, bias) {
+    for (let i = 0; i < n; i++) {
+      const u = rand();
+      const x = x0 + rand() * w;
+      const y = y0 + Math.pow(u, bias || 1) * h;
+      const r = 0.6 + rand() * 2.2;
+      g.fillStyle = `rgba(255,250,238,${0.25 + rand() * 0.55})`;
+      g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill();
+    }
+  }
+
+  // A lame cut: pale opened crumb with a dark lifted lip above it.
+  function earCut(g, x1, y1, cx, cy, x2, y2, width) {
+    g.save();
+    g.lineCap = 'round';
+    g.strokeStyle = '#efd9ab'; g.lineWidth = width;
+    g.beginPath(); g.moveTo(x1, y1); g.quadraticCurveTo(cx, cy, x2, y2); g.stroke();
+    g.strokeStyle = 'rgba(255,244,220,0.8)'; g.lineWidth = width * 0.35;
+    g.beginPath(); g.moveTo(x1, y1 + width * 0.15); g.quadraticCurveTo(cx, cy + width * 0.15, x2, y2 + width * 0.15); g.stroke();
+    g.strokeStyle = '#4a250d'; g.lineWidth = width * 0.38;
+    g.beginPath(); g.moveTo(x1, y1 - width * 0.5); g.quadraticCurveTo(cx, cy - width * 0.55, x2, y2 - width * 0.5); g.stroke();
+    g.strokeStyle = '#f2c47c'; g.lineWidth = width * 0.16;
+    g.beginPath(); g.moveTo(x1 + 4, y1 - width * 0.78); g.quadraticCurveTo(cx, cy - width * 0.85, x2 - 4, y2 - width * 0.78); g.stroke();
+    g.restore();
+  }
+
+  function boule(g, rand, cx, by, rx, h) {
+    softShadow(g, cx + rx * 0.12, by + 8, rx * 1.12, rx * 0.22, 0.6);
+    domePath(g, cx, by, rx, h, rx * 0.16);
+    g.fillStyle = crust(g, cx - rx * 0.38, by - h * 0.78, rx * 1.55);
+    g.fill();
+    g.save();
+    domePath(g, cx, by, rx, h, rx * 0.16);
+    g.clip();
+    // banneton flour rings
+    g.strokeStyle = 'rgba(255,246,226,0.32)';
+    g.lineWidth = 3;
+    for (let k = 1; k <= 6; k++) {
+      g.beginPath();
+      g.ellipse(cx, by - h * 0.86, rx * 0.17 * k, h * 0.11 * k, 0, Math.PI * 0.05, Math.PI * 0.95);
+      g.stroke();
+    }
+    flour(g, rand, cx - rx, by - h, rx * 2, h * 0.75, 900, 2.2);
+    g.restore();
+    earCut(g, cx - rx * 0.62, by - h * 0.5, cx - rx * 0.05, by - h * 1.04, cx + rx * 0.6, by - h * 0.62, rx * 0.1);
+    // rim darkening
+    domePath(g, cx, by, rx, h, rx * 0.16);
+    g.strokeStyle = 'rgba(40,18,6,0.65)'; g.lineWidth = 4; g.stroke();
+  }
+
+  function baguette(g, x1, y1, x2, y2, t) {
+    const ang = Math.atan2(y2 - y1, x2 - x1);
+    const len = Math.hypot(x2 - x1, y2 - y1);
+    softShadow(g, (x1 + x2) / 2 + 10, (y1 + y2) / 2 + t * 0.55, len * 0.55, t * 0.5, 0.55);
+    g.save();
+    g.translate(x1, y1); g.rotate(ang);
+    const p = () => {
+      g.beginPath();
+      g.moveTo(0, 0);
+      g.bezierCurveTo(0, -t * 0.55, t * 0.5, -t / 2, t * 1.3, -t / 2);
+      g.lineTo(len - t * 1.3, -t / 2);
+      g.bezierCurveTo(len - t * 0.5, -t / 2, len, -t * 0.55, len, 0);
+      g.bezierCurveTo(len, t * 0.5, len - t * 0.5, t / 2, len - t * 1.3, t / 2);
+      g.lineTo(t * 1.3, t / 2);
+      g.bezierCurveTo(t * 0.5, t / 2, 0, t * 0.5, 0, 0);
+      g.closePath();
+    };
+    p();
+    const gr = g.createLinearGradient(0, -t / 2, 0, t / 2);
+    gr.addColorStop(0, '#f5d697'); gr.addColorStop(0.3, '#d8994c');
+    gr.addColorStop(0.7, '#8c4d1e'); gr.addColorStop(1, '#3a1e0c');
+    g.fillStyle = gr; g.fill();
+    g.strokeStyle = 'rgba(40,18,6,0.6)'; g.lineWidth = 3; g.stroke();
+    const n = 5;
+    for (let i = 0; i < n; i++) {
+      const x = t * 1.5 + i * (len - t * 3) / (n - 1);
+      g.save(); g.translate(x, -t * 0.06); g.rotate(-0.38);
+      g.fillStyle = '#efd8a6';
+      g.beginPath(); g.ellipse(0, 0, len / 13, t * 0.14, 0, 0, TAU); g.fill();
+      g.strokeStyle = '#4a250d'; g.lineWidth = 4;
+      g.beginPath(); g.ellipse(0, -2, len / 13, t * 0.15, 0, Math.PI * 1.05, Math.PI * 1.95); g.stroke();
+      g.restore();
+    }
+    g.restore();
+  }
+
+  function slicePath(g, x, by, w, h) {
+    g.beginPath();
+    g.moveTo(x - w / 2, by);
+    g.lineTo(x - w / 2, by - h * 0.55);
+    g.bezierCurveTo(x - w / 2 - w * 0.08, by - h * 1.04, x + w / 2 + w * 0.08, by - h * 1.04, x + w / 2, by - h * 0.55);
+    g.lineTo(x + w / 2, by);
+    g.quadraticCurveTo(x, by + 5, x - w / 2, by);
+    g.closePath();
+  }
+
+  function crumbFace(g, rand, x, by, w, h) {
+    slicePath(g, x, by, w, h);
+    g.fillStyle = '#4a250e'; g.fill();
+    const inset = Math.max(7, w * 0.05);
+    slicePath(g, x, by - inset * 0.7, w - inset * 2, h - inset * 1.6);
+    const gr = g.createRadialGradient(x - w * 0.15, by - h * 0.6, 4, x, by - h * 0.45, w * 0.7);
+    gr.addColorStop(0, '#fbf0d8'); gr.addColorStop(0.7, '#ecd6ac'); gr.addColorStop(1, '#cfae78');
+    g.fillStyle = gr; g.fill();
+    g.save();
+    slicePath(g, x, by - inset * 0.7, w - inset * 2, h - inset * 1.6);
+    g.clip();
+    for (let i = 0; i < Math.round(w * h / 260); i++) {
+      const hx = x - w / 2 + rand() * w;
+      const hy = by - rand() * h;
+      const r = 1.5 + Math.pow(rand(), 2.5) * w * 0.05;
+      g.fillStyle = `rgba(120,78,36,${0.35 + rand() * 0.4})`;
+      g.beginPath(); g.ellipse(hx, hy, r * 1.3, r, rand() * 3, 0, TAU); g.fill();
+      g.fillStyle = 'rgba(255,248,232,0.6)';
+      g.beginPath(); g.ellipse(hx - r * 0.3, hy + r * 0.6, r * 0.9, r * 0.35, 0, 0, TAU); g.fill();
+    }
+    g.restore();
+  }
+
+  function cutLoaf(g, rand, x, by, w, h, len) {
+    softShadow(g, x + len * 0.5, by + 6, len * 0.75, h * 0.18, 0.6);
+    // body running away to the right
+    domePath(g, x + len * 0.5, by, len * 0.55, h * 0.98, h * 0.08);
+    g.fillStyle = crust(g, x + len * 0.3, by - h * 0.85, len * 0.9,
+      [[0, '#c98a4a'], [0.35, '#8e4f22'], [0.75, '#5a2d10'], [1, '#2b1407']]);
+    g.fill();
+    g.strokeStyle = 'rgba(30,12,4,0.6)'; g.lineWidth = 3; g.stroke();
+    // seeds on the crust
+    for (let i = 0; i < 120; i++) {
+      const sx = x + rand() * len;
+      const sy = by - h * (0.35 + rand() * 0.6);
+      g.fillStyle = `rgba(240,210,160,${0.25 + rand() * 0.4})`;
+      g.beginPath(); g.ellipse(sx, sy, 2.4, 1.1, rand() * 3, 0, TAU); g.fill();
+    }
+    crumbFace(g, rand, x, by, w, h);
+  }
+
+  function slice(g, rand, x, by, w, h, rot) {
+    g.save();
+    g.translate(x, by); g.rotate(rot);
+    softShadow(g, 8, 4, w * 0.62, h * 0.12, 0.6);
+    crumbFace(g, rand, 0, 0, w, h);
+    g.restore();
+  }
+
+  function bun(g, rand, x, y, r) {
+    softShadow(g, x + r * 0.15, y + r * 0.55, r * 1.2, r * 0.4, 0.6);
+    g.fillStyle = crust(g, x - r * 0.4, y - r * 0.45, r * 1.5,
+      [[0, '#f4c986'], [0.35, '#c98238'], [0.75, '#7c3f14'], [1, '#3a1b08']]);
+    g.beginPath(); g.ellipse(x, y, r, r * 0.82, 0, 0, TAU); g.fill();
+    // knot spiral
+    g.lineCap = 'round';
+    const turn = (off, col, lw) => {
+      g.strokeStyle = col; g.lineWidth = lw;
+      g.beginPath();
+      for (let a = 0; a <= TAU * 2.3; a += 0.12) {
+        const rr = r * 0.08 + (a / (TAU * 2.3)) * r * 0.8;
+        const px = x + Math.cos(a) * rr + off;
+        const py = y + Math.sin(a) * rr * 0.82 + off;
+        if (a === 0) g.moveTo(px, py); else g.lineTo(px, py);
+      }
+      g.stroke();
+    };
+    turn(1.5, 'rgba(50,22,6,0.85)', r * 0.09);
+    turn(-2, 'rgba(255,222,160,0.55)', r * 0.035);
+    for (let i = 0; i < 26; i++) {
+      const a = rand() * TAU, d = Math.sqrt(rand()) * r * 0.85;
+      g.fillStyle = 'rgba(255,255,250,0.9)';
+      g.fillRect(x + Math.cos(a) * d, y + Math.sin(a) * d * 0.8, 3, 3);
+    }
+  }
+
+  function knife(g, x1, y, x2, handleLen) {
+    softShadow(g, (x1 + x2 + handleLen) / 2, y + 16, (x2 + handleLen - x1) * 0.55, 12, 0.5);
+    const bw = 30;
+    const gr = g.createLinearGradient(0, y - bw / 2, 0, y + bw / 2);
+    gr.addColorStop(0, '#f4f5f4'); gr.addColorStop(0.45, '#b9bcbd'); gr.addColorStop(1, '#5d6264');
+    g.fillStyle = gr;
+    g.beginPath();
+    g.moveTo(x1, y + bw / 2);
+    g.quadraticCurveTo(x1 - 10, y - bw * 0.2, x1 + 30, y - bw / 2);
+    g.lineTo(x2, y - bw / 2); g.lineTo(x2, y + bw / 2); g.closePath(); g.fill();
+    g.strokeStyle = '#3a3d3e'; g.lineWidth = 2;
+    g.beginPath();
+    for (let sx = x1 + 6; sx < x2; sx += 9) { g.moveTo(sx, y + bw / 2); g.lineTo(sx + 4, y + bw / 2 - 4); }
+    g.stroke();
+    const hg = g.createLinearGradient(0, y - 20, 0, y + 20);
+    hg.addColorStop(0, '#8a5a34'); hg.addColorStop(0.5, '#5b351b'); hg.addColorStop(1, '#2c180a');
+    g.fillStyle = hg;
+    g.beginPath(); g.roundRect(x2, y - 18, handleLen, 36, 14); g.fill();
+    g.fillStyle = '#d8c7a4';
+    [0.25, 0.55, 0.85].forEach(f => { g.beginPath(); g.arc(x2 + handleLen * f, y, 4, 0, TAU); g.fill(); });
+  }
+
+  function wheatJar(g, rand, x, base, w, h) {
+    // stalks first so the jar sits in front of them
+    for (let i = 0; i < 9; i++) {
+      const sx = x + w * (0.3 + rand() * 0.4);
+      const tx = x + w / 2 + (rand() - 0.5) * w * 2.4;
+      const ty = base - h - 140 - rand() * 120;
+      g.strokeStyle = '#c9a466'; g.lineWidth = 2.5;
+      g.beginPath(); g.moveTo(sx, base - h * 0.6); g.quadraticCurveTo(sx, ty + 80, tx, ty); g.stroke();
+      const ang = Math.atan2(ty - (ty + 80), tx - sx);
+      for (let k = 0; k < 7; k++) {
+        const px = tx - Math.cos(ang) * k * 9, py = ty - Math.sin(ang) * k * 9 + k * 9 * 0.9;
+        g.fillStyle = k % 2 ? '#e6c588' : '#d2ab64';
+        g.beginPath(); g.ellipse(px - 4, py, 3.4, 7, -0.5, 0, TAU); g.fill();
+        g.beginPath(); g.ellipse(px + 4, py, 3.4, 7, 0.5, 0, TAU); g.fill();
+      }
+    }
+    softShadow(g, x + w / 2, base, w * 0.7, 10, 0.5);
+    const gr = g.createLinearGradient(x, 0, x + w, 0);
+    gr.addColorStop(0, '#d9cbb0'); gr.addColorStop(0.3, '#f3ead6'); gr.addColorStop(0.7, '#a89674'); gr.addColorStop(1, '#5d4f39');
+    g.fillStyle = gr;
+    g.beginPath(); g.roundRect(x, base - h, w, h, [10, 10, 16, 16]); g.fill();
+    g.fillStyle = '#7a3e22';
+    g.fillRect(x, base - h * 0.62, w, h * 0.16);
+  }
+
+  /* ---------- hero: the morning's bake on a board ---------- */
+  function hero(W = 1200, H = 780) {
+    const c = canvas(W, H), g = c.getContext('2d'), rand = rng(7);
+    const ty = H * 0.55;
+    let gr = g.createLinearGradient(0, 0, W, H * 0.3);
+    gr.addColorStop(0, '#7a573a'); gr.addColorStop(0.5, '#3e2a1c'); gr.addColorStop(1, '#1a110b');
+    g.fillStyle = gr; g.fillRect(0, 0, W, ty);
+    const lr = g.createRadialGradient(W * 0.16, H * 0.1, 10, W * 0.16, H * 0.1, W * 0.6);
+    lr.addColorStop(0, 'rgba(255,228,182,0.6)'); lr.addColorStop(1, 'rgba(255,228,182,0)');
+    g.fillStyle = lr; g.fillRect(0, 0, W, ty);
+    // window light falling on the wall in two panes
+    g.fillStyle = 'rgba(255,236,200,0.12)';
+    g.beginPath(); g.moveTo(40, 0); g.lineTo(300, 0); g.lineTo(420, ty); g.lineTo(150, ty); g.fill();
+    g.beginPath(); g.moveTo(330, 0); g.lineTo(450, 0); g.lineTo(560, ty); g.lineTo(450, ty); g.fill();
+    // table
+    gr = g.createLinearGradient(0, ty, 0, H);
+    gr.addColorStop(0, '#5e3d26'); gr.addColorStop(1, '#a5744b');
+    g.fillStyle = gr; g.fillRect(0, ty, W, H - ty);
+    g.strokeStyle = 'rgba(30,15,6,0.5)'; g.lineWidth = 2;
+    [0.12, 0.3, 0.55, 0.85].forEach(f => { const y = ty + (H - ty) * f; g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); });
+    g.strokeStyle = 'rgba(255,220,170,0.08)'; g.lineWidth = 1;
+    for (let i = 0; i < 70; i++) {
+      const y = ty + rand() * (H - ty);
+      g.beginPath(); g.moveTo(0, y);
+      g.bezierCurveTo(W * 0.3, y + (rand() - 0.5) * 8, W * 0.7, y + (rand() - 0.5) * 8, W, y + (rand() - 0.5) * 6);
+      g.stroke();
+    }
+    wheatJar(g, rand, W * 0.84, ty + 4, 96, 150);
+    // bread board
+    const bx = 110, bt = ty + 50, bwid = W - 260, bh = H - bt - 40;
+    g.fillStyle = '#4b2c16';
+    g.beginPath(); g.roundRect(bx, bt + 16, bwid, bh, 26); g.fill();
+    gr = g.createLinearGradient(0, bt, 0, bt + bh);
+    gr.addColorStop(0, '#c48d55'); gr.addColorStop(1, '#dcab74');
+    g.fillStyle = gr;
+    g.beginPath(); g.roundRect(bx, bt, bwid, bh, 26); g.fill();
+    g.strokeStyle = 'rgba(110,64,28,0.25)'; g.lineWidth = 1.2;
+    for (let i = 0; i < 40; i++) {
+      const y = bt + 8 + rand() * (bh - 16);
+      g.beginPath(); g.moveTo(bx + 10, y);
+      g.bezierCurveTo(bx + bwid * 0.4, y + (rand() - 0.5) * 10, bx + bwid * 0.6, y + (rand() - 0.5) * 10, bx + bwid - 10, y);
+      g.stroke();
+    }
+    // handle
+    g.fillStyle = '#c99159';
+    g.beginPath(); g.roundRect(bx + bwid - 6, bt + bh * 0.35, 90, bh * 0.3, 20); g.fill();
+    g.fillStyle = '#4b2c16';
+    g.beginPath(); g.ellipse(bx + bwid + 52, bt + bh * 0.5, 13, 10, 0, 0, TAU); g.fill();
+    flour(g, rand, bx + 20, bt + 10, bwid - 40, bh - 20, 500, 1);
+
+    baguette(g, 600, bt + 52, 1080, bt - 8, 74);
+    boule(g, rand, 420, bt + 150, 210, 300);
+    cutLoaf(g, rand, 790, bt + 196, 190, 170, 230);
+    slice(g, rand, 660, bt + 236, 140, 128, -0.1);
+    bun(g, rand, 190, bt + 205, 56);
+    bun(g, rand, 290, bt + 240, 48);
+    knife(g, 560, H - 52, 900, 170);
+    return c;
+  }
+
+  /* ---------- three shelf items ---------- */
+  function itemGround(g, W, H, rand) {
+    let gr = g.createLinearGradient(0, 0, 0, H * 0.62);
+    gr.addColorStop(0, '#f1e8d6'); gr.addColorStop(1, '#ddcdb0');
+    g.fillStyle = gr; g.fillRect(0, 0, W, H * 0.62);
+    gr = g.createLinearGradient(0, H * 0.62, 0, H);
+    gr.addColorStop(0, '#b99c74'); gr.addColorStop(1, '#e2cfaa');
+    g.fillStyle = gr; g.fillRect(0, H * 0.62, W, H);
+    // linen cloth stripe along the table
+    g.fillStyle = 'rgba(250,246,236,0.75)';
+    g.beginPath(); g.moveTo(0, H * 0.7); g.lineTo(W, H * 0.66); g.lineTo(W, H * 0.9); g.lineTo(0, H * 0.96); g.fill();
+    g.strokeStyle = 'rgba(160,60,40,0.55)'; g.lineWidth = 5;
+    [0.73, 0.76].forEach(f => { g.beginPath(); g.moveTo(0, H * f); g.lineTo(W, H * (f - 0.04)); g.stroke(); });
+  }
+
+  function countryLoaf(W = 640, H = 480) {
+    const c = canvas(W, H), g = c.getContext('2d'), rand = rng(11);
+    itemGround(g, W, H, rand);
+    const cx = W * 0.5, by = H * 0.74, rx = W * 0.36, h = H * 0.42;
+    softShadow(g, cx + 14, by + 6, rx * 1.15, rx * 0.16, 0.65);
+    domePath(g, cx, by, rx, h, rx * 0.12);
+    g.fillStyle = crust(g, cx - rx * 0.4, by - h * 0.8, rx * 1.6);
+    g.fill();
+    g.save(); domePath(g, cx, by, rx, h, rx * 0.12); g.clip();
+    flour(g, rand, cx - rx, by - h, rx * 2, h * 0.7, 700, 2.4);
+    g.restore();
+    earCut(g, cx - rx * 0.7, by - h * 0.55, cx - rx * 0.1, by - h * 1.06, cx + rx * 0.72, by - h * 0.5, rx * 0.11);
+    domePath(g, cx, by, rx, h, rx * 0.12);
+    g.strokeStyle = 'rgba(40,18,6,0.7)'; g.lineWidth = 4; g.stroke();
+    return c;
+  }
+
+  function croissant(W = 640, H = 480) {
+    const c = canvas(W, H), g = c.getContext('2d'), rand = rng(5);
+    itemGround(g, W, H, rand);
+    const C = [W * 0.5, H * 0.95], R = H * 0.5, T = 1.12;
+    const spine = t => [C[0] + R * Math.sin(t) * 1.08, C[1] - R * Math.cos(t)];
+    const thick = t => H * 0.25 * (1 - Math.pow(Math.abs(t) / (T * 1.04), 1.7)) + 10;
+    const edge = (t, side) => {
+      const [x, y] = spine(t), th = thick(t) / 2 * side;
+      return [x + Math.sin(t) * th * 1.08, y - Math.cos(t) * th];
+    };
+    softShadow(g, C[0] + 12, H * 0.66, W * 0.42, H * 0.09, 0.65);
+    const bands = 7;
+    const order = [0, 6, 1, 5, 2, 4, 3];
+    order.forEach(k => {
+      const t0 = -T + (2 * T) * k / bands - 0.05, t1 = -T + (2 * T) * (k + 1) / bands + 0.05;
+      const tm = (t0 + t1) / 2;
+      g.beginPath();
+      const steps = 14;
+      for (let i = 0; i <= steps; i++) { const t = t0 + (t1 - t0) * i / steps; const [x, y] = edge(t, 1.0 + 0.08 * Math.sin(Math.PI * i / steps)); i ? g.lineTo(x, y) : g.moveTo(x, y); }
+      for (let i = steps; i >= 0; i--) { const t = t0 + (t1 - t0) * i / steps; const [x, y] = edge(t, -1.0 - 0.06 * Math.sin(Math.PI * i / steps)); g.lineTo(x, y); }
+      g.closePath();
+      const [hx, hy] = edge(tm, 0.45);
+      const th = thick(tm);
+      g.fillStyle = crust(g, hx - th * 0.15, hy - th * 0.1, th * 1.25,
+        [[0, '#fde3aa'], [0.3, '#e3a656'], [0.68, '#a05a22'], [1, '#43210a']]);
+      g.fill();
+      g.strokeStyle = 'rgba(58,26,8,0.85)'; g.lineWidth = 3; g.stroke();
+      // egg-wash shine along the top of the roll
+      g.strokeStyle = 'rgba(255,248,226,0.7)'; g.lineWidth = Math.max(2, th * 0.06); g.lineCap = 'round';
+      g.beginPath();
+      for (let i = 2; i <= 10; i++) { const t = t0 + (t1 - t0) * i / 12; const [x, y] = edge(t, 0.55); i > 2 ? g.lineTo(x, y) : g.moveTo(x, y); }
+      g.stroke();
+      // laminated layers showing at the edge of each roll
+      g.strokeStyle = 'rgba(120,60,20,0.5)'; g.lineWidth = 1.5;
+      for (let l = 1; l <= 3; l++) {
+        g.beginPath();
+        for (let i = 1; i <= 11; i++) { const t = t0 + (t1 - t0) * i / 12; const [x, y] = edge(t, -0.4 - l * 0.13); i > 1 ? g.lineTo(x, y) : g.moveTo(x, y); }
+        g.stroke();
+      }
+    });
+    // flakes on the cloth
+    for (let i = 0; i < 26; i++) {
+      g.fillStyle = `rgba(${170 + rand() * 60 | 0},${100 + rand() * 50 | 0},40,0.85)`;
+      g.beginPath(); g.ellipse(W * (0.15 + rand() * 0.7), H * (0.74 + rand() * 0.14), 2 + rand() * 4, 1 + rand() * 2, rand() * 3, 0, TAU); g.fill();
+    }
+    return c;
+  }
+
+  function sponge(W = 640, H = 480) {
+    const c = canvas(W, H), g = c.getContext('2d'), rand = rng(9);
+    itemGround(g, W, H, rand);
+    // stand / plate
+    const cx = W * 0.42, base = H * 0.72, rx = W * 0.27, ry = H * 0.075;
+    softShadow(g, cx + 14, base + 14, rx * 1.35, ry * 1.6, 0.55);
+    g.fillStyle = '#e9e4da';
+    g.beginPath(); g.ellipse(cx, base + 6, rx * 1.22, ry * 1.5, 0, 0, TAU); g.fill();
+    g.fillStyle = '#fbf8f2';
+    g.beginPath(); g.ellipse(cx, base, rx * 1.22, ry * 1.45, 0, 0, TAU); g.fill();
+    g.strokeStyle = 'rgba(120,110,95,0.45)'; g.lineWidth = 2;
+    g.beginPath(); g.ellipse(cx, base, rx * 1.0, ry * 1.15, 0, 0, TAU); g.stroke();
+    // cake body: layers from the bottom up
+    const layers = [['sponge', 70], ['jam', 12], ['cream', 22], ['sponge', 66]];
+    let y = base;
+    const sideGrad = (y0, y1, a, b, cc) => {
+      const gr = g.createLinearGradient(cx - rx, 0, cx + rx, 0);
+      gr.addColorStop(0, a); gr.addColorStop(0.35, b); gr.addColorStop(1, cc);
+      return gr;
+    };
+    const cols = {
+      sponge: ['#c88a44', '#e7b56c', '#7a4a1e'],
+      jam: ['#7a1426', '#b02a3c', '#4a0a16'],
+      cream: ['#efe6d4', '#fffaf0', '#c9bda6'],
+    };
+    layers.forEach(([kind, h]) => {
+      const y1 = y - h;
+      g.fillStyle = sideGrad(y, y1, ...cols[kind]);
+      g.beginPath();
+      g.ellipse(cx, y, rx, ry, 0, 0, Math.PI);
+      g.lineTo(cx - rx, y1);
+      g.ellipse(cx, y1, rx, ry, 0, Math.PI, 0, true);
+      g.closePath(); g.fill();
+      if (kind === 'sponge') {
+        for (let i = 0; i < 90; i++) {
+          const a = rand() * Math.PI, px = cx - Math.cos(a) * rx * 0.98;
+          const py = y1 + rand() * h + Math.sin(a) * ry;
+          g.fillStyle = `rgba(90,50,16,${0.2 + rand() * 0.3})`;
+          g.beginPath(); g.arc(px, py, 1 + rand() * 2.2, 0, TAU); g.fill();
+        }
+      }
+      y = y1;
+    });
+    // sugared top
+    g.fillStyle = '#f6efe2';
+    g.beginPath(); g.ellipse(cx, y, rx, ry, 0, 0, TAU); g.fill();
+    for (let i = 0; i < 700; i++) {
+      const a = rand() * TAU, d = Math.sqrt(rand());
+      g.fillStyle = `rgba(${200 + rand() * 40 | 0},${170 + rand() * 40 | 0},120,${0.15 + rand() * 0.3})`;
+      g.fillRect(cx + Math.cos(a) * rx * d, y + Math.sin(a) * ry * d, 2, 2);
+    }
+    g.strokeStyle = 'rgba(120,80,40,0.45)'; g.lineWidth = 2;
+    g.beginPath(); g.ellipse(cx, y, rx, ry, 0, 0, TAU); g.stroke();
+    // a cut slice lying in front, its layers facing us
+    const sx = W * 0.72, sb = H * 0.86, sw = 150;
+    softShadow(g, sx + 10, sb + 6, sw * 0.7, 12, 0.6);
+    let yy = sb;
+    const tip = 46;
+    layers.forEach(([kind, h]) => {
+      const [a, b, cc] = cols[kind];
+      g.fillStyle = b;
+      g.fillRect(sx - sw / 2, yy - h * 0.82, sw, h * 0.82);
+      g.fillStyle = cc;
+      g.beginPath(); g.moveTo(sx + sw / 2, yy); g.lineTo(sx + sw / 2 + tip, yy - 12); g.lineTo(sx + sw / 2 + tip, yy - 12 - h * 0.82); g.lineTo(sx + sw / 2, yy - h * 0.82); g.fill();
+      if (kind === 'sponge') {
+        for (let i = 0; i < 60; i++) {
+          g.fillStyle = `rgba(110,64,22,${0.25 + rand() * 0.35})`;
+          g.beginPath(); g.arc(sx - sw / 2 + rand() * sw, yy - rand() * h * 0.82, 1 + rand() * 2.4, 0, TAU); g.fill();
+        }
+      }
+      yy -= h * 0.82;
+    });
+    g.fillStyle = '#f4ecdc';
+    g.beginPath(); g.moveTo(sx - sw / 2, yy); g.lineTo(sx + sw / 2, yy); g.lineTo(sx + sw / 2 + tip, yy - 12); g.lineTo(sx - sw / 2 + 30, yy - 16); g.closePath(); g.fill();
+    g.strokeStyle = 'rgba(60,30,10,0.55)'; g.lineWidth = 2;
+    g.strokeRect(sx - sw / 2, yy, sw, sb - yy);
+    return c;
+  }
+
+  function galette(W = 640, H = 480) {
+    const c = canvas(W, H), g = c.getContext('2d'), rand = rng(3);
+    itemGround(g, W, H, rand);
+    const cx = W * 0.5, cy = H * 0.56, rx = W * 0.36, ry = H * 0.25;
+    // baking paper
+    g.save(); g.translate(cx, cy + 10); g.rotate(-0.08);
+    g.fillStyle = '#efe4cc'; g.fillRect(-rx * 1.18, -ry * 1.35, rx * 2.36, ry * 2.7);
+    g.strokeStyle = 'rgba(120,90,50,0.35)'; g.lineWidth = 2; g.strokeRect(-rx * 1.18, -ry * 1.35, rx * 2.36, ry * 2.7);
+    g.restore();
+    softShadow(g, cx + 8, cy + ry * 0.35, rx * 1.1, ry * 0.9, 0.55);
+    // rim side
+    g.fillStyle = '#7d4218';
+    g.beginPath(); g.ellipse(cx, cy + 16, rx, ry, 0, 0, TAU); g.fill();
+    // crust rim top
+    g.fillStyle = crust(g, cx - rx * 0.4, cy - ry * 0.6, rx * 1.4,
+      [[0, '#f8d898'], [0.4, '#dc9c4e'], [0.8, '#a35e25'], [1, '#5c2e0f']]);
+    g.beginPath(); g.ellipse(cx, cy, rx, ry, 0, 0, TAU); g.fill();
+    // pleats
+    for (let k = 0; k < 22; k++) {
+      const a = (k / 22) * TAU;
+      const ix = cx + Math.cos(a) * rx * 0.74, iy = cy + Math.sin(a) * ry * 0.7;
+      const ox = cx + Math.cos(a + 0.1) * rx * 0.99, oy = cy + Math.sin(a + 0.1) * ry * 0.98;
+      g.strokeStyle = 'rgba(80,36,10,0.7)'; g.lineWidth = 3;
+      g.beginPath(); g.moveTo(ix, iy); g.lineTo(ox, oy); g.stroke();
+      g.strokeStyle = 'rgba(255,236,190,0.6)'; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(ix - 4, iy - 2); g.lineTo(ox - 4, oy - 2); g.stroke();
+    }
+    // fruit
+    const frx = rx * 0.72, fry = ry * 0.68;
+    g.fillStyle = '#3d0f24';
+    g.beginPath(); g.ellipse(cx, cy + 2, frx, fry, 0, 0, TAU); g.fill();
+    [[0.86, 20], [0.6, 14], [0.32, 8]].forEach(([f, n]) => {
+      for (let k = 0; k < n; k++) {
+        const a = (k / n) * TAU + f;
+        const x = cx + Math.cos(a) * frx * f, y = cy + Math.sin(a) * fry * f;
+        const tan = Math.atan2(Math.cos(a) * fry, -Math.sin(a) * frx);
+        g.save(); g.translate(x, y); g.rotate(tan);
+        g.fillStyle = '#6e1d43';
+        g.beginPath(); g.ellipse(0, 0, frx * 0.2, fry * 0.13, 0, 0, TAU); g.fill();
+        g.fillStyle = '#d9707e';
+        g.beginPath(); g.ellipse(0, -fry * 0.04, frx * 0.17, fry * 0.06, 0, Math.PI, TAU); g.fill();
+        g.restore();
+      }
+    });
+    for (let i = 0; i < 40; i++) {
+      const a = rand() * TAU, d = Math.sqrt(rand());
+      g.fillStyle = 'rgba(255,240,240,0.7)';
+      g.beginPath(); g.arc(cx + Math.cos(a) * frx * d, cy + Math.sin(a) * fry * d, 1.5 + rand() * 2, 0, TAU); g.fill();
+    }
+    for (let i = 0; i < 160; i++) {
+      const a = rand() * TAU, d = 0.76 + rand() * 0.22;
+      g.fillStyle = 'rgba(255,255,248,0.85)';
+      g.fillRect(cx + Math.cos(a) * rx * d, cy + Math.sin(a) * ry * d, 2.5, 2.5);
+    }
+    return c;
+  }
+
+  /* ---------- a bold mark for the order stamp ---------- */
+  function cakeStamp(W = 640, H = 480) {
+    const c = canvas(W, H), g = c.getContext('2d');
+    const ink = '#161616', bare = '#ffffff';
+    g.fillStyle = bare; g.fillRect(0, 0, W, H);
+    const cx = W / 2;
+    g.fillStyle = ink;
+    // cake stand
+    g.beginPath(); g.ellipse(cx, H * 0.72, W * 0.4, H * 0.055, 0, 0, TAU); g.fill();
+    g.beginPath(); g.moveTo(cx - 16, H * 0.72); g.lineTo(cx + 16, H * 0.72); g.lineTo(cx + 30, H * 0.9); g.lineTo(cx - 30, H * 0.9); g.fill();
+    g.beginPath(); g.ellipse(cx, H * 0.9, W * 0.15, H * 0.035, 0, 0, TAU); g.fill();
+    // the cake
+    const rx = W * 0.3, ry = H * 0.055, yB = H * 0.69, yT = H * 0.3;
+    g.beginPath();
+    g.ellipse(cx, yB, rx, ry, 0, 0, Math.PI);
+    g.lineTo(cx - rx, yT);
+    g.ellipse(cx, yT, rx, ry, 0, Math.PI, 0, true);
+    g.closePath(); g.fill();
+    g.strokeStyle = bare; g.lineWidth = 11; g.lineCap = 'butt';
+    [0.5].forEach(f => {
+      const y = yT + (yB - yT) * f;
+      g.beginPath(); g.ellipse(cx, y, rx, ry, 0, 0.02, Math.PI - 0.02); g.stroke();
+    });
+    // sugared top, left bare
+    g.fillStyle = bare;
+    g.beginPath(); g.ellipse(cx, yT, rx - 9, ry - 5, 0, 0, TAU); g.fill();
+    // cream rosettes around the top, with a cherry on every other one
+    g.fillStyle = ink;
+    for (let k = 0; k < 7; k++) {
+      const a = Math.PI * (0.08 + k * 0.14);
+      const x = cx - Math.cos(a) * rx * 0.86, y = yT + Math.sin(a) * ry * 0.4 - 14;
+      g.beginPath(); g.arc(x, y, 20, 0, TAU); g.fill();
+      g.fillStyle = bare;
+      g.beginPath(); g.arc(x - 4, y - 4, 4.5, 0, TAU); g.fill();
+      g.fillStyle = ink;
+    }
+    g.strokeStyle = ink; g.lineWidth = 5; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(cx, yT - 40); g.quadraticCurveTo(cx + 10, yT - 86, cx + 38, yT - 102); g.stroke();
+    g.beginPath(); g.arc(cx, yT - 30, 25, 0, TAU); g.fill();
+    g.fillStyle = bare;
+    g.beginPath(); g.arc(cx - 8, yT - 38, 6, 0, TAU); g.fill();
+    return c;
+  }
+
+  /* ---------- the shop on Wren Street ---------- */
+  function shopfront(W = 1200, H = 680) {
+    const c = canvas(W, H), g = c.getContext('2d'), rand = rng(21);
+    const pave = H * 0.8;
+    // brick
+    g.fillStyle = '#c9a58c'; g.fillRect(0, 0, W, pave);
+    const bw = 44, bh = 16;
+    for (let row = 0; row * bh < pave; row++) {
+      const off = row % 2 ? bw / 2 : 0;
+      for (let x = -bw; x < W + bw; x += bw) {
+        const v = rand();
+        const r = 128 + v * 34, gg = 62 + v * 20, b = 42 + v * 14;
+        g.fillStyle = `rgb(${r|0},${gg|0},${b|0})`;
+        g.fillRect(x + off + 2, row * bh + 2, bw - 4, bh - 4);
+      }
+    }
+    // upper floor windows
+    [[170, 0, 200, 70], [830, 0, 200, 70]].forEach(([x, y, w, h]) => {
+      g.fillStyle = '#efe8da'; g.fillRect(x - 10, y, w + 20, h + 14);
+      g.fillStyle = '#2a2d33'; g.fillRect(x, y, w, h);
+      g.fillStyle = 'rgba(220,230,240,0.25)';
+      g.beginPath(); g.moveTo(x + 20, y); g.lineTo(x + 70, y); g.lineTo(x + 30, y + h); g.lineTo(x - 0, y + h); g.fill();
+      g.fillStyle = '#efe8da'; g.fillRect(x + w / 2 - 4, y, 8, h);
+      g.fillStyle = '#d8cfbd'; g.fillRect(x - 18, y + h + 12, w + 36, 12);
+    });
+    const left = 70, right = W - 70;
+    // pilasters
+    [[left - 34, 34], [right, 34]].forEach(([x, w]) => {
+      const gr = g.createLinearGradient(x, 0, x + w, 0);
+      gr.addColorStop(0, '#f1e9d8'); gr.addColorStop(1, '#bfb29a');
+      g.fillStyle = gr; g.fillRect(x, 110, w, pave - 110);
+      g.fillStyle = '#e6dcc8'; g.fillRect(x - 8, 106, w + 16, 16);
+    });
+    // fascia sign
+    g.fillStyle = '#f1e9d8'; g.fillRect(left - 46, 100, right - left + 92, 14);
+    g.fillStyle = '#1f3a2e'; g.fillRect(left, 114, right - left, 92);
+    g.strokeStyle = '#d9c38c'; g.lineWidth = 3; g.strokeRect(left + 10, 124, right - left - 20, 72);
+    g.fillStyle = '#e8cf8f';
+    g.font = 'bold 54px Georgia, "Times New Roman", serif';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText("TULLER’S  BAKERY", W / 2, 162);
+    // awning
+    const at = 206, ab = 286;
+    const stripes = 22, sw = (right - left) / stripes;
+    for (let i = 0; i < stripes; i++) {
+      g.fillStyle = i % 2 ? '#efe4cc' : '#a8402a';
+      g.beginPath();
+      g.moveTo(left + i * sw, at); g.lineTo(left + (i + 1) * sw, at);
+      g.lineTo(left - 20 + (i + 1) * (sw + 40 / stripes), ab); g.lineTo(left - 20 + i * (sw + 40 / stripes), ab);
+      g.fill();
+      g.beginPath();
+      g.arc(left - 20 + (i + 0.5) * (sw + 40 / stripes), ab, (sw + 40 / stripes) / 2, 0, Math.PI);
+      g.fill();
+    }
+    let gr = g.createLinearGradient(0, at, 0, ab + 20);
+    gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(30,10,0,0.35)');
+    g.fillStyle = gr; g.fillRect(left - 20, at, right - left + 40, ab - at + 24);
+    // shop window
+    const wx = left + 20, wy = ab + 22, ww = 650, wh = pave - 80 - wy;
+    g.fillStyle = '#1f3a2e'; g.fillRect(wx - 14, wy - 10, ww + 28, pave - wy + 10);
+    gr = g.createLinearGradient(0, wy, 0, wy + wh);
+    gr.addColorStop(0, '#120d0a'); gr.addColorStop(1, '#3a2a1e');
+    g.fillStyle = gr; g.fillRect(wx, wy, ww, wh);
+    // warm lamp inside
+    const lamp = g.createRadialGradient(wx + ww * 0.55, wy + 20, 4, wx + ww * 0.55, wy + 30, ww * 0.6);
+    lamp.addColorStop(0, 'rgba(255,214,140,0.55)'); lamp.addColorStop(1, 'rgba(255,214,140,0)');
+    g.fillStyle = lamp; g.fillRect(wx, wy, ww, wh);
+    // shelves of loaves
+    [0.36, 0.68, 0.97].forEach((f, si) => {
+      const sy = wy + wh * f;
+      g.fillStyle = '#8a6440'; g.fillRect(wx + 10, sy, ww - 20, 7);
+      let x = wx + 30 + si * 12;
+      while (x < wx + ww - 60) {
+        const r = 26 + rand() * 16, hh = 26 + rand() * 18;
+        domePath(g, x + r, sy, r, hh, 0);
+        g.fillStyle = crust(g, x + r * 0.6, sy - hh * 0.8, r * 1.8);
+        g.fill();
+        x += r * 2 + 10 + rand() * 14;
+      }
+    });
+    // glazing bars and reflections
+    g.fillStyle = '#1f3a2e';
+    g.fillRect(wx + ww / 3 - 4, wy, 8, wh); g.fillRect(wx + ww * 2 / 3 - 4, wy, 8, wh);
+    g.fillStyle = 'rgba(255,255,255,0.13)';
+    g.beginPath(); g.moveTo(wx + 60, wy); g.lineTo(wx + 150, wy); g.lineTo(wx + 40, wy + wh); g.lineTo(wx - 0, wy + wh); g.lineTo(wx, wy + 80); g.fill();
+    g.beginPath(); g.moveTo(wx + 420, wy); g.lineTo(wx + 460, wy); g.lineTo(wx + 380, wy + wh); g.lineTo(wx + 340, wy + wh); g.fill();
+    // stallriser panels
+    g.strokeStyle = '#d9c38c'; g.lineWidth = 2;
+    [0, 1, 2].forEach(i => g.strokeRect(wx + 10 + i * (ww / 3), wy + wh + 16, ww / 3 - 20, pave - wy - wh - 30));
+    // door
+    const dx = wx + ww + 48, dw = 190, dy = ab + 10;
+    g.fillStyle = '#1f3a2e'; g.fillRect(dx - 12, dy - 6, dw + 24, pave - dy + 6);
+    g.fillStyle = '#2a4a3b'; g.fillRect(dx, dy, dw, pave - dy);
+    g.fillStyle = '#16100c'; g.fillRect(dx + 18, dy + 18, dw - 36, 170);
+    g.fillStyle = lamp; g.fillRect(dx + 18, dy + 18, dw - 36, 170);
+    g.fillStyle = 'rgba(255,255,255,0.12)';
+    g.beginPath(); g.moveTo(dx + 40, dy + 18); g.lineTo(dx + 80, dy + 18); g.lineTo(dx + 40, dy + 188); g.lineTo(dx + 18, dy + 188); g.fill();
+    g.strokeStyle = '#d9c38c'; g.lineWidth = 2;
+    g.strokeRect(dx + 22, dy + 210, dw - 44, pave - dy - 236);
+    // open sign
+    g.strokeStyle = '#d9c38c'; g.lineWidth = 1.5;
+    g.beginPath(); g.moveTo(dx + dw / 2 - 30, dy + 30); g.lineTo(dx + dw / 2, dy + 22); g.lineTo(dx + dw / 2 + 30, dy + 30); g.stroke();
+    g.fillStyle = '#f3ead6'; g.fillRect(dx + dw / 2 - 46, dy + 30, 92, 40);
+    g.fillStyle = '#a8402a'; g.font = 'bold 22px Georgia, serif'; g.fillText('OPEN', dx + dw / 2, dy + 51);
+    g.fillStyle = '#e0bf6a';
+    g.beginPath(); g.arc(dx + dw - 26, dy + 200, 7, 0, TAU); g.fill();
+    // bay tree in a pot
+    const tx = right - 52;
+    g.fillStyle = '#5b3a22'; g.fillRect(tx - 3, pave - 150, 6, 100);
+    const leaves = (x, y, r) => {
+      for (let i = 0; i < 70; i++) {
+        const a = rand() * TAU, d = Math.sqrt(rand()) * r;
+        const v = rand();
+        g.fillStyle = `rgb(${40 + v * 50 | 0},${70 + v * 60 | 0},${36 + v * 30 | 0})`;
+        g.beginPath(); g.ellipse(x + Math.cos(a) * d, y + Math.sin(a) * d, 9, 5, rand() * 3, 0, TAU); g.fill();
+      }
+    };
+    leaves(tx, pave - 175, 48);
+    g.fillStyle = '#9a4b2c';
+    g.beginPath(); g.moveTo(tx - 34, pave - 58); g.lineTo(tx + 34, pave - 58); g.lineTo(tx + 26, pave); g.lineTo(tx - 26, pave); g.fill();
+    // pavement
+    gr = g.createLinearGradient(0, pave, 0, H);
+    gr.addColorStop(0, '#9e978b'); gr.addColorStop(1, '#cfc8bb');
+    g.fillStyle = gr; g.fillRect(0, pave, W, H - pave);
+    g.strokeStyle = 'rgba(60,55,48,0.5)'; g.lineWidth = 2;
+    for (let x = -40; x < W + 80; x += 150) { g.beginPath(); g.moveTo(x, pave); g.lineTo(x - 40, H); g.stroke(); }
+    g.beginPath(); g.moveTo(0, pave + (H - pave) * 0.55); g.lineTo(W, pave + (H - pave) * 0.55); g.stroke();
+    g.fillStyle = 'rgba(20,14,10,0.35)'; g.fillRect(0, pave, W, 10);
+    // A-board
+    const ax = 120, ay = pave - 96;
+    g.strokeStyle = '#6b4a2e'; g.lineWidth = 8;
+    g.beginPath(); g.moveTo(ax, pave + 40); g.lineTo(ax + 20, ay); g.lineTo(ax + 110, ay); g.lineTo(ax + 130, pave + 40); g.stroke();
+    g.fillStyle = '#1d1d1b';
+    g.beginPath(); g.moveTo(ax + 22, ay + 8); g.lineTo(ax + 108, ay + 8); g.lineTo(ax + 122, pave + 28); g.lineTo(ax + 8, pave + 28); g.fill();
+    g.fillStyle = '#f2efe6'; g.font = 'bold 15px Georgia, serif';
+    g.fillText('TODAY', ax + 65, ay + 30);
+    g.font = '13px Georgia, serif';
+    ['rye', 'plum', 'buns'].forEach((t, i) => g.fillText(t, ax + 65, ay + 56 + i * 22));
+    // bicycle with a basket of bread
+    const bxl = 420, bxr = 610, wy0 = pave + 44, wr = 52;
+    g.strokeStyle = '#1b1a18'; g.lineWidth = 6;
+    [bxl, bxr].forEach(x => { g.beginPath(); g.arc(x, wy0, wr, 0, TAU); g.stroke(); });
+    g.lineWidth = 1;
+    [bxl, bxr].forEach(x => { for (let k = 0; k < 16; k++) { const a = k / 16 * TAU; g.beginPath(); g.moveTo(x, wy0); g.lineTo(x + Math.cos(a) * wr, wy0 + Math.sin(a) * wr); g.stroke(); } });
+    g.strokeStyle = '#a8402a'; g.lineWidth = 7; g.lineCap = 'round';
+    const crank = [bxl + 92, wy0], seat = [bxl + 70, wy0 - 92], head = [bxr - 22, wy0 - 92];
+    g.beginPath();
+    g.moveTo(bxl, wy0); g.lineTo(...crank); g.lineTo(...head); g.lineTo(...seat); g.lineTo(bxl, wy0);
+    g.moveTo(...seat); g.lineTo(...crank);
+    g.moveTo(...head); g.lineTo(bxr, wy0);
+    g.stroke();
+    g.strokeStyle = '#1b1a18'; g.lineWidth = 6;
+    g.beginPath(); g.moveTo(seat[0] - 22, seat[1] - 10); g.lineTo(seat[0] + 14, seat[1] - 10); g.stroke();
+    g.beginPath(); g.moveTo(head[0], head[1]); g.lineTo(head[0] - 6, head[1] - 20); g.lineTo(head[0] - 34, head[1] - 22); g.stroke();
+    // basket and baguettes
+    g.fillStyle = '#b98b52';
+    g.beginPath(); g.moveTo(head[0] + 6, head[1] - 44); g.lineTo(head[0] + 76, head[1] - 44); g.lineTo(head[0] + 66, head[1] + 4); g.lineTo(head[0] + 14, head[1] + 4); g.fill();
+    g.strokeStyle = 'rgba(70,44,20,0.7)'; g.lineWidth = 2;
+    for (let k = 0; k < 4; k++) { g.beginPath(); g.moveTo(head[0] + 8, head[1] - 36 + k * 11); g.lineTo(head[0] + 74, head[1] - 36 + k * 11); g.stroke(); }
+    g.lineCap = 'round';
+    [[18, -120, 1], [34, -132, 0.8], [52, -110, 1.1]].forEach(([dx2, len, tilt]) => {
+      g.strokeStyle = '#7c4318'; g.lineWidth = 16;
+      g.beginPath(); g.moveTo(head[0] + dx2, head[1] - 30); g.lineTo(head[0] + dx2 + tilt * 22, head[1] - 30 + len * 0.62); g.stroke();
+      g.strokeStyle = '#e1a45a'; g.lineWidth = 8;
+      g.beginPath(); g.moveTo(head[0] + dx2 - 2, head[1] - 34); g.lineTo(head[0] + dx2 + tilt * 22 - 2, head[1] - 34 + len * 0.62); g.stroke();
+    });
+    return c;
+  }
+
+  return { hero, countryLoaf, croissant, sponge, cakeStamp, shopfront };
+})();
+
+/* ---------- pictures: draw each scene, then let Lumenary print it ---------- */
+(function () {
+  const ink = { pair: 'black-red', grain: 45, density: 105, miss: 35, paper: 'cream' };
+  const jobs = [
+    { host: 'pic-hero',      scene: 'hero',        id: 'risograph',    dials: Object.assign({ seed: 4 }, ink) },
+    { host: 'pic-loaf',      scene: 'countryLoaf', id: 'risograph',    dials: Object.assign({ seed: 2 }, ink) },
+    { host: 'pic-croissant', scene: 'croissant',   id: 'risograph',    dials: Object.assign({ seed: 3 }, ink) },
+    { host: 'pic-sponge',    scene: 'sponge',      id: 'risograph',    dials: Object.assign({ seed: 5 }, ink) },
+    { host: 'pic-stamp',     scene: 'cakeStamp',   id: 'rubber-stamp', dials: { word: '48 HOURS NOTICE', ink: 'red', cut: 50, wear: 40, tilt: -5, seed: 2 } },
+    { host: 'pic-shop',      scene: 'shopfront',   id: 'screen-print', dials: { palette: 'sunset', passes: 4, miss: 30, rough: 35, mesh: 35, seed: 2 } },
+  ];
+
+  function place(job) {
+    const host = document.getElementById(job.host);
+    if (!host) return;
+    const src = Scenes[job.scene]();
+    let out = src;
+    try {
+      if (window.Lumenary && typeof Lumenary.render === 'function') out = Lumenary.render(job.id, src, job.dials) || src;
+    } catch (err) {
+      out = src;
+      console.warn('Lumenary could not render ' + job.id + '; showing the plain drawing.', err);
+    }
+    out.setAttribute('role', 'img');
+    out.setAttribute('aria-label', host.dataset.alt || '');
+    host.appendChild(out);
+    requestAnimationFrame(() => requestAnimationFrame(() => out.classList.add('in')));
+  }
+
+  function run(i) {
+    if (i >= jobs.length) return;
+    place(jobs[i]);
+    setTimeout(() => run(i + 1), 20);
+  }
+
+  if (document.readyState === 'complete') setTimeout(() => run(0), 30);
+  else window.addEventListener('load', () => setTimeout(() => run(0), 30));
+})();
+
+/* ---------- open or closed, by the bakery's own clock ---------- */
+(function () {
+  const hours = { 0: [8, 0, 13, 0], 1: null, 2: [7, 0, 15, 0], 3: [7, 0, 15, 0], 4: [7, 0, 15, 0], 5: [7, 0, 15, 0], 6: [7, 30, 16, 0] };
+  const names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const fmt = (h, m) => h + ':' + String(m).padStart(2, '0');
+  let day, mins;
+  try {
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
+    const get = t => (parts.find(p => p.type === t) || {}).value;
+    day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+    mins = parseInt(get('hour'), 10) * 60 + parseInt(get('minute'), 10);
+  } catch (e) {
+    const now = new Date(); day = now.getDay(); mins = now.getHours() * 60 + now.getMinutes();
+  }
+  if (day < 0 || isNaN(mins)) return;
+
+  const row = document.querySelector('#hours tr[data-day="' + day + '"]');
+  if (row) row.classList.add('today');
+
+  const el = document.getElementById('status');
+  if (!el) return;
+  const h = hours[day];
+  if (h && mins >= h[0] * 60 + h[1] && mins < h[2] * 60 + h[3]) {
+    const left = h[2] * 60 + h[3] - mins;
+    el.textContent = left <= 60 ? 'Open, closing at ' + fmt(h[2], h[3]) : 'Open now until ' + fmt(h[2], h[3]);
+    return;
+  }
+  el.classList.add('closed');
+  if (h && mins < h[0] * 60 + h[1]) { el.textContent = 'Closed, opens today at ' + fmt(h[0], h[1]); return; }
+  for (let k = 1; k <= 7; k++) {
+    const d = (day + k) % 7, n = hours[d];
+    if (n) { el.textContent = 'Closed, opens ' + (k === 1 ? 'tomorrow' : names[d]) + ' at ' + fmt(n[0], n[1]); return; }
+  }
+})();
+</script>
+</body>
+</html>

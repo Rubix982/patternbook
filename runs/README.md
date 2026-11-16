@@ -29,3 +29,6 @@ Agent-run timings, because they matter for the effort confound:
 | c009/arm-b (NASA-derived style) | ~1.5 min | 24 KB |
 | c011/arm-a (line-art style) | ~4 min | 28 KB |
 | c011/arm-b (PS Magazine style) | ~4 min | 52 KB |
+| c014/bakery (Lumenary engine) | ~18 min | 63 KB |
+| c014/photographer (Lumenary engine) | ~34 min | 67 KB |
+| c014/recipe (Lumenary engine) | ~16 min | 61 KB |

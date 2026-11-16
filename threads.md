@@ -105,3 +105,19 @@ value is just *any* specific instruction, not human sources.
 **Opened:** 2026-11-16
 **Question:** C-012's treated drawings read as printed and also as an effect. Candidates to test one at a time against the C-012 treated page: (1) uneven strength across drawings, as across a real press sheet; (2) treating the body text too, so nothing on the page is crisper than the ink; (3) protecting small lettering from ink spread; (4) giving the agent a plain flat drawing to print, instead of printing art that already fakes hand-made wobble.
 **Answer:** — (C-013: Lumenary's risograph model read as *more* filtered than `press`, equal on the other questions. Added candidate (5): print ink at full density; `riso`'s lighter lines may read as processing.)
+
+### T-014 · Does the engine plus an art-style file move the whole page, not just its pictures?
+
+**Status:** open
+**Parent:** C-014
+**Opened:** 2026-11-16
+**Question:** C-014's engine pages kept the cream/serif/uppercase-label base around better pictures. Give an agent both the engine and a style file (e.g. the PS hand-inked style, whose file already names a candidate treatment) and blind-pick against C-014's engine-only page for the same brief.
+**Answer:** —
+
+### T-015 · What do people other than Saif pick?
+
+**Status:** open
+**Parent:** C-014
+**Opened:** 2026-11-16
+**Question:** Every pick so far has one judge. Saif: "we can explore more usages and see what people would like." Run the existing blind pairs (C-008, C-011, C-014) past a few other people, including designers, and check whether their picks agree with his.
+**Answer:** —

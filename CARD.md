@@ -14,6 +14,96 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-014 · Does giving an agent the Lumenary engine move its pages off the AI look?
+
+**Status:** closed
+**Opened:** 2026-11-16
+
+**1. Where we are.**
+In C-005, unguided agents put a bakery, a wildlife-photography portfolio and a lentil-soup
+recipe page on the same cream / terracotta / pill-badge base; the Lumenary engine (214
+treatments) now runs in our tooling and hasn't been given to an agent.
+
+**2. What we are doing.**
+Give three fresh agents the C-005 briefs for the bakery, the photographer and the recipe,
+word for word, adding only: make the page's pictures with the Lumenary engine
+(`runs/c014/lumenary-for-agents.md` and `treatments/lumenary/CATALOG.md`). No style file, no
+problem entry. Then blind-pick each new page against its C-005 counterpart.
+
+Measures, per pair:
+- **(a)** which looks less AI-made; **(b)** which site would I rather spend time on.
+- C-005 default checklist (0–5) on the new pages, by eye for false hits.
+- Which treatments each agent chose, and how many pictures it made.
+
+**3. Why.**
+We don't know whether better *pictures* alone change how a whole page reads. C-010's judge
+named one picture tell ("polygon-ish") and four page tells; if the engine only fixes the
+pictures, the pages may still read as AI-made.
+
+**4. What is affected.**
+- Whether the README tells agents to use the engine by default for imagery.
+- The two-layer claim: if engine pages win, the top layer can move a page by itself; if they
+  lose or tie, the bottom layer (guides) matters more, as C-010 suggested.
+
+**5. Conclusion.**
+- **If** the engine pages win (a) in at least 2 of 3 pairs → we claim *treated imagery alone
+  moves pages off the AI look*, and the README points agents at the engine for pictures.
+- **If** they win (a) in at most 1 → we claim *the engine improves pictures but not the page's
+  reading*; the next card pairs the engine with a style file.
+- (b) and the checklist score are recorded either way; a high checklist score on a winning
+  page would mean the palette default survived while the pictures changed.
+
+**6. If not done.**
+We'd have an integrated engine and no evidence it helps an agent's page, which was the reason
+to integrate it.
+
+**Limits (known before running):** one run per brief; the C-005 pages were made two weeks
+earlier, in a different session, by the same agent setup; the engine pages load one 631 KB
+script and render pictures as they load; judge as before.
+
+**Result (2026-11-16):** second branch on (a). **The engine pages won "less AI-made" in 1 of 3
+pairs, and "rather spend time on" in 3 of 3.**
+
+| Brief | (a) less AI-made | (b) rather spend time on | Pictures | Treatments the agent chose | Agent time |
+|---|---|---|---|---|---|
+| Bakery | **engine** | **engine** | 6 | risograph, screen-print, rubber-stamp | ~18 min |
+| Wildlife photographer | tie ("I love both!") | **engine** | 12 | film-grain, cyanotype | ~34 min |
+| Lentil soup recipe | C-005 (unguided) | **engine** | 3 | screen-print | ~16 min |
+
+Saif, on the photographer pair: "I love both! I think these are basic examples to show the possible
+power of the engine, but we can explore more usages and see what people would like."
+
+**The page base didn't move.** All three engine pages are still on the agent's house style:
+- cream backgrounds `#f4ecdc`, `#f1ede4`, `#f3eee1` (trait 1, 3/3) and warm near-black text (trait 2, 3/3)
+- small uppercase labels (trait 4, 3/3) and serif type throughout (Iowan Old Style)
+- one warm accent, now red rather than terracotta (`#b2372a`, `#c8381c`, `#a3160f`, hue 2–11°, just
+  outside trait 3's 15–45°)
+- no pill chips (trait 5, 0/3)
+
+So, by eye, about 3 of 5 traits, with the accent shifted redder.
+
+**Choice was narrow.** Out of 214 treatments, the three agents used 5, four of them from print and
+craft or photographic sections (risograph, screen-print, cyanotype, film-grain, plus rubber-stamp).
+
+**Claim:** for these briefs, giving an agent the engine made pages Saif would rather spend time on
+every time, but it didn't consistently make them read as less AI-made (1 win, 1 loss, 1 tie). The
+pictures changed and the page around them stayed on the default, which fits C-010: four of the
+five tells the judge named are about the page, not the pictures.
+
+**Limits that matter:** the judge can tell which page used the engine from its pictures, so these
+pairs weren't blind in practice; one run per brief; the C-005 pages came from an earlier session.
+
+**Changes made:**
+- README: the engine is listed for imagery, with this result: it makes pages more appealing, and
+  doesn't by itself remove the AI look.
+- `tools/blind.sh` now rewrites relative asset paths in the blind copies (C-014's engine pages load
+  the engine by a relative path, which broke inside `blind/`).
+- T-014 opened: engine plus a style file. T-015 opened: other judges.
+
+**Closed:** 2026-11-16
+
+---
+
 ## C-013 · Does Lumenary's risograph ink model read as less "filtered" than our press?
 
 **Status:** closed

@@ -23,6 +23,11 @@ permission. His engine and theory data, unchanged and trimmed of the website, ar
 - On a page: load `lumenary/lumenary.js` and `treatments.js`, then
   `Treatments.treatAll('svg[role=img]', { treatment: 'lumenary:halftone', params: { angle: 45 } })`.
 
+**For agents building a page:** `runs/c014/lumenary-for-agents.md` explains how to use it, and
+`lumenary/CATALOG.md` lists all 214 treatments with their dials (regenerate with `node treatments/lumenary/catalog.mjs`).
+In C-014, pages built with it were the ones the judge would rather spend time on (3 of 3), but they
+read as less AI-made in only 1 of 3: the pictures change and the page around them doesn't.
+
 Checked headlessly on 2026-11-16: all 176 still and all 36 live treatments render. The two subject-aware ones
 (Type Behind, Split Treatment) load a model and a runtime from a CDN, need a local web server
 (`python3 -m http.server` from the repo root), and couldn't be confirmed headlessly.

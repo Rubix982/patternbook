@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noor Halden, wildlife photographs</title>
+<meta name="description" content="Wildlife photographs by Noor Halden: animals at dawn, dusk and in fog, from Britain, Norway and East Africa. Prints and commissions.">
+<style>
+:root{
+  --paper:#f1ede4;
+  --mat:#e4dfd4;
+  --ink:#1d1c19;
+  --ink-2:#3e3b35;
+  --muted:#777166;
+  --rule:#d6cfc2;
+  --film:#191715;
+  --film-hole:#060606;
+  --film-text:#bdb6aa;
+  --pencil:#c8381c;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua","URW Palladio L",Georgia,serif;
+  --sans:"Avenir Next",Avenir,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --gutter:clamp(16px,4vw,56px);
+  --gap:clamp(16px,2.4vw,36px);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#151412;
+    --mat:#1f1d1a;
+    --ink:#ebe6db;
+    --ink-2:#cbc5b9;
+    --muted:#968f83;
+    --rule:#34312c;
+    --film:#0c0b0a;
+    --film-hole:#000;
+    --pencil:#e2522f;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--paper);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,p,figure,ol,ul,dl,dd,table{margin:0;padding:0}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pencil)}
+.wrap{max-width:1440px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+
+/* masthead */
+.masthead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px;padding-top:26px;padding-bottom:22px}
+.name{font-size:23px;text-decoration:none;letter-spacing:.005em}
+.role{color:var(--muted);font-size:16px;font-style:italic}
+.masthead nav{margin-left:auto;display:flex;gap:clamp(14px,2vw,28px);font-family:var(--sans);font-size:12.5px;letter-spacing:.11em;text-transform:uppercase}
+.masthead nav a{text-decoration:none;color:var(--ink-2)}
+.masthead nav a:hover{color:var(--pencil)}
+
+/* frames and captions */
+.frame{position:relative;background:var(--mat);overflow:hidden}
+.frame canvas{display:block;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.1s ease}
+.frame.developed canvas{opacity:1}
+.r169{aspect-ratio:16/9}.r45{aspect-ratio:4/5}.r1610{aspect-ratio:16/10}.r32{aspect-ratio:3/2}.r11{aspect-ratio:1/1}
+
+.cap{display:grid;grid-template-columns:2.2em 1fr auto;column-gap:14px;row-gap:2px;margin-top:12px;font-size:15.5px;line-height:1.45;color:var(--ink-2)}
+.cap-no{font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-top:3px}
+.cap-text em{font-style:italic;color:var(--ink)}
+.cap-exif{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;padding-top:3px}
+.note{margin:14px 0 0 calc(2.2em + 14px);max-width:31em;font-size:16px;line-height:1.6;color:var(--ink-2)}
+.p-geese .cap,.p-heron .cap{grid-template-columns:2.2em 1fr}
+.p-geese .cap-exif,.p-heron .cap-exif{grid-column:2}
+
+/* hero */
+.hero{margin-top:4px}
+
+/* intro */
+.intro{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:28px;padding-top:clamp(72px,11vw,160px);padding-bottom:clamp(64px,9vw,130px)}
+.intro h1{grid-column:1 / span 6;font-weight:400;font-size:clamp(36px,4.9vw,68px);line-height:1.04;letter-spacing:-.012em}
+.intro .lede{grid-column:8 / span 5;align-self:end}
+.lede p+p{margin-top:1em}
+.facts{margin-top:26px;border-top:1px solid var(--rule);font-size:15px}
+.facts div{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule)}
+.facts dt{font-family:var(--sans);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+
+/* section heads */
+.shead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:1px solid var(--ink);padding-top:12px;margin-bottom:clamp(32px,5vw,64px)}
+.shead h2{font-family:var(--sans);font-weight:500;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase}
+.shead span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+/* work grid */
+.work{padding-bottom:clamp(80px,12vw,170px)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:clamp(72px,10vw,150px)}
+.p-heron{grid-column:1 / span 5}
+.p-murmur{grid-column:6 / span 7;align-self:end}
+.p-stag{grid-column:1 / span 8}
+.p-geese{grid-column:9 / span 4;margin-top:clamp(0px,9vw,140px)}
+
+/* sequence */
+.sequence{padding-bottom:clamp(80px,12vw,170px)}
+.seq{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:36px}
+.seq-text{grid-column:1 / span 4}
+.seq-text h3{font-weight:400;font-size:clamp(28px,3vw,40px);line-height:1.1;letter-spacing:-.008em;margin-bottom:22px}
+.seq-text p{color:var(--ink-2);font-size:17px}
+.seq-text p+p{margin-top:1em}
+.p-fluke{grid-column:5 / span 8}
+
+.sheet{margin-top:clamp(40px,6vw,72px)}
+.strip-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:14px 4px 8px}
+.strip{position:relative;display:flex;gap:10px;min-width:880px;background:var(--film);padding:40px 12px;transform:rotate(-.35deg)}
+.strip::before,.strip::after{content:"";position:absolute;left:0;right:0;height:9px;background-image:linear-gradient(90deg,var(--film-hole) 0 12px,transparent 12px 100%);background-size:25px 9px;background-repeat:repeat-x;background-position:6px 0}
+.strip::before{top:8px}
+.strip::after{bottom:8px}
+.sframe{position:relative;flex:1 1 0}
+.sframe .frame{aspect-ratio:3/2;background:#2a2724}
+.edge{position:absolute;left:2px;bottom:-25px;font-family:var(--mono);font-size:10px;line-height:1;letter-spacing:.08em;color:var(--film-text);white-space:nowrap}
+.edge.edge-up{bottom:auto;top:-20px;left:auto;right:4px}
+.ring{position:absolute;left:-22px;top:-26px;width:calc(100% + 44px);height:calc(100% + 52px);pointer-events:none;overflow:visible}
+.ring path{fill:none;stroke:var(--pencil);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
+.sheet-cap{margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+/* prints */
+.prints{padding-bottom:clamp(80px,12vw,170px)}
+.prints-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:56px}
+.prints-text{grid-column:1 / span 6}
+.prints-text h3{font-weight:400;font-size:clamp(28px,3vw,40px);line-height:1.1;margin-bottom:22px}
+.prints-text>p{max-width:32em;color:var(--ink-2)}
+.prints-text>p+p{margin-top:1em}
+table{border-collapse:collapse;width:100%;max-width:34em;margin:30px 0;font-size:16px}
+th{font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 0 8px;border-bottom:1px solid var(--ink)}
+td{padding:11px 0;border-bottom:1px solid var(--rule)}
+td:last-child,th:last-child{text-align:right}
+td.num{font-variant-numeric:tabular-nums}
+.p-cyano{grid-column:8 / span 5;align-self:start}
+.p-cyano .frame{aspect-ratio:4/5;background:#e9e6dd}
+.p-cyano .cap{grid-template-columns:1fr}
+
+/* field log */
+.log{padding-bottom:clamp(80px,12vw,170px)}
+.log ol{list-style:none}
+.log li{display:grid;grid-template-columns:5.5em minmax(0,1.2fr) minmax(0,1.4fr) minmax(0,.9fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16.5px}
+.log .when{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:3px}
+.log .what{color:var(--ink-2)}
+.log .time{color:var(--muted);text-align:right}
+
+/* contact */
+.contact{padding-bottom:clamp(64px,9vw,120px)}
+.contact-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:24px}
+.mail{grid-column:1 / span 7;font-size:clamp(28px,4vw,56px);line-height:1.08;letter-spacing:-.01em;overflow-wrap:anywhere}
+.mail a{text-decoration-thickness:1.5px;text-underline-offset:.16em}
+.reply{grid-column:8 / span 5;color:var(--ink-2);align-self:end;font-size:17px}
+
+.foot{border-top:1px solid var(--rule);padding:20px 0 34px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font-size:14px;color:var(--muted)}
+
+@media (max-width:900px){
+  .intro h1,.intro .lede,.p-heron,.p-murmur,.p-stag,.p-geese,.seq-text,.p-fluke,.prints-text,.p-cyano,.mail,.reply{grid-column:1 / -1}
+  .p-geese{margin-top:0}
+  .p-heron,.p-geese{max-width:560px}
+  .p-cyano{max-width:460px}
+  .log li{grid-template-columns:5em 1fr;row-gap:2px}
+  .log .what{grid-column:2}
+  .log .time{grid-column:2;text-align:left}
+}
+@media (max-width:560px){
+  body{font-size:17px}
+  .masthead nav{margin-left:0;width:100%;justify-content:space-between}
+  .cap{grid-template-columns:2em 1fr}
+  .cap-exif{grid-column:2;white-space:normal}
+  .note{margin-left:calc(2em + 14px)}
+  .facts div{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion: reduce){.frame canvas{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="masthead wrap">
+  <a class="name" href="#">Noor Halden</a>
+  <span class="role">Wildlife photographs</span>
+  <nav aria-label="Sections">
+    <a href="#work">Work</a>
+    <a href="#sequence">Sequence</a>
+    <a href="#prints">Prints</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <figure class="hero wrap">
+    <div class="frame r169" data-scene="elephants" data-size="1600x900" data-treat="film-grain"
+         data-params='{"stock":"portra","amount":42,"size":1.6,"halation":62,"fade":18,"dust":8,"seed":3}'
+         data-alt="A line of elephants walking left across a dry lake bed at sunset, in silhouette, with a low sun resting on the back of a calf and an acacia tree on the horizon."></div>
+    <figcaption class="cap">
+      <span class="cap-no">1</span>
+      <span class="cap-text"><em>Elephants crossing the lake bed at last light.</em> Amboseli, Kenya, September 2025.</span>
+      <span class="cap-exif">400 mm · f/8 · 1/1600 s · ISO 200</span>
+    </figcaption>
+  </figure>
+
+  <section class="intro wrap" aria-label="About">
+    <h1>I photograph wild animals in poor light.</h1>
+    <div class="lede">
+      <p>Most of these pictures were made in the hour after dawn or the hour before dark, in fog, or against a low sun. A lot of animals are moving then, and the light does more than at any other time to separate an animal from what is behind it.</p>
+      <p>I work slowly, usually from a hide or lying flat, and I don’t use bait, calls or playback to bring animals closer. Some of these took a week of mornings. The heron took four.</p>
+      <dl class="facts">
+        <div><dt>Based in</dt><dd>Bristol, UK</dd></div>
+        <div><dt>Working in</dt><dd>Britain, northern Norway, East Africa</dd></div>
+        <div><dt>Available for</dt><dd>Editorial and conservation commissions, licensing, prints</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="work wrap" id="work">
+    <div class="shead"><h2>Selected work</h2><span>2022–2025</span></div>
+    <div class="grid">
+      <figure class="p-heron">
+        <div class="frame r45" data-scene="heron" data-size="960x1200" data-treat="film-grain"
+             data-params='{"stock":"tri","amount":52,"size":1.8,"halation":22,"fade":30,"dust":14,"seed":5}'
+             data-alt="A grey heron standing in shallow water in thick fog, its reflection broken by ripples, with reeds at the edges of the frame."></div>
+        <figcaption class="cap">
+          <span class="cap-no">2</span>
+          <span class="cap-text"><em>Grey heron in fog.</em> Chew Valley Lake, Somerset, January 2024.</span>
+          <span class="cap-exif">600 mm · f/4 · 1/320 s · ISO 1600</span>
+        </figcaption>
+        <p class="note">The fog lifted for about twenty minutes on the fourth morning. The heron had fished the same shallows every day that week, so I had put the hide there in the dark and waited.</p>
+      </figure>
+
+      <figure class="p-murmur">
+        <div class="frame r1610" data-scene="murmur" data-size="1600x1000" data-treat="film-grain"
+             data-params='{"stock":"portra","amount":46,"size":1.6,"halation":30,"fade":24,"dust":8,"seed":2}'
+             data-alt="A huge flock of starlings over a reed bed at dusk under a pink sky, with a column of birds pouring down into the reeds and the sky reflected in open water."></div>
+        <figcaption class="cap">
+          <span class="cap-no">3</span>
+          <span class="cap-text"><em>Starlings coming in to roost.</em> Shapwick Heath, Somerset Levels, November 2023.</span>
+          <span class="cap-exif">70 mm · f/5.6 · 1/500 s · ISO 3200</span>
+        </figcaption>
+        <p class="note">For half an hour before dark the flock turns over the reed beds. This is the end of it, when the birds stop turning and pour down into the reeds in one column. From the first bird dropping to the last took under four minutes.</p>
+      </figure>
+
+      <figure class="p-stag">
+        <div class="frame r32" data-scene="stag" data-size="1500x1000" data-treat="film-grain"
+             data-params='{"stock":"tri","amount":60,"size":1.9,"halation":42,"fade":20,"dust":16,"seed":4}'
+             data-alt="A red deer stag roaring on a heather ridge in fog, head raised and antlers swept back, his breath showing in the cold air, two hinds faint on the slope behind."></div>
+        <figcaption class="cap">
+          <span class="cap-no">4</span>
+          <span class="cap-text"><em>Red deer stag roaring in fog.</em> Glen Feshie, Cairngorms, October 2024.</span>
+          <span class="cap-exif">500 mm · f/4 · 1/250 s · ISO 2000</span>
+        </figcaption>
+        <p class="note">Stags roar most in the first hour after dawn during the rut. I lay in the heather downwind of this one for nearly two hours before he walked up onto the ridge.</p>
+      </figure>
+
+      <figure class="p-geese">
+        <div class="frame r11" data-scene="geese" data-size="1100x1100" data-treat="film-grain"
+             data-params='{"stock":"tungsten","amount":48,"size":1.7,"halation":50,"fade":14,"dust":12,"seed":6}'
+             data-alt="A skein of geese in a loose V flying across a large rising full moon at dusk, above a dark line of trees."></div>
+        <figcaption class="cap">
+          <span class="cap-no">5</span>
+          <span class="cap-text"><em>Pink-footed geese crossing the moon.</em> North Norfolk coast, December 2022.</span>
+          <span class="cap-exif">800 mm · f/11 · 1/400 s · ISO 3200</span>
+        </figcaption>
+        <p class="note">The moon rose eleven minutes after sunset. I stood on the sea wall three evenings running, waiting for a skein to fly across it. On the third evening one did.</p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sequence wrap" id="sequence">
+    <div class="shead"><h2>Sequence</h2><span>Plate 6</span></div>
+    <div class="seq">
+      <div class="seq-text">
+        <h3>One dive, five frames</h3>
+        <p>A humpback surfaced next to the boat eleven times in forty minutes before it dived. I shot thirty-eight frames of the dive in about four seconds. These are five of them, as they sit on the contact sheet.</p>
+        <p>I printed the third. The fluke is fully clear of the water and the water is still coming off it in sheets. One frame later the sheets have broken into drops, and the picture feels smaller, though the whale has hardly moved.</p>
+      </div>
+      <figure class="p-fluke">
+        <div class="frame r32" data-scene="fluke" data-frame="2" data-size="1500x1000" data-treat="film-grain"
+             data-params='{"stock":"tri","amount":55,"size":1.9,"halation":26,"fade":24,"dust":16,"seed":7}'
+             data-alt="A humpback whale's tail raised clear of a grey fjord, water pouring off it, snowy mountains behind."></div>
+        <figcaption class="cap">
+          <span class="cap-no">6</span>
+          <span class="cap-text"><em>Humpback whale diving.</em> Kvænangen, Troms, Norway, January 2025.</span>
+          <span class="cap-exif">200 mm · f/6.3 · 1/2000 s · ISO 1600</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="sheet">
+      <div class="strip-scroll">
+        <div class="strip" role="group" aria-label="Contact sheet, five frames of the whale's dive">
+          <div class="sframe"><span class="edge edge-up">21</span><div class="frame" data-scene="fluke" data-frame="0" data-size="600x400" data-treat="film-grain" data-params='{"stock":"tri","amount":55,"size":1.4,"halation":20,"fade":28,"dust":24,"seed":21}' data-alt="Frame 21: the whale's back and dorsal fin, the last of its blow drifting."></div><span class="edge">▸21A</span></div>
+          <div class="sframe"><span class="edge edge-up">22</span><div class="frame" data-scene="fluke" data-frame="1" data-size="600x400" data-treat="film-grain" data-params='{"stock":"tri","amount":55,"size":1.4,"halation":20,"fade":28,"dust":24,"seed":22}' data-alt="Frame 22: the fluke rising, half out of the water."></div><span class="edge">▸22A</span></div>
+          <div class="sframe">
+            <span class="edge edge-up">23</span>
+            <div class="frame" data-scene="fluke" data-frame="2" data-size="600x400" data-treat="film-grain" data-params='{"stock":"tri","amount":55,"size":1.4,"halation":20,"fade":28,"dust":24,"seed":23}' data-alt="Frame 23, ringed: the fluke fully raised with water pouring off it."></div>
+            <span class="edge">▸23A</span>
+            <svg class="ring" viewBox="0 0 100 70" preserveAspectRatio="none" aria-hidden="true">
+              <path vector-effect="non-scaling-stroke" d="M10 40 C 6 18, 30 5, 58 5.5 C 84 6, 98 18, 96 36 C 94 56, 74 66, 46 65.5 C 20 65, 4 56, 5 40 C 6 27, 16 15, 34 10"/>
+            </svg>
+          </div>
+          <div class="sframe"><span class="edge edge-up">24</span><div class="frame" data-scene="fluke" data-frame="3" data-size="600x400" data-treat="film-grain" data-params='{"stock":"tri","amount":55,"size":1.4,"halation":20,"fade":28,"dust":24,"seed":24}' data-alt="Frame 24: the fluke at its highest, the water broken into drops."></div><span class="edge">▸24A</span></div>
+          <div class="sframe"><span class="edge edge-up">25</span><div class="frame" data-scene="fluke" data-frame="4" data-size="600x400" data-treat="film-grain" data-params='{"stock":"tri","amount":55,"size":1.4,"halation":20,"fade":28,"dust":24,"seed":25}' data-alt="Frame 25: the tips of the fluke sliding under, in a ring of foam."></div><span class="edge">▸25A</span></div>
+        </div>
+      </div>
+      <p class="sheet-cap">Contact sheet, frames 21–25 of the roll. Ringed in china marker: frame 23, printed as plate 6.</p>
+    </div>
+  </section>
+
+  <section class="prints wrap" id="prints">
+    <div class="shead"><h2>Prints</h2><span>Signed and numbered</span></div>
+    <div class="prints-grid">
+      <div class="prints-text">
+        <h3>Every plate is available as a print</h3>
+        <p>I print to order on cotton rag paper with pigment inks, and check every print against a reference before it goes out. Each is signed and numbered on the back. When an edition is gone it is not reprinted at that size.</p>
+        <table>
+          <thead><tr><th>Size</th><th>Edition</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr><td>30 × 40 cm</td><td class="num">25</td><td class="num">£340</td></tr>
+            <tr><td>50 × 70 cm</td><td class="num">15</td><td class="num">£780</td></tr>
+            <tr><td>90 × 120 cm</td><td class="num">5</td><td class="num">£2,100</td></tr>
+          </tbody>
+        </table>
+        <p>Prints take about three weeks and are posted flat. I can frame them in oak or black-stained ash. To order, email me with the plate number and size.</p>
+      </div>
+      <figure class="p-cyano">
+        <div class="frame" data-scene="heron" data-size="960x1200" data-treat="cyanotype"
+             data-params='{"tone":"classic","exposure":4,"contrast":30,"uneven":45,"brush":true,"seed":2}'
+             data-alt="The heron picture printed as a cyanotype: the bird and reeds in Prussian blue on white paper, with brushed edges."></div>
+        <figcaption class="cap">
+          <span class="cap-text"><em>Plate 2, as a cyanotype.</em> Cotton paper coated by hand and exposed in sunlight for about fifteen minutes under a large negative. No two come out quite the same. Edition of 12, 28 × 35 cm, £420.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="log wrap" aria-labelledby="log-h">
+    <div class="shead"><h2 id="log-h">Field log</h2><span>Recent trips</span></div>
+    <ol>
+      <li><span class="when">2025 · Sep</span><span>Amboseli, Kenya</span><span class="what">Elephant families on the dry lake bed</span><span class="time">23 days</span></li>
+      <li><span class="when">2025 · Jan</span><span>Kvænangen, Troms, Norway</span><span class="what">Humpback whales following the winter herring</span><span class="time">16 days on a small boat</span></li>
+      <li><span class="when">2024 · Oct</span><span>Glen Feshie, Cairngorms</span><span class="what">Red deer rut</span><span class="time">12 days</span></li>
+      <li><span class="when">2024 · Jan</span><span>Chew Valley Lake, Somerset</span><span class="what">Grey herons and great white egrets</span><span class="time">9 mornings in a hide</span></li>
+      <li><span class="when">2023 · Nov</span><span>Shapwick Heath, Somerset Levels</span><span class="what">Starling roosts</span><span class="time">14 evenings</span></li>
+      <li><span class="when">2022 · Dec</span><span>North Norfolk coast</span><span class="what">Pink-footed geese coming in off the fields at dusk</span><span class="time">6 evenings on the sea wall</span></li>
+    </ol>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div class="shead"><h2>Contact</h2><span>Commissions, prints, licensing</span></div>
+    <div class="contact-grid">
+      <p class="mail"><a href="mailto:studio@noorhalden.example">studio@noorhalden.example</a></p>
+      <p class="reply">I answer email within a few days, more slowly when I’m in the field. For licensing, tell me the plate number, where the picture will appear and for how long.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <span>© 2026 Noor Halden</span>
+    <span>Pictures made with Lumenary by Mursal Furqan Kumbhar.</span>
+  </div>
+</footer>
+
+<script src="../../treatments/lumenary/lumenary.js"></script>
+<script>
+(function(){
+'use strict';
+
+/* ---------- small drawing toolkit ---------- */
+var TAU = Math.PI * 2;
+function mk(w, h){ var c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function rng(seed){
+  var s = ((seed * 2654435761) >>> 0) || 1;
+  return function(){ s ^= s << 13; s >>>= 0; s ^= s >>> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; };
+}
+function lerp(a, b, t){ return a + (b - a) * t; }
+function clamp(v, a, b){ return v < a ? a : v > b ? b : v; }
+function smooth(e0, e1, v){ var t = clamp((v - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+function gauss(r){ var u = 0; while (u === 0) u = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * r()); }
+function rgba(c, a){ return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+function lin(x, x0, y0, x1, y1, stops){
+  var g = x.createLinearGradient(x0, y0, x1, y1);
+  stops.forEach(function(s){ g.addColorStop(s[0], s[1]); });
+  return g;
+}
+function blob(x, cx, cy, rx, ry, c, a){
+  if (rx <= 0 || ry <= 0) return;
+  x.save(); x.translate(cx, cy); x.scale(rx, ry);
+  var g = x.createRadialGradient(0, 0, 0, 0, 0, 1);
+  g.addColorStop(0, rgba(c, a)); g.addColorStop(0.45, rgba(c, a * 0.6)); g.addColorStop(1, rgba(c, 0));
+  x.fillStyle = g; x.beginPath(); x.arc(0, 0, 1, 0, TAU); x.fill(); x.restore();
+}
+function noise1(r, n){
+  var v = []; for (var i = 0; i <= n + 1; i++) v.push(r());
+  return function(t){ var p = clamp(t, 0, 1) * n, i = Math.floor(p), f = p - i, u = f * f * (3 - 2 * f); return v[i] * (1 - u) + v[Math.min(i + 1, n + 1)] * u; };
+}
+function fbm1(seed, oct, base){
+  var r = rng(seed), ns = [];
+  for (var o = 0; o < oct; o++) ns.push(noise1(r, (base || 3) << o));
+  return function(t){ var s = 0, a = 1, tot = 0; for (var i = 0; i < ns.length; i++){ s += ns[i](t) * a; tot += a; a *= 0.5; } return s / tot; };
+}
+function noise2(seed, n){
+  var r = rng(seed), w = n + 2, g = [];
+  for (var i = 0; i < w * w; i++) g.push(r());
+  return function(u, v){
+    u = clamp(u, 0, 1) * n; v = clamp(v, 0, 1) * n;
+    var i = Math.floor(u), j = Math.floor(v), fu = u - i, fv = v - j;
+    fu = fu * fu * (3 - 2 * fu); fv = fv * fv * (3 - 2 * fv);
+    return lerp(lerp(g[j * w + i], g[j * w + i + 1], fu), lerp(g[(j + 1) * w + i], g[(j + 1) * w + i + 1], fu), fv);
+  };
+}
+/* soft blur that works in every browser: step down by halves, then back up */
+function blur(src, levels){
+  var cur = src, i, n, nx;
+  for (i = 0; i < levels; i++){ n = mk(Math.max(1, cur.width >> 1), Math.max(1, cur.height >> 1)); nx = n.getContext('2d'); nx.imageSmoothingQuality = 'high'; nx.drawImage(cur, 0, 0, n.width, n.height); cur = n; }
+  for (i = 0; i < levels; i++){ n = mk(cur.width * 2, cur.height * 2); nx = n.getContext('2d'); nx.imageSmoothingQuality = 'high'; nx.drawImage(cur, 0, 0, n.width, n.height); cur = n; }
+  return cur;
+}
+function vignette(x, W, H, a){
+  var g = x.createRadialGradient(W / 2, H * 0.48, Math.min(W, H) * 0.3, W / 2, H / 2, Math.hypot(W, H) * 0.56);
+  g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,' + a + ')');
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+}
+function ridge(x, W, base, amp, seed, fill, to, oct){
+  var f = fbm1(seed, oct || 4, 3);
+  x.beginPath(); x.moveTo(0, to);
+  for (var i = 0; i <= W; i += 3) x.lineTo(i, base - amp * f(i / W));
+  x.lineTo(W, to); x.closePath(); x.fillStyle = fill; x.fill();
+}
+function treeline(x, W, base, h, seed, fill, freq){
+  var f = fbm1(seed, 5, freq || 8);
+  x.beginPath(); x.moveTo(0, base + h);
+  for (var i = 0; i <= W; i += 2){ var v = f(i / W); x.lineTo(i, base - h * Math.max(0, v - 0.32) * 2.4); }
+  x.lineTo(W, base + h); x.closePath(); x.fillStyle = fill; x.fill();
+}
+function bez(p0, p1, p2, p3, n){
+  var o = [];
+  for (var i = 0; i <= n; i++){
+    var t = i / n, u = 1 - t;
+    o.push([u*u*u*p0[0] + 3*u*u*t*p1[0] + 3*u*t*t*p2[0] + t*t*t*p3[0], u*u*u*p0[1] + 3*u*u*t*p1[1] + 3*u*t*t*p2[1] + t*t*t*p3[1]]);
+  }
+  return o;
+}
+function bpt(P, t){ var u = 1 - t; return [u*u*u*P[0][0] + 3*u*u*t*P[1][0] + 3*u*t*t*P[2][0] + t*t*t*P[3][0], u*u*u*P[0][1] + 3*u*u*t*P[1][1] + 3*u*t*t*P[2][1] + t*t*t*P[3][1]]; }
+function btan(P, t){ var u = 1 - t; return [3*u*u*(P[1][0]-P[0][0]) + 6*u*t*(P[2][0]-P[1][0]) + 3*t*t*(P[3][0]-P[2][0]), 3*u*u*(P[1][1]-P[0][1]) + 6*u*t*(P[2][1]-P[1][1]) + 3*t*t*(P[3][1]-P[2][1])]; }
+/* a filled limb through points, with a width at each point */
+function limb(x, pts, ws){
+  var L = [], R = [];
+  for (var i = 0; i < pts.length; i++){
+    var a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
+    var dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1, nx = -dy / d, ny = dx / d, w = ws[i] / 2;
+    L.push([pts[i][0] + nx * w, pts[i][1] + ny * w]); R.push([pts[i][0] - nx * w, pts[i][1] - ny * w]);
+  }
+  x.beginPath(); x.moveTo(L[0][0], L[0][1]);
+  for (var j = 1; j < L.length; j++) x.lineTo(L[j][0], L[j][1]);
+  for (var m = R.length - 1; m >= 0; m--) x.lineTo(R[m][0], R[m][1]);
+  x.closePath(); x.fill();
+}
+function taper(x, pts, w0, w1){
+  limb(x, pts, pts.map(function(_, i){ return lerp(w0, w1, i / (pts.length - 1)); }));
+  var e = pts[pts.length - 1]; x.beginPath(); x.arc(e[0], e[1], w1 / 2, 0, TAU); x.fill();
+}
+function reeds(x, r, x0, x1, base0, h, n, col, k, minH, spread){
+  var lo = minH == null ? 0.55 : minH, sp = spread || 0;
+  x.strokeStyle = col; x.fillStyle = col; x.lineCap = 'round';
+  for (var i = 0; i < n; i++){
+    var base = base0 + (r() - 0.5) * sp;
+    var bx = lerp(x0, x1, sp ? (r() + r()) / 2 : r()), hh = h * (lo + (1 - lo) * r()), lean = (r() - 0.42) * hh * 0.28;
+    var tx = bx + lean, ty = base - hh;
+    x.lineWidth = (0.9 + 1.1 * r()) * k;
+    x.beginPath(); x.moveTo(bx, base); x.quadraticCurveTo(bx + lean * 0.2, base - hh * 0.6, tx, ty); x.stroke();
+    if (r() < 0.7){
+      var ly = base - hh * (0.25 + 0.45 * r()), lx = lerp(bx, tx, (base - ly) / hh * 0.6), dir = r() < 0.5 ? -1 : 1, L = hh * (0.12 + 0.12 * r());
+      x.lineWidth = (0.7 + 0.8 * r()) * k;
+      x.beginPath(); x.moveTo(lx, ly); x.quadraticCurveTo(lx + dir * L * 0.6, ly - L * 0.5, lx + dir * L, ly - L * 0.2 + L * 0.3 * r()); x.stroke();
+    }
+    if (r() < 0.55){
+      var len = hh * (0.09 + 0.06 * r()), d2 = lean >= 0 ? 1 : -1;
+      x.save(); x.translate(tx, ty); x.rotate(d2 * (1.7 + 0.7 * r()));
+      x.beginPath(); x.ellipse(0, -len * 0.5, len * 0.12, len * 0.5, 0, 0, TAU); x.fill(); x.restore();
+    }
+  }
+}
+
+/* ---------- 1. elephants at last light ---------- */
+function elephantBody(x, p){
+  x.beginPath();
+  x.moveTo(20, 8);
+  x.bezierCurveTo(24, 4, 29, 2, 34, 4);
+  x.bezierCurveTo(39, 5, 43, 3, 49, 3);
+  x.bezierCurveTo(57, 3, 63, 7, 69, 7);
+  x.bezierCurveTo(77, 7, 85, 5, 90, 12);
+  x.bezierCurveTo(95, 19, 96, 31, 93, 42);
+  x.bezierCurveTo(84, 47, 62, 48, 47, 46);
+  x.bezierCurveTo(41, 45, 37, 42, 34, 37);
+  x.bezierCurveTo(31, 35, 29, 35, 27, 36);
+  x.bezierCurveTo(26, 48, 25, 62, 21, 75);
+  x.bezierCurveTo(20, 79, 17, 81, 14, 79);
+  x.bezierCurveTo(13, 77, 15, 76, 15.5, 74);
+  x.bezierCurveTo(15, 62, 13, 48, 10, 37);
+  x.bezierCurveTo(7, 29, 7, 19, 11, 13);
+  x.bezierCurveTo(13, 10, 16, 8.5, 20, 8);
+  x.closePath(); x.fill();
+  /* the lower lobe of the ear hangs below the neck line */
+  x.beginPath(); x.moveTo(27, 22);
+  x.bezierCurveTo(33, 22, 41, 24, 42, 32); x.bezierCurveTo(42, 38, 38, 44, 33, 45); x.bezierCurveTo(30, 44, 28, 40, 28, 36);
+  x.closePath(); x.fill();
+  function leg(t0, t1, ty, b0, b1){
+    x.beginPath(); x.moveTo(t0, ty);
+    x.bezierCurveTo(t0 - 1, ty + 14, b0 + 0.5, 70, b0 - 0.6, 79.2);
+    x.quadraticCurveTo((b0 + b1) / 2, 80.8, b1 + 0.6, 79.2);
+    x.bezierCurveTo(b1 - 0.5, 70, t1 + 1, ty + 14, t1, ty);
+    x.closePath(); x.fill();
+  }
+  leg(38, 49, 40, 40 - 9 * p, 50 - 9 * p);
+  leg(75, 87, 38, 76 + 8 * p, 86 + 8 * p);
+  leg(33, 45, 40, 30 + 9 * p, 41 + 9 * p);
+  leg(79, 91, 36, 81 - 8 * p, 92 - 8 * p);
+}
+function elephant(x, ox, oy, s, p, tusk, glow){
+  x.save(); x.translate(ox, oy); x.scale(s, s); x.translate(0, -80);
+  elephantBody(x, p);
+  x.lineCap = 'round';
+  if (tusk){ x.lineWidth = 2.2; x.beginPath(); x.moveTo(24, 39); x.quadraticCurveTo(16, 49, 7, 46); x.stroke(); }
+  x.lineWidth = 1.1; x.beginPath(); x.moveTo(92, 18); x.quadraticCurveTo(98, 30, 96, 42); x.stroke();
+  x.beginPath(); x.ellipse(96, 44, 1.4, 3.2, 0.2, 0, TAU); x.fill();
+  if (glow){
+    /* sunlight coming through the thin edge of the ear */
+    x.strokeStyle = glow; x.lineCap = 'round';
+    [[2.6, 0.35], [1.1, 0.8]].forEach(function(p){
+      x.globalAlpha = p[1]; x.lineWidth = p[0];
+      x.beginPath(); x.moveTo(30, 22); x.bezierCurveTo(34, 22.4, 40.2, 24.5, 41, 31.5); x.bezierCurveTo(41, 37.2, 37.6, 42.8, 33.5, 44); x.stroke();
+    });
+    x.globalAlpha = 1;
+  }
+  x.restore();
+}
+function acacia(x, cx, by, h, w, r, col){
+  x.fillStyle = col; x.strokeStyle = col; x.lineCap = 'round'; x.lineJoin = 'round';
+  var fork = [cx + h * 0.01, by - h * 0.42];
+  taper(x, bez([cx, by], [cx + h * 0.03, by - h * 0.15], [cx - h * 0.02, by - h * 0.3], fork, 8), h * 0.055, h * 0.034);
+  var crownY = by - h * 0.82;
+  [-1, -0.62, -0.25, 0.12, 0.5, 0.88].forEach(function(b){
+    var ex = cx + b * w * 0.4, ey = crownY + h * (0.02 + 0.06 * r());
+    var pts = bez(fork, [fork[0] + b * w * 0.06, fork[1] - h * 0.18], [ex - b * w * 0.12, ey + h * 0.14], [ex, ey], 10);
+    taper(x, pts, h * 0.03, h * 0.008);
+    for (var k = 0; k < 3; k++){
+      var p = pts[Math.floor((0.55 + 0.4 * r()) * 10)], tx = p[0] + (r() - 0.5) * w * 0.12, ty = crownY - h * 0.02 * r();
+      taper(x, [p, [(p[0] + tx) / 2, (p[1] + ty) / 2 + h * 0.02], [tx, ty]], h * 0.009, h * 0.003);
+    }
+  });
+  for (var i = 0; i < 280; i++){
+    var u = r() * 2 - 1, px = cx + u * w * 0.5, edge = 1 - u * u;
+    var py = crownY - h * 0.02 + (r() - 0.6) * h * 0.12 * (0.3 + 0.7 * edge);
+    var rx = w * (0.02 + 0.035 * r()) * (0.5 + 0.5 * edge), ry = rx * (0.28 + 0.12 * r());
+    x.beginPath(); x.ellipse(px, py, rx, ry, (r() - 0.5) * 0.2, 0, TAU); x.fill();
+  }
+}
+function sceneElephants(W, H){
+  var c = mk(W, H), x = c.getContext('2d'), r = rng(11), k = W / 1600, i;
+  var hz = H * 0.70;
+  x.fillStyle = lin(x, 0, 0, 0, hz, [[0, '#2a2238'], [0.32, '#5e3442'], [0.62, '#b65a3a'], [0.86, '#e79a58'], [1, '#f4c07a']]);
+  x.fillRect(0, 0, W, hz + 1);
+  var sx = W * 0.6, sy = hz - H * 0.095, sr = 44 * k;
+  blob(x, sx, sy, W * 0.55, H * 0.42, [255, 170, 100], 0.45);
+  blob(x, sx, sy, W * 0.18, H * 0.2, [255, 215, 160], 0.6);
+  for (i = 0; i < 14; i++){
+    var cy = H * (0.07 + 0.3 * r()), cx = W * r(), crx = W * (0.12 + 0.22 * r()), cry = H * (0.006 + 0.012 * r());
+    blob(x, cx, cy, crx, cry, [70, 35, 55], 0.35 + 0.3 * r());
+    blob(x, cx, cy + cry * 0.8, crx * 0.8, cry * 0.6, [240, 140, 90], 0.18);
+  }
+  blob(x, sx, sy, sr * 3.2, sr * 3.2, [255, 236, 190], 0.9);
+  x.fillStyle = '#fff4dc'; x.beginPath(); x.arc(sx, sy, sr, 0, TAU); x.fill();
+  x.fillStyle = lin(x, 0, hz - H * 0.16, 0, hz, [[0, 'rgba(245,175,110,0)'], [1, 'rgba(245,175,110,0.55)']]);
+  x.fillRect(0, hz - H * 0.16, W, H * 0.16);
+  /* the mountain, nearly lost in haze */
+  x.fillStyle = 'rgba(120,60,70,0.16)';
+  x.beginPath(); x.moveTo(-10, hz);
+  x.bezierCurveTo(W * 0.1, hz - H * 0.05, W * 0.18, hz - H * 0.14, W * 0.25, hz - H * 0.17);
+  x.lineTo(W * 0.32, hz - H * 0.168);
+  x.bezierCurveTo(W * 0.38, hz - H * 0.15, W * 0.48, hz - H * 0.06, W * 0.62, hz);
+  x.closePath(); x.fill();
+  treeline(x, W, hz + 2, H * 0.018, 5, 'rgba(70,32,34,0.75)', 10);
+  x.fillStyle = lin(x, 0, hz, 0, H, [[0, '#6a3424'], [0.15, '#3c1c14'], [1, '#140906']]);
+  x.fillRect(0, hz, W, H - hz);
+  x.fillStyle = lin(x, 0, hz, 0, hz + H * 0.06, [[0, 'rgba(250,170,100,0.35)'], [1, 'rgba(250,170,100,0)']]);
+  x.fillRect(0, hz, W, H * 0.06);
+  acacia(x, W * 0.14, hz + H * 0.012, H * 0.27, W * 0.21, r, '#24130f');
+  for (i = 0; i < 40; i++) blob(x, W * (0.28 + 0.72 * r()), hz + H * (0.03 + 0.04 * r()), W * (0.04 + 0.06 * r()), H * (0.02 + 0.03 * r()), [230, 140, 85], 0.18);
+  var feet = hz + H * 0.055, dark = '#1b0f0b', rim = 'rgba(255,178,106,0.6)', ear = 'rgba(190,80,48,0.32)';
+  [[0.325, 2.9, 0.8, true], [0.565, 1.55, -0.6, false], [0.73, 2.7, -0.3, true], [0.9, 2.05, 0.9, true]].forEach(function(e){
+    var S = e[1] * k, ox = W * e[0] - 50 * S;
+    var dx = sx - (ox + 50 * S), dy = sy - (feet - 40 * S), d = Math.hypot(dx, dy);
+    var ux = dx / d * 1.8 * k, uy = dy / d * 1.8 * k - 1.3 * k;
+    x.fillStyle = rim; x.strokeStyle = rim; elephant(x, ox + ux, feet + uy, S, e[2], e[3], null);
+    x.fillStyle = dark; x.strokeStyle = dark; elephant(x, ox, feet, S, e[2], e[3], null);
+  });
+  for (i = 0; i < 26; i++) blob(x, W * (0.2 + 0.8 * r()), feet - H * 0.004 + H * 0.01 * r(), W * (0.03 + 0.05 * r()), H * (0.01 + 0.012 * r()), [210, 120, 75], 0.2);
+  x.strokeStyle = 'rgba(25,12,9,0.9)'; x.lineCap = 'round';
+  for (i = 0; i < 800; i++){
+    var gx0 = W * r(), gy0 = feet + H * (0.004 + 0.06 * r()), gh = H * (0.005 + 0.02 * r());
+    x.lineWidth = k; x.beginPath(); x.moveTo(gx0, gy0); x.lineTo(gx0 + (r() - 0.5) * 4 * k, gy0 - gh); x.stroke();
+  }
+  var g = mk(W, H), gx = g.getContext('2d'); gx.strokeStyle = '#120806'; gx.lineCap = 'round';
+  for (i = 0; i < 520; i++){
+    var bx = W * r(), by = H * (0.9 + 0.12 * r()), h = H * (0.04 + 0.1 * r()), lean = (r() - 0.5) * h * 0.5;
+    gx.lineWidth = (1.5 + 3 * r()) * k; gx.beginPath(); gx.moveTo(bx, by); gx.quadraticCurveTo(bx + lean * 0.3, by - h * 0.6, bx + lean, by - h); gx.stroke();
+  }
+  x.drawImage(blur(g, 2), 0, 0, W, H);
+  vignette(x, W, H, 0.35);
+  return c;
+}
+
+/* ---------- 2. heron in fog ---------- */
+function heronShape(x){
+  x.beginPath();
+  x.moveTo(44, 40);
+  x.bezierCurveTo(52, 33, 66, 37, 76, 50);
+  x.lineTo(86, 61);
+  x.bezierCurveTo(78, 62, 68, 61, 60, 60);
+  x.bezierCurveTo(50, 59, 43, 54, 42, 47);
+  x.closePath(); x.fill();
+  x.beginPath();
+  x.moveTo(37, 13.5);
+  x.bezierCurveTo(44, 17, 46, 23, 43, 28);
+  x.bezierCurveTo(40, 33, 41, 38, 48, 40);
+  x.lineTo(44, 48);
+  x.bezierCurveTo(33, 42, 31, 33, 35, 27);
+  x.bezierCurveTo(38, 22, 36, 18, 31, 15);
+  x.closePath(); x.fill();
+  x.beginPath(); x.ellipse(34, 12.5, 4, 3, -0.15, 0, TAU); x.fill();
+  x.beginPath(); x.moveTo(31, 10.8); x.lineTo(15, 13.2); x.lineTo(31, 14.2); x.closePath(); x.fill();
+  x.lineCap = 'round';
+  x.lineWidth = 0.6; x.beginPath(); x.moveTo(36, 10.5); x.quadraticCurveTo(42, 10, 47, 12.5); x.stroke();
+  x.lineWidth = 0.5;
+  for (var i = 0; i < 5; i++){ x.beginPath(); x.moveTo(36 + i * 0.8, 36 + i); x.quadraticCurveTo(34 + i * 0.6, 44 + i, 35 + i, 50 + i * 0.5); x.stroke(); }
+  x.lineWidth = 1.6;
+  x.beginPath(); x.moveTo(60, 59); x.lineTo(59, 80); x.lineTo(58, 100); x.stroke();
+  x.beginPath(); x.moveTo(64, 59); x.lineTo(66, 79); x.lineTo(63, 100); x.stroke();
+}
+function sceneHeron(W, H){
+  var c = mk(W, H), x = c.getContext('2d'), r = rng(23), k = W / 960, i;
+  var wl = H * 0.58;
+  x.fillStyle = lin(x, 0, 0, 0, wl, [[0, '#a9afad'], [0.55, '#cfd2cc'], [1, '#e4e3dc']]); x.fillRect(0, 0, W, wl + 1);
+  blob(x, W * 0.78, H * 0.2, W * 0.5, H * 0.22, [248, 246, 238], 0.55);
+  var trees = mk(W, H), tx = trees.getContext('2d');
+  treeline(tx, W, wl - H * 0.055, H * 0.07, 31, 'rgba(118,128,124,0.30)');
+  for (i = 0; i < 10; i++) blob(tx, W * r(), wl - H * 0.06, W * (0.2 + 0.3 * r()), H * 0.03, [226, 228, 222], 0.5);
+  treeline(tx, W, wl - H * 0.012, H * 0.05, 37, 'rgba(92,102,98,0.42)');
+  x.drawImage(blur(trees, 1), 0, 0, W, H);
+  for (i = 0; i < 16; i++) blob(x, W * r(), wl - H * (0.02 + 0.05 * r()), W * (0.25 + 0.3 * r()), H * (0.02 + 0.025 * r()), [232, 233, 227], 0.45);
+  x.fillStyle = lin(x, 0, wl, 0, H, [[0, '#dedfd8'], [0.25, '#c9ccc6'], [1, '#8f9691']]); x.fillRect(0, wl, W, H - wl);
+  x.save(); x.beginPath(); x.rect(0, wl, W, H - wl); x.clip(); x.globalAlpha = 0.4;
+  x.translate(0, 2 * wl); x.scale(1, -1); x.drawImage(blur(trees, 2), 0, 0, W, H); x.restore();
+  for (i = 0; i < 420; i++){
+    var t = Math.pow(r(), 1.6), y = wl + 4 * k + (H - wl) * t, len = W * (0.02 + 0.12 * t) * (0.4 + r()), xx = W * r();
+    x.strokeStyle = r() < 0.5 ? 'rgba(245,245,240,' + (0.18 + 0.2 * r()) + ')' : 'rgba(70,78,75,' + (0.06 + 0.1 * r()) + ')';
+    x.lineWidth = (0.6 + 1.6 * t) * k; x.beginPath(); x.moveTo(xx, y); x.lineTo(xx + len, y); x.stroke();
+  }
+  /* reed clumps across the water, thinning out into the fog */
+  var far = mk(W, H), fq = far.getContext('2d');
+  reeds(fq, r, -W * 0.06, W * 0.3, wl + H * 0.035, H * 0.08, 40, 'rgb(112,120,116)', k, 0.2, H * 0.02);
+  reeds(fq, r, W * 0.8, W * 1.06, wl + H * 0.04, H * 0.07, 26, 'rgb(112,120,116)', k, 0.2, H * 0.02);
+  x.globalAlpha = 0.55; x.drawImage(blur(far, 1), 0, 0, W, H); x.globalAlpha = 1;
+  var mid = mk(W, H), mq = mid.getContext('2d');
+  reeds(mq, r, -W * 0.06, W * 0.2, wl + H * 0.1, H * 0.15, 34, 'rgb(62,69,65)', k * 1.3, 0.3, H * 0.03);
+  x.globalAlpha = 0.8; x.drawImage(mid, 0, 0); x.globalAlpha = 1;
+  /* the heron and its broken reflection */
+  var s = H * 0.0038, yc = H * 0.80, ox = W * 0.34, hcol = '#454c49';
+  var hl = mk(W, H), hx = hl.getContext('2d');
+  hx.save(); hx.translate(ox, yc - 92 * s); hx.scale(s, s); hx.fillStyle = hcol; hx.strokeStyle = hcol; heronShape(hx); hx.restore();
+  x.save(); x.beginPath(); x.rect(0, 0, W, yc); x.clip(); x.drawImage(hl, 0, 0); x.restore();
+  var rf = mk(W, H), rx = rf.getContext('2d'); rx.translate(0, 2 * yc); rx.scale(1, -1); rx.drawImage(hl, 0, 0);
+  x.save(); x.beginPath(); x.rect(0, yc, W, H - yc); x.clip(); x.globalAlpha = 0.42;
+  var step = Math.max(2, Math.round(3 * k));
+  for (var yy = yc; yy < H; yy += step){
+    var j = (r() - 0.5) * 6 * k * (1 + (yy - yc) / (H * 0.2));
+    x.drawImage(rf, 0, yy, W, step + 1, j, yy, W, step + 1);
+  }
+  x.restore();
+  for (i = 0; i < 3; i++){
+    x.strokeStyle = 'rgba(240,240,235,' + (0.35 - 0.09 * i) + ')'; x.lineWidth = 1.2 * k;
+    x.beginPath(); x.ellipse(ox + 61 * s, yc, (10 + 14 * i) * k, (2 + 2.4 * i) * k, 0, 0, TAU); x.stroke();
+  }
+  var fg = mk(W, H), fx = fg.getContext('2d');
+  reeds(fx, r, -W * 0.05, W * 0.18, H * 1.02, H * 0.42, 14, 'rgba(40,46,43,0.85)', k * 3.5);
+  reeds(fx, r, W * 0.9, W * 1.05, H * 1.02, H * 0.5, 8, 'rgba(40,46,43,0.8)', k * 4);
+  x.drawImage(blur(fg, 3), 0, 0, W, H);
+  vignette(x, W, H, 0.16);
+  return c;
+}
+
+/* ---------- 3. starling murmuration ---------- */
+function sceneMurmur(W, H){
+  var c = mk(W, H), x = c.getContext('2d'), r = rng(41), k = W / 1600, i;
+  var hz = H * 0.80;
+  x.fillStyle = lin(x, 0, 0, 0, hz, [[0, '#46506e'], [0.4, '#7e7490'], [0.72, '#c99a98'], [0.92, '#eab991'], [1, '#f3cf9f']]); x.fillRect(0, 0, W, hz + 2);
+  blob(x, W * 0.8, hz, W * 0.6, H * 0.3, [255, 214, 165], 0.55);
+  for (i = 0; i < 10; i++){
+    var cy = H * (0.1 + 0.45 * r()), cx = W * r(), crx = W * (0.15 + 0.25 * r()), cry = H * (0.008 + 0.014 * r());
+    blob(x, cx, cy, crx, cry, [60, 58, 90], 0.25 + 0.2 * r());
+    blob(x, cx, cy + cry, crx * 0.7, cry * 0.5, [245, 170, 140], 0.12);
+  }
+  /* the flock: a soft union of lobes with a crisp edge, folded into denser bands */
+  var nz = noise2(43, 6), nz2 = noise2(44, 12);
+  var lobes = [[0.40, 0.30, 0.20, 0.085, -0.22], [0.565, 0.22, 0.13, 0.075, 0.42], [0.27, 0.37, 0.09, 0.05, -0.6], [0.655, 0.35, 0.045, 0.11, 0.15]];
+  function dens(u, v){
+    var miss = 1;
+    for (var q = 0; q < lobes.length; q++){
+      var L = lobes[q], dx = u - L[0], dy = v - L[1], ca = Math.cos(L[4]), sa = Math.sin(L[4]);
+      var a = (dx * ca + dy * sa) / L[2], b = (-dx * sa + dy * ca) / L[3];
+      miss *= 1 - Math.exp(-(a * a + b * b));
+    }
+    return (1 - miss) * (0.7 + 0.6 * nz(u, v));
+  }
+  x.fillStyle = '#1a1621';
+  for (i = 0; i < 150000; i++){
+    var u = 0.1 + 0.66 * r(), v = 0.06 + 0.52 * r(), d = dens(u, v);
+    var edge = smooth(0.3, 0.42, d);
+    if (edge <= 0) continue;
+    var fold = 0.22 + 0.78 * Math.pow(0.5 + 0.5 * Math.sin((u * 0.83 + v * 0.56) * 40 + nz2(u, v) * 7), 1.6);
+    if (r() > edge * fold) continue;
+    var sz = (1.1 + 1.3 * r()) * k;
+    x.fillRect(u * W, v * H, sz, sz * 0.8);
+  }
+  var P = [[0.655 * W, 0.38 * H], [0.685 * W, 0.55 * H], [0.585 * W, 0.62 * H], [0.605 * W, 0.81 * H]];
+  for (i = 0; i < 7000; i++){
+    var t = r(), p = bpt(P, t), tg = btan(P, t), dl = Math.hypot(tg[0], tg[1]) || 1;
+    var w = k * (52 * (1 - t) + 5), o = (r() + r() + r() - 1.5) / 1.5;
+    var sz2 = (1.1 + 1.2 * r()) * k;
+    x.fillRect(p[0] - tg[1] / dl * o * w, p[1] + tg[0] / dl * o * w, sz2, sz2 * 0.8);
+  }
+  x.strokeStyle = '#1a1621'; x.lineWidth = 0.9 * k;
+  for (i = 0; i < 320; i++){
+    var L = lobes[Math.floor(r() * 3)], bxx = W * (L[0] + gauss(r) * L[2] * 0.9), byy = H * (L[1] + gauss(r) * L[3] * 1.4), b = (1.8 + 1.4 * r()) * k;
+    if (dens(bxx / W, byy / H) > 0.3) continue;
+    x.beginPath(); x.moveTo(bxx - b, byy - b * 0.6); x.lineTo(bxx, byy); x.lineTo(bxx + b, byy - b * 0.6); x.stroke();
+  }
+  /* distant trees, then the reed bed with its seed heads against the sky */
+  treeline(x, W, hz + H * 0.004, H * 0.03, 47, 'rgba(50,40,60,0.6)', 14);
+  var fr = fbm1(49, 6, 18);
+  function rtop(t){ return hz + H * 0.016 - H * 0.026 * fr(t); }
+  var reed = '#221c28';
+  x.beginPath(); x.moveTo(0, H); for (i = 0; i <= W; i += 2) x.lineTo(i, rtop(i / W)); x.lineTo(W, H); x.closePath();
+  x.fillStyle = reed; x.fill();
+  x.strokeStyle = reed; x.fillStyle = reed; x.lineCap = 'round';
+  for (i = 0; i < 1500; i++){
+    var t2 = r(), bx = t2 * W, by = rtop(t2) + 5 * k, hh = H * (0.006 + 0.03 * Math.pow(r(), 2.2)), lean = (r() - 0.4) * hh * 0.5;
+    x.lineWidth = (0.6 + 0.5 * r()) * k; x.beginPath(); x.moveTo(bx, by); x.quadraticCurveTo(bx + lean * 0.3, by - hh * 0.6, bx + lean, by - hh); x.stroke();
+    if (r() < 0.45){
+      /* a feathery seed head: a few fine strands hanging off the tip */
+      var ln = (6 + 8 * r()) * k, dd = lean >= 0 ? 1 : -1, ex = bx + lean, ey = by - hh;
+      x.lineWidth = 0.6 * k;
+      for (var s = 0; s < 4; s++){ var a = dd * (0.5 + 0.35 * s + 0.2 * r()); x.beginPath(); x.moveTo(ex, ey); x.quadraticCurveTo(ex + Math.sin(a) * ln * 0.5, ey - ln * 0.15, ex + Math.sin(a) * ln, ey + Math.cos(a) * ln * 0.25 + ln * 0.2); x.stroke(); }
+    }
+  }
+  /* open water in front, holding the colour of the sky */
+  var wy = H * 0.905;
+  x.fillStyle = lin(x, 0, wy, 0, H, [[0, '#ebbd96'], [0.45, '#c99a98'], [1, '#7b7392']]); x.fillRect(0, wy, W, H - wy);
+  var fw = fbm1(51, 5, 30);
+  x.fillStyle = 'rgba(34,28,40,0.85)'; x.beginPath(); x.moveTo(0, wy - 1);
+  for (i = 0; i <= W; i += 2) x.lineTo(i, wy + H * (0.004 + 0.016 * fw(i / W)));
+  x.lineTo(W, wy - 1); x.closePath(); x.fill();
+  for (i = 0; i < 160; i++){
+    var ry = wy + (H - wy) * (0.25 + 0.75 * r()), rl = W * (0.02 + 0.08 * r()), rx0 = W * r();
+    x.strokeStyle = r() < 0.6 ? 'rgba(255,225,190,0.35)' : 'rgba(40,32,50,0.25)'; x.lineWidth = (0.8 + r()) * k;
+    x.beginPath(); x.moveTo(rx0, ry); x.lineTo(rx0 + rl, ry); x.stroke();
+  }
+  var fg = mk(W, H), fx = fg.getContext('2d');
+  reeds(fx, r, -W * 0.02, W * 0.12, H * 1.02, H * 0.22, 26, '#141017', k * 2.4, 0.4);
+  reeds(fx, r, W * 0.9, W * 1.02, H * 1.02, H * 0.18, 18, '#141017', k * 2.4, 0.4);
+  x.drawImage(blur(fg, 2), 0, 0, W, H);
+  vignette(x, W, H, 0.28);
+  return c;
+}
+
+/* ---------- 4. red deer stag ---------- */
+function antler(x, bx, by, sc){
+  function P(a, b){ return [bx + a * sc, by + b * sc]; }
+  var beam = bez(P(0, 0), P(6, -14), P(22, -20), P(34, -26), 12).concat(bez(P(34, -26), P(42, -30), P(48, -36), P(52, -46), 8).slice(1));
+  taper(x, beam, 2.6, 1.3);
+  function tine(p0, p1, p2, w0){ taper(x, bez(p0, p1, p1, p2, 6), w0, 0.5); }
+  tine(P(1, -3), P(-4, -8), P(-8, -17), 1.7);
+  tine(P(4, -8), P(1, -14), P(-1, -22), 1.4);
+  tine(P(22, -21), P(25, -28), P(24, -37), 1.4);
+  tine(P(44, -33), P(45, -40), P(42, -48), 1.2);
+  tine(P(52, -46), P(52, -52), P(50, -58), 1.0);
+  tine(P(51, -42), P(56, -46), P(62, -47), 1.0);
+}
+function stagShape(x, horns){
+  x.beginPath();
+  x.moveTo(36, 56);
+  x.bezierCurveTo(31, 46, 30, 36, 27, 28);
+  x.lineTo(25, 26); x.lineTo(26, 23); x.lineTo(23, 21);
+  x.bezierCurveTo(19, 18, 15, 14, 12, 10);
+  x.lineTo(16, 9.5); x.lineTo(20, 9); x.lineTo(11, 3);
+  x.bezierCurveTo(12, 1, 15, 0, 18, 0.5);
+  x.bezierCurveTo(22, 1, 26, 1, 29, 3);
+  x.lineTo(33, 1.5); x.lineTo(33, 5.5);
+  x.bezierCurveTo(37, 10, 41, 18, 46, 26);
+  x.bezierCurveTo(50, 30, 56, 32, 62, 32);
+  x.bezierCurveTo(74, 32, 86, 33, 94, 37);
+  x.bezierCurveTo(99, 40, 101, 46, 100, 53);
+  x.bezierCurveTo(99, 58, 97, 62, 94, 64);
+  x.bezierCurveTo(80, 66, 60, 66, 46, 63);
+  x.bezierCurveTo(41, 62, 38, 60, 36, 56);
+  x.closePath(); x.fill();
+  limb(x, [[45, 58], [47, 80], [47, 96], [47, 100]], [7, 3.6, 2.8, 3.2]);
+  limb(x, [[86, 58], [88, 78], [86, 96], [85, 100]], [9, 3.6, 2.6, 3]);
+  limb(x, [[41, 58], [41, 80], [40, 96], [39, 100]], [8, 4, 3, 3.4]);
+  limb(x, [[92, 56], [96, 78], [94, 96], [93, 100]], [12, 4, 2.8, 3.2]);
+  x.beginPath(); x.ellipse(100.5, 45, 1.6, 3, 0.3, 0, TAU); x.fill();
+  if (horns){ antler(x, 29, 3.5, 0.94); antler(x, 26, 2, 1); }
+}
+function sceneStag(W, H){
+  var c = mk(W, H), x = c.getContext('2d'), r = rng(53), k = W / 1500, i;
+  x.fillStyle = lin(x, 0, 0, 0, H, [[0, '#9aa09f'], [0.45, '#cdd0ca'], [0.7, '#dedcd3'], [1, '#c4c3ba']]); x.fillRect(0, 0, W, H);
+  blob(x, W * 0.7, H * 0.3, W * 0.45, H * 0.4, [255, 252, 242], 0.7);
+  blob(x, W * 0.7, H * 0.3, W * 0.07, W * 0.07, [255, 255, 250], 0.9);
+  var hills = mk(W, H), hx = hills.getContext('2d');
+  ridge(hx, W, H * 0.56, H * 0.12, 61, 'rgba(122,128,126,0.28)', H);
+  for (i = 0; i < 12; i++) blob(hx, W * r(), H * (0.55 + 0.05 * r()), W * (0.2 + 0.3 * r()), H * 0.035, [214, 215, 208], 0.55);
+  ridge(hx, W, H * 0.64, H * 0.1, 67, 'rgba(98,104,101,0.42)', H);
+  for (i = 0; i < 12; i++) blob(hx, W * r(), H * (0.64 + 0.04 * r()), W * (0.2 + 0.3 * r()), H * 0.03, [210, 211, 204], 0.5);
+  x.drawImage(blur(hills, 1), 0, 0, W, H);
+  /* two hinds on the far slope, almost gone in the fog */
+  var hl = mk(W, H), hc = hl.getContext('2d'); hc.fillStyle = hc.strokeStyle = '#5b615f';
+  [[0.775, 0.616, 1], [0.835, 0.622, -1]].forEach(function(h){ var s = 0.75 * k; hc.save(); hc.translate(W * h[0], H * h[1] - 100 * s); hc.scale(s * h[2], s); hc.translate(h[2] < 0 ? -100 : 0, 0); stagShape(hc, false); hc.restore(); });
+  x.globalAlpha = 0.6; x.drawImage(blur(hl, 1), 0, 0, W, H); x.globalAlpha = 1;
+  var f = fbm1(71, 5, 6);
+  function rdg(t){ return H * (0.80 - 0.09 * Math.exp(-Math.pow((t - 0.42) / 0.32, 2))) - H * 0.012 * f(t); }
+  x.beginPath(); x.moveTo(0, H);
+  for (i = 0; i <= W; i += 3) x.lineTo(i, rdg(i / W));
+  x.lineTo(W, H); x.closePath();
+  x.fillStyle = lin(x, 0, H * 0.7, 0, H, [[0, '#55534c'], [1, '#2e2d29']]); x.fill();
+  x.strokeStyle = '#4a4842'; x.lineCap = 'round';
+  for (i = 0; i < 1600; i++){
+    var t = r(), bx = t * W, by = rdg(t) + H * 0.004 * r() + 2 * k, hh = H * (0.006 + 0.016 * r());
+    x.lineWidth = (0.8 + 0.8 * r()) * k; x.beginPath(); x.moveTo(bx, by); x.lineTo(bx + (r() - 0.5) * 7 * k, by - hh); x.stroke();
+  }
+  var S = 2.9 * k, sx0 = W * 0.42 - 55 * S, fy = rdg(0.42) + 4 * k, top = fy - 100 * S;
+  x.fillStyle = '#2f2e2a'; x.strokeStyle = '#2f2e2a';
+  x.save(); x.translate(sx0, top); x.scale(S, S); stagShape(x, true); x.restore();
+  for (i = 0; i < 14; i++){
+    var bt = i / 13;
+    blob(x, sx0 + (12 - 22 * bt - 6 * bt * bt) * S, top + (4 - 14 * bt) * S, (3 + 10 * bt) * S, (2.5 + 7 * bt) * S, [250, 250, 246], 0.5 * (1 - bt) + 0.06);
+  }
+  var fg = mk(W, H), fx = fg.getContext('2d'); fx.strokeStyle = '#22211e'; fx.lineCap = 'round';
+  for (i = 0; i < 260; i++){
+    var gx0 = W * r(), gy0 = H * (0.94 + 0.08 * r()), gh = H * (0.04 + 0.1 * r());
+    fx.lineWidth = (3 + 6 * r()) * k; fx.beginPath(); fx.moveTo(gx0, gy0);
+    fx.quadraticCurveTo(gx0 + (r() - 0.5) * gh * 0.4, gy0 - gh * 0.5, gx0 + (r() - 0.5) * gh * 0.8, gy0 - gh); fx.stroke();
+  }
+  x.drawImage(blur(fg, 3), 0, 0, W, H);
+  vignette(x, W, H, 0.25);
+  return c;
+}
+
+/* ---------- 5. geese across the moon ---------- */
+function goose(x, cx, cy, s, phase){
+  x.save(); x.translate(cx, cy); x.scale(s, s);
+  x.beginPath(); x.ellipse(4, 0, 10, 3.6, 0.04, 0, TAU); x.fill();
+  x.beginPath(); x.moveTo(12, -1.5); x.lineTo(18, 0); x.lineTo(12, 2); x.closePath(); x.fill();
+  x.beginPath(); x.moveTo(-5, -1.8); x.quadraticCurveTo(-11, -2.6, -16, -2.2); x.lineTo(-16, 0.4); x.quadraticCurveTo(-11, 0.2, -5, 1.6); x.closePath(); x.fill();
+  x.beginPath(); x.ellipse(-17.5, -1, 2.6, 1.9, 0, 0, TAU); x.fill();
+  x.beginPath(); x.moveTo(-19.5, -1.6); x.lineTo(-23, -0.6); x.lineTo(-19.5, 0.2); x.closePath(); x.fill();
+  function wing(tx, ty){
+    x.beginPath(); x.moveTo(-1, 0);
+    x.quadraticCurveTo(0, ty * 0.5, tx - 2, ty);
+    x.quadraticCurveTo(tx + 4, ty * 0.6, 9, 0);
+    x.closePath(); x.fill();
+  }
+  var ty = -20 * phase, tx = 8 + 3 * Math.abs(phase);
+  wing(tx + 3, ty * 0.8);
+  wing(tx, ty);
+  x.restore();
+}
+function sceneGeese(W, H){
+  var c = mk(W, H), x = c.getContext('2d'), r = rng(83), k = W / 1100, i, j;
+  x.fillStyle = lin(x, 0, 0, 0, H, [[0, '#0d1628'], [0.55, '#223152'], [0.85, '#43507a'], [1, '#5e6688']]); x.fillRect(0, 0, W, H);
+  var mx = W * 0.52, my = H * 0.5, R = W * 0.33;
+  blob(x, mx, my, R * 2.2, R * 2.2, [200, 200, 210], 0.14);
+  blob(x, mx, my, R * 1.3, R * 1.3, [240, 230, 210], 0.32);
+  x.save(); x.beginPath(); x.arc(mx, my, R, 0, TAU); x.clip();
+  var mg = x.createRadialGradient(mx - R * 0.15, my - R * 0.15, R * 0.1, mx, my, R);
+  mg.addColorStop(0, '#f7efda'); mg.addColorStop(0.8, '#eadcb9'); mg.addColorStop(1, '#d6c39a');
+  x.fillStyle = mg; x.fillRect(mx - R, my - R, 2 * R, 2 * R);
+  var maria = [[-0.32, -0.38, 0.26, 0.2], [-0.05, -0.42, 0.18, 0.14], [0.15, -0.15, 0.18, 0.18], [0.38, -0.25, 0.14, 0.14], [-0.45, 0.05, 0.26, 0.32], [0.05, 0.15, 0.2, 0.16], [0.25, 0.32, 0.16, 0.12], [-0.15, 0.4, 0.12, 0.1]];
+  maria.forEach(function(m){ for (j = 0; j < 16; j++) blob(x, mx + R * (m[0] + gauss(r) * m[2] * 0.45), my + R * (m[1] + gauss(r) * m[3] * 0.45), R * m[2] * (0.25 + 0.3 * r()), R * m[3] * (0.25 + 0.3 * r()), [138, 128, 110], 0.22); });
+  blob(x, mx - R * 0.08, my + R * 0.62, R * 0.05, R * 0.05, [255, 252, 240], 0.6);
+  x.restore();
+  x.fillStyle = '#0b0f1a';
+  var lead = [W * 0.24, H * 0.47], birds = [[0, 0]];
+  for (i = 1; i <= 7; i++) birds.push([i * 74 * k + (r() - 0.5) * 18 * k, i * 30 * k + (r() - 0.5) * 12 * k]);
+  for (i = 1; i <= 6; i++) birds.push([i * 80 * k + (r() - 0.5) * 18 * k, -i * 20 * k + (r() - 0.5) * 12 * k]);
+  birds.forEach(function(b){ var ph = (r() < 0.5 ? -1 : 1) * (0.5 + 0.5 * r()); goose(x, lead[0] + b[0], lead[1] + b[1], (1.8 + 0.35 * r()) * k, ph); });
+  goose(x, W * 0.88, H * 0.24, 1.5 * k, 0.8); goose(x, W * 0.93, H * 0.27, 1.45 * k, -0.6);
+  treeline(x, W, H * 0.96, H * 0.05, 89, '#070a12', 36); x.fillStyle = '#070a12'; x.fillRect(0, H * 0.96, W, H * 0.04);
+  vignette(x, W, H, 0.3);
+  return c;
+}
+
+/* ---------- 6. humpback fluke, five frames of one dive ---------- */
+var WHALE = '#23282b';
+/* the outline of the fluke in units of its half-span, notch at 0,0, y downward */
+function ftop(t){ return -(3 + 10 * Math.sin(Math.PI * t)) + 6 * t * t; }
+function fbot(t){ return ftop(t) + 52 * Math.pow(1 - t, 0.9); }
+function flukeRaised(x, cx, base, wy, k, span, tilt, water, r){
+  var u = span / 100, i;
+  function trailing(){
+    var o = [];
+    for (var i = 1; i <= 46; i++){ var t = i / 46, Y = ftop(t); if (t > 0.05) Y += (r() - 0.5) * 1.6 + (i % 3 === 0 ? (r() - 0.5) * 1.2 : 0); else Y = lerp(2, ftop(0.05), t / 0.05); o.push([100 * t, Y]); }
+    return o;
+  }
+  var topR = trailing(), topL = trailing(), lead = [];
+  for (i = 0; i <= 24; i++){ var t = 1 - 0.86 * (i / 24); lead.push([100 * t, fbot(t)]); }
+  var pedB = (wy - base) / Math.cos(tilt) + 30 * k;
+  var path = new Path2D();
+  path.moveTo(0, 2 * u);
+  topR.forEach(function(p){ path.lineTo(p[0] * u, p[1] * u); });
+  lead.forEach(function(p){ path.lineTo(p[0] * u, p[1] * u); });
+  path.lineTo(20 * u, pedB);
+  path.lineTo(-20 * u, pedB);
+  for (i = lead.length - 1; i >= 0; i--) path.lineTo(-lead[i][0] * u, lead[i][1] * u);
+  for (i = topL.length - 1; i >= 0; i--) path.lineTo(-topL[i][0] * u, topL[i][1] * u);
+  path.closePath();
+  x.save(); x.translate(cx, base); x.rotate(tilt);
+  x.fillStyle = WHALE; x.fill(path);
+  x.save(); x.clip(path);
+  /* the white underside, different on each lobe, as it is on every humpback */
+  [[-1, 0.13, 0.86], [1, 0.2, 0.72]].forEach(function(L){
+    var sg = L[0], t0 = L[1], t1 = L[2], n = 22, j, t;
+    x.fillStyle = 'rgba(236,238,236,0.94)'; x.beginPath();
+    for (j = 0; j <= n; j++){ t = lerp(t0, t1, j / n); var yt = ftop(t) + 3.4 + 0.8 * Math.sin(j * 1.3 + sg); if (j) x.lineTo(sg * 100 * t * u, yt * u); else x.moveTo(sg * 100 * t * u, yt * u); }
+    for (j = n; j >= 0; j--){ t = lerp(t0, t1, j / n); var yb = lerp(ftop(t), fbot(t), 0.7 + 0.1 * Math.sin(j * 0.55 + sg * 2) + 0.04 * Math.sin(j * 1.9)); x.lineTo(sg * 100 * t * u, yb * u); }
+    x.closePath(); x.fill();
+    x.strokeStyle = WHALE; x.lineCap = 'round';
+    for (j = 0; j < 3; j++){ var tt = lerp(t0, t1, 0.3 + 0.7 * r()), ya = lerp(ftop(tt), fbot(tt), 0.55 + 0.2 * r()); x.lineWidth = (0.6 + 1.2 * r()) * u; x.beginPath(); x.moveTo(sg * 14 * u, 22 * u); x.quadraticCurveTo(sg * 100 * tt * 0.55 * u, (ya + 8) * u, sg * 100 * tt * u, ya * u); x.stroke(); }
+    x.fillStyle = WHALE;
+    for (j = 0; j < 5; j++){ var st = lerp(t0, t1, r()), sy = lerp(ftop(st), fbot(st), 0.2 + 0.5 * r()); x.beginPath(); x.ellipse(sg * 100 * st * u, sy * u, (0.6 + 1.4 * r()) * u, (0.5 + 1 * r()) * u, r() * 3, 0, TAU); x.fill(); }
+  });
+  x.strokeStyle = WHALE; x.lineWidth = 5 * u; x.stroke(path);
+  x.strokeStyle = 'rgba(235,240,240,0.25)';
+  for (i = 0; i < (water === 'pour' ? 70 : 30); i++){ var px = (r() * 2 - 1) * 88 * u, py = -14 * u * r(); x.lineWidth = (0.4 + 1 * r()) * u; x.beginPath(); x.moveTo(px, py); x.lineTo(px + (r() - 0.5) * 2 * u, py + (8 + 22 * r()) * u); x.stroke(); }
+  x.restore();
+  /* water leaving the leading edge of each lobe: a thin veil, a few ribbons that break up, then drops */
+  [-1, 1].forEach(function(sg){
+    var j, t, X, Y, len, m;
+    if (water === 'sheet' || water === 'pour'){
+      var t0 = 0.5, t1 = 0.97, g = x.createLinearGradient(0, fbot(0.8) * u, 0, wy - base);
+      g.addColorStop(0, 'rgba(232,237,238,0.34)'); g.addColorStop(0.6, 'rgba(232,237,238,0.14)'); g.addColorStop(1, 'rgba(232,237,238,0.03)');
+      x.fillStyle = g; x.beginPath();
+      for (j = 0; j <= 20; j++){ t = lerp(t0, t1, j / 20); if (j) x.lineTo(sg * 100 * t * u, fbot(t) * u); else x.moveTo(sg * 100 * t * u, fbot(t) * u); }
+      for (j = 20; j >= 0; j--){ t = lerp(t0, t1, j / 20); x.lineTo(sg * (100 * t * u + (3 + 10 * (j / 20)) * k) + (r() - 0.5) * 6 * k, wy - base); }
+      x.closePath(); x.fill();
+      for (j = 0; j < 7; j++){
+        t = 0.3 + 0.68 * Math.pow(r(), 0.5); X = sg * 100 * t * u; Y = fbot(t) * u; len = (wy - base) - Y;
+        if (len <= 0) continue;
+        var w0 = (2 + 5 * r()) * k * (t > 0.9 ? 1.5 : 1), dr = sg * (2 + 7 * r()) * k, end = Y + len, yy = Y, first = true;
+        /* an unbroken ribbon for the first stretch, then pieces with gaps */
+        while (yy < end){
+          var y2 = Math.min(end, yy + (first ? len * (0.35 + 0.45 * r()) : (4 + 16 * r()) * k));
+          var q0 = (yy - Y) / len, q1 = (y2 - Y) / len;
+          var wa = w0 * (1 - 0.7 * q0), wb = w0 * (1 - 0.7 * q1), xa = X + dr * q0 * q0, xb = X + dr * q1 * q1;
+          x.fillStyle = 'rgba(238,242,242,' + (0.8 - 0.45 * q0) + ')';
+          x.beginPath(); x.moveTo(xa - wa / 2, yy); x.lineTo(xb - wb / 2, y2); x.lineTo(xb + wb / 2, y2); x.lineTo(xa + wa / 2, yy); x.closePath(); x.fill();
+          yy = y2 + (3 + 8 * r()) * k; first = false;
+        }
+      }
+    }
+    x.fillStyle = 'rgba(238,242,242,0.78)';
+    for (j = 0; j < (water === 'drops' ? 90 : 50); j++){
+      t = 0.2 + 0.8 * Math.pow(r(), 0.6); X = sg * 100 * t * u; Y = fbot(t) * u; len = (wy - base) - Y;
+      if (len <= 0) continue;
+      m = Math.pow(r(), water === 'drops' ? 0.9 : 0.5);
+      x.beginPath(); x.ellipse(X + sg * m * 10 * k + (r() - 0.5) * 6 * k, Y + len * m, (0.6 + 1.4 * r()) * k, (0.8 + 2.4 * r()) * k, 0, 0, TAU); x.fill();
+    }
+  });
+  x.restore();
+}
+function foam(x, cx, wy, k, w, r, n){
+  for (var i = 0; i < n; i++){
+    var a = r() * TAU, rr = Math.sqrt(r());
+    x.fillStyle = 'rgba(240,243,243,' + (0.25 + 0.5 * r()) + ')';
+    x.beginPath(); x.ellipse(cx + Math.cos(a) * w * rr, wy + Math.sin(a) * w * 0.1 * rr - 3 * k * r(), (2 + 8 * r()) * k, (1 + 2.5 * r()) * k, 0, 0, TAU); x.fill();
+  }
+}
+function gull(x, px, py, s, up){
+  x.beginPath(); x.moveTo(px - 7 * s, py + (up ? -2 : 1) * s);
+  x.quadraticCurveTo(px - 3 * s, py - 3 * s, px, py);
+  x.quadraticCurveTo(px + 3 * s, py - 3 * s, px + 7 * s, py + (up ? -2 : 1) * s); x.stroke();
+}
+function sceneFluke(W, H, frame){
+  var c = mk(W, H), x = c.getContext('2d'), r0 = rng(97), r = rng(200 + frame), k = W / 1500, i;
+  var hz = H * 0.47;
+  x.fillStyle = lin(x, 0, 0, 0, hz, [[0, '#a9b0b4'], [1, '#dadddd']]); x.fillRect(0, 0, W, hz + 1);
+  for (i = 0; i < 10; i++) blob(x, W * r0(), H * (0.04 + 0.2 * r0()), W * (0.2 + 0.3 * r0()), H * (0.04 + 0.05 * r0()), [150, 156, 162], 0.3);
+  /* snow-covered fjord mountains: each peak has a lit face and a shaded face */
+  function jag(a, b, n, amp){
+    var o = [];
+    for (var j = 0; j <= n; j++){
+      var t = j / n, px = lerp(a[0], b[0], t), py = lerp(a[1], b[1], t);
+      if (j && j < n){ var dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1, off = (r0() - 0.5) * amp; px += -dy / d * off; py += dx / d * off; }
+      o.push([px, py]);
+    }
+    return o;
+  }
+  function range(n, hmin, hmax, lit, shade, rock){
+    var ps = [];
+    for (var q = 0; q < n; q++) ps.push([W * (-0.05 + 1.1 * ((q + 0.5) / n + (r0() - 0.5) * 0.6 / n)), H * (hmin + (hmax - hmin) * r0())]);
+    ps.sort(function(a, b){ return b[1] - a[1]; });
+    ps.forEach(function(p){
+      var px = p[0], ph = p[1], py = hz - ph, wl = ph * (1.3 + 1.1 * r0()), wr = ph * (1.3 + 1.3 * r0());
+      var L = jag([px - wl, hz + 2], [px, py], 22, ph * 0.14), R = jag([px, py], [px + wr, hz + 2], 22, ph * 0.14);
+      var sx = px + (r0() - 0.35) * ph * 0.5, S = jag([px, py], [sx, hz + 2], 16, ph * 0.16), j;
+      x.fillStyle = lit; x.beginPath(); x.moveTo(L[0][0], L[0][1]);
+      for (j = 1; j < L.length; j++) x.lineTo(L[j][0], L[j][1]);
+      for (j = 1; j < S.length; j++) x.lineTo(S[j][0], S[j][1]);
+      x.closePath(); x.fill();
+      x.fillStyle = shade; x.beginPath(); x.moveTo(px, py);
+      for (j = 1; j < R.length; j++) x.lineTo(R[j][0], R[j][1]);
+      for (j = S.length - 1; j >= 0; j--) x.lineTo(S[j][0], S[j][1]);
+      x.closePath(); x.fill();
+      x.strokeStyle = rock; x.lineCap = 'round';
+      for (j = 0; j < 14; j++){
+        var a0 = R[Math.floor(r0() * (R.length - 2))], gl = ph * (0.08 + 0.28 * r0());
+        x.lineWidth = (0.8 + 1.8 * r0()) * k; x.beginPath(); x.moveTo(a0[0] - 2 * k, a0[1] + 3 * k); x.lineTo(a0[0] - gl * 0.35 - 2 * k, a0[1] + gl); x.stroke();
+      }
+      /* snow lying in the gullies of the shaded face */
+      x.strokeStyle = 'rgba(226,230,231,0.55)';
+      for (j = 0; j < 10; j++){
+        var b0 = S[1 + Math.floor(r0() * (S.length - 3))], sl2 = ph * (0.06 + 0.22 * r0());
+        x.lineWidth = (0.8 + 2 * r0()) * k; x.beginPath(); x.moveTo(b0[0] + 2 * k, b0[1]); x.lineTo(b0[0] + sl2 * 0.45, b0[1] + sl2); x.stroke();
+      }
+    });
+  }
+  /* the far range goes on its own layer and is softened, as distance and haze would */
+  var main = x, farC = mk(W, H);
+  x = farC.getContext('2d');
+  range(7, 0.12, 0.26, '#e4e7e8', '#b9c0c4', 'rgba(112,120,125,0.5)');
+  x = main; x.drawImage(blur(farC, 1), 0, 0, W, H);
+  x.fillStyle = lin(x, 0, hz - H * 0.26, 0, hz, [[0, 'rgba(214,218,219,0)'], [1, 'rgba(214,218,219,0.5)']]); x.fillRect(0, hz - H * 0.26, W, H * 0.26);
+  range(6, 0.045, 0.11, '#dce0e1', '#8d969b', 'rgba(70,78,83,0.55)');
+  var fs = fbm1(109, 5, 50);
+  x.beginPath(); x.moveTo(0, hz + 2); for (i = 0; i <= W; i += 2) x.lineTo(i, hz - H * (0.004 + 0.012 * fs(i / W))); x.lineTo(W, hz + 2); x.closePath(); x.fillStyle = '#4a5256'; x.fill();
+  x.fillStyle = lin(x, 0, hz - H * 0.1, 0, hz, [[0, 'rgba(214,218,219,0)'], [1, 'rgba(214,218,219,0.42)']]); x.fillRect(0, hz - H * 0.1, W, H * 0.1);
+  /* the sea */
+  x.fillStyle = lin(x, 0, hz, 0, H, [[0, '#868d91'], [0.12, '#5d6569'], [1, '#252c30']]); x.fillRect(0, hz, W, H - hz);
+  for (i = 0; i < 3200; i++){
+    var st = Math.pow(r0(), 1.5), sy = hz + (H - hz) * st, srx = (2 + 34 * st) * k * (0.5 + r0()), sry = (0.5 + 3.2 * st) * k, sx = W * r0();
+    x.fillStyle = r0() < 0.55 ? 'rgba(205,210,212,' + (0.10 + 0.22 * r0() * (1 - st * 0.5)) + ')' : 'rgba(15,20,23,' + (0.12 + 0.25 * r0()) + ')';
+    x.beginPath(); x.ellipse(sx, sy, srx, sry, 0, 0, TAU); x.fill();
+  }
+  x.strokeStyle = '#3a4044'; x.lineWidth = 1.6 * k; x.lineCap = 'round';
+  gull(x, W * 0.2 + frame * 34 * k, H * 0.14 - frame * 4 * k, 1.8 * k, frame % 2 === 0);
+  gull(x, W * 0.8 - frame * 22 * k, H * 0.2, 1.4 * k, frame % 2 === 1);
+  var cx = W * 0.5, wy = H * 0.76;
+  x.fillStyle = 'rgba(120,128,132,0.25)'; x.beginPath(); x.ellipse(cx, wy + H * 0.012, W * 0.24, H * 0.03, 0, 0, TAU); x.fill();
+  x.save(); x.beginPath(); x.rect(0, 0, W, wy + k); x.clip();
+  if (frame === 0){
+    /* the back rolling over, dorsal fin near the tail end, the blow drifting off */
+    for (i = 0; i < 18; i++){ var bt = i / 17; blob(x, cx - 330 * k + bt * 70 * k, wy - (30 + 170 * bt) * k, (16 + 50 * bt) * k, (14 + 34 * bt) * k, [232, 235, 236], 0.42 * (1 - bt) + 0.06); }
+    x.fillStyle = WHALE; x.beginPath(); x.moveTo(cx - 400 * k, wy + 2 * k);
+    x.bezierCurveTo(cx - 300 * k, wy - 34 * k, cx - 170 * k, wy - 58 * k, cx - 90 * k, wy - 56 * k);
+    x.bezierCurveTo(cx - 74 * k, wy - 62 * k, cx - 62 * k, wy - 84 * k, cx - 40 * k, wy - 90 * k);
+    x.quadraticCurveTo(cx - 44 * k, wy - 72 * k, cx - 26 * k, wy - 52 * k);
+    x.bezierCurveTo(cx + 10 * k, wy - 42 * k, cx + 50 * k, wy - 22 * k, cx + 80 * k, wy + 2 * k);
+    x.closePath(); x.fill();
+    x.strokeStyle = 'rgba(205,210,214,0.35)'; x.lineWidth = 2 * k; x.beginPath(); x.moveTo(cx - 330 * k, wy - 22 * k); x.bezierCurveTo(cx - 260 * k, wy - 44 * k, cx - 170 * k, wy - 55 * k, cx - 100 * k, wy - 54 * k); x.stroke();
+  } else if (frame === 1){
+    flukeRaised(x, cx, wy - 62 * k, wy, k, 286 * k, -0.06, 'pour', r);
+  } else if (frame === 2){
+    flukeRaised(x, cx, wy - 232 * k, wy, k, 290 * k, -0.02, 'sheet', r);
+  } else if (frame === 3){
+    flukeRaised(x, cx + 8 * k, wy - 262 * k, wy, k, 288 * k, 0.05, 'drops', r);
+  } else {
+    flukeRaised(x, cx + 14 * k, wy + 4 * k, wy, k, 292 * k, 0.04, 'drops', r);
+  }
+  x.restore();
+  foam(x, frame === 0 ? cx - 160 * k : cx, wy, k, (frame === 4 ? 210 : frame === 0 ? 260 : 110) * k, r, frame === 4 ? 280 : 130);
+  vignette(x, W, H, 0.22);
+  return c;
+}
+
+/* ---------- develop each frame through Lumenary ---------- */
+var SCENES = { elephants: sceneElephants, heron: sceneHeron, murmur: sceneMurmur, stag: sceneStag, geese: sceneGeese, fluke: sceneFluke };
+var cache = {};
+function source(el){
+  var name = el.dataset.scene, wh = el.dataset.size.split('x').map(Number), fr = el.dataset.frame ? +el.dataset.frame : 0;
+  var key = name + ':' + wh[0] + 'x' + wh[1] + ':' + fr;
+  if (!cache[key]) cache[key] = SCENES[name](wh[0], wh[1], fr);
+  return cache[key];
+}
+function copy(src){ var c = mk(src.width, src.height); c.getContext('2d').drawImage(src, 0, 0); return c; }
+function develop(el){
+  var src = source(el), out;
+  try {
+    if (!window.Lumenary) throw new Error('Lumenary did not load');
+    out = window.Lumenary.render(el.dataset.treat, src, JSON.parse(el.dataset.params || '{}'));
+    if (!out || out === src) out = copy(src);
+  } catch (e) {
+    if (window.console) console.warn('[portfolio] showing the untreated picture:', e && e.message);
+    out = copy(src);
+  }
+  out.setAttribute('role', 'img');
+  out.setAttribute('aria-label', el.dataset.alt || '');
+  el.appendChild(out);
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('developed'); }); });
+}
+function start(){
+  var els = Array.prototype.slice.call(document.querySelectorAll('.frame[data-scene]')), i = 0;
+  (function next(){
+    if (i >= els.length) return;
+    try { develop(els[i]); } catch (e) { if (window.console) console.error('[portfolio]', e); }
+    i++; setTimeout(next, 30);
+  })();
+}
+if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
+})();
+</script>
+</body>
+</html>
