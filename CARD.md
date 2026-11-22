@@ -14,6 +14,49 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-041 · Does taking the shading out of a jali photo keep its bars whole in a mask, and give the stone's own colour?
+
+**Status:** open
+**Opened:** 2026-11-23
+
+**1. Where we are.**
+Brightness breaks bars where a carved surface turns into shadow (C-033's unreadable bar widths), and tiled BiRefNet
+(C-040) reads the hard photos but agrees with brightness on only 11 of 17, with no reference that is neither. The 3D
+build will need each stone's colour without its lighting. Third of six open-model trials (T-049).
+
+**2. What we are doing.**
+Run Marigold's intrinsic model for lighting (prs-eth/marigold-iid-lighting-v1-1, OpenRAIL++, here on the Mac's GPU) over
+tiles of each of the 19 jali photos (512 px, at its 768 px processing size, overlapping by a quarter, blended with a
+raised cosine), keeping the albedo (the surface's colour with the light taken out). Split the albedo into stone and
+openings with C-031's reader (brightness, each sample's settings), and apply C-039's three checks unchanged
+(agreement with brightness's openings on the 17, 0.85 or more on at least 14; the two left-out screens by eye; the Met
+screens' bars). And read each screen's stone colour: the median albedo over its stone, in CIELAB.
+
+**3. Why.**
+We don't know whether a photo's shading is what breaks its bars in a brightness mask, or whether an albedo gives stone
+colours that a 3D build could use.
+
+**4. What is affected.**
+- `tools/screen_albedo.py`, `runs/c041/` (the Met's albedos; the V&A's stay local); `pieces/jali/grammar.md` (stone
+  colours, if they separate).
+
+**5. Conclusion.**
+- **Masks:** as C-039: **if** the albedo's openings agree with brightness's on at least 14 of 17 and read both left-out
+  screens by eye → the albedo is the reader's way in where shading breaks bars, and the two screens rejoin. **If not** →
+  shading isn't the only thing brightness gets wrong, or the albedo loses the bars.
+- **Bars:** under 0.3 or over 0.6 on the two Met screens, read as C-039 did.
+- **Colour:** **if** the marble screens' median lightness (L*) is at least 10 above the sandstone ones', and the red
+  sandstone screens' redness (a*) at least 5 above the buff ones' → the albedo separates the three stones, and their
+  medians become the build's stone colours. **If not** → its colours aren't usable for that.
+
+**6. If not done.**
+Bars stay unreadable under shading, and the build's stone colours stay picked by eye.
+
+**Limits (known before running):** albedo is the model's estimate, with no measured colour to check it against; a tile's
+colours can shift from its neighbours'; the materials are the catalogues' words.
+
+---
+
 ## C-040 · Does BiRefNet, run in tiles at the photo's own resolution, read fine lattices as well as brightness does?
 
 **Status:** closed

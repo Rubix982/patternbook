@@ -24,3 +24,5 @@ runs/c038/*.npy
 runs/c038/*-crop.png
 runs/c039/masks/*/vam-*
 runs/c040/masks/*/vam-*
+runs/c041/albedo/vam-*
+runs/c041/stone/vam-*
