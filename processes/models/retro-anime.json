@@ -1,0 +1,191 @@
+{
+ "id": "lumenary:retro-anime",
+ "name": "Retro Anime",
+ "physical": "partly",
+ "process": "cel-painting",
+ "process_name": "Cel painting (ink and paint on celluloid)",
+ "class": "painting",
+ "basis": "why: cels painted and shot on film, then seen on tape; how: flat cel paint, heavy photocopied outlines, halos, grain, colour bleed",
+ "note": "Also carries film grain and video bleed; filed under the cel as the main mark-making process.",
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "A cel from a late-eighties broadcast: flat paint in faded pastel, heavy outlines, a halo around every light, star glints, film grain and a little colour bleed.",
+  "theory_page": "processes/sources/theory-pages/07-painterly.md",
+  "code": "engine/styles/retro-anime.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Japanese animation shot on film",
+  "era": "1980s to mid 1990s",
+  "bestOn": "Night scenes and anything with lights or reflections"
+ },
+ "why": "Animation of the 1980s was painted on cels and photographed onto film, then seen on a tube television from a tape. Each step left something: paint that never reached true black, outlines photocopied a little too heavy, a halo round every light, stars on every sparkle, grain, and colour smeared sideways by the video signal. Those marks are the nostalgia.",
+ "how": [
+  "Flatten the picture into cel paint with heavy outlines.",
+  "Lift the darkest tones toward navy and warm the lightest toward cream.",
+  "Break the outlines up a little, as a photocopy does.",
+  "Blur the highlights widely and add them back as a warm halo.",
+  "Shift red one way and blue the other, and soften each row.",
+  "Add grain, darken the corners and draw star glints on the brightest spots."
+ ],
+ "history": "The 1980s were a boom for Japanese animation. Home video created a market for direct-to-tape releases from 1983, and feature films such as Akira (1988) reached audiences abroad. Cels were shot one frame at a time on a rostrum camera, and effects were made in camera: lights were cut as holes in black card and lit from behind, which gave their glow. By the late 1990s computers had replaced cel, camera and film.",
+ "uses": [
+  "City pop and synth album covers",
+  "Aesthetic edits and wallpapers",
+  "Retro channel art",
+  "Posters for night events"
+ ],
+ "terms": [
+  [
+   "Halation",
+   "A glow round bright areas, caused by light scattering inside film."
+  ],
+  [
+   "Rostrum camera",
+   "A camera fixed above a table, used to photograph artwork frame by frame."
+  ],
+  [
+   "Chroma bleed",
+   "Colour spreading sideways because a video signal carries it at low detail."
+  ]
+ ],
+ "related": [
+  "anime-cel",
+  "retro-vhs",
+  "vaporwave"
+ ],
+ "paragraphs": [
+  "The flat paint is made the same way as in the cel treatment, with heavier outlines. What changes is the age of the materials. Old cel paint photographed on film does not reach black or white, so each paint’s darkest tones are lifted toward navy and its lightest warmed toward cream, both in proportion to the fade slider, and saturation is trimmed. Outlines were photocopied onto the cel, and the copy breaks up where the toner ran thin, so line opacity is multiplied by a thresholded noise.",
+  "Three faults of the camera and the tape are then added. Light spreads inside film around anything bright: the highlights are isolated, blurred widely and added back in a warm tone, which is the halo. Colour bleed reads the red channel a few pixels to the left and the blue a few pixels to the right, and mixes every pixel with its horizontal neighbours. Grain is a hash plus a smoother noise, and the corners darken. Star glints are drawn on the brightest spots that are far enough apart: four thin kites each, the upright pair longer than the level pair, over a small round bloom."
+ ],
+ "primitives": [
+  "glow-bloom",
+  "misregistration",
+  "soft-threshold"
+ ],
+ "equations": [
+  {
+   "tex": "C\\leftarrow C+(C_{\\text{navy}}-C)\\cdot0.5f\\,\\big(1-S_{0,\\,0.5}(l)\\big),\\qquad C\\leftarrow C+(C_{\\text{cream}}-C)\\cdot0.4f\\,S_{0.6,\\,1}(l)",
+   "note": "Ageing of a paint of lightness l; f is the fade slider.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "R'(x)=R(x-b),\\qquad G'(x)=G(x),\\qquad B'(x)=B(x+b),\\qquad b=\\operatorname{round}(3\\cdot\\text{bleed})",
+   "note": "Colour bleed along each row.",
+   "primitives": [
+    "misregistration"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C\\leftarrow C+(C_{\\text{halo}}-C)\\cdot0.75\\,k\\cdot B_{9}^{2}\\,S_{0.72,\\,0.95}(Y)",
+   "note": "The halo: bright parts, blurred twice with a box of radius 9, blended toward a warm white; k is the halo slider.",
+   "primitives": [
+    "glow-bloom",
+    "soft-threshold"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "colours",
+   "label": "Paint colours",
+   "type": "range",
+   "default": 11,
+   "min": 6,
+   "max": 16,
+   "step": 1
+  },
+  {
+   "key": "fade",
+   "label": "Pastel fade",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "lines",
+   "label": "Outlines",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "halo",
+   "label": "Halo on lights",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "bleed",
+   "label": "Colour bleed",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grain",
+   "label": "Film grain",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glints",
+   "label": "Star glints",
+   "type": "range",
+   "default": 5,
+   "min": 0,
+   "max": 12,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New print",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Full fade and grain look like a worn tape.",
+   "set": {
+    "fade": 100,
+    "grain": 85,
+    "bleed": 80
+   }
+  },
+  {
+   "text": "Many glints and a strong halo turn any light into a sparkle.",
+   "set": {
+    "glints": 12,
+    "halo": 90
+   }
+  },
+  {
+   "text": "Turn the faults down for a clean film print.",
+   "set": {
+    "bleed": 0,
+    "grain": 15,
+    "fade": 30
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

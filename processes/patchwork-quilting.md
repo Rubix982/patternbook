@@ -48,7 +48,7 @@ _A patch is printed when its random number h is below the printed-fabrics slider
 
 **History:** Patchwork and quilting appear in many cultures, from the kantha of Bengal and the ralli of Sindh to the quilts of Britain and North America, where they used up worn clothing as well as celebrated skill. The Quilts of Gee’s Bend, made by a community of women in Alabama, were shown in major museums in the 2000s and brought wide attention to the craft as art.
 
-_Model `processes/models/lumenary/quilt-patchwork.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/quilt-patchwork.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/quilt-patchwork.json`; as captured from his site, `processes/sources/theory-pages/06-craft.md`; code `engine/styles/quilt-patchwork.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Ralli Patchwork (`lumenary:ralli-patchwork`, models this process)
 
@@ -86,6 +86,6 @@ _The stitch: a band 1.1 px wide, broken into dashes (55% on)._ (primitives: runn
 
 **History:** The word is said to come from a verb meaning to mix, which suits a cloth made of many colours. Rallis are made in Sindh and in the neighbouring regions of Thar, Cholistan and Kutch, and are often made as gifts and for a daughter’s wedding. Each family has its own colours, and the ralli remembers the clothes it was made from.
 
-_Model `processes/models/lumenary/ralli-patchwork.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `engine/styles/ralli-patchwork.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/ralli-patchwork.json`; as captured from his site, `processes/sources/theory-pages/12-sindhi.md`; code `engine/styles/ralli-patchwork.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

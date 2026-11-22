@@ -1,0 +1,178 @@
+{
+ "id": "lumenary:aurora",
+ "name": "Aurora",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "procedural curtains of light rising from bright regions (how)",
+ "note": "Natural phenomenon, not a making process.",
+ "lumenary": {
+  "section": "D. Light, colour and glass",
+  "kind": "still",
+  "blurb": "The bright parts of your picture rise as curtains of northern light over a dark pine ridge.",
+  "theory_page": "processes/sources/theory-pages/04-light.md",
+  "code": "engine/styles/aurora.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The polar skies",
+  "era": "Seen for all of human history",
+  "bestOn": "Pictures with bright shapes against darker areas"
+ },
+ "why": "An aurora is a curtain of glowing gas that hangs from a bright lower edge and fades upward. This treatment lets the bright parts of your picture be the source of that glow. From each source it sends a curtain up the page that fades at a steady rate, then streaks it with noise and colours it by how far it has risen from its source.",
+ "how": [
+  "Stretch and heavily blur the picture, and turn brightness into source strength with a smoothstep from 0.22 to 0.85.",
+  "Walk each column from bottom to top carrying a value that is replaced by a stronger source or fades by a constant factor.",
+  "Multiply it by two layers of value noise that change fast from left to right and slowly from bottom to top, for streaks.",
+  "Colour by distance from the source: green, then teal, violet and pink.",
+  "Add the light onto a dark blue sky, scatter stars where the sky is dark, and draw two rows of near black pines."
+ ],
+ "history": "Galileo gave the northern lights their name, aurora borealis, in 1619. The Norwegian scientist Kristian Birkeland argued in the early 1900s that they come from charged particles streaming from the Sun and guided by the Earth’s magnetic field. The greens and reds come from oxygen high in the atmosphere, and blues and purples from nitrogen.",
+ "uses": [
+  "Travel and nature posters",
+  "Wallpapers and calm backgrounds",
+  "Fantasy and music cover art",
+  "Winter greeting cards"
+ ],
+ "terms": [
+  [
+   "Aurora",
+   "Light made when charged particles from the Sun strike gases in the upper atmosphere."
+  ],
+  [
+   "Smoothstep",
+   "A curve that turns a straight ramp into an S shape, easing in and out."
+  ],
+  [
+   "Value noise",
+   "Smooth random variation made by blending random numbers on a grid."
+  ]
+ ],
+ "related": [
+  "gradient-mesh",
+  "neon-glow",
+  "bohemian"
+ ],
+ "paragraphs": [
+  "An aurora is a curtain of glowing gas that hangs down from a ceiling of light and fades upward. The treatment keeps that shape. The picture is stretched and blurred heavily, and only its brighter parts count as sources: a smoothstep from 0.22 to 0.85 turns brightness into source strength. Then, for each column of pixels, the program walks from the bottom to the top carrying a running value that is either replaced by a stronger source or fades by a constant factor. The result is that every bright patch sends a curtain upward, and the length of the curtain is set by the fade rate.",
+  "Real curtains are streaky, so the value is multiplied by two layers of value noise that change quickly from left to right but slowly from bottom to top. The colour comes from how far a pixel is from the source that fed it: green near the source, then teal, violet and pink further up, the order real auroras follow. Light adds rather than blends, so the glow is added to a dark blue sky. Stars appear only where the sky is dark, and the pine ridge is two rows of layered triangles in near black."
+ ],
+ "primitives": [
+  "additive-blend",
+  "colour-ramp",
+  "decay-trail",
+  "tone-curve"
+ ],
+ "equations": [
+  {
+   "tex": "c_y=\\max\\!\\big(s_y,\\ \\delta\\,c_{y+1}\\big),\\qquad \\delta=1-\\frac{1}{H\\,(0.05+0.75\\,\\ell)}",
+   "note": "The smear, from the bottom row upward: s is the source strength, ℓ the “curtain height” slider (0 to 1).",
+   "primitives": [
+    "decay-trail"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "a=\\operatorname{clamp}\\!\\big(c\\cdot\\text{ray}\\cdot k\\big),\\qquad g=0.95\\,a^{2}(3-2a)+0.12\\,a",
+   "note": "Intensity after the ray streaks and brightness gain k, then shaped so faint light stays faint and strong light glows.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{colour}=\\text{ramp}\\!\\Big(\\operatorname{clamp}\\tfrac{d}{0.55\\,H}\\Big),\\qquad \\text{pixel}=\\text{sky}+g\\cdot\\text{colour}",
+   "note": "d is the number of rows since the source.",
+   "primitives": [
+    "colour-ramp",
+    "additive-blend"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "palette",
+   "label": "Colours",
+   "type": "select",
+   "default": "classic",
+   "options": [
+    "classic",
+    "polar",
+    "crimson"
+   ]
+  },
+  {
+   "key": "length",
+   "label": "Curtain height",
+   "type": "range",
+   "default": 42,
+   "min": 15,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glow",
+   "label": "Brightness",
+   "type": "range",
+   "default": 70,
+   "min": 20,
+   "max": 140,
+   "step": 1
+  },
+  {
+   "key": "rays",
+   "label": "Ray streaks",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "stars",
+   "label": "Stars",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "trees",
+   "label": "Pine ridge",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "New sky",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Crimson with tall curtains is a rare storm.",
+   "set": {
+    "palette": "crimson",
+    "length": 90
+   }
+  },
+  {
+   "text": "Polar colours with strong ray streaks look cold and crisp.",
+   "set": {
+    "palette": "polar",
+    "rays": 90
+   }
+  },
+  {
+   "text": "Hide the pines for pure light.",
+   "set": {
+    "trees": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

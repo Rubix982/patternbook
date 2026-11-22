@@ -47,6 +47,6 @@ _Blend with the lazy direction θ₀ by adding unit vectors._ (primitives: edge-
 
 **History:** Embroidery is among the oldest decorative arts. The Bayeux Tapestry, made in the eleventh century, is in fact an embroidery in wool on linen. In 1828 Josué Heilmann in Alsace built an early embroidery machine, and today computerised machines stitch logos and motifs on clothing from digital files.
 
-_Model `processes/models/lumenary/embroidery.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/embroidery.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/embroidery.json`; as captured from his site, `processes/sources/theory-pages/06-craft.md`; code `engine/styles/embroidery.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

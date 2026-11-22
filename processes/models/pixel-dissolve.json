@@ -1,0 +1,179 @@
+{
+ "id": "lumenary:pixel-dissolve",
+ "name": "Pixel Dissolve",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "animated block dispersal (how)",
+ "note": null,
+ "lumenary": {
+  "section": "J. Motion and live",
+  "kind": "live",
+  "blurb": "The picture breaks into square pixels that lift away like sand in a wind, drift, and then find their way back, over and over. The cursor blows a hole in it.",
+  "theory_page": "processes/sources/theory-pages/10-motion.md",
+  "code": "engine/styles/pixel-dissolve.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Film transitions and computer graphics",
+  "era": "Dissolves from the 1900s, pixel effects from the 1980s",
+  "bestOn": "Bold pictures that still read at low resolution"
+ },
+ "why": "A picture on a screen is already a grid of squares, held in place only by agreement. Let the squares go and the picture becomes dust, and bringing them home restores it exactly. The pleasure is in the moment between, when enough has left to break the image and enough remains to remember it by.",
+ "how": [
+  "Reduce the picture to square blocks of one colour each.",
+  "Give every block an order: mostly its place along the wind, with some disorder.",
+  "Run a cycle: hold, sweep the blocks away in order, let them drift, sweep them back.",
+  "Fly each block along the wind by its own distance, with a slow sideways drift.",
+  "Shrink and fade a block as it travels.",
+  "Let the cursor blow nearby blocks outward."
+ ],
+ "history": "The dissolve, one picture fading into another, is among the oldest film transitions and was in use by 1900. Computers made it granular. Early Macintosh software such as HyperCard (1987) offered a “dissolve” that swapped pixels a scatter at a time, and Wolfenstein 3D (1992) faded its screen to red one pseudo-random pixel after another. Films later made the body that blows away as dust a familiar image.",
+ "uses": [
+  "Intro and outro animations",
+  "Reveal posts and countdowns",
+  "Game and tech event visuals",
+  "Looping backgrounds"
+ ],
+ "terms": [
+  [
+   "Dissolve",
+   "A transition in which one image gives way to another gradually."
+  ],
+  [
+   "Closed form",
+   "A formula that gives the answer for any moment directly, with no step-by-step simulation."
+  ],
+  [
+   "Phase",
+   "How far through its cycle a repeating motion is."
+  ]
+ ],
+ "related": [
+  "particles",
+  "pixel-art",
+  "pixel-sorting"
+ ],
+ "paragraphs": [
+  "Nothing here is simulated; where each block is depends only on the time, so the animation can be scrubbed, looped and applied to a video without ever losing step. One cycle holds the picture, sweeps it away, lets it drift, sweeps it back and holds again. Each block has an order number between 0 and 1, mostly its position along the wind with some random disorder, and two smoothsteps of the cycle phase, offset by that order, say how far the block has gone and how far it has come back. The smaller of the two is its distance from home, between 0 and 1.",
+  "That distance is eased and turned into a flight: a way along the wind, different for every block, plus a sideways drift read from value noise that changes slowly with time. As a block travels it shrinks to under half its size and fades. Blocks at home are not drawn one by one: the picture at one colour per block is drawn in a single operation, and only the blocks that are away are painted out and redrawn where they have got to. The cursor adds to the distance of nearby blocks and pushes them outward."
+ ],
+ "primitives": [
+  "particle-motion",
+  "seeded-random",
+  "smooth-noise",
+  "soft-threshold"
+ ],
+ "equations": [
+  {
+   "tex": "a=\\min\\!\\Big(S_{0.72o,\\ 0.72o+0.28}\\Big(\\frac{\\phi-0.16}{0.3}\\Big),\\ 1-S_{0.72(1-o),\\ 0.72(1-o)+0.28}\\Big(\\frac{\\phi-0.6}{0.3}\\Big)\\Big)",
+   "note": "How far a block is from home: φ is the phase of the cycle (0 to 1), o the block’s order.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\Delta\\mathbf x=\\mathbf w\\,F\\,(0.35+0.65\\,\\eta)\\,e+\\mathbf w^{\\perp}\\,\\tfrac12F\\,\\big(N-\\tfrac12\\big)\\,e,\\qquad e=3a^{2}-2a^{3}",
+   "note": "Flight: w is the wind direction, F the scatter distance, η a per-block hash and N value noise.",
+   "primitives": [
+    "particle-motion",
+    "smooth-noise",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{size}=s\\,(1-0.55\\,e),\\qquad \\text{opacity}=1-0.92\\,e^{2}",
+   "note": "A block in flight shrinks and fades.",
+   "primitives": [],
+   "bespoke": "specific"
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Pixel size",
+   "type": "range",
+   "default": 10,
+   "min": 5,
+   "max": 26,
+   "step": 1
+  },
+  {
+   "key": "speed",
+   "label": "Speed",
+   "type": "range",
+   "default": 50,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "scatter",
+   "label": "How far they fly",
+   "type": "range",
+   "default": 55,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wind",
+   "label": "Wind",
+   "type": "select",
+   "default": "right",
+   "options": [
+    "right",
+    "left",
+    "up",
+    "fall",
+    "burst"
+   ]
+  },
+  {
+   "key": "ground",
+   "label": "Behind",
+   "type": "select",
+   "default": "ghost",
+   "options": [
+    "ghost",
+    "black",
+    "white"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Another gust",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Small pixels falling slowly look like sand.",
+   "set": {
+    "size": 5,
+    "wind": "fall",
+    "speed": 25
+   }
+  },
+  {
+   "text": "A burst from the middle on white is an explosion in reverse.",
+   "set": {
+    "wind": "burst",
+    "ground": "white",
+    "scatter": 90
+   }
+  },
+  {
+   "text": "Big blocks that barely travel just shuffle in place.",
+   "set": {
+    "size": 24,
+    "scatter": 15
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

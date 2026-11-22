@@ -1,0 +1,180 @@
+{
+ "id": "lumenary:risograph",
+ "name": "Risograph",
+ "physical": "yes",
+ "process": "risograph-printing",
+ "process_name": "Risograph printing",
+ "class": "printing",
+ "basis": "why: one colour per pass, grainy stencil fill, misregistration; how: two plates, ink by noisy threshold, multiplied inks",
+ "note": null,
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "Two spot-colour inks printed one after the other, slightly off register, with the grainy fill of a stencil duplicator.",
+  "theory_page": "processes/sources/theory-pages/06-craft.md",
+  "code": "engine/styles/risograph.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Japanese stencil duplicators",
+  "era": "1980s machine, art-print revival since the 2000s",
+  "bestOn": "Illustrations, portraits and landscapes with clear tonal masses"
+ },
+ "why": "A risograph prints one colour per pass, so its pictures are built from two or three overlapping inks with a grainy fill and a hint of misregistration. This treatment makes two plates from the picture, one for shadows and one for almost everything, lays ink as random grain instead of dots, and multiplies the inks so overlaps mix like real transparent inks.",
+ "how": [
+  "Make plate one from the darkness raised to the power 1.35, which carries the shadows.",
+  "Make plate two from the darkness raised to the power 0.75, which carries almost everything, and read it from a position a few pixels away.",
+  "Compare each plate with a threshold of 0.5 plus a mix of white and smooth noise to decide where to ink, and smooth the comparison slightly.",
+  "Multiply the two inks together, so overlaps become a deeper third colour.",
+  "Multiply in a faint paper fibre pattern."
+ ],
+ "history": "The Japanese company Riso Kagaku developed the Risograph as a fast, cheap duplicator for schools and offices, and it reached the market in the 1980s. Illustrators and small presses adopted it in the 2000s for its soft colour, grain and low cost, and riso zines and prints are now a recognisable look.",
+ "uses": [
+  "Zines, posters and art prints",
+  "Independent book and album covers",
+  "Event flyers with a handmade feel",
+  "Illustration portfolios"
+ ],
+ "terms": [
+  [
+   "Misregistration",
+   "When separate colour layers do not line up exactly."
+  ],
+  [
+   "Spot colour",
+   "An ink printed by itself rather than mixed from others."
+  ],
+  [
+   "Plate",
+   "The stencil or surface that carries one colour."
+  ]
+ ],
+ "related": [
+  "screen-print",
+  "duotone",
+  "halftone"
+ ],
+ "paragraphs": [
+  "A risograph is a stencil duplicator that prints one ink colour per pass, which is why its pictures are built from two or three colours that overlap. Here two plates are made from the picture’s darkness. Plate one carries the shadows (darkness to the power 1.35). Plate two carries almost everything (darkness to the power 0.75, times 0.92) and is read from a position a few pixels away, because paper never goes back through the machine in exactly the same place.",
+  "A riso plate lays ink as a random grain, not as dots. For each pixel the plate’s value is compared with a threshold that is not 0.5 but 0.5 plus a mix of white noise and smooth noise, scaled by the grain slider: where the value beats the threshold the pixel is inked. Smoothing the comparison over a small range (±0.09) avoids hard pixels. The two inks combine by multiplication, the way transparent inks do, so the overlap of blue and pink is a deep purple, and a faint fibre pattern is multiplied in to look like paper."
+ ],
+ "primitives": [
+  "misregistration",
+  "multiply-blend",
+  "seeded-random",
+  "smooth-noise",
+  "tone-curve",
+  "tooth-threshold"
+ ],
+ "equations": [
+  {
+   "tex": "a_1=(1-L)^{1.35},\\qquad a_2=0.92\\,\\big(1-L(\\mathbf x+\\boldsymbol\\delta)\\big)^{0.75}",
+   "note": "The two plates; δ is the misregistration offset, about 7 px across and 4.5 px up at full strength.",
+   "primitives": [
+    "misregistration",
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{cov}_k=\\operatorname{smoothstep}\\big(\\vartheta_k-0.09,\\ \\vartheta_k+0.09,\\ a_k\\big),\\qquad \\vartheta=\\tfrac12+\\big(0.55\\,r+0.45\\,n-\\tfrac12\\big)G",
+   "note": "Coverage by ink k; r is white noise, n smooth noise, G = 0.25 + 1.3 × the grain slider.",
+   "primitives": [
+    "tooth-threshold",
+    "smooth-noise",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=C_{\\text{paper}}\\prod_{k=1}^{2}\\Big(1-\\text{cov}_k\\,\\delta_k\\,\\big(1-I_k/255\\big)\\Big)",
+   "note": "Multiply blend of the two inks I_k on the paper; δ_k is the ink density slider times a faint patchy unevenness.",
+   "primitives": [
+    "multiply-blend"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "pair",
+   "label": "Inks",
+   "type": "select",
+   "default": "blue-pink",
+   "options": [
+    "blue-pink",
+    "teal-orange",
+    "green-red",
+    "purple-yellow",
+    "black-red"
+   ]
+  },
+  {
+   "key": "grain",
+   "label": "Grain",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "miss",
+   "label": "Misregistration",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "density",
+   "label": "Ink density",
+   "type": "range",
+   "default": 90,
+   "min": 40,
+   "max": 130,
+   "step": 1
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "cream",
+   "options": [
+    "cream",
+    "white",
+    "grey"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Reprint",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Teal and orange gives a punchy, warm and cool contrast.",
+   "set": {
+    "pair": "teal-orange"
+   }
+  },
+  {
+   "text": "Strong misregistration looks like a rushed print run.",
+   "set": {
+    "miss": 90,
+    "grain": 80
+   }
+  },
+  {
+   "text": "White paper with dense ink looks clean and modern.",
+   "set": {
+    "paper": "white",
+    "density": 120
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,184 @@
+{
+ "id": "lumenary:spirograph",
+ "name": "Spirograph",
+ "physical": "yes",
+ "process": "spirograph-drawing",
+ "process_name": "Spirograph drawing",
+ "class": "drawing",
+ "basis": "why: a small wheel rolls inside a ring with a pen in one of its holes; how: hypotrochoid, tooth counts (ring of 144) decide closure",
+ "note": "Hard call: the geometry is exactly the toy's, but the picture only tints the line, which the toy cannot do.",
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "A small wheel rolling inside a larger ring, with a pen through one of its holes. The picture colours every line.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/spirograph.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Geometry and a drawing toy",
+  "era": "1965 toy, older mathematics",
+  "bestOn": "Pictures with large areas of tone"
+ },
+ "why": "A small wheel rolls inside a larger ring and a pen sits in one of its holes. Because the wheel turns faster than it travels, the pen swings out and back in again, drawing loops. The shape depends on the ratio of the two wheels. When the ratio is a fraction of whole numbers, the curve closes after a certain number of turns, so every gear pair has its own personality.",
+ "how": [
+  "Scale the ring to 1 and call the wheel’s relative size k, then trace the pen at (1 − k) cos t + h cos(((1 − k)/k) t), (1 − k) sin t − h sin(((1 − k)/k) t).",
+  "Find how many times around the wheel must travel before the curve closes: the wheel’s teeth divided by the greatest common divisor of its teeth and the ring’s 144.",
+  "Draw the curve as many short segments, 220 for each turn.",
+  "Colour each segment by the picture at its midpoint.",
+  "In the rosette layout, repeat the process in a grid of small spirographs with random coprime ratios and pen holes."
+ ],
+ "history": "Curves made by rolling circles were studied by Dürer in the sixteenth century and by many mathematicians after him, and the Polish engineer Bruno Abakanowicz built a drawing instrument for them in the 1880s. The British engineer Denys Fisher turned the idea into the Spirograph toy, shown in 1965 and sold in the United States by Kenner from 1966. It has been a classroom favourite ever since.",
+ "uses": [
+  "Decorative patterns and engraving",
+  "Banknote security backgrounds and guilloché",
+  "Gear and cam design",
+  "Teaching ratios and number theory"
+ ],
+ "terms": [
+  [
+   "Hypotrochoid",
+   "The path of a point on a circle that rolls inside another circle."
+  ],
+  [
+   "Coprime",
+   "Two whole numbers that share no factor other than 1."
+  ],
+  [
+   "Guilloché",
+   "A pattern of fine interlacing curves, used on banknotes."
+  ]
+ ],
+ "related": [
+  "lissajous-curves",
+  "banknote-engraving",
+  "string-art"
+ ],
+ "paragraphs": [
+  "A spirograph curve is a hypotrochoid: the path of a pen held in a hole of a small wheel (radius r) that rolls without slipping around the inside of a larger ring (radius R). With the ring scaled to 1 and k = r/R, the pen is at (1 − k) cos t + h cos(((1 − k)/k) t) horizontally and (1 − k) sin t − h sin(((1 − k)/k) t) vertically, where h is the pen’s distance from the wheel’s centre. The curve closes when the wheel has gone round q = N / gcd(n, N) times, for a wheel of n teeth in a ring of N = 144 teeth, and that is the number of turns drawn.",
+  "In the single-curve layout one large curve is drawn as many short segments (220 per turn). Each segment is coloured by the picture at its midpoint, so the picture appears through the weaving. The rosettes layout is a grid of small spirographs, each with a random wheel ratio from a list of coprime pairs (2/5, 3/7, 3/8 and so on) and a random pen hole. Each is scaled to fit its cell, using the largest radius the curve reaches, (1 − k) + h, and its colour is that of the picture at the cell’s centre. With size follows the picture the rosette is smaller in the highlights or the shadows, so the grid forms a halftone."
+ ],
+ "primitives": [
+  "parametric-curve",
+  "tone-mark-size"
+ ],
+ "equations": [
+  {
+   "tex": "\\begin{aligned}x(t)&=(1-k)\\cos t+h\\cos\\!\\Big(\\tfrac{1-k}{k}\\,t\\Big)\\\\ y(t)&=(1-k)\\sin t-h\\sin\\!\\Big(\\tfrac{1-k}{k}\\,t\\Big)\\end{aligned}\\qquad k=\\frac{n}{N}",
+   "note": "The hypotrochoid for a wheel of n teeth in a ring of N = 144; h = 1.6 k × the pen-hole slider.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "q=\\frac{N}{\\gcd(n,\\,N)},\\qquad t\\in[0,\\ 2\\pi q]",
+   "note": "The curve closes after q turns.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\rho_{\\max}=(1-k)+h,\\qquad R_{\\text{cell}}=\\frac{c\\,f}{2\\,\\rho_{\\max}}",
+   "note": "Scale for a rosette: c is the cell size, f the size-follows-picture factor (0.42 to 1).",
+   "primitives": [
+    "tone-mark-size"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "mode",
+   "label": "Layout",
+   "type": "select",
+   "default": "rosettes",
+   "options": [
+    "rosettes",
+    "one"
+   ]
+  },
+  {
+   "key": "cells",
+   "label": "Rosettes across",
+   "type": "range",
+   "default": 11,
+   "min": 3,
+   "max": 16,
+   "step": 1
+  },
+  {
+   "key": "teeth",
+   "label": "Gear teeth (ring has 144)",
+   "type": "range",
+   "default": 59,
+   "min": 21,
+   "max": 131,
+   "step": 1
+  },
+  {
+   "key": "hole",
+   "label": "Pen hole",
+   "type": "range",
+   "default": 80,
+   "min": 20,
+   "max": 140,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Line width",
+   "type": "range",
+   "default": 1,
+   "min": 0.4,
+   "max": 3,
+   "step": 0.1
+  },
+  {
+   "key": "size",
+   "label": "Size follows the picture",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "night",
+   "options": [
+    "night",
+    "cream"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New wheels",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A single big curve with many teeth looks like fine lacework.",
+   "set": {
+    "mode": "one",
+    "teeth": 97
+   }
+  },
+  {
+   "text": "A pen hole near the centre gives a gentler, rounder rosette.",
+   "set": {
+    "hole": 30
+   }
+  },
+  {
+   "text": "Fewer rosettes on a cream paper look like a printed sampler.",
+   "set": {
+    "cells": 5,
+    "paper": "cream"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

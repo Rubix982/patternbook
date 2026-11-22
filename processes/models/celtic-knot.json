@@ -1,0 +1,170 @@
+{
+ "id": "lumenary:celtic-knot",
+ "name": "Celtic Knot",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "over-under plait by parity of diagonal coordinates (how)",
+ "note": "Interlace was carved and illuminated, but neither craft is modelled.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "Interlace from the Book of Kells and the high crosses of Ireland: ribbons that pass over and under one another without end. Each length of ribbon takes the colour of the picture beneath it.",
+  "theory_page": "processes/sources/theory-pages/11-world.md",
+  "code": "engine/styles/celtic-knot.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Early medieval Ireland and Britain",
+  "era": "Seventh to ninth century and later",
+  "bestOn": "Bold shapes with strong colour"
+ },
+ "why": "Interlace is the signature of the insular art of Ireland and Britain: ribbons that pass over and under each other without end. The simplest way to draw it is a plait, a lattice of diagonal strands in which each strand goes over the next one it meets, then under, then over. The rule is so regular that it can be drawn pixel by pixel.",
+ "how": [
+  "Use two coordinates u = (x + y)/c and v = (x − y)/c that run along the two diagonals.",
+  "The strand going one way sits where u is near the middle of its unit cell, and the other where v is.",
+  "Where the two overlap, decide which is on top by the parity of ⌊u⌋ + ⌊v⌋, so it flips at every crossing and each strand alternates over and under.",
+  "Shade the ribbons with a highlight and draw outlines to separate them.",
+  "Colour each length of ribbon from the picture beneath it, and add a frame if wanted."
+ ],
+ "history": "Interlace appears in the Lindisfarne Gospels, made around 715, in the Book of Kells, from about 800, and on stone crosses such as those at Monasterboice. It was not unique to the Celts and had earlier roots in Roman mosaics and in Anglo-Saxon and Pictish art. George Bain published methods for constructing the patterns in his book Celtic Art in 1951.",
+ "uses": [
+  "Manuscript and book decoration",
+  "Jewellery and tattoo design",
+  "Architecture and stonework",
+  "Logos and borders"
+ ],
+ "terms": [
+  [
+   "Interlace",
+   "A pattern of strands that cross over and under one another."
+  ],
+  [
+   "Insular art",
+   "The art of Ireland and Britain in the early Middle Ages."
+  ],
+  [
+   "Parity",
+   "Whether a whole number is even or odd."
+  ]
+ ],
+ "related": [
+  "mandala",
+  "girih",
+  "cross-stitch"
+ ],
+ "paragraphs": [
+  "Interlace is the signature of insular art, the style of the Book of Kells and the great stone crosses of Ireland: ribbons that pass over and under each other for ever. The simplest way to draw it is a plait, a lattice of straight strands at ±45° where each strand goes over the next one it meets, then under, then over. The program draws exactly that, at the pixel level. Two coordinates u = (x + y)/c and v = (x − y)/c run along the two diagonals. The strand going one way sits where u is near the middle of its unit cell, and the other where v is.",
+  "Where the two overlap, the strand on top is decided by the parity of the cell, ⌊u⌋ + ⌊v⌋. Walking along a strand one cell at a time changes one of the two integers by one, so the parity flips at every crossing and the strand alternates over and under without ever having to be told. Each length of strand between two crossings takes its colour from the picture at its middle. Each strand is shaded as a cylinder, with a highlight, a dark outline at its edges, and a shadow on the lower strand next to the crossing. A gold stud sits in the diamond-shaped gap at each lattice point."
+ ],
+ "primitives": [
+  "cylinder-shading",
+  "lattice-repeat"
+ ],
+ "equations": [
+  {
+   "tex": "u=\\frac{x+y}{c},\\qquad v=\\frac{x-y}{c},\\qquad \\Big|\\operatorname{frac}(u)-\\tfrac12\\Big|<h\\ \\ \\text{or}\\ \\ \\Big|\\operatorname{frac}(v)-\\tfrac12\\Big|<h",
+   "note": "The two families of strands, with h half the ribbon width (the width slider divided by 200).",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{strand }u\\text{ is on top}\\iff(\\lfloor u\\rfloor+\\lfloor v\\rfloor)\\ \\text{is even}",
+   "note": "Over and under, set by the cell parity.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "s=\\frac{d}{h},\\qquad f=0.55+0.5\\sqrt{1-s^2}-0.18\\,s+0.25\\,e^{-\\left(\\frac{s+0.38}{0.16}\\right)^2}",
+   "note": "Cylinder shading: s runs −1 to 1 across the ribbon, with a soft highlight just off centre. The outline darkens where |s| passes 0.78.",
+   "primitives": [
+    "cylinder-shading"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Knot size",
+   "type": "range",
+   "default": 34,
+   "min": 16,
+   "max": 70,
+   "step": 1
+  },
+  {
+   "key": "width",
+   "label": "Ribbon width",
+   "type": "range",
+   "default": 36,
+   "min": 24,
+   "max": 46,
+   "step": 1
+  },
+  {
+   "key": "outline",
+   "label": "Outline",
+   "type": "range",
+   "default": 75,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "colour",
+   "label": "Ribbon",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "gold",
+    "emerald"
+   ]
+  },
+  {
+   "key": "ground",
+   "label": "Ground",
+   "type": "select",
+   "default": "night",
+   "options": [
+    "night",
+    "vellum",
+    "forest"
+   ]
+  },
+  {
+   "key": "frame",
+   "label": "Frame",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Gold ribbons on night ground look like an illuminated page.",
+   "set": {
+    "colour": "gold",
+    "ground": "night"
+   }
+  },
+  {
+   "text": "Small knots form a fine plait.",
+   "set": {
+    "size": 18,
+    "width": 30
+   }
+  },
+  {
+   "text": "Emerald on vellum is a gentle green.",
+   "set": {
+    "colour": "emerald",
+    "ground": "vellum"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

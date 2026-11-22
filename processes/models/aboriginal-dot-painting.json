@@ -1,0 +1,171 @@
+{
+ "id": "lumenary:aboriginal-dot-painting",
+ "name": "Aboriginal Dot Painting",
+ "physical": "partly",
+ "process": "dot-painting",
+ "process_name": "Dot painting",
+ "class": "painting",
+ "basis": "why: 'borrows only a visual technique, rows of dots in earth colours on dark ground'; how: dots placed along brightness contours",
+ "note": "The entry disclaims the meaning; filed by the dotting technique only.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "In the style of the Western Desert painters: the picture is laid down as rings of small dots following its contours, in the ochres of the country, on dark ground.",
+  "theory_page": "processes/sources/theory-pages/11-world.md",
+  "code": "engine/styles/aboriginal-dot-painting.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The Western Desert, Australia",
+  "era": "Acrylic painting from 1971",
+  "bestOn": "Landscapes, which fit the contour rings"
+ },
+ "why": "This treatment borrows only a visual technique, rows of dots in earth colours on dark ground. A real work carries what a picture cannot: the stories and law of a Country, which belong to the people and families who hold them. Dots were used in part to cover the meaning of a design from people who were not meant to read it. Please read this as a tribute and not as a copy, and look for the real paintings.",
+ "how": [
+  "Blur the picture’s brightness heavily to a smooth field F.",
+  "Find the contour lines where F crosses each of n evenly spaced levels, using marching squares, and chain the pieces into curves.",
+  "Place dots of radius R along each curve every 2.3 R of arc length, with a little jitter.",
+  "Colour each ring from the ochre palette by level, in bands, or from the picture.",
+  "Fill the ground between rings with scattered small dots, on black, red or night ground."
+ ],
+ "history": "In 1971 men of several language groups at Papunya, in the Northern Territory, began to paint on boards and canvas, with the encouragement of a schoolteacher, Geoffrey Bardon, the designs that belong to their Country and its stories. The Papunya Tula Artists company followed in 1972. Today Aboriginal artists across Australia, working through their own art centres, are among the best known painters in the world.",
+ "uses": [
+  "Learning about Aboriginal art and Country",
+  "Contour and elevation visualisation",
+  "Educational projects made with respect",
+  "Pointillist abstractions"
+ ],
+ "terms": [
+  [
+   "Country",
+   "In Aboriginal English, the land, waters and stories a people belong to."
+  ],
+  [
+   "Papunya",
+   "The community in the Northern Territory where the Western Desert art movement began."
+  ],
+  [
+   "Ochre",
+   "An earth pigment in yellows, reds and browns."
+  ]
+ ],
+ "related": [
+  "pointillism",
+  "contour-lines",
+  "mudcloth"
+ ],
+ "paragraphs": [
+  "The acrylic dot paintings of the Western Desert began at Papunya in 1971, when men of several language groups began to paint on boards and canvas the designs that belonged to their Country and its stories. Dots were used in part to cover the sacred meaning of a design from people who were not meant to read it. This treatment borrows only the visual technique, rows of dots in earth colours on dark ground, and cannot carry what a real work carries, so please read it as a tribute and not as a copy.",
+  "To build the rings the picture’s brightness is blurred heavily to a smooth field F. Marching squares finds the contour lines where F crosses each of n evenly spaced levels, the segments are chained into curves, and dots of radius R are placed along each curve every 2.3 R of arc length, with a little jitter. Each dot is a disc with a small highlight and a small shadow so it reads as a blob of paint. Because the contours of a smooth field crowd together where it changes quickly, dots bunch up along the edges of your picture and thin out across flat areas. Fine dots on a staggered lattice fill the ground between the rings."
+ ],
+ "primitives": [
+  "iso-contours",
+  "tone-bands"
+ ],
+ "equations": [
+  {
+   "tex": "\\{\\mathbf x:\\ F(\\mathbf x)=\\ell_i\\},\\qquad \\ell_i=0.07+0.86\\,\\frac{i+\\tfrac12}{n}",
+   "note": "The ring i is the contour of the blurred brightness F at level ℓᵢ.",
+   "primitives": [
+    "iso-contours"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\Delta=2.3\\,R,\\qquad N\\approx\\frac{\\Lambda}{\\Delta}",
+   "note": "Dots sit Δ apart along a contour of length Λ, so a longer ring simply holds more of them.",
+   "primitives": [],
+   "bespoke": "layout"
+  },
+  {
+   "tex": "\\delta x\\approx\\frac{0.86}{n\\,\\lVert\\nabla F\\rVert}",
+   "note": "The spacing between neighbouring rings: it shrinks where the gradient of F is large, which is why dots crowd at edges.",
+   "primitives": [
+    "iso-contours"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "j=\\min\\big(5,\\ \\lfloor 6\\,\\ell\\rfloor\\big)",
+   "note": "Dot colour by light level: ℓ picks one of six ochres from deep red up to cream.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "dot",
+   "label": "Dot size",
+   "type": "range",
+   "default": 5,
+   "min": 3,
+   "max": 10,
+   "step": 0.5
+  },
+  {
+   "key": "rings",
+   "label": "Rings",
+   "type": "range",
+   "default": 11,
+   "min": 5,
+   "max": 18,
+   "step": 1
+  },
+  {
+   "key": "fill",
+   "label": "Ground dots",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "colour",
+   "label": "Colours",
+   "type": "select",
+   "default": "level",
+   "options": [
+    "level",
+    "bands",
+    "picture"
+   ]
+  },
+  {
+   "key": "ground",
+   "label": "Ground",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "red",
+    "night"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Banded colours show the rings as separate layers of country.",
+   "set": {
+    "colour": "bands",
+    "rings": 15
+   }
+  },
+  {
+   "text": "Tiny dots on a red ground give a fine, dense texture.",
+   "set": {
+    "dot": 3,
+    "ground": "red"
+   }
+  },
+  {
+   "text": "Few ground dots leave the rings clear.",
+   "set": {
+    "fill": 10
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

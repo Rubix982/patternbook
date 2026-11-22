@@ -1,0 +1,166 @@
+{
+ "id": "lumenary:dithering",
+ "name": "Dithering",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "digital",
+ "basis": "Bayer and error-diffusion quantisation to a small palette (how)",
+ "note": "Digital cousin of halftone screening; filed as digital because it models algorithms, not a press.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "Few colours, many dots: ordered, Floyd-Steinberg and Atkinson dithering in old-computer palettes.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/dithering.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Printing and early computer graphics",
+  "era": "1970s onward",
+  "bestOn": "Smooth gradients and portraits"
+ },
+ "why": "When there are only a few colours to choose from, a smooth gradient has nowhere to go. Dithering fakes the missing shades by mixing the colours that exist, because your eye blends small dots into an in-between tone. The result keeps the sense of a smooth picture using nothing but black and white, or a handful of colours.",
+ "how": [
+  "Shrink the picture by the pixel size and stretch it for contrast.",
+  "For small palettes, use brightness alone, and for colour palettes, find the nearest colour with a weighting that suits human vision.",
+  "In ordered dithering, compare each pixel with a fixed pattern of thresholds, a Bayer matrix, and round up or down accordingly.",
+  "In error diffusion, round the pixel and push the rounding error onto neighbours that have not been processed yet.",
+  "Enlarge the result without smoothing so the dots stay crisp."
+ ],
+ "history": "Bryce Bayer published the ordered dither matrices in 1973, and Robert Floyd and Louis Steinberg described error diffusion in 1976. Bill Atkinson devised the variation used in the original Macintosh’s MacPaint in 1984, spreading only three quarters of the error so highlights and shadows stay clean. Dithering is still used in GIF images, e-paper and printers.",
+ "uses": [
+  "Retro computer and Macintosh style art",
+  "E-ink and low power display images",
+  "Printing and engraving with few inks",
+  "Stylised poster and sticker work"
+ ],
+ "terms": [
+  [
+   "Error diffusion",
+   "Passing the rounding error of one pixel to its unprocessed neighbours."
+  ],
+  [
+   "Bayer matrix",
+   "A square grid of thresholds designed so the dots spread evenly."
+  ],
+  [
+   "Palette",
+   "The fixed set of colours that may be used."
+  ]
+ ],
+ "related": [
+  "pixel-art",
+  "ascii-art",
+  "qr-barcode-art"
+ ],
+ "paragraphs": [
+  "A dither fakes shades with a handful of colours. The picture is first shrunk (the pixel-size slider) and stretched for contrast. For palettes of four tones or fewer, only brightness is used and the nearest palette tone is found by brightness; for colour palettes the nearest colour is found with a weighting that suits human vision.",
+  "There are two families. Ordered dithering compares each pixel with a fixed pattern of thresholds (Bayer’s matrices, built by repeatedly tiling and scaling a smaller one) and rounds up or down accordingly, giving a regular crosshatch. Error diffusion rounds the pixel and pushes the rounding error onto neighbours that have not been processed yet: Floyd-Steinberg spreads it over four of them, Atkinson spreads only three quarters of it over six, which keeps highlights and shadows cleaner and is the look of the first Macintosh."
+ ],
+ "primitives": [
+  "ordered-dither"
+ ],
+ "equations": [
+  {
+   "tex": "M_{2n}=\\begin{bmatrix}4M_n&4M_n+2\\\\4M_n+3&4M_n+1\\end{bmatrix}",
+   "note": "Bayer matrix recursion; the entries are then normalised to the range −½ to +½.",
+   "primitives": [
+    "ordered-dither"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "e=p-q(p),\\qquad p_j\\leftarrow p_j+w_j\\,e",
+   "note": "Error diffusion: p is the pixel, q(p) its palette colour and w the neighbour weights.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "\\text{Floyd-Steinberg: }\\tfrac{7}{16},\\tfrac{3}{16},\\tfrac{5}{16},\\tfrac{1}{16}\\qquad\\text{Atkinson: }\\tfrac18\\ \\text{ on six neighbours}",
+   "note": "The two diffusion kernels.",
+   "primitives": [],
+   "bespoke": "specific"
+  }
+ ],
+ "dials": [
+  {
+   "key": "method",
+   "label": "Method",
+   "type": "select",
+   "default": "atkinson",
+   "options": [
+    "atkinson",
+    "floyd",
+    "bayer8",
+    "bayer4",
+    "noise"
+   ]
+  },
+  {
+   "key": "palette",
+   "label": "Palette",
+   "type": "select",
+   "default": "mac",
+   "options": [
+    "mac",
+    "mono",
+    "gameboy",
+    "amber",
+    "cga",
+    "eight"
+   ]
+  },
+  {
+   "key": "scale",
+   "label": "Pixel size",
+   "type": "range",
+   "default": 2,
+   "min": 1,
+   "max": 8,
+   "step": 1
+  },
+  {
+   "key": "contrast",
+   "label": "Contrast",
+   "type": "range",
+   "default": 0,
+   "min": -50,
+   "max": 80,
+   "step": 1
+  },
+  {
+   "key": "bright",
+   "label": "Brightness",
+   "type": "range",
+   "default": 0,
+   "min": -60,
+   "max": 60,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Atkinson in the Mac palette is the classic 1984 look.",
+   "set": {
+    "method": "atkinson",
+    "palette": "mac"
+   }
+  },
+  {
+   "text": "Bayer 8 gives a regular woven pattern.",
+   "set": {
+    "method": "bayer8",
+    "scale": 3
+   }
+  },
+  {
+   "text": "Amber on black is a monochrome terminal.",
+   "set": {
+    "palette": "amber",
+    "method": "floyd"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

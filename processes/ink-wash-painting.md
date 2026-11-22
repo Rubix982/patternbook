@@ -51,6 +51,6 @@ _The ink concentration v mixes ink over paper._ (primitives: mix-over)
 
 **History:** Ink painting flourished in China under the Tang and Song dynasties and was carried to Japan by Zen monks, where Sesshū Tōyō (1420 to 1506) became its great master. Its tools are called the four treasures: brush, ink, paper and inkstone. The aesthetic of empty space, and of capturing the spirit of a subject in a few strokes, influenced Western painting and graphic design.
 
-_Model `processes/models/lumenary/ink-wash.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/ink-wash.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/ink-wash.json`; as captured from his site, `processes/sources/theory-pages/07-painterly.md`; code `engine/styles/ink-wash.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

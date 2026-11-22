@@ -53,7 +53,7 @@ _The cel shadow: L with a wide blur minus L with a narrow one, cut to a hard ste
 
 **History:** Earl Hurd patented the use of clear celluloid sheets for animation in 1914: characters were inked on the front, painted on the back and photographed over a background. Japanese television animation began in earnest with Astro Boy in 1963, whose tight budget made flat colour and limited movement a virtue. Studios moved to digital ink and paint around 2000. In 2006 Winnemöller, Olsen and Gooch showed how to get the look from video in real time, with the same steps used here.
 
-_Model `processes/models/lumenary/anime-cel.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/anime-cel.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/anime-cel.json`; as captured from his site, `processes/sources/theory-pages/07-painterly.md`; code `engine/styles/anime-cel.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Retro Anime (`lumenary:retro-anime`, a style that rests on this process)
 
@@ -88,6 +88,6 @@ _The halo: bright parts, blurred twice with a box of radius 9, blended toward a 
 
 **History:** The 1980s were a boom for Japanese animation. Home video created a market for direct-to-tape releases from 1983, and feature films such as Akira (1988) reached audiences abroad. Cels were shot one frame at a time on a rostrum camera, and effects were made in camera: lights were cut as holes in black card and lit from behind, which gave their glow. By the late 1990s computers had replaced cel, camera and film.
 
-_Model `processes/models/lumenary/retro-anime.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/retro-anime.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/retro-anime.json`; as captured from his site, `processes/sources/theory-pages/07-painterly.md`; code `engine/styles/retro-anime.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

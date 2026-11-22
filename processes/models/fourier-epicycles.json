@@ -1,0 +1,155 @@
+{
+ "id": "lumenary:fourier-epicycles",
+ "name": "Fourier Epicycles",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "contour traced by a chain of Fourier circles (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "live",
+  "blurb": "A chain of turning circles, each riding on the rim of the last, traces one outline of your picture. More circles bring more of the detail.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/fourier-epicycles.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Mathematics and ancient astronomy",
+  "era": "Ptolemy’s epicycles, Fourier 1822",
+  "bestOn": "Bold shapes with one clean outline"
+ },
+ "why": "Any closed curve can be drawn by a chain of turning circles, each riding on the rim of the one before. This is the idea behind the Fourier series: break a shape into pure rotations of different speeds and sizes. A few big circles trace the rough outline, and each additional small one adds finer detail, so the picture sharpens as circles are added.",
+ "how": [
+  "Find a long closed contour in a lightly blurred, half-size copy of the picture with marching squares, at the level chosen by the slider.",
+  "Resample it at 1,024 points of equal arc length and treat each point as a complex number z(t).",
+  "Compute all 1,024 Fourier coefficients c_k once, using a discrete Fourier transform.",
+  "Sort them by size and keep the largest few: z(t) = Σ c_k e^(2πikt), each a circle of radius |c_k| turning k times per cycle.",
+  "Chain the circles, each starting at the rim of the one before, and trace the tip of the last one."
+ ],
+ "history": "Ancient astronomers, among them Hipparchus and Ptolemy, explained the wandering of planets with circles on circles called epicycles. Joseph Fourier showed in 1822 that any periodic signal is a sum of waves. The mathematician John von Neumann is said to have joked that with four parameters he could fit an elephant, and in 2010 researchers did draw one with just a handful of Fourier terms. A 2019 video by Grant Sanderson of 3Blue1Brown made the picture of drawing with circles widely known.",
+ "uses": [
+  "Audio, image and video compression",
+  "Signal analysis in physics and engineering",
+  "Teaching the Fourier transform",
+  "Drawing machines and animation"
+ ],
+ "terms": [
+  [
+   "Epicycle",
+   "A circle whose centre moves along the rim of another circle."
+  ],
+  [
+   "Fourier series",
+   "A sum of waves or rotations that rebuilds a shape or signal."
+  ],
+  [
+   "Marching squares",
+   "A method for finding contour lines on a grid."
+  ]
+ ],
+ "related": [
+  "lissajous-curves",
+  "oscilloscope",
+  "spirograph"
+ ],
+ "paragraphs": [
+  "Any closed curve can be built from circles. Write the curve as a complex number z(t) and the Fourier series says z(t) = Σ c_k e^(2πikt), where each term is a circle of radius |c_k| turning k times per cycle (backwards for negative k), and each rides on the rim of the one before it. This is the old idea of epicycles, which Ptolemy used for the planets, made exact. The program finds an outline in your picture by marching squares on a lightly blurred, half-size copy at a level chosen by the slider, preferring a long closed contour (an open one is traced there and back, so it closes). It resamples the outline at 1,024 points of equal arc length and computes all 1,024 coefficients by a direct discrete Fourier transform, once.",
+  "The coefficients are sorted by size, and the circles slider keeps the largest ones. The sum of the squares of the coefficients left out is exactly the mean-square error of the drawing (Parseval’s identity), so every extra circle adds detail in order of importance; with a handful the outline is a smooth blob, with a few hundred it is a drawing. The positions of the pen tip are worked out for 1,400 moments of the cycle, and the visible trail is the most recent part of them (the trail length slider), fading with age. With show the circles on, the chain of turning circles and their spokes is drawn from the biggest to the smallest. The period slider is the number of seconds for one full drawing."
+ ],
+ "primitives": [],
+ "equations": [
+  {
+   "tex": "z(t)=\\sum_{k}c_k\\,e^{\\,2\\pi i\\,k\\,t},\\qquad c_k=\\frac{1}{M}\\sum_{m=0}^{M-1}z_m\\,e^{-2\\pi i\\,k\\,m/M},\\quad M=1024",
+   "note": "The series and its discrete coefficients; the circle k has radius |c_k| and turns k times per cycle.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "\\varepsilon^{2}=\\frac1M\\sum_{m}\\big\\lvert z_m-\\hat z_m\\big\\rvert^{2}=\\sum_{k\\notin K}\\lvert c_k\\rvert^{2}",
+   "note": "Parseval: the squared error of a drawing with the set K of kept circles.",
+   "primitives": [],
+   "bespoke": "specific"
+  }
+ ],
+ "dials": [
+  {
+   "key": "terms",
+   "label": "Circles",
+   "type": "range",
+   "default": 60,
+   "min": 3,
+   "max": 240,
+   "step": 1
+  },
+  {
+   "key": "level",
+   "label": "Which outline",
+   "type": "range",
+   "default": 50,
+   "min": 5,
+   "max": 95,
+   "step": 1
+  },
+  {
+   "key": "period",
+   "label": "Seconds per drawing",
+   "type": "range",
+   "default": 14,
+   "min": 6,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "trail",
+   "label": "Length of the trail",
+   "type": "range",
+   "default": 70,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "rings",
+   "label": "Show the circles",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "colour",
+   "label": "Pen colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "gold",
+    "white"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Few circles give a rough, wobbly sketch.",
+   "set": {
+    "terms": 8,
+    "trail": 100
+   }
+  },
+  {
+   "text": "Many circles reproduce the outline closely.",
+   "set": {
+    "terms": 200,
+    "rings": false
+   }
+  },
+  {
+   "text": "A gold pen on the circles looks like an orrery.",
+   "set": {
+    "colour": "gold",
+    "period": 24
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

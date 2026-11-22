@@ -1,0 +1,183 @@
+{
+ "id": "lumenary:kintsugi",
+ "name": "Kintsugi",
+ "physical": "yes",
+ "process": "gold-lacquer-repair",
+ "process_name": "Gold lacquer repair",
+ "class": "lacquer",
+ "basis": "why: broken pottery mended with lacquer and gold powder, breaks left visible; how: Worley shards, gold seams, misaligned pieces",
+ "note": "The breaking is generative; the gold seam is the process.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "The Japanese art of mending broken pottery with gold lacquer. Your picture is the glaze of a shattered piece, put back together a little out of line, with every crack left shining.",
+  "theory_page": "processes/sources/theory-pages/11-world.md",
+  "code": "engine/styles/kintsugi.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Japan",
+  "era": "Fifteenth century onward",
+  "bestOn": "Pictures with rich glaze-like colour"
+ },
+ "why": "Kintsugi, golden joinery, mends broken pottery with lacquer mixed with gold powder and leaves the break visible. It treats damage as part of the object’s history. The program breaks your picture the way a bowl breaks, with cracks that wander, then puts the pieces back a little out of line and traces every crack in gold.",
+ "how": [
+  "Bend the coordinates with smooth noise, by up to about 0.35 of the shard size at full jaggedness.",
+  "Find the Worley cells of the bent plane. Where the distance to the nearest seed equals the distance to the second nearest, two shards meet, and that line is the crack.",
+  "Set the width of the gold where g = F₂ − F₁ is below the seam width.",
+  "Put each shard back slightly out of true, reading the picture from a point shifted by the misalignment, with a slight brightness change.",
+  "Leave a few lost pieces filled with gold, and add a bevel of light along the seams."
+ ],
+ "history": "A story, which may be a legend, says that the shogun Ashikaga Yoshimasa sent a broken tea bowl to China in the fifteenth century and it came back mended with ugly metal staples, which led Japanese craftsmen to look for a more beautiful repair. The lacquer used is urushi, and kintsugi is often linked to the idea of wabi-sabi, finding beauty in what is imperfect. Worley cells were described by Steven Worley in 1996.",
+ "uses": [
+  "Ceramic repair and craft",
+  "Art about resilience and healing",
+  "Branding with a gold-seam motif",
+  "Procedural cracks in 3D art"
+ ],
+ "terms": [
+  [
+   "Urushi",
+   "The sap of the lacquer tree, used as a Japanese lacquer."
+  ],
+  [
+   "Wabi-sabi",
+   "An aesthetic that finds beauty in what is simple, worn and imperfect."
+  ],
+  [
+   "Worley noise",
+   "A pattern of cells made from the distance to the nearest random points."
+  ]
+ ],
+ "related": [
+  "voronoi-mosaic",
+  "gold-foil",
+  "stained-glass"
+ ],
+ "paragraphs": [
+  "Kintsugi, “golden joinery”, mends broken pottery with lacquer mixed with gold powder, and it leaves the break visible, even celebrated. The program breaks your picture the way a bowl breaks: with cracks that wander. It first bends the coordinates with smooth noise, by up to about 0.35 of the shard size at full jaggedness, and then finds the Worley cells of the bent plane. Where the distance to the nearest seed equals the distance to the second nearest, two shards meet, and that line is the crack. The width of the gold is set where the difference g = F₂ − F₁ is below the seam width w.",
+  "Each shard is put back a little out of true: it reads the picture from a point shifted by up to the misalignment amount, with its own random shift, and it has its own slight brightness. Close to a seam the glaze thickens and darkens, and right at the edge the pale body of the pot shows through. A random share of shards, set by the lost-pieces slider, is missing altogether and filled in gold. The gold is a four-stop ramp from dark bronze to pale yellow, lit as two soft ridges on either side of the crack, with a fine noise to give the surface a hammered texture."
+ ],
+ "primitives": [
+  "colour-ramp",
+  "coordinate-warp",
+  "crackle-network",
+  "cylinder-shading",
+  "seeded-random",
+  "smooth-noise"
+ ],
+ "equations": [
+  {
+   "tex": "g(\\mathbf x)=F_2(\\mathbf x)-F_1(\\mathbf x),\\qquad \\text{gold where } g<w",
+   "note": "Worley cells of side S with their distances F₁ ≤ F₂ to the two nearest seeds. g = 0 on the shared boundary of two shards.",
+   "primitives": [
+    "crackle-network"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf x'=\\mathbf x+J\\Big(2\\,\\big(\\operatorname{fbm}(2\\mathbf x/S)-\\tfrac12\\big)+\\tfrac12\\,\\big(\\operatorname{vnoise}(8.3\\,\\mathbf x/S)-\\tfrac12\\big)\\Big)",
+   "note": "The wandering crack: the coordinates are displaced by a broad noise and a finer ripple before the cells are found (the y shift uses a second copy of the noise). J is 0.35 S times the jaggedness slider.",
+   "primitives": [
+    "coordinate-warp",
+    "smooth-noise"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf x_{\\text{src}}=\\mathbf x+2\\,\\delta\\,\\big(h_1-\\tfrac12,\\ h_2-\\tfrac12\\big),\\qquad \\delta=7\\,\\mu\\,\\mathrm{sc}",
+   "note": "Each shard reads the picture from a shifted place: h₁ and h₂ are fixed random numbers for the shard and μ the misalignment slider.",
+   "primitives": [
+    "coordinate-warp",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{gold}=\\operatorname{ramp}\\big(0.35+0.5\\,b(f)+\\eta\\big),\\qquad f=\\frac{g}{w},\\quad b(\\tfrac12)=\\tfrac{\\sqrt2}{2},\\ b(0)=b(1)=0",
+   "note": "Lit gold: b is zero on the crack and on the seam’s edge and highest between, giving a rolled bead. η is fine noise.",
+   "primitives": [
+    "colour-ramp",
+    "cylinder-shading"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Shard size",
+   "type": "range",
+   "default": 110,
+   "min": 40,
+   "max": 200,
+   "step": 1
+  },
+  {
+   "key": "seam",
+   "label": "Gold seam",
+   "type": "range",
+   "default": 4,
+   "min": 1,
+   "max": 12,
+   "step": 0.5
+  },
+  {
+   "key": "shift",
+   "label": "Misalignment",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "fill",
+   "label": "Lost pieces",
+   "type": "range",
+   "default": 10,
+   "min": 0,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "jag",
+   "label": "Jaggedness",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New break",
+   "type": "shuffle",
+   "default": 5
+  }
+ ],
+ "presets": [
+  {
+   "text": "Thick seams make the break the star of the picture.",
+   "set": {
+    "seam": 10,
+    "jag": 80
+   }
+  },
+  {
+   "text": "Little misalignment looks like a clean, careful repair.",
+   "set": {
+    "shift": 10,
+    "fill": 0
+   }
+  },
+  {
+   "text": "Lost pieces filled with gold are the boldest version.",
+   "set": {
+    "fill": 50,
+    "size": 150
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -51,6 +51,6 @@ _Colour of a piece, in hue, saturation and lightness._ (primitives: saturation-a
 
 **History:** Coloured glass windows filled the great cathedrals of medieval Europe, as at Chartres in the early thirteenth century and Sainte-Chapelle in Paris, finished in 1248, and pierced windows of coloured glass are also found in Islamic architecture. Louis Comfort Tiffany developed new copper foil methods in the late nineteenth century. The cellular partition behind the pieces is the Voronoi diagram, studied by Georgy Voronoy in 1908.
 
-_Model `processes/models/lumenary/stained-glass.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/stained-glass.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/stained-glass.json`; as captured from his site, `processes/sources/theory-pages/06-craft.md`; code `engine/styles/stained-glass.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

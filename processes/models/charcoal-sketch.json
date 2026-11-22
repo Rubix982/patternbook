@@ -1,0 +1,180 @@
+{
+ "id": "lumenary:charcoal-sketch",
+ "name": "Charcoal Sketch",
+ "physical": "yes",
+ "process": "charcoal-drawing",
+ "process_name": "Charcoal drawing",
+ "class": "drawing",
+ "basis": "why: powder sticks to paper bumps and slides off hollows; how: pressure against paper tooth, doubled outlines, smudge",
+ "note": "Also offers conte, sanguine and graphite tints of the same model.",
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "A quick study in charcoal: dark tones catch on the tooth of the paper, thumbs smudge them, and the outlines are drawn twice.",
+  "theory_page": "processes/sources/theory-pages/07-painterly.md",
+  "code": "engine/styles/charcoal-sketch.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Drawing studios, and cave walls before that",
+  "era": "Prehistoric to today",
+  "bestOn": "Portraits and strong light and shade"
+ },
+ "why": "Charcoal is a powder that sticks to the bumps of the paper and slides off the hollows, so whether a pixel turns black depends on the paper’s tooth as well as on the picture. A light touch catches only the peaks and shows grain, and a heavy one fills everything. Sketchy, doubled outlines and a smudged ground complete the hand-drawn feel.",
+ "how": [
+  "Model the tooth of the paper as a mix of smooth and white noise.",
+  "Compute the stick’s pressure from the darkness of the lightly blurred picture, multiplied by the pressure slider and by diagonal streaks like a hand shading back and forth.",
+  "Ink the pixel where pressure beats the tooth, so light pressure only catches the peaks.",
+  "Read the edge map three times at places displaced by slow noise and keep the strongest reading, so outlines wander and double.",
+  "Add a heavily blurred copy as smudge, then tint everything as charcoal, conté, sanguine or graphite."
+ ],
+ "history": "Charcoal is among the oldest drawing materials, used on cave walls for tens of thousands of years. Renaissance artists drew studies in red chalk, or sanguine, and Nicolas-Jacques Conté invented the conté crayon in 1795. Charcoal remains the standard material for quick figure studies, because it can be rubbed out and redrawn in a moment.",
+ "uses": [
+  "Quick portrait and figure studies",
+  "Sketchbook style illustrations",
+  "Dramatic monochrome posters",
+  "Art class and teaching materials"
+ ],
+ "terms": [
+  [
+   "Tooth",
+   "The roughness of paper that grips the drawing material."
+  ],
+  [
+   "Sanguine",
+   "A red-brown chalk used for drawing, from the Latin for blood."
+  ],
+  [
+   "Conté",
+   "A hard drawing crayon made of pigment and clay, named after its inventor."
+  ]
+ ],
+ "related": [
+  "pencil-hatching",
+  "pastel-chalk",
+  "mezzotint"
+ ],
+ "paragraphs": [
+  "Charcoal is a powder that sticks to the bumps of the paper and slides off the hollows, so darkness alone does not decide whether a pixel turns black. The paper’s tooth does too. The program models the tooth as a mix of smooth and white noise (55% and 45%) and compares the stick’s pressure with it. The pressure itself is the darkness of the lightly blurred picture, multiplied by the pressure slider and by streaks: noise stretched along the 45 degree diagonal, which gives the direction of a hand shading back and forth. Where the pressure is high the stick reaches the hollows and the pixel is solid; where it is low only the peaks catch, and the grain shows.",
+  "The outlines are drawn more than once, the way a sketcher restates a contour. The edge map is read three times at places displaced by slow noise (2 to 12 px, from the sketchy-outlines slider) and the strongest reading wins, so lines wander and double. Smudging is a heavily blurred copy of the picture: dark regions dust the paper a little grey, as if a thumb had dragged the powder around. Four media are only different ink colours (charcoal, conté, sanguine and graphite), mixed over the paper by the final coverage."
+ ],
+ "primitives": [
+  "coordinate-warp",
+  "edge-outline",
+  "mix-over",
+  "seeded-random",
+  "smooth-noise",
+  "tooth-threshold"
+ ],
+ "equations": [
+  {
+   "tex": "\\text{cov}=\\operatorname{smoothstep}\\big(0.6\\,\\tau-0.25,\\ 0.6\\,\\tau+0.35,\\ a_0\\big),\\qquad \\tau=0.55\\,n+0.45\\,r",
+   "note": "The paper tooth τ (smooth noise n, white noise r) decides which pressure values a_0 stick.",
+   "primitives": [
+    "tooth-threshold",
+    "smooth-noise",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\ell=\\max_{k=1,2,3}\\ \\operatorname{smoothstep}\\big(0.045,\\ 0.16,\\ E(\\mathbf x+\\boldsymbol\\delta_k)\\big)",
+   "note": "The redrawn outline: the edge strength E sampled at three noise-shifted positions.",
+   "primitives": [
+    "edge-outline",
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=(1-a)\\,C_{\\text{paper}}\\,(1-0.55\\,w)+a\\,C_{\\text{ink}}",
+   "note": "a is the final coverage, w the smudge dusting taken from a blurred copy of the picture.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "pressure",
+   "label": "Pressure",
+   "type": "range",
+   "default": 65,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "smudge",
+   "label": "Smudging",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "lines",
+   "label": "Sketchy outlines",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "medium",
+   "label": "Medium",
+   "type": "select",
+   "default": "charcoal",
+   "options": [
+    "charcoal",
+    "conte",
+    "sanguine",
+    "graphite"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "cream",
+   "options": [
+    "white",
+    "cream",
+    "grey"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Redraw",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Sanguine on cream paper looks like an old master study.",
+   "set": {
+    "medium": "sanguine",
+    "paper": "cream"
+   }
+  },
+  {
+   "text": "Heavy smudge and strong pressure make a moody drawing.",
+   "set": {
+    "smudge": 85,
+    "pressure": 90
+   }
+  },
+  {
+   "text": "Graphite with light pressure feels like a quiet pencil sketch.",
+   "set": {
+    "medium": "graphite",
+    "pressure": 35
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

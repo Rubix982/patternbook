@@ -1,0 +1,171 @@
+{
+ "id": "lumenary:clay-3d",
+ "name": "Clay 3D",
+ "physical": "yes",
+ "process": "clay-modelling",
+ "process_name": "Clay modelling",
+ "class": "other",
+ "basis": "why: 'hand-pressed relief' lit from one side; how: brightness height map, diffuse and glossy light, fingerprint dents",
+ "note": "Family other: modelling is additive sculpture, not carving.",
+ "lumenary": {
+  "section": "E. Physical and 3D feel",
+  "kind": "still",
+  "blurb": "Soft, hand-pressed relief lit from one side.",
+  "theory_page": "processes/sources/theory-pages/05-physical.md",
+  "code": "engine/styles/clay-3d.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Stop-motion animation and sculpture",
+  "era": "20th century",
+  "bestOn": "Portraits and rounded objects with soft light"
+ },
+ "why": "Clay is a lighting problem. Treat the picture’s brightness as a height map, with bright parts raised and dark parts pressed in, and light it from one side, and a flat photograph becomes a relief you could touch. A little glossy highlight, shaded hollows and fingerprint dents then persuade the eye that a hand made it.",
+ "how": [
+  "Blur the picture twice so the surface is soft, then read brightness as height.",
+  "Measure the slope at each pixel to get a surface normal, the direction the clay faces.",
+  "Light the normal with one light whose direction you set, adding a diffuse term and a small, glossy highlight.",
+  "Darken hollows, where the blurred brightness is low, to fake ambient occlusion.",
+  "Add value noise at two scales to the slope for fingerprints, then soften and desaturate colours so they read as pigment in clay."
+ ],
+ "history": "Modelling in clay is as old as pottery, and clay animation brought it to the screen in the twentieth century; the word Claymation was coined by Will Vinton’s studio in 1978. The shading used here goes back to Johann Lambert’s eighteenth century law of diffuse light and to Bui Tuong Phong’s 1973 highlight model, later simplified by Jim Blinn.",
+ "uses": [
+  "Playful illustrations and kids’ media",
+  "Packaging and brand characters",
+  "Soft 3D looking social posts",
+  "Mood boards for craft and toys"
+ ],
+ "terms": [
+  [
+   "Height map",
+   "An image whose brightness is read as height."
+  ],
+  [
+   "Surface normal",
+   "A unit arrow pointing straight out of a surface."
+  ],
+  [
+   "Ambient occlusion",
+   "Darkening in hollows, where less light can reach."
+  ]
+ ],
+ "related": [
+  "plasticine",
+  "embossed-leather",
+  "gold-foil"
+ ],
+ "paragraphs": [
+  "Clay is a lighting calculation. The picture’s brightness, blurred twice so the surface is soft, is treated as a height map: bright is raised, dark is pressed in. At each pixel the slope of that surface is measured with central differences, which gives a surface normal, the direction the clay faces. The flatter the surface, the more the normal points straight at the viewer.",
+  "The normal is then lit by a single light whose direction you set with the angle slider. Two terms are added. Diffuse (Lambert) lighting is brightest where the surface faces the light. The specular term, a Blinn-Phong highlight raised to a high power, adds the small glossy shine of damp clay. Ambient occlusion is faked by darkening where the blurred brightness is low, as if hollows catch less light. “Fingerprints” are value noise at two scales added to the slope before lighting, so the surface acquires the dents of a hand. Finally the colours are desaturated and pulled toward a mid-lightness so they read as pigment in clay rather than as a photograph."
+ ],
+ "primitives": [
+  "relief-shading",
+  "specular-highlight",
+  "tone-to-height"
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf n=\\frac{\\big(-k\\,\\partial_xL_b,\\ -k\\,\\partial_yL_b,\\ 1\\big)}{\\left\\lVert\\big(-k\\,\\partial_xL_b,\\ -k\\,\\partial_yL_b,\\ 1\\big)\\right\\rVert},\\qquad\\partial_xL_b\\approx\\tfrac12\\big(L_b(x{+}1)-L_b(x{-}1)\\big)",
+   "note": "Surface normal from the blurred brightness; k is the depth slider.",
+   "primitives": [
+    "relief-shading",
+    "tone-to-height"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf l=\\frac{(\\cos\\alpha,\\,-\\sin\\alpha,\\,0.7)}{\\lVert\\cdot\\rVert},\\qquad\\mathbf h=\\frac{\\mathbf l+(0,0,1)}{\\lVert\\cdot\\rVert}",
+   "note": "Light direction from the angle α, and the half-vector for the highlight.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "I=(0.3+0.78\\,\\max(0,\\mathbf n\\!\\cdot\\!\\mathbf l))\\,(0.82+0.18\\,L_b)\\;+\\;0.22\\,(\\mathbf n\\!\\cdot\\!\\mathbf h)^{28}",
+   "note": "Diffuse × ambient occlusion, plus the specular highlight.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "depth",
+   "label": "Depth",
+   "type": "range",
+   "default": 38,
+   "min": 5,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "soft",
+   "label": "Softness",
+   "type": "range",
+   "default": 14,
+   "min": 1,
+   "max": 30,
+   "step": 1
+  },
+  {
+   "key": "angle",
+   "label": "Light direction",
+   "type": "range",
+   "default": 135,
+   "min": 0,
+   "max": 360,
+   "step": 1
+  },
+  {
+   "key": "texture",
+   "label": "Fingerprints",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "mode",
+   "label": "Coloring",
+   "type": "select",
+   "default": "source",
+   "options": [
+    "source",
+    "single"
+   ]
+  },
+  {
+   "key": "clay",
+   "label": "Clay color",
+   "type": "color",
+   "default": "#d9d2c5"
+  }
+ ],
+ "presets": [
+  {
+   "text": "Deep relief with the light from the left looks like a pressed sculpture.",
+   "set": {
+    "depth": 80,
+    "angle": 180
+   }
+  },
+  {
+   "text": "A single colour of clay turns the picture into a monochrome relief.",
+   "set": {
+    "mode": "single"
+   }
+  },
+  {
+   "text": "Strong fingerprints make it feel very hand-made.",
+   "set": {
+    "texture": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

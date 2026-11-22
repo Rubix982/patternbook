@@ -47,6 +47,6 @@ _Colour from the phosphor ramp._ (primitives: colour-ramp)
 
 **History:** Infrared and image-intensifier devices were developed for the military in the 1940s and 50s, and the first generation of starlight scopes reached the field in the 1960s. Later generations were far more sensitive. The green colour is a design choice: the human eye can distinguish more shades of green than of other colours.
 
-_Model `processes/models/lumenary/night-vision.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `engine/styles/night-vision.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/night-vision.json`; as captured from his site, `processes/sources/theory-pages/02-digital.md`; code `engine/styles/night-vision.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

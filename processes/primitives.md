@@ -5,10 +5,10 @@ section 7b). A treatment or generator is written by composing them, and a proces
 yet names the gap: the last section lists the gaps the subcontinent's crafts show.
 
 **How this was built (C-018, 2026-11-22).** The vocabulary was seeded from Lumenary's six foundation pages and the
-shared helper functions in his engine (`vendor/lumenary/src/engine/`), extended from a sample of 43 of the 214 models
+shared helper functions in his engine (`engine/`), extended from a sample of 43 of the 214 models
 across every class, and frozen at 53 primitives before any equation was tagged (the frozen copy is
 `runs/c018/vocab-v1-frozen.md`). All 610 equations of the models were then tagged
-(`models/lumenary-equation-tags.tsv`). 18 primitives were added after the freeze because three or more models turned
+(`models/equation-tags.tsv`). 18 primitives were added after the freeze because three or more models turned
 out to apply them; each says why. Lumenary's maths is Mursal Furqan Kumbhar's (credited in every model file); the
 names, grouping and tags here are patternbook's.
 

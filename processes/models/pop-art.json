@@ -1,0 +1,175 @@
+{
+ "id": "lumenary:pop-art",
+ "name": "Pop Art",
+ "physical": "partly",
+ "process": "screen-printing",
+ "process_name": "Screen printing",
+ "class": "printing",
+ "basis": "blurb: 'screen-print colour'; how: flat inks per band, 2x2 grid in different inks 'the way a screen printer pulls the same image'",
+ "note": "The Ben-Day dots at band edges are a second process (halftone or mechanical tint); filed under screen printing because the entry leads with it.",
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "Screen-print colour in four panels: flat inks, bold outlines and Ben-Day dots.",
+  "theory_page": "processes/sources/theory-pages/01-design.md",
+  "code": "engine/styles/pop-art.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Britain and the United States",
+  "era": "1950s and 1960s",
+  "bestOn": "Faces and strong silhouettes"
+ },
+ "why": "Pop art borrowed the look of mass printing: flat inks, bold outlines and the dots that cheap presses used to fake shading. Dots that grow as the tone gets darker let a few flat inks suggest smooth shading, and the 2 × 2 grid repeats the picture in different colours, the way a screen printer pulls the same image in several editions.",
+ "how": [
+  "Divide brightness into a few bands and print each in one flat ink.",
+  "Near the boundary with the next band, show the next ink as dots that grow as the pixel approaches it.",
+  "Place the dots on a staggered grid, every second column shifted by half a cell.",
+  "Draw outlines from edge strength in the darkest ink.",
+  "In grid layout, repeat the picture four times with a different set of inks in each panel."
+ ],
+ "history": "Pop art began in Britain in the 1950s, for example in Richard Hamilton’s 1956 collage about the modern home, and flourished in the United States in the 1960s. Roy Lichtenstein enlarged the dots of comic printing into paintings, and Andy Warhol repeated screen-printed celebrity faces in grids. The dot method is named after Benjamin Day, a nineteenth century printer.",
+ "uses": [
+  "Poster and merchandise graphics",
+  "Album covers and profile portraits",
+  "Party invitations",
+  "Editorial illustration"
+ ],
+ "terms": [
+  [
+   "Ben-Day dots",
+   "A pattern of evenly spaced dots whose size changes to suggest tone."
+  ],
+  [
+   "Halftone",
+   "Any method of showing tone with dots of different sizes."
+  ],
+  [
+   "Staggered grid",
+   "A grid whose alternate rows or columns are shifted by half a step."
+  ]
+ ],
+ "related": [
+  "comic-book",
+  "retro",
+  "neo-brutalism"
+ ],
+ "paragraphs": [
+  "Pop art comes from comic printing. The brightness is divided into n bands and each band is printed in one flat ink. To soften the jump from one band to the next, the Ben-Day trick is used: inside a band, the next ink appears as dots that grow as the pixel gets closer to the next band, just as a printer’s dots grow in a darker tint.",
+  "The dots sit on a staggered grid (every second column is shifted by half a cell). A dot’s radius is proportional to how far through the band the pixel is. Outlines come from the edge strength with a threshold, drawn in the darkest ink. The grid layout repeats the picture four times in a 2 × 2 panel with a different set of inks for each, the way Warhol did."
+ ],
+ "primitives": [
+  "edge-outline",
+  "tone-bands",
+  "tone-curve",
+  "tone-dot-lattice"
+ ],
+ "equations": [
+  {
+   "tex": "u=n\\,c(L),\\qquad b=\\min(n-1,\\lfloor u\\rfloor),\\qquad f=u-b",
+   "note": "Band b and the position f (0 to 1) inside it.",
+   "primitives": [
+    "tone-bands",
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{dot}:\\ \\ (x_c)^2+(y_c)^2<\\big(0.72\\,s\\,f\\big)^2",
+   "note": "A pixel is inside a dot of the next ink when its distance from the cell centre is less than 0.72·s·f.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\lvert\\nabla L\\rvert>0.35-0.28\\cdot\\text{outline}",
+   "note": "Where the outline ink replaces everything else.",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "layout",
+   "label": "Panels",
+   "type": "select",
+   "default": "grid",
+   "options": [
+    "grid",
+    "single"
+   ]
+  },
+  {
+   "key": "levels",
+   "label": "Inks per panel",
+   "type": "range",
+   "default": 4,
+   "min": 3,
+   "max": 4,
+   "step": 1
+  },
+  {
+   "key": "dots",
+   "label": "Ben-Day dots",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "dotSize",
+   "label": "Dot size",
+   "type": "range",
+   "default": 9,
+   "min": 4,
+   "max": 20,
+   "step": 1
+  },
+  {
+   "key": "outline",
+   "label": "Outline",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "contrast",
+   "label": "Contrast",
+   "type": "range",
+   "default": 30,
+   "min": -30,
+   "max": 80,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A single panel with big dots looks like a Lichtenstein enlargement.",
+   "set": {
+    "layout": "single",
+    "dotSize": 14
+   }
+  },
+  {
+   "text": "Three inks and a strong outline give a bolder, simpler print.",
+   "set": {
+    "levels": 3,
+    "outline": 90
+   }
+  },
+  {
+   "text": "Tiny dots at full strength read almost like a photograph.",
+   "set": {
+    "dots": 100,
+    "dotSize": 5
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

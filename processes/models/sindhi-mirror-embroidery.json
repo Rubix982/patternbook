@@ -1,0 +1,173 @@
+{
+ "id": "lumenary:sindhi-mirror-embroidery",
+ "name": "Sindhi Mirror Embroidery",
+ "physical": "yes",
+ "process": "mirror-embroidery",
+ "process_name": "Mirror embroidery",
+ "class": "stitch",
+ "basis": "why: mirror discs set into dark cloth and ringed with thread; how: mirror lattice, leaf stitches and spokes round each, seed-stitch fill",
+ "note": null,
+ "lumenary": {
+  "section": "L. Sindhi design",
+  "kind": "still",
+  "blurb": "Abhla bharat: small round mirrors stitched onto dark cloth, each ringed with radiating thread. The mirrors catch your picture and the thread takes its colours.",
+  "theory_page": "processes/sources/theory-pages/12-sindhi.md",
+  "code": "engine/styles/sindhi-mirror-embroidery.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Sindh and the deserts of Thar",
+  "era": "Traditional, worn at weddings and festivals",
+  "bestOn": "Bright pictures with lights and shadows"
+ },
+ "why": "Abhla bharat, mirror embroidery, sets small discs of mirror or mica into dark cloth and rings each one with thread. Each disc catches the light and flashes as the wearer moves, and the thread glows in colours that talk to one another. The program lays mirrors on a lattice, lets each one reflect a patch of your picture, and takes the thread colours from the same place.",
+ "how": [
+  "Lay mirrors on a triangular lattice: each row is 0.866 s below the last (that is √3/2, the height of an equilateral triangle) and every other row is shifted by half a spacing, so every mirror has six neighbours at the same distance.",
+  "Take the main thread colour c₁ from the picture under each mirror, push the saturation up by 1.7, and scale it by 0.92 + 0.28 t.",
+  "Turn the hue by 0.45 of a full circle (162°, close to the opposite) for the partner thread c₂, and use a pale petal thread c₃.",
+  "Around each mirror stitch ten leaf-shaped stitches and a ring of short spokes, alternating c₁ and c₂.",
+  "Fill the gaps between neighbours with small crosses of seed stitch, and add a shine to each mirror."
+ ],
+ "history": "Mirror work has a long history across Sindh, Gujarat and Rajasthan. Small discs of reflective glass or mica are held to the cloth with a lattice of stitches that cross over the edge, then the thread is worked round them in rings. It decorates shirts, cushions, camel trappings and the cloth of the bride, and each community and family has its own patterns.",
+ "uses": [
+  "Clothing, bags and cushion covers",
+  "Bridal and festive textiles",
+  "Surface and pattern design",
+  "Craft education and heritage projects"
+ ],
+ "terms": [
+  [
+   "Abhla bharat",
+   "Mirror embroidery in Sindhi."
+  ],
+  [
+   "Mica",
+   "A shiny mineral that splits into thin sheets, used for the first mirrors."
+  ],
+  [
+   "Seed stitch",
+   "Tiny scattered stitches that fill a space."
+  ]
+ ],
+ "related": [
+  "sindhi-topi",
+  "embroidery",
+  "ralli-patchwork"
+ ],
+ "paragraphs": [
+  "Abhla bharat is mirror embroidery: small discs of reflective glass or mica are held to the cloth with a lattice of stitches that cross over the edge, and then the thread is worked round them in rings. It is done on shirts, cushions, camel decorations and the cloth of the bride. The program lays mirrors on a triangular lattice. Each row is 0.866 s below the last (that is √3/2, the height of an equilateral triangle) and every other row is shifted by half a spacing, so every mirror has six neighbours at the same distance.",
+  "Thread colours are taken from the picture under each mirror. The colour is pushed to higher saturation (× 1.7) and gives the main thread c₁, scaled by 0.92 + 0.28 t. The partner thread c₂ has its hue turned by 0.45 of a full circle (162°, close to the opposite), and the petal thread c₃ is pale. Around each mirror go ten leaf-shaped stitches and then a ring of short spokes, alternating c₁ and c₂, and between neighbouring mirrors small crosses of seed stitch fill the gaps at the centres of the lattice triangles. The mirror itself shows a piece of your picture: a square 6.8 mirror radii wide is shrunk into the disc and flipped left to right, as a curved glass would show it, with a highlight and a darker rim."
+ ],
+ "primitives": [
+  "coordinate-warp",
+  "hue-shift",
+  "lattice-repeat"
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf p_{i,j}=\\Big(i\\,s+\\tfrac{s}{2}\\,(j \\bmod 2),\\ \\ j\\,\\tfrac{\\sqrt3}{2}\\,s\\Big)",
+   "note": "The mirror lattice. Row j sits √3/2 s below row j − 1 and odd rows are shifted by half a step.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "r_m=0.37\\,s\\,\\mu,\\qquad \\phi=\\frac{\\pi r_m^2}{s\\cdot\\frac{\\sqrt3}{2}s}=\\frac{2\\pi}{\\sqrt3}\\,(0.37\\,\\mu)^2",
+   "note": "Mirror radius (μ is the mirror size slider, 0.25 to 0.8) and the fraction of the cloth that is glass.",
+   "primitives": [],
+   "bespoke": "layout"
+  },
+  {
+   "tex": "\\mathbf q_1=\\mathbf p+\\big(\\tfrac{s}{2},\\ \\tfrac{\\sqrt3}{6}s\\big),\\qquad \\mathbf q_2=\\mathbf p+\\big(s,\\ \\tfrac{\\sqrt3}{3}s\\big)",
+   "note": "The seed stitches sit at the centres of the two triangles that each lattice point owns (one third and two thirds of the way down a triangle of height dy).",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{magnification}=\\frac{2\\,r_m}{2\\times3.4\\,r_m}=\\frac{1}{3.4},\\qquad h_2=h_1+0.45",
+   "note": "The mirror shrinks the surrounding picture by a factor of 3.4. The second thread’s hue h₂ is the first hue plus 0.45 of a turn.",
+   "primitives": [
+    "coordinate-warp",
+    "hue-shift"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Spacing",
+   "type": "range",
+   "default": 56,
+   "min": 30,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "mirror",
+   "label": "Mirror size",
+   "type": "range",
+   "default": 50,
+   "min": 25,
+   "max": 80,
+   "step": 1
+  },
+  {
+   "key": "thread",
+   "label": "Thread",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shine",
+   "label": "Mirror shine",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "cloth",
+   "label": "Cloth",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "maroon",
+    "indigo",
+    "green"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Large mirrors give a bold, shining cloth.",
+   "set": {
+    "mirror": 75,
+    "size": 90
+   }
+  },
+  {
+   "text": "Maroon cloth feels like a wedding tray.",
+   "set": {
+    "cloth": "maroon",
+    "thread": 85
+   }
+  },
+  {
+   "text": "Little shine and close spacing look like a quiet night sky.",
+   "set": {
+    "shine": 20,
+    "size": 34
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

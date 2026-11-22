@@ -1,0 +1,173 @@
+{
+ "id": "lumenary:navajo-weave",
+ "name": "Navajo Weave",
+ "physical": "yes",
+ "process": "tapestry-weaving",
+ "process_name": "Tapestry weaving",
+ "class": "weaving",
+ "basis": "why: each block is a short run of weft on an upright loom, so diagonals step; how: yarn-block grid, serrated edges, stepped border, fringe",
+ "note": null,
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "A Diné wool rug on an upright loom. The picture is built from coarse blocks of dyed and natural yarn, serrated at the edges the way diagonals have to be woven, and framed with a stepped zigzag border.",
+  "theory_page": "processes/sources/theory-pages/11-world.md",
+  "code": "engine/styles/navajo-weave.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The Diné (Navajo) of the American Southwest",
+  "era": "Centuries old, with rug trade from the 19th century",
+  "bestOn": "Bold pictures with strong shapes"
+ },
+ "why": "A Diné rug is woven on an upright loom, and every block of colour is a short run of weft pulled tight. An edge that is not square therefore has to step, so a diagonal becomes a staircase and a curve becomes a serrated line. The program does the same with a grid of yarn blocks laid over your picture, and its serrated edges are part of the look.",
+ "how": [
+  "Lay a grid of cells (the yarn blocks) over the picture and give each the nearest colour of the chosen wool, or, for the natural greys, a grey chosen by brightness.",
+  "Create symmetry by folding the picture: for left-to-right mirroring the sample x becomes min(x, W − x), and for four-way symmetry y is folded as well.",
+  "Serrate edges by shifting the sample point a quarter of a cell one way on even rows and the other way on odd ones.",
+  "Frame the rug with a plain or stepped zigzag border.",
+  "Add fringe to the ends and subtle wool texture."
+ ],
+ "history": "Diné tradition says that Spider Woman taught the people to weave. Regional styles are known by their wool and colour: the red grounds of Ganado, whose style was encouraged by trader John Lorenzo Hubbell, and the natural greys and browns of Two Grey Hills. Weavers still work today, and the best way to honour the tradition is to buy from Diné weavers directly.",
+ "uses": [
+  "Rug and blanket design",
+  "Southwestern interior and pattern design",
+  "Education about weaving and stepped geometry",
+  "Giving credit to and supporting Diné weavers"
+ ],
+ "terms": [
+  [
+   "Diné",
+   "The name the Navajo use for themselves, meaning the People."
+  ],
+  [
+   "Weft",
+   "The threads woven across the warp."
+  ],
+  [
+   "Serration",
+   "A stepped, sawtooth edge formed by the weave."
+  ]
+ ],
+ "related": [
+  "kente",
+  "tapestry-weave",
+  "pixel-art"
+ ],
+ "paragraphs": [
+  "Diné, or Navajo, weaving is done on an upright loom, and the tradition says that Spider Woman taught the people to weave. Every block of colour is a short run of weft pulled tight, so edges that are not square have to be stepped, and a diagonal becomes a staircase. Regional styles are known by their wool: the red grounds of Ganado, the natural greys and browns of Two Grey Hills. The program lays a grid of cells (the yarn blocks) over the picture and gives each the nearest colour of the chosen wool, or, for the natural greys, a grey picked by its brightness.",
+  "Symmetry is made by reading the picture folded: for left-to-right mirroring the sample x becomes min(x, W − x), and for four-way symmetry y is folded as well. Serrating shifts the sample point a quarter of a cell one way on even rows and the other way on odd rows (half a cell between neighbours), so that vertical edges turn into the zigzag teeth of real rugs. A border can be added: stripes, or the stepped zigzag, which is a triangle wave z(a) of the position a along the edge, and the red cells are those whose distance d from the border satisfies d − 2 = z or d − 2 = 4 − z, making a chain of diamonds. Each cell shows rows of yarn, a little fuzz and a slight darkening where one block meets the next, and fringe hangs from the ends."
+ ],
+ "primitives": [
+  "cylinder-shading",
+  "lattice-repeat",
+  "seeded-random",
+  "symmetry-fold"
+ ],
+ "equations": [
+  {
+   "tex": "x'=\\min(x,\\ W-x),\\qquad y'=\\min(y,\\ H-y)",
+   "note": "Mirroring in the sample point: the right-hand side of the rug is a reflection of the left, and with four-way symmetry the bottom of the top.",
+   "primitives": [
+    "symmetry-fold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "z(a)=\\min\\big(a\\bmod 8,\\ 8-(a\\bmod 8)\\big),\\qquad \\text{red if } d-2\\in\\{z(a),\\ 4-z(a)\\}",
+   "note": "The stepped zigzag border. d is the distance in cells from the rug’s edge and a the cell’s position along it.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "f=\\Big(0.74+0.26\\sin\\big(\\pi\\,\\operatorname{frac}(2\\,y_c)\\big)\\Big)\\,\\big(0.93+0.14\\,\\xi\\big),\\qquad y_c=\\tfrac{y-y_0}{c}",
+   "note": "Yarn: two ridges of weft per cell (y_c is the position across the cell) with a fuzz noise ξ.",
+   "primitives": [
+    "cylinder-shading",
+    "seeded-random"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Yarn block",
+   "type": "range",
+   "default": 9,
+   "min": 5,
+   "max": 20,
+   "step": 1
+  },
+  {
+   "key": "sym",
+   "label": "Symmetry",
+   "type": "select",
+   "default": "lr",
+   "options": [
+    "none",
+    "lr",
+    "quad"
+   ]
+  },
+  {
+   "key": "palette",
+   "label": "Wool",
+   "type": "select",
+   "default": "ganado",
+   "options": [
+    "ganado",
+    "twogrey",
+    "sunset"
+   ]
+  },
+  {
+   "key": "border",
+   "label": "Border",
+   "type": "select",
+   "default": "zig",
+   "options": [
+    "none",
+    "simple",
+    "zig"
+   ]
+  },
+  {
+   "key": "serrate",
+   "label": "Serrated edges",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "fringe",
+   "label": "Fringe",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Two Grey Hills uses natural wool and quiet geometry.",
+   "set": {
+    "palette": "twogrey",
+    "border": "simple"
+   }
+  },
+  {
+   "text": "Four-way symmetry makes a classic centred rug.",
+   "set": {
+    "sym": "quad",
+    "size": 12
+   }
+  },
+  {
+   "text": "Turn serration off for a smoother, pixel-like weave.",
+   "set": {
+    "serrate": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -13,9 +13,9 @@ our own.
 
 The engine's styles (`../engine/styles/`) take a picture and render it in a style. Sections A to N are **Lumenary**'s
 214, by Mursal Furqan Kumbhar, used with his permission: his engine, its files unchanged, is the base of `../engine/`
-(see `../vendor/lumenary/NOTICE.md` for what was received). Section P is patternbook's own, each rendering a picture
+(see `../NOTICE.md` for what was received). Section P is patternbook's own, each rendering a picture
 through a process modelled in `../engine/core/`. Every style's theory, as a model filed under the process it imitates,
-is in `../processes/`, and Lumenary's as received in `../processes/sources/lumenary/`.
+is in `../processes/`, and Lumenary's as received in `../processes/sources/`.
 
 - `studio.html` (live: https://rubix982.github.io/patternbook/treatments/studio.html): pick any style and turn its
   dials, or open the **contact sheet** to see every still style on one picture (the built-in still life, our router
@@ -24,7 +24,7 @@ is in `../processes/`, and Lumenary's as received in `../processes/sources/lumen
   `PatternbookEngine.studio`. Rebuild with `node engine/build.mjs` (uses `npx esbuild@0.24.0`). Pages that load the old
   `lumenary/lumenary.js` still work: it now loads `engine/engine.js` and names its studio `window.Lumenary`.
 - Lumenary's theory pages with every equation as TeX, and `MAP.md`, which links each treatment's theory to its code,
-  are in `../processes/sources/lumenary/theory-pages/`; each process page in `../processes/` carries his models in full.
+  are in `../processes/sources/theory-pages/`; each process page in `../processes/` carries his models in full.
 - On a page: load `../engine/engine.js` and `treatments.js`, then
   `Treatments.treatAll('svg[role=img]', { treatment: 'style:halftone', params: { angle: 45 } })` (`lumenary:halftone`
   still works).

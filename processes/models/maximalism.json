@@ -1,0 +1,155 @@
+{
+ "id": "lumenary:maximalism",
+ "name": "Maximalism",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "a design attitude: loud colour pairs and a pattern per tone band, beaded border (how)",
+ "note": null,
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "More is more: every tone gets a loud colour, a pattern and an ornate border.",
+  "theory_page": "processes/sources/theory-pages/01-design.md",
+  "code": "engine/styles/maximalism.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Baroque and rococo ornament, revived in postmodern design",
+  "era": "1960s onward",
+  "bestOn": "Busy scenes with a wide range of tones"
+ },
+ "why": "Maximalism is the opposite of minimalism: it fears empty space, an urge sometimes called horror vacui. So every tone of the picture is given a loud colour pair and its own pattern, and even the border is packed with beads. The picture survives because tone still decides which colour is on top, so the shapes stay readable inside the noise.",
+ "how": [
+  "Cut the brightness of the picture into a few bands.",
+  "Give each band two colours that sit far apart on the colour wheel.",
+  "Choose a pattern for each band: stripes, checks, dots, waves, diagonals or diamonds, never the same for two neighbours.",
+  "At every pixel let the pattern decide which of the band’s two colours shows.",
+  "Frame the whole thing with a border of beads."
+ ],
+ "history": "The architect Robert Venturi answered Mies van der Rohe’s “less is more” in 1966 with “less is a bore”, a line often used to introduce maximalism in design. The taste itself is much older: baroque churches, Victorian parlours and Indian block-printed textiles all cover every surface. In the 1980s the Memphis group made it playful, and it has returned in fashion and interiors several times since.",
+ "uses": [
+  "Festival and music posters",
+  "Textile, wrapping paper and wallpaper prints",
+  "Album art and book covers",
+  "Mood boards for bold interiors"
+ ],
+ "terms": [
+  [
+   "Horror vacui",
+   "Latin for fear of empty space: the urge to fill every part of a surface."
+  ],
+  [
+   "Complementary colours",
+   "Colours opposite each other on the wheel, which look strongest side by side."
+  ],
+  [
+   "Band",
+   "A slice of the brightness range that is treated as one tone."
+  ]
+ ],
+ "related": [
+  "memphis",
+  "pop-art",
+  "bohemian"
+ ],
+ "paragraphs": [
+  "Maximalism refuses to leave anything empty. The brightness (with a little extra contrast) is cut into n bands. Each band gets two colours that are far apart on the colour wheel, and a repeating pattern decides, pixel by pixel, which of the two shows: stripes, checks, dots, waves, diagonals or diamonds. Neighbouring bands use different patterns, so the picture is drawn entirely out of clashing textures.",
+  "The colours are spread round the wheel in equal steps and then moved by the seed, so the remix button changes the whole scheme but keeps the structure. Darker bands are also darker colours. A border of alternating beads, each with a pale centre, frames the whole thing."
+ ],
+ "primitives": [
+  "hue-shift",
+  "lattice-repeat"
+ ],
+ "equations": [
+  {
+   "tex": "h_i=\\left(h_0+0.92\\,\\frac{i}{n}+0.137\\,\\text{seed}\\right)\\bmod 1,\\qquad h_i'=h_i+0.38",
+   "note": "Hue of the two colours of band i.",
+   "primitives": [
+    "hue-shift"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{stripe}(x,y)=\\left\\lfloor\\frac{x+y}{s}\\right\\rfloor\\bmod 2,\\qquad \\text{check}(x,y)=\\left(\\left\\lfloor\\frac{x}{s}\\right\\rfloor+\\left\\lfloor\\frac{y}{s}\\right\\rfloor\\right)\\bmod 2",
+   "note": "Two of the seven pattern functions. The pattern value picks one of the two colours.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "bands",
+   "label": "Bands",
+   "type": "range",
+   "default": 6,
+   "min": 3,
+   "max": 7,
+   "step": 1
+  },
+  {
+   "key": "scale",
+   "label": "Pattern size",
+   "type": "range",
+   "default": 22,
+   "min": 6,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "hue",
+   "label": "Hue turn",
+   "type": "range",
+   "default": 0,
+   "min": 0,
+   "max": 360,
+   "step": 1
+  },
+  {
+   "key": "punch",
+   "label": "Colour punch",
+   "type": "range",
+   "default": 85,
+   "min": 40,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "border",
+   "label": "Ornate border",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Remix",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Seven bands with a small pattern size gives the busiest result.",
+   "set": {
+    "bands": 7,
+    "scale": 10
+   }
+  },
+  {
+   "text": "Turn the whole palette half way around the colour wheel.",
+   "set": {
+    "hue": 180
+   }
+  },
+  {
+   "text": "Raise colour punch to the maximum for neon intensity.",
+   "set": {
+    "punch": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,169 @@
+{
+ "id": "lumenary:hilbert-curve",
+ "name": "Hilbert Curve",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "space-filling curve coloured by the picture (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "One unbroken line that visits every cell of a square grid and never crosses itself. Each turn of the line takes the colour beneath it.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/hilbert-curve.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Mathematics",
+  "era": "1891",
+  "bestOn": "Pictures with fine detail"
+ },
+ "why": "The Hilbert curve is one unbroken line that visits every cell of a square grid and never crosses itself. Points that are near each other along the line are also near each other on the page, which makes it a good way to fold a long list into a flat image without tearing neighbourhoods apart. Here that line takes its colour from your picture.",
+ "how": [
+  "Order k covers a 2ᵏ by 2ᵏ grid in 4ᵏ steps, and is built by recursion: four copies of the previous order, the two lower ones turned a quarter turn in opposite directions, joined end to end.",
+  "The program skips the recursion and converts each step number into a grid position two binary digits at a time, turning and flipping the partial position as it goes.",
+  "Neighbouring steps are always neighbouring cells, so the line is continuous.",
+  "Draw from cell centre to cell centre, with the colour of the picture at each cell.",
+  "Let the line weight follow the picture’s darkness."
+ ],
+ "history": "Giuseppe Peano published the first space-filling curve in 1890, and David Hilbert found the simpler version in 1891. The curve is used to index points in databases and maps, in image processing and for cache friendly memory layouts. The webcomic xkcd used it to draw a map of the internet in 2006, since addresses close in number stay close on the map.",
+ "uses": [
+  "Spatial indexing in databases",
+  "Mapping long lists, such as internet addresses, onto a plane",
+  "Image compression and halftoning",
+  "Plotter and laser drawings"
+ ],
+ "terms": [
+  [
+   "Space-filling curve",
+   "A line that passes through every point of a region."
+  ],
+  [
+   "Locality",
+   "Points close along the curve are also close in the plane."
+  ],
+  [
+   "Recursion",
+   "A rule that builds a shape from smaller copies of itself."
+  ]
+ ],
+ "related": [
+  "truchet-tiles",
+  "string-art",
+  "wave-function-collapse"
+ ],
+ "paragraphs": [
+  "David Hilbert described in 1891 a curve that passes through every cell of a square grid and never crosses itself. The curve of order k covers a 2ᵏ × 2ᵏ grid in 4ᵏ steps. It is built by recursion: divide the square into four quarters, draw a curve of the next lower order in each (the two at the bottom turned by a quarter turn, one clockwise and one anti-clockwise), and join them end to end. The program does not recurse. It converts the step number d, two binary digits at a time, into a grid position: for s = 1, 2, 4, …, take rx = (t >> 1) & 1 and ry = (t xor rx) & 1, turn and flip the partial position if ry = 0, add s·rx and s·ry, and shift t by two bits.",
+  "Neighbouring steps are always neighbouring cells, so the line is continuous. Its useful property is locality: points close along the curve are close in the plane (the converse is not always true). The line is drawn from cell centre to cell centre, with the width set by the weight slider and made to follow the picture’s heaviness, and each segment takes the colour of the picture at its midpoint. The total length of the line is (4ᵏ − 1) cells of width W/2ᵏ, almost 2ᵏ times the width of the picture, which is why high orders look like a dense engraving."
+ ],
+ "primitives": [
+  "tone-line-screen"
+ ],
+ "equations": [
+  {
+   "tex": "n=2^{k},\\qquad \\text{cells}=n^{2}=4^{k},\\qquad \\text{length}=\\big(4^{k}-1\\big)\\frac{W}{2^{k}}\\approx2^{k}\\,W",
+   "note": "Grid, number of cells and the length of the line for order k.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "r_x=\\big\\lfloor t/2\\big\\rfloor\\,\\&\\,1,\\quad r_y=(t\\oplus r_x)\\,\\&\\,1,\\quad (x,y)\\leftarrow(x+s\\,r_x,\\ \\ y+s\\,r_y)",
+   "note": "One step of the conversion from the number along the curve to its place (after the rotation of the partial position when r_y = 0).",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "w=c\\,\\lambda\\,\\big[(1-f)+f\\,(0.2+1.1\\,h)\\big]",
+   "note": "Line width: c is the cell width, λ the weight slider, f the follow slider, h the heaviness beneath.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "order",
+   "label": "Order",
+   "type": "range",
+   "default": 6,
+   "min": 3,
+   "max": 8,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Line weight",
+   "type": "range",
+   "default": 0.62,
+   "min": 0.2,
+   "max": 1.2,
+   "step": 0.02
+  },
+  {
+   "key": "follow",
+   "label": "Weight follows the picture",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "cap",
+   "label": "Corners",
+   "type": "select",
+   "default": "round",
+   "options": [
+    "round",
+    "butt"
+   ]
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "ink"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "night",
+   "options": [
+    "night",
+    "cream"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "A low order shows the shape of the curve itself.",
+   "set": {
+    "order": 3,
+    "line": 0.9
+   }
+  },
+  {
+   "text": "A high order with a thin line draws the picture as one thread.",
+   "set": {
+    "order": 8,
+    "line": 0.4
+   }
+  },
+  {
+   "text": "Butt caps give crisp, mechanical corners.",
+   "set": {
+    "cap": "butt",
+    "colour": "ink"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

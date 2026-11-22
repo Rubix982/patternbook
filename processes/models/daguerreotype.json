@@ -1,0 +1,182 @@
+{
+ "id": "lumenary:daguerreotype",
+ "name": "Daguerreotype",
+ "physical": "yes",
+ "process": "daguerreotype",
+ "process_name": "Daguerreotype",
+ "class": "photographic",
+ "basis": "why: image on a mirror-polished silver plate that flips from positive to negative with tilt; how: tilt mix, soft lens, tarnish rings, brass mat",
+ "note": null,
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "An image on a polished silver plate: tilt it and it turns from positive to negative. Tarnish creeps in from the edges, inside a brass mat.",
+  "theory_page": "processes/sources/theory-pages/08-optical.md",
+  "code": "engine/styles/daguerreotype.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Paris",
+  "era": "1839 to the 1860s",
+  "bestOn": "Formal portraits and still lifes"
+ },
+ "why": "A daguerreotype is an image on a silver plate polished like a mirror. Tilt it one way and the plate reflects something dark, so the picture looks like a positive. Tilt it the other way and it reflects something bright and seems to turn into a negative. Tarnish creeping in from the edges and a brass mat give it its antique look.",
+ "how": [
+  "Mix lightness with its inverse by the tilt slider and add a little contrast about the middle.",
+  "Map the result through a ramp of dark, mid and light colours for silver, blue or gold plates.",
+  "Blur by 0.5 to 3.5 pixels, since the lenses of the day were soft.",
+  "Grow tarnish rings inward from the edge of the window, cycling blue, violet and amber like the interference colours of an oil slick.",
+  "Add polish marks, scratches and dust, and frame it with a brass mat that has metal grain, bevel rings and a band of glare."
+ ],
+ "history": "The French government announced Louis Daguerre’s process in 1839 and gave it to the world free of charge, apart from in Britain, where it was patented. Each daguerreotype was a unique plate, fragile and kept in a case. The process was replaced in the 1850s and 1860s by cheaper methods that could be copied, but its detail and mirror like depth are still admired.",
+ "uses": [
+  "Historical and period style portraits",
+  "Heritage and museum themed graphics",
+  "Vintage invitations and stationery",
+  "Gothic and steampunk art"
+ ],
+ "terms": [
+  [
+   "Daguerreotype",
+   "An early photograph made on a silvered copper plate."
+  ],
+  [
+   "Tarnish",
+   "A dull or coloured film that forms on metal as it reacts with the air."
+  ],
+  [
+   "Mat",
+   "The decorative border placed around a picture inside its frame."
+  ]
+ ],
+ "related": [
+  "film-grain",
+  "victorian",
+  "cyanotype"
+ ],
+ "paragraphs": [
+  "A daguerreotype is an image on a silver plate polished like a mirror. Tilted one way the plate reflects something dark and the picture looks like a positive; tilted the other way it reflects something bright and the picture seems to turn into a negative. The tilt slider mixes the lightness with its inverse, v = (1 − 0.92 t) L + 0.92 t (1 − L), then adds a little contrast about the middle. Three tones (silver, blue and gold) are each a ramp of a dark, a mid and a light colour. The lenses of the day were soft, so the picture is blurred by 0.5 to 3.5 px.",
+  "Tarnish creeps in from the edge of the plate. Let e be the distance to the edge of the window (0 at the edge, 1 in the middle). A ring is open where e plus a noise is below a reach that grows with the tarnish slider, and its colours cycle through blue, violet and amber as sin(16 e + 5 n + offset) with the three colour channels one third of a turn apart, the same kind of thin-film interference as an oil slick. Polish marks, scratches and dust are added to the plate, and a brass mat (a gradient with metal grain, bevel rings and a band of glare) frames it in an oval or a rectangle."
+ ],
+ "primitives": [
+  "sheet-edge",
+  "smooth-noise",
+  "soft-threshold",
+  "tone-curve"
+ ],
+ "equations": [
+  {
+   "tex": "v=\\operatorname{clip}\\Big(1.18\\,\\big[(1-0.92\\,\\tau)\\,L+0.92\\,\\tau\\,(1-L)-\\tfrac12\\big]+\\tfrac12\\Big)",
+   "note": "The mirror: τ is the tilt slider and L the softened lightness.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{ring}=\\operatorname{smoothstep}\\big(\\rho,\\ 0,\\ e+0.22\\,(n-\\tfrac12)\\big),\\qquad \\rho=0.04+0.34\\,T",
+   "note": "Where the tarnish reaches; T is the tarnish slider and n noise.",
+   "primitives": [
+    "soft-threshold",
+    "smooth-noise",
+    "sheet-edge"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "c_j=\\tfrac12+\\tfrac12\\sin\\!\\Big(16\\,e+5\\,n+\\tfrac{2\\pi j}{3}\\Big),\\qquad j=0,1,2\\ \\ (R,G,B)",
+   "note": "The iridescent colour of the tarnish: three phases of a thin-film interference.",
+   "primitives": [],
+   "bespoke": "specific"
+  }
+ ],
+ "dials": [
+  {
+   "key": "tilt",
+   "label": "Tilt the plate",
+   "type": "range",
+   "default": 0,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "tone",
+   "label": "Plate",
+   "type": "select",
+   "default": "silver",
+   "options": [
+    "silver",
+    "blue",
+    "gold"
+   ]
+  },
+  {
+   "key": "frame",
+   "label": "Mat",
+   "type": "select",
+   "default": "oval",
+   "options": [
+    "oval",
+    "rect",
+    "none"
+   ]
+  },
+  {
+   "key": "tarnish",
+   "label": "Tarnish",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "scratch",
+   "label": "Scratches and dust",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "soft",
+   "label": "Softness",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Age it again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Tilt the plate to see the picture turn into a negative.",
+   "set": {
+    "tilt": 100
+   }
+  },
+  {
+   "text": "A gold plate with a rectangular mat looks like a keepsake case.",
+   "set": {
+    "tone": "gold",
+    "frame": "rect"
+   }
+  },
+  {
+   "text": "Heavy tarnish with scratches looks like an heirloom.",
+   "set": {
+    "tarnish": 90,
+    "scratch": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

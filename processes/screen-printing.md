@@ -49,7 +49,7 @@ _c(L) is the brightness after the contrast slider._ (primitives: tone-bands, ton
 
 **History:** Screen printing became a major commercial process in the first half of the twentieth century and was taken up by artists such as Andy Warhol in the 1960s. In the 1970s it filled posters, record sleeves and packaging with earth-toned flat colour, and that palette is now shorthand for the decade.
 
-_Model `processes/models/lumenary/retro.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `engine/styles/retro.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/retro.json`; as captured from his site, `processes/sources/theory-pages/01-design.md`; code `engine/styles/retro.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Pop Art (`lumenary:pop-art`, a style that rests on this process)
 
@@ -83,7 +83,7 @@ _Where the outline ink replaces everything else._ (primitives: edge-outline)
 
 **History:** Pop art began in Britain in the 1950s, for example in Richard Hamilton’s 1956 collage about the modern home, and flourished in the United States in the 1960s. Roy Lichtenstein enlarged the dots of comic printing into paintings, and Andy Warhol repeated screen-printed celebrity faces in grids. The dot method is named after Benjamin Day, a nineteenth century printer.
 
-_Model `processes/models/lumenary/pop-art.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `engine/styles/pop-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/pop-art.json`; as captured from his site, `processes/sources/theory-pages/01-design.md`; code `engine/styles/pop-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Screen Print (`lumenary:screen-print`, models this process)
 
@@ -117,6 +117,6 @@ _Mesh texture: m is the slider and λ the mesh spacing._ (primitives: material-g
 
 **History:** Stencil printing through silk or fine mesh was used in East Asia for centuries. Commercial screen printing spread in the early 1900s, and in the 1930s artists proposed the name serigraphy for fine art prints. Andy Warhol made the technique famous in the 1960s, and it is still the main way to print posters, t-shirts and gig bills.
 
-_Model `processes/models/lumenary/screen-print.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/screen-print.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/screen-print.json`; as captured from his site, `processes/sources/theory-pages/06-craft.md`; code `engine/styles/screen-print.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

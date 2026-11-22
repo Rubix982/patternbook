@@ -23,10 +23,11 @@ All of patternbook's knowledge of how looks are made sits in this folder, and no
   `chain-stitch`, `contour-rows`, `quilt-ripple`, and the cards that follow) with their checks.
 - `foundations.md`: the shared tools of patternbook's own treatments.
 - `index.md`: generated. Every process with its models, and the entries that model no physical process.
-- `models/`: the same models in machine-readable form (`lumenary/<id>.json`), and the classification and tags they are
-  built from (`lumenary-map.tsv`, `lumenary-equation-tags.tsv`).
-- `sources/lumenary/`: Lumenary as received, unchanged and credited: his theory data (`data/`) and his theory pages as
-  captured from his site (`theory-pages/`). The upstream archive; read the process pages instead.
+- `models/`: the same models in machine-readable form (`<id>.json`), and the classification and tags they are
+  built from (`map.tsv`, `equation-tags.tsv`).
+- `sources/`: Lumenary's theory as received, unchanged and credited: his theory data (`data/`), his theory pages as
+  captured from his site (`theory-pages/`), and his app's README and catalogue (`upstream/`). The archive the models
+  were converted from; read the process pages instead.
 
 The code that runs these lives elsewhere: the engine in `engine/` (its base is Lumenary's engine; patternbook's process models are in `engine/core/`),
 the treatments that apply looks to pages in `treatments/`.
@@ -38,7 +39,7 @@ Any implementation of a process is a model of it, credited to whoever made it:
 - **patternbook's own treatments and primitives** (`treatments/`, `engine/`). Their theory is on the process pages and
   in `primitives.md`; `treatments/theory/` keeps one-line pointers to where each note went.
 - **Lumenary** by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary). His engine is the base of `engine/`
-  (see its `NOTICE.md`); his theory data and theory pages are in `sources/lumenary/`, as received. Each process page
+  (see `../NOTICE.md`); his theory data and theory pages are in `sources/`, as received. Each process page
   carries his models in full, credited; improvements are offered back to him.
 - **Papers and books**, cited through `references/references.md`.
 

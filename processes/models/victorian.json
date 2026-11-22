@@ -1,0 +1,156 @@
+{
+ "id": "lumenary:victorian",
+ "name": "Victorian",
+ "physical": "partly",
+ "process": "intaglio-engraving",
+ "process_name": "Intaglio line engraving",
+ "class": "printing",
+ "basis": "blurb: 'a steel-engraved portrait'; how: lines swell with darkness, wander like hand-cut lines, cross-hatch the deepest shadows",
+ "note": "Named for an era; the rendering is steel engraving throughout. Oval cameo frame is garnish.",
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "A steel-engraved portrait: hand-cut lines in an oval cameo with an ornate frame.",
+  "theory_page": "processes/sources/theory-pages/01-design.md",
+  "code": "engine/styles/victorian.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "British and American printing houses",
+  "era": "1830s to 1900",
+  "bestOn": "Portraits, with a clear face against a plain background"
+ },
+ "why": "An engraver cannot paint grey. Tone has to come from lines: thick and close together for shadow, thin and far apart for light. This treatment does the same with horizontal lines that swell and shrink with the darkness beneath them, adds crossing lines in the deepest shadows, and sets the result in an oval with an ornate frame, as keepsake portraits were.",
+ "how": [
+  "Draw many horizontal lines whose thickness follows the darkness of the picture beneath.",
+  "Make each line wander gently up and down on a sine wave, for the hand-cut look.",
+  "Add a second set of diagonal lines in the darkest places, lifting the pen where the picture is lighter than a threshold.",
+  "Clip the portrait to an oval and frame it with two rules and a ring of 72 beads.",
+  "Add the double border, corner rosettes and a caption between two rules."
+ ],
+ "history": "Steel replaced copper for engraving plates in the 1820s because it lasted for far longer print runs. Steel-engraved portraits, book illustrations and banknotes were everywhere in the Victorian era (1837 to 1901), before photography and halftone printing took over. The wandering line and cross-hatching used here are the engraver’s tools for building tone from nothing but black ink.",
+ "uses": [
+  "Certificate and invitation styling",
+  "Vintage book plates and almanac art",
+  "Heritage brand labels",
+  "Gothic and steampunk themed graphics"
+ ],
+ "terms": [
+  [
+   "Cross-hatching",
+   "Two sets of crossing lines used to build up dark tones."
+  ],
+  [
+   "Cameo",
+   "A portrait presented inside an oval frame."
+  ],
+  [
+   "Rosette",
+   "A circular flower shaped ornament, here placed in each corner."
+  ]
+ ],
+ "related": [
+  "art-deco",
+  "banknote-engraving",
+  "newspaper"
+ ],
+ "paragraphs": [
+  "A steel engraving builds tone from lines. The portrait is drawn as many horizontal lines whose thickness follows the darkness underneath, so a dark area is a row of fat lines that nearly touch, and a light one has hairlines or gaps. The lines wander gently up and down with a sine wave, which gives the hand-cut look.",
+  "In the darkest places a second set of diagonal lines is added (cross-hatching), but each diagonal pen stroke lifts wherever the picture is lighter than a threshold. The cameo is clipped to an oval, framed by two rules and a ring of 72 beads; the page has a double border with a rosette in each corner and a caption between two rules."
+ ],
+ "primitives": [
+  "tone-line-screen"
+ ],
+ "equations": [
+  {
+   "tex": "t(x,i)=1.05\\,\\big(1-L(x,y_i)\\big)\\,\\Delta y",
+   "note": "Thickness of line i at column x; Δy is the line spacing.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "y(x,i)=y_i+0.18\\,\\Delta y\\,\\sin(0.045\\,x+0.7\\,i)",
+   "note": "The gentle waver of each line.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{hatch where}\\quad L<0.4\\cdot\\text{cross}+0.05",
+   "note": "Cross-hatching is only drawn on dark places.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "ink",
+   "label": "Ink",
+   "type": "select",
+   "default": "sepia",
+   "options": [
+    "sepia",
+    "black",
+    "blue"
+   ]
+  },
+  {
+   "key": "lines",
+   "label": "Engraved lines",
+   "type": "range",
+   "default": 110,
+   "min": 50,
+   "max": 180,
+   "step": 1
+  },
+  {
+   "key": "cross",
+   "label": "Cross-hatching",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "oval",
+   "label": "Oval cameo",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "caption",
+   "label": "Caption",
+   "type": "text",
+   "default": "A VIEW OF THE ROOM"
+  }
+ ],
+ "presets": [
+  {
+   "text": "Blue ink with the maximum number of lines reads like fine banknote work.",
+   "set": {
+    "ink": "blue",
+    "lines": 160
+   }
+  },
+  {
+   "text": "Full cross-hatching deepens every shadow.",
+   "set": {
+    "cross": 100
+   }
+  },
+  {
+   "text": "Turn off the oval and write your own caption.",
+   "set": {
+    "oval": false,
+    "caption": "A PORTRAIT OF THE AUTHOR"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

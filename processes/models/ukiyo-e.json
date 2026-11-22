@@ -1,0 +1,194 @@
+{
+ "id": "lumenary:ukiyo-e",
+ "name": "Ukiyo-e",
+ "physical": "partly",
+ "process": "relief-block-printing",
+ "process_name": "Relief block printing (woodcut, linocut)",
+ "class": "printing",
+ "basis": "why: a woodblock print lays flat colour one block at a time; how: Edo pigment palette, key line, bokashi, wood grain, block misregistration",
+ "note": "A genre filed under its process, as in the brief's example.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "A Japanese woodblock print: a few flat colours pressed one block at a time, a black key line, and the soft fade of bokashi in the sky. Wood grain and paper fibre show through the ink.",
+  "theory_page": "processes/sources/theory-pages/11-world.md",
+  "code": "engine/styles/ukiyo-e.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Edo, now Tokyo, Japan",
+  "era": "Seventeenth to nineteenth century",
+  "bestOn": "Landscapes, skies and pictures with clear shapes"
+ },
+ "why": "A woodblock print can only lay down flat colour, one block at a time, so the picture has to be reduced to a few solid areas before anything is carved. That limit is the look: a firm black key line, a handful of pigments, and a soft fade of colour called bokashi in the sky, which the printer makes by wiping the block. The slight slip between blocks and the grain of the wood remind you that it was pressed by hand.",
+ "how": [
+  "Blur the picture by 0.9 times the simplify slider and raise its saturation a little.",
+  "Match every pixel to the nearest of eight pigments an Edo printer would have had: Prussian blue, vermilion, ochre, sage, pink, grey-brown, paper and sumi ink.",
+  "Run a majority filter over a 5 by 5 neighbourhood twice to remove specks that a knife could never cut.",
+  "Draw the key line from edges, add bokashi fades in the sky, and let the wood grain and paper fibre show through the ink.",
+  "Shift each colour layer slightly to imitate misregistration between blocks, and stamp an artist’s seal."
+ ],
+ "history": "Ukiyo-e means pictures of the floating world, the pleasure districts and theatres of Edo. Suzuki Harunobu produced the first full colour prints in 1765, and Katsushika Hokusai and Utagawa Hiroshige made landscapes famous in the early nineteenth century, including Hokusai’s Great Wave. Prussian blue, imported in the 1820s, gave the skies and seas of that period their depth. The prints reached Europe in the nineteenth century and influenced artists such as Monet and Van Gogh.",
+ "uses": [
+  "Poster and book cover illustration",
+  "Packaging and tea or sake labels",
+  "Teaching printmaking and colour separation",
+  "Travel and landscape graphics"
+ ],
+ "terms": [
+  [
+   "Bokashi",
+   "A gradual fade of colour made by wiping ink on the block."
+  ],
+  [
+   "Key block",
+   "The block that prints the black outlines."
+  ],
+  [
+   "Registration",
+   "The way blocks are lined up so colours meet exactly."
+  ]
+ ],
+ "related": [
+  "linocut",
+  "screen-print",
+  "sashiko"
+ ],
+ "paragraphs": [
+  "A woodblock print is made one colour at a time. The carver cuts a block of cherry wood for the black key line and one more block for every colour, and the printer presses damp paper onto each block in turn, lining the sheet up against two small notches in the bench. Because each block can only lay down a flat colour, the picture has to be reduced to a few areas of solid colour before anything else is done. Here the picture is blurred (radius 0.9 × the simplify slider) and its saturation is raised a little, then every pixel is matched to the nearest of eight pigments an Edo printer would have had: Prussian blue, vermilion, ochre, sage, pink, grey-brown, paper and sumi ink. A majority filter over a 5 × 5 neighbourhood, run twice, removes the specks that a knife could never cut.",
+  "The key line is drawn where the colour index changes and wherever the gradient of the lightly blurred brightness is steep. Bokashi, the graded wash a printer wipes onto the block with a damp cloth, is a blend toward Prussian blue over the top 38% of the sheet and toward pink over the bottom 18%. The wood grain shows through the pigment as long streaks (noise stretched about 87 times further along x than along y) and darkens it by up to about 20%. Misregistration is the tell of a real print: the colour layer is read from a position shifted by a pixel or two while the key line stays where it is."
+ ],
+ "primitives": [
+  "edge-outline",
+  "label-boundary",
+  "mix-over",
+  "mode-filter",
+  "palette-snap",
+  "saturation-adjust",
+  "smooth-noise"
+ ],
+ "equations": [
+  {
+   "tex": "k(\\mathbf x)=\\arg\\min_j\\ d\\big(\\mathbf c'(\\mathbf x),\\,\\mathbf p_j\\big),\\qquad s'=1.15\\,s+0.04",
+   "note": "Each pixel takes the index of the nearest pigment p_j to its blurred colour c′ (saturation s raised to s′), using a redmean-weighted colour distance.",
+   "primitives": [
+    "palette-snap",
+    "saturation-adjust"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "k'(\\mathbf x)=\\arg\\max_j\\ \\big|\\{\\mathbf y\\in N(\\mathbf x):\\ k(\\mathbf y)=j\\}\\big|",
+   "note": "The majority filter: the most common index among the neighbours N(x) wins.",
+   "primitives": [
+    "mode-filter"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\lambda=\\max\\!\\Big(e_{\\text{idx}}\\,\\big(0.5+0.5\\,w\\big),\\ w\\,\\operatorname{smoothstep}\\big(\\tau,\\,2.1\\tau,\\,\\lVert\\nabla L\\rVert\\big)\\Big),\\qquad \\tau=0.24-0.17\\,w",
+   "note": "The key line: e_idx is 1 on a boundary between colours, ‖∇L‖ the gradient of the lightly blurred brightness and w the key line slider (0 to 1). The ink is mixed in with strength λ, at most 0.95.",
+   "primitives": [
+    "label-boundary",
+    "edge-outline"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "t_{\\text{top}}=b\\Big(1-\\tfrac{y}{0.38H}\\Big)_+^{1.5}\\big(0.5+0.2\\,n\\big),\\qquad C\\leftarrow(1-t)\\,C+t\\,C_{\\text{blue}}",
+   "note": "Bokashi at the top: b is the slider and n a slow noise that makes the edge of the fade uneven.",
+   "primitives": [
+    "mix-over",
+    "smooth-noise"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "simplify",
+   "label": "Simplify",
+   "type": "range",
+   "default": 5,
+   "min": 1,
+   "max": 10,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Key line",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "bokashi",
+   "label": "Bokashi fade",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wood",
+   "label": "Wood grain",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "reg",
+   "label": "Block misregistration",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "washi",
+   "options": [
+    "washi",
+    "aged",
+    "white"
+   ]
+  },
+  {
+   "key": "seal",
+   "label": "Artist seal",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Strong bokashi turns a plain sky into a dawn.",
+   "set": {
+    "bokashi": 95
+   }
+  },
+  {
+   "text": "Aged paper gives the look of a collected print.",
+   "set": {
+    "paper": "aged",
+    "wood": 80
+   }
+  },
+  {
+   "text": "High simplification shows how few colours the blocks allowed.",
+   "set": {
+    "simplify": 9,
+    "reg": 60
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

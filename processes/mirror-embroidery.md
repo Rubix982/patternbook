@@ -59,7 +59,7 @@ _The mirror shrinks the surrounding picture by a factor of 3.4. The second threa
 
 **History:** Mirror work has a long history across Sindh, Gujarat and Rajasthan. Small discs of reflective glass or mica are held to the cloth with a lattice of stitches that cross over the edge, then the thread is worked round them in rings. It decorates shirts, cushions, camel trappings and the cloth of the bride, and each community and family has its own patterns.
 
-_Model `processes/models/lumenary/sindhi-mirror-embroidery.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `engine/styles/sindhi-mirror-embroidery.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/sindhi-mirror-embroidery.json`; as captured from his site, `processes/sources/theory-pages/12-sindhi.md`; code `engine/styles/sindhi-mirror-embroidery.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Sindhi Topi (`lumenary:sindhi-topi`, models this process)
 
@@ -97,6 +97,6 @@ _The beads on the rim are a little larger than half their spacing, so they overl
 
 **History:** The Sindhi topi is worn with the ajrak at weddings, at festivals and on Sindhi Cultural Day, celebrated on the first Sunday of December. The notch is often explained as letting the forehead touch the ground in prayer. Caps are embroidered and sewn by hand by makers in towns and villages across Sindh.
 
-_Model `processes/models/lumenary/sindhi-topi.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `engine/styles/sindhi-topi.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/sindhi-topi.json`; as captured from his site, `processes/sources/theory-pages/12-sindhi.md`; code `engine/styles/sindhi-topi.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

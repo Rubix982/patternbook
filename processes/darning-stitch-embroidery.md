@@ -52,6 +52,6 @@ _Coverage of a stitch: the distance from a pixel to the line of its stitch, whic
 
 **History:** Phulkari is the embroidery of Punjab, made in homes across what is now India and Pakistan, traditionally by the women of a family. A shawl called a bagh, which means garden, covers the whole cloth in silk stitches and was made for weddings and births, often begun when a girl was born and finished for her wedding. The floss was dyed in marigold, madder and indigo and sewn onto coarse hand-spun cotton called khaddar. After the Partition of 1947, families took their phulkaris with them, and the craft became a symbol of Punjabi heritage.
 
-_Model `processes/models/lumenary/phulkari.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `engine/styles/phulkari.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/phulkari.json`; as captured from his site, `processes/sources/theory-pages/13-southasia.md`; code `engine/styles/phulkari.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

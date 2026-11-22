@@ -1,0 +1,159 @@
+{
+ "id": "lumenary:y2k",
+ "name": "Y2K",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "early-2000s consumer-tech gloss: pale ramp, plastic highlight, sparkles, window frame (how)",
+ "note": null,
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "Early-2000s gloss: aqua and candy colour, chrome bevels, sparkles and a window frame.",
+  "theory_page": "processes/sources/theory-pages/01-design.md",
+  "code": "engine/styles/y2k.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Consumer electronics and early web design",
+  "era": "Late 1990s to early 2000s",
+  "bestOn": "Bright, friendly scenes and portraits"
+ },
+ "why": "Around the year 2000, computers were meant to look like candy. Translucent plastic, glossy buttons, chrome and sparkles all say optimism about the digital future. This treatment recreates that with a pale colour ramp, a curved white highlight like light on plastic, and four-pointed sparkles placed where the picture is bright.",
+ "how": [
+  "Map brightness through the colour ramp of the chosen scheme, with a gentle curve that lifts the shadows.",
+  "Fade a white highlight in from the top over a curved edge, like light on glossy plastic.",
+  "Scatter sparkles by trying random points and keeping the ones where the picture is bright enough.",
+  "Draw each sparkle as a four-pointed star with a soft glow.",
+  "Optionally set everything in a brushed-metal window with a title bar and three round buttons."
+ ],
+ "history": "The look grew from products such as the 1998 iMac G3 in translucent colours, glossy operating-system interfaces of the early 2000s, and the metallic, bubbly graphics of pop music and early websites. It disappeared under flat design in the 2010s and returned as nostalgia in the 2020s.",
+ "uses": [
+  "Nostalgic social posts",
+  "Cover art for pop releases",
+  "Fashion lookbooks and mood boards",
+  "Themed party graphics"
+ ],
+ "terms": [
+  [
+   "Gloss highlight",
+   "A bright curved band near the top of a shape that suggests a shiny surface."
+  ],
+  [
+   "Brushed metal",
+   "A metal finish with fine parallel scratches, imitated here with a gradient."
+  ],
+  [
+   "Bevel",
+   "A sloped edge, drawn with a light and a dark side."
+  ]
+ ],
+ "related": [
+  "vaporwave",
+  "retro-vhs",
+  "glassmorphism"
+ ],
+ "paragraphs": [
+  "Y2K design is glossy, pale and slightly translucent. Brightness goes through a colour ramp for the chosen scheme (with a gentle power curve that lifts the shadows), a white highlight fades from the top over a curved edge like light on plastic, and sparkles are scattered where the picture is bright. A sparkle is a four-pointed star, drawn with a soft white glow.",
+  "The optional window is a rectangle with a rounded hole cut into a brushed-metal gradient, a title bar in two of the scheme’s colours and three traffic-light buttons. Sparkle positions are chosen by trying random points and keeping those where the brightness beats a randomised threshold between 0.62 and 0.87."
+ ],
+ "primitives": [
+  "colour-ramp",
+  "importance-sampling",
+  "seeded-random",
+  "tone-curve"
+ ],
+ "equations": [
+  {
+   "tex": "C=\\operatorname{ramp}\\!\\big(L^{0.85};\\ \\text{scheme stops}\\big)",
+   "note": "Brightness through the scheme’s colour ramp.",
+   "primitives": [
+    "colour-ramp",
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{keep a sparkle at }(x,y)\\ \\text{if}\\ L(x,y)>0.62+0.25\\,\\xi,\\quad \\xi\\sim U(0,1)",
+   "note": "Rejection sampling: random points are kept only on bright places.",
+   "primitives": [
+    "importance-sampling",
+    "seeded-random"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "scheme",
+   "label": "Colour",
+   "type": "select",
+   "default": "aqua",
+   "options": [
+    "aqua",
+    "candy",
+    "chrome"
+   ]
+  },
+  {
+   "key": "gloss",
+   "label": "Gloss",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "sparkles",
+   "label": "Sparkles",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "window",
+   "label": "Window frame",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "title",
+   "label": "Window title",
+   "type": "text",
+   "default": "my_photo.jpg"
+  },
+  {
+   "key": "seed",
+   "label": "Scatter again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Candy pink with extra sparkles is pure 2001.",
+   "set": {
+    "scheme": "candy",
+    "sparkles": 90
+   }
+  },
+  {
+   "text": "Chrome and maximum gloss look like a liquid metal sticker.",
+   "set": {
+    "scheme": "chrome",
+    "gloss": 100
+   }
+  },
+  {
+   "text": "Drop the window to use the picture as a clean cover.",
+   "set": {
+    "window": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

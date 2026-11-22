@@ -1,0 +1,225 @@
+{
+ "id": "lumenary:phulkari",
+ "name": "Phulkari",
+ "physical": "yes",
+ "process": "darning-stitch-embroidery",
+ "process_name": "Darning-stitch embroidery",
+ "class": "stitch",
+ "basis": "why: untwisted silk carried across the weave in long straight darning stitches whose direction catches light; how: cell directions, joined stitches, silk sheen, khaddar weave",
+ "note": null,
+ "lumenary": {
+  "section": "M. South Asian and Islamic",
+  "kind": "still",
+  "blurb": "The picture embroidered in the Punjabi way: long silk stitches darned across rough hand-woven cloth, running one way in some blocks and the other in the next so the light catches them differently. A zigzag border closes it, as on a bride’s shawl.",
+  "theory_page": "processes/sources/theory-pages/13-southasia.md",
+  "code": "engine/styles/phulkari.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Punjab, in India and Pakistan",
+  "era": "An old Punjabi craft, at its height in the nineteenth century",
+  "bestOn": "Warm, bold pictures with clear shapes; faces and flowers"
+ },
+ "why": "Phulkari, which means flower work, is stitched from the back of the cloth. The embroiderer picks up a few threads of the weave at a time and carries untwisted silk floss across them in long straight stitches, so the whole pattern is built from straight lines of thread. Silk shines along its length, so stitches that run one way look different from those that run the other, and the design comes from putting the two directions side by side.",
+ "how": [
+  "Cut the picture into a grid of cells, each the width of one stitch.",
+  "Give each cell a direction, across or up and down, in diamonds, in squares, or along the picture’s own edges.",
+  "Join neighbouring cells of one direction into stitches of varied length that do not line up from row to row.",
+  "Colour each stitch from the average of the picture beneath it, matched to the nearest silk colour, with a little dither between colours.",
+  "Draw each stitch as a rounded thread with a shining band, and the cloth between as a slubby plain weave.",
+  "Add a gold line and a border of crimson and white teeth, as on a shawl."
+ ],
+ "history": "Phulkari is the embroidery of Punjab, made in homes across what is now India and Pakistan, traditionally by the women of a family. A shawl called a bagh, which means garden, covers the whole cloth in silk stitches and was made for weddings and births, often begun when a girl was born and finished for her wedding. The floss was dyed in marigold, madder and indigo and sewn onto coarse hand-spun cotton called khaddar. After the Partition of 1947, families took their phulkaris with them, and the craft became a symbol of Punjabi heritage.",
+ "uses": [
+  "Shawls, dupattas and wedding cloths",
+  "Cushions, bags and home textiles",
+  "Prints and posters of Punjabi heritage",
+  "Fashion and embroidery pattern design"
+ ],
+ "terms": [
+  [
+   "Phulkari",
+   "Punjabi embroidery whose name means flower work, in silk floss on coarse cotton cloth."
+  ],
+  [
+   "Darning stitch",
+   "A long straight stitch that picks up only a few threads of the cloth, worked from the back in phulkari."
+  ],
+  [
+   "Floss",
+   "Soft, untwisted silk or cotton thread used for embroidery."
+  ]
+ ],
+ "related": [
+  "embroidery",
+  "cross-stitch",
+  "ralli-patchwork",
+  "sindhi-mirror-embroidery"
+ ],
+ "paragraphs": [
+  "The cloth is a grid of square cells of width w = W/n, where n is the number of stitches across. Cell (i, j) takes its direction from the pattern. For diamonds it is floor((|i - i0| + |j - j0|)/b) mod 2, where b is the block size and (i0, j0) the middle; for squares, (floor(i/b) + floor(j/b)) mod 2; for the following mode, across if the vertical gradient of the picture’s brightness at the cell is larger than the horizontal one, since a thread should run along an edge. Along each row (for across stitches) or column (for up and down ones), runs of cells with the same direction are cut into stitches of round(L (0.55 + 0.45 h)) cells, where L is the length slider and h a hash of the position, so the lengths vary and the stitches do not line up.",
+  "A stitch takes the average of the picture under it, with its saturation raised by 35% and its contrast by 12%, plus a Bayer dither offset of up to 55 levels either way from the shading slider. If its brightness is below a threshold of 0 to 0.45 it is left as bare cloth; otherwise the colour is replaced by the nearest silk colour, by redmean distance. Each stitch is a capsule, a line with round ends, of radius 0.44 w. It is shaded as a cylinder lit from the upper left, with a bright band of sheen that is strongest on across stitches (62% as strong on the others) and a darker body for up and down stitches (0.86 against 1.04). The ends dive into the cloth at 58% brightness. The cloth is a plain weave, 0.8 + 0.2 (1/2 + 1/2 sin(2 pi x/p) sin(2 pi y/p)), with slubs from two stretched noises and a shadow beside every stitch."
+ ],
+ "primitives": [
+  "sdf-shape",
+  "seeded-random",
+  "stitch-grid"
+ ],
+ "equations": [
+  {
+   "tex": "d_{ij}=\\Big\\lfloor \\frac{|i-i_0|+|j-j_0|}{b}\\Big\\rfloor \\bmod 2",
+   "note": "The direction of the stitch in a cell, for diamonds: b is the block size and (i_0, j_0) the middle.",
+   "primitives": [
+    "stitch-grid"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{length}=\\operatorname{round}\\big(L\\,(0.55+0.45\\,h)\\big)",
+   "note": "Stitch length in cells: L is the length slider and h a hash of the position, from 0 to 1.",
+   "primitives": [
+    "stitch-grid",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "c=\\operatorname{clamp}\\big(\\rho-\\operatorname{dist}(\\mathbf p,\\ \\text{stitch})+\\tfrac12\\big),\\qquad \\rho=0.44\\,w",
+   "note": "Coverage of a stitch: the distance from a pixel to the line of its stitch, which has round ends.",
+   "primitives": [
+    "stitch-grid",
+    "sdf-shape"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "stitches",
+   "label": "Stitches across",
+   "type": "range",
+   "default": 90,
+   "min": 30,
+   "max": 160,
+   "step": 1
+  },
+  {
+   "key": "pattern",
+   "label": "Direction of the stitches",
+   "type": "select",
+   "default": "diamond",
+   "options": [
+    "diamond",
+    "check",
+    "flow",
+    "rows"
+   ]
+  },
+  {
+   "key": "block",
+   "label": "Size of the blocks",
+   "type": "range",
+   "default": 5,
+   "min": 2,
+   "max": 12,
+   "step": 1
+  },
+  {
+   "key": "float",
+   "label": "Length of a stitch",
+   "type": "range",
+   "default": 4,
+   "min": 1,
+   "max": 8,
+   "step": 1
+  },
+  {
+   "key": "palette",
+   "label": "Silk",
+   "type": "select",
+   "default": "classic",
+   "options": [
+    "classic",
+    "warm",
+    "picture",
+    "cream"
+   ]
+  },
+  {
+   "key": "ground",
+   "label": "Cloth",
+   "type": "select",
+   "default": "rust",
+   "options": [
+    "rust",
+    "indigo",
+    "natural",
+    "black"
+   ]
+  },
+  {
+   "key": "show",
+   "label": "Cloth showing through",
+   "type": "range",
+   "default": 18,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shade",
+   "label": "Shading between colours",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "sheen",
+   "label": "Shine of the silk",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "border",
+   "label": "Zigzag border",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Another hand",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Following the picture’s edges keeps the detail of a face better than diamonds do.",
+   "set": {
+    "pattern": "flow",
+    "stitches": 110
+   }
+  },
+  {
+   "text": "The picture’s own silk colours on indigo cloth give a modern shawl.",
+   "set": {
+    "palette": "picture",
+    "ground": "indigo"
+   }
+  },
+  {
+   "text": "Longer stitches and bigger blocks are closer to a true bagh.",
+   "set": {
+    "float": 7,
+    "block": 8,
+    "stitches": 60
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

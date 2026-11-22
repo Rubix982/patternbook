@@ -1,0 +1,143 @@
+{
+ "id": "lumenary:split-treatment",
+ "name": "Split Treatment",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "subject",
+ "basis": "a subject mask splits two treatments (how)",
+ "note": null,
+ "lumenary": {
+  "section": "N. Subject aware",
+  "kind": "still",
+  "blurb": "Two treatments in one picture: the subject gets one, and everything behind it gets another. Keep the subject true to life and let the world around it turn into a print, a heat map or a comic.",
+  "theory_page": null,
+  "code": "engine/styles/split-treatment.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Darkroom masking and print design",
+  "era": "A century of masks, automatic now",
+  "bestOn": "A clear subject against a busy or plain background"
+ },
+ "why": "Most treatments change the whole frame the same way, which can bury the subject in its own style. Here the subject and its surroundings are treated separately: keep the person true to life and turn the room into a heat map, or print the subject as a risograph on a real background. The contrast between the two looks is what makes the subject stand out, and a thin outline can seal the cut.",
+ "how": [
+  "Find the subject with a small neural network that runs on your own device, and get a map of where it is.",
+  "Put the whole picture through the treatment chosen for the surroundings.",
+  "Put the whole picture through the treatment chosen for the subject.",
+  "Cut the subject out of its version using the map, with a softened edge.",
+  "Grow the cutout into an outline, draw it over the surroundings, then draw the subject on top."
+ ],
+ "history": "Photographers have treated parts of a print differently since the darkroom, shading areas with cut paper masks and dodging and burning by hand. Layer masks brought the same idea to software in the 1990s, and finding the subject automatically with a neural network is the newest step. What used to take a careful pen tool selection now takes a second.",
+ "uses": [
+  "Portraits where the background should recede",
+  "Poster and cover artwork",
+  "Product shots with a stylised backdrop",
+  "Social media graphics"
+ ],
+ "terms": [
+  [
+   "Layer mask",
+   "A map that decides where a layer shows and where it is hidden."
+  ],
+  [
+   "Feathering",
+   "Softening the edge of a mask so the join does not look cut."
+  ],
+  [
+   "Compositing",
+   "Combining several pictures into one."
+  ]
+ ],
+ "related": [
+  "sticker",
+  "duotone",
+  "risograph"
+ ],
+ "paragraphs": [],
+ "primitives": [],
+ "equations": [],
+ "dials": [
+  {
+   "key": "subject",
+   "label": "Subject",
+   "type": "select",
+   "default": "original",
+   "options": [
+    "original",
+    "risograph",
+    "duotone",
+    "thermal-camera",
+    "comic-book",
+    "pixel-art",
+    "neon-glow"
+   ]
+  },
+  {
+   "key": "world",
+   "label": "Everything else",
+   "type": "select",
+   "default": "risograph",
+   "options": [
+    "original",
+    "risograph",
+    "cyanotype",
+    "pop-art",
+    "duotone",
+    "thermal-camera",
+    "comic-book",
+    "pixel-art",
+    "ascii-art",
+    "neon-glow"
+   ]
+  },
+  {
+   "key": "line",
+   "label": "Outline",
+   "type": "range",
+   "default": 6,
+   "min": 0,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "color",
+   "label": "Outline colour",
+   "type": "color",
+   "default": "#f5f5f5"
+  },
+  {
+   "key": "edge",
+   "label": "Soft edge",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Keep yourself real and turn the room into a heat map.",
+   "set": {
+    "subject": "original",
+    "world": "thermal-camera"
+   }
+  },
+  {
+   "text": "A thick outline gives a sticker feel.",
+   "set": {
+    "line": 26
+   }
+  },
+  {
+   "text": "Print the subject and keep the world real.",
+   "set": {
+    "subject": "risograph",
+    "world": "original",
+    "line": 0
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

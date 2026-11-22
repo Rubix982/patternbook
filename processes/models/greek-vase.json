@@ -1,0 +1,195 @@
+{
+ "id": "lumenary:greek-vase",
+ "name": "Greek Vase",
+ "physical": "yes",
+ "process": "slip-painting",
+ "process_name": "Slip painting on pottery",
+ "class": "glaze",
+ "basis": "why: one black glaze and the red of the clay, detail scratched or drawn; how: two-tone cut, black-figure incision or red-figure reserve, meander border",
+ "note": "Greek 'glaze' is a refined gloss slip; family glaze is the nearest.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "The picture painted onto the side of an ancient Greek vase. In black-figure the shapes are glossy black glaze on orange clay, with fine lines scratched through to the clay; in red-figure it is the other way round. Meander borders, the curve of the pot and the cracks of two thousand years finish it.",
+  "theory_page": "processes/sources/theory-pages/11-world.md",
+  "code": "engine/styles/greek-vase.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Ancient Greece: Corinth and Athens",
+  "era": "Black-figure from about 700 BC, red-figure from about 530 BC",
+  "bestOn": "Pictures with strong shapes and clear dark or light figures"
+ },
+ "why": "Greek vase painters had no colours to mix, only one black glaze and the red of the clay. So every figure had to be a silhouette, and detail had to be scratched or drawn as line. That limit made the style: bold shapes, the profile view, and a border of repeating pattern to hold the picture in. A photograph pressed through it loses its shading and keeps its outline, which is what a silhouette is for.",
+ "how": [
+  "Lift the local contrast, then cut the picture into two tones at a level set by how much is to be painted.",
+  "In black-figure the dark shapes are glaze on bare clay; in red-figure the light shapes are the clay and the ground is glazed.",
+  "Scratch fine lines through the glaze to the clay for black-figure, or draw them in glaze on the clay for red-figure.",
+  "Add red and white over the glaze where the picture is warm or cool, as painters did for cloth and skin.",
+  "Draw a meander border above and below, shade the pot darker towards its sides, and age it with stains and cracks."
+ ],
+ "history": "Black-figure pottery began in Corinth about 700 BC and was perfected in Athens, where painters drew figures in a slip that turned black in a three-stage firing and scratched details through to the clay. Around 530 BC the Andokides Painter and his circle reversed it: red-figure left the figures the colour of the clay and painted the ground, so that details could be drawn with a brush. The meander, or Greek key, is a running hook pattern and among the oldest decorations of the Greek world.",
+ "uses": [
+  "Museum shop prints and book covers",
+  "Packaging for olive oil, wine and food",
+  "Tattoo and ceramic design",
+  "Posters for classical events and plays"
+ ],
+ "terms": [
+  [
+   "Black-figure",
+   "A vase painting style in which figures are black glaze on the clay and details are scratched through it."
+  ],
+  [
+   "Red-figure",
+   "A vase painting style in which figures are left the colour of the clay and the ground is painted black."
+  ],
+  [
+   "Meander",
+   "A continuous line that turns back on itself in right angles, also called the Greek key."
+  ]
+ ],
+ "related": [
+  "greek-meander",
+  "byzantine-mosaic",
+  "hala-blue-pottery"
+ ],
+ "paragraphs": [
+  "The picture is first given a local contrast boost, T = l + 0.85 (l - l_bar), with l_bar a wide blur, after a small blur has taken out the grain. A threshold t, from 0.16 to 0.62 with the slider for how much is painted, cuts it in two with a soft edge of 0.035. For black-figure the glaze mask is G = smoothstep(t + 0.035, t - 0.035, T), the dark shapes; for red-figure it is 1 - smoothstep(1 - t - 0.035, 1 - t + 0.035, T), the ground. The mask is blurred and sharpened again with smoothstep(0.4, 0.6) so that outlines are smooth. The border is a row of meander hooks drawn as a stroked path on a separate canvas, and added to the mask.",
+  "The clay is a base colour times a mottling of fractal noise (plus or minus 10%), a fine grain and a slight darkening next to the glaze; the glaze is near black with a faint sheen of noise. Scratched lines are where the Sobel gradient of the brightness exceeds a limit that falls as the scratch slider rises, together with thin dark features; they are mixed in as clay colour inside the glaze for black-figure, and as glaze inside the clay for red-figure. For the added colours, the blurred picture is read where the glaze is: if its chroma is above 0.14 it is painted crimson where it is warmer than blue, and white where it is cooler. Finally the pot is shaded by 1 - 0.62 c s^2.3, where s is the distance from the centre line (0 to 1) and c the curve slider, with a soft highlight on the left, and aged by stains, a net of cracks from the edges of a cellular (Voronoi) pattern, and a few chips of bare clay."
+ ],
+ "primitives": [
+  "crackle-network",
+  "cylinder-shading",
+  "soft-threshold",
+  "unsharp-mask"
+ ],
+ "equations": [
+  {
+   "tex": "T=\\ell+0.85\\,(\\ell-\\bar\\ell),\\qquad G=\\operatorname{smoothstep}(t+0.035,\\ t-0.035,\\ T)",
+   "note": "Black-figure: the glaze mask G is where the boosted brightness T falls below the threshold t.",
+   "primitives": [
+    "unsharp-mask",
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{shade}=1-0.62\\,c\\,|2u-1|^{2.3}",
+   "note": "The curve of the pot: u is the position across the picture (0 to 1) and c the curve slider.",
+   "primitives": [
+    "cylinder-shading"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{crack}=1-\\operatorname{smoothstep}\\big(0.5\\sigma,\\ 1.5\\sigma,\\ 0.9\\,(d_2-d_1)\\big)",
+   "note": "A net of cracks from a Voronoi pattern: d_1 and d_2 are the distances to the nearest and second nearest points, and sigma is the picture scale.",
+   "primitives": [
+    "crackle-network"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "mode",
+   "label": "Technique",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "red"
+   ]
+  },
+  {
+   "key": "figures",
+   "label": "How much is painted",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "incise",
+   "label": "Scratched detail",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "clay",
+   "label": "Clay",
+   "type": "select",
+   "default": "attic",
+   "options": [
+    "attic",
+    "corinth",
+    "pale"
+   ]
+  },
+  {
+   "key": "accent",
+   "label": "Added red and white",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "border",
+   "label": "Meander borders",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "curve",
+   "label": "Curve of the pot",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "age",
+   "label": "Age and wear",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Another pot",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Red-figure on pale clay gives the crisp look of a classical vase painting.",
+   "set": {
+    "mode": "red",
+    "clay": "pale"
+   }
+  },
+  {
+   "text": "More painted area and strong scratching keep the details of a face.",
+   "set": {
+    "figures": 62,
+    "incise": 85
+   }
+  },
+  {
+   "text": "Less age and no border make it a clean, modern pot design.",
+   "set": {
+    "age": 10,
+    "border": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

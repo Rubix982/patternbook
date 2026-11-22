@@ -1,0 +1,190 @@
+{
+ "id": "lumenary:ink-wash",
+ "name": "Ink Wash",
+ "physical": "yes",
+ "process": "ink-wash-painting",
+ "process_name": "Ink wash painting",
+ "class": "painting",
+ "basis": "why: every tone from a few dilutions of one ink; how: tone levels, ink soaking sideways, tide-line, dry-brush streaks",
+ "note": null,
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "Sumi-e: a few layers of diluted black ink, soft bleeds, one dry-brush stroke and a great deal of empty paper.",
+  "theory_page": "processes/sources/theory-pages/07-painterly.md",
+  "code": "engine/styles/ink-wash.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "China and Japan",
+  "era": "Tang dynasty onward, Zen painting from the 14th century",
+  "bestOn": "Mountains, trees, flowers and calm portraits"
+ },
+ "why": "Sumi-e builds every tone from a few dilutions of one ink and leaves most of the paper bare. The empty space is not a gap but part of the picture, and a stroke is meant to be seen as a gesture. This treatment gives the picture a few flat washes, lets the ink bleed into damp paper, drags a dry brush across the darks and adds a red seal.",
+ "how": [
+  "Measure the picture’s darkness, stretched and blurred, and rescale it from a lower bound that moves with the how-much-is-inked slider.",
+  "Multiply by the number of tone levels and let the integer part be the tone, with a smoothstep ramp up to the next tone.",
+  "Blur the result twice to show ink soaking sideways, and wobble the lookup a little with the bleed slider.",
+  "Darken the ink where it has an edge, the tide-line a drying wash leaves.",
+  "Remove ink with long dry-brush streaks in the dark areas, and multiply an optional red seal onto the lower right corner."
+ ],
+ "history": "Ink painting flourished in China under the Tang and Song dynasties and was carried to Japan by Zen monks, where Sesshū Tōyō (1420 to 1506) became its great master. Its tools are called the four treasures: brush, ink, paper and inkstone. The aesthetic of empty space, and of capturing the spirit of a subject in a few strokes, influenced Western painting and graphic design.",
+ "uses": [
+  "Calm posters and wall art",
+  "Tea house, wellness and brand imagery",
+  "Greeting cards and invitations",
+  "Book covers with an Eastern feel"
+ ],
+ "terms": [
+  [
+   "Sumi-e",
+   "Japanese for ink picture: painting in black ink."
+  ],
+  [
+   "Chop",
+   "A carved seal stamped in red ink to sign a painting."
+  ],
+  [
+   "Dry brush",
+   "A stroke made with little ink, leaving gaps where the paper shows."
+  ]
+ ],
+ "related": [
+  "watercolour",
+  "charcoal-sketch",
+  "cyanotype"
+ ],
+ "paragraphs": [
+  "Sumi-e builds its tones from a few dilutions of one ink and leaves most of the paper bare. The picture’s darkness d (the stretched lightness, blurred twice at a radius of 3 px, inverted) is rescaled from a lower bound l₀ that moves with the how-much-is-inked slider, then multiplied by the number of tone levels K. The integer part of the result is the tone and the fractional part is pushed up to the next tone by a smoothstep, so each tone is a flat wash with a short ramp between neighbours, like layers of diluted ink laid one over another. The result is blurred twice more, 1 to 7 px, which is the ink soaking sideways into damp paper.",
+  "At draw time the lookup wobbles a little (up to ±2.5 px × bleed). Where the ink has an edge it is darker by up to half again, the tide-line that a drying wash leaves. Dry brush is a set of long streaks, tilted slightly, that remove up to 62% of the ink in the dark areas, the white skips of a quick stroke from a nearly dry brush. Paper fibre varies the ink by ±10%, and the final colour is paper and ink mixed by the concentration v. An optional red seal (a chop) is multiplied onto the lower right corner."
+ ],
+ "primitives": [
+  "mix-over",
+  "soft-threshold",
+  "tone-bands",
+  "tooth-threshold"
+ ],
+ "equations": [
+  {
+   "tex": "t=K\\,\\operatorname{smoothstep}(l_0,\\ 1,\\ d),\\qquad v=\\min\\!\\Big(1,\\ \\frac{1.02}{K}\\big(\\lfloor t\\rfloor+\\operatorname{smoothstep}(0.55,\\,1,\\ t-\\lfloor t\\rfloor)\\big)\\Big),\\qquad l_0=0.6-0.5\\,a",
+   "note": "Flat tones with short ramps; a is the how-much-is-inked slider.",
+   "primitives": [
+    "tone-bands",
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "v\\ \\leftarrow\\ v\\,\\Big[1-0.62\\,D\\,\\operatorname{smoothstep}(0.58,\\,0.85,\\ \\sigma)\\,\\operatorname{smoothstep}(0.35,\\,0.8,\\ v)\\Big]",
+   "note": "Dry brush: σ is a noise stretched along the stroke direction, D the dry brush slider.",
+   "primitives": [
+    "tooth-threshold",
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=C_{\\text{paper}}\\,(1-v)+C_{\\text{ink}}\\,v",
+   "note": "The ink concentration v mixes ink over paper.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "amount",
+   "label": "How much is inked",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "tones",
+   "label": "Layers of ink",
+   "type": "range",
+   "default": 4,
+   "min": 2,
+   "max": 6,
+   "step": 1
+  },
+  {
+   "key": "bleed",
+   "label": "Bleed",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "dry",
+   "label": "Dry brush",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ink",
+   "label": "Ink",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "indigo",
+    "sepia"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "rice",
+   "options": [
+    "rice",
+    "white",
+    "tea"
+   ]
+  },
+  {
+   "key": "seal",
+   "label": "Red seal",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "New brushwork",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Few layers of ink with lots of paper is the most meditative.",
+   "set": {
+    "tones": 2,
+    "amount": 35
+   }
+  },
+  {
+   "text": "Indigo ink on white paper looks cool and modern.",
+   "set": {
+    "ink": "indigo",
+    "paper": "white"
+   }
+  },
+  {
+   "text": "Heavy dry brush leaves the white skips of a quick stroke.",
+   "set": {
+    "dry": 95
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

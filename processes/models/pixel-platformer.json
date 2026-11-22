@@ -1,0 +1,164 @@
+{
+ "id": "lumenary:pixel-platformer",
+ "name": "Pixel Platformer",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "digital",
+ "basis": "game tile-map conventions (how)",
+ "note": null,
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "Your picture as a level from a sixteen-bit platform game: the dark parts become solid blocks, every ledge grows grass, coins hang above it and a score bar runs along the top.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/pixel-platformer.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Side-scrolling platform games",
+  "era": "1985 to the mid 1990s",
+  "bestOn": "Pictures with clear light and dark areas"
+ },
+ "why": "A platform level is a grid. Every square is either something to stand on or empty air, and a whole world is built from a small set of tiles. Treat the dark parts of a picture as ground and the light parts as sky and it becomes such a level: blocks, ledges with grass, coins to collect and a score along the top.",
+ "how": [
+  "Divide the picture into tiles of eight game pixels.",
+  "Average each tile for its colour and brightness.",
+  "Sort the brightnesses and make the darkest share of the tiles solid.",
+  "Draw solid tiles as bevelled brick blocks, and put grass on every block with air above it.",
+  "Show the picture itself, coarsely, in the open tiles.",
+  "Hang coins above some ledges, stand the little explorer on one, and draw the score bar."
+ ],
+ "history": "Donkey Kong (1981) made jumping between platforms a game, and Super Mario Bros. (1985) made the level scroll. Consoles of the time drew the screen from a table of small tiles, usually 8 by 8 pixels, because memory was too scarce to store whole pictures. The 16-bit machines that followed around 1990 kept the tiles and added more colours and layers. Tile maps are still how most 2D games are built.",
+ "uses": [
+  "Birthday and invitation cards",
+  "Game-themed profile pictures",
+  "Classroom and coding club posters",
+  "Retro thumbnails for videos"
+ ],
+ "terms": [
+  [
+   "Tile",
+   "A small square image reused many times to build a level."
+  ],
+  [
+   "Tile map",
+   "The grid that says which tile goes where."
+  ],
+  [
+   "Sprite",
+   "A small picture, such as a character or a coin, drawn over the background."
+  ]
+ ],
+ "related": [
+  "pixel-art",
+  "lego-voxel",
+  "retro-console"
+ ],
+ "paragraphs": [
+  "A tile is eight game pixels square, and the number of tiles across fixes the size of a game pixel. The picture is sampled at four by four points per tile; their average gives the tile its colour and its brightness. Which tiles are solid is decided by rank, not by a fixed brightness: all the tile brightnesses are sorted, and the value at the chosen fraction of the list becomes the threshold. A dark photograph and a pale one therefore both produce a level with the same share of ground.",
+  "A solid tile is drawn as a block: its colour, a lighter edge above and to the left, a darker edge below and to the right, and two courses of brick. A solid tile with open air above it is a ledge and grows a cap of grass with a ragged lower edge. Open tiles show the picture itself at four blocks to the tile, so it stays readable behind the level. Colours are made more saturated and then rounded to 32 levels a channel, which is how sixteen-bit consoles stored them. A coin is hung above a ledge with a probability set by the slider, wherever the two tiles above it are free."
+ ],
+ "primitives": [
+  "tone-bands"
+ ],
+ "equations": [
+  {
+   "tex": "g=\\operatorname{round}\\!\\Big(\\frac{W}{8\\,n}\\Big),\\qquad T=8\\,g",
+   "note": "Size of a game pixel g and of a tile T, from the canvas width W and n tiles across.",
+   "primitives": [],
+   "bespoke": "layout"
+  },
+  {
+   "tex": "\\theta=L_{(\\lceil q\\,N\\rceil)},\\qquad \\text{solid}\\iff L_{ij}\\le\\theta",
+   "note": "The threshold is the brightness of the tile at rank qN in sorted order; q is the “how much is solid” slider.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "c'=\\frac{255}{31}\\,\\operatorname{round}\\!\\Big(\\frac{31\\,c}{255}\\Big)",
+   "note": "Five bits a channel: 32 levels.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "tiles",
+   "label": "Tiles across",
+   "type": "range",
+   "default": 24,
+   "min": 12,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "ground",
+   "label": "How much is solid",
+   "type": "range",
+   "default": 45,
+   "min": 15,
+   "max": 85,
+   "step": 1
+  },
+  {
+   "key": "palette",
+   "label": "Palette",
+   "type": "select",
+   "default": "console",
+   "options": [
+    "console",
+    "dusk",
+    "handheld",
+    "picture"
+   ]
+  },
+  {
+   "key": "coins",
+   "label": "Coins",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "hud",
+   "label": "Score bar",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "New level",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "More solid tiles turn the picture into a cave.",
+   "set": {
+    "ground": 70
+   }
+  },
+  {
+   "text": "Small tiles keep more of the picture.",
+   "set": {
+    "tiles": 38,
+    "coins": 20
+   }
+  },
+  {
+   "text": "The green handheld palette has just four shades.",
+   "set": {
+    "palette": "handheld"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

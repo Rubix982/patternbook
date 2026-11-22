@@ -1,0 +1,166 @@
+{
+ "id": "lumenary:voronoi-mosaic",
+ "name": "Voronoi Mosaic",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "Voronoi cells with Lloyd relaxation (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "Scatter points, give every pixel to its nearest one, and paint each cell its average colour. More points gather where the picture has detail.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/voronoi-mosaic.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Mathematics and geography",
+  "era": "Dirichlet 1850, Voronoy 1908",
+  "bestOn": "Pictures with strong edges"
+ },
+ "why": "Scatter some points and give every spot on the page to whichever point is nearest. The result is a set of irregular cells that look like cracked glaze, giraffe skin, dried mud and soap bubbles, because nature often grows from seeds that claim the space around them. More points in the detailed parts of a picture make smaller cells there.",
+ "how": [
+  "Place seeds by rejection sampling: accept a random point with a probability that is high at strong edges (Sobel strength) and low in flat areas.",
+  "Label every pixel with its nearest seed using jump flooding, which takes about log₂ of the picture size in passes rather than checking every seed.",
+  "Run Lloyd relaxation: move each seed to the weighted centre of its cell, and relabel. A few rounds even out the cells.",
+  "Paint each cell with the average colour of the picture inside it.",
+  "Draw borders and a faceting gradient on top for a look of glaze."
+ ],
+ "history": "Descartes drew such diagrams in 1644 to show the distribution of matter in the heavens. Peter Gustav Lejeune Dirichlet used them in 1850 and Georgy Voronoy generalised them in 1908. Physician John Snow’s 1854 map of cholera deaths around the Broad Street pump is often described as an informal example. Stuart Lloyd’s relaxation was written in 1957 and published in 1982, and Adrian Secord used weighted Voronoi diagrams for stippling in 2002.",
+ "uses": [
+  "Finding the nearest hospital, shop or station",
+  "Terrain and map generation in games",
+  "Crack and cell textures in 3D art",
+  "Mesh generation in engineering"
+ ],
+ "terms": [
+  [
+   "Voronoi cell",
+   "The region of points that are nearer to one seed than to any other."
+  ],
+  [
+   "Lloyd relaxation",
+   "Moving each seed to the centre of its cell to make cells more even."
+  ],
+  [
+   "Jump flooding",
+   "A fast way to find the nearest seed for every pixel."
+  ]
+ ],
+ "related": [
+  "stained-glass",
+  "low-poly",
+  "poisson-stippling"
+ ],
+ "paragraphs": [
+  "The Voronoi cell of a seed is the set of points nearer to that seed than to any other. Here the seeds are scattered by rejection sampling: a random point is accepted with probability equal to an importance value that is high where the picture has strong edges (the Sobel strength, scaled to its maximum and boosted ×2.2) and low (0.06) where it is flat, so cells crowd together around the detail. The gather-in-detail slider mixes this importance with a uniform 1. Every pixel is given the label of its nearest seed by jump flooding, which finds nearest seeds in about log₂ of the picture size passes instead of comparing against all of them.",
+  "Lloyd relaxation then moves each seed to the centroid of its cell, weighted by the importance squared, and the labels are recomputed. A few rounds even out the cells and give the soft, almost organic look of a cracked glaze, while still keeping more of them where the picture is detailed. Each cell is painted with the mean colour of the picture within it. The faceting slider adds a gentle dome of light across each cell, and the borders slider darkens the pixels next to a neighbouring cell by up to 55%."
+ ],
+ "primitives": [
+  "importance-sampling",
+  "voronoi-cells"
+ ],
+ "equations": [
+  {
+   "tex": "\\lambda(\\mathbf x)=\\arg\\min_{i}\\ \\lVert\\mathbf x-\\mathbf s_i\\rVert,\\qquad P(\\text{accept }\\mathbf s)=\\text{imp}(\\mathbf s)",
+   "note": "Cell labels, and the rejection rule for seeds.",
+   "primitives": [
+    "voronoi-cells",
+    "importance-sampling"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{imp}=(1-\\delta)+\\delta\\,\\Big(0.06+0.94\\,\\min\\!\\big(1,\\ 2.2\\,\\tfrac{E}{E_{\\max}}\\big)\\Big)",
+   "note": "Importance: E is the edge strength, δ the gather-in-detail slider.",
+   "primitives": [
+    "importance-sampling"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf s_i\\leftarrow\\frac{\\sum_{\\mathbf x\\in V_i}w(\\mathbf x)\\,\\mathbf x}{\\sum_{\\mathbf x\\in V_i}w(\\mathbf x)},\\qquad w=\\text{imp}^{2}+0.002",
+   "note": "One round of Lloyd relaxation.",
+   "primitives": [],
+   "bespoke": "specific"
+  }
+ ],
+ "dials": [
+  {
+   "key": "cells",
+   "label": "Cells",
+   "type": "range",
+   "default": 700,
+   "min": 60,
+   "max": 3000,
+   "step": 10
+  },
+  {
+   "key": "detail",
+   "label": "Gather in detail",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "relax",
+   "label": "Even out the cells",
+   "type": "range",
+   "default": 1,
+   "min": 0,
+   "max": 3,
+   "step": 1
+  },
+  {
+   "key": "edge",
+   "label": "Cell borders",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "bevel",
+   "label": "Faceting",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Scatter again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Thousands of cells make a fine stained-glass portrait.",
+   "set": {
+    "cells": 2000,
+    "edge": 20
+   }
+  },
+  {
+   "text": "Few cells and strong faceting look like low-poly glass.",
+   "set": {
+    "cells": 150,
+    "bevel": 85
+   }
+  },
+  {
+   "text": "No relaxing leaves the cells random and uneven.",
+   "set": {
+    "relax": 0
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

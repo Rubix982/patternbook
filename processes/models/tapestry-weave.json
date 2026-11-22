@@ -1,0 +1,155 @@
+{
+ "id": "lumenary:tapestry-weave",
+ "name": "Tapestry Weave",
+ "physical": "yes",
+ "process": "tapestry-weaving",
+ "process_name": "Tapestry weaving",
+ "class": "weaving",
+ "basis": "why: coloured weft packed over a hidden warp in horizontal rows; how: rows of cells, wool palette, round passes, warp dips, fringe",
+ "note": null,
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "A hand-woven wall hanging: wool passes laid row on row over hidden warp threads, in a few earthy yarns, with a fringe.",
+  "theory_page": "processes/sources/theory-pages/06-craft.md",
+  "code": "engine/styles/tapestry-weave.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Weaving workshops of Europe, the Middle East and the Americas",
+  "era": "Many centuries",
+  "bestOn": "Landscapes and simple scenes with clear colour regions"
+ },
+ "why": "In tapestry the coloured weft is passed back and forth over a hidden warp and packed so tightly that the warp disappears and the picture is built of horizontal rows. A pass of wool is round, so it is bright in its middle and dark where it dips, and hand beaten rows never run quite straight. These details turn a neat mosaic into something woven.",
+ "how": [
+  "Divide the picture into rows (passes of weft) and into cells about as wide as a row is tall, and take one colour per cell.",
+  "Limit the colours to k wool colours by k-means.",
+  "Shift odd rows by half a cell, as in real weaving, and wave the row boundaries a little with the wobble slider.",
+  "Light each pass as a round strand, with a sine raised to the power 0.55, and alternate cells slightly in brightness to show the over and under.",
+  "Show the dark warp where each row dips, and draw loose warp ends as a fringe at the bottom."
+ ],
+ "history": "Woven tapestries hung in medieval castles and cathedrals. The Gobelins manufactory in Paris was established in the seventeenth century, and the Renaissance painter Raphael designed cartoons in 1515 and 1516 for tapestries for the Sistine Chapel. In the twentieth century the Bauhaus weaving workshop, with artists such as Anni Albers, made tapestry a modern art.",
+ "uses": [
+  "Wall hanging and textile design ideas",
+  "Craft and heritage themed visuals",
+  "Warm, earthy poster art",
+  "Cover art with a handmade feel"
+ ],
+ "terms": [
+  [
+   "Warp",
+   "The fixed lengthwise threads on a loom."
+  ],
+  [
+   "Weft",
+   "The crosswise thread that is woven through the warp."
+  ],
+  [
+   "Cartoon",
+   "A full-size design used as a pattern for a tapestry or fresco."
+  ]
+ ],
+ "related": [
+  "cross-stitch",
+  "navajo-weave",
+  "fabric-folds"
+ ],
+ "paragraphs": [
+  "In a tapestry the weft, a coloured wool, is passed back and forth over a hidden warp, packed so tightly that the warp disappears and the picture is made of horizontal rows. The program divides the picture into rows (the passes of weft slider) and into cells about as wide as a row is tall, takes one colour per cell from a picture of that size, and limits the colours to k wool colours by k-means. Odd rows are shifted by half a cell, as in real weaving, and the row boundaries wave a little (the wobble slider) because hand-beaten weft is never straight.",
+  "The lighting is within each row: a pass of wool is round, so it is bright in the middle and dark where it dips against its neighbours, a sine raised to the power 0.55. Cells alternate slightly in brightness in a checkerboard to show the over-under of the weave. Fine noise along the row is the fuzz of the wool. Where the row dips, the dark warp shows through, by an amount set by the visible-warp slider. The fringe at the bottom is the loose ends of the warp, drawn as pale curved threads."
+ ],
+ "primitives": [
+  "cylinder-shading",
+  "soft-threshold"
+ ],
+ "equations": [
+  {
+   "tex": "k=\\big(0.34+0.8\\,b\\big)\\,o\\,\\Big(0.9+0.1\\sin\\pi f_x\\Big),\\qquad b=\\big(\\sin\\pi f_y\\big)^{0.55}",
+   "note": "Brightness of the wool: f_y and f_x are the positions across the row and across the cell (0 to 1), o is 1 or 0.9 in a checkerboard.",
+   "primitives": [
+    "cylinder-shading"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "k\\leftarrow k\\,\\Big(1-\\omega\\,g\\,\\big(0.35+0.35\\,w\\big)\\Big),\\ \\ w=\\tfrac12+\\tfrac12\\sin\\tfrac{2\\pi x}{c},\\qquad g=1-\\operatorname{smoothstep}\\big(0,\\ 0.14,\\ \\min(f_y,1-f_y)\\big)",
+   "note": "The warp showing through at the edges of a row; ω is the visible-warp slider, c the cell width and the sine-based factor the pattern of the hidden warp threads.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "rows",
+   "label": "Passes of weft",
+   "type": "range",
+   "default": 84,
+   "min": 40,
+   "max": 160,
+   "step": 1
+  },
+  {
+   "key": "yarns",
+   "label": "Colours of wool",
+   "type": "range",
+   "default": 7,
+   "min": 3,
+   "max": 12,
+   "step": 1
+  },
+  {
+   "key": "warp",
+   "label": "Visible warp",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wobble",
+   "label": "Hand-woven wobble",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "fringe",
+   "label": "Fringe",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Re-weave",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Many fine passes look like a detailed Gobelins panel.",
+   "set": {
+    "rows": 140,
+    "yarns": 10
+   }
+  },
+  {
+   "text": "High wobble gives a very hand-woven look.",
+   "set": {
+    "wobble": 95
+   }
+  },
+  {
+   "text": "Remove the fringe for a framed tapestry.",
+   "set": {
+    "fringe": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

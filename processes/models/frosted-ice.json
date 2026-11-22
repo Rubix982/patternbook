@@ -1,0 +1,173 @@
+{
+ "id": "lumenary:frosted-ice",
+ "name": "Frosted Ice",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "procedural frost: heavy blur, ridged-noise crystals, a wiped patch (how)",
+ "note": "Natural phenomenon.",
+ "lumenary": {
+  "section": "D. Light, colour and glass",
+  "kind": "still",
+  "blurb": "A frozen window: the picture blurs behind crystals, with one wiped patch where it shows clearly.",
+  "theory_page": "processes/sources/theory-pages/04-light.md",
+  "code": "engine/styles/frosted-ice.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Cold windows",
+  "era": "Always",
+  "bestOn": "Pictures with a clear subject near the middle"
+ },
+ "why": "Frost scatters light, so a frozen window blurs everything behind it and leaves crystal ridges that look like cracks and feathers. A clear patch wiped by a hand shows the scene sharply for a moment. This treatment blurs the picture strongly, grows crystals from layered noise, and wipes one patch clean.",
+ "how": [
+  "Blur each colour channel strongly with two box blurs.",
+  "Bend the coordinates with two layers of smooth value noise.",
+  "Compute a ridged version of the noise, 1 minus the absolute value of 2n minus 1, at two scales, so lines appear where the noise crosses its middle.",
+  "Raise it to the fifth power to keep only the strongest ridges, add sparkle, and push the colours toward pale blue, thicker near the edges of the pane.",
+  "Wipe a curved patch where the sharp picture shows, with its edge wobbled by noise and a brighter ridge just outside."
+ ],
+ "history": "Window frost forms when water vapour freezes directly onto cold glass, without becoming liquid first. Wilson Bentley photographed snow crystals through a microscope from 1885, and in the 1930s Ukichiro Nakaya began growing and classifying them in a laboratory. Frost patterns have inspired ornament for centuries, from lace to engraved glass.",
+ "uses": [
+  "Winter greeting cards and posters",
+  "Cosy social posts",
+  "Backgrounds for seasonal campaigns",
+  "Mood and weather illustrations"
+ ],
+ "terms": [
+  [
+   "Ridged noise",
+   "Noise folded so that its middle value becomes a sharp ridge."
+  ],
+  [
+   "Domain warp",
+   "Bending the coordinates before looking something up."
+  ],
+  [
+   "Scatter",
+   "The spreading of light in many directions by a rough or crystalline surface."
+  ]
+ ],
+ "related": [
+  "glassmorphism",
+  "glass-refraction",
+  "aurora"
+ ],
+ "paragraphs": [
+  "Frosted glass scatters light, so the first step is blurring the picture strongly, each colour channel separately, with two box blurs. The frost itself is made from noise. Two layers of smooth value noise bend the coordinates (a “warp”), and a ridged version of the noise, 1 − |2n − 1|, is computed at two scales, so lines appear where the noise crosses its middle value: they look like cracks and crystal edges. Raising that to the fifth power keeps only the strongest ridges. A scatter of single bright pixels adds sparkle, and the same warp shifts the blurred picture sideways by a few pixels, as ice does.",
+  "Frost is thicker toward the edges of a pane, so its amount grows with distance from the centre. The result is pushed toward a pale icy blue. Finally comes the clear patch, a stroke wiped by a hand: the distance of each pixel to a curved path of points, wobbled by low-frequency noise so the edge is not a perfect ellipse. Inside the stroke the sharp picture shows; just outside it, the wiped-away frost piles up in a brighter ridge."
+ ],
+ "primitives": [
+  "coordinate-warp",
+  "mix-over",
+  "sdf-shape",
+  "sheet-edge",
+  "smooth-noise"
+ ],
+ "equations": [
+  {
+   "tex": "q=1-\\lvert 2\\,n(x\\,\\phi+5w_x,\\ y\\,\\phi+5w_y)-1\\rvert,\\qquad \\text{crystal}=(0.65\\,q_1+0.35\\,q_2)^{5}",
+   "note": "Ridged noise at two scales, with warp w; φ is the frost frequency (a little lower vertically).",
+   "primitives": [
+    "smooth-noise",
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{white}=\\operatorname{clamp}\\!\\big(f\\,(0.14+0.55\\,\\text{crystal})+0.22\\,f\\,\\varsigma\\big),\\qquad f=\\phi_0\\,(0.55+0.45\\,e)",
+   "note": "How much white frost covers a pixel: φ₀ is the frost slider, e the nearness to the pane edge and ς 1 on sparkle pixels.",
+   "primitives": [
+    "sheet-edge"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C\\leftarrow C+(C_{\\text{ice}}-C)\\,(0.28\\,f+0.7\\,\\text{white}),\\qquad m=1-\\operatorname{smoothstep}\\big(0.84\\,\\rho_0,\\ 0.97\\,\\rho_0,\\ d\\big)",
+   "note": "Tint toward pale ice; m is how clear the wiped patch is at distance d from its path, of radius ρ₀.",
+   "primitives": [
+    "mix-over",
+    "sdf-shape"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "frost",
+   "label": "Frost",
+   "type": "range",
+   "default": 75,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "blur",
+   "label": "Blur",
+   "type": "range",
+   "default": 14,
+   "min": 2,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "size",
+   "label": "Clear patch",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "x",
+   "label": "Patch across",
+   "type": "range",
+   "default": 52,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "y",
+   "label": "Patch down",
+   "type": "range",
+   "default": 46,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Refreeze",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Heavy frost with a small clear patch hides almost everything.",
+   "set": {
+    "frost": 95,
+    "size": 25
+   }
+  },
+  {
+   "text": "Move the wiped patch to the side to reveal another part of the scene.",
+   "set": {
+    "x": 25,
+    "y": 70
+   }
+  },
+  {
+   "text": "Light frost with low blur is a gentle misting.",
+   "set": {
+    "frost": 35,
+    "blur": 6
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

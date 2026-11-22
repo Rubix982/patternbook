@@ -55,6 +55,6 @@ _The centre of sign i, counted from the right-hand end of the band._ (written fo
 
 **History:** The seals are mostly carved in steatite, a soft stone, and most are read from right to left, since the signs crowd toward the left end when the carver ran out of room. Mohenjo-daro was excavated from the 1920s and is a UNESCO World Heritage Site. The script of about four hundred signs has resisted every attempt to decipher it. The signs here are random strokes and do not spell anything.
 
-_Model `processes/models/lumenary/indus-seal.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `engine/styles/indus-seal.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/indus-seal.json`; as captured from his site, `processes/sources/theory-pages/12-sindhi.md`; code `engine/styles/indus-seal.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

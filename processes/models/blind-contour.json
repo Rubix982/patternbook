@@ -1,0 +1,171 @@
+{
+ "id": "lumenary:blind-contour",
+ "name": "Blind Contour",
+ "physical": "yes",
+ "process": "pen-and-ink-drawing",
+ "process_name": "Pen and ink drawing",
+ "class": "drawing",
+ "basis": "why: one continuous pen line that wanders near the edge; how: edges chained into one drifting curved line",
+ "note": "Models the drawing exercise's behaviour; the pen itself is implied, not modelled.",
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "A drawing made without looking at the page: one wandering pen line follows the outlines of the picture and drifts a little off the edge.",
+  "theory_page": "processes/sources/theory-pages/07-painterly.md",
+  "code": "engine/styles/blind-contour.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Art school drawing exercises",
+  "era": "20th century",
+  "bestOn": "Objects and faces with clear outlines"
+ },
+ "why": "In a blind contour drawing the artist looks only at the subject and never at the page, with the pen kept on the paper. The line wanders and lands near the edge but not on it, and the result is more alive than a careful tracing. This treatment finds the edges, chains them into one continuous pen line and lets it drift.",
+ "how": [
+  "Find the picture’s edges with the Sobel gradient of a lightly blurred, stretched lightness.",
+  "Divide the picture into small cells and keep the strongest edge pixel in each if it passes a threshold.",
+  "Chain the points: start at one, jump to the nearest unused point within 2.6 cells, and repeat until none is near enough, then lift the pen and start again.",
+  "Drop lines shorter than four points.",
+  "Add drift to every point, smooth noise along the drawing plus a little jitter, and join them with quadratic curves through the midpoints so the line has no corners."
+ ],
+ "history": "The exercise was popularised by the art teacher Kimon Nicolaïdes in his 1941 book The Natural Way to Draw, and later by Betty Edwards’s Drawing on the Right Side of the Brain. It trains the eye to see edges as they are rather than as we assume them to be, and it has become a common warm-up in art classes.",
+ "uses": [
+  "Line drawing posters and cards",
+  "Editorial and sketchbook style art",
+  "Art class demonstrations",
+  "Minimal portrait prints"
+ ],
+ "terms": [
+  [
+   "Contour",
+   "The outline of a shape."
+  ],
+  [
+   "Quadratic curve",
+   "A smooth curve defined by two end points and one control point."
+  ],
+  [
+   "Pen lift",
+   "A break in a line where the pen leaves the paper."
+  ]
+ ],
+ "related": [
+  "pencil-hatching",
+  "charcoal-sketch",
+  "contour-lines"
+ ],
+ "paragraphs": [
+  "In a blind contour drawing the artist looks at the subject, never at the page, and the pen stays on the paper, so the line wanders and lands near but not on the edge. The program first finds the edges (the Sobel gradient of a lightly blurred, stretched lightness). It divides the picture into cells of 3 to 6.5 px, depending on the detail slider, and keeps the strongest edge pixel in each cell if it is above a threshold between 0.03 and 0.1. These points are then chained. Start at the first unused point, jump to the nearest unused point within 2.6 cells, and repeat until nothing is near enough; then lift the pen and start a new line. Lines shorter than four points are dropped. A grid of cells makes the nearest-point search fast.",
+  "The wandering is added to every point: smooth noise travelling along the drawing (up to 14 px at full drift) plus a little random jitter (35% of that). The points are joined with quadratic curves that pass through the midpoints between neighbours, which turns a polyline into one continuous pen line with no corners. Each stroke has its own width (0.8 to 1.3 times the weight slider) and is drawn at 88% opacity on a speckled paper."
+ ],
+ "primitives": [
+  "image-gradient",
+  "seeded-random",
+  "smooth-noise"
+ ],
+ "equations": [
+  {
+   "tex": "\\mathcal P=\\Big\\{\\ \\arg\\max_{\\text{cell}}E\\ :\\ \\max_{\\text{cell}}E>\\vartheta\\ \\Big\\},\\qquad \\vartheta=0.1-0.07\\,D",
+   "note": "Edge points: the strongest Sobel response E in each cell, if above the threshold set by the detail slider D.",
+   "primitives": [
+    "image-gradient"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf q_{i+1}=\\arg\\min_{\\mathbf q\\in\\mathcal P\\,\\setminus\\,\\text{used}}\\lVert\\mathbf q-\\mathbf q_i\\rVert\\qquad\\text{if}\\quad\\lVert\\mathbf q_{i+1}-\\mathbf q_i\\rVert<2.6\\,g",
+   "note": "Chaining the points into one pen line; g is the cell size.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "\\tilde{\\mathbf q}_i=\\mathbf q_i+2A\\,\\big(\\boldsymbol\\nu(0.0045\\,i)-\\tfrac12\\big)+0.35\\,A\\,\\big(\\mathbf u-\\tfrac12\\big)",
+   "note": "The hand drifts: ν is smooth noise along the line, u random numbers in [0, 1], A = 14 px × the drift slider.",
+   "primitives": [
+    "smooth-noise",
+    "seeded-random"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "detail",
+   "label": "How much is drawn",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "drift",
+   "label": "Hand drift",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "weight",
+   "label": "Line weight",
+   "type": "range",
+   "default": 3,
+   "min": 1,
+   "max": 10,
+   "step": 0.5
+  },
+  {
+   "key": "ink",
+   "label": "Ink",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "blue",
+    "red",
+    "green"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "cream",
+   "options": [
+    "white",
+    "cream"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Draw again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "High drift gives a nervous, expressive line.",
+   "set": {
+    "drift": 90,
+    "weight": 2
+   }
+  },
+  {
+   "text": "More detail draws more of the picture.",
+   "set": {
+    "detail": 90
+   }
+  },
+  {
+   "text": "Blue ink on white paper looks like a pen sketch.",
+   "set": {
+    "ink": "blue",
+    "paper": "white"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

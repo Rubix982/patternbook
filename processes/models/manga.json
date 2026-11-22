@@ -1,0 +1,192 @@
+{
+ "id": "lumenary:manga",
+ "name": "Manga",
+ "physical": "partly",
+ "process": "mechanical-tint",
+ "process_name": "Mechanical tint (screentone, Ben-Day)",
+ "class": "printing",
+ "basis": "why/hist: screentone sheets of dots and lines stuck on the page and cut away; how: tone bands each filled with a fixed screentone",
+ "note": "Same idea as Ben-Day tints; comic-book is under halftone because its dots grow with tone.",
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "A page of black and white comic ink: firm outlines, solid blacks, and the shades in between built from screentone, the printed sheets of dots and hatching that cartoonists stick onto a page. Add speed lines for the moment of impact.",
+  "theory_page": "processes/sources/theory-pages/07-painterly.md",
+  "code": "engine/styles/manga.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Japanese comics",
+  "era": "Screentone in manga since the 1960s",
+  "bestOn": "Portraits in strong light; pictures with a clear subject"
+ },
+ "why": "A comic page is printed in black ink on white paper, so every shade has to be built from marks. Manga artists do it with screentone: a sheet of tiny dots or lines stuck on the page and cut away where it is not wanted. Fine dots read as a pale grey, coarse dots as a mid grey, hatching as a darker one. The few marks still carry light, shape and mood, and the speed lines say where the eye should go.",
+ "how": [
+  "Lift the local contrast, so that faces and folds keep their shape when only a few tones are left.",
+  "Cut the tone into bands: bare paper, fine dots, coarse dots, hatching, cross-hatching and solid black.",
+  "Fill each band with a screentone of its own, laid at 45 degrees and anti-aliased.",
+  "Find the ink line where the tone changes fast, and add thin dark features such as eyes and creases.",
+  "Optionally add speed lines, only in flat, light places, and a pale wash of the picture’s colour beneath it all.",
+  "Finish with paper grain and a black panel frame."
+ ],
+ "history": "Modern manga took shape in the postwar years with Osamu Tezuka, whose cinematic panels and large-eyed faces set the style from 1947. Early pages were shaded by hand with ink. From the 1960s, adhesive sheets printed with dots and lines, cut to shape with a craft knife and pressed onto the page, let artists cover large areas quickly, and by the 1980s there were hundreds of patterns to choose from. Today most tone is laid digitally, but the dot patterns are the same ones.",
+ "uses": [
+  "Comic and graphic-novel panels",
+  "Profile pictures and posters",
+  "Black and white print and zines",
+  "Storyboards and character sheets"
+ ],
+ "terms": [
+  [
+   "Screentone",
+   "A sheet printed with a pattern of dots or lines that is stuck onto a comic page to make grey."
+  ],
+  [
+   "Speed lines",
+   "Straight lines drawn behind a subject to show movement or to focus the eye on it."
+  ],
+  [
+   "Cross-hatching",
+   "Two sets of parallel lines drawn across each other to make a darker tone."
+  ]
+ ],
+ "related": [
+  "comic-book",
+  "halftone",
+  "pencil-hatching"
+ ],
+ "paragraphs": [
+  "The picture is first given a local contrast boost, T = l + 0.9 (l - l_bar), where l_bar is a heavy blur about W/28 pixels wide, so that faces and folds keep their shape in only a few tones. T is then cut into bands. Below a black threshold s (0.07 to 0.3 from the solid-black slider) it is solid ink; above that come cross-hatching, hatching, coarse dots (a quarter of the cell inked, 0.34), fine dots (0.13) and bare paper, with the band edges at about 0.33, 0.48, 0.63 and 0.8.",
+  "A dot screen lies on a lattice turned by 45 degrees. With u = (x + y)/(sqrt(2) p) and v = (x - y)/(sqrt(2) p) for a dot spacing p, the distance from the nearest lattice point is d = sqrt(du^2 + dv^2), and a dot covering a share delta of its cell has radius r = sqrt(delta/pi); the coverage is clamp((r - d) p + 1/2), an anti-aliased edge one pixel wide. Hatching is the same idea in one dimension. Speed lines are drawn in 132 sectors around the centre, each with its own width and jitter, or as horizontal bands for rushing sideways, and are allowed only where the picture is both light (T above 0.58) and flat (its blurred gradient below 0.06), so they pass behind a face instead of across it."
+ ],
+ "primitives": [
+  "image-gradient",
+  "soft-threshold",
+  "tone-dot-lattice",
+  "unsharp-mask"
+ ],
+ "equations": [
+  {
+   "tex": "T=\\ell+0.9\\,(\\ell-\\bar\\ell)",
+   "note": "Local contrast: l is the brightness and its bar a wide blur.",
+   "primitives": [
+    "unsharp-mask"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "u=\\frac{x+y}{\\sqrt2\\,p},\\quad v=\\frac{x-y}{\\sqrt2\\,p},\\qquad c=\\operatorname{clamp}\\Big(\\big(\\sqrt{\\delta/\\pi}-\\sqrt{\\Delta u^{2}+\\Delta v^{2}}\\big)\\,p+\\tfrac12\\Big)",
+   "note": "A screentone dot: du and dv are the offsets from the nearest lattice point, and delta the share of the cell that is inked.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{ink}=\\max\\Big(\\text{tone},\\ \\text{rays}\\cdot S_{0.58,0.72}(T)\\big(1-S_{0.018,0.06}(\\overline{|\\nabla T|})\\big),\\ \\text{line}\\Big)",
+   "note": "Speed lines fill only light, flat places; the outline is drawn over everything. S is smoothstep.",
+   "primitives": [
+    "soft-threshold",
+    "image-gradient"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "tone",
+   "label": "Size of the screentone",
+   "type": "range",
+   "default": 100,
+   "min": 40,
+   "max": 200,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Ink outline",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "black",
+   "label": "Solid black",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "speed",
+   "label": "Speed lines",
+   "type": "select",
+   "default": "none",
+   "options": [
+    "none",
+    "focus",
+    "rush"
+   ]
+  },
+  {
+   "key": "wash",
+   "label": "Colour",
+   "type": "select",
+   "default": "bw",
+   "options": [
+    "bw",
+    "wash"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "white",
+   "options": [
+    "white",
+    "cream"
+   ]
+  },
+  {
+   "key": "panel",
+   "label": "Panel frame",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Another page",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A burst of speed lines behind a portrait makes it an instant action frame.",
+   "set": {
+    "speed": "focus",
+    "line": 70,
+    "black": 60
+   }
+  },
+  {
+   "text": "Larger tone on a cream page looks like an old printed volume.",
+   "set": {
+    "tone": 160,
+    "paper": "cream"
+   }
+  },
+  {
+   "text": "A wash of colour under the tones makes a manga cover.",
+   "set": {
+    "wash": "wash",
+    "paper": "cream"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

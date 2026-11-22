@@ -51,6 +51,6 @@ _Thread width and brightness: s is the stitch length, ω the weight slider and t
 
 **History:** Sashiko developed in rural Japan during the Edo period, when cotton was precious and clothes were patched and layered, especially in the north. Cloth mended for generations in this way is called boro. Hitomezashi patterns have also caught the interest of mathematicians in recent years, who have studied the loops and regions that they form.
 
-_Model `processes/models/lumenary/sashiko.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/sashiko.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/sashiko.json`; as captured from his site, `processes/sources/theory-pages/11-world.md`; code `engine/styles/sashiko.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

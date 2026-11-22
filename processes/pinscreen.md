@@ -51,6 +51,6 @@ _Brightness of a head and its specular highlight._ (primitives: relief-shading, 
 
 **History:** The pinscreen was invented by the animators Alexandre Alexeieff and Claire Parker, who built the first one in Paris around 1931 and used it for the short film A Night on Bald Mountain (1933). Hundreds of thousands of pins stood in a board, and light raked across them from the side drew the picture in shadow. The toy version, with loose pins that take the shape of a hand pressed into it, was patented by Ward Fleming in 1985 and has sat on desks ever since.
 
-_Model `processes/models/lumenary/pin-art.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/pin-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/pin-art.json`; as captured from his site, `processes/sources/theory-pages/05-physical.md`; code `engine/styles/pin-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

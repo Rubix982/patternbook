@@ -1,0 +1,174 @@
+{
+ "id": "lumenary:cross-processed",
+ "name": "Cross-Processed",
+ "physical": "yes",
+ "process": "cross-processing",
+ "process_name": "Cross-processing",
+ "class": "photographic",
+ "basis": "why: film developed in the wrong chemistry, each dye layer on its own curve; how: per-channel spline curves",
+ "note": null,
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "Film developed in the wrong chemistry: each colour channel follows its own curve, so shadows turn one hue, highlights another and contrast jumps.",
+  "theory_page": "processes/sources/theory-pages/08-optical.md",
+  "code": "engine/styles/cross-processed.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Darkroom and lab experiments",
+  "era": "1990s fashion and art photography",
+  "bestOn": "Street, fashion and landscape photographs with bold colour"
+ },
+ "why": "Cross processing means developing film in the chemistry meant for another kind of film. The three dye layers then respond to light in unusual ways, each with its own tone curve, so shadows lean towards one hue, highlights towards another and contrast jumps. This treatment stores each look as a curve per colour channel and applies them to your picture.",
+ "how": [
+  "Store each look as a list of knots for each of the red, green and blue channels.",
+  "Join the knots with a Catmull-Rom spline, a smooth curve that passes through every knot, and evaluate it once for each of the 256 input values to make a lookup table.",
+  "Look up every channel of every pixel in its own table and mix the original with the result by the strength slider.",
+  "Scale saturation around luminance and lift the blacks for the faded look.",
+  "Add a vignette and grain."
+ ],
+ "history": "Slide film is developed in a process called E-6 and colour negative film in C-41, and swapping them was a trick of photographers and labs for decades. It became a signature of fashion and music photography in the 1990s and was taken up by lomography fans who liked its unpredictable colour. Many phone filters imitate it.",
+ "uses": [
+  "Fashion and editorial photo looks",
+  "Music and event photography grading",
+  "Social posts with a retro film feel",
+  "Poster and album art"
+ ],
+ "terms": [
+  [
+   "Cross processing",
+   "Developing film in chemistry meant for a different type of film."
+  ],
+  [
+   "Tone curve",
+   "A graph that maps input brightness to output brightness."
+  ],
+  [
+   "Catmull-Rom spline",
+   "A smooth curve that passes through all its control points."
+  ]
+ ],
+ "related": [
+  "film-grain",
+  "lomography",
+  "duotone"
+ ],
+ "paragraphs": [
+  "Cross processing means developing a film in the chemistry meant for another kind of film. The three dye layers then respond to light in unusual ways, each with its own tone curve, so the shadows lean toward one hue, the highlights toward another and the contrast jumps. The program stores each look as a list of knots for each channel, for example the blue curve of slide film in colour-negative chemistry starts at 0.17 and ends at 0.74, and joins them with a Catmull-Rom spline, a smooth curve that passes through every knot. The curve is evaluated once for each of the 256 input values and kept as a lookup table.",
+  "Each channel of each pixel is looked up in its own table, and the strength slider mixes the original with the result. Saturation is then scaled around the luminance (0.7 to 1.6) and blacks can be lifted by up to 10% for the faded look. A vignette and grain complete the film. The three looks are slide film in colour chemistry, negative film in slide chemistry, and a teal and amber grade."
+ ],
+ "primitives": [
+  "saturation-adjust",
+  "tone-curve"
+ ],
+ "equations": [
+  {
+   "tex": "y(t)=\\tfrac12\\Big[\\,2p_1+(p_2-p_0)\\,t+(2p_0-5p_1+4p_2-p_3)\\,t^2+(3p_1-p_0-3p_2+p_3)\\,t^3\\Big]",
+   "note": "Catmull-Rom spline through the knots p₀ … p₃; t runs from 0 to 1 between p₁ and p₂.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "c'=(1-a)\\,c+a\\,\\operatorname{LUT}_c(c)",
+   "note": "Each channel c through its own table, mixed by the strength a.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=f+(1-f)\\operatorname{clip}\\big(l+\\sigma\\,(c'-l)\\big),\\qquad \\sigma=0.7+0.9\\,s,\\ \\ f\\le 0.1",
+   "note": "Saturation s around the luminance l, then faded blacks f.",
+   "primitives": [
+    "saturation-adjust",
+    "tone-curve"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "look",
+   "label": "Process",
+   "type": "select",
+   "default": "slide",
+   "options": [
+    "slide",
+    "negative",
+    "teal"
+   ]
+  },
+  {
+   "key": "amount",
+   "label": "Strength",
+   "type": "range",
+   "default": 85,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "sat",
+   "label": "Saturation",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "fade",
+   "label": "Faded blacks",
+   "type": "range",
+   "default": 15,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "vig",
+   "label": "Dark corners",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grain",
+   "label": "Grain",
+   "type": "range",
+   "default": 25,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "The teal look is the modern orange and teal grade.",
+   "set": {
+    "look": "teal",
+    "amount": 90
+   }
+  },
+  {
+   "text": "Negative film in slide chemistry gives deep, contrasty colour.",
+   "set": {
+    "look": "negative",
+    "sat": 70
+   }
+  },
+  {
+   "text": "A little strength gives a gentle, subtle shift.",
+   "set": {
+    "amount": 40,
+    "fade": 30
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

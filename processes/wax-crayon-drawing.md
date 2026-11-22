@@ -52,6 +52,6 @@ _The wobble: shapes are read at a position displaced by up to A pixels._ (primit
 
 **History:** Wax crayons became a school staple after 1903, when Binney and Smith in Pennsylvania began selling boxes of eight colours for a nickel. Coloured chalks and pastels are far older, but the wax stick was clean, cheap and safe for small children. Illustrators have long borrowed the look for picture books, because a crayon line tells a child that this is something they could draw too.
 
-_Model `processes/models/lumenary/crayon-cartoon.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/crayon-cartoon.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/crayon-cartoon.json`; as captured from his site, `processes/sources/theory-pages/07-painterly.md`; code `engine/styles/crayon-cartoon.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

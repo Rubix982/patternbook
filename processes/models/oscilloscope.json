@@ -1,0 +1,157 @@
+{
+ "id": "lumenary:oscilloscope",
+ "name": "Oscilloscope",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "stacked traces lifted by brightness with hidden lines (how): a ridgeline plot",
+ "note": "Dressed as a scope (graticule, phosphor glow), but a scope does not stack traces; same construction as ridgeline.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "Your picture drawn as stacked phosphor waveforms on a graticule, brighter pixels, taller peaks.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/oscilloscope.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Electronic test equipment",
+  "era": "1930s onward",
+  "bestOn": "Pictures with a bright subject on a dark ground"
+ },
+ "why": "An oscilloscope shows a signal as a glowing line on a gridded screen. Stack a few dozen such lines and let each rise with the brightness of the picture, and you get a landscape of peaks that still contains a portrait. Hiding each line behind the one in front is what makes the stack read as a surface.",
+ "how": [
+  "Make one trace for each of a set of rows of the picture.",
+  "Along each trace, make its height above its baseline the brightness raised to the power 1.5, so only the brightest parts become tall peaks.",
+  "Flatten both ends to the baseline so lines meet the frame.",
+  "Draw from back to front, filling the area below each trace with the screen colour before stroking it.",
+  "Add the graticule of eight columns by ten rows and a glow made of two blurred copies."
+ ],
+ "history": "Karl Ferdinand Braun’s cathode-ray tube of 1897 made oscilloscopes possible. In 1958 William Higinbotham at Brookhaven National Laboratory made Tennis for Two, one of the first video games, on an oscilloscope screen. Stacked waveform plots entered popular culture with Joy Division’s Unknown Pleasures in 1979, and a small scene of oscilloscope music has grown since.",
+ "uses": [
+  "Music and album artwork",
+  "Science and electronics posters",
+  "Data art and backgrounds",
+  "Retro lab and sci-fi graphics"
+ ],
+ "terms": [
+  [
+   "Graticule",
+   "The grid printed on an oscilloscope screen for reading values."
+  ],
+  [
+   "Trace",
+   "The glowing line that shows the signal."
+  ],
+  [
+   "Painter’s algorithm",
+   "Drawing the farthest things first so nearer ones cover them."
+  ]
+ ],
+ "related": [
+  "wireframe-3d",
+  "scanlines-crt",
+  "night-vision"
+ ],
+ "paragraphs": [
+  "The picture is drawn as a stack of waveforms, in the manner of the well-known stacked plot of a pulsar’s pulses. There is one trace for each of n rows of the picture. Along the trace, its height above its baseline is the brightness of the picture at that point, raised to the power 1.5 so that only the brightest parts make tall peaks. Both ends are flattened to the baseline so the lines meet the frame.",
+  "Traces are drawn from the back (top) to the front (bottom). To hide the parts of earlier traces that would be behind a later one, each trace fills the area below itself with the screen colour before it is stroked, which is the painter’s algorithm. The graticule has eight columns by ten rows with fine ticks on the centre lines. Glow is two blurred copies added on top."
+ ],
+ "primitives": [
+  "tone-curve",
+  "tone-line-screen"
+ ],
+ "equations": [
+  {
+   "tex": "y_i(t)=b_i-A\\,L_b(t,\\,b_i)^{1.5}\\,e(t),\\qquad e(t)=\\min\\!\\big(1,\\ 14\\min(t,1-t)\\big)",
+   "note": "Height of trace i at position t from 0 to 1; b is the baseline and e the taper at the ends.",
+   "primitives": [
+    "tone-line-screen",
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "A=\\Delta b\\,\\big(1.2+4.2\\cdot\\text{amp}\\big)",
+   "note": "The amplitude, in multiples of the spacing between traces.",
+   "primitives": [],
+   "bespoke": "constants"
+  }
+ ],
+ "dials": [
+  {
+   "key": "lines",
+   "label": "Traces",
+   "type": "range",
+   "default": 62,
+   "min": 20,
+   "max": 130,
+   "step": 1
+  },
+  {
+   "key": "amp",
+   "label": "Amplitude",
+   "type": "range",
+   "default": 62,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "phosphor",
+   "label": "Phosphor",
+   "type": "select",
+   "default": "green",
+   "options": [
+    "green",
+    "amber",
+    "cyan",
+    "white"
+   ]
+  },
+  {
+   "key": "hidden",
+   "label": "Hide lines behind",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "grid",
+   "label": "Graticule",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "glow",
+   "label": "Glow",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Amber phosphor with many traces is a delicate engraving.",
+   "set": {
+    "phosphor": "amber",
+    "lines": 110
+   }
+  },
+  {
+   "text": "Strong amplitude gives tall, dramatic peaks.",
+   "set": {
+    "amp": 95
+   }
+  },
+  {
+   "text": "Turn off hiding to see through every line.",
+   "set": {
+    "hidden": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

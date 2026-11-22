@@ -35,7 +35,7 @@ Three things it does, in this order:
 - `METHOD.md`, the card protocol (`CARD.md`), `threads.md`, the blind pick, the judge's checklist.
 - `treatments/` (ours: press, riso, halftone, hatch) and the studio page.
 - `engine/`: Lumenary's engine, its files unchanged, as the base, with patternbook's own styles and process models
-  (`engine/core/`) built on it; `vendor/lumenary/` keeps the rest of what was received. Lumenary is Mursal Furqan
+  (`engine/core/`) built on it; `NOTICE.md` lists everything received and where it is. Lumenary is Mursal Furqan
   Kumbhar's work; patternbook credits it wherever its code or theory is used, and offers improvements back to him
   rather than changing his files.
 
@@ -213,13 +213,13 @@ listed in `processes/primitives.md`.
 - **patternbook's own treatments and generators.** The theory notes for `press`, `riso`, `halftone` and `hatch` move
   into the process pages for letterpress, risograph, halftone screening and hatching as those pages are written, each
   leaving a pointer where it was.
-- **Lumenary** (Mursal Furqan Kumbhar). `processes/sources/lumenary/data/` (moved out of `vendor/lumenary/src/data` on 2026-11-22) holds the maths behind 212 of his 214 treatments
+- **Lumenary** (Mursal Furqan Kumbhar). `processes/sources/data/` (moved out of Lumenary's `src/data` on 2026-11-22) holds the maths behind 212 of his 214 treatments
   (610 equations with notes, 426 paragraphs), a fuller account of all 214 (where each look comes from, why it looks
   that way, how it is made, its history, uses, presets, terms and related treatments) and six foundation pages on the
   tools they share. His entries are models of physical processes: resist dyeing, running stitch, painting on tin glaze
   and its crackle, cut paper, pierced and lit hide, stone relief under a moving light, tesserae, block printing and
   its registration, dot fields. Each process page carries his models in full, credited; his theory data and his theory
-  pages as captured from his site stay unchanged in `processes/sources/lumenary/`, and anything that improves on his
+  pages as captured from his site stay unchanged in `processes/sources/`, and anything that improves on his
   work is offered back to him. All of this sits in `processes/`, the one place for knowledge of how looks are made.
 - **Papers and books**, through `references/references.md`.
 
@@ -314,8 +314,8 @@ subcontinent/               + the entries
   palettes/<id>.md          (+ <id>.json, the colours)
   _templates/<kind>.md
 processes/                  + all knowledge of how looks are made (section 7b): process pages carrying every model in
-                              full, primitives.md, foundations.md, index.md, models/, and Lumenary as received in
-                              sources/lumenary/ (his theory data and theory pages)
+                              full, primitives.md, foundations.md, index.md, models/, and Lumenary's theory as received in
+                              sources/ (his theory data, theory pages, and his app's README and catalogue)
 looks/<id>.md               + looks, each with <id>.tokens.json
 engine/                     + our generators (Lumenary's conventions)
   core/                     symmetry groups, margin functions, seeded noise, SVG writer, layers
@@ -327,7 +327,7 @@ references/references.md    + the one bibliography, with rights
 library/                    the pages shelf, unchanged
 treatments/                 the treatments that apply looks to pages; their theory moved into processes/ (pointers left)
 engine/                     the engine: Lumenary's as the base (files unchanged), patternbook's styles and core/
-vendor/lumenary/            the rest of what was received from Lumenary: NOTICE, README, scripts
+NOTICE.md                   what came from other projects and where it is
 runs/, tools/, sources/     unchanged (sources/ stays git-ignored)
 ```
 

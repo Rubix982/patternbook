@@ -51,6 +51,6 @@ _Vertical scale of the moving flap during one flip, f being progress through it.
 
 **History:** Flap displays were developed in the 1950s, and the Italian company Solari di Udine made them a fixture of railway stations and airports across the world. Their rhythm of clacking was one of the sounds of travel until LED and LCD boards replaced most of them in the 2000s and 2010s. Some are still kept for their charm.
 
-_Model `processes/models/lumenary/split-flap.json`; as captured from his site, `processes/sources/lumenary/theory-pages/03-type.md`; code `engine/styles/split-flap.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/split-flap.json`; as captured from his site, `processes/sources/theory-pages/03-type.md`; code `engine/styles/split-flap.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

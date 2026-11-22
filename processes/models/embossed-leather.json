@@ -1,0 +1,175 @@
+{
+ "id": "lumenary:embossed-leather",
+ "name": "Embossed Leather",
+ "physical": "yes",
+ "process": "leather-embossing",
+ "process_name": "Leather embossing",
+ "class": "other",
+ "basis": "why: the shape pressed into leather by a hot die; how: cellular grain plus picture as raised relief, satin light",
+ "note": "Saddle stitching is garnish.",
+ "lumenary": {
+  "section": "E. Physical and 3D feel",
+  "kind": "still",
+  "blurb": "Your picture pressed into pebbled leather with a hot die, finished with a row of saddle stitches.",
+  "theory_page": "processes/sources/theory-pages/05-physical.md",
+  "code": "engine/styles/embossed-leather.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Saddlery, bookbinding and leatherwork",
+  "era": "Centuries old",
+  "bestOn": "Bold shapes and logos"
+ },
+ "why": "Leather has two surfaces at once: the pebbled grain of the hide, and the shape pressed into it by a hot die. Both can be one height map. The grain comes from cellular noise, in which creases form wherever two cells meet, and the picture is added on top so that bright parts stand proud.",
+ "how": [
+  "Scatter a random site in every square of a grid and find, for each pixel, the distance to the nearest site and to the second nearest.",
+  "Where the two distances are nearly equal the pixel is on a crease, and near a site it is the top of a small dome.",
+  "Stretch and blur the picture and add it to the grain so bright parts are raised.",
+  "Light from the top left with a broad, soft highlight, since leather is satin not mirror, and lift the pressed-in parts a little so the relief stays readable.",
+  "Draw a row of saddle stitches along an inset rectangle, each with a dark shadow, a cream thread and a thin highlight."
+ ],
+ "history": "Embossed and tooled leather has covered books, saddles and furniture for centuries, and gold tooling on bookbindings spread through the Islamic world and Europe from the Middle Ages. The cellular noise used for the grain was described by Steven Worley in 1996, and it is closely related to the Voronoi diagrams of the early twentieth century.",
+ "uses": [
+  "Journal, wallet and book cover mock-ups",
+  "Luxury brand and packaging concepts",
+  "Textured backgrounds",
+  "Western and heritage craft designs"
+ ],
+ "terms": [
+  [
+   "Cellular noise",
+   "A pattern made from distances to random points, giving cells and creases."
+  ],
+  [
+   "Die",
+   "A shaped tool pressed into a material to leave its shape."
+  ],
+  [
+   "Saddle stitch",
+   "A hand stitch that runs a thread through each hole twice, in opposite directions."
+  ]
+ ],
+ "related": [
+  "gold-foil",
+  "clay-3d",
+  "letterpress"
+ ],
+ "paragraphs": [
+  "Leather has two surfaces at once: the pebbled grain of the hide and the shape pressed into it by a hot die. Both are one height map. The grain is cellular noise: scatter a random site in every square of a grid, and for each pixel find the distance F1 to the nearest site and F2 to the second nearest. Where F2 − F1 is small the pixel lies on the boundary between two cells, which becomes a crease; near a site it is the top of a little dome. The picture, stretched and blurred, is added on top so that bright parts stand proud.",
+  "The slope of the combined height gives the normal. Light comes from the top left; leather is lit with a broad, soft highlight (a low power of the half-vector product) because its finish is satin, not mirror. A tone factor then lifts the low, pressed-in parts a little and dims the raised ones, which softens the relief so the picture stays readable. The stitching is a row of short thread dashes along a rectangle inset from the edge, each drawn three times: a dark offset shadow, a cream thread, and a thin highlight."
+ ],
+ "primitives": [
+  "crackle-network",
+  "relief-shading",
+  "tone-to-height",
+  "voronoi-cells"
+ ],
+ "equations": [
+  {
+   "tex": "h=L_b\\Big(0.7+\\tfrac{e}{40}\\Big)+0.07\\,g\\,\\Big(\\operatorname{smoothstep}(0,\\,0.22\\,s,\\,F_2-F_1)\\,\\big(0.55+0.45\\,d\\big)-1\\Big)",
+   "note": "Height: L_b is the blurred picture, e the emboss slider, g the grain slider, s the grain spacing and d the dome term below.",
+   "primitives": [
+    "tone-to-height",
+    "crackle-network",
+    "voronoi-cells"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "d=\\max\\!\\Big(0,\\ 1-\\Big(\\frac{F_1}{0.75\\,s}\\Big)^{2}\\Big)",
+   "note": "The dome of one pebble: highest at its site, zero at 0.75 s.",
+   "primitives": [
+    "voronoi-cells"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{shade}=\\big(0.3+0.85\\,(\\mathbf n\\cdot\\mathbf l)^{+}\\big)\\big(0.9+0.2\\,(1-L_b)\\big)",
+   "note": "Diffuse shading; the second bracket is the tone factor, 1.1 where the picture is dark and 0.9 where it is bright.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "leather",
+   "label": "Leather",
+   "type": "select",
+   "default": "tan",
+   "options": [
+    "tan",
+    "chestnut",
+    "black",
+    "oxblood",
+    "forest"
+   ]
+  },
+  {
+   "key": "emboss",
+   "label": "Emboss depth",
+   "type": "range",
+   "default": 60,
+   "min": 5,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grain",
+   "label": "Grain",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "size",
+   "label": "Grain size",
+   "type": "range",
+   "default": 7,
+   "min": 3,
+   "max": 16,
+   "step": 1
+  },
+  {
+   "key": "sheen",
+   "label": "Sheen",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "stitch",
+   "label": "Stitching",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Black leather with deep emboss looks like a premium cover.",
+   "set": {
+    "leather": "black",
+    "emboss": 85
+   }
+  },
+  {
+   "text": "Big grain on oxblood feels like old travel luggage.",
+   "set": {
+    "leather": "oxblood",
+    "size": 13
+   }
+  },
+  {
+   "text": "Switch off the stitching for a flat panel.",
+   "set": {
+    "stitch": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

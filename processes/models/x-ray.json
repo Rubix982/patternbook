@@ -1,0 +1,184 @@
+{
+ "id": "lumenary:x-ray",
+ "name": "X-ray",
+ "physical": "yes",
+ "process": "film-radiography",
+ "process_name": "Film radiography",
+ "class": "photographic",
+ "basis": "why: film records what passes through, so a radiograph is a negative; how: inversion, edge glow, grain, collimator shadow, blue-base film tint",
+ "note": "Inversion stands in for attenuation; models the film's look, not X-ray physics.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "A radiograph on a light box: tones turned over into pale blue on black, edges shining like dense bone, a mottle of grain, the shadow of the collimator and a lead marker in the corner.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/x-ray.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Medical radiography",
+  "era": "1895",
+  "bestOn": "Objects and portraits with clear structure"
+ },
+ "why": "X-rays pass through soft things and are stopped by dense ones, and the film records what got through. So a radiograph is a negative: bone is pale, air is black, and edges glow where a dense shell is seen side on. The treatment turns the picture’s tones over, sharpens its structure, adds the grain of a short exposure and tints it like blue-based film on a light box.",
+ "how": [
+  "Turn the brightness over, so dark things become bright.",
+  "Push each pixel away from the average of its surroundings to bring out structure.",
+  "Add the edge strength, so outlines shine.",
+  "Add noise that is strongest in the darker greys.",
+  "Darken a soft border where the collimator kept the beam off the film.",
+  "Tint from the film’s base colour to its full density, then add a glow, a lead letter and a line of data."
+ ],
+ "history": "Wilhelm Röntgen discovered X-rays in Würzburg in November 1895 while experimenting with a cathode-ray tube, and within weeks made the famous image of his wife Anna Bertha’s hand with her ring. He received the first Nobel Prize in Physics in 1901. Hospitals adopted the method within a year. Film gave way to digital detectors from the 1980s onward, but the convention of pale bone on a dark ground has stayed.",
+ "uses": [
+  "Halloween and horror graphics",
+  "Science and medical teaching material",
+  "Album covers and band posters",
+  "Product teardown illustrations"
+ ],
+ "terms": [
+  [
+   "Radiograph",
+   "A picture made by X-rays passing through an object."
+  ],
+  [
+   "Collimator",
+   "Lead shutters that limit the beam to the area being examined."
+  ],
+  [
+   "Unsharp masking",
+   "Sharpening by subtracting a blurred copy of a picture from itself."
+  ]
+ ],
+ "related": [
+  "night-vision",
+  "thermal-camera",
+  "infrared"
+ ],
+ "paragraphs": [
+  "A radiograph is a negative: dense things stop the rays and stay pale on the film. The treatment therefore turns the stretched brightness over, so that the dark parts of the picture shine. Structure is then added by unsharp masking: each pixel is pushed away from the average of its surroundings, taken from a copy blurred twice with a box of radius 14 pixels. Edge strength from the Sobel operator is added on top, which makes outlines glow the way the dense shell of a bone does, and a power of 1.25 deepens the mid tones.",
+  "Noise is added in proportion to how dark a pixel is, because in a real exposure the grainiest areas are the ones that received the fewest photons. The collimator, the pair of lead shutters that limits the beam, is a soft-edged rectangle that leaves the border of the film almost unexposed. Colour comes last: each channel is blended from the film’s base colour to its full density along a slightly different curve, red slowest and blue fastest, which gives the blue cast of medical film. A soft glow, a lead letter and a line of exposure data finish the plate."
+ ],
+ "primitives": [
+  "colour-ramp",
+  "grain-overlay",
+  "image-gradient",
+  "tone-curve",
+  "unsharp-mask"
+ ],
+ "equations": [
+  {
+   "tex": "v\\leftarrow\\operatorname{clamp}\\!\\big(v+s\\,(v-\\bar v)+k\\,\\lvert\\nabla L\\rvert\\big)^{1.25},\\qquad v=1-L",
+   "note": "Structure: v̄ is the wide blur of v, s the structure slider times 1.5 and k the bright-edges slider times 1.6.",
+   "primitives": [
+    "unsharp-mask",
+    "image-gradient",
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "v\\leftarrow v+g\\,\\eta\\,\\big(0.4+0.6\\,(1-v)\\big)",
+   "note": "Mottle: η is noise between −1 and 1, g the mottle slider times 0.16.",
+   "primitives": [
+    "grain-overlay"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "R=\\operatorname{lerp}(b_R,f_R,\\,0.4t^{2}+0.6t),\\quad G=\\operatorname{lerp}(b_G,f_G,\\,t),\\quad B=\\operatorname{lerp}(b_B,f_B,\\,t^{0.82})",
+   "note": "From film base b to full density f; t is the eased value 0.35 S(v) + 0.65 v.",
+   "primitives": [
+    "colour-ramp",
+    "tone-curve"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "invert",
+   "label": "Dark things shine",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "structure",
+   "label": "Structure",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "edges",
+   "label": "Bright edges",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glow",
+   "label": "Light box glow",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grain",
+   "label": "Mottle",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "film",
+   "label": "Film",
+   "type": "select",
+   "default": "blue",
+   "options": [
+    "blue",
+    "grey",
+    "green",
+    "sepia"
+   ]
+  },
+  {
+   "key": "marker",
+   "label": "Lead marker and scale",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Strong structure and bright edges read as bone.",
+   "set": {
+    "structure": 90,
+    "edges": 85
+   }
+  },
+  {
+   "text": "Fluoroscope green looks like a live screen from the 1950s.",
+   "set": {
+    "film": "green",
+    "glow": 70
+   }
+  },
+  {
+   "text": "Leave the tones the right way up for a ghostly print.",
+   "set": {
+    "invert": false,
+    "film": "sepia"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -51,6 +51,6 @@ _What the glasses combine; for the other pairs the channels are assigned as desc
 
 **History:** Charles Wheatstone described the stereoscope in 1838, and Wilhelm Rollmann made the first anaglyphs in 1853 by printing two views in complementary colours. Louis Ducos du Hauron patented the process for photographs in 1891. Red and cyan 3D appeared in books, comics and cinema in the twentieth century, and again in the 2010s on early home 3D.
 
-_Model `processes/models/lumenary/anaglyph-3d.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/anaglyph-3d.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/anaglyph-3d.json`; as captured from his site, `processes/sources/theory-pages/08-optical.md`; code `engine/styles/anaglyph-3d.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -50,7 +50,7 @@ The top layer also includes **[Lumenary](https://github.com/mursalfk/lumenary)**
 Kumbhar**: 214 browser-only image treatments, each with a theory page giving the equations its code
 runs. His engine is the base of patternbook's `engine/`, where patternbook's own styles and process models build on
 it, and his theory sits with the rest of patternbook's knowledge in `processes/` (as received in
-`processes/sources/lumenary/`), used with his permission (see `vendor/lumenary/NOTICE.md`). The method in `METHOD.md`
+`processes/sources/`), used with his permission (see `NOTICE.md`). The method in `METHOD.md`
 step 2c, deriving a look from the process that made it, was learned from his theory pages.
 
 ![The Lumenary studio in patternbook, showing the risograph treatment with its dials](docs/images/lumenary-studio.jpg)
@@ -96,11 +96,11 @@ CARD.md                         the open card, and closed ones with results
 threads.md                      open questions, not yet worked on
 runs/<card>/                    test prompts, generated pages, blind keys
 processes/                      all knowledge of how looks are made: process pages (every model in full), primitives,
-                                foundations, models; Lumenary as received in processes/sources/lumenary/
+                                foundations, models; Lumenary as received in processes/sources/
 engine/                         the engine: styles (picture in, treated picture out; Lumenary's and ours), the process
                                 models in core/, the studio API, one bundle (engine.js), checks and demo pages
 treatments/                     the picture layer that applies styles to pages, the studio page, and its demos
-vendor/lumenary/                what else was kept of Lumenary (Mursal Furqan Kumbhar): its NOTICE, README, scripts
+NOTICE.md                       what came from other projects (Lumenary, by Mursal Furqan Kumbhar) and where it is
 tools/                          measuring and blind-test scripts
 docs/images/                    pictures in this README
 sources/                        local copies of source documents (git-ignored)

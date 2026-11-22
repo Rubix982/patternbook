@@ -1,0 +1,147 @@
+{
+ "id": "lumenary:depth-parallax",
+ "name": "Depth Parallax",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "cursor-driven parallax from a guessed depth map (how)",
+ "note": null,
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "live",
+  "blurb": "A fake depth map from brightness and position, so the flat picture shifts like a 3D scene as the cursor moves.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/depth-parallax.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Animation, games and phone cameras",
+  "era": "1930s concept, 2010s depth photos",
+  "bestOn": "Landscapes and tables with a foreground and a background"
+ },
+ "why": "Two things at different distances shift by different amounts when you move your head, and that difference is parallax. A flat photograph has no distances, so this treatment guesses them: brighter things are nearer, and things lower in the frame are nearer. Shifting each point by its guessed depth makes the flat picture appear to turn as the cursor moves.",
+ "how": [
+  "Blend two guesses of depth: brightness, and height in the frame.",
+  "Blur the depth twice so it changes smoothly instead of with every speck of texture.",
+  "Move each point sideways in proportion to how far its depth is from the focus plane, in the direction of the camera.",
+  "Look up the depth where the pixel lands, twice, because the first guess lands on a different depth than the pixel started on.",
+  "Ease the camera towards the cursor, or let it drift in a slow figure of eight, and run the warp on a small copy for speed."
+ ],
+ "history": "Disney’s multiplane camera, used in the 1930s, created depth in animation by moving painted glass layers at different speeds. Side-scrolling games used the same idea from the early 1980s. In the 2010s phones began to store a real depth map with photographs, which made it possible to move a still picture like a tiny 3D scene.",
+ "uses": [
+  "Living photographs and hero images on websites",
+  "Social posts with depth",
+  "Presentation backgrounds",
+  "Previews of depth-aware photos"
+ ],
+ "terms": [
+  [
+   "Parallax",
+   "The apparent shift of near objects against far ones when the viewpoint moves."
+  ],
+  [
+   "Depth map",
+   "An image whose values say how far away each pixel is."
+  ],
+  [
+   "Focus plane",
+   "The depth that stays still while everything else moves."
+  ]
+ ],
+ "related": [
+  "isometric",
+  "wireframe-3d",
+  "low-poly"
+ ],
+ "paragraphs": [
+  "A flat photograph has no depth, so the program invents one. Depth is a mix of two guesses: brighter things are nearer (or the reverse, if you choose), and things lower in the frame are nearer, which is true of most landscapes and tables. The brightness is blurred twice so that depth changes smoothly, not with every speck of texture.",
+  "To look at the picture from a slightly different place, each point is moved sideways in proportion to how far its depth is from the focus plane, in the direction of the camera, so near and far things shift by different amounts, which is parallax. The shift is found by looking up the depth where the pixel lands, twice, because the first guess lands on a different depth than the pixel started on. The camera follows the cursor with smooth easing, or drifts on a slow figure-of-eight when the cursor is away. The warp runs on a smaller copy of the picture, which is then enlarged, to stay fast on a phone."
+ ],
+ "primitives": [
+  "coordinate-warp",
+  "ease-toward-target"
+ ],
+ "equations": [
+  {
+   "tex": "D=0.62\\,L_b+0.38\\,\\frac{y}{H}",
+   "note": "The invented depth, between 0 (far) and 1 (near).",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "\\mathbf s=\\mathbf x-\\mathbf c\\odot\\big(\\kappa,\\ 0.55\\,\\kappa\\big)\\,(D-f),\\qquad \\kappa=\\text{depth}\\cdot0.075\\,W_b",
+   "note": "Where the output pixel x reads from; c is the camera position from −1 to 1 and f the focus plane.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf c\\leftarrow\\mathbf c+(\\mathbf c^{*}-\\mathbf c)\\,\\big(1-e^{-6\\Delta t}\\big)",
+   "note": "Easing of the camera towards its target c*.",
+   "primitives": [
+    "ease-toward-target"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "depth",
+   "label": "Depth",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "focus",
+   "label": "Focus plane",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "near",
+   "label": "Bright is near",
+   "type": "select",
+   "default": "bright",
+   "options": [
+    "bright",
+    "dark"
+   ]
+  },
+  {
+   "key": "drift",
+   "label": "Slow drift",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Maximum depth with dark as near reverses the guess.",
+   "set": {
+    "depth": 100,
+    "near": "dark"
+   }
+  },
+  {
+   "text": "Move the focus plane closer to the front to pin the foreground.",
+   "set": {
+    "focus": 20
+   }
+  },
+  {
+   "text": "Turn off the drift to keep it still until you move.",
+   "set": {
+    "drift": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

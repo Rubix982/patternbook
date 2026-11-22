@@ -5,7 +5,7 @@ family: <dyeing | printing | stitch | weaving | carving | piercing | inlay | gla
 materials: [<what it works on and with>]
 makes: [<atlas element ids made by this process>]
 models:                          # every implementation of this process, each credited
-  - {by: lumenary, id: <treatment id>, relation: exact | same | analogous, theory: treatments/lumenary/theory/<file>.md}
+  - {by: lumenary, id: <treatment id>, relation: exact | same | analogous, theory: processes/sources/theory-pages/<file>.md}
   - {by: patternbook, treatment: <id>}            # or generator: <id>
 primitives: [<ids in primitives.md>]
 sources: [<anchors in references/references.md>]

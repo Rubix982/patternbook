@@ -51,6 +51,6 @@ _Screen blending of a light leak over the picture._ (primitives: additive-blend)
 
 **History:** The LOMO LC-A was a compact camera made in Leningrad from 1984. Students from Vienna found one in Prague in the early 1990s, loved its saturated, vignetted pictures and founded the Lomographic Society in 1992, with a playful list of rules such as shoot from the hip and do not think. Lomography then spread through film shops and later phone apps.
 
-_Model `processes/models/lumenary/lomography.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/lomography.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lomography.json`; as captured from his site, `processes/sources/theory-pages/08-optical.md`; code `engine/styles/lomography.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

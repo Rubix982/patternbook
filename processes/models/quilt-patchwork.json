@@ -1,0 +1,160 @@
+{
+ "id": "lumenary:quilt-patchwork",
+ "name": "Quilt Patchwork",
+ "physical": "yes",
+ "process": "patchwork-quilting",
+ "process_name": "Patchwork quilting",
+ "class": "stitch",
+ "basis": "why: patches cut, matched and sewn, quilting puffs each one; how: squares or triangles, fabric palette, puff gradient, running stitch",
+ "note": null,
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "A quilt: your picture cut into squares or triangles of printed cotton, puffed by the wadding and held with running stitches.",
+  "theory_page": "processes/sources/theory-pages/06-craft.md",
+  "code": "engine/styles/quilt-patchwork.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Textile traditions worldwide",
+  "era": "Centuries old",
+  "bestOn": "Bold pictures with simple colour regions"
+ },
+ "why": "A quilt makes a picture from scraps: cut cloth into squares or triangles, choose the colour that best matches each part of the picture, and sew them together. The quilting stitches then pull each patch into a gentle puff, light on top and shadowed at the seams. Printed fabrics add pattern to some patches for extra life.",
+ "how": [
+  "Divide the picture into squares, or split each square into two triangles along a randomly chosen diagonal.",
+  "Choose k fabric colours by k-means and give each patch the nearest to the picture’s colour at its centre.",
+  "Give a chosen fraction of patches a pattern in a lighter or darker shade of their own colour: dots, stripes, a check, florets or diagonal lines.",
+  "Puff each patch with a radial gradient, white at 20 percent near the middle and black at 30 percent at the rim.",
+  "Draw a thin dark seam and a dashed running stitch on a copy of the patch outline shrunk to 82 percent."
+ ],
+ "history": "Patchwork and quilting appear in many cultures, from the kantha of Bengal and the ralli of Sindh to the quilts of Britain and North America, where they used up worn clothing as well as celebrated skill. The Quilts of Gee’s Bend, made by a community of women in Alabama, were shown in major museums in the 2000s and brought wide attention to the craft as art.",
+ "uses": [
+  "Textile and home decor inspiration",
+  "Craft and sewing project plans",
+  "Warm, handmade looking posters",
+  "Pattern ideas for fabrics"
+ ],
+ "terms": [
+  [
+   "Patch",
+   "A single piece of cloth in a patchwork."
+  ],
+  [
+   "Wadding",
+   "The soft layer inside a quilt that gives it body."
+  ],
+  [
+   "Running stitch",
+   "A simple stitch that passes in and out of the cloth in a row."
+  ]
+ ],
+ "related": [
+  "ralli-patchwork",
+  "cross-stitch",
+  "paper-cut-out"
+ ],
+ "paragraphs": [
+  "A quilt is a grid of fabric patches. The picture is divided into squares, or each square into two triangles along a randomly chosen diagonal, and each patch takes the nearest of k fabric colours (from k-means, slightly softened) to the colour of the picture at its centre. A chosen fraction of patches, set by the printed-fabrics slider, also gets a pattern in a lighter or darker shade of its own colour: dots, stripes, a check, florets or diagonal lines.",
+  "Quilting makes each patch puff up. That is faked with a radial gradient: white at 20% opacity near the middle and black at 30% at the rim, so the patch looks lit from above and shadowed at the seams. The seam is a thin dark line, and the running stitch is a dashed light line on a copy of the patch outline shrunk to 82% about its centre. A little grain finishes the cloth."
+ ],
+ "primitives": [
+  "coarse-grid",
+  "palette-snap",
+  "seeded-random"
+ ],
+ "equations": [
+  {
+   "tex": "s=\\frac{W}{n},\\qquad \\text{patch colour}=\\arg\\min_{f\\in F}\\big\\lVert \\bar P(\\text{centre})-f\\big\\rVert",
+   "note": "Patch size for n patches across, and its fabric.",
+   "primitives": [
+    "coarse-grid",
+    "palette-snap"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{pattern}\\iff h<\\pi,\\qquad \\text{kind}=\\Big\\lfloor \\frac{5\\,h}{\\pi}\\Big\\rfloor",
+   "note": "A patch is printed when its random number h is below the printed-fabrics slider π (0 to 1); the kind of print is chosen from five.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "across",
+   "label": "Patches across",
+   "type": "range",
+   "default": 13,
+   "min": 6,
+   "max": 30,
+   "step": 1
+  },
+  {
+   "key": "shape",
+   "label": "Patches",
+   "type": "select",
+   "default": "triangles",
+   "options": [
+    "squares",
+    "triangles"
+   ]
+  },
+  {
+   "key": "fabrics",
+   "label": "Fabrics",
+   "type": "range",
+   "default": 8,
+   "min": 4,
+   "max": 12,
+   "step": 1
+  },
+  {
+   "key": "prints",
+   "label": "Printed fabrics",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "stitch",
+   "label": "Running stitches",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Re-cut",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Small squares with strong prints look like a classic quilt.",
+   "set": {
+    "shape": "squares",
+    "across": 24,
+    "prints": 85
+   }
+  },
+  {
+   "text": "Few patches make a big, bold block pattern.",
+   "set": {
+    "across": 7,
+    "fabrics": 5
+   }
+  },
+  {
+   "text": "Hide the stitching for a flatter, graphic look.",
+   "set": {
+    "stitch": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

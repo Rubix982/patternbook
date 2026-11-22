@@ -1,0 +1,154 @@
+{
+ "id": "lumenary:reaction-diffusion",
+ "name": "Reaction-diffusion",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "Gray-Scott simulation steered by tone (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "live",
+  "blurb": "Two chemicals feed and kill each other while they spread. Spots, stripes and coral grow on their own, and your picture steers which one appears where.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/reaction-diffusion.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Mathematical biology",
+  "era": "1952 theory, 1990s computer art",
+  "bestOn": "Pictures with soft light and shadow"
+ },
+ "why": "Turing asked how a uniform ball of cells could grow stripes or spots. His answer was that two chemicals that react and spread at different speeds can organise themselves. One feeds the other, and the other spreads more slowly, so small bumps grow and push each other apart. The picture steers where each pattern appears.",
+ "how": [
+  "Keep two chemicals on a grid: a food U and an activator V.",
+  "At each step, V turns U into more V (the term u v²), and V is removed at a rate f + k while U is fed at rate f.",
+  "Let both spread, U at 0.21 and V at 0.105, using a five-point Laplacian with clamped edges.",
+  "Make f and k vary from cell to cell with the picture’s tone, so light and dark regions sit at different places in the pattern map.",
+  "Choose a preset pair of f and k: coral, worms, spots, maze or dividing cells."
+ ],
+ "history": "Alan Turing published The Chemical Basis of Morphogenesis in 1952. The Belousov-Zhabotinsky reaction, shown to make spirals and rings in a dish, gave experiments to match. In 1991 Greg Turk, and separately Andrew Witkin and Michael Kass, brought reaction-diffusion to computer graphics, and in 1993 John Pearson charted the patterns of the Gray-Scott model. In 1995 Kondo and Asai showed that the stripes of angelfish move over time as such a model predicts.",
+ "uses": [
+  "Modelling animal coats, shells and fingerprints",
+  "Procedural textures for games and film",
+  "Generative art and architecture",
+  "Chemistry and developmental biology teaching"
+ ],
+ "terms": [
+  [
+   "Morphogen",
+   "A chemical that gives cells signals about form and position."
+  ],
+  [
+   "Laplacian",
+   "A measure of how different a point is from its neighbours, which drives diffusion."
+  ],
+  [
+   "Gray-Scott model",
+   "A pair of equations for feeding and killing two chemicals that spread."
+  ]
+ ],
+ "related": [
+  "physarum",
+  "differential-growth",
+  "cellular-automata"
+ ],
+ "paragraphs": [
+  "Alan Turing proposed in 1952 that two chemicals that react and spread at different speeds can organise themselves into spots and stripes. This is the Gray-Scott model. A food chemical U is fed in at rate f. An activator V turns U into more V (the reaction U + 2V → 3V, which gives the term u v²) and is removed at rate f + k. Both spread, the food faster than the activator (Dᵤ = 0.21, Dᵥ = 0.105 in grid units). Depending on f and k the same rules grow coral, worms, spots, mazes or cells that divide; the preset sets the pair, and each step is one explicit Euler step on a grid about 1/2.8 of the picture’s width with a five-point Laplacian and clamped edges.",
+  "The picture steers the chemistry. f and k are not constants but vary from cell to cell by the picture’s tone, f = f₀ + s (tone − ½) × 0.02 and k = k₀ + s (tone − ½) × 0.005, so bright and dark regions sit at different places in the pattern map and grow different textures, spots on one side and stripes on the other, and the picture emerges from the growth. The grid starts as U = 1 with scattered 3 × 3 patches (2% of cells) where U = 0.5 and V ≈ 0.25. Pressing and dragging seeds the same kind of patch under the pointer. V is shown through a smoothstep as ink, as an ember colour ramp, or as the picture’s own colours."
+ ],
+ "primitives": [],
+ "equations": [
+  {
+   "tex": "\\begin{aligned}\\frac{\\partial u}{\\partial t}&=D_u\\nabla^{2}u-u\\,v^{2}+f\\,(1-u)\\\\[2pt] \\frac{\\partial v}{\\partial t}&=D_v\\nabla^{2}v+u\\,v^{2}-(f+k)\\,v\\end{aligned}",
+   "note": "The Gray-Scott equations; D_u = 0.21 and D_v = 0.105.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "\\nabla^{2}u\\approx u_N+u_S+u_E+u_W-4\\,u,\\qquad u\\leftarrow u+\\Delta t\\,\\dot u,\\ \\ \\Delta t=1",
+   "note": "The discrete Laplacian on the grid and the Euler step.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "f=f_0+0.02\\,s\\,\\big(\\tau-\\tfrac12\\big),\\qquad k=k_0+0.005\\,s\\,\\big(\\tau-\\tfrac12\\big)",
+   "note": "The picture’s steering: τ is the tone (0 to 1), s the steering slider.",
+   "primitives": [],
+   "bespoke": "specific"
+  }
+ ],
+ "dials": [
+  {
+   "key": "preset",
+   "label": "Pattern",
+   "type": "select",
+   "default": "coral",
+   "options": [
+    "coral",
+    "worms",
+    "spots",
+    "maze",
+    "mitosis"
+   ]
+  },
+  {
+   "key": "steer",
+   "label": "Picture steers the pattern",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "speed",
+   "label": "Speed",
+   "type": "range",
+   "default": 7,
+   "min": 1,
+   "max": 16,
+   "step": 1
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "ember",
+    "ink"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Scatter new seeds",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Worms give long, winding stripes.",
+   "set": {
+    "preset": "worms"
+   }
+  },
+  {
+   "text": "Mitosis makes cells that keep dividing.",
+   "set": {
+    "preset": "mitosis",
+    "speed": 10
+   }
+  },
+  {
+   "text": "Strong steering shows the picture more clearly.",
+   "set": {
+    "steer": 90
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

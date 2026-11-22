@@ -1,0 +1,162 @@
+{
+ "id": "lumenary:liquid-morph",
+ "name": "Liquid morph",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "animated domain warp with cursor ripples (how)",
+ "note": null,
+ "lumenary": {
+  "section": "D. Light, colour and glass",
+  "kind": "live",
+  "blurb": "The picture melts and flows. Move over it to make ripples.",
+  "theory_page": "processes/sources/theory-pages/04-light.md",
+  "code": "engine/styles/liquid-morph.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Film effects and creative coding",
+  "era": "1988 morphing, 1990s liquid metal",
+  "bestOn": "Portraits and strong colour shapes"
+ },
+ "why": "The picture is never changed, only looked up in a different place. A smooth, slowly moving field of offsets tells each pixel where to read from, so everything seems to flow. The field is built from sines whose phases are bent by other sines, so the motion never quite repeats.",
+ "how": [
+  "Compute a vector field of offsets from sine waves whose phases are themselves bent by other sines.",
+  "Calculate it only at nodes six pixels apart and blend it up to every pixel bilinearly.",
+  "For every output pixel read the source at the shifted position.",
+  "Add a ripple at the cursor, a ring shaped wave that decays with distance and travels outward.",
+  "Read red, green and blue at slightly different strengths of the offset for the colour split, and brighten or dim by the field’s vertical slope for sheen."
+ ],
+ "history": "Computer morphing made its film debut in Willow in 1988, built at Industrial Light and Magic, and became a sensation in Terminator 2 and the Black or White music video in 1991. Warping coordinates with layered noise, often called domain warping, was later taught widely by shader artists such as Inigo Quilez.",
+ "uses": [
+  "Fluid background loops",
+  "Music visualisers and album art",
+  "Playful avatar effects",
+  "Transitions between images"
+ ],
+ "terms": [
+  [
+   "Vector field",
+   "A map that assigns an arrow, here an offset, to every point."
+  ],
+  [
+   "Domain warping",
+   "Bending the coordinates used to look something up."
+  ],
+  [
+   "Bilinear interpolation",
+   "Blending the four nearest values by distance."
+  ]
+ ],
+ "related": [
+  "gradient-mesh",
+  "surreal",
+  "domain-warp"
+ ],
+ "paragraphs": [
+  "The picture is never changed, only looked up in a different place. For every output pixel the program computes an offset and reads the source pixel at the shifted position. The offsets form a smooth, slowly moving vector field built from sines whose phases are themselves bent by other sines (a simple form of domain warping), which is what gives the motion its liquid, non-repeating look.",
+  "To keep it fast the field is calculated only at nodes six pixels apart and then blended up to every pixel bilinearly. Three effects ride on top. The cursor adds a ripple: a ring-shaped wave that decays exponentially with distance and travels outward over time. Colour split reads the red, green and blue channels at slightly different strengths of the same offset, so the channels drift apart like a prism. Sheen brightens or dims each pixel according to the vertical slope of the field, as if the surface were catching light."
+ ],
+ "primitives": [
+  "coordinate-warp",
+  "misregistration"
+ ],
+ "equations": [
+  {
+   "tex": "f_1=\\sin\\!\\big(5.5F v+1.3\\tau+1.6\\sin(3.1F u+0.7\\tau)\\big),\\quad f_2=\\cos\\!\\big(5.0F u-1.1\\tau+1.5\\sin(2.7F v-0.9\\tau)\\big)",
+   "note": "The two components of the field at normalised position (u, v), wave scale F and time τ.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf d=A\\,(f_1,f_2)\\;+\\;e^{-\\rho/(0.2W)}\\sin(0.07\\rho-7t)\\,\\max(A,0.02W)\\,0.9\\,\\hat{\\boldsymbol\\rho}",
+   "note": "Total displacement; A = strength × 0.07 W. The second term is the cursor ripple at distance ρ.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "R(\\mathbf x)=S(\\mathbf x+\\mathbf d(1+s)),\\quad G(\\mathbf x)=S(\\mathbf x+\\mathbf d),\\quad B(\\mathbf x)=S(\\mathbf x+\\mathbf d(1-s))",
+   "note": "Colour split: each channel samples the source S at a different multiple of the offset.",
+   "primitives": [
+    "misregistration",
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "strength",
+   "label": "Strength",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "scale",
+   "label": "Wave scale",
+   "type": "range",
+   "default": 1.6,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.1
+  },
+  {
+   "key": "speed",
+   "label": "Speed",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "split",
+   "label": "Color split",
+   "type": "range",
+   "default": 30,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "sheen",
+   "label": "Sheen",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "High strength with fine waves looks like water.",
+   "set": {
+    "strength": 85,
+    "scale": 3
+   }
+  },
+  {
+   "text": "Very slow, wide waves feel like a lava lamp.",
+   "set": {
+    "speed": 15,
+    "scale": 0.8
+   }
+  },
+  {
+   "text": "Maximum colour split turns it into a prism.",
+   "set": {
+    "split": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

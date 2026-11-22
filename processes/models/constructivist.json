@@ -1,0 +1,134 @@
+{
+ "id": "lumenary:constructivist",
+ "name": "Constructivist",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "poster conventions: two-tone threshold, tilted layout, red wedge, slab type (how)",
+ "note": "Photomontage is named in the history but not modelled.",
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "Soviet poster language: a red-and-black photograph, diagonal bars, a wedge and bold slogan type.",
+  "theory_page": "processes/sources/theory-pages/01-design.md",
+  "code": "engine/styles/constructivist.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Russia and the Soviet Union",
+  "era": "1917 to the 1930s",
+  "bestOn": "Strong portraits with simple backgrounds"
+ },
+ "why": "Constructivist designers wanted posters that acted: bold diagonals, red and black, and photographs reduced to two tones so that they read at once from across a street. The tilted layout creates energy, and a thick slab of type turns a few words into a command.",
+ "how": [
+  "Reduce the photograph to two tones with a hard threshold at the picture’s own median brightness.",
+  "Clip it to a rectangle rotated by the poster angle.",
+  "Multiply a red wedge across it and add a black frame.",
+  "Draw two heavy red bars and a black disc.",
+  "Set the slogan in a black slab on a slightly different slant."
+ ],
+ "history": "Constructivism grew in Russia after 1917, with artists such as Alexander Rodchenko, El Lissitzky and Gustav Klutsis. El Lissitzky’s 1919 poster Beat the Whites with the Red Wedge is the best known example of its geometry. Photomontage, diagonals and heavy sans-serif type were its tools, and later designers worldwide borrowed them.",
+ "uses": [
+  "Event and exhibition posters",
+  "Zine and book covers",
+  "Music flyers",
+  "Bold announcement graphics"
+ ],
+ "terms": [
+  [
+   "Photomontage",
+   "A picture made by combining and cropping several photographs."
+  ],
+  [
+   "Median",
+   "The middle value: half of the pixels are darker and half lighter."
+  ],
+  [
+   "Slab type",
+   "Heavy letters with thick, block-like strokes."
+  ]
+ ],
+ "related": [
+  "swiss-design",
+  "pop-art",
+  "mondrian"
+ ],
+ "paragraphs": [
+  "Constructivist posters are red, black and cream, with strong diagonals. The photograph is reduced to two tones with a hard threshold, black below and cream above. The threshold is the median of the picture’s own brightness (nudged by the contrast slider), so that about half the picture is black, however light or dark the original.",
+  "It is then clipped into a rectangle rotated by the poster angle, with a red wedge multiplied across it, a black frame, two heavy red bars and a black disc. The slogan sits in a black slab set on a smaller slant than the picture."
+ ],
+ "primitives": [
+  "tone-bands"
+ ],
+ "equations": [
+  {
+   "tex": "C=\\begin{cases}\\text{black}&L<q_{\\,0.5-\\text{contrast}/600}\\\\\\text{cream}&\\text{otherwise}\\end{cases}",
+   "note": "Two-tone threshold at a quantile q of the picture’s brightness.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\begin{bmatrix}x'\\\\y'\\end{bmatrix}=\\begin{bmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{bmatrix}\\begin{bmatrix}x\\\\y\\end{bmatrix}",
+   "note": "The rotation applied to the photo, wedge and bars (θ is the poster angle).",
+   "primitives": [],
+   "bespoke": "layout"
+  }
+ ],
+ "dials": [
+  {
+   "key": "angle",
+   "label": "Poster angle",
+   "type": "range",
+   "default": 18,
+   "min": 0,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "contrast",
+   "label": "Photo contrast",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wedge",
+   "label": "Red wedge",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "slogan",
+   "label": "Slogan",
+   "type": "text",
+   "default": "SEE THE LIGHT"
+  }
+ ],
+ "presets": [
+  {
+   "text": "A steep angle and high contrast gives the most dramatic poster.",
+   "set": {
+    "angle": 35,
+    "contrast": 100
+   }
+  },
+  {
+   "text": "Drop the wedge for a calmer composition.",
+   "set": {
+    "wedge": false
+   }
+  },
+  {
+   "text": "Replace the slogan with your own words.",
+   "set": {
+    "slogan": "LOOK CLOSER"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

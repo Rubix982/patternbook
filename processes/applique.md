@@ -52,6 +52,6 @@ _The nap: two value noises and a per-pixel hash η, as a factor on the felt’s 
 
 **History:** Felt is made by matting wet wool, with no weaving, and is one of the oldest textiles known. Felt hangings with appliqué figures were found in the frozen tombs of Pazyryk in the Altai mountains, from about the fourth century BC. In the twentieth century the felt board became a teaching tool: cut-out figures cling to a felt-covered board, and a story can be told by moving them.
 
-_Model `processes/models/lumenary/felt-story.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/felt-story.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/felt-story.json`; as captured from his site, `processes/sources/theory-pages/05-physical.md`; code `engine/styles/felt-story.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

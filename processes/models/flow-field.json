@@ -1,0 +1,172 @@
+{
+ "id": "lumenary:flow-field",
+ "name": "Flow Field",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "evenly spaced streamlines of a noise field (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "Evenly spaced streamlines that follow a drifting field. Near the edges of your picture they turn to run along it.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/flow-field.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Fluid dynamics and generative art",
+  "era": "1997 method, popular from the 2010s",
+  "bestOn": "Pictures with clear outlines"
+ },
+ "why": "A streamline is the path a speck of dust would take in a steady wind. Drawing many of them, evenly spaced, shows the whole shape of the wind. Here the wind swirls according to smooth noise, but near edges in your picture it turns to run along them, so outlines appear as places where the flow bends.",
+ "how": [
+  "Make the direction field from fractal noise, with an angle θ = 2π × 2.2 × fbm, so it swirls without jumps.",
+  "Where the picture has an edge, rotate the field toward the edge’s tangent, perpendicular to the gradient of lightness.",
+  "Place seeds on a jittered grid and accept one only if it is at least 0.8 of the spacing from every existing line.",
+  "Trace each line both ways in steps of 0.45 of the spacing, stopping when it comes too close to another.",
+  "Draw the lines with width and colour from the picture."
+ ],
+ "history": "Streamlines are old tools in fluid dynamics. Bruno Jobard and Wilfrid Lefer published the evenly spaced method in 1997 for scientific visualisation of wind and flow. In the 2010s and 2020s, flow fields became a staple of generative art, with artists such as Tyler Hobbs using them for collections like Fidenza in 2021.",
+ "uses": [
+  "Wind, current and field visualisation",
+  "Hair and fur direction in 3D art",
+  "Generative art prints and plotter drawings",
+  "Engineering flow analysis"
+ ],
+ "terms": [
+  [
+   "Streamline",
+   "A curve that is everywhere tangent to a flow."
+  ],
+  [
+   "fbm",
+   "Fractal Brownian motion, a sum of noise at several scales."
+  ],
+  [
+   "Tangent",
+   "The direction along a curve at a given point."
+  ]
+ ],
+ "related": [
+  "domain-warp",
+  "contour-lines",
+  "physarum"
+ ],
+ "paragraphs": [
+  "A streamline is a curve that is everywhere tangent to a vector field. The field here is made of a direction angle θ taken from smooth noise, θ = 2π × 2.2 × fbm(νx), so that it swirls without ever jumping. Where the picture has an edge, the field is bent toward the tangent of the edge, the direction perpendicular to the gradient of the lightness, with a weight w = follow × smoothstep(0.015, 0.12, |∇L|). Streamlines then run along outlines instead of across them, and the picture’s shapes appear as the places where the flow turns.",
+  "To keep the lines evenly spaced and uncrossed the program uses the method of Jobard and Lefer (1997). Seeds are laid on a jittered grid and shuffled. A seed is accepted only if it is at least 0.8 of the spacing from every existing line point. From it a line is traced both ways in steps of 0.45 of the spacing (up to 260 each way), and it stops as soon as the next point would come too close to another line, or to its own older points (the most recent 14 steps are exempt, so it does not stop itself). The check looks only in a 5 × 5 neighbourhood of a grid with cells of spacing/√2. Each line is drawn as a smooth curve whose width follows the tone at its middle and whose colour is the picture’s there."
+ ],
+ "primitives": [
+  "edge-tangent-field",
+  "poisson-disc",
+  "smooth-noise",
+  "streamline-trace"
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf d=\\frac{(1-w)\\,(\\cos\\theta,\\ \\sin\\theta)+w\\,\\mathbf t}{\\big\\lVert(1-w)\\,(\\cos\\theta,\\ \\sin\\theta)+w\\,\\mathbf t\\big\\rVert},\\qquad \\mathbf t=\\frac{(-\\partial_y L,\\ \\partial_x L)}{\\lVert\\nabla L\\rVert}",
+   "note": "Field direction: θ from noise, t the edge tangent, w the follow weight.",
+   "primitives": [
+    "edge-tangent-field",
+    "smooth-noise"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf x_{j+1}=\\mathbf x_j+h\\,\\mathbf d(\\mathbf x_j),\\qquad h=0.45\\,s",
+   "note": "One step of a streamline; s is the line spacing.",
+   "primitives": [
+    "streamline-trace"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{stop if }\\ \\lVert\\mathbf x_{j+1}-\\mathbf y\\rVert<0.8\\,s\\ \\ \\text{for any other line point }\\mathbf y",
+   "note": "The separation rule that keeps the lines evenly spaced.",
+   "primitives": [
+    "poisson-disc"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "space",
+   "label": "Line spacing",
+   "type": "range",
+   "default": 6,
+   "min": 3,
+   "max": 16,
+   "step": 0.5
+  },
+  {
+   "key": "scale",
+   "label": "Size of the swirls",
+   "type": "range",
+   "default": 45,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "follow",
+   "label": "Follow the picture",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "weight",
+   "label": "Picture sets line weight",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "ink",
+    "night"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New field",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Tight spacing and strong following draw the picture in fine hair.",
+   "set": {
+    "space": 3,
+    "follow": 90
+   }
+  },
+  {
+   "text": "Large swirls feel like wind over a field.",
+   "set": {
+    "scale": 85,
+    "follow": 30
+   }
+  },
+  {
+   "text": "Ink lines on night paper glow like silk threads.",
+   "set": {
+    "colour": "night"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

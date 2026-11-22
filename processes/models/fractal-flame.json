@@ -1,0 +1,176 @@
+{
+ "id": "lumenary:fractal-flame",
+ "name": "Fractal Flame",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "iterated function system histogram (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "A point hops between a few folded transforms a couple of million times. Where it lands often, the picture glows; where it lands rarely, it fades.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/fractal-flame.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Chaos games and iterated function systems",
+  "era": "1992, published 2003",
+  "bestOn": "Colourful pictures, which tint the flame"
+ },
+ "why": "A point jumps around the plane again and again, each time by one of a few chosen rules. Most of the points end up in a thin, tangled set, and the places the point visits often become bright. The rules include curved folds, and these give the result its smoke, silk and feather look. It is a drawing made by counting visits.",
+ "how": [
+  "Pick a start point, then at each step choose one of three or four transforms at random, weighted.",
+  "Apply it: an affine map, followed by two nonlinear variations such as sinusoidal, spherical, swirl, horseshoe or heart.",
+  "Throw away the first 24 steps, then add the position to a histogram of visits for a few million steps.",
+  "Keep a running colour: the point’s colour moves halfway toward the colour of the chosen transform at each step.",
+  "Convert counts to brightness using a logarithm, with gamma, so both dense and faint regions are visible."
+ ],
+ "history": "Scott Draves designed fractal flames in 1992 and published the algorithm in 2003, building on iterated function systems, which John Hutchinson formalised in 1981 and Michael Barnsley popularised in the 1980s. Draves also created Electric Sheep, a screen saver from 1999 in which thousands of computers dream and vote on flames. Flame fractals appear in programs such as Apophysis.",
+ "uses": [
+  "Generative art and wallpaper",
+  "Screen savers and music visuals",
+  "Texture generation for film and games",
+  "Teaching chaos and iterated functions"
+ ],
+ "terms": [
+  [
+   "Affine map",
+   "A transform made of rotation, scaling and shifting."
+  ],
+  [
+   "Iterated function system",
+   "A set of transforms applied again and again to build a fractal."
+  ],
+  [
+   "Histogram",
+   "A count of how often each position was visited."
+  ]
+ ],
+ "related": [
+  "strange-attractors",
+  "mandelbrot-fill",
+  "aurora"
+ ],
+ "paragraphs": [
+  "A fractal flame (Scott Draves, 2003) is found by a game of chance. Pick a point. Choose one of three or four transforms at random (each with its own weight), apply it, and plot where the point lands; repeat a few million times. Each transform is an affine map (a rotation, scale and shift) followed by two nonlinear variations V mixed with weights w₁ + w₂ = 1. The variations are named, familiar curves: sinusoidal, spherical (dividing by r²), swirl, horseshoe, polar, handkerchief, heart, disc, spiral, julia, bubble and fisheye. They fold the plane, and the folds are what makes a flame look like smoke and fabric. The first 24 steps are thrown away, and the points are accumulated in a histogram.",
+  "Colour is carried by a running mean: each transform has a colour index c_i and the point’s colour moves halfway toward it at every step, so a pixel’s colour is the average of the routes by which it was reached. Since many random sets of transforms make dull or empty pictures, the program tries up to 60 seeds. For each it plots 30,000 points, finds the middle 94% of their range, and keeps the candidate only if it is a real picture (a decent extent and at least 130 of 24 × 24 cells occupied); the view is then fitted to that range. The histogram is shown by log-density tone mapping, the standard flame trick that lets a dense core glow and faint filaments remain visible, with a white-hot core added where the density is highest. With rotational symmetry s > 1, each point is rotated by a random multiple of 2π/s."
+ ],
+ "primitives": [
+  "tone-curve"
+ ],
+ "equations": [
+  {
+   "tex": "(x,y)\\ \\leftarrow\\ w_1\\,V_{j_1}\\!\\big(A_i(x,y)\\big)+w_2\\,V_{j_2}\\!\\big(A_i(x,y)\\big),\\qquad A_i(x,y)=(a\\,x+b\\,y+e,\\ c\\,x+d\\,y+f)",
+   "note": "One step of the chaos game with the randomly chosen transform i.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "V_{\\text{sph}}=\\frac{(x,\\,y)}{r^{2}},\\qquad V_{\\text{swirl}}=\\big(x\\sin r^{2}-y\\cos r^{2},\\ \\ x\\cos r^{2}+y\\sin r^{2}\\big)",
+   "note": "Two of the twelve variations (spherical and swirl), with r² = x² + y².",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "t=\\operatorname{clip}\\!\\Big[\\Big(\\frac{\\ln(1+n)}{\\ln(1+n_{\\max})}\\Big)^{0.72}B\\Big],\\qquad C=(1-t)\\,C_{\\text{bg}}+1.25\\,\\frac{t}{n}\\sum c\\ +\\ 0.35\\cdot255\\,t^{3.5}",
+   "note": "Log-density tone mapping: n is the hit count of a pixel, B the brightness slider, Σc the sum of the colours that landed there.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "family",
+   "label": "Folds",
+   "type": "select",
+   "default": "mixed",
+   "options": [
+    "mixed",
+    "smooth",
+    "sharp"
+   ]
+  },
+  {
+   "key": "sym",
+   "label": "Rotational symmetry",
+   "type": "range",
+   "default": 1,
+   "min": 1,
+   "max": 6,
+   "step": 1
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "ember",
+    "aurora",
+    "rose"
+   ]
+  },
+  {
+   "key": "quality",
+   "label": "Quality",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "bright",
+   "label": "Brightness",
+   "type": "range",
+   "default": 62,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ghost",
+   "label": "Faint picture behind",
+   "type": "range",
+   "default": 18,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Grow another",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Three-fold symmetry makes a flower-like flame.",
+   "set": {
+    "sym": 3
+   }
+  },
+  {
+   "text": "Sharp folds give crystalline, feathery shapes.",
+   "set": {
+    "family": "sharp",
+    "quality": 85
+   }
+  },
+  {
+   "text": "The ember palette is the classic fire look.",
+   "set": {
+    "colour": "ember",
+    "bright": 75
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

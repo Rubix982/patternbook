@@ -1,0 +1,189 @@
+{
+ "id": "lumenary:double-exposure",
+ "name": "Double Exposure",
+ "physical": "yes",
+ "process": "multiple-exposure",
+ "process_name": "Multiple exposure",
+ "class": "photographic",
+ "basis": "why: two pictures on one frame, light adds; how: the photograph's tones open a window, a second scene screened in",
+ "note": "The second scene is drawn procedurally; screen blend stands in for light adding.",
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "Two frames on one piece of film: the picture’s tones become a window, and a second scene (mountains, pines, a city) shows through it.",
+  "theory_page": "processes/sources/theory-pages/08-optical.md",
+  "code": "engine/styles/double-exposure.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Early photography and cinema",
+  "era": "1860s onward, a design trend in the 2010s",
+  "bestOn": "Portraits and profiles against a plain background"
+ },
+ "why": "When two pictures are recorded on one frame of film, light adds, so one picture shows through wherever the other was dark. This treatment recreates that with a window: the photograph’s tones decide where a second scene shows through, and the two are toned in the same pair of inks so they feel like one image. The second scene is drawn from scratch, with distant layers lighter than near ones for depth.",
+ "how": [
+  "Tone the photograph into two inks, a dark and a light one, with a ramp over its lightness.",
+  "Compare its blurred tones with a level, using a smoothstep whose width is the softness of the window, and decide whether dark or light parts open it.",
+  "Draw the second scene in the same inks: mountains from layered noise, pine rows from stacked triangles, a city from three ranks of buildings, or a moon with stars and clouds.",
+  "Make each far layer lighter and each near one darker, with fog between them for aerial perspective.",
+  "Inside the window mix the scene in with a screen blend, 80 percent replacement and 20 percent film, with the photograph’s lightness modulating the scene’s brightness."
+ ],
+ "history": "Double exposures happened by accident in the earliest photographs and were used on purpose in the 1860s by spirit photographers who printed ghostly figures over portraits. Filmmakers such as Georges Méliès used them for early special effects. The portrait-with-a-landscape version became a design trend in the 2010s, and it was widely seen in the title sequence of the TV series True Detective in 2014.",
+ "uses": [
+  "Poster and album cover art",
+  "Portrait and nature composites",
+  "Film title and social media graphics",
+  "Gifts and prints with a symbolic image"
+ ],
+ "terms": [
+  [
+   "Double exposure",
+   "Recording two images on a single frame of film."
+  ],
+  [
+   "Aerial perspective",
+   "The way distant things look paler and bluer because of the air between."
+  ],
+  [
+   "Screen blend",
+   "A way of combining layers so the result is never darker than either."
+  ]
+ ],
+ "related": [
+  "surreal",
+  "duotone",
+  "aurora"
+ ],
+ "paragraphs": [
+  "In a double exposure two pictures are recorded on one frame. Light adds on the film, so one picture shows through wherever the other was dark. The program imitates it with a window. The photograph is toned into two inks (a dark and a light one, chosen by the ink slider) by a ramp over its lightness. Its tones, blurred twice at about 5 px, are then compared with a level: where the tone passes the level, by a smoothstep whose width is the softness of the window, the window is open. You choose whether the dark or the light parts open it.",
+  "The second scene is drawn from scratch, in the same two inks. Mountains are six ridgelines made of layered noise, pines are rows of stacked triangles, a city is three ranks of buildings with scattered lit windows, and the moon is a disc with stars and bands of cloud. Each far layer is lighter and each near one darker, with a gradient of fog between them, the aerial perspective that makes the depth. Inside the window the scene replaces the photograph and is mixed with a screen blend, 80% replacement and 20% film. The photo detail slider lets the lightness of the photograph modulate the brightness of the scene, so its face or its shapes are still readable."
+ ],
+ "primitives": [
+  "additive-blend",
+  "mix-over",
+  "multiply-blend",
+  "soft-threshold",
+  "tone-curve"
+ ],
+ "equations": [
+  {
+   "tex": "m=\\operatorname{smoothstep}\\big(\\lambda-\\sigma,\\ \\lambda+\\sigma,\\ v\\big),\\qquad v=\\begin{cases}L_b&\\text{light opens}\\\\ 1-L_b&\\text{dark opens}\\end{cases}",
+   "note": "The window: λ is the level slider and σ = 0.02 + 0.5 × the softness slider.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "s'=s\\cdot\\operatorname{clip}\\big(0.87+0.9\\,D\\,(L-\\tfrac12),\\ 0,\\ 1.15\\big)",
+   "note": "The scene’s brightness follows the photograph’s lightness L; D is the photo detail slider.",
+   "primitives": [
+    "multiply-blend",
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=0.8\\Big[(1-0.96\\,m)\\,b+0.96\\,m\\,s'\\Big]+0.2\\Big[255-\\frac{(255-b)\\,(255-0.55\\,m\\,s')}{255}\\Big]",
+   "note": "The base b (the toned photograph) with the scene inside the window, plus a screen blend of the two.",
+   "primitives": [
+    "mix-over",
+    "additive-blend"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "scene",
+   "label": "Second scene",
+   "type": "select",
+   "default": "mountains",
+   "options": [
+    "mountains",
+    "pines",
+    "skyline",
+    "moon"
+   ]
+  },
+  {
+   "key": "tint",
+   "label": "Ink",
+   "type": "select",
+   "default": "blue",
+   "options": [
+    "blue",
+    "sepia",
+    "mono",
+    "rose",
+    "forest"
+   ]
+  },
+  {
+   "key": "fill",
+   "label": "Scene shows in",
+   "type": "select",
+   "default": "dark",
+   "options": [
+    "dark",
+    "light"
+   ]
+  },
+  {
+   "key": "level",
+   "label": "Where the window opens",
+   "type": "range",
+   "default": 38,
+   "min": 10,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "soft",
+   "label": "Softness of the window",
+   "type": "range",
+   "default": 28,
+   "min": 5,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "detail",
+   "label": "Photo detail kept",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New scene",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Pines in forest green make a classic woodland portrait.",
+   "set": {
+    "scene": "pines",
+    "tint": "forest"
+   }
+  },
+  {
+   "text": "A moon scene in blue is quiet and nocturnal.",
+   "set": {
+    "scene": "moon",
+    "tint": "blue"
+   }
+  },
+  {
+   "text": "Let the light parts open the window instead of the dark.",
+   "set": {
+    "fill": "light"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

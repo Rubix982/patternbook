@@ -51,6 +51,6 @@ _The zigzag motif: a band bent by the triangle wave τ._ (primitives: lattice-re
 
 **History:** The Bamana weave cotton in narrow strips, soak it in a tea of leaves rich in tannin, paint patterns with fermented mud and then bleach the background. The designs often carry meanings of history, proverbs and protection. In the late twentieth century the Malian designer Chris Seydou brought bogolan into fashion, and it is now worn around the world.
 
-_Model `processes/models/lumenary/mudcloth.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/mudcloth.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/mudcloth.json`; as captured from his site, `processes/sources/theory-pages/11-world.md`; code `engine/styles/mudcloth.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

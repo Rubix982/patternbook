@@ -1,0 +1,169 @@
+{
+ "id": "lumenary:handwritten",
+ "name": "Handwritten",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "calligram: letter size, weight and opacity follow darkness (how)",
+ "note": "Mentions pen pressure but models letter placement, not a pen.",
+ "lumenary": {
+  "section": "C. Typographic",
+  "kind": "still",
+  "blurb": "Your picture written out by hand: a notebook page where the pen presses harder and writes bigger on the dark parts.",
+  "theory_page": "processes/sources/theory-pages/03-type.md",
+  "code": "engine/styles/handwritten.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Notebooks and calligrams",
+  "era": "Ancient, with calligrams from 1918",
+  "bestOn": "Portraits and high contrast scenes"
+ },
+ "why": "When we write by hand we press harder, and write bigger, when we are in a hurry or mean something strongly. This treatment turns that human variation into tone. Dark parts of the picture get large, heavy, dark letters, and light parts are left as bare paper, so a picture appears out of a handwritten sentence.",
+ "how": [
+  "Draw the page: paper, ruled lines or grid, a red margin and three binder holes.",
+  "Stretch the picture so its darkest 2 percent are black and its lightest 2 percent white, then blur it.",
+  "Write the sentence one letter at a time, line after line, starting again when it runs out.",
+  "For each letter, read the darkness above its baseline and make it larger, bolder and more opaque where it is dark.",
+  "Lift the pen where the picture is very light, and turn each letter a couple of degrees at random so it does not look typeset."
+ ],
+ "history": "Shape poetry, in which words form the thing they describe, goes back to ancient Greek poets. Guillaume Apollinaire gave it a modern name in 1918 with his Calligrammes. Pictures made of writing appear in many scripts, and notebook doodles of the same kind are among the oldest habits of anyone with a pen.",
+ "uses": [
+  "Gifts and cards with a personal message",
+  "Poetry and lyric posters",
+  "Journal and notebook style graphics",
+  "Portraits made from a favourite quote"
+ ],
+ "terms": [
+  [
+   "Calligram",
+   "A poem or text arranged so that it forms a picture of its subject."
+  ],
+  [
+   "Baseline",
+   "The invisible line that letters sit on."
+  ],
+  [
+   "Tone",
+   "How light or dark a part of a picture is."
+  ]
+ ],
+ "related": [
+  "calligraphy-portrait",
+  "newspaper",
+  "letterpress"
+ ],
+ "paragraphs": [
+  "The page is drawn first: paper, ruled lines (or a square grid), a red margin and three binder holes. Then your sentence is written out one letter at a time, left to right, line after line, starting again from the beginning whenever it runs out. Before writing, the picture’s brightness is stretched so that its darkest 2% become black and its lightest 2% white, then blurred, so each letter reads a smooth tone and not one noisy pixel.",
+  "A pen presses harder where the picture is dark. For every letter the program looks at the darkness d just above its baseline and makes the letter larger, bolder (weight 700 once d passes one half) and more opaque. Where d is under 0.07 the pen lifts and nothing is written, so the paper shows through the highlights. Each letter is also turned by a random couple of degrees at most and its size varies by a few percent, which is what stops it looking typeset. The “Pen pressure” slider widens the gap between light and heavy writing."
+ ],
+ "primitives": [
+  "auto-levels",
+  "blur",
+  "seeded-random",
+  "tone-mark-size"
+ ],
+ "equations": [
+  {
+   "tex": "v=\\operatorname{clamp}\\!\\left(\\frac{L-L_{2\\%}}{\\max(0.08,\\;L_{98\\%}-L_{2\\%})}\\right),\\qquad d=1-\\bar v",
+   "note": "Brightness stretched between its 2nd and 98th percentiles, blurred (the bar), and turned into darkness d.",
+   "primitives": [
+    "auto-levels",
+    "blur"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "s=1.28\\,q\\,\\big(0.62+(0.55+0.35\\,\\pi)\\,d\\big)\\,(0.94+0.12\\,u),\\qquad q=\\frac{0.9\\,H}{n}",
+   "note": "Letter size: q is the line pitch for n lines, π the pressure slider (0 to 1) and u a random number from 0 to 1.",
+   "primitives": [
+    "tone-mark-size",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\alpha=\\min\\!\\big(1,\\;0.16+d\\,(0.7+0.55\\,\\pi)\\big)",
+   "note": "Ink opacity of one letter.",
+   "primitives": [],
+   "bespoke": "specific"
+  }
+ ],
+ "dials": [
+  {
+   "key": "text",
+   "label": "Words",
+   "type": "text",
+   "default": "light falls on everything and nothing keeps it"
+  },
+  {
+   "key": "lines",
+   "label": "Lines of writing",
+   "type": "range",
+   "default": 40,
+   "min": 22,
+   "max": 70,
+   "step": 1
+  },
+  {
+   "key": "ink",
+   "label": "Ink",
+   "type": "select",
+   "default": "blue",
+   "options": [
+    "blue",
+    "black",
+    "sepia"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "lined",
+   "options": [
+    "lined",
+    "grid",
+    "plain"
+   ]
+  },
+  {
+   "key": "press",
+   "label": "Pen pressure",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Write again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Black ink on a plain page is the cleanest version.",
+   "set": {
+    "ink": "black",
+    "paper": "plain"
+   }
+  },
+  {
+   "text": "More lines of writing give a finer portrait.",
+   "set": {
+    "lines": 65
+   }
+  },
+  {
+   "text": "Use your own sentence.",
+   "set": {
+    "text": "for you, with love"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

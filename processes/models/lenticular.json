@@ -1,0 +1,167 @@
+{
+ "id": "lumenary:lenticular",
+ "name": "Lenticular",
+ "physical": "yes",
+ "process": "lenticular-printing",
+ "process_name": "Lenticular printing",
+ "class": "optical-device",
+ "basis": "why: cylindrical lenses over two interlaced pictures send one strip to the eye per angle; how: per-lens strip selection by tilt",
+ "note": "Interactive; the second picture is derived from the first.",
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "live",
+  "blurb": "A ribbed plastic lens over two interlaced pictures. Move across it and the image flips from one to the other, strip by strip.",
+  "theory_page": "processes/sources/theory-pages/08-optical.md",
+  "code": "engine/styles/lenticular.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Printing and novelty design",
+  "era": "1940s onward, popular in the 1960s and 70s",
+  "bestOn": "Bold pictures that change meaning when altered"
+ },
+ "why": "A lenticular print is a sheet of tiny cylindrical lenses over two pictures that have been cut into thin strips and interlaced. Each lens sends one strip to your eye from one angle and the other strip from another, so as you move, the picture flips. This treatment makes a second picture from the first, interlaces the two under virtual lenses and tilts them with your pointer.",
+ "how": [
+  "Make the second picture from the first by a negative, a night blue ramp, opposite hues, black and white or sepia.",
+  "For each lens of width w, work out how far across the lens each column is: x divided by w, modulo 1.",
+  "Show picture A where that is below a split point and picture B above it, with the split following the tilt.",
+  "Track the pointer across the picture with a smooth catch-up, and sway on its own with a slow sine when the pointer is away.",
+  "Slide the pictures in opposite directions with the tilt, up to 1.4 lens widths, for parallax, and add a moving shine band and dark lens seams."
+ ],
+ "history": "Lenticular imaging developed in the early twentieth century, and flip images and 3D cards became common novelties in the 1950s and 60s, found in cereal packets, on postcards and on album covers. The same principle is used in some glasses-free 3D displays.",
+ "uses": [
+  "Flip card and collectible style graphics",
+  "Before and after reveals",
+  "Album and poster mock-ups",
+  "Playful packaging ideas"
+ ],
+ "terms": [
+  [
+   "Lenticular lens",
+   "A cylindrical lens, one of many in a ribbed sheet."
+  ],
+  [
+   "Interlacing",
+   "Alternating thin strips of two or more pictures."
+  ],
+  [
+   "Parallax",
+   "The apparent shift of things at different depths when the viewpoint changes."
+  ]
+ ],
+ "related": [
+  "anaglyph-3d",
+  "depth-parallax",
+  "holographic"
+ ],
+ "paragraphs": [
+  "A lenticular print is a sheet of tiny cylindrical lenses laid over two pictures that have been cut into thin strips and interlaced, A B A B. Each lens sends the A strip to your eye from one viewing angle and the B strip from another, so as you move the picture seems to flip. The program makes the second picture from the first by one of five alterations (a negative, a night-blue ramp, the opposite hues, black and white or sepia), then for each lens of width w it works out how far across the lens each column is, u = (x/w) mod 1. The lens shows picture A where u is below a split point and B above it. The split point follows the tilt: split = ½ (1 + θ).",
+  "The tilt θ is a number between −1 and 1. It follows your pointer across the picture (the left edge is −1, the right edge 1) with a smooth, exponential catch-up, and when the pointer is away it sways by itself as a slow sine wave. The two pictures also slide in opposite directions with the tilt, by up to 1.4 lens widths, which is the parallax that makes a lenticular look deep. The lens shine adds a bright band that moves across each lens, darkens the lens edges and the seam, so the strips read as ribbed plastic."
+ ],
+ "primitives": [
+  "coordinate-warp",
+  "cylinder-shading",
+  "ease-toward-target",
+  "lattice-repeat"
+ ],
+ "equations": [
+  {
+   "tex": "u=\\frac{x}{w}\\bmod 1,\\qquad \\text{show B if }\\ u\\ge\\tfrac12\\,(1+\\theta)",
+   "note": "w is the lens width in pixels and θ the tilt.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\theta\\ \\leftarrow\\ \\theta+(\\theta^{*}-\\theta)\\,\\big(1-e^{-7\\,\\Delta t}\\big),\\qquad \\theta^{*}=\\begin{cases}2p_x-1&\\text{pointer inside}\\\\ 0.95\\,s\\,\\sin(0.75\\,t)&\\text{otherwise}\\end{cases}",
+   "note": "The tilt eases toward its target; p_x is the pointer’s horizontal position (0 to 1) and s the sway slider.",
+   "primitives": [
+    "ease-toward-target"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "x_{\\text{src}}=x\\mp\\theta\\,\\delta,\\quad \\delta=1.4\\,P\\,w;\\qquad k=1+S\\Big(0.3\\,e^{-(u-h)^{2}/0.018}-0.12\\,\\operatorname{smoothstep}(0.62,\\,1,\\,\\lvert 2u-1\\rvert)\\Big)",
+   "note": "Parallax shift (minus for A, plus for B; P the parallax slider) and the shine multiplier; h = ½ + 0.38 θ is where the glint sits in each lens, S the shine slider.",
+   "primitives": [
+    "coordinate-warp",
+    "cylinder-shading"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "alter",
+   "label": "Second picture",
+   "type": "select",
+   "default": "night",
+   "options": [
+    "negative",
+    "night",
+    "hue",
+    "mono",
+    "sepia"
+   ]
+  },
+  {
+   "key": "lens",
+   "label": "Lens width",
+   "type": "range",
+   "default": 8,
+   "min": 3,
+   "max": 16,
+   "step": 1
+  },
+  {
+   "key": "depth",
+   "label": "Parallax",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shine",
+   "label": "Lens shine",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "sway",
+   "label": "Sway on its own",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A negative flip is dramatic and graphic.",
+   "set": {
+    "alter": "negative"
+   }
+  },
+  {
+   "text": "Narrow lenses and strong parallax give a deep, fine ribbing.",
+   "set": {
+    "lens": 4,
+    "depth": 80
+   }
+  },
+  {
+   "text": "Switch off the sway to control the flip with the pointer only.",
+   "set": {
+    "sway": 0
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

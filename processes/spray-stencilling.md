@@ -47,6 +47,6 @@ _Overspray: the blurred copy is blended over the sharp one._ (primitives: mix-ov
 
 **History:** Modern graffiti took shape in Philadelphia in the late 1960s and in New York in the 1970s, where tags such as TAKI 183 were noticed by the press in 1971. Stencil work followed, with artists such as Blek le Rat in Paris in the early 1980s and later Banksy, who used the speed of a cut stencil to put detailed images on walls in seconds.
 
-_Model `processes/models/lumenary/graffiti.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `engine/styles/graffiti.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/graffiti.json`; as captured from his site, `processes/sources/theory-pages/01-design.md`; code `engine/styles/graffiti.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

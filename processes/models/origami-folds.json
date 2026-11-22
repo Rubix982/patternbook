@@ -1,0 +1,161 @@
+{
+ "id": "lumenary:origami-folds",
+ "name": "Origami Folds",
+ "physical": "yes",
+ "process": "paper-folding",
+ "process_name": "Paper folding",
+ "class": "other",
+ "basis": "why: a folded sheet shows its structure through shading; how: squares folded into pyramids, facets shaded by lean, creases drawn",
+ "note": null,
+ "lumenary": {
+  "section": "E. Physical and 3D feel",
+  "kind": "still",
+  "blurb": "Paper folded into a sheet of small pyramids; each facet catches light differently and takes its colour from your picture.",
+  "theory_page": "processes/sources/theory-pages/05-physical.md",
+  "code": "engine/styles/origami-folds.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Japan, with modern folding mathematics",
+  "era": "Paper folding for centuries, modern origami from the 20th century",
+  "bestOn": "Colourful pictures with soft shapes"
+ },
+ "why": "A folded sheet shows its structure through shading: a facet that leans towards the light is bright, and one leaning away is dark. Cover a sheet with small pyramids, colour each facet from the picture and shade it by its lean, and the picture appears in a tessellation of folded paper.",
+ "how": [
+  "Divide the sheet into a grid of squares.",
+  "Fold each square at random in one of three ways: four small triangles meeting at the centre, or two triangles along one of the diagonals.",
+  "Colour each facet from the picture at its centre, slightly softened, or leave the paper white.",
+  "Brighten facets that lean towards the light and darken those leaning away, in proportion to the dot product of lean and light direction, with a random sign per square and a tiny tilt per facet.",
+  "Draw each crease as a dark line with a pale line one pixel beside it, and add paper grain."
+ ],
+ "history": "Paper folding developed in Japan and elsewhere over centuries, and the modern art was shaped in the twentieth century by Akira Yoshizawa, who developed the notation of dashed lines and arrows still used to record folds. Today scientists and artists such as Robert Lang use folding theory in engineering, and Koryo Miura’s Miura fold has been used to pack solar panels for spacecraft.",
+ "uses": [
+  "Paper craft and packaging inspiration",
+  "Faceted posters and wallpapers",
+  "Educational and geometry themed graphics",
+  "Calm decorative backgrounds"
+ ],
+ "terms": [
+  [
+   "Tessellation",
+   "A pattern that covers a surface with repeating shapes and no gaps."
+  ],
+  [
+   "Facet",
+   "One flat face of a folded or faceted surface."
+  ],
+  [
+   "Crease",
+   "The line where paper has been folded."
+  ]
+ ],
+ "related": [
+  "paper-cut-out",
+  "low-poly",
+  "quilt-patchwork"
+ ],
+ "paragraphs": [
+  "The sheet is a grid of squares. In each square the paper is folded in one of three ways, chosen at random: four small triangles meeting at the centre, or two triangles along one of the diagonals. Every triangle is a flat facet that takes its colour from the picture at its centre (slightly softened, so it looks like coloured paper), or plain white if you choose that.",
+  "What makes it look folded is shading. Each facet leans in a direction (outward from the centre for the four-facet fold, perpendicular to the diagonal for the two-facet folds). A facet leaning toward the light is brightened and one leaning away is darkened, in proportion to the dot product of its direction and the light direction in the picture plane, with a random sign per square and a small random tilt per facet. Crease lines are drawn on top as a dark line with a pale line one pixel beside it, which is how a real fold looks, and a fine grain finishes the paper."
+ ],
+ "primitives": [
+  "facet-shading",
+  "seeded-random"
+ ],
+ "equations": [
+  {
+   "tex": "\\text{shade}=1+\\phi\\,\\Big(0.62\\,\\varepsilon\\,(\\mathbf d\\cdot\\mathbf l)+0.5\\,(r-\\tfrac12)\\Big)",
+   "note": "Brightness factor of a facet: φ is the fold-strength slider, ε = ±1 per square, d the facet’s direction, l the light direction and r a random number.",
+   "primitives": [
+    "facet-shading",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{fold}\\ \\in\\ \\{4\\text{ triangles about the centre},\\ \\diagdown\\ \\text{split},\\ \\diagup\\ \\text{split}\\},\\qquad P\\approx 0.34,\\ 0.33,\\ 0.33",
+   "note": "The three fold types, chosen with roughly equal chance (0.34, 0.33 and 0.33).",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "cells",
+   "label": "Folds across",
+   "type": "range",
+   "default": 13,
+   "min": 5,
+   "max": 30,
+   "step": 1
+  },
+  {
+   "key": "fold",
+   "label": "Fold strength",
+   "type": "range",
+   "default": 62,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "angle",
+   "label": "Light direction",
+   "type": "range",
+   "default": 135,
+   "min": 0,
+   "max": 360,
+   "step": 1
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "colour",
+   "options": [
+    "colour",
+    "white"
+   ]
+  },
+  {
+   "key": "crease",
+   "label": "Crease lines",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Fold differently",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Strong folds with white paper look like a sculpture.",
+   "set": {
+    "paper": "white",
+    "fold": 90
+   }
+  },
+  {
+   "text": "Many tiny folds turn the picture into fine pleated paper.",
+   "set": {
+    "cells": 28
+   }
+  },
+  {
+   "text": "Fewer folds with strong creases is graphic and bold.",
+   "set": {
+    "cells": 7,
+    "crease": 90
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

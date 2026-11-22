@@ -51,6 +51,6 @@ _Bubble: a pixel at radius ρ looks at radius ρ^e, nearer the centre, so the mi
 
 **History:** The law of refraction was written down by Ibn Sahl around 984 and rediscovered by Willebrord Snell in the early 1600s. Isaac Newton showed in 1666 that a prism splits white light into colours. Fluted and reeded glass became a favourite of Art Deco interiors and returned as a popular detail in modern homes and shops.
 
-_Model `processes/models/lumenary/glass-refraction.json`; as captured from his site, `processes/sources/lumenary/theory-pages/04-light.md`; code `engine/styles/glass-refraction.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/glass-refraction.json`; as captured from his site, `processes/sources/theory-pages/04-light.md`; code `engine/styles/glass-refraction.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

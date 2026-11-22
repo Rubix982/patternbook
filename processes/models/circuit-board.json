@@ -1,0 +1,151 @@
+{
+ "id": "lumenary:circuit-board",
+ "name": "Circuit Board",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "PCB layout conventions: traces snapped to 45 degrees along edges, pads, vias, chips (how)",
+ "note": "Imitates an etched object but models routing rules, not etching; arguable as partly.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "A printed circuit board: copper traces on 45 degree angles follow your edges, with pads, vias and chips.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/circuit-board.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Electronics manufacturing",
+  "era": "1940s onward",
+  "bestOn": "Portraits and pictures with clear edges and some flat areas"
+ },
+ "why": "A circuit board is a drawing in copper: straight runs, 45 degree corners, round pads with holes. Those rules happen to turn any picture into a pattern that is both technical and graphic. Here the traces follow the picture’s own edges, snapped to four directions, while the green soldermask still contains the picture itself.",
+ "how": [
+  "Tint and darken the picture to make the board surface.",
+  "In the darkest areas, add a diagonal copper hatch like a ground plane.",
+  "On a grid, measure the edge direction in each cell, turn it to run along the edge, and snap it to horizontal, vertical or either diagonal.",
+  "Where traces are crowded, add round pads with holes and small vias.",
+  "Place chips with pins on calm areas, never overlapping, and print part numbers such as R12 and C7 on empty cells."
+ ],
+ "history": "The printed circuit was developed by Paul Eisler in the 1930s and 40s and was used widely in electronics after the Second World War. Its 45 degree routing came from the need to avoid sharp corners that were hard to etch and prone to faults. Today almost every electronic device contains one, and their patterns have become a decorative language of their own.",
+ "uses": [
+  "Technology and engineering branding",
+  "Posters for electronics and maker events",
+  "Wallpaper and backgrounds with a hardware feel",
+  "Game and sci-fi interface art"
+ ],
+ "terms": [
+  [
+   "Soldermask",
+   "The coloured coating over a board that protects the copper."
+  ],
+  [
+   "Via",
+   "A small plated hole that joins traces on different layers."
+  ],
+  [
+   "Ground plane",
+   "A large copper area that serves as a shared return path."
+  ]
+ ],
+ "related": [
+  "blueprint",
+  "futuristic",
+  "matrix-rain"
+ ],
+ "paragraphs": [
+  "The board colour is the picture itself, tinted and darkened, so the picture is still in the soldermask. In the darkest areas a diagonal hatching of copper is added, like the ground plane of a real board. Over it, copper traces are drawn on a grid. In each cell the edge direction is measured with the Sobel operator on a blurred brightness map; the trace follows the edge, so its direction is perpendicular to the gradient, and it is snapped to the nearest of four angles (horizontal, vertical or the two diagonals), because circuit boards use 45° routing.",
+  "Where traces are crowded, round pads with holes and small vias are added at random. Chips are rectangles with pins on their long sides, placed on calm parts of the picture and never overlapping each other, and silk-screen part numbers (R12, C7) are placed on empty cells."
+ ],
+ "primitives": [
+  "edge-tangent-field"
+ ],
+ "equations": [
+  {
+   "tex": "\\theta=\\operatorname{atan2}(G_y,G_x)+\\tfrac{\\pi}{2},\\qquad q=\\operatorname{round}\\!\\Big(\\frac{\\theta}{\\pi/4}\\Big)\\bmod 4",
+   "note": "The trace is along the tangent of the edge; q picks one of four directions.",
+   "primitives": [
+    "edge-tangent-field"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "w=w_0\\,\\big(0.55+0.75\\min(1,\\,1.6\\,m)\\big)",
+   "note": "Trace width grows with the edge strength m, relative to the strongest edge.",
+   "primitives": [],
+   "bespoke": "specific"
+  }
+ ],
+ "dials": [
+  {
+   "key": "board",
+   "label": "Board",
+   "type": "select",
+   "default": "green",
+   "options": [
+    "green",
+    "black",
+    "blue"
+   ]
+  },
+  {
+   "key": "density",
+   "label": "Trace grid",
+   "type": "range",
+   "default": 52,
+   "min": 24,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "thresh",
+   "label": "Edge threshold",
+   "type": "range",
+   "default": 16,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "chips",
+   "label": "Chips",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "pads",
+   "label": "Pads and vias",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Re-route",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A black board with a dense grid looks like a modern motherboard.",
+   "set": {
+    "board": "black",
+    "density": 80
+   }
+  },
+  {
+   "text": "Lower the edge threshold for many more traces.",
+   "set": {
+    "thresh": 5
+   }
+  },
+  {
+   "text": "Remove the chips for a pure trace drawing.",
+   "set": {
+    "chips": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

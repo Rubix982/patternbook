@@ -1,0 +1,145 @@
+{
+ "id": "lumenary:collage-art",
+ "name": "Collage Art",
+ "physical": "yes",
+ "process": "paper-collage",
+ "process_name": "Paper collage",
+ "class": "cutting",
+ "basis": "why: torn edges, shadows and overlaps show the picture 'cut and rebuilt by hand'; how: torn pieces pasted over paper scraps, tape",
+ "note": null,
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "Your picture torn into pieces and pasted back over scraps of coloured paper.",
+  "theory_page": "processes/sources/theory-pages/01-design.md",
+  "code": "engine/styles/collage-art.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Cubist Paris and Dada Berlin",
+  "era": "1912 onward",
+  "bestOn": "Busy scenes and group photographs"
+ },
+ "why": "A collage shows its seams. The torn edges, the shadow under each scrap and the overlap of pieces tell you that the picture has been cut and rebuilt by hand. Here the photograph is sliced into a grid, every piece is torn and rotated a little, and the pieces are dropped back over coloured paper and a speckled desk.",
+ "how": [
+  "Cut the photograph into a grid of pieces.",
+  "Draw each piece as a rectangle outline with 28 points, each nudged by a random amount, so the edge wobbles like torn paper.",
+  "Fill the torn shape with the matching part of the picture, slightly larger than its cell so neighbours overlap, and add a shadow below it.",
+  "Rotate and move the pieces by random amounts scaled by the scatter slider, and draw them in random order.",
+  "Lay scraps of plain paper and a speckled desk underneath, and stick strips of translucent tape on a few pieces."
+ ],
+ "history": "The word collage comes from the French coller, to glue. Pablo Picasso and Georges Braque began pasting paper into their paintings around 1912, and Dada artists such as Hannah Höch used cut photographs to make sharp social commentary in Berlin from 1919. Kurt Schwitters built whole works out of scraps, and Henri Matisse’s late paper cut-outs gave the idea a joyful colour.",
+ "uses": [
+  "Zine and mixed-media covers",
+  "Mood boards and scrapbooks",
+  "Album art",
+  "Social posts with a handmade feel"
+ ],
+ "terms": [
+  [
+   "Papier collé",
+   "French for pasted paper, the Cubists’ name for their paper collages."
+  ],
+  [
+   "Photomontage",
+   "A picture made by combining and cropping several photographs."
+  ],
+  [
+   "Seed",
+   "A starting number for a random generator, so that a result can be repeated."
+  ]
+ ],
+ "related": [
+  "surreal",
+  "maximalism",
+  "pop-art"
+ ],
+ "paragraphs": [
+  "The photograph is cut into a grid of pieces, and each piece is drawn as a torn rectangle: its outline is a rectangle with 28 points, each moved by a random amount, so the edge wobbles like torn paper. The torn shape is filled with the matching part of the picture, a little larger than its cell so neighbours overlap, and a shadow below it makes the paper look lifted.",
+  "Pieces are rotated and moved by random amounts scaled by the scatter slider, and drawn in random order so that some lie over others. Underneath, scraps of plain coloured paper and a speckled desk give the scene depth. Strips of translucent tape are placed on a few pieces."
+ ],
+ "primitives": [
+  "seeded-random"
+ ],
+ "equations": [
+  {
+   "tex": "\\text{source rect}=\\left(\\frac{(i+\\tfrac12)c_w-0.53\\,c_w}{0.86},\\ \\frac{(j+\\tfrac12)c_h-0.53\\,c_h}{0.86},\\ \\frac{1.06\\,c_w}{0.86},\\ \\frac{1.06\\,c_h}{0.86}\\right)",
+   "note": "The part of the photograph shown on piece (i, j) of size c_w × c_h; the photograph fills 86% of the page.",
+   "primitives": [],
+   "bespoke": "layout"
+  },
+  {
+   "tex": "\\theta=0.7\\,(\\xi-\\tfrac12)\\cdot\\text{scatter},\\qquad \\xi\\sim U(0,1)",
+   "note": "The random rotation of each piece.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "pieces",
+   "label": "Pieces",
+   "type": "range",
+   "default": 20,
+   "min": 6,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "tear",
+   "label": "Torn edges",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "scatter",
+   "label": "Scatter",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "tape",
+   "label": "Tape",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Re-tear",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Ten big pieces with rough tears look like a fast, bold collage.",
+   "set": {
+    "pieces": 10,
+    "tear": 100
+   }
+  },
+  {
+   "text": "Maximum scatter without tape makes a loose, tumbled pile.",
+   "set": {
+    "scatter": 100,
+    "tape": false
+   }
+  },
+  {
+   "text": "Forty fine pieces with little scatter keep the picture easy to read.",
+   "set": {
+    "pieces": 40,
+    "scatter": 10
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

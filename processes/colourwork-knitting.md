@@ -47,6 +47,6 @@ _Each of the two legs is an ellipse of these radii._ (primitives: stitch-grid)
 
 **History:** Knitting is known from Egypt around the eleventh century, and knitted colour patterns developed in Scandinavia and the Shetland Islands. Fair Isle gets its name from a small island in Shetland, and the style became fashionable far beyond it when the Prince of Wales wore a Fair Isle pullover in 1921.
 
-_Model `processes/models/lumenary/knitted-pattern.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/knitted-pattern.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/knitted-pattern.json`; as captured from his site, `processes/sources/theory-pages/06-craft.md`; code `engine/styles/knitted-pattern.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -1,0 +1,183 @@
+{
+ "id": "lumenary:cellular-automata",
+ "name": "Cellular Automata",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "Life-like rules seeded by tone (how)",
+ "note": "Interactive.",
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "live",
+  "blurb": "Every cell looks at its eight neighbours and lives, dies or is born. The picture sets where life starts thickest, and the cursor plants new cells.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/cellular-automata.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Mathematics and computing",
+  "era": "1940s theory, Life in 1970",
+  "bestOn": "Pictures with a good spread of light and dark"
+ },
+ "why": "A cellular automaton is a world made of squares that live, die or are born according to a rule about their neighbours. Nothing in the rule mentions gliders, guns or oscillators, and yet they appear. It is a small experiment in how complex behaviour can arise from very simple local rules, and the picture sets only where life starts out thickest.",
+ "how": [
+  "Hold a grid of alive and dead cells that wraps round at the edges like a torus.",
+  "Update every cell at once: a dead cell is born if its number of living neighbours is in the birth set B, and a living cell survives if the number is in the survival set S.",
+  "Use the Life-like rules: Life B3/S23, HighLife B36/S23, Day and Night B3678/S34678, Coral B3/S45678 and Maze B3/S12345.",
+  "Start each cell alive with a probability that rises with the picture’s tone, so the picture shows as a density of life.",
+  "Fade dead cells slowly with an afterglow so you can see where life has been, and let the cursor plant new cells."
+ ],
+ "history": "John von Neumann and Stanislaw Ulam explored self-reproducing cells in the 1940s. John Conway invented the Game of Life in 1970, and Martin Gardner introduced it to the public in Scientific American the same year. Stephen Wolfram surveyed one-dimensional automata in the 1980s, and Life, as well as his Rule 110, has been proved able to compute anything a computer can.",
+ "uses": [
+  "Modelling growth, forest fires and traffic",
+  "Procedural cave and terrain generation in games",
+  "Teaching emergence and computation",
+  "Generative art and music"
+ ],
+ "terms": [
+  [
+   "Cellular automaton",
+   "A grid of cells that all update together by a local rule."
+  ],
+  [
+   "Glider",
+   "A small pattern in Life that travels across the grid."
+  ],
+  [
+   "Emergence",
+   "Complex behaviour that arises from simple rules."
+  ]
+ ],
+ "related": [
+  "wave-function-collapse",
+  "reaction-diffusion",
+  "matrix-rain"
+ ],
+ "paragraphs": [
+  "A cellular automaton is a grid of cells, each alive or dead, that all update together by a rule that looks only at its eight neighbours. The rules here are of the “Life-like” kind: a dead cell becomes alive if its number of living neighbours is in the birth set B, and a living cell stays alive if the number is in the survival set S. Conway’s Life is B3/S23, HighLife B36/S23, Day and Night B3678/S34678, Coral B3/S45678 and Maze B3/S12345. The grid wraps at the edges, like the surface of a torus.",
+  "The picture sets where life begins: each cell is alive at the start with probability clip(d (0.25 + 1.5 τ)), where d is the crowding slider and τ the picture’s tone (stretched to the full range), so the picture appears as a density of life, thicker in the light parts. The generations per second slider sets the speed (at most six generations per frame). Dead cells remember: the afterglow value h is 1 while a cell lives and then shrinks each frame by the afterglow factor, which draws fading ghosts behind the moving patterns. If the sheet becomes quiet, with less than 5% alive when the generation count is a multiple of 60, a scatter of new cells (12% × tone) is added. Pressing and dragging plants a 7 × 7 patch of random cells (55% of them alive)."
+ ],
+ "primitives": [
+  "decay-trail",
+  "importance-sampling",
+  "seeded-random"
+ ],
+ "equations": [
+  {
+   "tex": "s_{t+1}(i)=\\begin{cases}[\\,n_i\\in S\\,]&\\text{if } s_t(i)=1\\\\[2pt] [\\,n_i\\in B\\,]&\\text{if } s_t(i)=0\\end{cases},\\qquad n_i=\\sum_{j\\in\\text{8 neighbours}}s_t(j)",
+   "note": "The update rule; B and S are the birth and survival sets of the chosen rule.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "P(s_0=1)=\\operatorname{clip}\\big[\\,d\\,(0.25+1.5\\,\\tau)\\,\\big]",
+   "note": "Initial state, with the tone τ of the picture and the crowding d.",
+   "primitives": [
+    "importance-sampling",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "h_{t+1}=\\begin{cases}1&\\text{alive}\\\\ \\gamma\\,h_t&\\text{dead}\\end{cases}",
+   "note": "The afterglow, with γ the afterglow slider.",
+   "primitives": [
+    "decay-trail"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "rule",
+   "label": "Rule",
+   "type": "select",
+   "default": "life",
+   "options": [
+    "life",
+    "high",
+    "dn",
+    "coral",
+    "maze"
+   ]
+  },
+  {
+   "key": "cell",
+   "label": "Cell size",
+   "type": "range",
+   "default": 5,
+   "min": 3,
+   "max": 12,
+   "step": 1
+  },
+  {
+   "key": "speed",
+   "label": "Generations per second",
+   "type": "range",
+   "default": 14,
+   "min": 2,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "start",
+   "label": "How crowded it starts",
+   "type": "range",
+   "default": 34,
+   "min": 5,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "trail",
+   "label": "Afterglow",
+   "type": "range",
+   "default": 78,
+   "min": 0,
+   "max": 95,
+   "step": 1
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "phosphor",
+    "ink"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Seed again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Maze grows winding corridors from a scatter.",
+   "set": {
+    "rule": "maze",
+    "start": 12
+   }
+  },
+  {
+   "text": "Coral builds slow, solid reefs.",
+   "set": {
+    "rule": "coral",
+    "speed": 8
+   }
+  },
+  {
+   "text": "A long afterglow draws trails of every moving shape.",
+   "set": {
+    "trail": 95,
+    "colour": "phosphor"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,182 @@
+{
+ "id": "lumenary:chalkboard",
+ "name": "Chalkboard",
+ "physical": "yes",
+ "process": "chalk-pastel-drawing",
+ "process_name": "Chalk and pastel drawing",
+ "class": "drawing",
+ "basis": "why: dry crumbly chalk adds light to a dark ground and sticks to high points; how: tooth map, outlines broken by tooth, side-of-stick fills, eraser smears",
+ "note": "Merged with pastel as the same dry-stick-on-tooth process.",
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "Chalk on a school board: dusty outlines, the light areas rubbed in with the side of the stick, eraser smears across the slate and a wooden frame with a tray.",
+  "theory_page": "processes/sources/theory-pages/07-painterly.md",
+  "code": "engine/styles/chalkboard.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "School and café blackboards",
+  "era": "About 1801 onward",
+  "bestOn": "Pictures with bright subjects and clear outlines"
+ },
+ "why": "Chalk is the one common drawing tool that works by adding light to a dark ground. It is also dry and crumbly, so it only sticks to the high points of the board and every stroke is a scatter of grains. And a board has a memory: yesterday’s work is never fully erased, only spread about. Those three facts make the look.",
+ "how": [
+  "Paint the board: uneven slate with broad eraser sweeps of old chalk.",
+  "Make a tooth map of the board’s high points.",
+  "Draw the outlines in chalk, broken by the tooth.",
+  "Rub chalk into the bright areas with slanted side-of-the-stick strokes.",
+  "With coloured sticks, choose the stick nearest in hue to the picture.",
+  "Add the wooden frame, the tray, chalk and an eraser."
+ ],
+ "history": "James Pillans, a headmaster in Edinburgh, is credited with hanging a large slate on the classroom wall around 1801 so that a whole class could see one lesson. By the mid nineteenth century blackboards were in almost every school. Green boards of enamelled steel arrived in the twentieth century because they were lighter and easier on the eyes. School “chalk” has long been made of gypsum, not true chalk.",
+ "uses": [
+  "Café menus and shop signs",
+  "Teaching slides and lesson covers",
+  "Wedding and party signs",
+  "Back-to-school posts"
+ ],
+ "terms": [
+  [
+   "Tooth",
+   "The fine roughness of a surface that holds chalk."
+  ],
+  [
+   "Fractal noise",
+   "Several layers of smooth noise, each finer and fainter than the last."
+  ],
+  [
+   "Threshold",
+   "A cut-off value: above it one thing happens, below it another."
+  ]
+ ],
+ "related": [
+  "pastel-chalk",
+  "charcoal-sketch",
+  "blueprint"
+ ],
+ "paragraphs": [
+  "A board is never clean. Its colour is multiplied by slow noise, and a second noise, stretched sideways and bent by a third, marks the broad sweeps an eraser leaves; inside those sweeps the board is blended a little toward chalk white. Chalk itself only catches on the high points of the surface, so everything drawn is gated by a tooth map made of fine value noise and a per-pixel hash. That gate is what breaks every line into grains.",
+  "Chalk draws light, so the picture is used the other way round from a pencil sketch. Outlines come from the Sobel operator, read at two slightly displaced positions so the line doubles in places. Shading goes where the picture is bright: a target amount is computed from the blurred brightness and from a noise stretched along one slanted direction, which stands for strokes made with the side of the stick, and chalk lands where the tooth exceeds a threshold that falls as the target rises. With coloured sticks, each pixel takes the stick whose hue is nearest to the picture’s there, as long as the picture is colourful enough."
+ ],
+ "primitives": [
+  "edge-outline",
+  "material-ground",
+  "soft-threshold",
+  "tooth-threshold"
+ ],
+ "equations": [
+  {
+   "tex": "C_{\\text{board}}=C_0\\,(0.8+0.34\\,m)+(C_{\\text{chalk}}-C_0)\\,(0.05+0.2\\,\\text{wipe})\\cdot\\text{dust}",
+   "note": "The slate: m is mottling noise, wipe the eraser sweeps, dust the smears slider.",
+   "primitives": [
+    "material-ground"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "q=S_{0.42,\\,0.95}(L)\\cdot s\\cdot(0.55+0.6\\,\\text{stroke}),\\qquad \\alpha=0.82\\,S_{0.95-0.9q,\\ 1.25-0.75q}(\\text{tooth}+0.35)",
+   "note": "Side-of-chalk shading: q is how much chalk is wanted, s the shading slider.",
+   "primitives": [
+    "soft-threshold",
+    "tooth-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\alpha_{\\text{line}}=S_{\\theta,\\,2.2\\theta}(E)\\cdot S_{0.18,\\,0.5}(\\text{tooth}+0.25),\\qquad\\theta=\\operatorname{lerp}(0.16,\\ 0.05,\\ \\text{lines})",
+   "note": "Outlines, broken by the tooth of the board.",
+   "primitives": [
+    "edge-outline",
+    "tooth-threshold"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "lines",
+   "label": "Outlines",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shade",
+   "label": "Side-of-chalk shading",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "dust",
+   "label": "Eraser smears",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "chalk",
+   "label": "Chalk",
+   "type": "select",
+   "default": "white",
+   "options": [
+    "white",
+    "colour"
+   ]
+  },
+  {
+   "key": "board",
+   "label": "Board",
+   "type": "select",
+   "default": "green",
+   "options": [
+    "green",
+    "black",
+    "blue"
+   ]
+  },
+  {
+   "key": "frame",
+   "label": "Frame and tray",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Wipe and redraw",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Coloured sticks on black slate make a café menu board.",
+   "set": {
+    "chalk": "colour",
+    "board": "black"
+   }
+  },
+  {
+   "text": "Outlines alone, with no shading, read as a quick diagram.",
+   "set": {
+    "shade": 0,
+    "lines": 90
+   }
+  },
+  {
+   "text": "A dusty board looks used all day.",
+   "set": {
+    "dust": 100,
+    "shade": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

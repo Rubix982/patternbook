@@ -55,6 +55,6 @@ _Line width and dot radius from the line weight slider ω._ (written for this mo
 
 **History:** Kolam is drawn daily, and in the month of Margazhi (December to January) streets fill with large, elaborate ones. Related floor drawings include rangoli in much of India, muggu in Andhra Pradesh and alpana in Bengal. Mathematicians and computer scientists have studied kolams since the 1970s, as pictures made by simple rules, and Gift Siromoney and colleagues in Chennai were among the first to analyse them with array grammars.
 
-_Model `processes/models/lumenary/kolam.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `engine/styles/kolam.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/kolam.json`; as captured from his site, `processes/sources/theory-pages/13-southasia.md`; code `engine/styles/kolam.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

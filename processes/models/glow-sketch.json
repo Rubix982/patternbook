@@ -1,0 +1,195 @@
+{
+ "id": "lumenary:glow-sketch",
+ "name": "Glow Sketch",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "digital",
+ "basis": "glow-brush line sketch: edges drawn three times, hatched, additive halo (how)",
+ "note": "History cites light painting, but no long exposure is modelled.",
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "A drawing made with a pen of light on a dark page: every outline is gone over twice by an unsteady hand, shadows are hatched in, and the lines glow.",
+  "theory_page": "processes/sources/theory-pages/07-painterly.md",
+  "code": "engine/styles/glow-sketch.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Light painting and neon line art",
+  "era": "1930s photographs, 2010s digital drawing",
+  "bestOn": "Subjects with strong, simple outlines"
+ },
+ "why": "Draw with a light instead of a pen and the rules invert: the page is dark and the line shines. A line of light also has a halo, bright in the core and fading outward, and a hand moving fast leaves a line that wanders and doubles back. This treatment sketches the outlines of the picture three times over, hatches the shadows and lets it all glow.",
+ "how": [
+  "Find the outlines with a blur and the Sobel operator.",
+  "Read them three times at slightly different, noisy positions, so each outline is drawn three times.",
+  "Hatch the dark areas with slanted strokes, and cross them in the darkest.",
+  "Colour the lines with one pen, or by position for a rainbow.",
+  "Add the line layer to a dark page with blurred copies of itself for the halo."
+ ],
+ "history": "In 1935 Man Ray photographed himself drawing in the air with a small light, a series he called Space Writing. In 1949 the photographer Gjon Mili showed the technique to Picasso, who drew centaurs and bulls in light for Life magazine. Neon signs, patented by Georges Claude in 1915, made the glowing line part of the city. Drawing apps brought “glow” brushes to everyone in the 2010s.",
+ "uses": [
+  "Music and night event posters",
+  "Stream overlays and channel art",
+  "Tattoo and logo sketches",
+  "Dark-mode wallpapers"
+ ],
+ "terms": [
+  [
+   "Hatching",
+   "Shading with closely spaced parallel lines."
+  ],
+  [
+   "Bloom",
+   "A soft halo of light round something bright."
+  ],
+  [
+   "Additive blending",
+   "Combining colours by adding their light, so overlaps get brighter."
+  ]
+ ],
+ "related": [
+  "neon-glow",
+  "blind-contour",
+  "charcoal-sketch"
+ ],
+ "paragraphs": [
+  "Outlines are found with the blur-then-Sobel pipeline, but they are not drawn where they are. The edge map is looked up three times at each pixel, each time at a position nudged by a different slow noise, and the strongest of the three is kept. One true outline therefore appears as three lines that wander apart and together, like a pen going over the same contour again. Each pass is also faded in small patches by a hash, so the lines skip.",
+  "Shadows are hatched. The pixel’s position along a diagonal, divided by the spacing of the strokes, tells how far it is from the nearest stroke centre; it is inked if it is close enough and the picture there is dark enough. A second set of strokes on the other diagonal is added only in the deepest shadows. The finished line layer is drawn with additive blending, then again from copies shrunk to a quarter and a tenth of the size. Enlarging a small copy smears each line outward, and the sum is a hard core inside a soft halo. The rainbow pen takes its hue from the position on the page."
+ ],
+ "primitives": [
+  "coordinate-warp",
+  "edge-outline",
+  "glow-bloom",
+  "tone-line-screen"
+ ],
+ "equations": [
+  {
+   "tex": "a=\\max_{j=1,2,3}\\ S_{\\theta,\\,2.3\\theta}\\Big(E\\big(\\mathbf x+A\\,\\mathbf n_j(\\mathbf x)\\big)\\Big),\\qquad \\theta=\\operatorname{lerp}(0.17,\\ 0.035,\\ \\text{detail})",
+   "note": "Line opacity: the edge map E read at three noisy offsets n_j of size A = 1.5 + 9 × wobble pixels.",
+   "primitives": [
+    "edge-outline",
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "s=\\Big\\lvert\\operatorname{frac}\\frac{x+y+\\delta}{p}-\\tfrac12\\Big\\rvert,\\qquad \\text{hatch}=\\big(1-S_{0.05,\\,0.11}(s)\\big)\\cdot S_{0.5,\\,0.62}(1-L)",
+   "note": "First hatching direction: strokes every p = 11 px, drawn where the picture is dark. δ is a slow sway.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=E+g\\,\\big(\\operatorname{up}(E_{1/4})+\\operatorname{up}(E_{1/10})\\big)+0.28\\,E",
+   "note": "The glow: the line layer E plus enlarged small copies, all added; g grows with the glow slider.",
+   "primitives": [
+    "glow-bloom"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "detail",
+   "label": "Detail",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wobble",
+   "label": "Unsteady hand",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "hatch",
+   "label": "Hatched shadows",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glow",
+   "label": "Glow",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "pen",
+   "label": "Pen",
+   "type": "select",
+   "default": "cyan",
+   "options": [
+    "cyan",
+    "pink",
+    "lime",
+    "amber",
+    "white",
+    "rainbow"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Page",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "navy",
+    "plum"
+   ]
+  },
+  {
+   "key": "grid",
+   "label": "Dotted grid",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Draw again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A very unsteady hand turns outlines into scribbles.",
+   "set": {
+    "wobble": 95,
+    "detail": 40
+   }
+  },
+  {
+   "text": "The rainbow pen on navy with no hatching is pure line.",
+   "set": {
+    "pen": "rainbow",
+    "paper": "navy",
+    "hatch": 0
+   }
+  },
+  {
+   "text": "Heavy hatching and little glow look like chalk at night.",
+   "set": {
+    "hatch": 90,
+    "glow": 25,
+    "pen": "white"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,186 @@
+{
+ "id": "lumenary:makli-carving",
+ "name": "Makli Carving",
+ "physical": "yes",
+ "process": "relief-carving",
+ "process_name": "Relief carving",
+ "class": "carving",
+ "basis": "why: tombs carved in sandstone and limestone with rosettes and lozenges; how: relief height map, depth from brightness, lit, weathered",
+ "note": null,
+ "lumenary": {
+  "section": "L. Sindhi design",
+  "kind": "still",
+  "blurb": "Relief cut into the soft stone of the Makli hills near Thatta: rosettes and lozenges raised from the ground, worn by centuries of sun, rain and salt.",
+  "theory_page": "processes/sources/theory-pages/12-sindhi.md",
+  "code": "engine/styles/makli-carving.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The Makli hills near Thatta, Sindh",
+  "era": "Fourteenth to eighteenth century",
+  "bestOn": "Pictures with bright and dark regions"
+ },
+ "why": "The Makli necropolis is one of the largest burial grounds in the world, and its tombs are carved in sandstone and limestone with rosettes, lozenges, arcades and flowing foliage. The soft stone has been worn by the sun, by rain and by the salt in the air. This treatment fills the page with a repeating cell of relief and lights it like a wall, with the picture setting how deep the carving is.",
+ "how": [
+  "Build the relief as a height map. In the eight-petal rosette the flower’s outer edge is at radius p(θ) = 0.8 (0.52 + 0.48 |cos 4θ|), the petals rise to 0.62 with a thin groove along the middle, a boss rises to 0.95 at the centre, a ring surrounds the flower, and corner ornaments rise to 0.55.",
+  "Use a diamond plate, a groove, a centre boss and corners for the lozenge pattern.",
+  "Multiply the height by 0.12 + 1.15 T², where T is the blurred brightness, so bright regions are deeply cut and dark regions are shallow.",
+  "Light the height map from the chosen direction and shade by its slope.",
+  "Add weathering, which wears the carving and stains the stone, and tint the stone from the picture."
+ ],
+ "history": "Makli, near Thatta, is a UNESCO World Heritage Site, inscribed in 1981. Its tombs and mausoleums were built from the fourteenth to the eighteenth centuries under the Samma, Arghun, Tarkhan and Mughal rulers. Visitors are struck by the stone carving and by the glazed tile, and conservation work continues against the weather, salt and neglect.",
+ "uses": [
+  "Relief and stone texture design",
+  "Architecture and heritage education",
+  "Tile and panel design",
+  "Games and illustration set in historic landscapes"
+ ],
+ "terms": [
+  [
+   "Necropolis",
+   "A large cemetery, from the Greek for city of the dead."
+  ],
+  [
+   "Relief",
+   "Carving in which the design stands out from the background."
+  ],
+  [
+   "Rosette",
+   "A circular, flower-like ornament."
+  ]
+ ],
+ "related": [
+  "mughal-jali",
+  "hala-blue-pottery",
+  "embossed-leather"
+ ],
+ "paragraphs": [
+  "The Makli necropolis, near Thatta, is one of the largest burial grounds in the world, and its tombs from the fourteenth to the eighteenth centuries are carved in sandstone and limestone with rosettes, lozenges, arcades and flowing foliage. The soft stone has been worn by the sun, by rain and by the salt in the air. The program fills the page with a repeating cell of relief and lights it like a wall.",
+  "The relief is a height map. In the eight-petal rosette, the outer edge of the flower is at radius p(θ) = 0.8 (0.52 + 0.48 |cos 4θ|), the petals are raised to 0.62 with a thin groove along their middle, a boss rises to 0.95 at the centre, a ring surrounds the flower, and corner ornaments rise to 0.55. The lozenge pattern has a diamond plate, a groove, a centre boss and corners. In both, the picture sets how deep the carving is: the height of the pattern is multiplied by 0.12 + 1.15 T², where T is the blurred brightness, so bright regions are deeply cut and dark regions are shallow. Light from the chosen direction, a darkening where the surface is lower than its own blur (ambient occlusion), a stain of the picture’s colour, long water streaks and patches of lichen finish the surface."
+ ],
+ "primitives": [
+  "relief-shading",
+  "sdf-shape",
+  "star-rosette-motif",
+  "tone-to-height"
+ ],
+ "equations": [
+  {
+   "tex": "p(\\theta)=0.8\\,\\big(0.52+0.48\\,|\\cos4\\theta|\\big),\\qquad h_{\\text{petal}}=0.62\\,\\operatorname{smoothstep}\\big(-w,\\,w,\\,p(\\theta)-\\rho\\big)",
+   "note": "The rosette’s outline and petal height. w = 0.05 is the softness of the edge, and ρ the distance from the cell’s centre (cell coordinates from −1 to 1).",
+   "primitives": [
+    "star-rosette-motif",
+    "sdf-shape"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "H=P\\,\\big(0.12+1.15\\,T^2\\big)+0.9\\,T_s+\\eta",
+   "note": "The final height map: P is the carved pattern, T the picture’s blurred brightness, T_s a much broader blur (which gives a gentle swell) and η a fine noise.",
+   "primitives": [
+    "tone-to-height"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "f=\\operatorname{clamp}\\!\\big(0.74+0.7\\,(\\mathbf s\\cdot\\mathbf l),\\ 0.3,\\ 1.45\\big)\\,(1-a),\\qquad a=\\operatorname{clamp}\\big(2.4\\,(\\bar H-H),\\,0,\\,0.55\\big)",
+   "note": "Lighting by the slope s = −k∇H (k = 70 × depth) against the light direction l, and occlusion a where the height is below its own blur H̄.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "pattern",
+   "label": "Carving",
+   "type": "select",
+   "default": "rosette",
+   "options": [
+    "rosette",
+    "lozenge"
+   ]
+  },
+  {
+   "key": "size",
+   "label": "Cell size",
+   "type": "range",
+   "default": 64,
+   "min": 40,
+   "max": 150,
+   "step": 1
+  },
+  {
+   "key": "relief",
+   "label": "Depth",
+   "type": "range",
+   "default": 60,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "light",
+   "label": "Light direction",
+   "type": "range",
+   "default": 225,
+   "min": 0,
+   "max": 360,
+   "step": 5
+  },
+  {
+   "key": "tint",
+   "label": "Picture in the stone",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "weather",
+   "label": "Weathering",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "stone",
+   "label": "Stone",
+   "type": "select",
+   "default": "sandstone",
+   "options": [
+    "sandstone",
+    "limestone",
+    "red"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Lozenges give a calmer, geometric carving.",
+   "set": {
+    "pattern": "lozenge",
+    "size": 90
+   }
+  },
+  {
+   "text": "Strong relief with a low sun raises each petal as a shadow.",
+   "set": {
+    "relief": 95,
+    "light": 200
+   }
+  },
+  {
+   "text": "Heavy weathering looks like centuries of salt and sun.",
+   "set": {
+    "weather": 95,
+    "stone": "limestone"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

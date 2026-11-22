@@ -1,0 +1,186 @@
+{
+ "id": "lumenary:tiny-planet",
+ "name": "Tiny Planet",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "stereographic projection of the picture into a ring (how)",
+ "note": null,
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "The picture bent into a small round world. Its bottom edge shrinks to the centre of the planet, its top edge becomes the horizon of the sky, and its left and right sides are joined round the back.",
+  "theory_page": "processes/sources/theory-pages/08-optical.md",
+  "code": "engine/styles/tiny-planet.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Panoramic photography and map projection",
+  "era": "Stereographic maps from antiquity, tiny-planet photos since the 2000s",
+  "bestOn": "Wide pictures with flat ground and open sky"
+ },
+ "why": "Roll a wide picture into a ring, with the ground inwards and the sky outwards, and it becomes a little round world with you standing on it. The left and right edges meet round the back, and the ground shrinks to a point in the middle. The trick works because the stereographic projection, which maps a sphere onto a plane, keeps small shapes the right way round, so buildings and trees still look like themselves while the horizon curls.",
+ "how": [
+  "Treat each column of the picture as a direction round the planet and each row as a distance from its centre.",
+  "Map the bottom row to the centre and the top row to the planet’s edge, with a curve that crowds the lower rows inward.",
+  "For every output pixel, work out the angle and the radius, and read the picture back at the matching column and row.",
+  "Average several samples near the centre, where a whole row is squeezed into a few pixels, to keep it smooth.",
+  "Cross-fade the left and right sides, or mirror them, so that no seam shows.",
+  "Past the top edge, continue the sky as a soft haze of the picture’s own colours."
+ ],
+ "history": "The stereographic projection was known to the ancient Greeks, and Ptolemy described it in the second century for charting the sky. It preserves angles, which is why it is used for polar maps and in the design of wide-angle lenses. The little-planet look came to photography with panorama software in the 2000s, when a spherical panorama could be projected stereographically with the ground at the centre. It spread across photo-sharing sites and became a staple of drone and travel photography.",
+ "uses": [
+  "Travel and drone photography",
+  "Social posts and album covers",
+  "Maps of cities and campuses",
+  "Dome and planetarium art"
+ ],
+ "terms": [
+  [
+   "Stereographic projection",
+   "A way of mapping a sphere onto a plane from the opposite pole, which keeps angles and small shapes."
+  ],
+  [
+   "Nadir",
+   "The point on a sphere directly beneath the viewer, here the centre of the planet."
+  ],
+  [
+   "Equirectangular",
+   "A panorama format in which the horizontal axis is longitude and the vertical axis is latitude."
+  ]
+ ],
+ "related": [
+  "kaleidoscope",
+  "warped-grid",
+  "glass-refraction"
+ ],
+ "paragraphs": [
+  "For an output pixel at offset (dx, dy) from the centre, the angle is theta = atan2(dy, dx) plus the turn, and the radius is r. The picture’s column is u = theta / 2 pi times the number of times round, and its row comes from the radius through the inverse of a curve g. With s running from 0 at the bottom row to 1 at the top row, g(s) = (1 - k) s + k tan(s phi / 2) / tan(phi / 2), where k is the curve slider and phi = 2.45 radians is the width of the projected view. At k = 0 this is the plain polar map, with the radius growing evenly with the row; at k = 1 it is the stereographic projection of a sphere, which crowds the lower rows into the middle. A pixel at radius r reads the row s = g^-1 (r / R), where R is the planet’s radius, found by a binary search in a table of 1024 values of g.",
+  "Near the centre one output pixel spans many picture pixels, because a whole row is squeezed into a short circle of radius r. The sampler therefore averages up to 12 samples round the circle, and up to 3 along the radius, which removes the moire of stripes that a single sample would give. The two sides are joined either by mirroring or by cross-fading the last 14% of the width into the first with a smoothstep weight. Beyond the top row the sky is a strip made from the average colour of the top 5% of each column, blurred sideways round the loop, and faded towards its overall average as the radius approaches the far pole of the sphere, at s = pi / phi."
+ ],
+ "primitives": [
+  "blur",
+  "coordinate-warp"
+ ],
+ "equations": [
+  {
+   "tex": "g(s)=(1-k)\\,s+k\\,\\frac{\\tan(s\\varphi/2)}{\\tan(\\varphi/2)},\\qquad \\varphi=2.45",
+   "note": "How far from the centre row s lands: k is the curve slider, and s runs from 0 at the bottom to 1 at the top.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\theta=\\operatorname{atan2}(\\Delta y,\\Delta x)+\\tau,\\qquad u=\\frac{n\\,\\theta}{2\\pi},\\qquad s=g^{-1}\\!\\big(r/R\\big)",
+   "note": "The picture is read at column u and row s: n is the number of times round and tau the turn.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "N_\\theta=\\Big\\lceil \\frac{0.86\\,n\\,W}{2\\pi r}\\Big\\rceil\\quad(\\le 12)",
+   "note": "How many samples are averaged round a circle of radius r, so that the centre stays smooth.",
+   "primitives": [
+    "blur"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "curve",
+   "label": "Curve of the world",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "zoom",
+   "label": "Size of the planet",
+   "type": "range",
+   "default": 78,
+   "min": 30,
+   "max": 150,
+   "step": 1
+  },
+  {
+   "key": "spin",
+   "label": "Turn",
+   "type": "range",
+   "default": 0,
+   "min": 0,
+   "max": 360,
+   "step": 1
+  },
+  {
+   "key": "repeat",
+   "label": "Times round",
+   "type": "range",
+   "default": 1,
+   "min": 1,
+   "max": 4,
+   "step": 1
+  },
+  {
+   "key": "seam",
+   "label": "Where the sides meet",
+   "type": "select",
+   "default": "blend",
+   "options": [
+    "blend",
+    "mirror"
+   ]
+  },
+  {
+   "key": "sky",
+   "label": "Beyond the top edge",
+   "type": "select",
+   "default": "soft",
+   "options": [
+    "soft",
+    "stretch",
+    "black",
+    "white"
+   ]
+  },
+  {
+   "key": "rim",
+   "label": "Glow at the horizon",
+   "type": "range",
+   "default": 30,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Raise the curve and shrink the planet for a small world floating in a haze.",
+   "set": {
+    "curve": 85,
+    "zoom": 55,
+    "sky": "soft"
+   }
+  },
+  {
+   "text": "Turn the planet and repeat the picture twice round for a mandala of the scene.",
+   "set": {
+    "repeat": 2,
+    "spin": 90
+   }
+  },
+  {
+   "text": "A black sky and a bright rim make it a little moon.",
+   "set": {
+    "sky": "black",
+    "rim": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

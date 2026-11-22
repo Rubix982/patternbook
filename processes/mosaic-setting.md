@@ -54,6 +54,6 @@ _Gold in the light: g is the gold slider and ξ a random number per cube, so the
 
 **History:** The mosaics of Ravenna, such as those in San Vitale (consecrated in 547) with the portraits of the emperor Justinian and the empress Theodora, and the mosaics of Constantinople, are among the best known in the world. Gold tesserae became common in Christian church decoration from around the fifth century. Mosaics later spread across the Byzantine, Islamic and Western worlds.
 
-_Model `processes/models/lumenary/byzantine-mosaic.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/byzantine-mosaic.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/byzantine-mosaic.json`; as captured from his site, `processes/sources/theory-pages/11-world.md`; code `engine/styles/byzantine-mosaic.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

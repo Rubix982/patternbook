@@ -54,7 +54,7 @@ _Lines every p = 5.2 px, slanted and gently waved._ (primitives: tone-line-scree
 
 **History:** Parchment takes its name from Pergamon in Asia Minor, where by tradition it was perfected in the second century BC. From late antiquity to the nineteenth century most European writing was done in iron gall ink, made from oak galls and iron salts, which goes on pale and darkens to brown-black. Monastic scribes developed the illuminated page, with red headings called rubrics and gold leaf, as in the Book of Kells of about 800.
 
-_Model `processes/models/lumenary/parchment.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/parchment.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/parchment.json`; as captured from his site, `processes/sources/theory-pages/06-craft.md`; code `engine/styles/parchment.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Blind Contour (`lumenary:blind-contour`, models this process)
 
@@ -88,7 +88,7 @@ _The hand drifts: ν is smooth noise along the line, u random numbers in [0, 1],
 
 **History:** The exercise was popularised by the art teacher Kimon Nicolaïdes in his 1941 book The Natural Way to Draw, and later by Betty Edwards’s Drawing on the Right Side of the Brain. It trains the eye to see edges as they are rather than as we assume them to be, and it has become a common warm-up in art classes.
 
-_Model `processes/models/lumenary/blind-contour.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/blind-contour.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/blind-contour.json`; as captured from his site, `processes/sources/theory-pages/07-painterly.md`; code `engine/styles/blind-contour.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Poisson Stippling (`lumenary:poisson-stippling`, models this process)
 
@@ -122,7 +122,7 @@ _Approximate density of dots, and the drawn dot radius (k is the dot size slider
 
 **History:** Stippling is an old technique in pen and ink illustration, used for botany and anatomy. Robert Cook introduced stochastic sampling to computer graphics in 1986, and Don Mitchell and others developed blue noise sampling in the early 1990s. Robert Bridson published a fast algorithm in 2007. The psychologist John Yellott observed in 1983 that the receptor cells in a monkey’s eye are arranged in a similar pattern.
 
-_Model `processes/models/lumenary/poisson-stippling.json`; as captured from his site, `processes/sources/lumenary/theory-pages/09-generative.md`; code `engine/styles/poisson-stippling.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/poisson-stippling.json`; as captured from his site, `processes/sources/theory-pages/09-generative.md`; code `engine/styles/poisson-stippling.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->
 

@@ -1,0 +1,195 @@
+{
+ "id": "lumenary:bokeh",
+ "name": "Bokeh",
+ "physical": "yes",
+ "process": "lens-defocus",
+ "process_name": "Lens defocus (bokeh)",
+ "class": "optical-device",
+ "basis": "why: out of focus, each point of light becomes an image of the aperture; how: blur plus discs in the aperture shape at bright points",
+ "note": "Discs are scattered by brightness, not obtained by convolving with the aperture.",
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "The picture goes out of focus and every bright point swells into a disc of light, soft in the middle and brighter at the rim.",
+  "theory_page": "processes/sources/theory-pages/08-optical.md",
+  "code": "engine/styles/bokeh.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Lens optics and photography",
+  "era": "The word spread in the 1990s",
+  "bestOn": "Night scenes and pictures with scattered bright lights"
+ },
+ "why": "Out of focus, every point of light in a scene turns into a small image of the lens opening, and the blur that results is called bokeh. Bright points make bright discs, and the shape of the aperture decides whether they are round, hexagonal or even heart shaped. This treatment blurs the picture and then scatters discs of light where the picture is brightest.",
+ "how": [
+  "Shrink the picture to a very small size and enlarge it again for a cheap blur, laid over a near black field.",
+  "Lay a grid of cells about 1.05 times the disc size and place one candidate disc in each at a jittered position.",
+  "Keep a candidate with a probability that rises steeply with the brightness of the small picture there.",
+  "Give each kept disc the colour of the picture, boosted toward full brightness, and draw it with additive blending at low opacity, so overlaps add up.",
+  "Draw a thin brighter ring on its rim, in the aperture shape: circle, hexagon, pentagon, star or heart."
+ ],
+ "history": "The word comes from the Japanese boke, meaning blur or haze. It was popularised in English in the late 1990s by the photographer and writer Mike Johnston in Photo Techniques magazine. Photographers choose lenses partly for the character of their bokeh, which depends on the aperture blades and the lens design.",
+ "uses": [
+  "Night and city photo effects",
+  "Festive and celebration backgrounds",
+  "Portrait and wedding photo looks",
+  "Dreamy wallpapers"
+ ],
+ "terms": [
+  [
+   "Aperture",
+   "The adjustable opening in a lens that lets light in."
+  ],
+  [
+   "Additive blending",
+   "Combining lights by adding their brightness."
+  ],
+  [
+   "Circle of confusion",
+   "The blur disc made by a point of light that is out of focus."
+  ]
+ ],
+ "related": [
+  "tilt-shift",
+  "neon-glow",
+  "film-grain"
+ ],
+ "paragraphs": [
+  "Out of focus, every point of light in a scene becomes a small image of the lens opening, and the blur that results is called bokeh. The program first makes a cheap blur: the picture is shrunk to between about 35 and 200 pixels across (the out-of-focus slider sets how far) and enlarged again, laid at 78% on a near-black field. Then it places discs of light. A grid of cells of about 1.05 times the disc size is laid over the picture and each cell is given one candidate disc at a jittered position. The candidate is kept with a probability that rises steeply with the brightness of the small picture at that point, scaled by the how-many-lights slider, so highlights become discs and shadows stay dark.",
+  "A kept disc takes the colour of the picture there, boosted toward full brightness, and is drawn with additive blending at low opacity, so where discs overlap their light adds up. A thin brighter ring is drawn on its rim, as in lenses whose bokeh is brighter at the edge. The aperture shape is a regular polygon (a hexagon for six blades, a pentagon for five), a ten-point star whose points alternate between the full radius and 0.48 of it, a heart made of two Bézier curves, or a plain circle. Each disc has a random size (0.45 to 1.3 times the size slider, a bit bigger when the light is bright) and a random rotation."
+ ],
+ "primitives": [
+  "additive-blend",
+  "importance-sampling",
+  "seeded-random",
+  "soft-threshold",
+  "star-rosette-motif"
+ ],
+ "equations": [
+  {
+   "tex": "P(\\text{disc})=\\operatorname{smoothstep}\\big(0.7\\,\\vartheta,\\ \\vartheta+0.35,\\ l\\big)\\,\\big(0.04+0.62\\,\\delta\\big)",
+   "note": "The chance that a cell holds a disc: l is the lightness of the small picture, ϑ the lights-come-from threshold, δ the density.",
+   "primitives": [
+    "importance-sampling",
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf v_j=\\mathbf c+\\rho_j\\big(\\cos(\\theta_0+\\tfrac{2\\pi j}{m}),\\ \\sin(\\theta_0+\\tfrac{2\\pi j}{m})\\big),\\qquad \\rho_j=\\begin{cases}r & \\text{polygon}\\\\ r,\\ 0.48\\,r\\ \\text{alternately} & \\text{star}\\end{cases}",
+   "note": "The vertices of a disc: m is 6, 5 or 10 and θ₀ a random turn.",
+   "primitives": [
+    "star-rosette-motif",
+    "seeded-random"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=\\min\\Big(255,\\ \\sum_i \\alpha_i\\,\\mathbf c_i\\,\\mathbb 1_{\\text{disc}_i}(\\mathbf x)\\Big),\\qquad \\alpha_i=0.05+0.15\\,g\\,\\big(0.5+0.5\\,l_i\\big)",
+   "note": "Additive blending of the discs over the blurred picture; g is the brightness slider.",
+   "primitives": [
+    "additive-blend"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Disc size",
+   "type": "range",
+   "default": 44,
+   "min": 10,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "density",
+   "label": "How many lights",
+   "type": "range",
+   "default": 55,
+   "min": 5,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shape",
+   "label": "Aperture shape",
+   "type": "select",
+   "default": "circle",
+   "options": [
+    "circle",
+    "hex",
+    "penta",
+    "star",
+    "heart"
+   ]
+  },
+  {
+   "key": "blur",
+   "label": "Out of focus",
+   "type": "range",
+   "default": 80,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glow",
+   "label": "Brightness",
+   "type": "range",
+   "default": 60,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ring",
+   "label": "Bright rim",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "thr",
+   "label": "Lights come from",
+   "type": "range",
+   "default": 45,
+   "min": 20,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Scatter again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Heart shaped lights are a ready-made romantic look.",
+   "set": {
+    "shape": "heart",
+    "size": 55
+   }
+  },
+  {
+   "text": "Many tiny discs make a field of sparkles.",
+   "set": {
+    "size": 18,
+    "density": 90
+   }
+  },
+  {
+   "text": "Hexagonal discs with strong rims look like a real lens.",
+   "set": {
+    "shape": "hex",
+    "ring": 85
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

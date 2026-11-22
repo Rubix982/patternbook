@@ -180,7 +180,7 @@ the process it imitates in <code>processes/</code>.</p>
     var file = THEORY[t.section.id];
     $('about').innerHTML = '<strong>' + t.name + '</strong> · ' + t.section.letter + '. ' + t.section.title +
       (t.kind === 'live' ? ' · live' : ' · still') + '<br>' + (t.blurb || '') +
-      (file ? '<br><span class="k">Theory and maths: <code>processes/sources/lumenary/theory-pages/' + file + '</code></span>' : '');
+      (file ? '<br><span class="k">Theory and maths: <code>processes/sources/theory-pages/' + file + '</code></span>' : '');
     var snippet = t.kind === 'live'
       ? "// Live treatments run as animations:\nLumenary.animate('" + t.id + "', sourceCanvas, " + JSON.stringify(params) + ", targetCanvas);"
       : "// On a patternbook page, after loading lumenary/lumenary.js and treatments.js:\nTreatments.treatAll('svg[role=img]', { treatment: 'lumenary:" + t.id + "', params: " + JSON.stringify(params) + " });";

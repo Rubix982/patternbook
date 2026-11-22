@@ -52,6 +52,6 @@ _The five stitches of one shell, fanned about its foot._ (primitives: stitch-gri
 
 **History:** Crochet as we know it appears in Europe in the early nineteenth century; the Dutch magazine Penélopé printed patterns in 1823. In Ireland during the famine of the 1840s, crocheted lace became a cottage industry that fed families. The granny square, made from leftover yarn, spread in the twentieth century, and Japan’s amigurumi, small crocheted creatures, made the craft popular with a new generation.
 
-_Model `processes/models/lumenary/wool-crochet.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/wool-crochet.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/wool-crochet.json`; as captured from his site, `processes/sources/theory-pages/06-craft.md`; code `engine/styles/wool-crochet.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

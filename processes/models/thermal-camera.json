@@ -1,0 +1,152 @@
+{
+ "id": "lumenary:thermal-camera",
+ "name": "Thermal Camera",
+ "physical": "yes",
+ "process": "thermal-imaging",
+ "process_name": "Thermal imaging camera",
+ "class": "optical-device",
+ "basis": "why: heat shown as false colour on a small coarse sensor; how: sensor cells, noise, colour ramp, hot-spot marker",
+ "note": "Brightness stands in for heat ('does not measure temperature'), so it models the camera's readout, not what it senses.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "A heat-camera view: false colour from brightness, a coarse sensor, a hot-spot reading and a scale bar.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/thermal-camera.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Infrared imaging",
+  "era": "1960s onward",
+  "bestOn": "Portraits and warm subjects against cooler backgrounds"
+ },
+ "why": "A thermal camera shows heat as false colour on a small, coarse sensor. This treatment does not measure temperature. It borrows brightness as a stand-in for heat, cuts the picture into sensor cells and sends the values through a colour ramp, so warm, bright areas glow like a body in an infrared scan.",
+ "how": [
+  "Cut the picture into cells the size of the sensor pixel, and take the brightness at the centre of each.",
+  "Add a very small amount of noise to each cell.",
+  "Treat brightness as heat and stretch its contrast about the middle.",
+  "Send the heat through the chosen colour ramp.",
+  "Find the hottest spot, mark it with a crosshair and a reading, and draw the scale bar."
+ ],
+ "history": "William Herschel discovered infrared radiation in 1800 by placing a thermometer beyond the red end of a sunlit spectrum. Thermal imaging cameras reached industry and the military in the second half of the twentieth century, and cheaper uncooled sensors in the 1990s took them into firefighting, building inspection and wildlife work. The ironbow palette is a common choice for showing heat.",
+ "uses": [
+  "Science and technology posters",
+  "Building and home energy illustrations",
+  "Sci-fi and security camera looks",
+  "Playful “heat vision” portraits"
+ ],
+ "terms": [
+  [
+   "False colour",
+   "Colour that does not come from the real scene but from a scale that maps values to colours."
+  ],
+  [
+   "Infrared",
+   "Light just beyond red, invisible to us, emitted by warm objects."
+  ],
+  [
+   "Sensor pixel",
+   "One cell of the camera’s detector."
+  ]
+ ],
+ "related": [
+  "night-vision",
+  "futuristic",
+  "pixel-art"
+ ],
+ "paragraphs": [
+  "A thermal camera has a small sensor and shows temperature as false colour. To imitate the coarse sensor, the picture is cut into cells (the sensor pixel), and each cell takes the brightness at its centre; a very small amount of noise per cell is added. Brightness is treated as heat, with contrast stretched about the middle, and the heat value goes through the chosen colour ramp.",
+  "The hot spot is the maximum of the heat over a coarse grid (it ignores the borders so the label stays on the picture) and the reading is a straight line from 18 °C to 38 °C. The scale bar draws the same ramp from top to bottom with three labels."
+ ],
+ "primitives": [
+  "tone-curve"
+ ],
+ "equations": [
+  {
+   "tex": "h=\\operatorname{clamp}\\big((L_b-\\tfrac12)\\,k+\\tfrac12\\big),\\qquad k=1+1.7\\cdot\\text{contrast}",
+   "note": "Heat from the blurred brightness.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "T=18+20\\,h\\ \\ {}^{\\circ}\\mathrm{C}",
+   "note": "The temperature shown for heat h between 0 and 1.",
+   "primitives": [],
+   "bespoke": "constants"
+  }
+ ],
+ "dials": [
+  {
+   "key": "palette",
+   "label": "Palette",
+   "type": "select",
+   "default": "ironbow",
+   "options": [
+    "ironbow",
+    "rainbow",
+    "arctic",
+    "white"
+   ]
+  },
+  {
+   "key": "sensor",
+   "label": "Sensor pixel",
+   "type": "range",
+   "default": 5,
+   "min": 1,
+   "max": 14,
+   "step": 1
+  },
+  {
+   "key": "contrast",
+   "label": "Contrast",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "invert",
+   "label": "Black hot",
+   "type": "toggle",
+   "default": false
+  },
+  {
+   "key": "cross",
+   "label": "Hot spot",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "bar",
+   "label": "Scale bar",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "The rainbow palette separates tones the most clearly.",
+   "set": {
+    "palette": "rainbow"
+   }
+  },
+  {
+   "text": "A very coarse sensor reads like a cheap early camera.",
+   "set": {
+    "sensor": 12
+   }
+  },
+  {
+   "text": "Black hot flips the scale, as many cameras can.",
+   "set": {
+    "invert": true,
+    "palette": "white"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

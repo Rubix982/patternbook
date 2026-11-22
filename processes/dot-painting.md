@@ -52,7 +52,7 @@ _The jitter in hue, saturation and lightness; v is the colour jitter slider and 
 
 **History:** Georges Seurat painted A Sunday Afternoon on the Island of La Grande Jatte in 1884 to 1886, and Paul Signac helped develop the method, called divisionism or pointillism. They drew on nineteenth century colour theory, including Michel Eugène Chevreul’s work on simultaneous contrast. The principle returns every time an image is made of dots, from halftone printing to a screen’s pixels.
 
-_Model `processes/models/lumenary/pointillism.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/pointillism.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/pointillism.json`; as captured from his site, `processes/sources/theory-pages/07-painterly.md`; code `engine/styles/pointillism.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Aboriginal Dot Painting (`lumenary:aboriginal-dot-painting`, a style that rests on this process)
 
@@ -90,6 +90,6 @@ _Dot colour by light level: ℓ picks one of six ochres from deep red up to crea
 
 **History:** In 1971 men of several language groups at Papunya, in the Northern Territory, began to paint on boards and canvas, with the encouragement of a schoolteacher, Geoffrey Bardon, the designs that belong to their Country and its stories. The Papunya Tula Artists company followed in 1972. Today Aboriginal artists across Australia, working through their own art centres, are among the best known painters in the world.
 
-_Model `processes/models/lumenary/aboriginal-dot-painting.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/aboriginal-dot-painting.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/aboriginal-dot-painting.json`; as captured from his site, `processes/sources/theory-pages/11-world.md`; code `engine/styles/aboriginal-dot-painting.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

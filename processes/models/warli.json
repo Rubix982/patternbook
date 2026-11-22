@@ -1,0 +1,169 @@
+{
+ "id": "lumenary:warli",
+ "name": "Warli",
+ "physical": "partly",
+ "process": "mud-wall-painting",
+ "process_name": "Mud-wall painting",
+ "class": "painting",
+ "basis": "why/hist: white rice paste on red-brown mud walls with a bamboo stick; how: mud-wall texture, rice-paste figures with wobbly lines",
+ "note": null,
+ "lumenary": {
+  "section": "M. South Asian and Islamic",
+  "kind": "still",
+  "blurb": "White rice-paste drawings on a mud wall, from Maharashtra: triangles for bodies, circles for heads, and a crowd that gathers where your picture is darkest.",
+  "theory_page": "processes/sources/theory-pages/13-southasia.md",
+  "code": "engine/styles/warli.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The Warli people of Maharashtra and Gujarat",
+  "era": "Ancient tradition, shown on paper from the 1970s",
+  "bestOn": "Pictures with a dark subject on a light ground"
+ },
+ "why": "Warli painting is made with a vocabulary of three shapes: a circle, a triangle and a square, which are said to come from the sun and the moon, from mountains and trees, and from a field or a hut. A person is two triangles meeting at their tips with a circle for a head and stick limbs, and a crowd of them dances in a ring. The picture decides where the crowd gathers.",
+ "how": [
+  "Make a wall texture from two noises, a broad one 90 px across and a fine one 5 px across.",
+  "Place candidate positions on a staggered grid with spacing 0.82 u (u is the figure size), each shifted by up to a quarter of the spacing.",
+  "At each position let the picture’s tone t set the chance that anything is drawn: p = min(1, 1.15 d (1 − t)^1.5), where d is the crowd slider. Dark places hold a thick crowd and light ones stay empty.",
+  "Draw the figures in white rice paste: dancers, animals, trees and huts, with slightly wobbly lines.",
+  "Add a border of small triangles and squares."
+ ],
+ "history": "Warli painting belongs to the Warli people, an Adivasi community of Maharashtra and Gujarat. It is painted on the red-brown mud walls of houses, in white rice paste, with a bamboo stick, and is often made for weddings, around a square drawn for the goddess Palaghata. In the 1970s the artist Jivya Soma Mashe brought Warli painting onto cloth and paper, and received a Padma Shri in 2011.",
+ "uses": [
+  "Wall art, textiles and stationery",
+  "Illustration for children’s books",
+  "Packaging and poster design",
+  "Cultural education and village crafts"
+ ],
+ "terms": [
+  [
+   "Warli",
+   "An Adivasi community of western India, and its painting."
+  ],
+  [
+   "Rice paste",
+   "The white paint made of ground rice used on the mud walls."
+  ],
+  [
+   "Adivasi",
+   "The Indigenous peoples of India."
+  ]
+ ],
+ "related": [
+  "madhubani",
+  "kolam",
+  "aboriginal-dot-painting"
+ ],
+ "paragraphs": [
+  "Warli painting belongs to the Warli people of Maharashtra and Gujarat. It is painted on the red-brown mud walls of houses, in white rice paste, with a bamboo stick, and is often made for weddings. The vocabulary is small: a circle, a triangle and a square, said to come from the sun and the moon, mountains and trees, and a field or a hut. A human is two triangles meeting at their tips, with a circle for a head and stick limbs, and a crowd of them dances in a ring. The program fills the wall with such figures and lets the picture decide where the crowd gathers.",
+  "The wall is a texture of two noises, a broad one 90 px across and a fine one 5 px across. Candidate positions lie on a staggered grid with spacing 0.82 u (u is the figure size), each shifted by a random amount of up to a quarter of the spacing. At each position the picture’s tone t sets the chance that anything is drawn there: p = min(1, 1.15 d (1 − t)^1.5), where d is the crowd slider. Dark places therefore hold a thick crowd and light places stay empty. What is drawn is chosen at random: a figure 60% of the time, a tree 16%, a bird 10%, a hut 10% and a sun 4%. Its size also follows the picture, from 0.8 u in light places to 1.2 u in dark. A border of two frames and a chain of triangles is added when it is switched on."
+ ],
+ "primitives": [
+  "importance-sampling",
+  "seeded-random",
+  "tone-curve",
+  "tone-mark-size"
+ ],
+ "equations": [
+  {
+   "tex": "p(t)=\\min\\!\\big(1,\\ 1.15\\,d\\,(1-t)^{1.5}\\big)",
+   "note": "The chance that a grid position holds a drawing, from the tone t and crowd slider d.",
+   "primitives": [
+    "importance-sampling",
+    "tone-curve"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "N\\approx\\sum_{\\text{sites}}p(t)\\ \\approx\\ \\frac{A}{(0.82\\,u)^2}\\ \\overline{p}",
+   "note": "The expected number of drawings in an area A.",
+   "primitives": [
+    "importance-sampling"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "s=u\\,\\big(0.8+0.4\\,(1-t)\\big)",
+   "note": "The size of a figure, from the tone.",
+   "primitives": [
+    "tone-mark-size"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\text{kind}=\\begin{cases}\\text{person}&h<0.60\\\\ \\text{tree}&h<0.76\\\\ \\text{bird}&h<0.86\\\\ \\text{hut}&h<0.96\\\\ \\text{sun}&\\text{otherwise}\\end{cases}",
+   "note": "The pick, with h a random number fixed by the position and the seed. Figures are drawn from the top of the wall down so lower ones overlap higher ones.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Figure size",
+   "type": "range",
+   "default": 26,
+   "min": 14,
+   "max": 46,
+   "step": 1
+  },
+  {
+   "key": "crowd",
+   "label": "Crowd",
+   "type": "range",
+   "default": 72,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wall",
+   "label": "Wall",
+   "type": "select",
+   "default": "terracotta",
+   "options": [
+    "terracotta",
+    "ochre",
+    "night"
+   ]
+  },
+  {
+   "key": "border",
+   "label": "Border",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "New crowd",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A full crowd fills the darkest parts of your picture.",
+   "set": {
+    "crowd": 100,
+    "size": 20
+   }
+  },
+  {
+   "text": "Ochre walls feel like a sun-baked village.",
+   "set": {
+    "wall": "ochre",
+    "border": true
+   }
+  },
+  {
+   "text": "A night wall makes the white figures glow.",
+   "set": {
+    "wall": "night",
+    "crowd": 60
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

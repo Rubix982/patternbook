@@ -47,6 +47,6 @@ _Ink coverage a at a pixel._ (primitives: tooth-threshold)
 
 **History:** The method is credited to Ludwig von Siegen, a German officer, in 1642, and Prince Rupert of the Rhine introduced it to England. In the eighteenth century it became the English favourite for reproducing portraits and paintings, valued for its velvety darks, before photography replaced it.
 
-_Model `processes/models/lumenary/mezzotint.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/mezzotint.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/mezzotint.json`; as captured from his site, `processes/sources/theory-pages/06-craft.md`; code `engine/styles/mezzotint.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

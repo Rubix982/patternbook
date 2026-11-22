@@ -1,7 +1,7 @@
 # engine
 
 One engine. Its base is Lumenary's engine, by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary, used with
-his permission; see `../vendor/lumenary/NOTICE.md`), its files unchanged: the styles that take a picture and render it
+his permission; see `../NOTICE.md`), its files unchanged: the styles that take a picture and render it
 (`styles/`), and the code they share (`utils.js`, `helpers.js`, `culture.js`, `registry.js`, `runtime.js`,
 `sample.js`, `toon.js`, `retro.js`, `history.js`, `subject/`, and the subject model in `models/`). patternbook builds
 on it: process models where no style covers an operation, and styles of its own in section P.

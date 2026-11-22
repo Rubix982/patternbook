@@ -47,6 +47,6 @@ _The three fold types, chosen with roughly equal chance (0.34, 0.33 and 0.33)._ 
 
 **History:** Paper folding developed in Japan and elsewhere over centuries, and the modern art was shaped in the twentieth century by Akira Yoshizawa, who developed the notation of dashed lines and arrows still used to record folds. Today scientists and artists such as Robert Lang use folding theory in engineering, and Koryo Miura’s Miura fold has been used to pack solar panels for spacecraft.
 
-_Model `processes/models/lumenary/origami-folds.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/origami-folds.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/origami-folds.json`; as captured from his site, `processes/sources/theory-pages/05-physical.md`; code `engine/styles/origami-folds.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

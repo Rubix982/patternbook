@@ -1,0 +1,161 @@
+{
+ "id": "lumenary:stained-glass",
+ "name": "Stained Glass",
+ "physical": "yes",
+ "process": "stained-glass",
+ "process_name": "Stained glass",
+ "class": "glass",
+ "basis": "why: coloured pieces held in dark lead, lit from behind; how: Voronoi pieces, lead at cell borders, darker near the lead, backlight",
+ "note": null,
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "Your picture cut into pieces of coloured glass set in dark lead, lit from behind.",
+  "theory_page": "processes/sources/theory-pages/06-craft.md",
+  "code": "engine/styles/stained-glass.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Medieval cathedrals and Islamic architecture",
+  "era": "Around 1000 onward",
+  "bestOn": "Bold pictures with clear colour"
+ },
+ "why": "Stained glass is a mosaic of coloured pieces held in dark lead, lit from behind so that the colour glows. Its irregular pieces come naturally from cellular noise: each point belongs to the nearest of a set of random sites. Lead lies where two sites are nearly equally close, and each piece is darker near the lead and brighter in the middle, as real glass is.",
+ "how": [
+  "Scatter a random site in every square of a coarse grid and give each pixel to its nearest site, making irregular convex pieces.",
+  "Take each piece’s colour from the picture, blurred to about the size of a piece and read at the site, then boost saturation and brightness.",
+  "Place lead where the distances to the nearest and second nearest sites nearly match, drawn as a dark bar with a soft highlight along its crown.",
+  "Make each piece darker towards the lead and brighter in the middle, with ripple from two layers of noise.",
+  "Light it with a backlight that fades away from the top left."
+ ],
+ "history": "Coloured glass windows filled the great cathedrals of medieval Europe, as at Chartres in the early thirteenth century and Sainte-Chapelle in Paris, finished in 1248, and pierced windows of coloured glass are also found in Islamic architecture. Louis Comfort Tiffany developed new copper foil methods in the late nineteenth century. The cellular partition behind the pieces is the Voronoi diagram, studied by Georgy Voronoy in 1908.",
+ "uses": [
+  "Window and lampshade design ideas",
+  "Church, mosque and heritage themed graphics",
+  "Colourful posters and covers",
+  "Backgrounds with a luminous feel"
+ ],
+ "terms": [
+  [
+   "Voronoi diagram",
+   "A division of the plane in which each point belongs to its nearest site."
+  ],
+  [
+   "Came",
+   "The grooved lead strip that holds pieces of glass together."
+  ],
+  [
+   "Backlight",
+   "Light shining from behind so that it passes through the material."
+  ]
+ ],
+ "related": [
+  "voronoi-mosaic",
+  "byzantine-mosaic",
+  "low-poly"
+ ],
+ "paragraphs": [
+  "Stained glass is a mosaic of coloured pieces held in lead strips. The pieces here come from cellular noise: a random site in every square of a coarse grid, with each pixel belonging to the nearest site, which makes irregular convex shapes. Each piece’s colour is the picture, blurred to about the size of a piece, read at the site, then made more saturated and brighter, like glass lit from behind.",
+  "Lead lies on the boundary between two pieces: a pixel is lead where the distance to the nearest site and to the second nearest nearly match, that is where F2 − F1 is below the lead width. Lead is a dark bar with a soft highlight along its crown. Glass is not flat: it is darker toward the lead and brighter in the middle of a piece (a smoothstep of the distance to the site), rippled by two layers of noise, and lit by a backlight whose strength you set and which fades away from the top left."
+ ],
+ "primitives": [
+  "crackle-network",
+  "saturation-adjust",
+  "soft-threshold",
+  "voronoi-cells"
+ ],
+ "equations": [
+  {
+   "tex": "\\text{lead}\\iff F_2-F_1<\\lambda,\\qquad \\lambda=0.9\\,\\sigma\\,\\ell",
+   "note": "Where lead lies: F₁ and F₂ are the distances to the nearest and second-nearest sites, ℓ the lead slider and σ the picture scale.",
+   "primitives": [
+    "crackle-network"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "k=\\big(0.55+0.55\\,m+\\rho\\big)\\,\\big(0.58+0.42\\,\\beta\\big)\\,\\gamma\\,\\big(0.78+0.22\\,q\\big),\\qquad m=1-\\operatorname{smoothstep}(0.1s,\\ 0.7s,\\ F_1)",
+   "note": "Glass brightness: m is the nearness to the middle of the piece, ρ the ripple, β the backlight slider, γ the fade across the picture and q the distance from the lead.",
+   "primitives": [
+    "voronoi-cells",
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "(h,\\ s,\\ l)\\mapsto\\big(h,\\ \\operatorname{clamp}(1.35\\,s+0.12),\\ \\operatorname{clamp}(0.78\\,l+0.14,\\ 0.22,\\ 0.78)\\big)",
+   "note": "Colour of a piece, in hue, saturation and lightness.",
+   "primitives": [
+    "saturation-adjust"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "pieces",
+   "label": "Pieces across",
+   "type": "range",
+   "default": 16,
+   "min": 8,
+   "max": 44,
+   "step": 1
+  },
+  {
+   "key": "lead",
+   "label": "Lead width",
+   "type": "range",
+   "default": 6,
+   "min": 1,
+   "max": 10,
+   "step": 1
+  },
+  {
+   "key": "glow",
+   "label": "Backlight",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ripple",
+   "label": "Glass ripple",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Re-cut",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Thick lead and larger pieces look like a church window.",
+   "set": {
+    "pieces": 12,
+    "lead": 9
+   }
+  },
+  {
+   "text": "Very small pieces with fine lead give a delicate mosaic.",
+   "set": {
+    "pieces": 40,
+    "lead": 2
+   }
+  },
+  {
+   "text": "Full backlight makes the glass glow.",
+   "set": {
+    "glow": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

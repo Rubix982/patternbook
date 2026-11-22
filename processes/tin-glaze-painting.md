@@ -57,7 +57,7 @@ _The painted pattern: p is the slider, and P the pigment chosen so it always con
 
 **History:** The word comes from the Arabic az-zulayj, small polished stone. Portugal and Spain took up painted tiles in the sixteenth century, and the Portuguese king Manuel I is said to have admired tiles in Seville in 1503. In the seventeenth and eighteenth centuries blue and white came to cover churches, palaces, stations and the fronts of houses, including the panels at São Bento station in Porto, painted by Jorge Colaço and completed in 1930.
 
-_Model `processes/models/lumenary/azulejo.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/azulejo.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/azulejo.json`; as captured from his site, `processes/sources/theory-pages/11-world.md`; code `engine/styles/azulejo.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Delft Blue (`lumenary:delft-blue`, models this process)
 
@@ -91,7 +91,7 @@ _The darker the place, the more opaque and the wider the stroke._ (primitives: t
 
 **History:** Dutch potters in Delft developed blue and white earthenware in the seventeenth century, in imitation of Ming porcelain imported by the Dutch East India Company. De Koninklijke Porceleyne Fles, founded in 1653, is still producing Delftware today. Windmills, tulips and landscapes remain popular subjects.
 
-_Model `processes/models/lumenary/delft-blue.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/delft-blue.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/delft-blue.json`; as captured from his site, `processes/sources/theory-pages/11-world.md`; code `engine/styles/delft-blue.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Talavera (`lumenary:talavera`, models this process)
 
@@ -125,7 +125,7 @@ _The warm-or-cool rule: R and B are the red and blue values of the picture’s b
 
 **History:** Talavera de Puebla descends from Spanish majolica, brought to New Spain in the sixteenth century, and it also took on Indigenous and Asian influences. It has a protected designation of origin. In 2019 UNESCO added the artisanal Talavera of Puebla and Tlaxcala, together with the ceramics of Talavera de la Reina and El Puente del Arzobispo in Spain, to its list of intangible heritage.
 
-_Model `processes/models/lumenary/talavera.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/talavera.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/talavera.json`; as captured from his site, `processes/sources/theory-pages/11-world.md`; code `engine/styles/talavera.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Hala Blue Pottery (`lumenary:hala-blue-pottery`, models this process)
 
@@ -163,7 +163,7 @@ _Where a flower may sit: q is the flowers slider and ξ a random number per grid
 
 **History:** Hala, a town in the Matiari district, is one of the places where blue pottery is still made in Sindh. It shares a tradition with Multan and with Persia, and Sindh has a long tradition of blue glazed tile, as seen on the Shah Jahan Mosque at Thatta (1647). Potters work in small family kilns, and the craft depends on knowledge passed from one generation to the next.
 
-_Model `processes/models/lumenary/hala-blue-pottery.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `engine/styles/hala-blue-pottery.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/hala-blue-pottery.json`; as captured from his site, `processes/sources/theory-pages/12-sindhi.md`; code `engine/styles/hala-blue-pottery.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->
 

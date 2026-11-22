@@ -51,6 +51,6 @@ _Position on the foil’s colour strip from the tilt (n_x, n_y) of the normal an
 
 **History:** Gold leaf has decorated manuscripts, icons and temples for thousands of years. Hot foil stamping, pressing metallic film onto a surface with a heated die, developed with industrial printing and now decorates book covers, wedding invitations and packaging. The ridged noise behind the crumple was popularised by the graphics researcher Ken Musgrave.
 
-_Model `processes/models/lumenary/gold-foil.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/gold-foil.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/gold-foil.json`; as captured from his site, `processes/sources/theory-pages/05-physical.md`; code `engine/styles/gold-foil.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

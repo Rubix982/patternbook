@@ -1,0 +1,178 @@
+{
+ "id": "lumenary:metaballs",
+ "name": "Metaballs",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "summed implicit fields (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "Soft balls whose fields add together. Close neighbours bridge into one body, and the colours underneath come from your picture.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/metaballs.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Computer graphics",
+  "era": "1980s",
+  "bestOn": "Pictures with bright spots on dark ground, or the reverse"
+ },
+ "why": "Metaballs are blobs that have no outline of their own. Each ball contributes a field that fades with distance, and the fields add up. Wherever the sum is above a level, there is body. When two balls are far apart each stands alone, and as they approach, the fields add in the gap until a smooth neck of matter joins them. That melting is what makes the shape look like liquid.",
+ "how": [
+  "Give each ball a field (1 − r²/R²)³ out to R = 2.6 times its radius, and zero beyond.",
+  "Add all the fields, and call a pixel inside the body wherever the total passes the level, which moves from 0.95 (apart) to 0.28 (merged) with the slider.",
+  "Choose ball positions by rejection sampling with probability 0.04 + 0.96 w^1.3, where w is the tone of the picture (light, dark or even).",
+  "Light the surface by treating the field as a height and using its gradient as a normal.",
+  "Take colour from the picture underneath, with an optional faint ghost of the original behind."
+ ],
+ "history": "Jim Blinn introduced the blobby model in 1982 while working on ways to draw molecules, and similar ideas were developed by researchers in Japan and by the Wyvill brothers in the mid 1980s. Metaballs became a standard tool in 3D modelling programs and a classic demoscene effect, and the moving blobs of lava lamps are a physical cousin.",
+ "uses": [
+  "Fluid and organic shapes in 3D modelling",
+  "Medical scans and isosurface visualisation",
+  "Demoscene and game effects",
+  "Interface animations that merge and separate"
+ ],
+ "terms": [
+  [
+   "Implicit surface",
+   "A surface defined by where a function equals a value."
+  ],
+  [
+   "Isosurface",
+   "The set of points where a field has the same value."
+  ],
+  [
+   "Rejection sampling",
+   "Choosing random points and keeping each with a chosen probability."
+  ]
+ ],
+ "related": [
+  "liquid-morph",
+  "ink-in-water",
+  "particles"
+ ],
+ "paragraphs": [
+  "Metaballs are blobs defined by a field, not by a surface. Each ball contributes a smooth field that falls to zero at a finite radius, f(r) = (1 − r²/R²)³ for r < R, with R = 2.6 times the ball’s radius. The fields of all the balls are added into one field F, and the body of the shape is wherever F is above a level. Where two balls are far apart each stands alone; as they come close the fields add up in between and the two bodies join with a smooth neck. The how-readily-they-merge slider moves the level between 0.95 (balls stay apart) and 0.28 (they melt together).",
+  "Balls are placed by rejection sampling. A random point is accepted with probability 0.04 + 0.96 w^1.3, where w is the picture’s tone there (for light places), its complement (for dark places) or 1 (anywhere), and the ball’s radius also grows with w. The surface is lit by treating F as a height: its gradient gives a normal n = (−∂ₓF, −∂ᵧF, 0.22/(0.3 + level)), normalised, with a diffuse term from a light at upper left and a tight specular highlight (power 22). The colour of the ball is the picture’s own, multiplied by 0.45 to 1.15 with the light. The edge is antialiased with a smoothstep of ±0.03 around the level."
+ ],
+ "primitives": [
+  "relief-shading",
+  "soft-threshold",
+  "specular-highlight"
+ ],
+ "equations": [
+  {
+   "tex": "f(r)=\\Big(1-\\frac{r^{2}}{R^{2}}\\Big)^{3}\\ \\ (r<R),\\qquad F(\\mathbf x)=\\sum_i f_i\\big(\\lVert\\mathbf x-\\mathbf p_i\\rVert\\big)",
+   "note": "The kernel of one ball and the total field.",
+   "primitives": [],
+   "bespoke": "specific"
+  },
+  {
+   "tex": "\\text{inside}=\\operatorname{smoothstep}\\big(\\lambda-0.03,\\ \\lambda+0.03,\\ F\\big),\\qquad \\lambda=0.95-0.67\\,g",
+   "note": "The body: g is the merge slider.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf n=\\frac{(-F_x,\\ -F_y,\\ \\nu)}{\\lVert(-F_x,\\ -F_y,\\ \\nu)\\rVert},\\quad \\nu=\\frac{0.22}{0.3+\\lambda},\\qquad C=C_{\\text{pic}}\\,(0.45+0.7\\,\\mathbf n\\cdot\\mathbf l)+178\\,G\\,(\\mathbf n\\cdot\\mathbf h)^{22}",
+   "note": "Shading from the field’s gradient; l and h are the light and highlight directions, G the gloss slider.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "count",
+   "label": "Balls",
+   "type": "range",
+   "default": 420,
+   "min": 30,
+   "max": 900,
+   "step": 10
+  },
+  {
+   "key": "size",
+   "label": "Size",
+   "type": "range",
+   "default": 15,
+   "min": 6,
+   "max": 50,
+   "step": 1
+  },
+  {
+   "key": "goo",
+   "label": "How readily they merge",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "where",
+   "label": "Balls gather in",
+   "type": "select",
+   "default": "even",
+   "options": [
+    "light",
+    "dark",
+    "even"
+   ]
+  },
+  {
+   "key": "gloss",
+   "label": "Gloss",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ghost",
+   "label": "Faint picture behind",
+   "type": "range",
+   "default": 15,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New arrangement",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "High merge makes the balls melt into one shape.",
+   "set": {
+    "goo": 90
+   }
+  },
+  {
+   "text": "Low merge keeps clear bubbles apart.",
+   "set": {
+    "goo": 5,
+    "gloss": 85
+   }
+  },
+  {
+   "text": "Balls gathering in the dark parts invert the portrait.",
+   "set": {
+    "where": "dark",
+    "count": 700
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

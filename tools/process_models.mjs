@@ -3,18 +3,18 @@
 //
 //   node tools/process_models.mjs
 //
-// Reads, never writes: processes/sources/lumenary/data/ (Lumenary's theory data, kept there since 2026-11-22) and
+// Reads, never writes: processes/sources/data/ (Lumenary's theory data, kept there since 2026-11-22) and
 // engine/styles (the styles that came from Lumenary, by Mursal Furqan Kumbhar, https://github.com/mursalfk/lumenary, used with his
-// permission; see processes/sources/lumenary/README.md and vendor/lumenary/NOTICE.md), and processes/models/lumenary-map.tsv (patternbook's own
+// permission; see processes/sources/README.md and NOTICE.md), and processes/models/map.tsv (patternbook's own
 // classification: which physical process each treatment models, or what it is instead).
 // Writes:
-//   processes/models/lumenary/<id>.json   one model per treatment: its story, steps, equations, dials, presets, credit
+//   processes/models/<id>.json            one model per treatment: its story, steps, equations, dials, presets, credit
 //   processes/<process>.md                created at "listed" if absent; only the block between the models markers is
 //                                         regenerated, so hand-written sections are never overwritten
 //   processes/index.md                    every process with its models, the entries that aren't physical processes,
 //                                         and the counts C-017 measures
 //   processes/primitives.md               (C-018) refreshes each entry's "Applied by" line from
-//                                         processes/models/lumenary-equation-tags.tsv; the rest of the file is hand-written
+//                                         processes/models/equation-tags.tsv; the rest of the file is hand-written
 // The models and process pages also carry the primitives their equations apply, from the same tags.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -24,7 +24,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = process.env.PROCESSES_OUT ? resolve(process.env.PROCESSES_OUT) : join(root, 'processes');
 const imp = (p) => import(pathToFileURL(p).href);
 
-const data = join(root, 'processes', 'sources', 'lumenary', 'data');
+const data = join(root, 'processes', 'sources', 'data');
 const { SECTIONS, slugify } = await imp(join(data, 'sections.js'));
 const { THEORY } = await imp(join(data, 'theory.js'));
 const { EXTRA } = await imp(join(data, 'theory-extra', 'index.js'));
@@ -36,16 +36,16 @@ for (const f of readdirSync(join(root, 'engine', 'styles')).filter((f) => f.ends
   const s = (await imp(join(root, 'engine', 'styles', f))).default;
   if (received.has(s.id)) styles[s.id] = s;
 }
-const notice = readFileSync(join(root, 'vendor', 'lumenary', 'NOTICE.md'), 'utf8');
+const notice = readFileSync(join(root, 'NOTICE.md'), 'utf8');
 const commit = (notice.match(/commit `([0-9a-f]{40})`/) || [])[1] || null;
 const THEORY_PAGE = { A: '01-design', B: '02-digital', C: '03-type', D: '04-light', E: '05-physical', F: '06-craft',
   G: '07-painterly', H: '08-optical', I: '09-generative', J: '10-motion', K: '11-world', L: '12-sindhi', M: '13-southasia' };
 const CREDIT = 'Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; ' +
-  'see vendor/lumenary/NOTICE.md. Converted to patternbook\'s model format by tools/process_models.mjs; his text and ' +
+  'see NOTICE.md. Converted to patternbook\'s model format by tools/process_models.mjs; his text and ' +
   'maths are unchanged.';
 
 // patternbook's classification
-const mapPath = join(out, 'models', 'lumenary-map.tsv');
+const mapPath = join(out, 'models', 'map.tsv');
 const lines = readFileSync(mapPath, 'utf8').split('\n').filter((l) => l.trim());
 const head = lines[0].split('\t');
 const map = {};
@@ -56,7 +56,7 @@ for (const l of lines.slice(1)) {
 }
 
 // patternbook's tags (C-018): which primitives each equation applies, or what kind of bespoke maths it is
-const tagPath = join(out, 'models', 'lumenary-equation-tags.tsv');
+const tagPath = join(out, 'models', 'equation-tags.tsv');
 const tags = {};
 if (existsSync(tagPath)) {
   const tl = readFileSync(tagPath, 'utf8').split('\n').filter((l) => l.trim());
@@ -78,7 +78,7 @@ const dial = (p) => {
   return d;
 };
 
-mkdirSync(join(out, 'models', 'lumenary'), { recursive: true });
+mkdirSync(join(out, 'models'), { recursive: true });
 const models = [];
 const missing = [];
 for (const sec of SECTIONS.filter((s) => s.enabled)) {
@@ -103,7 +103,7 @@ for (const sec of SECTIONS.filter((s) => s.enabled)) {
         section: `${sec.letter}. ${sec.title}`,
         kind: s.kind === 'still' ? 'still' : 'live',
         blurb: s.blurb || null,
-        theory_page: THEORY_PAGE[sec.letter] ? `processes/sources/lumenary/theory-pages/${THEORY_PAGE[sec.letter]}.md` : null,
+        theory_page: THEORY_PAGE[sec.letter] ? `processes/sources/theory-pages/${THEORY_PAGE[sec.letter]}.md` : null,
         code: `engine/styles/${s.id}.js`,
         commit,
       },
@@ -124,7 +124,7 @@ for (const sec of SECTIONS.filter((s) => s.enabled)) {
       presets: x.tips || [],
       credit: CREDIT,
     };
-    writeFileSync(join(out, 'models', 'lumenary', `${s.id}.json`), JSON.stringify(model, null, 1) + '\n');
+    writeFileSync(join(out, 'models', `${s.id}.json`), JSON.stringify(model, null, 1) + '\n');
     models.push(model);
   }
 }
@@ -148,7 +148,7 @@ const modelText = (m) => {
   }
   if (m.dials && m.dials.length) out.push(`**Dials:** ${m.dials.map(dialText).join('; ')}.`, '');
   if (m.history) out.push(`**History:** ${m.history}`, '');
-  out.push(`_Model \`processes/models/lumenary/${m.id.split(':')[1]}.json\`${m.lumenary.theory_page ? `; as captured from his site, \`${m.lumenary.theory_page}\`` : ''}; code \`${m.lumenary.code}\`. ${m.credit}_`, '');
+  out.push(`_Model \`processes/models/${m.id.split(':')[1]}.json\`${m.lumenary.theory_page ? `; as captured from his site, \`${m.lumenary.theory_page}\`` : ''}; code \`${m.lumenary.code}\`. ${m.credit}_`, '');
   return out.join('\n');
 };
 const block = (pid, ms) => [START, '', ...ms.map(modelText), END].join('\n');

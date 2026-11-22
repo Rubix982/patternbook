@@ -56,7 +56,7 @@ _The fill line is blended with strength 0.9 κ, where κ is the pattern strength
 
 **History:** Madhubani painting comes from the Mithila region of Bihar and the neighbouring parts of Nepal, painted with twigs and cotton-wrapped sticks and with pigments from turmeric, indigo, soot, flowers and clay. After the Bihar earthquake of 1934 the British officer William Archer photographed wall paintings in damaged houses. From the 1960s women artists such as Sita Devi, Ganga Devi and Mahasundari Devi brought the art onto paper, and it became known across India and abroad.
 
-_Model `processes/models/lumenary/madhubani.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `engine/styles/madhubani.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/madhubani.json`; as captured from his site, `processes/sources/theory-pages/13-southasia.md`; code `engine/styles/madhubani.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Warli (`lumenary:warli`, a style that rests on this process)
 
@@ -94,6 +94,6 @@ _The pick, with h a random number fixed by the position and the seed. Figures ar
 
 **History:** Warli painting belongs to the Warli people, an Adivasi community of Maharashtra and Gujarat. It is painted on the red-brown mud walls of houses, in white rice paste, with a bamboo stick, and is often made for weddings, around a square drawn for the goddess Palaghata. In the 1970s the artist Jivya Soma Mashe brought Warli painting onto cloth and paper, and received a Padma Shri in 2011.
 
-_Model `processes/models/lumenary/warli.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `engine/styles/warli.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/warli.json`; as captured from his site, `processes/sources/theory-pages/13-southasia.md`; code `engine/styles/warli.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

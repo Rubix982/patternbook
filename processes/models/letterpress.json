@@ -1,0 +1,175 @@
+{
+ "id": "lumenary:letterpress",
+ "name": "Letterpress",
+ "physical": "yes",
+ "process": "letterpress",
+ "process_name": "Letterpress",
+ "class": "printing",
+ "basis": "why: a raised plate pressed into soft paper leaves a dent; how: plate as ink map, paper as height field lit from top left, ink wear",
+ "note": "The plate carries a halftone; the modelled process is the impression.",
+ "lumenary": {
+  "section": "C. Typographic",
+  "kind": "still",
+  "blurb": "One colour of ink pressed deep into thick cotton paper: a halftone, a title and the shadow of the impression.",
+  "theory_page": "processes/sources/theory-pages/03-type.md",
+  "code": "engine/styles/letterpress.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The printing press",
+  "era": "Since the 1450s, revived from the late 1990s",
+  "bestOn": "Bold pictures and portraits with clear tones"
+ },
+ "why": "Letterpress is printing with a raised plate pressed into thick, soft paper, so the ink arrives with a physical dent. That dent is the whole charm: a shadow on one wall, a lit edge on the other. This treatment draws a one colour plate and then treats the paper as a height field so that the impression catches light.",
+ "how": [
+  "Build the plate as black on transparent: a 45 degree halftone of the picture, two rules and the title.",
+  "Turn the plate into an ink map between 0 and 1.",
+  "Soften the map with two small blurs, the give of the paper, and measure its slope.",
+  "Light from the top left, so the lower right wall of each dent is lit and the upper left wall is in shadow.",
+  "Add fibre and speckle to the paper, darken ink slightly at the edges, and knock small holes in the ink for wear."
+ ],
+ "history": "Johannes Gutenberg’s movable type press of around 1450 made letterpress the main way of printing for centuries. Offset printing replaced it in the twentieth century, but from the late 1990s designers rediscovered the deep impression on cotton stock, and it became a favourite for wedding invitations and business cards.",
+ "uses": [
+  "Wedding and event stationery",
+  "Business cards and brand cards",
+  "Greeting cards and art prints",
+  "Premium packaging inserts"
+ ],
+ "terms": [
+  [
+   "Impression",
+   "The dent a raised plate leaves in paper."
+  ],
+  [
+   "Height field",
+   "An image whose values are read as heights."
+  ],
+  [
+   "Cotton stock",
+   "A thick soft paper made from cotton fibre, ideal for deep impressions."
+  ]
+ ],
+ "related": [
+  "newspaper",
+  "halftone",
+  "rubber-stamp"
+ ],
+ "paragraphs": [
+  "Letterpress is printing with a raised plate pressed into thick cotton paper, so the ink arrives with a physical dent. The treatment builds the plate first, as black on transparent: a 45° halftone of your picture, two rules and the title. That layer becomes an ink map a(x, y) between 0 and 1.",
+  "The paper is then treated as a height field. The ink map is softened with two small blurs (the paper’s give) and its slope is measured with a Sobel filter. Light comes from the top left, so the lower-right wall of every dent is lit and the upper-left wall falls in shadow, which is how the impression shows. Paper tone gets a little fibre and speckle noise. Ink is the one chosen colour, a touch darker at the edges where it squashes outward, and the “ink wear” slider knocks small holes in it, the way a worn plate prints."
+ ],
+ "primitives": [
+  "blur",
+  "mix-over",
+  "relief-shading",
+  "tone-dot-lattice"
+ ],
+ "equations": [
+  {
+   "tex": "r=0.72\\,s\\,\\sqrt{1-L}",
+   "note": "Halftone dot radius on the plate; s is the dot spacing.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "v=1-5.2\\,\\delta\\,(G_x+G_y)-0.07\\,\\delta\\,\\tilde a+\\eta,\\qquad \\tilde a=\\text{blur}^2(a)",
+   "note": "Paper shading v: δ is the impression slider, G the Sobel slopes of the softened ink map, η small noise.",
+   "primitives": [
+    "relief-shading",
+    "blur"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=v\\,\\Big(P+k\\,\\big(\\sigma\\,I-P\\big)\\Big),\\qquad k=a\\,(1-h)",
+   "note": "Final colour: paper P toward ink I by the ink amount k; h is 0.55 on worn speckles and σ shades the ink.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "title",
+   "label": "Title",
+   "type": "text",
+   "default": "Seen Differently"
+  },
+  {
+   "key": "ink",
+   "label": "Ink",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "navy",
+    "oxblood",
+    "forest"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "cotton",
+   "options": [
+    "cotton",
+    "cream",
+    "grey"
+   ]
+  },
+  {
+   "key": "dot",
+   "label": "Dot size",
+   "type": "range",
+   "default": 8,
+   "min": 4,
+   "max": 16,
+   "step": 1
+  },
+  {
+   "key": "depth",
+   "label": "Impression",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wear",
+   "label": "Ink wear",
+   "type": "range",
+   "default": 25,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Oxblood ink on cream paper looks warm and traditional.",
+   "set": {
+    "ink": "oxblood",
+    "paper": "cream"
+   }
+  },
+  {
+   "text": "Deep impression with little wear is crisp and luxurious.",
+   "set": {
+    "depth": 95,
+    "wear": 5
+   }
+  },
+  {
+   "text": "Add your own title.",
+   "set": {
+    "title": "With thanks"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

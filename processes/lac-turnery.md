@@ -55,6 +55,6 @@ _Shading and the two highlights, a broad one on the left and a narrow one on the
 
 **History:** Lac is the resin made by tiny insects and used for centuries across South Asia for lacquer and sealing wax. In Sindh the craft of lacquered, lathe-turned wood is closely tied to Hala, where bed legs, cradles, toys and boxes are made. It is a craft of family workshops, and demand for it has been under pressure from cheaper goods.
 
-_Model `processes/models/lumenary/hala-lacquerware.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `engine/styles/hala-lacquerware.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/hala-lacquerware.json`; as captured from his site, `processes/sources/theory-pages/12-sindhi.md`; code `engine/styles/hala-lacquerware.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

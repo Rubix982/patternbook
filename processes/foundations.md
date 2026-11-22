@@ -1,7 +1,7 @@
 # Foundations
 
 _The shared tools of patternbook's own treatments (`treatments/treatments.js`), moved here from `treatments/theory/` on
-2026-11-22. Lumenary's foundations, which these follow, are in `sources/lumenary/theory-pages/00-foundations.md`; the
+2026-11-22. Lumenary's foundations, which these follow, are in `sources/theory-pages/00-foundations.md`; the
 same operations, named once across every model, are entries in `primitives.md` (`luminance`, `blur`, `image-gradient`,
 `seeded-random`, `smooth-noise`, `tone-curve`)._
 

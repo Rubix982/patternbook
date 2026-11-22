@@ -55,6 +55,6 @@ _Frame width, with φ the frame slider (0 to 1). Below 6 px the frame is dropped
 
 **History:** Decorating lorries, buses and rickshaws grew with the long-distance road trade of the twentieth century, drawing on Mughal and Persian ornament and on local styles such as Peshawar’s carved wooden fittings and Karachi’s painted panels. Painters often learn as apprentices and work in small workshops. Truck art has been shown in museums and festivals abroad, and a new generation of artists now paints on canvas, walls and buildings as well.
 
-_Model `processes/models/lumenary/truck-art.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `engine/styles/truck-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/truck-art.json`; as captured from his site, `processes/sources/theory-pages/13-southasia.md`; code `engine/styles/truck-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

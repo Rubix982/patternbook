@@ -1,0 +1,172 @@
+{
+ "id": "lumenary:blueprint",
+ "name": "Blueprint",
+ "physical": "partly",
+ "process": "cyanotype",
+ "process_name": "Cyanotype",
+ "class": "photographic",
+ "basis": "hist and terms: blueprints were cyanotype copies, white lines on deep blue; how: paper and line colours mixed by line strength",
+ "note": "Weak model of the process: most of the treatment is drafting convention (edge lines, hatching, grid, title block); only the white-on-blue copy is cyanotype.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "Technical-drawing linework with a grid, hatching and a title block.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/blueprint.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Architecture and engineering offices",
+  "era": "1840s process, widely used 1870s to 1990s",
+  "bestOn": "Buildings, machines and objects with clear outlines"
+ },
+ "why": "A blueprint is a drawing meant to be read, so it is made of lines: outlines, hatching, dimensions and a title block. This treatment turns your picture into exactly that. Edges become drawn lines, shadow becomes hatching, and the page is furnished with a drafting grid and annotations, so the photograph reads like a technical study.",
+ "how": [
+  "Blur the picture and find its edges, with the line weight setting how coarse the neighbourhood is.",
+  "Where the picture is darker than a threshold, draw a field of diagonal lines, and where it is darker still, cross it with a second set.",
+  "Add a drafting grid, with every fifth line stronger.",
+  "Mix paper and line colours according to the strength of lines, hatching and grid.",
+  "Draw the double border, dimension lines with arrowheads, the title block and registration crosses."
+ ],
+ "history": "The cyanotype process, invented by Sir John Herschel in 1842, made white lines on a deep blue ground and let engineers copy drawings cheaply. Anna Atkins used it in the 1840s for her botanical books. Architects and engineers relied on blueprints from the 1870s until diazo prints and then computer drawing replaced them, and the name stuck for any detailed plan.",
+ "uses": [
+  "Product and architecture presentation visuals",
+  "Maker and engineering posters",
+  "Technical themed backgrounds",
+  "Mock-up sheets for portfolios"
+ ],
+ "terms": [
+  [
+   "Cyanotype",
+   "A photographic printing process that produces a blue image, the origin of the word blueprint."
+  ],
+  [
+   "Hatching",
+   "Parallel lines drawn to suggest shade."
+  ],
+  [
+   "Title block",
+   "The box on a drawing that gives its name, number and author."
+  ]
+ ],
+ "related": [
+  "circuit-board",
+  "victorian",
+  "futuristic"
+ ],
+ "paragraphs": [
+  "A blueprint is a drawing, so the picture is turned into lines. Edges come from the usual blur-then-Sobel pass, with the line weight slider setting the Sobel step so thicker lines mean looking at a coarser neighbourhood. Shading is not done with grey but with hatching, as draughtsmen do: where the blurred picture is darker than a threshold a field of diagonal lines is drawn, and where it is darker still a second set at the opposite diagonal crosses it. The lines are one pixel wide, repeated every sp pixels, and found by testing a position’s remainder, so no line has to be drawn at all.",
+  "A drafting grid is added the same way (a minor line every 1/40 of the width, with every fifth line stronger). Each pixel’s final colour is a straight mix of the paper colour and the line colour by the strength a of all these things, so lines have soft edges. The sheet furniture is drawn on top: a double border, dimension lines with arrowheads (a filled triangle at each end, rotated to the line’s angle), a title block, and registration crosses at the edge midpoints."
+ ],
+ "primitives": [
+  "edge-outline",
+  "mix-over",
+  "tone-line-screen"
+ ],
+ "equations": [
+  {
+   "tex": "a=\\max\\Big(S_{\\theta,1.7\\theta}(\\lvert\\nabla L_b\\rvert),\\ a_{\\text{hatch}},\\ a_{\\text{grid}}\\Big)",
+   "note": "Line strength at a pixel is the strongest of edge, hatching and grid.",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "a_{\\text{hatch}}=\\begin{cases}0.5&D>\\lambda_1\\ \\text{and}\\ (x+y)\\bmod s<w\\\\0.4&D>\\lambda_2+0.2\\ \\text{and}\\ (x-y)\\bmod s<w\\end{cases},\\qquad D=1-\\bar L",
+   "note": "Cross-hatching: D is local darkness; the modulo picks out evenly spaced diagonals.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=C_{\\text{paper}}+(C_{\\text{line}}-C_{\\text{paper}})\\,a",
+   "note": "Linear mix of paper and ink.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "scheme",
+   "label": "Sheet",
+   "type": "select",
+   "default": "blueprint",
+   "options": [
+    "blueprint",
+    "whiteprint",
+    "mono"
+   ]
+  },
+  {
+   "key": "detail",
+   "label": "Line detail",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "weight",
+   "label": "Line weight",
+   "type": "range",
+   "default": 1,
+   "min": 1,
+   "max": 3,
+   "step": 1
+  },
+  {
+   "key": "hatch",
+   "label": "Hatching",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grid",
+   "label": "Grid",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "notes",
+   "label": "Annotations",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "title",
+   "label": "Title",
+   "type": "text",
+   "default": "STUDY NO. 18"
+  }
+ ],
+ "presets": [
+  {
+   "text": "The whiteprint sheet looks like a modern drafting copy.",
+   "set": {
+    "scheme": "whiteprint"
+   }
+  },
+  {
+   "text": "High line detail with heavy hatching gives a rich study.",
+   "set": {
+    "detail": 90,
+    "hatch": 90
+   }
+  },
+  {
+   "text": "Rename the sheet to label your own drawing.",
+   "set": {
+    "title": "STUDY NO. 7"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

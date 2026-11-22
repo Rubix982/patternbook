@@ -1,0 +1,183 @@
+{
+ "id": "lumenary:tilt-shift",
+ "name": "Tilt-Shift",
+ "physical": "yes",
+ "process": "tilt-shift-lens",
+ "process_name": "Tilt-shift lens",
+ "class": "optical-device",
+ "basis": "why: a tilt-shift lens tips its plane of focus so only a thin band is sharp; how: blur graded by distance from the band",
+ "note": "Could merge with lens defocus; kept apart because photographers name it as a lens technique.",
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "A thin band of sharpness with blur everywhere else, boosted colour and contrast: the world turns into a very small model of itself.",
+  "theory_page": "processes/sources/theory-pages/08-optical.md",
+  "code": "engine/styles/tilt-shift.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "View cameras and architectural photography",
+  "era": "Lenses from the 1900s, miniature effect from the 2000s",
+  "bestOn": "High-angle city, harbour and crowd scenes"
+ },
+ "why": "A tilt-shift lens tips its plane of focus so that only a thin band is sharp and the rest falls quickly into blur. That is also what happens when you photograph a tiny scene up close, so a street photographed this way tricks the brain into seeing a model. Boosted colour and contrast add the gloss of a toy.",
+ "how": [
+  "Build five versions of the picture in advance, with blur radii of 0, 1.6, 3.6, 7 and 12 pixels scaled by the blur slider.",
+  "For each pixel measure its distance from the band: a straight line through the focus point, tilted by the angle slider, or an ellipse for the radial shape.",
+  "Pass the distance through a smoothstep that starts at the band’s half width and ends further on, scaled to a position among the five levels.",
+  "Mix the two nearest levels linearly so blur grows smoothly.",
+  "Raise saturation and contrast, up to 1.85 and 1.45 times, for the look of glossy paint."
+ ],
+ "history": "Tilt and shift movements on view cameras were used in the nineteenth and twentieth centuries to control perspective in architecture, using principles described by Theodor Scheimpflug in 1904. In the early 2000s photographers such as Olivo Barbieri used them on cities seen from above, and the miniature look became a popular effect in photography and video.",
+ "uses": [
+  "Cityscape and travel photo effects",
+  "Toy and diorama style posters",
+  "Real estate and architecture mock-ups",
+  "Playful video and thumbnail looks"
+ ],
+ "terms": [
+  [
+   "Plane of focus",
+   "The flat slice of the scene that is perfectly sharp."
+  ],
+  [
+   "Scheimpflug principle",
+   "The rule that explains how tilting a lens tilts the plane of focus."
+  ],
+  [
+   "Depth of field",
+   "The range of distances that appear acceptably sharp."
+  ]
+ ],
+ "related": [
+  "bokeh",
+  "depth-parallax",
+  "isometric"
+ ],
+ "paragraphs": [
+  "A tilt-shift lens tips its plane of focus, so only a thin band is sharp and the rest falls quickly into blur. That is the cue we associate with macro photography of a tiny scene, which is why a street photographed this way looks like a model. The program builds five versions of the picture in advance (blur radii 0, 1.6, 3.6, 7 and 12 px, all scaled by the blur slider) and chooses between them for each pixel by its distance from the band. For a straight band this is the distance to a line through the focus point tilted by the angle slider; for the radial shape it is an ellipse, slightly squeezed horizontally.",
+  "The distance passes through a smoothstep, starting at the half-width of the band and ending 0.38 of the picture height further on, and is scaled to a position between 0 and 4 along the five levels. The pixel is a linear mix of the two nearest levels, so the blur grows smoothly. Finally colour and contrast are raised (saturation up to 1.85 times, contrast up to 1.45), the glossy paint of a toy."
+ ],
+ "primitives": [
+  "blur",
+  "saturation-adjust",
+  "soft-threshold",
+  "tone-curve"
+ ],
+ "equations": [
+  {
+   "tex": "t=4\\,\\operatorname{smoothstep}\\!\\Big(h,\\ h+0.38\\,H,\\ \\big\\lvert(\\mathbf x-\\mathbf c)\\cdot\\mathbf n\\big\\rvert\\Big),\\qquad \\mathbf n=(-\\sin\\alpha,\\ \\cos\\alpha)",
+   "note": "Position along the blur levels; h is half the band width, c the focus point, α the tilt. For the radial shape the distance is √((1.15 Δx)² + Δy²).",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C=(1-\\phi)\\,B_{\\lfloor t\\rfloor}+\\phi\\,B_{\\lfloor t\\rfloor+1},\\qquad \\phi=t-\\lfloor t\\rfloor",
+   "note": "B₀ is the sharp picture, B₁ to B₄ the blurred ones.",
+   "primitives": [
+    "blur"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C'=\\tfrac12+k_c\\Big(l+k_s\\,(C-l)-\\tfrac12\\Big)",
+   "note": "The model-making boost: saturation k_s and contrast k_c.",
+   "primitives": [
+    "saturation-adjust",
+    "tone-curve"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "focus",
+   "label": "Where the sharp band sits",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "width",
+   "label": "Width of the band",
+   "type": "range",
+   "default": 18,
+   "min": 4,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "blur",
+   "label": "Blur strength",
+   "type": "range",
+   "default": 60,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "angle",
+   "label": "Tilt the band",
+   "type": "range",
+   "default": 0,
+   "min": -45,
+   "max": 45,
+   "step": 1
+  },
+  {
+   "key": "shape",
+   "label": "Shape",
+   "type": "select",
+   "default": "line",
+   "options": [
+    "line",
+    "radial"
+   ]
+  },
+  {
+   "key": "sat",
+   "label": "Colour boost",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "contrast",
+   "label": "Contrast",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A thin band near the top feels like a tiny city seen from a roof.",
+   "set": {
+    "focus": 35,
+    "width": 10
+   }
+  },
+  {
+   "text": "A radial shape keeps the middle sharp like a macro lens.",
+   "set": {
+    "shape": "radial",
+    "blur": 85
+   }
+  },
+  {
+   "text": "Tilt the band to lean the focus across the scene.",
+   "set": {
+    "angle": 20
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

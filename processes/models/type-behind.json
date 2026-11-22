@@ -1,0 +1,167 @@
+{
+ "id": "lumenary:type-behind",
+ "name": "Type Behind",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "subject",
+ "basis": "subject cut out by U2-Net so type sits behind it (how)",
+ "note": null,
+ "lumenary": {
+  "section": "N. Subject aware",
+  "kind": "still",
+  "blurb": "Giant lettering set behind the subject of your picture, so the person or object stands in front of the words. The subject is found on your own device, and nothing is uploaded.",
+  "theory_page": null,
+  "code": "engine/styles/type-behind.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Magazine covers and posters",
+  "era": "Print for decades, short video lately",
+  "bestOn": "A clear person or object against a calmer background"
+ },
+ "why": "Words usually sit on top of a picture. Set behind the subject they do the opposite: the person or object stands in front of the lettering, and the eye reads that overlap as depth without any 3D at all. The trick only works if the subject is cut out cleanly, which is why this treatment first asks a small neural network where the subject is. The network runs on your own device, so the picture is never uploaded.",
+ "how": [
+  "Shrink a copy of the picture to 320 by 320 and feed it to a small neural network called U2-Net.",
+  "The network returns a map in which every pixel scores how likely it is to belong to the main subject.",
+  "Scale the map back to the size of the picture and soften its edge with a smooth curve.",
+  "Draw the picture, darken it a little, then draw the words as large as the width allows, solid, outlined or both.",
+  "Draw the subject back on top, cut out with the map, so the words disappear behind it."
+ ],
+ "history": "Hiding one thing partly behind another is the oldest depth cue in painting, and magazines have long tucked the title behind the head of the person on the cover. Cutting the subject out used to mean tracing it by hand with a pen tool. Neural networks for finding the salient object in a picture made it automatic, and U2-Net, published in 2020 by Xuebin Qin and colleagues, is a small one that is light enough to run inside a web page.",
+ "uses": [
+  "Magazine and album cover layouts",
+  "Titles and intros for short video",
+  "Posters and event announcements",
+  "Video thumbnails"
+ ],
+ "terms": [
+  [
+   "Occlusion",
+   "When one object hides part of another, which tells the eye which one is in front."
+  ],
+  [
+   "Salient object",
+   "The part of a picture that draws the eye first."
+  ],
+  [
+   "Mask",
+   "A map of which pixels are kept and which are hidden."
+  ]
+ ],
+ "related": [
+  "kinetic-type",
+  "newspaper",
+  "split-treatment"
+ ],
+ "paragraphs": [],
+ "primitives": [],
+ "equations": [],
+ "dials": [
+  {
+   "key": "text",
+   "label": "Words",
+   "type": "text",
+   "default": "DREAM"
+  },
+  {
+   "key": "font",
+   "label": "Lettering",
+   "type": "select",
+   "default": "sans",
+   "options": [
+    "sans",
+    "serif",
+    "hand",
+    "mono"
+   ]
+  },
+  {
+   "key": "rows",
+   "label": "Rows",
+   "type": "range",
+   "default": 2,
+   "min": 1,
+   "max": 5,
+   "step": 1
+  },
+  {
+   "key": "width",
+   "label": "Width of the words",
+   "type": "range",
+   "default": 92,
+   "min": 40,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "height",
+   "label": "How high",
+   "type": "range",
+   "default": 42,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "look",
+   "label": "Letters",
+   "type": "select",
+   "default": "alternate",
+   "options": [
+    "fill",
+    "outline",
+    "alternate"
+   ]
+  },
+  {
+   "key": "color",
+   "label": "Colour",
+   "type": "color",
+   "default": "#f5f5f5"
+  },
+  {
+   "key": "dim",
+   "label": "Darken the picture",
+   "type": "range",
+   "default": 25,
+   "min": 0,
+   "max": 70,
+   "step": 1
+  },
+  {
+   "key": "edge",
+   "label": "Soft edge",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "One huge word behind a head is the classic cover look.",
+   "set": {
+    "rows": 1,
+    "look": "fill",
+    "height": 30
+   }
+  },
+  {
+   "text": "Outline only keeps the picture calm and the words light.",
+   "set": {
+    "look": "outline",
+    "dim": 0
+   }
+  },
+  {
+   "text": "A serif face gives it a magazine feel.",
+   "set": {
+    "font": "serif",
+    "rows": 2
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

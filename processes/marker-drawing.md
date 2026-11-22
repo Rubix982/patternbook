@@ -52,6 +52,6 @@ _Choice of marker from the smoothed colour; D is the darkness of the picture._ (
 
 **History:** Enamelled steel boards that could be written on and wiped were sold from the 1960s, but they needed a damp cloth. The dry-wipe marker, whose ink sits on the surface and brushes off, arrived in the mid 1970s. Offices adopted the whiteboard first, and during the 1990s it replaced the chalkboard in many schools, partly to keep chalk dust away from computers.
 
-_Model `processes/models/lumenary/whiteboard.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/whiteboard.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/whiteboard.json`; as captured from his site, `processes/sources/theory-pages/07-painterly.md`; code `engine/styles/whiteboard.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

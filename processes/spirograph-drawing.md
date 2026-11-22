@@ -51,6 +51,6 @@ _Scale for a rosette: c is the cell size, f the size-follows-picture factor (0.4
 
 **History:** Curves made by rolling circles were studied by Dürer in the sixteenth century and by many mathematicians after him, and the Polish engineer Bruno Abakanowicz built a drawing instrument for them in the 1880s. The British engineer Denys Fisher turned the idea into the Spirograph toy, shown in 1965 and sold in the United States by Kenner from 1966. It has been a classroom favourite ever since.
 
-_Model `processes/models/lumenary/spirograph.json`; as captured from his site, `processes/sources/lumenary/theory-pages/09-generative.md`; code `engine/styles/spirograph.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/spirograph.json`; as captured from his site, `processes/sources/theory-pages/09-generative.md`; code `engine/styles/spirograph.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

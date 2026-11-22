@@ -1,0 +1,154 @@
+{
+ "id": "lumenary:embroidery",
+ "name": "Embroidery",
+ "physical": "yes",
+ "process": "long-and-short-stitch-embroidery",
+ "process_name": "Long-and-short stitch embroidery (thread painting)",
+ "class": "stitch",
+ "basis": "why: short threads laid in the direction the shape runs; how: strokes along edges, floss palette, glossy thread shading on linen",
+ "note": "Generic 'embroidery'; the stitch modelled is directional fill (thread painting).",
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "Thousands of glossy thread strokes laid along the edges of the picture on linen, in a handful of floss colours.",
+  "theory_page": "processes/sources/theory-pages/06-craft.md",
+  "code": "engine/styles/embroidery.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Textile traditions across the world",
+  "era": "Thousands of years old",
+  "bestOn": "Pictures with clear edges and rich colour"
+ },
+ "why": "An embroidered picture is drawn with thousands of short threads laid in the direction the shape runs, so a face is stitched around the cheek and a leaf along the vein. This treatment follows that logic: each stroke runs along the edge it sits on, in a colour taken from the picture, and is shaded to look glossy.",
+ "how": [
+  "Scatter a jittered grid of stroke centres over the picture and put them in random order.",
+  "For each, find the direction of the edge: the thread runs perpendicular to the gradient. Where there is no edge, use a lazy angle that changes slowly.",
+  "Blend the two directions by an amount that grows with edge strength and with the follow slider.",
+  "Choose floss colours by k-means and give each stroke the nearest to the colour of a quarter-size copy at its centre.",
+  "Draw each stroke three times: a dark offset shadow, the thread itself, and a thin lighter line to one side for sheen, on linen with a wooden hoop."
+ ],
+ "history": "Embroidery is among the oldest decorative arts. The Bayeux Tapestry, made in the eleventh century, is in fact an embroidery in wool on linen. In 1828 Josué Heilmann in Alsace built an early embroidery machine, and today computerised machines stitch logos and motifs on clothing from digital files.",
+ "uses": [
+  "Patches, badges and apparel logos",
+  "Craft and textile inspired illustration",
+  "Heritage and handmade brand graphics",
+  "Gift and keepsake designs"
+ ],
+ "terms": [
+  [
+   "Floss",
+   "Embroidery thread made of loosely twisted strands."
+  ],
+  [
+   "Satin stitch",
+   "Parallel stitches laid close together to cover an area smoothly."
+  ],
+  [
+   "Hoop",
+   "A ring that holds cloth taut while it is stitched."
+  ]
+ ],
+ "related": [
+  "cross-stitch",
+  "knitted-pattern",
+  "tapestry-weave"
+ ],
+ "paragraphs": [
+  "Embroidered pictures are drawn with short glossy threads laid in the direction the shape runs. The program scatters a jittered grid of stroke centres over the picture and puts them in random order. For each one it finds the direction of the picture’s edge: the gradient (the slope of brightness) points across an edge, so the thread runs perpendicular to it. Where there is no edge the thread would have no direction at all, so a lazy angle is used instead: a base angle plus a random shift that is constant over each 16-pixel square. The two directions are blended by an amount that grows with the edge strength and with the “follow the shapes” slider.",
+  "The k floss colours come from k-means on the picture, and each stroke takes the floss nearest to the colour of a quarter-size copy at its centre. It is drawn three times: a dark, offset shadow, the thread itself in a brightness varied by about ±10%, and a thin lighter line slightly to one side for the sheen. The background is linen, flecks of short horizontal and vertical threads. The hoop is a wooden ellipse with a highlight, with the area outside it dark."
+ ],
+ "primitives": [
+  "edge-tangent-field"
+ ],
+ "equations": [
+  {
+   "tex": "\\theta_e=\\operatorname{atan2}(G_x,\\,-G_y),\\qquad w=\\phi\\ \\operatorname{clamp}(14\\,\\lvert\\nabla L\\rvert)",
+   "note": "Thread direction along the edge (the gradient G turned by 90°), and the weight w of edge-following; φ is the follow slider.",
+   "primitives": [
+    "edge-tangent-field"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\theta=\\operatorname{atan2}\\!\\big(w\\sin\\theta_e+(1-w)\\sin\\theta_0,\\ \\ w\\cos\\theta_e+(1-w)\\cos\\theta_0\\big)",
+   "note": "Blend with the lazy direction θ₀ by adding unit vectors.",
+   "primitives": [
+    "edge-tangent-field"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "density",
+   "label": "Stroke size",
+   "type": "range",
+   "default": 7,
+   "min": 3,
+   "max": 14,
+   "step": 1
+  },
+  {
+   "key": "flosses",
+   "label": "Colours of thread",
+   "type": "range",
+   "default": 10,
+   "min": 4,
+   "max": 18,
+   "step": 1
+  },
+  {
+   "key": "follow",
+   "label": "Follow the shapes",
+   "type": "range",
+   "default": 75,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "sheen",
+   "label": "Thread sheen",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "hoop",
+   "label": "Embroidery hoop",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Restitch",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Short strokes with many flosses make a fine, painterly stitch.",
+   "set": {
+    "density": 4,
+    "flosses": 16
+   }
+  },
+  {
+   "text": "Let threads follow the shapes strongly.",
+   "set": {
+    "follow": 100
+   }
+  },
+  {
+   "text": "Hide the hoop to fill the whole frame.",
+   "set": {
+    "hoop": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

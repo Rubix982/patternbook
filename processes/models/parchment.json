@@ -1,0 +1,180 @@
+{
+ "id": "lumenary:parchment",
+ "name": "Parchment",
+ "physical": "partly",
+ "process": "pen-and-ink-drawing",
+ "process_name": "Pen and ink drawing",
+ "class": "drawing",
+ "basis": "how: picture shaded with parallel pen lines that thicken with tone, cross-hatched, iron-gall ink thinned and faded on vellum",
+ "note": "Named for a material; the manuscript furniture (red and gold frame, capital, script) is garnish. Illumination is not modelled.",
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "A leaf from an old manuscript: the picture drawn in iron-gall ink and hatched like an engraving, inside a red and gold border on stained vellum, with a drop capital and lines of script below.",
+  "theory_page": "processes/sources/theory-pages/06-craft.md",
+  "code": "engine/styles/parchment.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Manuscript books on animal skin",
+  "era": "About 200 BC to 1500",
+  "bestOn": "Figures and objects with clear light and shade"
+ },
+ "why": "Before paper reached Europe, books were written on prepared animal skin, which is tough, slightly translucent and never quite flat or even in colour. Ink bit into it and has since browned. A page was planned like a building: a ruled text block, a picture in a painted frame, and a large red initial to mark where reading begins.",
+ "how": [
+  "Build the skin: mottling, a darker rim, rusty foxing and fine pores.",
+  "Shade the picture with parallel pen lines that thicken as the tone darkens.",
+  "Cross them with a second set in the deepest shadows, and add outlines.",
+  "Thin the ink unevenly and fade it in patches.",
+  "Frame the picture in red and gold, rule the lines, paint the capital and write the script."
+ ],
+ "history": "Parchment takes its name from Pergamon in Asia Minor, where by tradition it was perfected in the second century BC. From late antiquity to the nineteenth century most European writing was done in iron gall ink, made from oak galls and iron salts, which goes on pale and darkens to brown-black. Monastic scribes developed the illuminated page, with red headings called rubrics and gold leaf, as in the Book of Kells of about 800.",
+ "uses": [
+  "Wedding and event invitations",
+  "Fantasy maps and game handouts",
+  "Certificates and awards",
+  "Covers for history and folklore"
+ ],
+ "terms": [
+  [
+   "Vellum",
+   "Fine parchment, usually calfskin."
+  ],
+  [
+   "Rubric",
+   "A heading or initial written in red."
+  ],
+  [
+   "Foxing",
+   "Rust-coloured spots that appear on old paper and skin."
+  ]
+ ],
+ "related": [
+  "banknote-engraving",
+  "calligraphy-portrait",
+  "persian-miniature"
+ ],
+ "paragraphs": [
+  "The skin is built first. A fractal noise gives broad mottling, the distance to the nearest edge (with its threshold wobbled by more noise) gives the darker rim that handling leaves, and the product of two thresholded noises gives foxing, the rusty freckles of old leaves. These add up to a stain amount that blends a pale vellum colour toward a brown one; the age slider scales all three. A fine hash and a value noise stand in for the pores of the hide.",
+  "The picture is drawn the way an engraver shades: with parallel lines whose thickness carries the tone. The lines run on a slight slant and a slow wave. At each pixel the distance to the nearest line centre is compared with a width that grows with darkness, so pale areas get hairlines and dark areas nearly solid ink. Past a darker threshold a second set crosses the first. Outlines come from the Sobel operator. The ink is then thinned by noise, since it sits unevenly on skin, and faded in patches. The border, the ruled lines, the red capital and the script are ordinary canvas drawing on top."
+ ],
+ "primitives": [
+  "material-ground",
+  "sheet-edge",
+  "tone-line-screen"
+ ],
+ "equations": [
+  {
+   "tex": "s=\\operatorname{clamp}\\big(0.9\\,a\\,(m-0.35)+\\text{rim}\\,(0.35+0.5a)+0.5\\,a\\,\\text{fox}\\big)",
+   "note": "Stain amount: m is the mottling noise, a the age slider. The skin colour is a blend from vellum to brown by s.",
+   "primitives": [
+    "material-ground",
+    "sheet-edge"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\alpha_1=1-S_{0.8w,\\,0.8w+0.22}(d_1),\\qquad w=\\operatorname{clamp}\\big(1.25\\,(D-0.22)\\big)\\cdot h",
+   "note": "Hatching: d₁ is the distance to the nearest line centre (0 to 1), D the darkness of the picture, h the hatching slider.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "d_1=2\\,\\Big\\lvert\\operatorname{frac}\\!\\Big(\\frac{y+0.35x+6\\sin(0.012y+0.004x)}{p}\\Big)-\\tfrac12\\Big\\rvert",
+   "note": "Lines every p = 5.2 px, slanted and gently waved.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "age",
+   "label": "Age of the skin",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "hatch",
+   "label": "Pen hatching",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "lines",
+   "label": "Outlines",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ink",
+   "label": "Ink",
+   "type": "select",
+   "default": "gall",
+   "options": [
+    "gall",
+    "black",
+    "sepia",
+    "blue"
+   ]
+  },
+  {
+   "key": "layout",
+   "label": "Page",
+   "type": "select",
+   "default": "leaf",
+   "options": [
+    "leaf",
+    "full"
+   ]
+  },
+  {
+   "key": "text",
+   "label": "Script",
+   "type": "text",
+   "default": "Here begins the book of light, in which every picture is written twice, once by the sun and once by the hand."
+  },
+  {
+   "key": "seed",
+   "label": "Another leaf",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A very old skin with heavy hatching looks like a museum leaf.",
+   "set": {
+    "age": 95,
+    "hatch": 85
+   }
+  },
+  {
+   "text": "Indigo ink on a young skin is clean and legible.",
+   "set": {
+    "ink": "blue",
+    "age": 20
+   }
+  },
+  {
+   "text": "Give the whole page to the picture.",
+   "set": {
+    "layout": "full",
+    "lines": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

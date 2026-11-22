@@ -1,0 +1,153 @@
+{
+ "id": "lumenary:gradient-mesh",
+ "name": "Gradient mesh",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "digital",
+ "basis": "software gradient mesh with an animated warp (how)",
+ "note": null,
+ "lumenary": {
+  "section": "D. Light, colour and glass",
+  "kind": "live",
+  "blurb": "The picture dissolved into a slow, soft field of its own colours.",
+  "theory_page": "processes/sources/theory-pages/04-light.md",
+  "code": "engine/styles/gradient-mesh.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Vector illustration software and modern interfaces",
+  "era": "1998 tool, 2020s trend",
+  "bestOn": "Colourful scenes without fine detail"
+ },
+ "why": "A gradient mesh forgets the shapes of a picture and keeps only where its colours are. The picture is reduced to a small grid of colour points and the program draws a smooth surface through them, so what remains is mood: a soft field in your picture’s own palette. Slow warping makes the colours drift like oil on water.",
+ "how": [
+  "Reduce the picture to a small grid of colour points.",
+  "Push each colour a little: more saturation, and more contrast around mid lightness.",
+  "Build a smooth surface by blending the four nearest mesh points with eased weights, so there are no creases.",
+  "Warp where the surface is read with two nested sine waves that change slowly with time.",
+  "Compute at no more than 180 pixels wide, enlarge it, and lay a film of noise on top to prevent banding."
+ ],
+ "history": "The Gradient Mesh tool arrived in Adobe Illustrator in 1998, giving illustrators smooth, hand-controlled colour transitions. In the 2020s soft mesh gradients became a common background in websites, wallpapers and music apps, replacing the flat colours of the previous decade.",
+ "uses": [
+  "Website and app backgrounds",
+  "Album and playlist covers",
+  "Phone wallpapers",
+  "Calm title backgrounds for videos"
+ ],
+ "terms": [
+  [
+   "Mesh",
+   "A grid of points that carry colours or positions."
+  ],
+  [
+   "Interpolation",
+   "Working out values between known points."
+  ],
+  [
+   "Banding",
+   "Visible steps in a smooth gradient caused by too few shades."
+  ]
+ ],
+ "related": [
+  "aurora",
+  "liquid-morph",
+  "duotone"
+ ],
+ "paragraphs": [
+  "The picture is reduced to a small grid of colour points (the mesh), and their colours are pushed a little: saturation up, contrast around mid-lightness up, both controlled by the vividness slider. The output is not the picture but a smooth surface that passes through those colours, built by interpolating between the four nearest mesh points with eased weights so there are no visible seams or creases.",
+  "The motion comes from warping where the surface is read. Every output pixel looks up the mesh at a position that has been pushed around by two nested sine waves that change slowly with time, so the colours drift like oil on water without the mesh itself ever changing. The surface is computed at no more than 180 pixels wide, which is plenty for something so smooth, and the canvas’s own smoothing scales it up to size. A tile of noise is laid over the top using the “overlay” blend to add a trace of film grain that stops the soft gradients from banding."
+ ],
+ "primitives": [
+  "bilinear-sample",
+  "coordinate-warp"
+ ],
+ "equations": [
+  {
+   "tex": "u=u_0+w\\,\\sin\\!\\big(3.4v_0+0.9\\tau+1.2\\sin(2.2u_0+0.6\\tau)\\big),\\quad v=v_0+w\\,\\cos\\!\\big(3.0u_0-0.8\\tau+1.2\\sin(2.6v_0-0.5\\tau)\\big)",
+   "note": "Warped lookup position; w = warp × 0.16.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C(u,v)=\\sum_{a,b\\in\\{0,1\\}}\\omega_a(e_x)\\,\\omega_b(e_y)\\,P_{i+a,\\,j+b},\\qquad e=3f^{2}-2f^{3}",
+   "note": "Bilinear blend of the four nearest mesh colours P with eased fractional weights.",
+   "primitives": [
+    "bilinear-sample"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "points",
+   "label": "Color points",
+   "type": "range",
+   "default": 5,
+   "min": 3,
+   "max": 9,
+   "step": 1
+  },
+  {
+   "key": "warp",
+   "label": "Warp",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "speed",
+   "label": "Drift speed",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "vivid",
+   "label": "Vividness",
+   "type": "range",
+   "default": 30,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grain",
+   "label": "Grain",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "More colour points follow the picture more closely.",
+   "set": {
+    "points": 9,
+    "vivid": 55
+   }
+  },
+  {
+   "text": "A slow drift with little warp feels like breathing.",
+   "set": {
+    "speed": 15,
+    "warp": 25
+   }
+  },
+  {
+   "text": "Strong grain gives a printed, risograph feel.",
+   "set": {
+    "grain": 90
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

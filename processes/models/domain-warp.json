@@ -1,0 +1,161 @@
+{
+ "id": "lumenary:domain-warp",
+ "name": "Domain Warp",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "recursive noise displacement (how)",
+ "note": "History likens the result to marbling (suminagashi, ebru) but no marbling is modelled.",
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "live",
+  "blurb": "Noise bends the map that tells each pixel where to look in your picture, then noise bends that map again. The picture flows like marbled ink.",
+  "theory_page": "processes/sources/theory-pages/09-generative.md",
+  "code": "engine/styles/domain-warp.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Procedural graphics",
+  "era": "2002 onward",
+  "bestOn": "Photographs with colour and texture"
+ },
+ "why": "Instead of asking the picture for the colour at a pixel’s own place, ask for the colour at a place that noise has moved it to. Do it again to the noise itself and the result folds back on itself like marbled paper or ink in water. A small amount of bending only wobbles the picture, and a larger amount turns it into smoke.",
+ "how": [
+  "For each pixel at p, compute a displacement d(p) from fractal noise and read the picture at p + d(p).",
+  "With one layer, d is the noise q = (fbm(p), fbm(p + c₁)).",
+  "With two layers, evaluate the noise again at a point q has moved: r = (fbm(p + 4q + c₂), fbm(p + 4q + c₃)). With three, repeat once more.",
+  "Compute the field on a coarse lattice of 5 px cells at half size and interpolate it bilinearly to stay fast.",
+  "Let time slowly shift the noise to animate it, and shade the folds for depth."
+ ],
+ "history": "Inigo Quilez popularised domain warping in shader programming in the early 2000s, building on Ken Perlin’s noise function of 1983, for which Perlin received an Academy Award in 1997. The visual result is close to the old craft of marbling paper, such as Japanese suminagashi and Turkish ebru.",
+ "uses": [
+  "Procedural textures for skies, marble and terrain",
+  "Shader art and music visuals",
+  "Backgrounds and animated wallpapers",
+  "Image distortion effects in video"
+ ],
+ "terms": [
+  [
+   "Noise",
+   "Smooth random values used to create natural looking variation."
+  ],
+  [
+   "fbm",
+   "Fractal Brownian motion, a sum of noise at several scales."
+  ],
+  [
+   "Displacement",
+   "Moving a point from where it is to somewhere else."
+  ]
+ ],
+ "related": [
+  "liquid-morph",
+  "ink-in-water",
+  "heat-haze"
+ ],
+ "paragraphs": [
+  "Domain warping is a technique popularised by Inigo Quilez: rather than computing a value f(p) of noise, compute it at a point that noise has moved, f(p + h(p)). Here the idea is turned toward a picture. Each pixel asks the picture for its colour not at its own place but at a displaced one, x + d(x), and the displacement d is made from fractal noise. With one layer d is the noise q = (fbm(p), fbm(p + c₁)). With two layers the noise is evaluated again at a point that q has moved, r = (fbm(p + 4q + c₂), fbm(p + 4q + c₃)). With three layers the process is repeated once more. Each warp feeds into the next, which gives the folded, marbled flow. The fractal noise fbm is a normalised sum of three octaves with amplitudes ½, ¼, ⅛.",
+  "To keep the animation fast the field is computed on a coarse lattice of 5 px cells, at half the size of the picture, and interpolated bilinearly. Time slowly shifts the offsets c in different directions, so the folds drift, and the pointer smoothly moves the noise’s origin, so you can steer the pattern. A lookup that would leave the picture is mirrored back in, so it never runs out. The shading adds a little light and dark following the noise value itself, k = 1 + s (f − ½) × 0.9, which makes the folds look like dyed marbling."
+ ],
+ "primitives": [
+  "coordinate-warp",
+  "smooth-noise"
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf q=\\big(\\operatorname{fbm}(\\mathbf p),\\ \\operatorname{fbm}(\\mathbf p+\\mathbf c_1)\\big),\\qquad \\mathbf r=\\big(\\operatorname{fbm}(\\mathbf p+4\\mathbf q+\\mathbf c_2),\\ \\operatorname{fbm}(\\mathbf p+4\\mathbf q+\\mathbf c_3)\\big)",
+   "note": "Two layers of warping; a third repeats the step with r in place of q.",
+   "primitives": [
+    "smooth-noise",
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "C(\\mathbf x)=k\\;I\\Big(\\mathbf x+2A\\,\\big(\\mathbf w-\\tfrac12\\big)\\,W_h\\Big),\\qquad k=1+0.9\\,s\\,\\big(f-\\tfrac12\\big)",
+   "note": "The warped lookup: w is the last layer’s noise, A = 0.34 × the amount slider, W_h the width of the working picture, f the noise value that shades the folds and s the shading slider.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "amount",
+   "label": "How far it bends",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "scale",
+   "label": "Size of the swirls",
+   "type": "range",
+   "default": 45,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "layers",
+   "label": "Layers of warping",
+   "type": "range",
+   "default": 2,
+   "min": 1,
+   "max": 3,
+   "step": 1
+  },
+  {
+   "key": "speed",
+   "label": "Speed",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shade",
+   "label": "Shading in the folds",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New noise",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Three layers give deep, marbled folds.",
+   "set": {
+    "layers": 3,
+    "amount": 70
+   }
+  },
+  {
+   "text": "A small amount gently ripples the picture like water.",
+   "set": {
+    "amount": 15,
+    "layers": 1
+   }
+  },
+  {
+   "text": "Slow speed and big swirls feel like drifting smoke.",
+   "set": {
+    "speed": 15,
+    "scale": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

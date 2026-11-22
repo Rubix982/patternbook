@@ -1,0 +1,181 @@
+{
+ "id": "lumenary:hologram-hud",
+ "name": "Hologram HUD",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "science-fiction film convention for holograms plus HUD furniture (how)",
+ "note": "Not a model of holography.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "live",
+  "blurb": "A projected hologram: the picture in translucent scan lines that flicker, tear and drift, framed by brackets, dials and readouts. The reticle follows your cursor.",
+  "theory_page": "processes/sources/theory-pages/02-digital.md",
+  "code": "engine/styles/hologram-hud.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Science fiction film and aircraft cockpits",
+  "era": "1950s displays, 1977 film holograms",
+  "bestOn": "A single subject with strong outlines"
+ },
+ "why": "A film hologram is drawn in light, so it can only add brightness and can never be darker than the room. It is built of scan lines, it flickers because the signal is weak, and it is surrounded by instruments that tell you someone is measuring it. This treatment rebuilds each of those signs: light added to darkness, lines, dropouts, tearing and a ring of dials.",
+ "how": [
+  "Turn the picture into a layer of one colour, most solid where it is bright and along its outlines.",
+  "Add that layer to a dark ground, flickering, with a dropout now and then.",
+  "Redraw a few bands shifted sideways to tear the image.",
+  "Slide a pattern of dark scan lines upward and sweep a bright band down.",
+  "Draw brackets, a reticle that follows the cursor, turning rings and moving bars."
+ ],
+ "history": "Dennis Gabor invented holography in 1947 and received the Nobel Prize for it in 1971, but the flickering blue figure most people picture comes from cinema, above all the message scene in Star Wars (1977). The head-up display is older and real: military aircraft began projecting flight data onto glass in front of the pilot in the 1950s. Film designers joined the two into the screen language of science fiction.",
+ "uses": [
+  "Science fiction titles and overlays",
+  "Gaming channel intros",
+  "Tech event visuals",
+  "Interface concept art"
+ ],
+ "terms": [
+  [
+   "HUD",
+   "Head-up display: information drawn over the view so you need not look down."
+  ],
+  [
+   "Reticle",
+   "The aiming mark at the centre of a sight."
+  ],
+  [
+   "Additive blending",
+   "Combining colours by adding their light, so the result only gets brighter."
+  ]
+ ],
+ "related": [
+  "holographic",
+  "scanlines-crt",
+  "night-vision"
+ ],
+ "paragraphs": [
+  "The picture is turned into a layer of coloured light. Its opacity at a pixel grows with the brightness there and with the edge strength (blur, then Sobel), so outlines are the most solid part, and the colour is pushed toward white along the same outlines. The layer is added to a near-black ground, since light adds. The whole layer flickers as the product of two sine waves of unrelated frequency, and fourteen times a second a hash decides whether it drops to 45% for an instant.",
+  "Tearing is done nine times a second: up to three horizontal bands are drawn a second time, shifted sideways. Scan lines are one small strip of pattern tiled down the frame and slid upward at a steady speed, and a brighter band sweeps down every few seconds. The instruments are plain strokes: corner brackets, a reticle that eases toward the cursor (and wanders on a figure of eight when left alone), rings of ticks turning at different speeds and a row of bars whose heights follow value noise in time."
+ ],
+ "primitives": [
+  "ease-toward-target",
+  "flicker",
+  "image-gradient"
+ ],
+ "equations": [
+  {
+   "tex": "\\alpha=\\operatorname{clamp}\\big(0.1+0.75\\,L+k\\,\\lvert\\nabla L\\rvert\\big),\\qquad k=2.6\\cdot\\text{outline}",
+   "note": "Opacity of the hologram layer at a pixel.",
+   "primitives": [
+    "image-gradient"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "a(t)=\\big(1-0.14f+0.14f\\,\\sin 31t\\,\\sin 7.3t\\big)\\cdot d(t)",
+   "note": "Brightness of the whole layer: f is the flicker slider, d is 0.45 during a dropout and 1 otherwise.",
+   "primitives": [
+    "flicker"
+   ],
+   "bespoke": null
+  },
+  {
+   "tex": "\\mathbf r\\leftarrow\\mathbf r+(\\mathbf r^{*}-\\mathbf r)\\,\\min(1,\\,6\\,\\Delta t)",
+   "note": "The reticle r eases toward its target r*, the cursor or the idle path.",
+   "primitives": [
+    "ease-toward-target"
+   ],
+   "bespoke": null
+  }
+ ],
+ "dials": [
+  {
+   "key": "colour",
+   "label": "Light",
+   "type": "select",
+   "default": "cyan",
+   "options": [
+    "cyan",
+    "amber",
+    "green",
+    "magenta"
+   ]
+  },
+  {
+   "key": "lines",
+   "label": "Scan lines",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "edges",
+   "label": "Outline strength",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "flicker",
+   "label": "Flicker",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glitch",
+   "label": "Tearing",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "hud",
+   "label": "Instruments",
+   "type": "range",
+   "default": 75,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Recalibrate",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Amber light and slow flicker look like an old radar.",
+   "set": {
+    "colour": "amber",
+    "flicker": 15
+   }
+  },
+  {
+   "text": "Heavy tearing makes a signal about to be lost.",
+   "set": {
+    "glitch": 100,
+    "flicker": 80
+   }
+  },
+  {
+   "text": "Hide the instruments to keep only the projected figure.",
+   "set": {
+    "hud": 0,
+    "lines": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}
