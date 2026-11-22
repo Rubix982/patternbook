@@ -14,6 +14,47 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-043 · Can image features tell the generator's jalis from real ones, and is their cue the writer's?
+
+**Status:** open
+**Opened:** 2026-11-23
+
+**1. Where we are.**
+Over C-035 to C-037 the writer picked the generated jali in 19 of 62 rows, reliably taking real ones for generated; one
+judge whose cue runs backwards can't say whether the designs look real (T-046). Sixth open-model trial (T-052; T-051,
+StarVector, is parked).
+
+**2. What we are doing.**
+Embed masks of real and generated jalis with two open image models, DINOv2 (facebook/dinov2-base, Apache-2.0) and SigLIP
+(google/siglip-base-patch16-224, Apache-2.0), and fit a logistic regression on each to tell generated from real. The
+training crops: eight squares of five repeats at random places (seed 43) in each of C-031's 15 geometric jalis and in
+each of C-035's 36 candidate designs, smoothed and thresholded as C-037 did, 384 px. Accuracy by cross-validation that
+keeps all crops of one screen or design in the same fold (five folds). Then score the very images the writer saw in
+C-035, C-036 and C-037's pattern rows (taken from the pick pages), with a model trained without that row's two screens,
+and count the rows where it rates the truly generated image the more generated of the two, and the rows where it rates
+the writer's pick so.
+
+**3. Why.**
+We don't know whether a measure that isn't one person's eye can tell the generator's jalis from real ones, or what it
+would say about the writer's reversed picks.
+
+**4. What is affected.**
+- `tools/jali_probe.py`, `runs/c043/` (accuracies, per-row scores; the crops stay local, they hold V&A photos).
+
+**5. Conclusion.**
+- **If** either model's accuracy is 0.75 or more → image features can tell them apart; the rows show whether the
+  writer's picks follow that cue or run against it.
+- **If** both are 0.6 or less → at the level of a mask, these features can't tell them apart either.
+- **Between** → partly; the card says by how much.
+
+**6. If not done.**
+Realism stays judged by one person whose cue runs backwards.
+
+**Limits (known before running):** 15 real screens, so the model may learn which screens rather than what makes one
+real (the grouped folds are against that); masks only, no stone or light; a linear model on general-purpose features.
+
+---
+
 ## C-042 · Can an open image-to-3D model rebuild a jali, its openings cut through and its depth, from one photo?
 
 **Status:** closed

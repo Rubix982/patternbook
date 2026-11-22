@@ -514,12 +514,15 @@ and Hunyuan3D not tried (an NVIDIA GPU, or uploading photos to a hosted demo, wh
 
 ### T-051 · Can StarVector read a jali's mask back into lines a grammar could fit?
 
-**Status:** open
+**Status:** parked (2026-11-23)
 **Parent:** T-046
 **Opened:** 2026-11-22
 **Question:** Fifth of six. StarVector (1B, 8B; Apache-2.0), image to SVG: on generated masks whose lines are known and on
 real ones, how close are the lines it returns to the pattern's, and could a tiling and contact angle be fitted to them?
-**Answer:** —
+**Answer:** — Parked: its model code (read: harmless) imports a `starvector` package whose pyproject pins torch 2.5.1,
+transformers 4.49 and flash_attn 2.7.3 (NVIDIA only), none of which install on this machine's Python 3.13 stack. Trying
+it needs a separate environment on Python 3.12 with flash attention patched out, or an NVIDIA machine; the writer's
+call.
 
 ### T-052 · Can image features tell generated jalis from real ones, and on what?
 
