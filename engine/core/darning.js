@@ -71,7 +71,7 @@ export function darned(opts) {
   const ground = o.ground || STRUCTURES.plain;
   const unit = o.side === 'back' ? { ends: ground.ends, picks: ground.picks, up: (i, j) => !ground.up(i, j) } : ground;
   const seed = o.seed || 1;
-  const base = cloth({ ...o, unit, seed });
+  const base = cloth({ ...o, unit, seed, ground: o.groundColour ?? '#3a3330' });
   const { width, height, rgb, top, xb, yb, disp } = base;
   const sett = o.sett || 8, pickSett = o.pickSett || sett;
   const F = (Array.isArray(o.floss) ? o.floss : [o.floss || '#e8b423']).map(hexRgb);

@@ -1,0 +1,212 @@
+{
+ "size": 320,
+ "defaults": {
+  "sett": 3,
+  "slub": 0.15,
+  "beat": 0.2,
+  "wobble": 0.25,
+  "gap": 0.12,
+  "round": 0.55,
+  "dip": 0.35,
+  "fibre": 0.25,
+  "rowGap": 7,
+  "stitchLen": 5,
+  "space": 3,
+  "thread": 1.6,
+  "ripple": 0.6,
+  "wrinkle": 0.3,
+  "lightAngle": 300,
+  "margin": 4,
+  "background": "rows",
+  "groundThread": "#9fbf8a",
+  "rows": "contour",
+  "width": 320,
+  "height": 320,
+  "warp": [
+   "#efe8d8"
+  ],
+  "weft": [
+   "#ebe3d1"
+  ],
+  "groundColour": "#d9cfbb",
+  "seed": 7
+ },
+ "results": [
+  {
+   "label": "default",
+   "contour": {
+    "stitches": 487,
+    "medianAngle": 5.8,
+    "onRow": 0.988,
+    "stitchLen": 4.5
+   },
+   "control": {
+    "stitches": 491,
+    "medianAngle": 45,
+    "onRow": 0.515,
+    "stitchLen": 5
+   },
+   "ripple": {
+    "period": 7,
+    "autocorr": 0.985,
+    "amplitude": 0.0623
+   },
+   "noRipple": {
+    "period": 6,
+    "autocorr": 0.235,
+    "amplitude": 0.0058
+   },
+   "unsmoothed": {
+    "ripple": {
+     "period": 6,
+     "autocorr": 0.722,
+     "amplitude": 0.1113
+    },
+    "noRipple": {
+     "period": 6,
+     "autocorr": 0.858,
+     "amplitude": 0.0702
+    }
+   },
+   "checks": {
+    "direction": true,
+    "rows": true,
+    "stitch": true,
+    "ripple": false
+   },
+   "pass": false
+  },
+  {
+   "label": "off",
+   "contour": {
+    "stitches": 501,
+    "medianAngle": 5.6,
+    "onRow": 0.992,
+    "stitchLen": 4.5
+   },
+   "control": {
+    "stitches": 492,
+    "medianAngle": 45,
+    "onRow": 0.535,
+    "stitchLen": 5
+   },
+   "ripple": {
+    "period": 7,
+    "autocorr": 0.996,
+    "amplitude": 0.0632
+   },
+   "noRipple": {
+    "period": 6,
+    "autocorr": 0.284,
+    "amplitude": 0.001
+   },
+   "unsmoothed": {
+    "ripple": {
+     "period": 6,
+     "autocorr": 0.807,
+     "amplitude": 0.1032
+    },
+    "noRipple": {
+     "period": 6,
+     "autocorr": 0.999,
+     "amplitude": 0.0472
+    }
+   },
+   "checks": {
+    "direction": true,
+    "rows": true,
+    "stitch": true,
+    "ripple": false
+   },
+   "pass": false
+  },
+  {
+   "label": "x2",
+   "contour": {
+    "stitches": 487,
+    "medianAngle": 5.8,
+    "onRow": 0.984,
+    "stitchLen": 5
+   },
+   "control": {
+    "stitches": 493,
+    "medianAngle": 45,
+    "onRow": 0.493,
+    "stitchLen": 5
+   },
+   "ripple": {
+    "period": 7,
+    "autocorr": 0.969,
+    "amplitude": 0.0633
+   },
+   "noRipple": {
+    "period": 8,
+    "autocorr": 0.236,
+    "amplitude": 0.0095
+   },
+   "unsmoothed": {
+    "ripple": {
+     "period": 6,
+     "autocorr": 0.594,
+     "amplitude": 0.1128
+    },
+    "noRipple": {
+     "period": 6,
+     "autocorr": 0.552,
+     "amplitude": 0.0733
+    }
+   },
+   "checks": {
+    "direction": true,
+    "rows": true,
+    "stitch": true,
+    "ripple": false
+   },
+   "pass": false
+  },
+  {
+   "label": "x3",
+   "contour": {
+    "stitches": 481,
+    "medianAngle": 5.9,
+    "onRow": 0.981,
+    "stitchLen": 4
+   },
+   "control": {
+    "stitches": 496,
+    "medianAngle": 45,
+    "onRow": 0.496,
+    "stitchLen": 4
+   },
+   "ripple": {
+    "period": 7,
+    "autocorr": 0.948,
+    "amplitude": 0.0646
+   },
+   "noRipple": {
+    "period": 5,
+    "autocorr": 0.262,
+    "amplitude": 0.0141
+   },
+   "unsmoothed": {
+    "ripple": {
+     "period": 7,
+     "autocorr": 0.525,
+     "amplitude": 0.1127
+    },
+    "noRipple": {
+     "period": 6,
+     "autocorr": 0.212,
+     "amplitude": 0.0726
+    }
+   },
+   "checks": {
+    "direction": true,
+    "rows": true,
+    "stitch": true,
+    "ripple": false
+   },
+   "pass": false
+  }
+ ]
+}

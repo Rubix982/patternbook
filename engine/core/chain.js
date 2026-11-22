@@ -56,8 +56,10 @@ function pointAt(path, s, at) {
 export function holes(path, { link, jitter = 0.1, wander = 0.2, seed = 1 }) {
   const s = arcLength(path), L = s[s.length - 1], out = [];
   // a closed path (a ring): even out the stitches so the last one closes it, as an embroiderer does
+  if (!(L > 1)) return []; // a path too short to stitch (a level line can close on itself in a point)
   const closed = Math.hypot(path[0][0] - path[path.length - 1][0], path[0][1] - path[path.length - 1][1]) < 0.5;
   if (closed) link = L / Math.max(3, Math.round(L / link));
+  link = Math.max(link, 0.5);
   let at = 0, k = 0;
   while (at <= L + 1e-6) {
     const [x, y] = pointAt(path, s, Math.min(at, L));
@@ -95,7 +97,8 @@ function segDist(px, py, ax, ay, bx, by) {
 
 // Draw stitches along paths onto an image ({ width, height, rgb, top }).
 //   paths        a list of paths (each an array of [x, y])
-//   kind         'chain', or 'running' (dashes along the same path: the control in C-022)
+//   kind         'chain', or 'running' (dashes along the same path: the control in C-022; `dash` sets the share of
+//                each link the stitch covers, 0.6 by default)
 //   side         'face' or 'back' (a chain's back: straight stitches end to end)
 //   link, loop, thread    link length, loop width and thread thickness, in pixels
 //   jitter, wander, swell  how much link length, the holes' position and loop width vary
@@ -126,8 +129,9 @@ export function stitch(img, paths, opts = {}) {
     const P = holes(path, { link: o.link, jitter: o.jitter, wander: o.wander, seed: seed + pi * 13 });
     for (let k = 0; k + 1 < P.length; k++) {
       const [ax, ay] = P[k], [bx, by] = P[k + 1];
-      if (o.kind === 'running') { // a dash over 60 % of each link, a gap over the rest
-        tube(ax, ay, ax + (bx - ax) * 0.6, ay + (by - ay) * 0.6, half);
+      if (o.kind === 'running') { // a dash over `dash` of each link (0.6 unless set), a gap over the rest
+        const dash = o.dash ?? 0.6;
+        tube(ax, ay, ax + (bx - ax) * dash, ay + (by - ay) * dash, half);
         continue;
       }
       if (o.side === 'back') { tube(ax, ay, bx, by, half * 1.05); continue; }
@@ -155,6 +159,6 @@ export function chained(opts) {
   const o = { ...CHAIN_DEFAULTS, ...opts };
   const ground = o.ground || STRUCTURES.plain;
   const unit = o.side === 'back' ? { ends: ground.ends, picks: ground.picks, up: (i, j) => !ground.up(i, j) } : ground;
-  const img = cloth({ ...o, unit, seed: o.seed || 1 });
+  const img = cloth({ ...o, unit, seed: o.seed || 1, ground: o.groundColour ?? '#3a3330' });
   return stitch(img, o.paths || [], o);
 }

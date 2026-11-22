@@ -32,7 +32,11 @@
     },
     "got": {
      "warp": 1,
-     "weft": 1
+     "weft": 1,
+     "samples": {
+      "warp": 5320,
+      "weft": 5360
+     }
     }
    },
    "floatsOk": true,
@@ -612,7 +616,11 @@
     },
     "got": {
      "warp": 1,
-     "weft": 1
+     "weft": 1,
+     "samples": {
+      "warp": 5318,
+      "weft": 5679
+     }
     }
    },
    "floatsOk": true,
@@ -1192,7 +1200,11 @@
     },
     "got": {
      "warp": 2,
-     "weft": 2
+     "weft": 2,
+     "samples": {
+      "warp": 2590,
+      "weft": 2610
+     }
     }
    },
    "floatsOk": true,
@@ -1492,7 +1504,11 @@
     },
     "got": {
      "warp": 2,
-     "weft": 2
+     "weft": 2,
+     "samples": {
+      "warp": 2596,
+      "weft": 2783
+     }
     }
    },
    "floatsOk": true,
@@ -1792,7 +1808,11 @@
     },
     "got": {
      "warp": 3,
-     "weft": 1
+     "weft": 1,
+     "samples": {
+      "warp": 2520,
+      "weft": 2680
+     }
     }
    },
    "floatsOk": true,
@@ -1952,7 +1972,11 @@
     },
     "got": {
      "warp": 3,
-     "weft": 1
+     "weft": 1,
+     "samples": {
+      "warp": 2533,
+      "weft": 2839
+     }
     }
    },
    "floatsOk": true,
@@ -2112,7 +2136,11 @@
     },
     "got": {
      "warp": 1,
-     "weft": 3
+     "weft": 3,
+     "samples": {
+      "warp": 2660,
+      "weft": 2540
+     }
     }
    },
    "floatsOk": true,
@@ -2272,7 +2300,11 @@
     },
     "got": {
      "warp": 1,
-     "weft": 3
+     "weft": 3,
+     "samples": {
+      "warp": 2656,
+      "weft": 2720
+     }
     }
    },
    "floatsOk": true,
@@ -2432,7 +2464,11 @@
     },
     "got": {
      "warp": 2,
-     "weft": 2
+     "weft": 2,
+     "samples": {
+      "warp": 2520,
+      "weft": 2560
+     }
     }
    },
    "floatsOk": true,
@@ -2620,7 +2656,11 @@
     },
     "got": {
      "warp": 2,
-     "weft": 2
+     "weft": 2,
+     "samples": {
+      "warp": 2528,
+      "weft": 2740
+     }
     }
    },
    "floatsOk": true,
@@ -2808,7 +2848,11 @@
     },
     "got": {
      "warp": 4,
-     "weft": 1
+     "weft": 1,
+     "samples": {
+      "warp": 1960,
+      "weft": 2144
+     }
     }
    },
    "floatsOk": true,
@@ -2940,7 +2984,11 @@
     },
     "got": {
      "warp": 4,
-     "weft": 1
+     "weft": 1,
+     "samples": {
+      "warp": 1979,
+      "weft": 2273
+     }
     }
    },
    "floatsOk": true,
@@ -3072,7 +3120,11 @@
     },
     "got": {
      "warp": 1,
-     "weft": 4
+     "weft": 4,
+     "samples": {
+      "warp": 2128,
+      "weft": 1976
+     }
     }
    },
    "floatsOk": true,
@@ -3204,7 +3256,11 @@
     },
     "got": {
      "warp": 1,
-     "weft": 4
+     "weft": 4,
+     "samples": {
+      "warp": 2124,
+      "weft": 2122
+     }
     }
    },
    "floatsOk": true,

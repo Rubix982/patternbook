@@ -14,6 +14,96 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-023 · Can running stitch follow a motif's contour in rows, as in kantha, so that the rows' direction, their spacing, the stitch lengths and the quilting's ripple all read back?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-018 found running stitch only along straight lines, seams and edge insets; rows following a curved motif would need
+`streamline-trace` and `running-stitch` together, and no treatment combines them. `chain-stitch` (C-022) lays running
+stitch along any given path. Sources describe kantha as two to seven layers of old cloth held by running stitch, which
+both outlines and fills motifs, with quilting stitches worked closely over the surface that ripple the cloth.
+
+**2. What we are doing.**
+Write `engine/core/field.js` (a distance field from a motif's shape, and its level lines traced into paths) and
+`engine/core/kantha.js`: rows of running stitch inside each motif along its contour, one row every so many pixels
+inward from its edge, rows across the background around the motifs, and the cloth puffed between rows into a ripple
+lit from one side; then read the rows' direction, their spacing, the stitch and gap lengths and the ripple back from
+the image, against straight rows inside the same motifs as the control.
+
+**3. Why.**
+We don't know whether rows drawn from a distance field follow a motif's contour closely enough to read as kantha's
+echoing rows, or whether a ripple tied to the rows can be told, by its period, from the texture of the weave beneath.
+
+**4. What is affected.**
+- `engine/core/field.js`, `engine/core/kantha.js`, their check, sheet and demo; `engine/core/chain.js` gains a dash
+  length for running stitch; the engine bundle.
+- `processes/primitives.md`: `contour-rows` and `quilt-ripple` entries; the gap list.
+- The atlas's kantha and nakshi kantha, and running-stitch quilting elsewhere (ralli's quilting, Sujni).
+
+**5. Conclusion.**
+On three motifs (a circle, a paisley, a lotus of petals) and their background, from the image alone at the defaults:
+- direction: inside the motifs, the stitches' median angle to the contour is at most 15°; straight rows inside the same
+  motifs (the control) are at least 30° off;
+- spacing: at least 80 % of stitches inside the motifs lie on a row (within a quarter of the row gap of one);
+- stitch: the most common stitch length is within 20 % of the planned one;
+- ripple: across the background rows, the cloth's brightness repeats with a period within 15 % of the row gap and an
+  autocorrelation of at least 0.3; with the ripple off, at most 0.1.
+- **If** all hold → we claim *kantha's contour-following rows and their ripple are covered*.
+- **If** the direction fails → the rows don't follow the contour, and the card says where (on tight curves, at points).
+- **If** the ripple doesn't show by its period → it isn't tied to the rows strongly enough to read, or the weave's
+  texture masks it.
+
+**6. If not done.**
+Kantha, one of the subcontinent's most widely made textiles and a registered geographical indication in Bangladesh as
+nakshi kantha, stays without its defining rows and texture.
+
+**Limits (known before running):** the layers are not modelled one by one: the ripple stands for what their quilting
+does to the surface. Motifs are given as shapes, as a design drawn on the cloth is. Likeness to a real kantha is a later
+blind pick.
+
+**Result (2026-11-22):** three criteria hold; the fourth holds in substance and fails as written, because its control
+was badly designed. **On a circle, a paisley and a lotus, from the image alone at the defaults: stitches inside the
+motifs sit 5.8° from the contour (median), against 45° for straight rows in the same motifs; 98.8 % of them lie on a
+row; the stitch reads 4.5 px against 5 planned; across the background the cloth's brightness repeats with exactly the
+row gap (7 px, autocorrelation 0.985).** With the ripple off, the autocorrelation is 0.235, not the 0.1 or less the
+card asked for.
+
+**Why the ripple's control fails, recorded in three steps.** (1) First, the weave's own picks (3 px apart) read as a
+repeat at 6 px, ripple or not (0.86 with it off): averaging the profile over exactly one pick, which a reader knows from
+the cloth's sett, cancels the weave's repeat and its multiples. (2) Next, leaving out the pixel rows under each
+stitched row left a gap every 7 px that repeated on its own: the quilting thread is now left out by colour (stitched in
+a pale green for the check only), so every pixel row of ground counts. (3) What remained was a near-flat profile whose
+residue the autocorrelation, which divides by the profile's own variation, still reads as a repeat. By size the
+difference is plain: the repeat's size is 0.062 in brightness with the ripple and 0.006 without it (0.001 with the
+imperfections off); at three times the imperfections, 0.065 against 0.014. The criterion should have been the size
+against the control (at least 5 times); it is recorded in `engine/README.md` for the cards that follow, and the
+result here is not changed to meet it.
+
+**Bugs found on the way, and what was rechecked.** Kantha's row spacing was called `gap`, which the weave reads as the
+share of each thread's space left open: it drew no thread. Supplementary weft and darning passed their weave structure
+as `ground`, which the weave reads as the colour in its gaps: their gap pixels were invalid (NaN) in their sheets and
+demos. Every layer now passes the gaps' colour as `groundColour`, and the weave refuses anything but a colour. After
+the fix, the checks of C-019 to C-022 were rerun: their results are unchanged (darning's bagh still fails at 18 %);
+their sheets were redrawn. A zero-length path could stop the stitch placement from ending (`holes()` now returns no
+holes for a path shorter than a pixel).
+
+**Claim:** kantha's contour-following rows are covered, and the quilting's ripple is tied to the rows and readable by
+its period and its size. The card's own control for the ripple was the wrong measure.
+
+**Changes made:**
+- `engine/core/field.js`, `engine/core/kantha.js`; `engine/core/chain.js` (a `dash` share for running stitch; no
+  holes on a too-short path; the gaps' colour); `weave.js`, `supplementary.js`, `darning.js` (the gaps' colour).
+- `engine/check/kantha.mjs`, `kantha-sheet.mjs`; `engine/demo/kantha.html`; the engine bundle (all five demo pages'
+  scripts run against it and paint).
+- `processes/primitives.md`: `contour-rows` and `quilt-ripple`; `engine/README.md`: what the checks have taught.
+- `runs/c023/`; `runs/c020/` and `runs/c021/` sheets redrawn, their checks' results unchanged.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-022 · Can chain stitch be laid along any path, straight or curved, so that each link's eye, the links' spacing and the chain's continuity read back, and the back shows straight stitches?
 
 **Status:** closed

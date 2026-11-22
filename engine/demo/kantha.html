@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kantha rows</title>
+<style>
+  :root { --bg: #f4f1ea; --ink: #1d1b17; --muted: #6b655b; --line: #d8d1c4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { color: var(--muted); margin: 0 0 16px; max-width: 72ch; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  fieldset { border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 12px; }
+  legend { color: var(--muted); font-size: 13px; }
+  label { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+  label.wide { grid-template-columns: 90px 1fr; }
+  input[type=text], select { width: 100%; font: inherit; font-size: 13px; padding: 3px 5px; }
+  output { font-variant-numeric: tabular-nums; color: var(--muted); }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Kantha rows</h1>
+  <p class="lede">The primitives <code>contour-rows</code> and <code>quilt-ripple</code> (card C-023): running stitch in
+    rows that echo each motif's edge inward, rows of quilting across the ground around them, and the ripple the
+    stitching pulls into layered cloth, lit from one side. Switch the rows to straight to see them ignore the contour;
+    turn the ripple down to see the cloth lie flat.</p>
+  <div class="wrap">
+    <canvas id="c" width="560" height="560"></canvas>
+    <form id="f">
+      <fieldset><legend>Design</legend>
+        <label class="wide">motifs <select name="design"><option value="three">circle, paisley, lotus</option><option value="panel">lotus panel</option></select></label>
+        <label class="wide">rows <select name="rows"><option>contour</option><option>straight</option></select></label>
+        <label>row gap <input type="range" name="rowGap" min="4" max="14" step="0.5" value="7"><output></output></label>
+        <label>stitch <input type="range" name="stitchLen" min="2" max="12" step="0.5" value="5"><output></output></label>
+        <label>space <input type="range" name="space" min="1" max="8" step="0.5" value="3"><output></output></label>
+        <label>thread <input type="range" name="thread" min="0.8" max="3" step="0.1" value="1.6"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Cloth and colour</legend>
+        <label class="wide">motif threads <input type="text" name="colours" value="#1f3a7a #b8312f #2e6b3a"></label>
+        <label class="wide">quilting <input type="text" name="groundThread" value="#e6dcc6"></label>
+        <label class="wide">cloth <input type="text" name="cloth" value="#efe8d8"></label>
+        <label>ripple <input type="range" name="ripple" min="0" max="1.5" step="0.01" value="0.6"><output></output></label>
+        <label>wrinkle <input type="range" name="wrinkle" min="0" max="1" step="0.01" value="0.3"><output></output></label>
+        <label>light <input type="range" name="lightAngle" min="0" max="360" step="5" value="315"><output></output></label>
+        <label>seed <input type="range" name="seed" min="1" max="99" step="1" value="5"><output></output></label>
+      </fieldset>
+    </form>
+  </div>
+</main>
+<script src="../engine.js"></script>
+<script>
+  const { paint, DEFAULTS } = PatternbookEngine.weave;
+  const { kantha, SHAPES } = PatternbookEngine.kantha;
+  const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
+  const colours = (s, d) => { const v = s.split(/[\s,]+/).filter((x) => /^#?[0-9a-f]{6}$/i.test(x)).map((x) => (x[0] === '#' ? x : '#' + x)); return v.length ? v : d; };
+  function draw() {
+    const v = Object.fromEntries(new FormData(f));
+    for (const o of f.querySelectorAll('output')) o.value = o.previousElementSibling.value;
+    const W = c.width, cols = colours(v.colours, ['#1f3a7a']);
+    const shapes = v.design === 'panel'
+      ? [SHAPES.lotus(W / 2, W / 2, W * 0.38, 10), SHAPES.circle(W / 2, W / 2, W * 0.09)]
+      : [SHAPES.circle(W * 0.25, W * 0.25, W * 0.17), SHAPES.paisley(W * 0.7, W * 0.3, W * 0.14, 0.5), SHAPES.lotus(W * 0.5, W * 0.73, W * 0.23)];
+    const cl = colours(v.cloth, ['#efe8d8'])[0];
+    const img = kantha({ ...DEFAULTS, width: W, height: W, sett: 4, slub: 0.15, warp: [cl], weft: [cl], groundColour: '#d9cfbb',
+      motifs: shapes.map((inside, k) => ({ inside, colour: cols[k % cols.length] })), rows: v.rows, rowGap: +v.rowGap,
+      stitchLen: +v.stitchLen, space: +v.space, thread: +v.thread, groundThread: colours(v.groundThread, ['#e6dcc6'])[0],
+      ripple: +v.ripple, wrinkle: +v.wrinkle, lightAngle: +v.lightAngle, seed: +v.seed });
+    paint(ctx, img);
+  }
+  f.addEventListener('input', draw);
+  draw();
+</script>
+</body>
+</html>

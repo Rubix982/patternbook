@@ -97,7 +97,8 @@ function find(b, x) {
 // Cloth rendered from a unit.
 //   sett, pickSett  nominal pixels per warp end and per weft pick
 //   warp, weft      colour sequences (hex), repeated across the ends and down the picks: stripes and checks
-//   ground          what shows through the gaps between threads
+//   ground          the colour that shows through the gaps between threads (the layers built on this one call it
+//                   `groundColour`, since their `ground` is the weave structure)
 //   slub            yarn thickness variation (0 to 1)
 //   beat            unevenness of pick spacing (0 to 1)
 //   wobble          how far threads wander from straight (0 to 1)
@@ -113,7 +114,7 @@ export function cloth(opts) {
     warp = ['#1d2a4a'], weft = ['#e9e1cf'], ground = '#3a3330', seed = 1,
     slub = 0.25, beat = 0.2, wobble = 0.25, gap = 0.12, round = 0.55, dip = 0.35, fibre = 0.25,
   } = opts;
-  const W = warp.map(hexRgb), F = weft.map(hexRgb), G = hexRgb(ground);
+  const W = warp.map(hexRgb), F = weft.map(hexRgb), G = hexRgb(typeof ground === 'string' ? ground : '#3a3330');
   const nEnds = Math.ceil(width / (sett * 0.45)) + 4, nPicks = Math.ceil(height / (pickSett * 0.45)) + 4;
   const xb = boundaries(nEnds, sett, slub, seed * 31 + 1, 0.17);
   const yb = boundaries(nPicks, pickSett, beat, seed * 31 + 2, 0.11);

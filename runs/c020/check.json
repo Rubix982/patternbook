@@ -610,9 +610,13 @@
   },
   {
    "factor": 2,
-   "passed": 9,
+   "passed": 6,
    "of": 9,
-   "failed": []
+   "failed": [
+    "vine and buti/discontinuous",
+    "vine and buti/continuous",
+    "vine and buti/cutwork"
+   ]
   },
   {
    "factor": 3,

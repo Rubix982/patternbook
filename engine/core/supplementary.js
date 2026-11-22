@@ -86,7 +86,7 @@ export function figured(opts) {
   const { on, kind, side = 'face', ratio, bind, suppScale, wander, turn, sheen, cut, seed = 1 } = o;
   const ground = o.ground || STRUCTURES.plain;
   const unit = side === 'back' ? { ends: ground.ends, picks: ground.picks, up: (i, j) => !ground.up(i, j) } : ground;
-  const base = cloth({ ...o, unit, seed });
+  const base = cloth({ ...o, unit, seed, ground: o.groundColour ?? '#3a3330' });
   const { width, height, rgb, top, xb, yb, disp, half } = base;
   const pickSett = o.pickSett || o.sett || 8;
   const S = (Array.isArray(o.supp) ? o.supp : [o.supp || '#d4a017']).map(hexRgb);
