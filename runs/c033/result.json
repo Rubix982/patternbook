@@ -1,0 +1,245 @@
+{
+ "calibrates": {
+  "bar_cv": true,
+  "jitter": true,
+  "drift": true,
+  "rough": true,
+  "corner": false
+ },
+ "floor": {
+  "bar_cv": 0.0686,
+  "jitter": 0.0075,
+  "drift": 0.0,
+  "rough": 0.0468,
+  "corner": 0.3985
+ },
+ "seen_threshold": {
+  "bar_cv": 0.0925,
+  "jitter": 0.0184,
+  "drift": 0.0059,
+  "rough": 0.0545,
+  "corner": 0.442
+ },
+ "real": {
+  "bar_cv": {
+   "n": 17,
+   "p10": 0.1059,
+   "median": 0.3159,
+   "p90": 0.7651
+  },
+  "jitter": {
+   "n": 14,
+   "p10": 0.0183,
+   "median": 0.0822,
+   "p90": 0.1418
+  },
+  "drift": {
+   "n": 10,
+   "p10": 0.0,
+   "median": 0.0873,
+   "p90": 0.179
+  },
+  "rough": {
+   "n": 16,
+   "p10": 0.0272,
+   "median": 0.0387,
+   "p90": 0.0626
+  },
+  "corner": {
+   "n": 17,
+   "p10": 0.1606,
+   "median": 0.237,
+   "p90": 0.4491
+  }
+ },
+ "slopes": {
+  "bar_cv": {
+   "hand": 0.0859,
+   "jitter": 1.9361,
+   "drift": -0.0023,
+   "wear": 0.4659
+  },
+  "jitter": {
+   "hand": 0.036,
+   "jitter": 1.143,
+   "drift": 0.3141,
+   "wear": 0.1516
+  },
+  "drift": {
+   "hand": 0.0062,
+   "jitter": 0.1637,
+   "drift": 0.4665,
+   "wear": 0.0292
+  },
+  "rough": {
+   "hand": -0.0002,
+   "jitter": 0.054,
+   "drift": 0.0012,
+   "wear": 0.0178
+  }
+ },
+ "dials": {
+  "hand": {
+   "n": 9,
+   "p10": 0.0,
+   "median": 0.0,
+   "p90": 0.0245
+  },
+  "jitter": {
+   "n": 9,
+   "p10": 0.0,
+   "median": 0.0,
+   "p90": 0.0405
+  },
+  "drift": {
+   "n": 9,
+   "p10": 0.0,
+   "median": 0.0602,
+   "p90": 0.2294
+  },
+  "wear": {
+   "n": 9,
+   "p10": 0.0,
+   "median": 0.2003,
+   "p90": 1.3347
+  }
+ },
+ "dials_per_sample": {
+  "vam-O40073": {
+   "hand": 0.0,
+   "jitter": 0.022,
+   "drift": 0.2224,
+   "wear": 0.0
+  },
+  "vam-O40067": null,
+  "vam-O40065": {
+   "hand": 0.0,
+   "jitter": 0.0,
+   "drift": 0.0602,
+   "wear": 0.4842
+  },
+  "vam-O470734": null,
+  "vam-O15488": {
+   "hand": 0.0,
+   "jitter": 0.0,
+   "drift": 0.1865,
+   "wear": 1.0451
+  },
+  "vam-O167205": {
+   "hand": 0.1224,
+   "jitter": 0.0398,
+   "drift": 0.2574,
+   "wear": 0.0
+  },
+  "vam-O40068": null,
+  "vam-O40069": {
+   "hand": 0.0,
+   "jitter": 0.0404,
+   "drift": 0.0288,
+   "wear": 0.0
+  },
+  "vam-O40077": {
+   "hand": 0.0,
+   "jitter": 0.0407,
+   "drift": 0.0081,
+   "wear": 0.0
+  },
+  "vam-O40071": {
+   "hand": 0.0,
+   "jitter": 0.0,
+   "drift": 0.0,
+   "wear": 0.2003
+  },
+  "vam-O40070": null,
+  "vam-O40078": null,
+  "vam-O442441": {
+   "hand": 0.0,
+   "jitter": 0.0,
+   "drift": 0.1553,
+   "wear": 1.1813
+  },
+  "met-453343": {
+   "hand": 0.0,
+   "jitter": 0.0,
+   "drift": 0.0,
+   "wear": 1.9483
+  },
+  "met-453344": null,
+  "vam-O73674": null,
+  "met-453241": null
+ },
+ "jitter_drift_joint": {
+  "matrix": [
+   [
+    1.143,
+    0.3141
+   ],
+   [
+    0.1637,
+    0.4665
+   ]
+  ],
+  "floor": {
+   "jitter": 0.007506666666666666,
+   "drift": 0.0
+  },
+  "per_sample": {
+   "vam-O40073": {
+    "jitter": 0.0757,
+    "drift": 0.1484
+   },
+   "vam-O40065": {
+    "jitter": 0.0,
+    "drift": 0.1542
+   },
+   "vam-O470734": {
+    "jitter": 0.047,
+    "drift": 0.1607
+   },
+   "vam-O15488": {
+    "jitter": 0.0,
+    "drift": 0.3892
+   },
+   "vam-O167205": {
+    "jitter": 0.0492,
+    "drift": 0.25
+   },
+   "vam-O40069": {
+    "jitter": 0.0729,
+    "drift": 0.0
+   },
+   "vam-O40077": {
+    "jitter": 0.0552,
+    "drift": 0.0
+   },
+   "vam-O40071": {
+    "jitter": 0.0236,
+    "drift": 0.0
+   },
+   "vam-O442441": {
+    "jitter": 0.0064,
+    "drift": 0.3755
+   },
+   "met-453343": {
+    "jitter": 0.0745,
+    "drift": 0.2446
+   }
+  },
+  "n": 10,
+  "jitter": {
+   "p10": 0.0,
+   "median": 0.0481,
+   "p90": 0.0746
+  },
+  "drift": {
+   "p10": 0.0,
+   "median": 0.1575,
+   "p90": 0.3769
+  }
+ },
+ "single_dial_readback": {
+  "jitter": 0.0653,
+  "drift": 0.1871,
+  "hand": 2.879
+ }
+}

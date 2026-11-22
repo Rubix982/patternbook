@@ -38,3 +38,12 @@ None of these proportions sets a jali apart from other pierced screens (an iron 
 Egyptian stone window, a stucco window screen from Iran): on each, the jalis' middle 80 % takes in at least two of the
 four. Turning symmetry may: no control turns by more than a half, against 13 of the 17 jalis by a quarter or a sixth.
 That was seen, not tested (T-037).
+
+## How irregular they are (C-033)
+
+Read on the same photos by `tools/screen_hand.py`, calibrated on the generator's own designs: meeting points sit off a
+regular lattice by a median 0.048 of a lattice step (0 to 0.075 over the middle 80 %), and the pattern drifts by a
+median 0.16 of a step over three steps (0 to 0.38), from 10 jalis with both readings. Both are upper bounds: a photo's
+perspective and lens add their own. How much bars vary in width, how round the corners are and how rough the edges are
+can't be read back from these photographs (`../../CARD.md`, C-033).
+

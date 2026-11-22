@@ -12,3 +12,5 @@ tools/__pycache__/
 runs/c032/designs/*.png
 runs/c032/directions/*.png
 runs/c032/hand-sketch/*.png
+runs/c033/calibration/*.png
+runs/c033/look/*.png

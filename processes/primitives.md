@@ -921,7 +921,9 @@ $j\,a\,(2h(\mathbf x)-1)$, $h$ a hash of where the point is, so ends that meet m
 $w\,(1+\eta\,n)$; rounding is a morphological opening of the open area by a disc of radius $\rho w$; wear moves the edge
 along its signed distance by $\omega\,w\,n(\mathbf x/0.8w)$.
 **Helpers:** `engine/core/jali-design.js` (`drift`, `jitter`, `hand`, `round`, `wear`; all 0 by default).
-**Entered:** C-032. **Not measured:** amplitudes are guesses until read from real screens (T-040).
+**Entered:** C-032. **Measured** (C-033, `tools/screen_hand.py`, calibrated on 48 of the generator's designs): jitter
+0.048 and drift 0.16 lattice steps (medians of 10 real jalis, read back jointly; upper bounds), now the defaults; bar
+width's spread, the tool's radius and wear can't be read back from the photographs, so `hand` stays 0.15 and the others 0.
 
 ## What the subcontinent's crafts need that the primitives don't yet cover
 

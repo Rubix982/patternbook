@@ -369,7 +369,9 @@ share of screens turning by more than a half higher among jalis, and by how much
 **Opened:** 2026-11-22
 **Question:** Two of C-031's jalis were left out because brightness alone could not tell what is cut through: a marble
 screen on grey, and a tree screen carved in deep relief. Colour, the photo's own shading, or a photo with light behind
-the screen might; marble and tree screens are the families C-031 has fewest of.
+the screen might; marble and tree screens are the families C-031 has fewest of. C-033 adds two more reasons: shading
+across a carved bar breaks it up in the mask (bar width's spread read 0.1 to 1.0), and a measure in bar widths needs
+the photo's bars and the design's to span similar pixels before the two compare.
 **Answer:** —
 
 ### T-039 · Should the star reader count a single rosette at a screen's centre?
@@ -391,7 +393,9 @@ thing from a repeating star (a layout, not a pattern), and should C-032's gramma
 the carving got wrong: how much the openings of one kind vary in size, how much a bar varies in width along its length,
 how far meeting points sit from a fitted lattice, the radius of an opening's corners against the bar, and how rough the
 edges are; then draw the generator's `drift`, `jitter`, `hand`, `round` and `wear` from those numbers, not guesses.
-**Answer:** —
+**Answer:** C-033, in part: jitter 0.048 and drift 0.16 lattice steps (medians, upper bounds), now the defaults. Bar
+width's spread is dominated by the photographs, roughness isn't comparable across resolutions, and the corner reader
+doesn't calibrate on hexagons; those three wait on a photo reader that can see carved stone (T-038).
 
 ### T-041 · What is a jali's composition, beyond its pattern?
 

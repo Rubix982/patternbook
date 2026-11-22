@@ -21,7 +21,8 @@ wide, and time wore the edges. The light through it is C-028's thick screen (`pr
 | construction | `kind` (strands, cells), `angle` (the contact angle) | about a quarter of geometric jalis read as cells | C-031 |
 | cut | `barOverOpening` | 0.31 to 0.89 (open share 0.36 to 0.60 follows, or should) | C-031 |
 | thickness | `thickness` (over the opening) | 2.9 to 4.8 | C-031 |
-| the hand | `hand` (bars' width along their length), `drift`, `jitter`, `round`, `wear` | not measured | |
+| the hand | `jitter`, `drift` | jitter 0 to 0.075, drift 0 to 0.38 lattice steps (medians 0.048, 0.16; upper bounds) | C-033 |
+| | `hand`, `round`, `wear` | not read back: `hand` stays 0.15, `round` and `wear` 0 | C-033 |
 
 **Strands** (Hankin's polygons in contact): from each edge's middle, two rays at the contact angle, each stopping where
 it meets its neighbour's; where polygons share an edge, the rays cross there, so the lines run on as strands crossing
@@ -58,6 +59,6 @@ photographs. Sketches (`runs/c032/hand-sketch/`, amplitudes guessed) put what is
    arch, spandrels, and large rosettes among smaller stars (T-039, T-041).
 2. **The stone in light.** Bars are rounded ribbons lit from one side, the openings deep shadow, the stone's colour
    uneven. A 2D relief sketch made the bars muddy domes: this belongs in a renderer (T-043).
-3. **The hand.** Drift, jitter, uneven bars, the chisel's radius and wear are dials now, at zero by default; their
-   amplitudes are to be measured on C-031's photos, not guessed (T-040). A first guess at the chisel's radius, 0.6 of a
-   bar, rounded the eight-point stars into blobs.
+3. **The hand.** Drift, jitter, uneven bars, the chisel's radius and wear are dials. C-033 measured jitter and drift on
+   real jalis and made them the defaults (0.048 and 0.16 lattice steps); the other three can't be read back from these
+   photographs. A first guess at the chisel's radius, 0.6 of a bar, had rounded the eight-point stars into blobs.

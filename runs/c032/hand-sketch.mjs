@@ -9,7 +9,7 @@ import { toRGBA } from '../../engine/core/picture.js';
 import { encodePng } from '../../engine/png.js';
 
 mkdirSync('runs/c032/hand-sketch', { recursive: true });
-const base = { tiling: '4.8.8', kind: 'strands', angle: 67.5, barOverOpening: 0.4, frame: 'pointed', across: 7, hand: 0, seed: 5 };
+const base = { tiling: '4.8.8', kind: 'strands', angle: 67.5, barOverOpening: 0.4, frame: 'pointed', across: 7, hand: 0, seed: 5, drift: 0, jitter: 0, round: 0, wear: 0 };
 const STAGES = [
   ['1-exact', {}],
   ['2-setting-out', { drift: 0.04, jitter: 0.015 }],

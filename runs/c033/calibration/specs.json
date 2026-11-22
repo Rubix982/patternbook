@@ -1,0 +1,386 @@
+[
+ {
+  "id": "octagram-exact-0",
+  "base": "octagram",
+  "dial": "exact",
+  "level": 0,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-drift-0.03",
+  "base": "octagram",
+  "dial": "drift",
+  "level": 0.03,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-drift-0.06",
+  "base": "octagram",
+  "dial": "drift",
+  "level": 0.06,
+  "bar": 11.93,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-drift-0.1",
+  "base": "octagram",
+  "dial": "drift",
+  "level": 0.1,
+  "bar": 11.93,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-jitter-0.01",
+  "base": "octagram",
+  "dial": "jitter",
+  "level": 0.01,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-jitter-0.02",
+  "base": "octagram",
+  "dial": "jitter",
+  "level": 0.02,
+  "bar": 11.93,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-jitter-0.04",
+  "base": "octagram",
+  "dial": "jitter",
+  "level": 0.04,
+  "bar": 11.93,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-hand-0.2",
+  "base": "octagram",
+  "dial": "hand",
+  "level": 0.2,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-hand-0.4",
+  "base": "octagram",
+  "dial": "hand",
+  "level": 0.4,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-hand-0.6",
+  "base": "octagram",
+  "dial": "hand",
+  "level": 0.6,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-round-0.2",
+  "base": "octagram",
+  "dial": "round",
+  "level": 0.2,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-round-0.4",
+  "base": "octagram",
+  "dial": "round",
+  "level": 0.4,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-round-0.6",
+  "base": "octagram",
+  "dial": "round",
+  "level": 0.6,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-wear-0.1",
+  "base": "octagram",
+  "dial": "wear",
+  "level": 0.1,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-wear-0.2",
+  "base": "octagram",
+  "dial": "wear",
+  "level": 0.2,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "octagram-wear-0.3",
+  "base": "octagram",
+  "dial": "wear",
+  "level": 0.3,
+  "bar": 11.78,
+  "lattice": 111.43
+ },
+ {
+  "id": "hexagram-exact-0",
+  "base": "hexagram",
+  "dial": "exact",
+  "level": 0,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-drift-0.03",
+  "base": "hexagram",
+  "dial": "drift",
+  "level": 0.03,
+  "bar": 13.28,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-drift-0.06",
+  "base": "hexagram",
+  "dial": "drift",
+  "level": 0.06,
+  "bar": 13.28,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-drift-0.1",
+  "base": "hexagram",
+  "dial": "drift",
+  "level": 0.1,
+  "bar": 13.33,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-jitter-0.01",
+  "base": "hexagram",
+  "dial": "jitter",
+  "level": 0.01,
+  "bar": 13.27,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-jitter-0.02",
+  "base": "hexagram",
+  "dial": "jitter",
+  "level": 0.02,
+  "bar": 13.33,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-jitter-0.04",
+  "base": "hexagram",
+  "dial": "jitter",
+  "level": 0.04,
+  "bar": 13.37,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-hand-0.2",
+  "base": "hexagram",
+  "dial": "hand",
+  "level": 0.2,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-hand-0.4",
+  "base": "hexagram",
+  "dial": "hand",
+  "level": 0.4,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-hand-0.6",
+  "base": "hexagram",
+  "dial": "hand",
+  "level": 0.6,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-round-0.2",
+  "base": "hexagram",
+  "dial": "round",
+  "level": 0.2,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-round-0.4",
+  "base": "hexagram",
+  "dial": "round",
+  "level": 0.4,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-round-0.6",
+  "base": "hexagram",
+  "dial": "round",
+  "level": 0.6,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-wear-0.1",
+  "base": "hexagram",
+  "dial": "wear",
+  "level": 0.1,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-wear-0.2",
+  "base": "hexagram",
+  "dial": "wear",
+  "level": 0.2,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "hexagram-wear-0.3",
+  "base": "hexagram",
+  "dial": "wear",
+  "level": 0.3,
+  "bar": 13.05,
+  "lattice": 86.67
+ },
+ {
+  "id": "honeycomb-exact-0",
+  "base": "honeycomb",
+  "dial": "exact",
+  "level": 0,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-drift-0.03",
+  "base": "honeycomb",
+  "dial": "drift",
+  "level": 0.03,
+  "bar": 19.85,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-drift-0.06",
+  "base": "honeycomb",
+  "dial": "drift",
+  "level": 0.06,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-drift-0.1",
+  "base": "honeycomb",
+  "dial": "drift",
+  "level": 0.1,
+  "bar": 19.71,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-jitter-0.01",
+  "base": "honeycomb",
+  "dial": "jitter",
+  "level": 0.01,
+  "bar": 19.71,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-jitter-0.02",
+  "base": "honeycomb",
+  "dial": "jitter",
+  "level": 0.02,
+  "bar": 19.7,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-jitter-0.04",
+  "base": "honeycomb",
+  "dial": "jitter",
+  "level": 0.04,
+  "bar": 19.48,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-hand-0.2",
+  "base": "honeycomb",
+  "dial": "hand",
+  "level": 0.2,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-hand-0.4",
+  "base": "honeycomb",
+  "dial": "hand",
+  "level": 0.4,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-hand-0.6",
+  "base": "honeycomb",
+  "dial": "hand",
+  "level": 0.6,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-round-0.2",
+  "base": "honeycomb",
+  "dial": "round",
+  "level": 0.2,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-round-0.4",
+  "base": "honeycomb",
+  "dial": "round",
+  "level": 0.4,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-round-0.6",
+  "base": "honeycomb",
+  "dial": "round",
+  "level": 0.6,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-wear-0.1",
+  "base": "honeycomb",
+  "dial": "wear",
+  "level": 0.1,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-wear-0.2",
+  "base": "honeycomb",
+  "dial": "wear",
+  "level": 0.2,
+  "bar": 19.74,
+  "lattice": 78
+ },
+ {
+  "id": "honeycomb-wear-0.3",
+  "base": "honeycomb",
+  "dial": "wear",
+  "level": 0.3,
+  "bar": 19.74,
+  "lattice": 78
+ }
+]

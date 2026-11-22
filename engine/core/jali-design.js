@@ -99,8 +99,10 @@ export function frameField(kind, x0, y0, x1, y1) {
 //   jitter  each meeting point placed a little off on its own (repeats);
 //   round   the chisel's and drill's radius: an opening's corners rounded (bar widths);
 //   wear    the edges eroded unevenly, rougher where the stone is soft (bar widths).
+// drift and jitter default to what C-033 read on 10 real jalis (medians, read back jointly through the calibration;
+// upper bounds, since a photograph adds its own distortion); round and wear stay 0 (not calibrated, or not seen).
 export const DESIGN_DEFAULTS = { width: 1100, height: 1400, margin: 90, border: 70, frame: 'rect', tiling: '4.8.8', kind: 'strands', angle: 67.5,
-  across: 7, barOverOpening: 0.45, hand: 0.15, thickness: 3.5, seed: 1, drift: 0, jitter: 0, round: 0, wear: 0 };
+  across: 7, barOverOpening: 0.45, hand: 0.15, thickness: 3.5, seed: 1, drift: 0.16, jitter: 0.048, round: 0, wear: 0 };
 
 export function designJali(options = {}) {
   const o = { ...DESIGN_DEFAULTS, ...options }, W = o.width, H = o.height;

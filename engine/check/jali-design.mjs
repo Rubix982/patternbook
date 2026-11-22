@@ -20,7 +20,8 @@ const lerp = (r, u) => r[0] + (r[1] - r[0]) * u;
 export function cardDesign(k) {
   const r = rng(k), u = [r(), r(), r(), r(), r()], tiling = TILING_NAMES[k % 6];
   return { seed: k, kind: k % 4 === 0 ? 'cells' : 'strands', tiling, angle: +(35 + 45 * u[0]).toFixed(1), barOverOpening: +(0.31 + 0.58 * u[1]).toFixed(3),
-    hand: +(0.4 * u[2]).toFixed(3), frame: k % 6 === 0 ? 'cusped' : k % 2 ? 'rect' : 'pointed', across: +lerp(ACROSS[tiling], u[3]).toFixed(2), thickness: +(2.9 + 1.9 * u[4]).toFixed(2) };
+    hand: +(0.4 * u[2]).toFixed(3), frame: k % 6 === 0 ? 'cusped' : k % 2 ? 'rect' : 'pointed', across: +lerp(ACROSS[tiling], u[3]).toFixed(2), thickness: +(2.9 + 1.9 * u[4]).toFixed(2),
+    drift: 0, jitter: 0, round: 0, wear: 0 }; // C-032 drew them exact (the defaults changed in C-033)
 }
 
 export const DIRECTIONS = {
@@ -56,7 +57,7 @@ for (let k = 1; k <= 24; k++) {
 writeFileSync(join(out, 'designs', 'samples.tsv'), rows.join('\n') + '\n');
 writeFileSync(join(out, 'designs', 'recipes.json'), JSON.stringify(recipes, null, 1) + '\n');
 for (const [name, spec] of Object.entries(DIRECTIONS)) {
-  const d = designJali({ ...spec, seed: 5 }), id = name.split(' (')[0].replace(/\s+/g, '-');
+  const d = designJali({ drift: 0, jitter: 0, round: 0, wear: 0, ...spec, seed: 5 }), id = name.split(' (')[0].replace(/\s+/g, '-');
   writeFileSync(join(out, 'directions', `${id}.png`), photo(d, 5));
   writeFileSync(join(out, 'directions', `${id}.svg`), d.svg());
   console.log('direction', name, `bar ${d.recipe.bar}px opening ${d.recipe.opening}px`);

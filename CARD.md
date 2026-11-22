@@ -14,6 +14,106 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-033 · How irregular are real jalis, and can the generator's carving errors be set from them?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-032's designs are exact; the writer reads them as "very symmetrical, very geometric". The generator now has five
+carving errors as dials, all zero by default (`drift`, `jitter`, `hand`, `round`, `wear`), and the one amplitude guessed
+so far, a tool radius of 0.6 of a bar, rounded eight-point stars into blobs.
+
+**2. What we are doing.**
+Measure five irregularities on C-031's 17 jali photos, with a reader (`tools/screen_hand.py`) calibrated on the
+generator's own designs:
+1. **bar width's spread**: the coefficient of variation of bar width along the skeleton's loops, away from junctions
+   (for `hand`);
+2. **jitter**: how far a junction sits from where one lattice step from another junction puts it, after removing a
+   linear trend (the photo's perspective), in lattice steps (for `jitter`);
+3. **drift**: the same over three steps, less what jitter explains (for `drift`);
+4. **corner radius**: the radius of a circle fitted to each corner of the main openings, over the bar's width (for
+   `round`);
+5. **edge roughness**: how far an opening's edge strays from itself smoothed over half a bar, away from corners, over
+   the bar's width (for `wear`).
+And, as a check on all of them together, the spread of the main openings' areas after a linear trend.
+
+The calibration: three exact designs (octagram, hexagram, honeycomb cells), each drawn again with one dial at a time at
+three levels (drift 0.03, 0.06, 0.1; jitter 0.01, 0.02, 0.04; hand 0.2, 0.4, 0.6; round 0.2, 0.4, 0.6; wear 0.1, 0.2,
+0.3): 48 designs, the reader's response to each dial fitted as a line per measure.
+
+**3. Why.**
+We don't know how irregular real jalis are, so the generator's carving errors are guesses, and a guess already
+overshot.
+
+**4. What is affected.**
+- `tools/screen_hand.py` and its calibration (`engine/check/jali-hand.mjs`), `runs/c033/`.
+- `engine/core/jali-design.js`: `DESIGN_DEFAULTS` for the five dials become the real jalis' medians where measured
+  (C-032's 24 designs pinned at zero so they stay as they were); `pieces/jali/grammar.md` and `README.md` (the hand's
+  ranges); `processes/primitives.md` (`carving-errors`).
+
+**5. Conclusion.**
+- **Calibration:** a measure can set its dial if its reading rises with that dial at every level, in all three designs.
+- **Seen:** a real jalis' median is seen if it is above the exact designs' highest reading by at least half the step
+  the dial's lowest level adds (averaged over the three designs).
+- **If** a measure calibrates and its median is seen → the dial's range is the real jalis' 10th to 90th percentile read
+  back through the calibration, and its default the median.
+- **If** it calibrates but isn't seen → these photos can't show that irregularity; the dial stays at zero and the card
+  says how small it must be.
+- **If** it doesn't calibrate → that reader can't set its dial; recorded.
+
+**6. If not done.**
+The generator's hand stays guessed, and the next guess may overshoot as the first did.
+
+**Limits (known before running):** a photo adds its own irregularity (lighting across a bar moves the threshold;
+carving and shadow roughen the mask), so real readings are upper bounds on the stone's. Drift can't be told from a
+photo's distortion beyond what a linear trend removes. The calibration covers three designs.
+
+**How it ran.** The reader was fixed three times on the calibration before any real jali was read (all on designs whose
+answer is known): the autocorrelation's nearest peaks were near-periods (0.2 to 0.5) rather than the lattice (0.97 to
+1), so steps landed on the wrong kind of junction; corners were read where octagons turn 45 degrees, so the radius
+measured the angle; steps of three repeats that landed outside the field found the wrong junction, so an exact design
+read drift 0.074. Run 1 of the calibration is kept (`runs/c033/calibration-run1.json`).
+
+**Result (2026-11-22): the photos show jitter and drift, and the generator now carries them: jitter 0.048 and drift
+0.16 lattice steps by default (medians of 10 jalis, read back jointly). Bar width's spread is seen but can't be read
+back from these photos; edge roughness is not seen; corner radius doesn't calibrate.**
+
+| Measure (dial) | Calibrates | Exact designs | Seen above | Real jalis: 10th, median, 90th | Read back |
+|---|---|---|---|---|---|
+| bar width's spread (`hand`) | yes | 0.069 | 0.093 | 0.106, 0.316, 0.765 (17) | 2.9 alone: not applied |
+| jitter (`jitter`) | yes | 0.008 | 0.018 | 0.018, 0.082, 0.142 (14) | jointly 0, 0.048, 0.075 |
+| drift (`drift`) | yes | 0 | 0.006 | 0, 0.087, 0.179 (10) | jointly 0, 0.16, 0.38 |
+| edge roughness (`wear`) | yes | 0.047 | 0.055 | 0.027, 0.039, 0.063 (16) | not seen |
+| corner radius (`round`) | no: hexagons have no sharp corners | 0.40 | | 0.16, 0.24, 0.45 (17) | |
+
+Jitter and drift are read back together because each raises the other's reading (drift at 0.1 reads as jitter 0.04,
+the same as jitter at 0.02 to 0.04); alone, the median jitter would read 0.065. Ten jalis have both readings: three
+arched V&A panels read no drift, and the large, dense screens read 0.15 to 0.39, where a photo's perspective beyond a
+linear trend weighs most, so drift is an upper bound.
+
+**Where the card's rule was not followed.** Field 4 said each measured median becomes a default. Bar width's spread
+reads back as `hand` 2.9, five times the calibration's top level and enough to remove the bars; the reading is
+dominated by the photographs (relief and shading break bars up in the mask), and wear, which also raises it, isn't
+seen. `hand` stays at 0.15. Edge roughness reads below the exact designs' floor because the photos' bars span more
+pixels than the designs', so roughness in bar widths isn't comparable across the two: `wear` stays 0, and what the
+photos show is that it is below what this reader can see at their resolution.
+
+**Claim:** in 10 real jalis, meeting points sit off a regular lattice by up to about 5 % of a repeat each, and the
+pattern wanders by up to about 16 % of a repeat over three repeats (medians; upper bounds, since a photo adds its own
+distortion). The generator draws designs that way by default now, and C-032's designs keep their exact hand.
+
+**Changes made:**
+- `tools/screen_hand.py`, `engine/check/jali-hand.mjs` (the 48 calibration designs), `runs/c033/` (calibration, real
+  readings, result, and `look/`: three directions exact and with the measured hand beside a real screen).
+- `engine/core/jali-design.js` (defaults `drift` 0.16, `jitter` 0.048); `engine/check/jali-design.mjs` and
+  `runs/c032/hand-sketch.mjs` pin C-032's zeros (its 24 designs and 8 directions redraw with the same geometry).
+- `pieces/jali/grammar.md`, `pieces/jali/README.md`, `processes/primitives.md` (`carving-errors`), `threads.md`.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-032 · Can a generator built from a tiling's symmetry and C-031's measured ranges make new jali designs that measure, and read, like real ones?
 
 **Status:** closed
