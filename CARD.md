@@ -14,6 +14,93 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-028 · Can a pierced screen be given thickness, so that its walls narrow the sunlight through it, its cast light softens with distance, and its openings show their inner walls when seen at an angle?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-018 found pierced screens covered as flat openings (`sdf-shape`, `lattice-repeat`, `star-rosette-motif`); the light
+and shadow a screen's thickness throws is done by an offset lookup of a blurred mask in two models (Mughal jali), and
+not shared. Sources (Wikipedia, "Jali"; Metropolitan Museum and V&A catalogue entries; a Daily Art Magazine piece)
+describe the jali as a perforated stone screen, its pattern geometric, floral or calligraphic, cut subtractively from
+a single block with stencils, drills and small chisels, in sandstone, marble and other materials; the light through it
+changes through the day and the seasons, and at Salim Chishti's tomb in Fatehpur Sikri it is made to fall round the
+cenotaph.
+
+**2. What we are doing.**
+Write `engine/core/jali.js`: a screen as a pattern of openings through stone of a given thickness. Seen from inside,
+each opening shows the bright outside where a line of sight passes both faces, and its inner wall (lit or in shade by
+the sun's side) where it doesn't. The sun behind it sends light through only where its rays clear both faces, and that
+light lands on a wall inside, shifted by the sun's angle and softened by the sun's size with distance, with a faint
+glow from the sky. Then read the narrowing, the softening and the inner walls back from the image.
+
+**3. Why.**
+We don't know whether one operation, the opening intersected with itself shifted by the thickness along a direction,
+used for the sun and for the eye, gives the three things a thick screen does that a thin one doesn't, each readable
+from the image.
+
+**4. What is affected.**
+- `engine/core/jali.js`, its check, sheet and demo; the engine bundle.
+- `processes/primitives.md`: a `thick-screen` entry; the process page that covers stone piercing, a pointer.
+- The atlas's jali in stone, wood and stucco, and pierced metal lanterns where the same geometry holds.
+
+**5. Conclusion.**
+At the defaults, on a lattice of square openings 24 px across between 12 px bars, in stone 12 px thick, from the image
+alone (the pattern, its thickness, the sun's and the eye's directions and the wall's distance are the plan, which a
+reader knows):
+- narrowing: the area lit on the wall, with the sun at 0°, 20° and 40° from the screen's normal, falls as the
+  thickness predicts, to within 0.05 of 1, 1 − t·tan 20°/a and 1 − t·tan 40°/a of its area at 0°; with a screen of no
+  thickness (the control), it stays at least 0.95 at every angle;
+- softening: the cast light's edges are at least twice as wide (10-90 %) on a wall three times as far away; with the
+  sun a point (the control), within 10 %;
+- inner walls: seen 25° off the normal, each opening shows a strip of its wall t·tan 25° (5.6 px) wide, to within
+  0.75 px (median over openings); with no thickness (the control), under 0.5 px.
+- **If** all hold → we claim *a thick pierced screen is covered*: the narrowed sunlight, its softening, and the walls.
+- **If** narrowing and walls hold and softening doesn't → the geometry is right and the light's spread is not.
+- **If** narrowing fails → one shifted intersection is not enough, and the card says why.
+
+**6. If not done.**
+Jali, among the most recognisable stonework of the subcontinent, stays a flat cut-out whose light ignores the stone's
+depth.
+
+**Limits (known before running):** no source read gives a screen's thickness, so 12 px against 24 px openings is a
+guess at proportion. Light is one bounce: no light reflected from walls inside the openings onto the room. The
+receiving wall is parallel to the screen (a floor would stretch the pattern). Likeness to a real jali's light is a
+later blind pick.
+
+**Result (2026-11-22):** narrowing and the inner walls hold; softening fails as written, by a little, because the
+reader cannot see an edge sharper than 1.6 px. **From the image alone at the defaults: the area lit on the wall falls to
+0.822 of its area at 0° with the sun at 20°, and to 0.586 at 40° (the thickness predicts 0.818 and 0.580); with no
+thickness it stays at 1.004 and 1.008; seen 25° off the normal, each opening shows 5.2 px of its inner wall (median;
+5.6 planned), and none with no thickness.** The cast light's edges are 1.64 px wide on a wall 150 px away and 3.23 px on
+one 450 px away: 1.97 times, where at least 2 was set; with the sun a point, 1.00. By geometry the sun's penumbra is
+0.9 px on the near wall and 2.7 px on the far one, three times; but a perfectly sharp edge, sampled once per pixel and
+interpolated, reads 1.5 to 1.6 px with this reader (measured with a point sun, and still 1.5 px with four times the
+samples, no sky and no plaster texture), so the near edge reads the reader's floor, not the penumbra. The result is not
+changed to meet the bar. The card's second branch ("the light's spread is not right") doesn't describe the failure:
+the far edge is about what the geometry gives plus the floor.
+
+All three hold the same way at two and three times the imperfections (softening 1.98 and 2.00).
+
+**Before the run, from looking at the first sheet:** the sunlit patches were clipped to white, which would have cut the
+top off every edge; the sun's strength was lowered so they aren't.
+
+**Claim:** a pierced screen's thickness is covered for the sunlight through it and for the eye: the light narrows as
+the thickness predicts and the openings show their walls. Its light softens with distance (3.23 px far, against
+1.64 near), but this card's measure could not show the near penumbra.
+
+**Changes made:**
+- `engine/core/jali.js`; `engine/check/jali.mjs`, `jali-sheet.mjs`; `engine/demo/jali.html`; the engine bundle (all ten
+  demo pages' scripts run against it and paint).
+- `processes/primitives.md`: `thick-screen`, and the gap list's note brought up to date; `processes/piercing.md`: a
+  pointer; `engine/README.md`: one lesson.
+- `runs/c028/`; thread T-030.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-027 · Can inlay pieces be cut from banded stone so each piece's bands run along it, and fitted to recesses the motif's own shape, so that both read back?
 
 **Status:** closed

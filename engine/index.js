@@ -10,3 +10,4 @@ export * as dye from './core/dye.js';
 export * as mirror from './core/mirror.js';
 export * as glaze from './core/glaze.js';
 export * as inlay from './core/inlay.js';
+export * as jali from './core/jali.js';

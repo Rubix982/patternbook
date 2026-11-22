@@ -6,7 +6,7 @@ patternbook's own primitives, written where no Lumenary model covers an operatio
 - `core/`: the primitives, as ES modules with no dependencies: `random.js` (seeded randomness and noise),
   `weave.js` (`weave-draft`, C-019), `supplementary.js` (`supplementary-weft`, C-020), `darning.js`
   (`counted-darning`, C-021), `chain.js` (`chain-stitch`, C-022), `field.js` and `kantha.js` (`contour-rows`,
-  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026), `inlay.js` (`inlay-cut`, C-027).
+  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026), `inlay.js` (`inlay-cut`, C-027), `jali.js` (`thick-screen`, C-028).
 - `check/`: each card's read-back check, run with Node (`node engine/check/weave.mjs`), the sheets
   (`node engine/check/weave-sheet.mjs runs/c019/weave-sheet.png`), and the shared read-back code (`readback.mjs`).
 - `demo/`: a page per primitive with every dial. They open straight from disk.
@@ -42,3 +42,6 @@ patternbook's own primitives, written where no Lumenary model covers an operatio
 - **A saturated pixel carries no ratio.** C-026 read a glaze's tint from the ratio of two channels, so the lighting would
   cancel; on slopes facing the lamp the red channel sat at full brightness, and half the pixels in a groove read too
   little tint. Leave out any pixel with a channel at its limit before taking a ratio.
+- **Measure the reader's floor before setting a bar.** A perfectly sharp edge, sampled once per pixel and interpolated,
+  reads 1.6 px wide (10-90 %). C-028 asked a penumbra of 0.9 px to widen threefold with distance; the floor swallowed the
+  near one and the ratio read 1.97. Render the control at its sharpest first and set the bar above what it reads.

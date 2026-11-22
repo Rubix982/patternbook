@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thick screen</title>
+<style>
+  :root { --bg: #f4f1ea; --ink: #1d1b17; --muted: #6b655b; --line: #d8d1c4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { color: var(--muted); margin: 0 0 16px; max-width: 72ch; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  fieldset { border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 12px; }
+  legend { color: var(--muted); font-size: 13px; }
+  label { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+  label.wide { grid-template-columns: 90px 1fr; }
+  input[type=text], select { width: 100%; font: inherit; font-size: 13px; padding: 3px 5px; }
+  output { font-variant-numeric: tabular-nums; color: var(--muted); }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Thick screen</h1>
+  <p class="lede">The primitive <code>thick-screen</code> (card C-028): a jali cut through stone with depth. Seen at an
+    angle, each opening shows part of its own inner wall. The sun behind it gets through only where its rays clear both
+    faces, so the light on the wall inside is narrower than the openings, shifted by the sun's angle, and softer the
+    further the wall is. Set the thickness to 0 to see a screen with no depth.</p>
+  <div class="wrap">
+    <canvas id="c" width="480" height="480"></canvas>
+    <form id="f">
+      <fieldset><legend>Show</legend>
+        <label class="wide">view <select name="show"><option value="light">the light on the wall inside</option><option value="screen">the screen, from inside</option></select></label>
+        <label class="wide">pattern <select name="pattern"><option value="stars">stars and squares</option><option value="hexagons">hexagons</option><option value="squares">squares</option></select></label>
+        <label>cell <input type="range" name="cell" min="20" max="120" step="2" value="56"><output></output></label>
+        <label>opening <input type="range" name="opening" min="0.2" max="0.9" step="0.01" value="0.62"><output></output></label>
+        <label>thickness <input type="range" name="thickness" min="0" max="40" step="0.5" value="12"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Sun and eye</legend>
+        <label>sun angle <input type="range" name="sunAngle" min="0" max="70" step="1" value="25"><output></output></label>
+        <label>sun from <input type="range" name="sunAzimuth" min="0" max="360" step="5" value="20"><output></output></label>
+        <label>sun size <input type="range" name="sunSize" min="0" max="2" step="0.01" value="0.27"><output></output></label>
+        <label>wall at <input type="range" name="distance" min="10" max="1200" step="10" value="240"><output></output></label>
+        <label>eye angle <input type="range" name="viewAngle" min="0" max="60" step="1" value="25"><output></output></label>
+        <label>eye from <input type="range" name="viewAzimuth" min="0" max="360" step="5" value="200"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Stone and hand</legend>
+        <label class="wide">stone <input type="text" name="stone" value="#c79c74"></label>
+        <label>vary <input type="range" name="vary" min="0" max="0.2" step="0.01" value="0.04"><output></output></label>
+        <label>wear <input type="range" name="wear" min="0" max="3" step="0.1" value="0.8"><output></output></label>
+        <label>grain <input type="range" name="grain" min="0" max="0.4" step="0.01" value="0.08"><output></output></label>
+        <label>chisel <input type="range" name="chisel" min="0" max="0.5" step="0.01" value="0.14"><output></output></label>
+        <label>seed <input type="range" name="seed" min="1" max="99" step="1" value="4"><output></output></label>
+      </fieldset>
+    </form>
+  </div>
+</main>
+<script src="../engine.js"></script>
+<script>
+  const { paint } = PatternbookEngine.weave;
+  const { screenView, castLight, LATTICES, JALI_DEFAULTS } = PatternbookEngine.jali;
+  const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
+  function draw() {
+    const v = Object.fromEntries(new FormData(f));
+    for (const o of f.querySelectorAll('output')) o.value = o.previousElementSibling.value;
+    const cell = +v.cell, k = +v.opening, seed = +v.seed;
+    const open = v.pattern === 'squares' ? LATTICES.squares(cell, cell * (1 - k), +v.vary, seed)
+      : v.pattern === 'hexagons' ? LATTICES.hexagons(cell, cell * (1 - k), +v.vary, seed) : LATTICES.stars(cell, cell * k * 0.62, +v.vary, seed);
+    const stone = /^#?[0-9a-f]{6}$/i.test(v.stone.trim()) ? (v.stone.trim()[0] === '#' ? v.stone.trim() : '#' + v.stone.trim()) : JALI_DEFAULTS.stone;
+    const o = { ...JALI_DEFAULTS, width: c.width, height: c.height, open, seed, stone, thickness: +v.thickness, sunAngle: +v.sunAngle,
+      sunAzimuth: +v.sunAzimuth, sunSize: +v.sunSize, distance: +v.distance, viewAngle: +v.viewAngle, viewAzimuth: +v.viewAzimuth,
+      vary: +v.vary, wear: +v.wear, grain: +v.grain, chisel: +v.chisel };
+    paint(ctx, v.show === 'screen' ? screenView(o) : castLight(o));
+  }
+  f.addEventListener('input', draw);
+  draw();
+</script>
+</body>
+</html>

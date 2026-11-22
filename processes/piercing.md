@@ -14,6 +14,9 @@ status: listed
 
 # Piercing (jali, cut work)
 
+patternbook's own model of a pierced screen's thickness, for the light through it and for the eye, is `thick-screen`
+(`processes/primitives.md`; `engine/core/jali.js`, C-028).
+
 Listed by C-017 from the models filed under it. Sections 1-7 and 9 of `_template.md` (the process, its constraints, its imperfections, the maths, dials, variants, what it makes, sources) are not written yet.
 
 ## 8. Models

@@ -1,0 +1,241 @@
+{
+ "size": 360,
+ "cell": 36,
+ "bar": 12,
+ "thickness": 12,
+ "defaults": {
+  "thickness": 12,
+  "sunAngle": 25,
+  "sunAzimuth": 0,
+  "viewAngle": 0,
+  "viewAzimuth": 0,
+  "distance": 240,
+  "sunSize": 0.27,
+  "sun": 0.7,
+  "sky": 0.1,
+  "ambient": 0.25,
+  "stone": "#c79c74",
+  "outside": "#eef3f6",
+  "plaster": "#ebe3d6",
+  "vary": 0.04,
+  "wear": 0.8,
+  "grain": 0.08,
+  "chisel": 0.14,
+  "unevenWall": 0.04,
+  "samples": 2
+ },
+ "results": [
+  {
+   "label": "default",
+   "narrowing": [
+    {
+     "angle": 20,
+     "share": 0.822,
+     "predicted": 0.818
+    },
+    {
+     "angle": 40,
+     "share": 0.586,
+     "predicted": 0.58
+    }
+   ],
+   "narrowingThin": [
+    {
+     "angle": 20,
+     "share": 1.004,
+     "predicted": 1
+    },
+    {
+     "angle": 40,
+     "share": 1.008,
+     "predicted": 1
+    }
+   ],
+   "softening": {
+    "near": 1.64,
+    "far": 3.23,
+    "ratio": 1.969
+   },
+   "softeningPointSun": {
+    "near": 1.61,
+    "far": 1.62,
+    "ratio": 1.003
+   },
+   "walls": {
+    "median": 5.18,
+    "planned": 5.6,
+    "openings": 100
+   },
+   "wallsThin": {
+    "median": 0,
+    "planned": 0,
+    "openings": 100
+   },
+   "checks": {
+    "narrowing": true,
+    "softening": false,
+    "walls": true
+   },
+   "pass": false
+  },
+  {
+   "label": "off",
+   "narrowing": [
+    {
+     "angle": 20,
+     "share": 0.824,
+     "predicted": 0.818
+    },
+    {
+     "angle": 40,
+     "share": 0.575,
+     "predicted": 0.58
+    }
+   ],
+   "narrowingThin": [
+    {
+     "angle": 20,
+     "share": 1.023,
+     "predicted": 1
+    },
+    {
+     "angle": 40,
+     "share": 1.023,
+     "predicted": 1
+    }
+   ],
+   "softening": {
+    "near": 1.63,
+    "far": 2.76,
+    "ratio": 1.694
+   },
+   "softeningPointSun": {
+    "near": 1.6,
+    "far": 0.8,
+    "ratio": 0.5
+   },
+   "walls": {
+    "median": 5.5,
+    "planned": 5.6,
+    "openings": 100
+   },
+   "wallsThin": {
+    "median": 0,
+    "planned": 0,
+    "openings": 100
+   },
+   "checks": {
+    "narrowing": true,
+    "softening": false,
+    "walls": true
+   },
+   "pass": false
+  },
+  {
+   "label": "x2",
+   "narrowing": [
+    {
+     "angle": 20,
+     "share": 0.82,
+     "predicted": 0.818
+    },
+    {
+     "angle": 40,
+     "share": 0.58,
+     "predicted": 0.58
+    }
+   ],
+   "narrowingThin": [
+    {
+     "angle": 20,
+     "share": 0.998,
+     "predicted": 1
+    },
+    {
+     "angle": 40,
+     "share": 0.998,
+     "predicted": 1
+    }
+   ],
+   "softening": {
+    "near": 1.68,
+    "far": 3.32,
+    "ratio": 1.984
+   },
+   "softeningPointSun": {
+    "near": 1.65,
+    "far": 1.64,
+    "ratio": 0.99
+   },
+   "walls": {
+    "median": 5.3,
+    "planned": 5.6,
+    "openings": 100
+   },
+   "wallsThin": {
+    "median": 0,
+    "planned": 0,
+    "openings": 100
+   },
+   "checks": {
+    "narrowing": true,
+    "softening": false,
+    "walls": true
+   },
+   "pass": false
+  },
+  {
+   "label": "x3",
+   "narrowing": [
+    {
+     "angle": 20,
+     "share": 0.83,
+     "predicted": 0.818
+    },
+    {
+     "angle": 40,
+     "share": 0.599,
+     "predicted": 0.58
+    }
+   ],
+   "narrowingThin": [
+    {
+     "angle": 20,
+     "share": 1.01,
+     "predicted": 1
+    },
+    {
+     "angle": 40,
+     "share": 1.01,
+     "predicted": 1
+    }
+   ],
+   "softening": {
+    "near": 1.72,
+    "far": 3.44,
+    "ratio": 1.998
+   },
+   "softeningPointSun": {
+    "near": 1.69,
+    "far": 1.68,
+    "ratio": 0.993
+   },
+   "walls": {
+    "median": 5.3,
+    "planned": 5.6,
+    "openings": 100
+   },
+   "wallsThin": {
+    "median": 0,
+    "planned": 0,
+    "openings": 100
+   },
+   "checks": {
+    "narrowing": true,
+    "softening": false,
+    "walls": true
+   },
+   "pass": false
+  }
+ ]
+}

@@ -276,3 +276,14 @@ read for C-027 say only that the joins are almost invisible. Look for a workshop
 Agra or Mughal inlay that says how a piece's patch of stone is chosen (bands along the petal, shading from base to tip,
 or colour alone), and check it in close photographs of the Taj Mahal's and Agra's inlay.
 **Answer:** —
+
+### T-030 · How thick is a jali against its openings, and how soft is its light on the floor?
+
+**Status:** open
+**Parent:** C-028
+**Opened:** 2026-11-22
+**Question:** `thick-screen`'s checks used stone half as thick as an opening is wide, a guess; no source read for C-028
+gives a thickness. Museum catalogue entries (the Met's and the V&A's jali panels) list depth with height and width:
+collect the proportions, and compare the narrowing and softening they predict with photographs of jali light at
+Fatehpur Sikri and Ahmedabad.
+**Answer:** —
