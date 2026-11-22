@@ -24,6 +24,33 @@ on it: process models where no style covers an operation, and styles of its own 
   (`node engine/check/weave-sheet.mjs runs/c019/weave-sheet.png`), and the shared read-back code (`readback.mjs`).
 - `demo/`: a page per process model with every dial. They open straight from disk.
 
+## How a style is written
+
+(From Lumenary's README, sections 11 and 12, by Mursal Furqan Kumbhar, with the paths changed to patternbook's.)
+
+- **A style** is a module in `styles/` with `id`, `name`, `blurb`, `params` and either
+  - a still: `still({ ..., render(ctx, work, p, env, W, H, cache) })`, drawn once whenever the dials or the picture
+    change (`still` is in `utils.js`; `helpers.pixels(work, W, H, cache)` gives the picture's pixels); or
+  - an animated style: `{ kind: 'animated', create(env) }`, returning `setSource`, `setParams`,
+    `draw(ctx, t, dt, pointer)` and `dispose` (and `setFrame(canvas)` if it keeps state, so video doesn't restart it).
+- Dials are `range`, `select`, `toggle`, `color`, `text` or `shuffle`. Give them as counts or fractions of the width,
+  never pixels, so a still looks the same at preview size and at 3x export.
+- The engine never touches the page directly: canvases come from `env.makeCanvas`, which is how styles run headless.
+  `runtime.js`'s `createRuntime` runs a style on a canvas; `renderThumb` renders a small frame of any style.
+- Shared helpers: `toon.js` (edge-keeping smoothing, palettes, lines and highlights), `retro.js` (ordered dither,
+  pixel text, sprites), `culture.js` (snapping to a few pigments, outlines, woven, wooden and carved fills, rosettes,
+  stars, ribbons), `helpers.js` (`stretch` for tone, `slopes` from a height map, `cellular` noise), `subject/` (finding
+  the main subject with U2-Net, cut-outs and outlines).
+- Don't use `ctx.filter` (Safari's canvas ignores it): blur arrays with `boxBlur`, or draw small and scale up. Draw
+  thousands of small shapes with flat fills; a gradient or a `save`/`restore` per shape is very slow without a
+  graphics card.
+
+**To add one:** copy a still style (`styles/minimalism.js` is the simplest), start the file with a comment giving its
+path, give it a unique `id`, and put its `name` in the right section's `items` in `sections.js` so that
+`slugify(name)` equals the `id` (patternbook's own go in section P). The build and the catalogue pick up every file
+in `styles/`; run `node engine/build.mjs` and `node engine/catalog.mjs`. Write its theory on the page of the process it
+renders, in `../processes/`.
+
 ## What the checks have taught
 
 - **Count threads; don't use a ruler.** Uneven yarn adds up across a cloth: a read-back that places cells by nominal

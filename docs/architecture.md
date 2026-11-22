@@ -315,7 +315,7 @@ subcontinent/               + the entries
   _templates/<kind>.md
 processes/                  + all knowledge of how looks are made (section 7b): process pages carrying every model in
                               full, primitives.md, foundations.md, index.md, models/, and Lumenary's theory as received in
-                              sources/ (his theory data, theory pages, and his app's README and catalogue)
+                              sources/ (his theory data and theory pages)
 looks/<id>.md               + looks, each with <id>.tokens.json
 engine/                     + our generators (Lumenary's conventions)
   core/                     symmetry groups, margin functions, seeded noise, SVG writer, layers

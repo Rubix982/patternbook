@@ -19,9 +19,8 @@ is the upstream archive; what patternbook reads and builds on is the process pag
 exception: `theoryGroups.js` imports the treatment list from its new relative path
 (now `../../../engine/styles/index.js`, the Vite-only file that was not kept, so that import has no target in
 patternbook, as before). Each file's first-line comment still names its old path, as he wrote it. The readers were
-repointed: his `scripts/check-theory.mjs` (now `engine/check/theory.mjs`) and `scripts/catalogue.mjs` (now
-`upstream/catalogue.mjs`), and patternbook's `engine/sections.js`, `engine/catalog.mjs` and `tools/process_models.mjs`.
-`upstream/` keeps his app's `README.md`, `TREATMENTS.md` (his catalogue and roadmap) and `package.json`.
+repointed: his `scripts/check-theory.mjs` (now `engine/check/theory.mjs`), and patternbook's `engine/sections.js`,
+`engine/catalog.mjs` and `tools/process_models.mjs`.
 
 ## How patternbook uses it
 

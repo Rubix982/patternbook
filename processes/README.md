@@ -26,7 +26,7 @@ All of patternbook's knowledge of how looks are made sits in this folder, and no
 - `models/`: the same models in machine-readable form (`<id>.json`), and the classification and tags they are
   built from (`map.tsv`, `equation-tags.tsv`).
 - `sources/`: Lumenary's theory as received, unchanged and credited: his theory data (`data/`), his theory pages as
-  captured from his site (`theory-pages/`), and his app's README and catalogue (`upstream/`). The archive the models
+  captured from his site (`theory-pages/`). The archive the models
   were converted from; read the process pages instead.
 
 The code that runs these lives elsewhere: the engine in `engine/` (its base is Lumenary's engine; patternbook's process models are in `engine/core/`),
