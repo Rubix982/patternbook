@@ -101,6 +101,8 @@ engine/                         the engine: styles (picture in, treated picture 
                                 models in core/, the studio API, one bundle (engine.js), checks and demo pages
 treatments/                     the picture layer that applies styles to pages, the studio page, and its demos
 service/                        the engine as an MCP server, for agents (C-030)
+pieces/<piece>/                 one made thing (a jali): samples, measures, grammar; its generator in engine/core/; the
+                                process for a piece in pieces/README.md
 NOTICE.md                       what came from other projects (Lumenary, by Mursal Furqan Kumbhar) and where it is
 tools/                          measuring and blind-test scripts
 docs/images/                    pictures in this README

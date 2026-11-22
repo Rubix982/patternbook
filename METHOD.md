@@ -119,6 +119,13 @@ Get the bottom layer right first. A style file should name the treatment and set
 match it, so the filter doesn't fight the palette. Treatments get blind-tested too: the same
 filter over everything becomes its own recognisable look.
 
+## Pieces (2026-11-22)
+
+A piece is one made thing that recurs across buildings or objects (a jali, a jharokha). Its variations are learned
+from measured real examples, and a generator makes new ones inside them. The six steps (samples, measures, how it was
+made by step 2c, grammar, generator, creatives sheet) and the mathematics a generator can draw on are in
+`pieces/README.md`.
+
 ## The judge's checklist (from Saif's notes, C-010, 2026-10-31)
 
 What the human judge named as reading AI-made, across six judged pages. **No palette trait

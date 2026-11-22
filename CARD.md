@@ -14,6 +14,116 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-031 · What do real jalis share, measured, and does any of it set them apart from other pierced screens?
+
+**Status:** open
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+patternbook's jalis are written from the process, not from measured screens. Lumenary's Mughal Jali (eight-point
+star, six-point star and lotus lattices as margin functions) and C-028's thick screen (squares, stars, hexagons) run
+on proportions nobody has measured; C-028 set the stone half as thick as an opening is wide, a guess (T-030). The
+Met's and the V&A's collection APIs list jali screens with height, width and depth: one at the Met, red sandstone,
+second half of the 16th century, is 186 x 131 cm and 9 cm deep.
+
+**2. What we are doing.**
+Measure 15 to 20 jali screens from the Met's and the V&A's open collections, across the families (star and hexagon
+lattices, floral and tree-of-life screens; sandstone and marble; rectangular and arched), and 5 pierced or latticed
+screens from other traditions (Chinese lattice windows, European iron grilles) as the control. Each is recorded in
+`pieces/jali/samples.tsv` with its source, licence, date, place, material and size. On each, from its photo and its
+catalogue entry:
+
+1. **open share**: the openings' area over the area inside the frame;
+2. **symmetry**: the repeat's rotation order (2, 3, 4 or 6, the only ones a repeating pattern can have) and whether
+   it has mirrors; and the number of points on its largest star, which can be 8, 10 or 12 only locally;
+3. **bar over opening**: the median bar width (twice the ridge of the solid's distance transform) over the median
+   opening width (twice each opening's largest inscribed radius);
+4. **thickness over opening**: the catalogue's depth over the median opening width in mm (the photo's scale from the
+   catalogue's width), where depth is listed;
+5. **openings per junction**: openings over junctions where three or more bars meet (from the bars' skeleton), in the
+   field away from the frame, each opening counted by its top-left point so the window does not bias the count. By
+   Euler's formula on one repeat this is (average bar ends per junction) / 2 - 1: 1 where bars cross in pairs, as in star
+   patterns drawn as strands; 0.5 where they meet in threes, as in a honeycomb.
+
+The measuring code is checked first on synthetic screens with known numbers: a square grid (open share and bar width
+set; four-fold with mirrors; 1 opening per junction), a hexagon grid (six-fold with mirrors; 0.5), a triangle grid
+(six-fold; 2) and a pinwheel (four-fold without mirrors). It must read them back within 5 %, symmetry exactly. Every
+sample's mask is laid over its photo on a sheet; a sample whose mask fails by eye is left out and listed.
+
+**3. Why.**
+We don't know where real jalis sit on these numbers, how far they vary within a family, or whether any number tells a
+jali from another pierced screen. C-032's generator needs both: ranges for its dials and a test for its output. And we
+don't know whether geometric jalis are strands crossing in pairs, which Hankin's method draws, or cells, which it does
+not.
+
+**4. What is affected.**
+- `pieces/jali/samples.tsv`, `pieces/jali/measures.tsv`, the measuring code and its check, `runs/c031/` (the sheet).
+  Public-domain images are committed; the V&A's (free for non-commercial use) stay local and git-ignored.
+- `JALI_DEFAULTS.thickness` and `LATTICES` (C-028), and the defaults of Mughal Jali and Jali Light: recorded against
+  the measured ranges either way, and moved inside them if they fall outside (the old values kept as a direction).
+- T-030 (its thickness half answered).
+- C-032's dial ranges and its test.
+
+**5. Conclusion.**
+- **If** on at least one measure the jalis' 10th to 90th percentile excludes at least 4 of the 5 controls → that
+  measure is the jali test, and C-032's designs are checked by it.
+- **If** no measure does → proportions don't tell a jali from other pierced screens; the pattern itself (its
+  symmetry and motif) does, and C-032's designs are checked by family, in a blind pick.
+- **If** the geometric jalis read 1 opening per junction (median within 0.1) → they are strands crossing in pairs,
+  and C-032 draws them by Hankin's method. **If not** → they are cells, and C-032 draws them from a tiling's faces.
+- Either way, each family's 10th to 90th percentile becomes C-032's dial ranges.
+
+**6. If not done.**
+Every jali the engine draws keeps guessed proportions, and C-032 has no range for its dials and no test for its
+output.
+
+**Limits (known before running):** the museums' screens are a small, uneven set, mostly panels made or collected in
+the 19th century, few from buildings still standing. Photos are not always square-on. Depth is not listed for every
+piece. Licence notes are not legal advice.
+
+---
+
+## C-032 · Can a generator built from a pattern's symmetry and the measured ranges make new jali designs that measure, and read, like real ones?
+
+**Status:** drafted. Opens when C-031 closes; fields 1, 4 and 5 are rewritten then with C-031's numbers.
+
+**1. Where we are.**
+(From C-031: each family's measured ranges, the jali test if there is one, and whether geometric jalis are strands or
+cells.)
+
+**2. What we are doing.**
+Write `engine/core/jali-design.js`, a generator in layers: a frame (rectangle, pointed arch, cusped arch); a symmetry
+(a wallpaper group with four- or six-fold turns, with or without mirrors); a pattern drawn in the group's fundamental
+region by Hankin's method on a tiling (4.8.8, 6.6.6, 4.6.12, 3.12.12, 4.4.4.4) at a contact angle; the cut (solid
+wherever a point lies within half a bar width of the pattern's lines, from a distance field, so the bars keep one
+width; open elsewhere); and the material and thickness, for C-028's screen model. Its dials are ranged by C-031. Then
+draw 24 designs, measure them with C-031's code, and lay them beside the samples on a sheet.
+
+**3. Why.**
+We don't know whether designs drawn this way, inside the measured ranges, measure like real jalis, or whether a person
+who doesn't know which is which can tell them apart.
+
+**4. What is affected.**
+- `engine/core/jali-design.js`, its check and demo; `pieces/jali/grammar.md`; `runs/c032/`.
+- C-028's screen model, Mughal Jali and Jali Light can take a generated design (a dial chooses; their own lattices
+  are kept).
+- The service and the MCP server gain the generator: dials and a seed in, an outline (SVG), an open and solid map
+  and a thickness out.
+
+**5. Conclusion.**
+- **If** at least 20 of the 24 designs fall inside their family's ranges on every C-031 measure (and pass the jali
+  test, if C-031 found one), and in a blind pick of 12 pairs (a generated design and a real one of the same family,
+  both as masks at the same size) the judge picks out the generated one in fewer than 10 → the generator makes
+  jalis, and the next piece is written in the same form.
+- **If** they measure inside but are picked out (10 or more of 12; 1 in 50 by chance) → the numbers miss what makes
+  a jali; the card records what the judge saw.
+- **If** they fall outside → the construction doesn't reach the real range; the card names the layer.
+
+**6. If not done.**
+The engine's jalis stay three fixed lattices, and nothing can make a new one.
+
+---
+
 ## C-030 · Can a request in words become several very different images through the engine, served over MCP, so that a client can find the right crafts, draw a scene, and get back finished pictures at the sizes a page needs?
 
 **Status:** closed

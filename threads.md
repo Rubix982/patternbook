@@ -287,3 +287,64 @@ gives a thickness. Museum catalogue entries (the Met's and the V&A's jali panels
 collect the proportions, and compare the narrowing and softening they predict with photographs of jali light at
 Fatehpur Sikri and Ahmedabad.
 **Answer:** —
+
+### T-031 · Can star fields that never repeat (cosines in 8, 10 or 12 directions) make screens that read as jali?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** A repeating jali can be at most six-fold as a whole; its eight-point stars are eight-fold only locally.
+A sum of cosines in N directions is N-fold everywhere and never repeats exactly. Do such screens read as jali, or as
+something no carver made? Lu and Steinhardt (2007) found near quasi-periodic girih in Isfahan; no jali is known to us
+that does it.
+**Answer:** —
+
+### T-032 · Did carvers ever bend a lattice to fit its arch instead of cropping it, and does a conformal map read better?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** C-032 crops its lattice by the frame. An angle-preserving map would bend it into the arch, keeping every
+star a star while the stars shrink toward the apex. Look for arched jalis whose pattern follows the arch, and compare
+cropped and bent designs in a blind pick.
+**Answer:** —
+
+### T-033 · Can a mirrored growth rule fill an arch with a tree the way the Ahmedabad tree screens do?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** Tree-of-life screens need a second rule. Space colonisation (Runions and others 2007) grows branches
+toward the empty space left in a frame; mirrored about the arch's axis, with C-031's measures for the tree family, does
+it give screens that measure and read like them?
+**Answer:** —
+
+### T-034 · What holds the eye in a jali?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** Candidates: a pattern that can be read several ways at once (stars, then octagons, then crosses); a
+balance of order and complexity (Birkhoff 1933); a second, smaller pattern seen only up close. Each could be measured
+on C-031's samples and C-032's designs and set against which designs people pick. None is a judge until it predicts
+picks.
+**Answer:** —
+
+### T-035 · Can a screen be designed backwards from the light it should cast?
+
+**Status:** open
+**Parent:** C-028
+**Opened:** 2026-11-22
+**Question:** A thick screen's light changes with the sun (C-028). Shadow Art (Mitra and Pauly 2009) shaped sculptures
+whose shadows match given pictures from given directions. Could one screen cast one motif on the floor in the morning
+and another in the evening, and does a carvable screen exist for useful pairs?
+**Answer:** —
+
+### T-036 · Would a screen designed for strength alone look like a jali?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** Topology optimisation (Bendsøe and Sigmund 2003) finds where a stone slab needs material to hold its own
+weight at a target open share. Compare what it leaves open with real jalis on C-031's measures.
+**Answer:** —
