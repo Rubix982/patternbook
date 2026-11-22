@@ -463,3 +463,64 @@ reliably taking real ones for generated. Candidates: other judges who haven't se
 in the same pick (real beside real, generated beside generated) to show a judge's lean; asking "which is real?" in half
 the rows; and a reading of the real screens' irregularity at the scale of several repeats, so the generator can carry it.
 **Answer:** —
+
+### T-047 · Can depth and normal models read a jali bar's section and the carving's depth from one museum photo?
+
+**Status:** answered (C-038)
+**Parent:** T-043
+**Opened:** 2026-11-22
+**Question:** Open models to try, first of six (a look at the field, 2026-11-22). Depth Anything V2 Small and DA3 Mono
+Large (Apache-2.0), Marigold depth (Apache-2.0) and normals (OpenRAIL++), StableNormal (Apache-2.0): can they recover a
+known bar section from a rendered relief, and what section do real jalis' bars have?
+**Answer:** C-038, for Depth Anything V2 Small and Marigold normals: neither passed a rendered control (1 and 2 of 3;
+the bevel read as flat). On the Met's photos Marigold's maps are detailed and nearest a rounded section; a control that
+looks like a photograph (a slab rendered with real light) is needed before trusting it. DA3, Marigold depth and
+StableNormal not tried.
+
+### T-048 · Can SAM 2.1, SAM 3 or BiRefNet give clean masks where brightness can't?
+
+**Status:** open
+**Parent:** T-038
+**Opened:** 2026-11-22
+**Question:** Second of six. SAM 2.1 (Apache-2.0), SAM 3 (a custom Meta licence), BiRefNet (MIT, made for fine
+structures): masks for the two jalis C-031 left out (white marble on grey, a tree in deep relief), checked by eye and on
+C-031's synthetic screens; and whether bar width's spread (C-033) can then be read back.
+**Answer:** —
+
+### T-049 · Can an intrinsic split take the shading out of a jali photo?
+
+**Status:** open
+**Parent:** T-038
+**Opened:** 2026-11-22
+**Question:** Third of six. Marigold's intrinsic model (albedo against shading, OpenRAIL++): does a mask from the albedo
+keep bars whole where a mask from brightness breaks them, and does the albedo give the stone's colour for building?
+**Answer:** —
+
+### T-050 · Can an open image-to-3D model rebuild a jali, through-holes and depth, from one photo?
+
+**Status:** open
+**Parent:** T-047
+**Opened:** 2026-11-22
+**Question:** Fourth of six. TripoSR (MIT, runs here), TRELLIS.2 (MIT, likely needs an NVIDIA GPU or a hosted demo, which
+means uploading the photo: asked first), Hunyuan3D-2 (a custom licence with territory limits). On public-domain photos:
+does the model come back with openings cut through, at a measured depth, or does it fill them?
+**Answer:** —
+
+### T-051 · Can StarVector read a jali's mask back into lines a grammar could fit?
+
+**Status:** open
+**Parent:** T-046
+**Opened:** 2026-11-22
+**Question:** Fifth of six. StarVector (1B, 8B; Apache-2.0), image to SVG: on generated masks whose lines are known and on
+real ones, how close are the lines it returns to the pattern's, and could a tiling and contact angle be fitted to them?
+**Answer:** —
+
+### T-052 · Can image features tell generated jalis from real ones, and on what?
+
+**Status:** open
+**Parent:** T-046
+**Opened:** 2026-11-22
+**Question:** Sixth of six. DINOv2 or SigLIP features (Apache-2.0) with a small real-against-generated test on top: if it
+can tell them apart, which crops does it find easiest, and does that match the writer's reversed picks?
+**Answer:** —
+

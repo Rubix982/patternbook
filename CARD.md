@@ -14,6 +14,80 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-038 · Can depth and normal models read a jali bar's section and the carving's depth from one museum photo?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+A mask shows what is cut through and nothing of the stone's shape: whether a bar is rounded, bevelled or flat across
+its width, and how deep the spandrels are carved, are guesses (T-043), and the 3D build needs both. A look at the field
+(2026-11-22) found open depth and normal models on the Hub; this is the first of six to try (T-047 to T-052).
+
+**2. What we are doing.**
+Run Depth Anything V2 Small (depth) and Marigold normals v1-1 (surface normals), both local, on (a) a control: three
+reliefs rendered from one generated design, each bar given a known section (flat-topped, rounded, bevelled at 45
+degrees), lit from the upper left with a little ambient; and (b) the Met's four public-domain jali photos. Across every
+bar (sampled at right angles, away from junctions, read by C-031's reader on the mask) read the profile: normalised
+depth from edge to edge, and the normal's tilt across it; class each design or photo's median profile as flat, rounded
+or bevelled by which of the three known profiles it is closest to.
+
+**3. Why.**
+We don't know whether a model reading one frontal photo can see a bar's section at all at this scale, or, if it can,
+what section real jalis' bars have.
+
+**4. What is affected.**
+- A separate environment for models (`.venv-models`, git-ignored; `requirements-models.txt`), `tools/screen_relief.py`,
+  `runs/c038/`.
+- If it reads: the bar section the 3D build uses, and `pieces/jali/grammar.md`.
+
+**5. Conclusion.**
+- **Control:** a model reads sections if, on all three rendered reliefs, its median profile is closest to the section
+  actually drawn.
+- **If** a model passes the control → its reading of the four Met photos is the bars' measured section (the card says
+  which, per photo, and whether they agree).
+- **If** neither passes → one frontal photo at museum resolution can't show a bar's section to these models; the
+  section stays a guess, or waits for photos taken at an angle.
+
+**6. If not done.**
+The 3D build cuts bars with a guessed section, and the carved relief that masks can't show stays unread.
+
+**Limits (known before running):** the control's relief is rendered, not photographed, so it is easier or harder than a
+photo in ways not known; the Met's photos are four, of two kinds of screen; downloads are a few gigabytes of model
+weights, kept on this machine.
+
+**How it ran.** Both models ran here, on the Mac's GPU, in their own environment (`.venv-models`,
+`requirements-models.txt`); the control and the Met's three readable photos took about a minute each pass. One of the
+four Met photos (met-453261, white marble on grey) was skipped, since C-031's reader can't split it (T-048).
+
+**Result (2026-11-22): neither model reads a bar's section from the rendered control. Depth Anything V2 Small read all
+three reliefs as flat (1 of 3); Marigold normals read the flat and rounded ones right and the bevelled one as flat (2 of
+3), so as written, one frontal picture at this scale doesn't show a bar's section to these models.** Looking at the
+maps rather than the numbers: Marigold returned a uniform, camera-facing surface for the flat and the bevelled reliefs
+(the bevels' faces drew no response) and normals turning across every bar for the rounded one (`runs/c038/`).
+
+**What the Met photos showed, beyond the rule.** On the real photographs Marigold's normal maps are detailed: bars stand
+out as surfaces with faces, the openings as drops. The median profile across bars is nearest the rounded section on all
+three (errors 0.127 to 0.179 against flat 0.26 to 0.36). The control never read a flat or bevelled relief as rounded, so
+this suggests real bars aren't flat across; but a ridge (two faces meeting along the bar's middle), which the maps look
+like to the eye and which the card's three sections didn't include, comes close on the marble screen when added after
+the fact (0.136 against 0.127) and not on the others. The control may also be the weak link: rendered from a height map,
+with stepped edges, no cast shadows and flat light, it looks less like carved stone than the photos do, and Marigold
+reads the photos far more richly. Telling which needs a control that looks like a photograph: a slab cut with a known
+section and rendered with real light, which is the 3D build's first step.
+
+**Claim:** read from one frontal picture, neither Depth Anything V2 Small nor Marigold normals told a flat, a rounded
+and a bevelled bar apart on a rendered relief (1 and 2 of 3); on three real Met screens Marigold's readings are nearest a
+rounded section, which a better control has to confirm.
+
+**Changes made:** `tools/screen_relief.py`; `requirements-models.txt` (the models' environment, `.venv-models/`,
+git-ignored); `runs/c038/` (the control's reliefs and every normal map; depth arrays and enlarged crops left out, as the
+tool remakes them); `threads.md` (T-047 answered; T-048 to T-052 queued).
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-037 · Can the generator compose a screen in real jalis' four layouts, so that whole generated screens can't be told from whole real ones?
 
 **Status:** closed
