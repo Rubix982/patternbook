@@ -1,0 +1,634 @@
+{
+ "size": 320,
+ "sett": 8,
+ "defaults": {
+  "sett": 8,
+  "slub": 0.25,
+  "beat": 0.2,
+  "wobble": 0.25,
+  "gap": 0.12,
+  "round": 0.55,
+  "dip": 0.35,
+  "fibre": 0.25,
+  "kind": "discontinuous",
+  "ratio": 2,
+  "bind": 6,
+  "suppScale": 1.5,
+  "wander": 0.25,
+  "turn": 0.35,
+  "sheen": 0,
+  "cut": 1
+ },
+ "off": [
+  {
+   "imperfections": "off",
+   "motif": "buti",
+   "kind": "discontinuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 3
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0,
+    "kind": "discontinuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "off",
+   "motif": "buti",
+   "kind": "continuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 3
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 1,
+    "near": 1,
+    "kind": "continuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "off",
+   "motif": "buti",
+   "kind": "cutwork",
+   "face": {
+    "iou": 1,
+    "longestFloat": 3
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0.614,
+    "kind": "cutwork"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "off",
+   "motif": "kalka",
+   "kind": "discontinuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0,
+    "kind": "discontinuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "off",
+   "motif": "kalka",
+   "kind": "continuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 1,
+    "near": 1,
+    "kind": "continuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "off",
+   "motif": "kalka",
+   "kind": "cutwork",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0.576,
+    "kind": "cutwork"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "off",
+   "motif": "vine and buti",
+   "kind": "discontinuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0,
+    "kind": "discontinuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "off",
+   "motif": "vine and buti",
+   "kind": "continuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 1,
+    "near": 1,
+    "kind": "continuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "off",
+   "motif": "vine and buti",
+   "kind": "cutwork",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0.679,
+    "kind": "cutwork"
+   },
+   "pass": true
+  }
+ ],
+ "results": [
+  {
+   "imperfections": "default",
+   "motif": "buti",
+   "kind": "discontinuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 3
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0,
+    "kind": "discontinuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "default",
+   "motif": "buti",
+   "kind": "continuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 3
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 1,
+    "near": 1,
+    "kind": "continuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "default",
+   "motif": "buti",
+   "kind": "cutwork",
+   "face": {
+    "iou": 1,
+    "longestFloat": 3
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0.61,
+    "kind": "cutwork"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "default",
+   "motif": "kalka",
+   "kind": "discontinuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0,
+    "kind": "discontinuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "default",
+   "motif": "kalka",
+   "kind": "continuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 1,
+    "near": 1,
+    "kind": "continuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "default",
+   "motif": "kalka",
+   "kind": "cutwork",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0.583,
+    "kind": "cutwork"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "default",
+   "motif": "vine and buti",
+   "kind": "discontinuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0,
+    "kind": "discontinuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "default",
+   "motif": "vine and buti",
+   "kind": "continuous",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 1,
+    "near": 1,
+    "kind": "continuous"
+   },
+   "pass": true
+  },
+  {
+   "imperfections": "default",
+   "motif": "vine and buti",
+   "kind": "cutwork",
+   "face": {
+    "iou": 1,
+    "longestFloat": 5
+   },
+   "ground": {
+    "floats": {
+     "want": {
+      "warp": 1,
+      "weft": 1
+     },
+     "got": {
+      "warp": 1,
+      "weft": 1
+     }
+    },
+    "floatsOk": true,
+    "signature": 1,
+    "pass": true
+   },
+   "back": {
+    "far": 0,
+    "near": 0.69,
+    "kind": "cutwork"
+   },
+   "pass": true
+  }
+ ],
+ "confusion": [
+  {
+   "rendered": "buti",
+   "expected": "kalka",
+   "iou": 0.128,
+   "pass": false
+  },
+  {
+   "rendered": "buti",
+   "expected": "vine and buti",
+   "iou": 0.159,
+   "pass": false
+  },
+  {
+   "rendered": "kalka",
+   "expected": "buti",
+   "iou": 0.128,
+   "pass": false
+  },
+  {
+   "rendered": "kalka",
+   "expected": "vine and buti",
+   "iou": 0.112,
+   "pass": false
+  },
+  {
+   "rendered": "vine and buti",
+   "expected": "buti",
+   "iou": 0.159,
+   "pass": false
+  },
+  {
+   "rendered": "vine and buti",
+   "expected": "kalka",
+   "iou": 0.112,
+   "pass": false
+  }
+ ],
+ "sweep": [
+  {
+   "factor": 1.5,
+   "passed": 9,
+   "of": 9,
+   "failed": []
+  },
+  {
+   "factor": 2,
+   "passed": 9,
+   "of": 9,
+   "failed": []
+  },
+  {
+   "factor": 3,
+   "passed": 0,
+   "of": 9,
+   "failed": [
+    "buti/discontinuous",
+    "buti/continuous",
+    "buti/cutwork",
+    "kalka/discontinuous",
+    "kalka/continuous",
+    "kalka/cutwork",
+    "vine and buti/discontinuous",
+    "vine and buti/continuous",
+    "vine and buti/cutwork"
+   ]
+  }
+ ]
+}

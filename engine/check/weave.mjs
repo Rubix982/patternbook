@@ -9,74 +9,9 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { STRUCTURES, fromDraft, drawdown, floats, cloth, DEFAULTS, OFF } from '../core/weave.js';
+import { modeOf, classifyDarkLight as classify, floatModes, signature as sig } from './readback.mjs';
 
 const SIZE = 320, SETT = 8;
-const mod = (a, n) => ((a % n) + n) % n;
-const modeOf = (xs) => {
-  const c = new Map();
-  for (const x of xs) c.set(x, (c.get(x) || 0) + 1);
-  return [...c.entries()].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0]?.[0] ?? null;
-};
-
-// 1 = warp on top (dark), 0 = weft on top (light), -1 = can't tell (gap, or a thread darkened where it turns)
-function classify(img) {
-  const T = new Int8Array(img.width * img.height);
-  for (let p = 0; p < T.length; p++) {
-    const L = 0.2126 * img.rgb[p * 3] + 0.7152 * img.rgb[p * 3 + 1] + 0.0722 * img.rgb[p * 3 + 2];
-    T[p] = L < 0.3 ? 1 : L > 0.55 ? 0 : -1;
-  }
-  return T;
-}
-
-function floatModes(T, w, h, sett, pickSett) {
-  const warpRuns = [], weftRuns = [];
-  for (let x = 0; x < w; x++) { // warp floats run down a column
-    let y = 0;
-    while (y < h) {
-      if (T[y * w + x] !== 1) { y++; continue; }
-      const y0 = y;
-      while (y < h && T[y * w + x] === 1) y++;
-      if (y0 > 0 && y < h && y - y0 >= 0.5 * pickSett) warpRuns.push(Math.round((y - y0) / pickSett));
-    }
-  }
-  for (let y = 0; y < h; y++) { // weft floats run along a row
-    let x = 0;
-    while (x < w) {
-      if (T[y * w + x] !== 0) { x++; continue; }
-      const x0 = x;
-      while (x < w && T[y * w + x] === 0) x++;
-      if (x0 > 0 && x < w && x - x0 >= 0.5 * sett) weftRuns.push(Math.round((x - x0) / sett));
-    }
-  }
-  return { warp: modeOf(warpRuns), weft: modeOf(weftRuns) };
-}
-
-function pearson(pairs) {
-  let n = 0, sx = 0, sy = 0, sxx = 0, syy = 0, sxy = 0;
-  for (const [a, b] of pairs) { n++; sx += a; sy += b; sxx += a * a; syy += b * b; sxy += a * b; }
-  const vx = sxx / n - (sx / n) ** 2, vy = syy / n - (sy / n) ** 2;
-  if (n < 10 || vx < 1e-9 || vy < 1e-9) return null;
-  return (sxy / n - (sx / n) * (sy / n)) / Math.sqrt(vx * vy);
-}
-
-function imageR(T, w, h, k, l, sett, pickSett) {
-  const dx = Math.round(k * sett), dy = Math.round(l * pickSett);
-  const pairs = [];
-  for (let y = Math.max(0, -dy); y < Math.min(h, h - dy); y += 1)
-    for (let x = Math.max(0, -dx); x < Math.min(w, w - dx); x += 1) {
-      const a = T[y * w + x], b = T[(y + dy) * w + (x + dx)];
-      if (a >= 0 && b >= 0) pairs.push([a, b]);
-    }
-  return pearson(pairs);
-}
-
-function unitR(unit, k, l) {
-  const pairs = [];
-  for (let i = 0; i < unit.picks * 4; i++)
-    for (let j = 0; j < unit.ends * 4; j++)
-      pairs.push([unit.up(mod(i, unit.picks), mod(j, unit.ends)) ? 1 : 0, unit.up(mod(i + l, unit.picks), mod(j + k, unit.ends)) ? 1 : 0]);
-  return pearson(pairs);
-}
 
 function check(name, unit, imperfections, expect = unit) {
   const img = cloth({ unit, width: SIZE, height: SIZE, sett: SETT, warp: ['#111111'], weft: ['#f2f2f2'], ground: '#808080', seed: 7, ...imperfections });
@@ -84,24 +19,9 @@ function check(name, unit, imperfections, expect = unit) {
   const want = floats(expect);
   const got = floatModes(T, SIZE, SIZE, SETT, SETT);
   const wantMode = { warp: modeOf(want.warp), weft: modeOf(want.weft) };
-  let strong = 0, agree = 0;
-  const offsets = [];
-  // Both directions: an offset strong in the expected structure must show in the image, and an offset strong in the
-  // image must be predicted by the expected structure. (One direction alone let twill 2/2 pass as basket 2/2, whose
-  // strong offsets are a subset of twill's.)
-  for (let k = -4; k <= 4; k++) for (let l = -4; l <= 4; l++) {
-    if (!k && !l) continue;
-    const ru = unitR(expect, k, l);
-    const ri = imageR(T, SIZE, SIZE, k, l, SETT, SETT);
-    const strongU = ru !== null && Math.abs(ru) >= 0.5, strongI = ri !== null && Math.abs(ri) >= 0.5;
-    if (!strongU && !strongI) continue;
-    strong++;
-    const ok = ru !== null && ri !== null && Math.sign(ri) === Math.sign(ru) && Math.abs(ri) >= 0.15 && Math.abs(ru) >= 0.2;
-    if (ok) agree++;
-    offsets.push({ k, l, unit: ru === null ? null : +ru.toFixed(2), image: ri === null ? null : +ri.toFixed(2), ok });
-  }
+  const sg = sig(T, SIZE, SIZE, expect, SETT, SETT);
+  const signature = sg.score, strong = sg.strong, offsets = sg.offsets;
   const floatsOk = got.warp === wantMode.warp && got.weft === wantMode.weft;
-  const signature = strong ? agree / strong : 1;
   return { name, floats: { want: wantMode, got }, floatsOk, signature: +signature.toFixed(3), strongOffsets: strong,
            pass: floatsOk && signature >= 0.95, offsets };
 }

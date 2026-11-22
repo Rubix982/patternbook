@@ -14,6 +14,89 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-020 · Can a supplementary weft lie over the woven ground so that motif, binding and ground all read back, and the back tells continuous from discontinuous?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+`weave-draft` (C-019) weaves a ground from a draft and reads back through its imperfections. Supplementary weft,
+the extra non-structural weft that makes the figure in jamdani and Banarasi brocade, isn't covered by any primitive
+(C-018). Sources describe two kinds: discontinuous, where the extra weft is laid only inside each motif (jamdani, put
+in by hand with small spools; Banarasi kadhua, with no floats on the back between figures), and continuous, running
+selvedge to selvedge with floats on the back, which in Banarasi cutwork are clipped afterwards.
+
+**2. What we are doing.**
+Write `engine/core/supplementary.js`: a thicker extra weft laid over a `weave-draft` ground along pattern lines, on
+the face where a motif bitmap says, tied down by a binding warp end every so many ends, in three kinds (discontinuous,
+continuous, cutwork), seen from the face or the back; then read the motif, the binding, the ground and the kind back
+from the rendered cloth alone.
+
+**3. Why.**
+We don't know whether laying an extra weft over the ground keeps the ground's structure readable around the motifs,
+or whether one primitive can carry both kinds in a way that only the back tells apart, as it does on the loom.
+
+**4. What is affected.**
+- `engine/core/supplementary.js`, its check, sheet and demo; `engine/core/weave.js` returns its thread geometry so
+  the extra weft lies on the same threads.
+- `processes/primitives.md`: a `supplementary-weft` entry; the gap list.
+- The atlas elements it serves: jamdani, Banarasi brocade and the named handloom saris with woven figures.
+
+**5. Conclusion.**
+Read back from images only, at the default imperfections, over three motifs:
+- face: the motif recovered with IoU of at least 0.9 once binding points are closed; no float on the face longer than
+  the binding allows;
+- ground: outside the motifs, the ground's structure reads back as in C-019;
+- back: each of the three kinds is told apart by how much extra weft shows outside the motifs (9 cases).
+- **If** all hold → we claim *supplementary weft is covered*, in both kinds.
+- **If** the face and ground hold but the back can't tell the kinds apart → the kinds are drawn alike, and the card
+  says what the back is missing.
+- **If** the ground stops reading back around the motifs → laying the extra weft disturbs the ground, and the card
+  says how.
+
+**6. If not done.**
+Jamdani and brocade, two of the atlas's most named weaves, stay out of reach, and so do most of the woven saris among
+its geographical indications.
+
+**Limits (known before running):** the extra weft is drawn as a layer over the ground along pattern lines, not as
+picks inserted into the ground's sequence; how a jamdani weaver forms the shed for each motif pick wasn't found in the
+sources read. The read-back assigns pixels to cells by nominal thread spacing. Likeness to real jamdani or brocade is a
+later blind pick.
+
+**Result (2026-11-22):** first branch, after a fault in the read-back was found and fixed. **Over three figures (a
+stepped buti, a kalka, a vine border with buti) and three kinds, read from the image alone at the default
+imperfections: the figure is recovered exactly (IoU 1.0), no face float is longer than the binding allows (5 ends at
+most with a binding end every 6), the ground reads back as plain weave around the figures, and the back tells all
+nine cases apart** (outside the figures: continuous 1.0 covered; cutwork 0.58-0.69 beside the figure and 0 beyond it;
+discontinuous 0).
+
+**The fault, recorded.** The first run assigned pixels to cells by the nominal thread spacing, as the card's limits
+said it would. With the imperfections off everything passed; at the defaults the figure read back at IoU 0.49-0.70
+while the ground and the back still passed. Uneven yarn and beat add up across the cloth until the real threads sit up
+to half a thread from where a ruler puts them. The read-back now counts threads in the image (`trackBoundaries` in
+`engine/check/readback.mjs`): each next boundary is the lowest point of the warp or weft colour's profile within 0.6
+to 1.45 thread-spacings of the last. It still uses no knowledge of the figure; it uses the weaving plan a reader would
+know (ground picks per pattern line, the binding interval), which is how "once binding points are closed" in the
+conclusion was applied: the figure is compared with itself less its binding points.
+
+**Can it fail?** Each figure's face read against the other figures scores IoU 0.11-0.16 (0 of 6 pass). The kinds are
+three-way: all nine read correctly. Imperfections: all nine pass at 1.5 and twice the defaults, none at three times.
+
+**Claim:** supplementary weft is covered, in both kinds and cutwork. The face is the same for all three, as on the
+loom; the back tells them apart.
+
+**Changes made:**
+- `engine/core/supplementary.js` (`figured`, `bitmap`, `layout`, `band`, `MOTIFS`); `engine/core/weave.js` returns its
+  thread geometry (checked byte for byte: its images are unchanged).
+- `engine/check/readback.mjs`, shared by both checks (the weave check gives the same results on it);
+  `engine/check/supplementary.mjs`, `supplementary-sheet.mjs`; `engine/demo/supplementary.html`.
+- `processes/primitives.md`: the `supplementary-weft` entry.
+- `runs/c020/check.json`, `runs/c020/supplementary-sheet.png`.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-019 · Can one primitive weave plain, twill, basket and satin from a draft, and keep the structure readable through the cloth's imperfections?
 
 **Status:** closed

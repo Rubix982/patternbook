@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supplementary weft</title>
+<style>
+  :root { --bg: #f4f1ea; --ink: #1d1b17; --muted: #6b655b; --line: #d8d1c4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { color: var(--muted); margin: 0 0 16px; max-width: 72ch; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  fieldset { border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 12px; }
+  legend { color: var(--muted); font-size: 13px; }
+  label { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+  label.wide { grid-template-columns: 90px 1fr; }
+  input[type=text], select { width: 100%; font: inherit; font-size: 13px; padding: 3px 5px; }
+  output { font-variant-numeric: tabular-nums; color: var(--muted); }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Supplementary weft</h1>
+  <p class="lede">The primitive <code>supplementary-weft</code> (card C-020): an extra, thicker weft laid over a woven
+    ground along pattern lines, on the face only where the figure is, tied down by a binding warp end every few ends.
+    Discontinuous (jamdani, Banarasi kadhua), continuous (floats on the back) or cutwork (the back's floats clipped);
+    switch to the back to tell them apart. Served pages only (GitHub Pages or <code>python3 -m http.server</code>).</p>
+  <div class="wrap">
+    <canvas id="c" width="560" height="560"></canvas>
+    <form id="f">
+      <fieldset><legend>Figure</legend>
+        <label class="wide">motif <select name="motif"><option>buti</option><option>kalka</option><option value="vine">vine border and buti</option></select></label>
+        <label class="wide">kind <select name="kind"><option>discontinuous</option><option>continuous</option><option>cutwork</option></select></label>
+        <label class="wide">side <select name="side"><option>face</option><option>back</option></select></label>
+        <label>bind <input type="range" name="bind" min="3" max="10" step="1" value="6"><output></output></label>
+        <label>ratio <input type="range" name="ratio" min="1" max="3" step="1" value="2"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Threads</legend>
+        <label class="wide">ground <select name="ground"></select></label>
+        <label class="wide">warp <input type="text" name="warp" value="#ebe5d6"></label>
+        <label class="wide">weft <input type="text" name="weft" value="#f3eee2"></label>
+        <label class="wide">extra weft <input type="text" name="supp" value="#7a1f2b"></label>
+        <label>thickness <input type="range" name="suppScale" min="1" max="2.5" step="0.05" value="1.5"><output></output></label>
+        <label>sheen <input type="range" name="sheen" min="0" max="1" step="0.01" value="0"><output></output></label>
+        <label>sett <input type="range" name="sett" min="4" max="14" step="1" value="7"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Imperfections</legend>
+        <label>wander <input type="range" name="wander" min="0" max="1" step="0.01" value="0.25"><output></output></label>
+        <label>turn <input type="range" name="turn" min="0" max="1" step="0.01" value="0.35"><output></output></label>
+        <label>slub <input type="range" name="slub" min="0" max="1" step="0.01" value="0.25"><output></output></label>
+        <label>beat <input type="range" name="beat" min="0" max="1" step="0.01" value="0.2"><output></output></label>
+        <label>wobble <input type="range" name="wobble" min="0" max="1" step="0.01" value="0.25"><output></output></label>
+        <label>seed <input type="range" name="seed" min="1" max="99" step="1" value="4"><output></output></label>
+      </fieldset>
+    </form>
+  </div>
+</main>
+<script type="module">
+  import { STRUCTURES, paint, DEFAULTS } from '../core/weave.js';
+  import { figured, MOTIFS, layout, band } from '../core/supplementary.js';
+  const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
+  for (const n of Object.keys(STRUCTURES)) f.elements.ground.add(new Option(n, n));
+  const colours = (s, d) => { const v = s.split(/[\s,]+/).filter((x) => /^#?[0-9a-f]{6}$/i.test(x)).map((x) => (x[0] === '#' ? x : '#' + x)); return v.length ? v : d; };
+  const motifs = {
+    buti: layout(MOTIFS.buti, { across: 15, down: 12 }),
+    kalka: layout(MOTIFS.kalka, { across: 17, down: 15 }),
+    vine: (p, j) => band(MOTIFS.vine, { y0: 2 })(p, j) || layout(MOTIFS.buti, { across: 16, down: 13, y0: 10 })(p, j),
+  };
+  function draw() {
+    const v = Object.fromEntries(new FormData(f));
+    for (const o of f.querySelectorAll('output')) o.value = o.previousElementSibling.value;
+    const img = figured({ ...DEFAULTS, width: c.width, height: c.height, on: motifs[v.motif], kind: v.kind, side: v.side,
+      bind: +v.bind, ratio: +v.ratio, ground: STRUCTURES[v.ground], warp: colours(v.warp, ['#ebe5d6']), weft: colours(v.weft, ['#f3eee2']),
+      supp: colours(v.supp, ['#7a1f2b']), suppScale: +v.suppScale, sheen: +v.sheen, sett: +v.sett, wander: +v.wander, turn: +v.turn,
+      slub: +v.slub, beat: +v.beat, wobble: +v.wobble, seed: +v.seed });
+    paint(ctx, img);
+  }
+  f.addEventListener('input', draw);
+  draw();
+</script>
+</body>
+</html>

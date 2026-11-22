@@ -105,7 +105,8 @@ function find(b, x) {
 //   round           how strongly a thread's roundness shades across it (0 to 1)
 //   dip             how much a thread darkens where it curves under at a float's end (0 to 1)
 //   fibre           fine along-thread variation in tone (0 to 1)
-// Returns { width, height, rgb (Float32Array, 0 to 1), top (Uint8Array: 1 warp, 0 weft, 2 gap) }.
+// Returns { width, height, rgb (Float32Array, 0 to 1), top (Uint8Array: 1 warp, 0 weft, 2 gap) }, and the thread
+// geometry (xb, yb, disp, half) so a layer drawn over the cloth (a supplementary weft) lies on the same threads.
 export function cloth(opts) {
   const {
     unit, width = 320, height = 320, sett = 8, pickSett = sett,
@@ -122,10 +123,12 @@ export function cloth(opts) {
   const half = (1 - gap) / 2;
   const up = (i, j) => unit.up(mod(i, unit.picks), mod(j, unit.ends));
   const amp = wobble * 0.22;
+  // where a pixel sits on the threads, after the threads' wander: shared with layers drawn over the cloth
+  const disp = (x, y) => [x + amp * sett * noise2(x / (sett * 9), y / (sett * 9), seed + 11),
+    y + amp * pickSett * noise2(x / (pickSett * 9) + 50, y / (pickSett * 9), seed + 13)];
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
-      const xs = x + amp * sett * noise2(x / (sett * 9), y / (sett * 9), seed + 11);
-      const ys = y + amp * pickSett * noise2(x / (pickSett * 9) + 50, y / (pickSett * 9), seed + 13);
+      const [xs, ys] = disp(x, y);
       const j = find(xb, Math.max(0, xs)), i = find(yb, Math.max(0, ys));
       const s = (xs - xb[j]) / (xb[j + 1] - xb[j]) - 0.5, t = (ys - yb[i]) / (yb[i + 1] - yb[i]) - 0.5;
       const warpHere = Math.abs(s) < half, weftHere = Math.abs(t) < half;
@@ -156,7 +159,8 @@ export function cloth(opts) {
       top[y * width + x] = who;
     }
   }
-  return { width, height, rgb, top };
+  // xb, yb: thread boundaries (pixels, before wander); disp: the wander; half: a thread's half-width as a share
+  return { width, height, rgb, top, xb, yb, disp, half, sett, pickSett };
 }
 
 // Paint a rendered cloth into a canvas 2D context (browser only).
