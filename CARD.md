@@ -16,7 +16,7 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ## C-035 · Can the writer tell the generator's patterns from real jalis' when the photograph, the labels and the frame are taken away?
 
-**Status:** open
+**Status:** closed
 **Opened:** 2026-11-22
 
 **1. Where we are.**
@@ -55,11 +55,47 @@ The writer's impression stays unmeasured, and C-036 can't show whether uneven ba
 the generator's six tilings don't include the girih rosettes of some real screens, so a pattern's family may give it
 away apart from how it is drawn; masks from photographs keep some of a photo's noise after the blur and threshold.
 
+**How it ran.** The first 12 of C-032's rule to measure inside real jalis' ranges, with the measured irregularity, were
+designs 1, 2, 7, 11, 12, 13, 16, 17, 20, 22, 26 and 27 (12 of the first 36). Before the page was shown, the 24 crops were
+looked over for processing faults; two looked odd (a solid blob, merged openings) and both were what their source is
+(the real screen's solid surround of its door; the generator breaking some bars at the measured jitter and drift in
+design 22), so neither was changed. The scoring script first wrote the right-hand image's name and the pick's
+correctness to one field; fixed and rescored from the unchanged key.
+
+**Result (2026-11-22): the writer picked the generated one in 5 of 12; 10 were needed to say the patterns give
+themselves away. At the level of the pattern (masks, five repeats, no frame) the writer can't reliably tell generated
+from real.** The writer: "Some results are GENUINELY hard to tell as generated or not, or just masks of actual original
+pictures, like (6), (7), (10)" (6 and 10 picked right, 7 wrong). In 7 rows the writer took the real screen for the
+generated one, including both 16th-century Met screens and vam-O167205's sixteen-point rosette, which the generator
+can't draw. Design 22's broken bars didn't give it away: the writer took the real screen in that row for the generated
+one (`runs/c035/result.json`).
+
+**The sides weren't balanced.** Seed 35 put the generated design on the left in 10 of 12 rows (about 1 in 25 by chance),
+and the writer picked the right in 9 of 12, so a judge who always picked left would have scored 10 and one who always
+picked right 2. Split by side, the writer picked left in 3 of the 10 rows with the generated on the left and in 0 of the
+2 with it on the right: no sign of telling them apart either way, but the next pick fixes six on each side by design.
+
+**What it changes for C-036.** At this level the count is already at chance, so uneven bars and age can't show as an
+improvement in the same test: they live in the stone's surface and edges, which a blurred five-repeat mask hides. C-036's
+pick has to show more (more repeats, no blur, or the stone itself), with C-035's generator in the same pick as its
+baseline.
+
+**Claim:** shown as black-and-white masks of five repeats, with the photograph, the frame and the labels taken away, the
+generator's jalis, drawn with real jalis' measured irregularity, couldn't be told from real ones by the writer: 5 of 12
+picked right, where guessing gives 6. One judge, unbalanced sides; the pattern only, not the stone, the light or the
+composition.
+
+**Changes made:** `tools/jali_blind.py`, `engine/check/jali-blind.mjs`, `runs/c035/` (the candidates' recipes and
+measures, `inside.json`, `result.json`; the pick page and its real crops stay local in `runs/c035/blind/`).
+
+**Closed:** 2026-11-22
+
 ---
 
 ## C-036 · Do bars cut one by one, from uneven stone, and worn by time, make generated jalis harder to tell from real ones?
 
-**Status:** drafted. Opens after C-035, with its count as the starting point.
+**Status:** drafted. Opens after C-035, with its count as the starting point: 5 of 12, at chance, so its pick must show
+more than C-035's did (see C-035's result).
 
 **1. Where we are.**
 How much bars differ from one another, each read by its median width (a check before this card, 2026-11-22):
