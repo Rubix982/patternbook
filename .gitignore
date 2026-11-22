@@ -9,3 +9,6 @@ runs/c031/sheet-*.jpg
 runs/c031/synthetic/*.png
 runs/c031/overlays/*.png
 tools/__pycache__/
+runs/c032/designs/*.png
+runs/c032/directions/*.png
+runs/c032/hand-sketch/*.png

@@ -886,6 +886,43 @@ notches at $R_2$ is open where $\sqrt{u^2+v^2}<r(\phi)$, $r$ the polar radius of
 **Entered:** C-031. **Checked:** eight- and twelve-point star slabs and a twelve-petal rosette read back their star's
 order, corners, opening width and openings per junction (`runs/c031/readback.json`).
 
+### polygons-in-contact
+**Name:** Hankin's rays on a tiling
+**Plain words:** in every polygon of a tiling, from the middle of each edge send two rays into the polygon at the same
+angle to the edge, one leaning towards each of its ends; each ray stops where it meets the ray leaning back from the
+next edge. Rays from polygons that share an edge cross at its middle, so the lines run on as strands crossing in pairs.
+Turning the angle turns one tiling into many star patterns: near 90° the rays meet at each polygon's centre, near 0
+they hug its edges.
+**Maths:** edge $i$ with middle $\mathbf m_i$, direction $\mathbf u_i$ and inward normal $\mathbf n_i$; contact angle $\theta$:
+$\mathbf d_i=\cos\theta\,\mathbf u_i+\sin\theta\,\mathbf n_i$ and $\mathbf d'_{i+1}=-\cos\theta\,\mathbf u_{i+1}+\sin\theta\,\mathbf n_{i+1}$;
+they meet at $\mathbf m_i+s\,\mathbf d_i$ with $s=\dfrac{(\mathbf m_{i+1}-\mathbf m_i)\times\mathbf d'_{i+1}}{\mathbf d_i\times\mathbf d'_{i+1}}$, kept if
+both parameters are positive. Tilings (one repeat each): 4.4.4.4, 6.6.6, 4.8.8 (octagon side $a/(1+\sqrt2)$), 3.12.12
+(dodecagon apothem $a/2$), 4.6.12 (side $a/(3+\sqrt3)$), 3.6.3.6. The tiling's own edges give cells instead.
+**Helpers:** `engine/core/jali-design.js` (`TILINGS`, `hankin`, `edgesOf`, `designJali`).
+**Entered:** C-032 (Hankin 1925; Kaplan and Salesin 2004). **Checked:** as designs measured by C-031's reader: 9 of 24
+fall inside real jalis' ranges (`runs/c032/result.json`).
+
+### arch-frame
+**Name:** a screen's field: rectangle, pointed arch, cusped arch
+**Plain words:** the pattern fills a field inside a solid border; a pointed arch is two circles crossing above a
+rectangle, a cusped one has small lobes of stone along its curves.
+**Maths:** field width $W$, arcs of radius $R=0.85W$ centred on the springing line at $R$ in from each side; the rise is
+$\sqrt{R^2-(R-W/2)^2}$; a point is in the arch if within $R$ of both centres; cusps are discs of radius $0.055W$ at
+five even steps along each arc.
+**Helpers:** `engine/core/jali-design.js` (`frameField`).
+**Entered:** C-032. The cusps read as steps rather than lobes (`runs/c032/designs-sheet.jpg`).
+
+### carving-errors
+**Name:** what the carving got slightly wrong
+**Plain words:** the setting-out wanders across a panel, each meeting point sits a little off, bars come out unevenly
+wide, the tool rounds an opening's corners, and wear roughens the edges.
+**Maths:** with lattice spacing $a$ and smooth noise $n$: drift moves each line's ends by $\delta\,a\,n(\mathbf x/3a)$; jitter by
+$j\,a\,(2h(\mathbf x)-1)$, $h$ a hash of where the point is, so ends that meet move together; the bar varies as
+$w\,(1+\eta\,n)$; rounding is a morphological opening of the open area by a disc of radius $\rho w$; wear moves the edge
+along its signed distance by $\omega\,w\,n(\mathbf x/0.8w)$.
+**Helpers:** `engine/core/jali-design.js` (`drift`, `jitter`, `hand`, `round`, `wear`; all 0 by default).
+**Entered:** C-032. **Not measured:** amplitudes are guesses until read from real screens (T-040).
+
 ## What the subcontinent's crafts need that the primitives don't yet cover
 
 _Since C-018: warp and weft from a draft is covered by `weave-draft` (C-019); supplementary weft, both kinds, by

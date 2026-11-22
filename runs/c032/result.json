@@ -1,0 +1,605 @@
+{
+ "ranges": {
+  "open_share": [
+   0.362,
+   0.6006
+  ],
+  "bar_over_opening": [
+   0.3065,
+   0.8871
+  ],
+  "per_junction": [
+   0.496,
+   1.7177
+  ],
+  "rotation": [
+   2,
+   4,
+   6
+  ],
+  "star": [
+   3,
+   10
+  ]
+ },
+ "inside_all": 9,
+ "of": 24,
+ "fails_by_measure": {
+  "open_share": 11,
+  "bar_over_opening": 9,
+  "per_junction": 4,
+  "rotation": 0,
+  "star": 5
+ },
+ "open_share_below": [
+  "design-03",
+  "design-05",
+  "design-08",
+  "design-09",
+  "design-15",
+  "design-18",
+  "design-19",
+  "design-20",
+  "design-21",
+  "design-24"
+ ],
+ "open_share_above": [
+  "design-23"
+ ],
+ "bar_target_vs_read": {
+  "design-01": [
+   0.312,
+   0.3322
+  ],
+  "design-02": [
+   0.498,
+   0.6385
+  ],
+  "design-03": [
+   0.332,
+   0.405
+  ],
+  "design-04": [
+   0.503,
+   0.1854
+  ],
+  "design-05": [
+   0.758,
+   0.7474
+  ],
+  "design-06": [
+   0.311,
+   0.3095
+  ],
+  "design-07": [
+   0.346,
+   0.34
+  ],
+  "design-08": [
+   0.673,
+   0.987
+  ],
+  "design-09": [
+   0.804,
+   1.1328
+  ],
+  "design-10": [
+   0.842,
+   0.2131
+  ],
+  "design-11": [
+   0.617,
+   0.5643
+  ],
+  "design-12": [
+   0.354,
+   0.381
+  ],
+  "design-13": [
+   0.519,
+   0.6058
+  ],
+  "design-14": [
+   0.557,
+   0.2169
+  ],
+  "design-15": [
+   0.544,
+   0.8662
+  ],
+  "design-16": [
+   0.394,
+   0.4533
+  ],
+  "design-17": [
+   0.422,
+   0.4334
+  ],
+  "design-18": [
+   0.66,
+   1.025
+  ],
+  "design-19": [
+   0.5,
+   0.5031
+  ],
+  "design-20": [
+   0.533,
+   0.5831
+  ],
+  "design-21": [
+   0.569,
+   1.0215
+  ],
+  "design-22": [
+   0.447,
+   0.4191
+  ],
+  "design-23": [
+   0.35,
+   0.1336
+  ],
+  "design-24": [
+   0.869,
+   1.0728
+  ]
+ },
+ "designs": [
+  {
+   "id": "design-01",
+   "kind": "strands",
+   "tiling": "6.6.6",
+   "target_bar_over_opening": 0.312,
+   "open_share": 0.5704,
+   "bar_over_opening": 0.3322,
+   "per_junction": 0.7732,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-02",
+   "kind": "strands",
+   "tiling": "4.8.8",
+   "target_bar_over_opening": 0.498,
+   "open_share": 0.4384,
+   "bar_over_opening": 0.6385,
+   "per_junction": 0.5561,
+   "rotation": 4,
+   "star": 8,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-03",
+   "kind": "strands",
+   "tiling": "3.12.12",
+   "target_bar_over_opening": 0.332,
+   "open_share": 0.2918,
+   "bar_over_opening": 0.405,
+   "per_junction": 1.4507,
+   "rotation": 6,
+   "star": 12,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": false
+   },
+   "all": false
+  },
+  {
+   "id": "design-04",
+   "kind": "cells",
+   "tiling": "4.6.12",
+   "target_bar_over_opening": 0.503,
+   "open_share": 0.5642,
+   "bar_over_opening": 0.1854,
+   "per_junction": 0.5073,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": false,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-05",
+   "kind": "strands",
+   "tiling": "3.6.3.6",
+   "target_bar_over_opening": 0.758,
+   "open_share": 0.2922,
+   "bar_over_opening": 0.7474,
+   "per_junction": 0.9106,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-06",
+   "kind": "strands",
+   "tiling": "4.4.4.4",
+   "target_bar_over_opening": 0.311,
+   "open_share": 0.5148,
+   "bar_over_opening": 0.3095,
+   "per_junction": 1.0052,
+   "rotation": 4,
+   "star": 4,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-07",
+   "kind": "strands",
+   "tiling": "6.6.6",
+   "target_bar_over_opening": 0.346,
+   "open_share": 0.4399,
+   "bar_over_opening": 0.34,
+   "per_junction": 1.4657,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-08",
+   "kind": "cells",
+   "tiling": "4.8.8",
+   "target_bar_over_opening": 0.673,
+   "open_share": 0.3013,
+   "bar_over_opening": 0.987,
+   "per_junction": 1.0057,
+   "rotation": 4,
+   "star": 8,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": false,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-09",
+   "kind": "strands",
+   "tiling": "3.12.12",
+   "target_bar_over_opening": 0.804,
+   "open_share": 0.2037,
+   "bar_over_opening": 1.1328,
+   "per_junction": 4.672,
+   "rotation": 6,
+   "star": 12,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": false,
+    "per_junction": false,
+    "rotation": true,
+    "star": false
+   },
+   "all": false
+  },
+  {
+   "id": "design-10",
+   "kind": "strands",
+   "tiling": "4.6.12",
+   "target_bar_over_opening": 0.842,
+   "open_share": 0.3733,
+   "bar_over_opening": 0.2131,
+   "per_junction": 1.6667,
+   "rotation": 6,
+   "star": 12,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": false,
+    "per_junction": true,
+    "rotation": true,
+    "star": false
+   },
+   "all": false
+  },
+  {
+   "id": "design-11",
+   "kind": "strands",
+   "tiling": "3.6.3.6",
+   "target_bar_over_opening": 0.617,
+   "open_share": 0.3852,
+   "bar_over_opening": 0.5643,
+   "per_junction": 1.0458,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-12",
+   "kind": "cells",
+   "tiling": "4.4.4.4",
+   "target_bar_over_opening": 0.354,
+   "open_share": 0.5525,
+   "bar_over_opening": 0.381,
+   "per_junction": 1.0033,
+   "rotation": 4,
+   "star": 4,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-13",
+   "kind": "strands",
+   "tiling": "6.6.6",
+   "target_bar_over_opening": 0.519,
+   "open_share": 0.3814,
+   "bar_over_opening": 0.6058,
+   "per_junction": 0.9999,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-14",
+   "kind": "strands",
+   "tiling": "4.8.8",
+   "target_bar_over_opening": 0.557,
+   "open_share": 0.5222,
+   "bar_over_opening": 0.2169,
+   "per_junction": 1.7813,
+   "rotation": 4,
+   "star": 8,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": false,
+    "per_junction": false,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-15",
+   "kind": "strands",
+   "tiling": "3.12.12",
+   "target_bar_over_opening": 0.544,
+   "open_share": 0.2736,
+   "bar_over_opening": 0.8662,
+   "per_junction": 0.5046,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-16",
+   "kind": "cells",
+   "tiling": "4.6.12",
+   "target_bar_over_opening": 0.394,
+   "open_share": 0.3622,
+   "bar_over_opening": 0.4533,
+   "per_junction": 1.5027,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-17",
+   "kind": "strands",
+   "tiling": "3.6.3.6",
+   "target_bar_over_opening": 0.422,
+   "open_share": 0.4506,
+   "bar_over_opening": 0.4334,
+   "per_junction": 0.4988,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": true
+  },
+  {
+   "id": "design-18",
+   "kind": "strands",
+   "tiling": "4.4.4.4",
+   "target_bar_over_opening": 0.66,
+   "open_share": 0.3222,
+   "bar_over_opening": 1.025,
+   "per_junction": 1.0039,
+   "rotation": 4,
+   "star": 4,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": false,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-19",
+   "kind": "strands",
+   "tiling": "6.6.6",
+   "target_bar_over_opening": 0.5,
+   "open_share": 0.3294,
+   "bar_over_opening": 0.5031,
+   "per_junction": 1.5772,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-20",
+   "kind": "cells",
+   "tiling": "4.8.8",
+   "target_bar_over_opening": 0.533,
+   "open_share": 0.3597,
+   "bar_over_opening": 0.5831,
+   "per_junction": 1.9105,
+   "rotation": 4,
+   "star": 4,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": true,
+    "per_junction": false,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-21",
+   "kind": "strands",
+   "tiling": "3.12.12",
+   "target_bar_over_opening": 0.569,
+   "open_share": 0.2271,
+   "bar_over_opening": 1.0215,
+   "per_junction": 0.91,
+   "rotation": 6,
+   "star": 12,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": false,
+    "per_junction": true,
+    "rotation": true,
+    "star": false
+   },
+   "all": false
+  },
+  {
+   "id": "design-22",
+   "kind": "strands",
+   "tiling": "4.6.12",
+   "target_bar_over_opening": 0.447,
+   "open_share": 0.5413,
+   "bar_over_opening": 0.4191,
+   "per_junction": 0.7794,
+   "rotation": 6,
+   "star": 12,
+   "inside": {
+    "open_share": true,
+    "bar_over_opening": true,
+    "per_junction": true,
+    "rotation": true,
+    "star": false
+   },
+   "all": false
+  },
+  {
+   "id": "design-23",
+   "kind": "strands",
+   "tiling": "3.6.3.6",
+   "target_bar_over_opening": 0.35,
+   "open_share": 0.653,
+   "bar_over_opening": 0.1336,
+   "per_junction": 5.6641,
+   "rotation": 6,
+   "star": 6,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": false,
+    "per_junction": false,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  },
+  {
+   "id": "design-24",
+   "kind": "cells",
+   "tiling": "4.4.4.4",
+   "target_bar_over_opening": 0.869,
+   "open_share": 0.2905,
+   "bar_over_opening": 1.0728,
+   "per_junction": 1.0142,
+   "rotation": 4,
+   "star": 4,
+   "inside": {
+    "open_share": false,
+    "bar_over_opening": false,
+    "per_junction": true,
+    "rotation": true,
+    "star": true
+   },
+   "all": false
+  }
+ ]
+}

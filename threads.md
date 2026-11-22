@@ -381,3 +381,45 @@ the screen might; marble and tree screens are the families C-031 has fewest of.
 rosette of 16 at its centre, found once and not counted, so the screen reads 3. Is a centred medallion a different
 thing from a repeating star (a layout, not a pattern), and should C-032's grammar treat it as one?
 **Answer:** —
+
+### T-040 · How irregular are real jalis, measured?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** C-032's designs are exact, and the writer reads them as too symmetrical. On C-031's 17 photos, measure what
+the carving got wrong: how much the openings of one kind vary in size, how much a bar varies in width along its length,
+how far meeting points sit from a fitted lattice, the radius of an opening's corners against the bar, and how rough the
+edges are; then draw the generator's `drift`, `jitter`, `hand`, `round` and `wear` from those numbers, not guesses.
+**Answer:** —
+
+### T-041 · What is a jali's composition, beyond its pattern?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** The real screens are composed: a border band with its own small pattern, a moulded arch, spandrels,
+rosettes at more than one size, a centred medallion (T-039). Describe and measure the composition on C-031's samples
+(how wide the border, what fills it, how the field's pattern meets the frame) as the assembly layer of the grammar.
+**Answer:** —
+
+### T-042 · Can the cut hit open share and bar over opening together?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** In C-032 the bar was set from a target bar over opening, and open share fell where it fell: 10 of 24 below
+real jalis, all four on 3.12.12. With both as targets, which tilings and contact angles can reach real jalis' pairs of
+values, and which never can?
+**Answer:** —
+
+### T-043 · What is a jali bar's section, and how does it take the light?
+
+**Status:** open
+**Parent:** C-032
+**Opened:** 2026-11-22
+**Question:** In the photographs a bar is a rounded or bevelled ribbon lit from one side, the openings deep shadow. A 2D
+relief sketch made muddy domes. Read the section's shape from photos taken at an angle (C-028's inner walls), and
+render it with real light, as geometry, rather than shading a flat mask.
+**Answer:** —
+

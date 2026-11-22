@@ -16,6 +16,8 @@ on it: process models where no style covers an operation, and styles of its own 
   `jali.js` (`thick-screen`, C-028).
 - `core/pattern.js`: patterns as lines and slabs (C-031): symmetry folds, line networks cut into bars of one width,
   stars and rosettes cut from a slab. The functions a pierced screen is drawn with; C-032's generator builds on them.
+- `core/jali-design.js`, `jali-design.mjs`: the jali generator (C-032): a frame, a tiling, strands by Hankin's method or cells,
+  bars cut to one width, the carving's errors; on the command line, dials in, PNG, SVG and recipe out.
 - `service.js`, `cli.mjs`, `png.js`: the engine as a service (below); `picture-style.js` and `core/picture.js`: what
   patternbook's picture styles share (a picture's palette, regions and their shapes).
 - `studio.js`: the studio API over the styles (list, render, renderAsync, animate, applyImageData, sample), used by

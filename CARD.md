@@ -14,6 +14,100 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-032 · Can a generator built from a tiling's symmetry and C-031's measured ranges make new jali designs that measure, and read, like real ones?
+
+**Status:** closed
+**Opened:** 2026-11-22 (drafted with C-031; fields 2, 4 and 5 rewritten at opening with what C-031 found)
+
+**1. Where we are.**
+C-031 measured 17 jalis: geometric ones are open 0.36 to 0.60, bars 0.31 to 0.89 of an opening, 2.9 to 4.8 openings
+deep (4 with a depth), and of two kinds, bars crossing in pairs and cells (`pieces/jali/README.md`). No proportion sets
+a jali apart from other pierced screens, so there is no jali test to pass; the blind pick carries the claim.
+
+**2. What we are doing.**
+Write `engine/core/jali-design.js`, a generator in layers:
+- a **frame**: rectangle, pointed arch, or cusped arch, with a solid border;
+- a **tiling** whose symmetry the design takes: square (4.4.4.4), hexagons (6.6.6), octagons and squares (4.8.8),
+  dodecagons and triangles (3.12.12), dodecagons, hexagons and squares (4.6.12), hexagons and triangles (3.6.3.6);
+- a **construction**: strands (Hankin's method: from the middle of each edge, two rays at a contact angle, each
+  stopping where it meets its neighbour's) or cells (the tiling's own edges);
+- the **cut**: stone within half a bar of the lines (`line-cut`, C-031), the bar set from a target bar over opening
+  through the lines' distance field;
+- the **hand**: bars that vary a little in width along their length;
+- the **thickness**, as a share of the opening, for building.
+
+Then draw 24 designs with dials drawn inside C-031's ranges (design k: cells when k is a multiple of 4, strands
+otherwise, matching the quarter or so of real geometric jalis that read as cells; tiling k mod 6; contact angle 35 to
+80 degrees; bar over opening 0.31 to 0.89; hand 0 to 0.4; frames alternating rectangle and pointed arch, every sixth
+cusped), measure them with C-031's reader, and pair designs 1 to 12 with 12 of C-031's 15 geometric jalis (chosen by
+seed 32) for a blind pick.
+
+**3. Why.**
+We don't know whether designs drawn this way, inside the measured ranges, measure like real jalis, or whether a person
+who doesn't know which is which can tell them apart.
+
+**4. What is affected.**
+- `engine/core/jali-design.js`, its check (`engine/check/jali-design.mjs`), a command line (`engine/jali-design.mjs`:
+  dials in; PNG, SVG and the recipe out); `pieces/jali/grammar.md`; `processes/primitives.md` (Hankin's rays, the
+  tilings, the frames); `runs/c032/`.
+- Not in this card, recorded for later: the service and the MCP server gaining the generator; C-028's model and Jali
+  Light taking a generated design.
+
+**5. Conclusion.**
+- **Measure:** at least 20 of the 24 designs fall inside the geometric jalis' 10th to 90th percentile on open share and
+  bar over opening (the dials' ranges), inside the real jalis' whole range on openings per junction (0.50 to 1.72; a
+  result of the construction, not a dial), turn by 2, 4 or 6, and have a largest star of 3 to 10.
+- **Blind pick:** 12 pairs, a design and a real jali, both as masks (solid dark, open light), cropped to five repeats
+  round the field's centre, scaled to the same repeat, blurred and thresholded alike, so the judge sees the design and
+  not the photograph. The judge (the writer, not a model) says which of each pair was generated.
+- **If** both hold and the judge picks out fewer than 10 of 12 → the generator makes jalis, and the next piece is
+  written in the same form.
+- **If** the designs measure inside but are picked out (10 or more of 12; 1 in 50 by chance) → the numbers miss what
+  makes a jali; the card records what the judge saw.
+- **If** fewer than 20 measure inside → the construction doesn't reach the real range; the card names the layer.
+
+**6. If not done.**
+The engine's jalis stay three fixed lattices, and nothing can make a new one.
+
+**Limits (known before running):** the real masks come from photographs of carved stone and the designs from exact
+geometry; blurring and thresholding both alike evens their edges but not everything a photo carries (wear, a chipped
+bar). C-031's ranges rest on 15 geometric jalis, 13 of them from one group of V&A panels. The contact angle has no
+measured range.
+
+**Result (2026-11-22): 9 of 24 designs measure inside real jalis' ranges; 20 were needed. The construction doesn't
+reach the real range, and the layer that fails is the cut.** By measure: open share fails in 11 designs, bar over
+opening in 9, openings per junction in 4, the largest star in 5 (12 points, above real jalis' 10), turning in none
+(`runs/c032/result.json`). Open share isn't a dial: the bar is set from a target bar over opening, and 10 designs came
+out less open than the middle 80 % of real jalis, all four on 3.12.12 at 0.20 to 0.29 (its dodecagons and tiny
+triangles can't open further at these bars). In 10 designs the bar the reader finds is more than a quarter off its
+target, mostly where thick bars fill a tiling's small faces (4.6.12 cells: 0.50 asked, 0.19 read), so the dial doesn't
+yet control what it names. The blind pick wasn't run: it belongs to the first two branches.
+
+**The writer's reading** of the designs, before any pick: "very symmetrical, very geometric", without the historical,
+in-place touch of the photographs. Sketches on one design (`runs/c032/hand-sketch/`, amplitudes guessed) put what is
+missing in order: the composition of a real screen (a border band, a moulded arch, rosettes at more than one size), the
+stone in light (rounded bars lit from one side, openings in shadow; a 2D relief made muddy domes), and, smallest, the
+hand. The carving's errors (drift, jitter, uneven bars, the tool's radius, wear) are now dials, at zero by default, to be
+measured rather than guessed: a first guess at the tool's radius turned the stars into blobs.
+
+**Claim:** a generator built on six tilings, Hankin's strands and cells, with dials drawn inside C-031's ranges, puts 9
+of 24 designs inside real jalis' measured ranges; its cut doesn't control open share, and its designs read to the
+writer as too exact. What comes next is chosen from T-040 (measure the hand), T-041 (the composition), T-042 (the cut)
+and T-043 (the bar's section, in light).
+
+**Changes made:**
+- `engine/core/jali-design.js` (tilings, Hankin's rays, frames, the cut, the carving's errors), `engine/jali-design.mjs`
+  (command line), `engine/check/jali-design.mjs` (the 24 designs by the card's rule, eight directions).
+- `pieces/jali/grammar.md`; `processes/primitives.md` (`polygons-in-contact`, `arch-frame`, `carving-errors`);
+  `engine/README.md`.
+- `runs/c032/` (designs as SVG and recipes, their measures and overlays, the result, the hand sketch and its script;
+  the PNG renders are left out, as `engine/check/jali-design.mjs` and `runs/c032/hand-sketch.mjs` remake them).
+- Not done, recorded: the service and MCP server gaining the generator; C-028's model and Jali Light taking a design.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-031 · What do real jalis share, measured, and does any of it set them apart from other pierced screens?
 
 **Status:** closed
@@ -155,50 +249,6 @@ junctions). Real jalis are 2.7 to 5.1 openings deep, about seven times the depth
 - `engine/styles/jali-light.js` (defaults), `engine/engine.js` (rebuilt).
 
 **Closed:** 2026-11-22
-
----
-
-## C-032 · Can a generator built from a pattern's symmetry and the measured ranges make new jali designs that measure, and read, like real ones?
-
-**Status:** drafted. Opens at the next slot; fields 2, 4 and 5 are rewritten then with what C-031 found.
-
-**1. Where we are.**
-C-031 measured 17 jalis: geometric ones are open 0.36 to 0.60, bars 0.31 to 0.89 of an opening, 2.9 to 4.8 openings
-deep (4 with a depth), and of two kinds, bars crossing in pairs and cells (`pieces/jali/README.md`). No proportion sets
-a jali apart from other pierced screens, so there is no jali test to pass; the blind pick carries the claim. The
-generator needs both constructions (Hankin's method for strands, a tiling's faces for cells), which field 2 doesn't
-yet say.
-
-**2. What we are doing.**
-Write `engine/core/jali-design.js`, a generator in layers: a frame (rectangle, pointed arch, cusped arch); a symmetry
-(a wallpaper group with four- or six-fold turns, with or without mirrors); a pattern drawn in the group's fundamental
-region by Hankin's method on a tiling (4.8.8, 6.6.6, 4.6.12, 3.12.12, 4.4.4.4) at a contact angle; the cut (solid
-wherever a point lies within half a bar width of the pattern's lines, from a distance field, so the bars keep one
-width; open elsewhere); and the material and thickness, for C-028's screen model. Its dials are ranged by C-031. Then
-draw 24 designs, measure them with C-031's code, and lay them beside the samples on a sheet.
-
-**3. Why.**
-We don't know whether designs drawn this way, inside the measured ranges, measure like real jalis, or whether a person
-who doesn't know which is which can tell them apart.
-
-**4. What is affected.**
-- `engine/core/jali-design.js`, its check and demo; `pieces/jali/grammar.md`; `runs/c032/`.
-- C-028's screen model, Mughal Jali and Jali Light can take a generated design (a dial chooses; their own lattices
-  are kept).
-- The service and the MCP server gain the generator: dials and a seed in, an outline (SVG), an open and solid map
-  and a thickness out.
-
-**5. Conclusion.**
-- **If** at least 20 of the 24 designs fall inside their family's ranges on every C-031 measure (and pass the jali
-  test, if C-031 found one), and in a blind pick of 12 pairs (a generated design and a real one of the same family,
-  both as masks at the same size) the judge picks out the generated one in fewer than 10 → the generator makes
-  jalis, and the next piece is written in the same form.
-- **If** they measure inside but are picked out (10 or more of 12; 1 in 50 by chance) → the numbers miss what makes
-  a jali; the card records what the judge saw.
-- **If** they fall outside → the construction doesn't reach the real range; the card names the layer.
-
-**6. If not done.**
-The engine's jalis stay three fixed lattices, and nothing can make a new one.
 
 ---
 
