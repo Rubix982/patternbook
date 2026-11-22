@@ -1,0 +1,165 @@
+{
+ "id": "lumenary:truchet-tiles",
+ "name": "Truchet Tiles",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "random-orientation arc tiles weighted by darkness (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "One square tile, turned at random. Arcs join into tangles, and the weight of each line follows the light in your picture.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/truchet-tiles.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "A Dominican priest in Paris",
+  "era": "1704",
+  "bestOn": "Pictures with good light and dark contrast"
+ },
+ "why": "Truchet tiles show how a very small rule can produce endless variety. One tile, turned in one of two ways, is placed by chance, and because every arc ends at the middle of a side, arcs from neighbouring tiles always meet and join into winding paths. The picture then controls only the weight of the lines, so the paths thicken in shadows and thin out in the lights.",
+ "how": [
+  "Draw each tile with two quarter circles, centred on opposite corners, that meet the midpoints of the sides.",
+  "Choose between the two orientations with a hash of the tile’s position, so the same seed always gives the same pattern.",
+  "Measure the darkness of the picture under the tile, averaged over 0.45 of a tile width.",
+  "Scale the line width, or the disc radius, with that darkness, from a hairline in the lights to a bold stroke in the shadows.",
+  "In busy areas, optionally split a tile into smaller ones so detail shows."
+ ],
+ "history": "Sébastien Truchet, a Dominican priest and engineer, published a study of patterns made from one square tile divided along its diagonal in 1704. The work was largely forgotten until Cyril Stanley Smith and Pauline Boucher revived it in a paper in 1987. A single line of Commodore 64 BASIC called 10 PRINT, which prints one of two diagonal slashes at random, makes the same kind of pattern and became a favourite of early programmers.",
+ "uses": [
+  "Maze and pattern generators",
+  "Textile, tile and wallpaper design",
+  "Game levels and textures",
+  "Teaching tilings and topology"
+ ],
+ "terms": [
+  [
+   "Tiling",
+   "A way of covering a surface with shapes without gaps or overlaps."
+  ],
+  [
+   "Hash",
+   "A function that turns a position into a repeatable pseudo random number."
+  ],
+  [
+   "Topology",
+   "The study of how shapes are connected, regardless of their exact size."
+  ]
+ ],
+ "related": [
+  "wave-function-collapse",
+  "hexagon-mosaic",
+  "penrose-tiling"
+ ],
+ "paragraphs": [
+  "In 1704 the Dominican Sébastien Truchet noticed that one square tile, divided by its diagonal into a light and a dark half, makes endless patterns when the copies are turned at random. In the arc version used here each tile carries two quarter circles of radius s/2, centred on opposite corners, which meet the midpoints of the sides. The tile is placed in one of two orientations, chosen by a hash of its position, and because every arc ends at a side midpoint, arcs of neighbouring tiles always join into winding paths. Quarter discs and plain diagonals use the same grid.",
+  "The picture decides how heavy each tile is. Its darkness under the tile, averaged over a radius of 0.45 tile widths, scales the line width (or the disc radius), from a hairline in the lights to a bold stroke in the shadows. The picture shows through slider mixes between a uniform weight and the full tonal weight, and on the night paper the roles reverse (light is heavy). Colour comes from the picture, a little darker than the original, or from a single ink. With smaller tiles in detail on, a tile whose four quarters differ strongly in tone, with variance above 0.006, is replaced by four half-size tiles."
+ ],
+ "equations": [
+  {
+   "tex": "w=s\\,\\big(0.06+0.5\\,\\hat t\\big),\\qquad \\hat t=(1-\\beta)\\,\\tfrac12+\\beta\\,t",
+   "note": "Line width of a tile of side s: t is the picture’s darkness under it (1 minus lightness on light paper), β the picture-shows-through slider."
+  },
+  {
+   "tex": "\\sigma^{2}=\\sum_{i=1}^{4}\\big(t_i-\\bar t\\big)^{2}>0.006\\ \\Longrightarrow\\ \\text{split into four tiles of side } s/2",
+   "note": "The quadtree rule: t_i is the tone of the i-th quarter of the tile."
+  },
+  {
+   "tex": "\\text{flip}=\\big[\\,h(\\text{tile}_x,\\ \\text{tile}_y,\\ \\text{seed})\\ge\\tfrac12\\,\\big]",
+   "note": "The random orientation of each tile comes from a hash h of its position, so the pattern is the same each time you redraw with the same seed."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Tile size",
+   "type": "range",
+   "default": 28,
+   "min": 12,
+   "max": 64,
+   "step": 1
+  },
+  {
+   "key": "tile",
+   "label": "Tile",
+   "type": "select",
+   "default": "arcs",
+   "options": [
+    "arcs",
+    "quarter",
+    "diag"
+   ]
+  },
+  {
+   "key": "weight",
+   "label": "Picture shows through",
+   "type": "range",
+   "default": 75,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "multi",
+   "label": "Smaller tiles in detail",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "ink",
+    "blue",
+    "red"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "cream",
+   "options": [
+    "cream",
+    "white",
+    "night"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Turn the tiles again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "The diagonal tile is the original, with plain zigzag paths.",
+   "set": {
+    "tile": "diag",
+    "size": 20
+   }
+  },
+  {
+   "text": "Quarter discs give a bold, graphic look.",
+   "set": {
+    "tile": "quarter",
+    "colour": "ink"
+   }
+  },
+  {
+   "text": "Full tonal weight with small tiles shows the picture clearly.",
+   "set": {
+    "weight": 100,
+    "size": 14
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

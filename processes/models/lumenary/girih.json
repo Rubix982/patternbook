@@ -1,0 +1,158 @@
+{
+ "id": "lumenary:girih",
+ "name": "Girih",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "Hankin's rule on a Penrose rhomb tiling (how)",
+ "note": "The girih craft (tile and wood strapwork) is not modelled; the entry says it uses two shapes, not the five girih tiles.",
+ "lumenary": {
+  "section": "M. South Asian and Islamic",
+  "kind": "still",
+  "blurb": "The strapwork of Islamic architecture. Every edge of a tiling sends two lines inward at a fixed angle, and the lines weave stars out of rhombs.",
+  "theory_page": "treatments/lumenary/theory/13-southasia.md",
+  "code": "vendor/lumenary/src/engine/styles/girih.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The Islamic world, from Persia to Spain",
+  "era": "Medieval, from about the eleventh century",
+  "bestOn": "Colourful pictures, which tint the stars"
+ },
+ "why": "Girih, from the Persian for knot, is the strapwork of Islamic buildings: bands that appear to weave over and under to make stars and polygons. The craft knowledge was geometric and practical, and the same few steps can generate an endless range of stars. Its mathematics turned out to be close to the aperiodic tilings of modern science.",
+ "how": [
+  "Build a Penrose tiling of two rhombs with de Bruijn’s pentagrid method, laying five families of parallel lines across the plane.",
+  "Follow Hankin’s rule: from the middle of every edge of a polygon, two lines go inward at the same angle to the edge, and each meets the line from the neighbouring edge.",
+  "Draw the strapwork on each rhomb, with the contact angle set by the slider, and widen the lines into straps.",
+  "Weave the straps over and under, and colour them classic, from the picture or both.",
+  "Turn the whole pattern by a chosen angle, and pick another patch of the tiling with the seed."
+ ],
+ "history": "The Topkapı Scroll, a collection of pattern designs from the fifteenth or sixteenth century kept in the Topkapı Palace Library, shows that medieval designers used a small set of tile shapes. Ernest Hankin described a rule for drawing the lines in 1925. In 2007 Peter Lu and Paul Steinhardt showed that the girih at the Darb-i Imam shrine in Isfahan (1453) comes very close to a Penrose tiling. This program uses two shapes, and not the five girih tiles of the scrolls.",
+ "uses": [
+  "Architecture, tile and ceiling design",
+  "Textile, jewellery and metalwork pattern",
+  "Laser-cut screens and panels",
+  "Teaching tilings and symmetry"
+ ],
+ "terms": [
+  [
+   "Girih",
+   "Islamic geometric strapwork, from the Persian for knot."
+  ],
+  [
+   "Strapwork",
+   "Decorative bands that appear to interweave."
+  ],
+  [
+   "Pentagrid",
+   "Five families of parallel lines used to build a Penrose tiling."
+  ]
+ ],
+ "related": [
+  "penrose-tiling",
+  "mughal-jali",
+  "mandala"
+ ],
+ "paragraphs": [
+  "Girih, from the Persian for knot, is the strapwork of Islamic buildings: bands that appear to weave over and under to make stars and polygons. The medieval method, as far as we can tell from scrolls kept in Topkapı Palace, was to divide the plane into a few tile shapes and draw lines across them. In 1925 Ernest Hankin gave a rule for the lines that is easy to compute: from the middle of every edge of a polygon, two lines go inward at the same angle to the edge, and each meets the line from the neighbouring edge. In 2007 Peter Lu and Paul Steinhardt showed that the girih at the Darb-i Imam shrine in Isfahan (1453) comes very close to a Penrose tiling, which never repeats.",
+  "The program uses that connection. It builds a Penrose tiling of two rhombs by de Bruijn’s pentagrid method and then draws the strapwork on each rhomb (this uses two shapes, and not the five girih tiles of the scrolls). Five families of parallel lines are laid across the plane, family i being the set of points z with z · eᵢ + γᵢ a whole number, where eᵢ is a unit vector at angle 2πi/5 and the offsets γᵢ add up to zero. Where a line of family r crosses a line of family s there is one rhomb, whose corners are found by rounding up z · eᵢ + γᵢ for the other families. If r and s are neighbouring directions the rhomb is the wide one, otherwise the narrow one. The random offsets are the “patch of the tiling” (shuffle). Each rhomb is then given Hankin’s lines at the chosen contact angle, which splits it into four kites and a central star, each coloured from your picture, a classic lapis or turquoise and ivory scheme, or both, with the lines drawn in gold."
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf z\\cdot\\mathbf e_i+\\gamma_i\\in\\mathbb Z,\\qquad \\mathbf e_i=\\Big(\\cos\\tfrac{2\\pi i}{5},\\ \\sin\\tfrac{2\\pi i}{5}\\Big),\\qquad \\sum_{i=0}^{4}\\gamma_i=0",
+   "note": "The pentagrid: five families of lines. The condition on the offsets γᵢ makes the dual a Penrose tiling."
+  },
+  {
+   "tex": "K_i=\\lceil\\mathbf z\\cdot\\mathbf e_i+\\gamma_i\\rceil,\\qquad \\mathbf v=\\sum_{i=0}^{4}q_i\\,\\mathbf e_i,\\quad q_i=\\begin{cases}k_r+\\{0,1\\}&i=r\\\\ k_s+\\{0,1\\}&i=s\\\\ K_i&\\text{otherwise}\\end{cases}",
+   "note": "Corners of the rhomb for the crossing of line k_r of family r and line k_s of family s. The four choices of 0 or 1 give its four corners."
+  },
+  {
+   "tex": "\\mathbf m_i+t\\,\\mathbf d_1=\\mathbf m_{i+1}+u\\,\\mathbf d_2,\\qquad \\mathbf d_1=R_{\\theta}(\\mathbf b-\\mathbf a),\\quad \\mathbf d_2=R_{-\\theta}(\\mathbf b-\\mathbf c)",
+   "note": "Hankin’s rule for an edge ab followed by bc: the lines leaving the midpoints m_i and m_{i+1} at the contact angle θ meet where t and u are both positive. R_θ is a rotation by θ. If they do not meet, the point halfway between the midpoints is used."
+  },
+  {
+   "tex": "t=\\frac{(\\mathbf m_{i+1}-\\mathbf m_i)\\times\\mathbf d_2}{\\mathbf d_1\\times\\mathbf d_2},\\qquad \\frac{N_{\\text{wide}}}{N_{\\text{narrow}}}\\to\\varphi=\\frac{1+\\sqrt5}{2}",
+   "note": "The parameter t, using the 2D cross product, and a famous property of Penrose tilings: wide rhombs outnumber narrow ones by the golden ratio."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Tile size",
+   "type": "range",
+   "default": 58,
+   "min": 26,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "angle",
+   "label": "Contact angle",
+   "type": "range",
+   "default": 54,
+   "min": 25,
+   "max": 80,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Strap width",
+   "type": "range",
+   "default": 2.4,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.1
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "both",
+   "options": [
+    "picture",
+    "classic",
+    "both"
+   ]
+  },
+  {
+   "key": "turn",
+   "label": "Turn",
+   "type": "range",
+   "default": 0,
+   "min": 0,
+   "max": 36,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Patch of the tiling",
+   "type": "shuffle",
+   "default": 3
+  }
+ ],
+ "presets": [
+  {
+   "text": "A larger contact angle makes stars with fatter points.",
+   "set": {
+    "angle": 72,
+    "size": 70
+   }
+  },
+  {
+   "text": "Classic colours show the traditional palette.",
+   "set": {
+    "colour": "classic",
+    "line": 3.5
+   }
+  },
+  {
+   "text": "A small tile size packs in many small stars.",
+   "set": {
+    "size": 30,
+    "line": 1.2
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

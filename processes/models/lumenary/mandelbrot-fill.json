@@ -1,0 +1,180 @@
+{
+ "id": "lumenary:mandelbrot-fill",
+ "name": "Mandelbrot Fill",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "orbit-trap fractal (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "Follow each point’s orbit under z² + c. When it passes through a window in the plane, the picture shows the colour found there.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/mandelbrot-fill.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Complex dynamics",
+  "era": "Julia 1918, Mandelbrot 1980",
+  "bestOn": "Colourful pictures with large smooth areas"
+ },
+ "why": "Take a number, square it, add a constant, and repeat. Some starting numbers fly off to infinity and some never do. The boundary between them is one of the most intricate shapes known, and zooming in reveals smaller copies of the whole. In this treatment the orbit is also a probe: when it passes through a window over the plane, it picks up the colour of your picture at that spot.",
+ "how": [
+  "Map each pixel to a point of the complex plane, inside a chosen view such as the seahorse valley or the triple spiral.",
+  "Iterate zₙ₊₁ = zₙ² + c, with c from the pixel for the Mandelbrot set, or z₀ from the pixel and a fixed c for a Julia set.",
+  "Stop when |z|² passes 400 or after the chosen number of steps.",
+  "Lay a window |Re z| < hₓ, |Im z| < hᵧ over the plane and stretch the picture across it: the first time an orbit passes through it, the pixel takes that colour, darkened if it arrived late.",
+  "Add a glow on the edge of the set, and colour the pixels that never land from a palette."
+ ],
+ "history": "Gaston Julia and Pierre Fatou studied iteration of complex functions around 1918, but without computers they could not see the shapes. Benoit Mandelbrot, working at IBM, first drew the set in 1980 and named fractals in his 1975 book, later expanded as The Fractal Geometry of Nature in 1982. Orbit traps of this kind were developed in the 1980s, including by Clifford Pickover.",
+ "uses": [
+  "Computer art and wallpaper",
+  "Benchmarking processors and graphics cards",
+  "Teaching complex numbers and chaos",
+  "Modelling coastlines, clouds and terrain"
+ ],
+ "terms": [
+  [
+   "Complex number",
+   "A number with a real part and an imaginary part, drawn as a point on a plane."
+  ],
+  [
+   "Orbit",
+   "The sequence of points produced by applying a rule repeatedly."
+  ],
+  [
+   "Orbit trap",
+   "A shape used to colour a point by where its orbit passes."
+  ]
+ ],
+ "related": [
+  "fractal-flame",
+  "strange-attractors",
+  "domain-warp"
+ ],
+ "paragraphs": [
+  "The Mandelbrot set is the set of complex numbers c for which the orbit z₀ = 0, zₙ₊₁ = zₙ² + c stays bounded. A Julia set uses the same rule with c fixed (here at distance 0.7885 from the origin, at the angle set by the Julia-shape slider) and the starting point z₀ taken from the pixel. Every pixel is mapped to a point of the complex plane inside a chosen view (the whole set, the seahorse valley, the elephant valley, the triple spiral or a small copy), widened or narrowed by the zoom, and its orbit is followed for up to the detail number of steps. The orbit is declared escaped when |z|² passes 400.",
+  "The picture comes in as an orbit trap. A window |Re z| < hₓ, |Im z| < hᵧ around the origin is laid over the plane and your picture is stretched across it. The first time an orbit passes through the window, the pixel takes the colour of the picture at that spot, and a late arrival is darkened: the factor is 0.5 + 0.5 e^(−n/7). Because orbits near the set’s boundary wander, they sample the picture at scattered points, and the picture appears in thousands of distorted copies. The pixels whose orbits never touched the window but escaped get a smooth iteration count, ν = n + 1 − log₂(log₂|zₙ|), run through a cyclic colour ramp, with a glow near the edge that fades as e^(−n/14); orbits that never escape and never touch the window are left near black."
+ ],
+ "equations": [
+  {
+   "tex": "z_{n+1}=z_n^{2}+c,\\qquad \\text{Mandelbrot: } z_0=0,\\ c=\\text{pixel};\\quad \\text{Julia: } z_0=\\text{pixel},\\ c=0.7885\\,e^{i\\alpha}",
+   "note": "The two kinds of orbit."
+  },
+  {
+   "tex": "\\text{colour}=C_{\\text{picture}}\\!\\Big(\\tfrac12\\big(\\tfrac{\\operatorname{Re}z_n}{h_x}+1\\big)W,\\ \\ \\tfrac12\\big(1-\\tfrac{\\operatorname{Im}z_n}{h_y}\\big)H\\Big)\\cdot\\big(0.5+0.5\\,e^{-n/7}\\big)",
+   "note": "The orbit trap: n is the first step with |Re z| < hₓ and |Im z| < hᵧ."
+  },
+  {
+   "tex": "\\nu=n+1-\\log_2\\!\\big(\\log_2\\lvert z_n\\rvert\\big)",
+   "note": "Smooth escape count, used for the colour of pixels that escaped without touching the window."
+  }
+ ],
+ "dials": [
+  {
+   "key": "kind",
+   "label": "Set",
+   "type": "select",
+   "default": "mandel",
+   "options": [
+    "mandel",
+    "julia"
+   ]
+  },
+  {
+   "key": "view",
+   "label": "Where to look",
+   "type": "select",
+   "default": "full",
+   "options": [
+    "full",
+    "seahorse",
+    "elephant",
+    "spiral",
+    "mini"
+   ]
+  },
+  {
+   "key": "zoom",
+   "label": "Zoom",
+   "type": "range",
+   "default": 1,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.1
+  },
+  {
+   "key": "julia",
+   "label": "Julia shape",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 360,
+   "step": 1
+  },
+  {
+   "key": "window",
+   "label": "Size of the picture window",
+   "type": "range",
+   "default": 90,
+   "min": 20,
+   "max": 200,
+   "step": 1
+  },
+  {
+   "key": "iter",
+   "label": "Detail",
+   "type": "range",
+   "default": 110,
+   "min": 30,
+   "max": 300,
+   "step": 5
+  },
+  {
+   "key": "edge",
+   "label": "Glow of the edge",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "out",
+   "label": "Where no picture lands",
+   "type": "select",
+   "default": "dusk",
+   "options": [
+    "dusk",
+    "gold",
+    "ice",
+    "ink"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "The seahorse valley is the most famous close-up.",
+   "set": {
+    "view": "seahorse",
+    "zoom": 2
+   }
+  },
+  {
+   "text": "A Julia set shows a different member of the family.",
+   "set": {
+    "kind": "julia",
+    "julia": 120
+   }
+  },
+  {
+   "text": "A smaller window shows more of the original picture inside.",
+   "set": {
+    "window": 160
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

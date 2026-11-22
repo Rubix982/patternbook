@@ -1,0 +1,148 @@
+{
+ "id": "lumenary:impressionist",
+ "name": "Impressionist",
+ "physical": "partly",
+ "process": "oil-painting",
+ "process_name": "Oil painting",
+ "class": "painting",
+ "basis": "why: short visible strokes of broken colour laid quickly; how: layered brush passes along isophotes (Hertzmann 1998)",
+ "note": "Models stroke placement, not paint body; impasto is the stronger oil-paint model.",
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "Broken colour in short, visible brushstrokes: big ones first for the light, small ones only where the picture has detail.",
+  "theory_page": "treatments/lumenary/theory/07-painterly.md",
+  "code": "vendor/lumenary/src/engine/styles/impressionist.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Paris",
+  "era": "1870s and 1880s",
+  "bestOn": "Landscapes, gardens and water"
+ },
+ "why": "Impressionist painters worked quickly outdoors, laying down short visible strokes of colour to catch the light before it changed. The program does the same in three passes: big brushes for the broad colour, then smaller ones only where the picture still differs from the canvas. Strokes run along lines of equal brightness, so they follow edges instead of cutting across them.",
+ "how": [
+  "In the first pass paint over a very blurry copy of the picture enlarged to the canvas.",
+  "In the second and third passes compare the canvas with the picture blurred to half the brush radius.",
+  "On a grid of cells, sample five random points, and place a stroke at the worst one if the average colour error is above a threshold.",
+  "Make each stroke follow the isophote, the line of equal brightness, by turning the brightness gradient by 90 degrees and stepping along it until the colour drifts too far.",
+  "Tone each stroke in the impressionist spirit: more saturation, lighter lightness, and shadows pushed toward violet."
+ ],
+ "history": "The movement is named after Claude Monet’s Impression, Sunrise, shown in 1874 at the first independent exhibition of the group in Paris. Cheap paint tubes let painters work outdoors, and the group’s short strokes of broken colour replaced the smooth finish of the academies. The layered stroke method used here was described by Aaron Hertzmann at SIGGRAPH in 1998.",
+ "uses": [
+  "Fine art style prints",
+  "Soft, painterly posters and greeting cards",
+  "Travel and garden imagery",
+  "Backgrounds with brushwork"
+ ],
+ "terms": [
+  [
+   "Isophote",
+   "A line along which brightness is constant."
+  ],
+  [
+   "Plein air",
+   "Painting outdoors, in front of the subject."
+  ],
+  [
+   "Broken colour",
+   "Colours placed side by side in small strokes instead of being blended."
+  ]
+ ],
+ "related": [
+  "pointillism",
+  "oil-impasto",
+  "watercolour"
+ ],
+ "paragraphs": [
+  "Impressionist painting works from coarse to fine, and so does the program, in three passes with brush radii R from about 7 to 21, 3.4 to 10 and 1.8 to 5.4 px (set by the brush size slider). The first pass paints over a very blurry copy of the picture, enlarged to the canvas. In the second and third passes the canvas is compared with a reference, the picture blurred to a radius of R/2. On a grid of cells 1.15 R wide, five random samples measure the colour error; a stroke is placed at the worst sample only if the average error per channel exceeds a threshold, so small brushes work where the picture still has detail. This is the layered-stroke method described by Hertzmann in 1998.",
+  "A stroke follows the isophote, the line of constant brightness, so it runs along an edge instead of across it. The direction is the gradient of the blurred luminance turned by 90 degrees. The stroke takes steps of 0.9 R, up to a length set by the stroke length slider, and stops early if the reference colour has drifted too far from the stroke’s colour. The colour is then toned in the Impressionist spirit: saturation is raised, lightness lifted a little, and the darks are pushed toward violet, since shadows were painted with colour, not black. A faint woven pattern can be multiplied in for canvas."
+ ],
+ "equations": [
+  {
+   "tex": "\\bar e=\\frac{1}{15}\\sum_{k=1}^{5}\\big(\\lvert\\Delta R\\rvert+\\lvert\\Delta G\\rvert+\\lvert\\Delta B\\rvert\\big)_k>\\tau,\\qquad \\tau=60\\,(1-D)+8",
+   "note": "A stroke is placed in a cell only if the mean error exceeds τ; D is the detail slider (the first pass paints everywhere)."
+  },
+  {
+   "tex": "\\mathbf d=\\frac{\\big(-\\partial_y L,\\ \\ \\partial_x L\\big)}{\\lVert\\nabla L\\rVert},\\qquad \\mathbf x_{j+1}=\\mathbf x_j+0.9\\,R\\,\\mathbf d_j",
+   "note": "Stroke path along the isophote of the blurred luminance L (the sign is kept the same as the previous step so the stroke does not fold back)."
+  },
+  {
+   "tex": "h'=h+\\min\\!\\big(0.5,\\ 1.4\\,g\\,(0.4-l)\\big)\\,(0.72-h)\\qquad (l<0.4)",
+   "note": "Shadow colour: dark hues slide toward violet (0.72 of the colour wheel); g is the sunlit colour slider."
+  }
+ ],
+ "dials": [
+  {
+   "key": "brush",
+   "label": "Brush size",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "detail",
+   "label": "Detail",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "length",
+   "label": "Stroke length",
+   "type": "range",
+   "default": 45,
+   "min": 1,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glow",
+   "label": "Sunlit colour",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "canvas",
+   "label": "Canvas texture",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Repaint",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Large brushes and low detail give a loose, early morning scene.",
+   "set": {
+    "brush": 75,
+    "detail": 25
+   }
+  },
+  {
+   "text": "Small brushes with high detail are closer to a finished canvas.",
+   "set": {
+    "brush": 20,
+    "detail": 85
+   }
+  },
+  {
+   "text": "Long strokes flow along the shapes like wind.",
+   "set": {
+    "length": 85
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

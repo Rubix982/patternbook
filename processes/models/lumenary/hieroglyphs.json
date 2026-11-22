@@ -1,0 +1,163 @@
+{
+ "id": "lumenary:hieroglyphs",
+ "name": "Hieroglyphs",
+ "physical": "partly",
+ "process": "relief-carving",
+ "process_name": "Relief carving",
+ "class": "carving",
+ "basis": "why: signs cut into the surface (sunk relief) and painted; how: signs incised on a plate, lit as relief, pigment by brightness",
+ "note": "Sunk relief plus paint; filed under relief carving.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "Sunk relief as it was cut in the temples of the Nile: signs incised into columns of limestone and then painted in lapis, ochre and malachite. The signs grow fuller and the pigment stronger where your picture is bright.",
+  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "code": "vendor/lumenary/src/engine/styles/hieroglyphs.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Ancient Egypt",
+  "era": "About 3200 BCE to the 4th century CE",
+  "bestOn": "Pictures with warm and cool contrast"
+ },
+ "why": "The Egyptians cut their writing in two ways. In raised relief the background is cut away and the signs stand out. In sunk relief the signs are cut into the surface, which lets them be read in the strong light of an outside wall, where a hollow throws a clear shadow. Both were painted, in lapis blue, red ochre, malachite green, yellow ochre and black. The signs here are chosen for how they look and do not spell a message.",
+ "how": [
+  "Write in columns divided by double rules, with a horizontal band every six lines, and face signs alternately in neighbouring columns, since hieroglyphs face the start of the line.",
+  "Draw twelve signs: the ankh, the eye, water, the feather, the sun disc, the djed pillar, the was sceptre, a snake, a duck, an owl, a lotus and a basket.",
+  "Cut each in with a dark stroke on a middle-grey plate, so the lighting finds a hollow.",
+  "Make the signs fuller and the pigment stronger where the picture is bright.",
+  "Light the relief from a chosen direction and add weathering to limestone, sandstone or granite."
+ ],
+ "history": "The Rosetta Stone, found in 1799, carried the same decree in hieroglyphs, Demotic and Greek. Jean-François Champollion announced the decipherment in 1822. Egyptian writing was used for more than three thousand years, and the last known inscription, at Philae, dates from 394 CE.",
+ "uses": [
+  "Museum and education material",
+  "Relief and stone texture design",
+  "Teaching writing systems and decipherment",
+  "Themed illustration made with care"
+ ],
+ "terms": [
+  [
+   "Sunk relief",
+   "Carving in which the design is cut into the surface."
+  ],
+  [
+   "Cartouche",
+   "An oval that encloses a royal name."
+  ],
+  [
+   "Malachite",
+   "A green mineral used as a pigment."
+  ]
+ ],
+ "related": [
+  "aztec-glyphs",
+  "embossed-leather",
+  "indus-seal"
+ ],
+ "paragraphs": [
+  "The Egyptians cut their writing in two ways. In raised relief the background is cut away and the signs stand out. In sunk relief the signs are cut into the surface, which lets them be read in the strong light of an outside wall, where a hollow throws a clear shadow. Both were painted, in lapis blue, red ochre, malachite green, yellow ochre and black. The program writes in sunk relief: columns of signs, divided by double rules, with a horizontal band every six lines, and signs that face alternate ways in neighbouring columns, since hieroglyphs face the start of the line.",
+  "Twelve signs are drawn (the ankh, the eye, water, the feather, the sun disc, the djed pillar, the was sceptre, a snake, a duck, an owl, a lotus and a basket). Each is cut in with a dark stroke on a middle-grey plate, so after blurring the signs sit lower than their surroundings, and the double rules are cut as raised ridges. A broad blur of the picture’s brightness lifts the whole surface slightly where it is bright. A sign is drawn larger the brighter the picture is under it, from half to full size. The paint that fills a sign is the nearest of the five pigments to the picture’s colour, and a wash of the picture tints the stone."
+ ],
+ "equations": [
+  {
+   "tex": "H=\\rho\\,\\big(0.59-0.49\\,\\chi\\big)+0.18\\,\\bar L,\\qquad \\chi\\in\\{0,1\\}\\ \\text{inside a sign}",
+   "note": "Sunk relief: the plate is at 150/255, a sign is cut down to 25/255 (a depth of 0.49 ρ) and L̄ is a broad blur of brightness."
+  },
+  {
+   "tex": "u=\\tfrac{s}{2}\\,\\big(0.5+0.5\\,t\\big)",
+   "note": "The half-size of a sign in a cell of height s, from the picture’s brightness t."
+  },
+  {
+   "tex": "f=\\operatorname{clamp}\\big(0.74+0.7\\,(\\mathbf s\\cdot\\mathbf l),\\ 0.3,\\ 1.45\\big)\\,(1-a),\\qquad \\mathbf s=-k\\,\\nabla H",
+   "note": "Lit as in the Aztec relief: with the light from the chosen direction and an occlusion term a that darkens the grooves."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Sign size",
+   "type": "range",
+   "default": 48,
+   "min": 24,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "relief",
+   "label": "Depth",
+   "type": "range",
+   "default": 65,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "paint",
+   "label": "Paint",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "light",
+   "label": "Light direction",
+   "type": "range",
+   "default": 225,
+   "min": 0,
+   "max": 360,
+   "step": 5
+  },
+  {
+   "key": "wear",
+   "label": "Weathering",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "stone",
+   "label": "Stone",
+   "type": "select",
+   "default": "limestone",
+   "options": [
+    "limestone",
+    "sandstone",
+    "granite"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New text",
+   "type": "shuffle",
+   "default": 6
+  }
+ ],
+ "presets": [
+  {
+   "text": "Deep relief with a low light shows each sign as a shadow.",
+   "set": {
+    "relief": 95,
+    "light": 200
+   }
+  },
+  {
+   "text": "Granite gives a darker, harder stone.",
+   "set": {
+    "stone": "granite",
+    "paint": 40
+   }
+  },
+  {
+   "text": "Strong paint recalls a freshly coloured tomb.",
+   "set": {
+    "paint": 100,
+    "wear": 10
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

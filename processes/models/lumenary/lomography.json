@@ -1,0 +1,173 @@
+{
+ "id": "lumenary:lomography",
+ "name": "Lomography",
+ "physical": "partly",
+ "process": "toy-camera-photography",
+ "process_name": "Toy-camera photography",
+ "class": "photographic",
+ "basis": "why: 'what a cheap plastic camera does wrong'; how: saturation, hard curve, soft corners, light leaks, vignette",
+ "note": "Named for a movement; the look is the camera and film.",
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "A cheap plastic lens and expired film: saturated colour, hard contrast, dark corners, soft edges and a stray leak of light.",
+  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "code": "vendor/lumenary/src/engine/styles/lomography.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "A Soviet compact camera, then a Vienna photography movement",
+  "era": "1984 camera, 1990s movement",
+  "bestOn": "Everyday scenes, street and travel snapshots"
+ },
+ "why": "Lomography celebrates what a cheap plastic camera does wrong: colours too rich, shadows too dark, corners lost, edges soft and now and then a stripe of light leaking where the camera back does not close. Each fault is recreated in turn, and together they say that the picture was taken quickly and happily, without worrying about technical quality.",
+ "how": [
+  "Scale each colour’s distance from its own luminance to boost saturation, and multiply the channels by gains for a colour cast.",
+  "Apply an S shaped contrast curve whose shoulders flatten more as it grows.",
+  "Lay a blurred copy over the sharp one through a radial mask, clear in the middle and increasingly soft towards the corners.",
+  "Add one or two large radial gradients near the edge, in colours matching the cast, with screen blending, which can only brighten.",
+  "Darken the corners with a vignette and add grain."
+ ],
+ "history": "The LOMO LC-A was a compact camera made in Leningrad from 1984. Students from Vienna found one in Prague in the early 1990s, loved its saturated, vignetted pictures and founded the Lomographic Society in 1992, with a playful list of rules such as shoot from the hip and do not think. Lomography then spread through film shops and later phone apps.",
+ "uses": [
+  "Travel and street photo looks",
+  "Social posts with a vintage film feel",
+  "Event and party photo galleries",
+  "Moodboards and fashion snapshots"
+ ],
+ "terms": [
+  [
+   "Vignette",
+   "Darkening toward the corners of a picture."
+  ],
+  [
+   "Light leak",
+   "Stray light that reaches the film through a gap and leaves a bright streak."
+  ],
+  [
+   "Screen blend",
+   "A way of combining layers that can only brighten the result."
+  ]
+ ],
+ "related": [
+  "film-grain",
+  "cross-processed",
+  "retro-vhs"
+ ],
+ "paragraphs": [
+  "Lomography is the look of a cheap plastic camera and film that was never meant to be pushed this far: colours too rich, shadows too dark, corners lost, the edges of the frame soft, and now and then a stripe of light that has crept in where the back of the camera does not close. Each of those faults is made in turn. Saturation scales every colour’s distance from its own luminance (by 0.6 to 1.9). A colour cast multiplies the three channels by gains, for example warm is (1.06, 1.0, 0.84). Contrast is an S-shaped curve whose shoulders flatten more as it grows.",
+  "The cheap lens is a blurred copy of the picture (one sixth of the size, enlarged) laid over the sharp one through a radial mask: clear inside a circle of 0.28 of the short side, then rising to 35% to 100% opacity at the corners, so only the middle is sharp. Light leaks are one or two large radial gradients, warm or coloured to match the cast, placed near the edge and added with screen blending, which can only brighten. The dark corners (a vignette) and the grain are added last."
+ ],
+ "equations": [
+  {
+   "tex": "c'=\\operatorname{clip}\\Big(g_c\\,\\big[\\,l+\\sigma\\,(c-l)\\,\\big]\\Big),\\qquad \\sigma=0.6+1.3\\,s",
+   "note": "Saturation s and the colour cast gain g_c for each channel c; l is the luminance."
+  },
+  {
+   "tex": "y=\\tfrac12+\\frac{x}{1+1.1\\,(k-1)\\,\\lvert x\\rvert}\\,\\big(1+0.28\\,(k-1)\\big),\\qquad x=k\\,(v-\\tfrac12)",
+   "note": "The contrast curve for a contrast factor k = 1 + 1.1 × the slider."
+  },
+  {
+   "tex": "C=1-(1-C_0)\\,(1-C_{\\text{leak}})",
+   "note": "Screen blending of a light leak over the picture."
+  }
+ ],
+ "dials": [
+  {
+   "key": "sat",
+   "label": "Saturation",
+   "type": "range",
+   "default": 62,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "contrast",
+   "label": "Contrast",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "vig",
+   "label": "Dark corners",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "soft",
+   "label": "Soft edges",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "leak",
+   "label": "Light leak",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "cast",
+   "label": "Colour cast",
+   "type": "select",
+   "default": "warm",
+   "options": [
+    "warm",
+    "green",
+    "magenta",
+    "cool"
+   ]
+  },
+  {
+   "key": "grain",
+   "label": "Grain",
+   "type": "range",
+   "default": 30,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Move the leak",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Strong leak and a green cast look like an expired roll.",
+   "set": {
+    "leak": 85,
+    "cast": "green"
+   }
+  },
+  {
+   "text": "Heavy vignette with high contrast is the classic toy-camera look.",
+   "set": {
+    "vig": 90,
+    "contrast": 80
+   }
+  },
+  {
+   "text": "Cool cast with little leak is calmer.",
+   "set": {
+    "cast": "cool",
+    "leak": 10
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

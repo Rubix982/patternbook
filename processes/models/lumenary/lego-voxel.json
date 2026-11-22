@@ -1,0 +1,130 @@
+{
+ "id": "lumenary:lego-voxel",
+ "name": "Lego Voxel",
+ "physical": "yes",
+ "process": "brick-mosaic",
+ "process_name": "Brick mosaic",
+ "class": "inlay",
+ "basis": "why: a brick mosaic is 'a palette problem' of fixed brick colours; how: one stud per cell, nearest brick colour, studs drawn as plastic cylinders",
+ "note": "A toy medium; kept apart from tesserae mosaic setting because its units are fixed and gridded.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "A mosaic of plastic bricks: every cell is one brick colour with a round stud on top.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/lego-voxel.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Toy bricks and voxel graphics",
+  "era": "1958 brick, 2010s voxel art",
+  "bestOn": "Bold, colourful subjects and simple faces"
+ },
+ "why": "A brick mosaic is a palette problem. Each stud can only be one of the colours that bricks come in, so the picture is rebuilt from a small, fixed set. A little ordered dithering lets a smooth gradient become a mix of two neighbouring brick colours, and the drawn studs with their shadows and shine make it feel like plastic.",
+ "how": [
+  "Reduce the picture to one pixel per stud, each the average of its patch.",
+  "Add a small offset from a 4 × 4 Bayer pattern so gradients mix two brick colours.",
+  "Replace each stud with the nearest brick colour, using a weighting that favours red in bright colours and blue in dark ones.",
+  "Draw each stud as a short cylinder with a shadow, a darker side, a lighter top and a pale arc of shine.",
+  "Give each brick a light top and left edge and a dark bottom and right edge."
+ ],
+ "history": "The LEGO brick in its modern interlocking form was patented in 1958 in Denmark. Mosaics from plates of single-colour studs became a hobby of their own, and LEGO later sold sets that build art from them. A voxel is a pixel with volume, and games such as Minecraft turned the idea of a world made of cubes into mainstream culture.",
+ "uses": [
+  "Toy and kids’ brand visuals",
+  "Party and gift graphics",
+  "Mosaic planning and portrait ideas",
+  "Playful avatars"
+ ],
+ "terms": [
+  [
+   "Stud",
+   "The round bump on top of a brick."
+  ],
+  [
+   "Voxel",
+   "A pixel in three dimensions: a small cube in a grid."
+  ],
+  [
+   "Ordered dithering",
+   "Mixing nearby colours in a regular pattern to suggest shades between them."
+  ]
+ ],
+ "related": [
+  "pixel-art",
+  "isometric",
+  "dithering"
+ ],
+ "paragraphs": [
+  "The picture is reduced to one pixel per stud, so a stud is an average of its patch. A brick has one of a fixed set of real brick colours, so each stud takes the nearest colour in the set. Distance between colours uses a weighting that gives the red channel more weight when the colours are bright and the blue more when they are dark, which is closer to how colours look than a plain distance. Before the nearest colour is found, a small offset from a 4 × 4 Bayer pattern is added, so that smooth gradients become a mixture of two brick colours instead of one hard step.",
+  "Each stud is a short cylinder drawn with a shadow, a darker side, a lighter top and a pale arc of shine. The brick under it gets a light top and left edge and dark bottom and right edge."
+ ],
+ "equations": [
+  {
+   "tex": "d^2=\\Big(2+\\frac{\\bar r}{256}\\Big)\\Delta R^2+4\\,\\Delta G^2+\\Big(2+\\frac{255-\\bar r}{256}\\Big)\\Delta B^2,\\qquad \\bar r=\\frac{R_1+R_2}{2}",
+   "note": "The “redmean” colour distance."
+  },
+  {
+   "tex": "C_{\\text{stud}}\\in\\{0.74\\,C,\\ 1.07\\,C\\}",
+   "note": "The side of the stud is drawn at 74% of the brick colour and the top at 107%."
+  }
+ ],
+ "dials": [
+  {
+   "key": "studs",
+   "label": "Studs across",
+   "type": "range",
+   "default": 40,
+   "min": 16,
+   "max": 96,
+   "step": 1
+  },
+  {
+   "key": "palette",
+   "label": "Brick colours",
+   "type": "select",
+   "default": "full",
+   "options": [
+    "full",
+    "basic",
+    "greys"
+   ]
+  },
+  {
+   "key": "dither",
+   "label": "Dither tones",
+   "type": "range",
+   "default": 30,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shine",
+   "label": "Shine",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Fewer studs make a chunkier, more readable mosaic.",
+   "set": {
+    "studs": 24
+   }
+  },
+  {
+   "text": "The greys palette gives a smooth sculptural portrait.",
+   "set": {
+    "palette": "greys",
+    "studs": 60
+   }
+  },
+  {
+   "text": "Switch the shine off for matte bricks.",
+   "set": {
+    "shine": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

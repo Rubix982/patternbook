@@ -1,0 +1,161 @@
+{
+ "id": "lumenary:shadow-puppet",
+ "name": "Shadow Puppet",
+ "physical": "yes",
+ "process": "piercing",
+ "process_name": "Piercing (jali, cut work)",
+ "class": "piercing",
+ "basis": "why: 'the maker draws with holes' punched in hide; how: solid figure punched with holes and slits, blurred by distance, backlit cloth",
+ "note": "Also models shadow projection (blur with distance from the cloth).",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "A shadow play: the dark half of the picture becomes one figure cut from hide, pierced with rows of small holes that let the lamp through, held on rods against a glowing cloth.",
+  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "code": "vendor/lumenary/src/engine/styles/shadow-puppet.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Java and Bali, China, India, Turkey",
+  "era": "More than a thousand years",
+  "bestOn": "A dark figure in profile against a light background"
+ },
+ "why": "A shadow puppet is not looked at, it is looked through. The audience sits on the far side of a lit cloth and sees only what the figure blocks, so the maker draws with holes: rows of small punched openings let the lamp through and pick out a jewel, a fold or an eye. Held close to the cloth the shadow is sharp; drawn back, it softens and grows.",
+ "how": [
+  "Make everything darker than a threshold into one solid figure.",
+  "Lay a slanted lattice of points over the figure.",
+  "Punch a round hole wherever the figure is lighter than its surroundings, and in bands that follow its forms.",
+  "Cut slits along its strongest inner edges.",
+  "Blur the figure by its distance from the cloth.",
+  "Light a woven cloth from behind with one lamp, let a little colour through the hide, and add the rods."
+ ],
+ "history": "Shadow theatre is old across Asia. In Java and Bali, wayang kulit figures are cut from buffalo hide, pierced with fine chisels and painted, and a single puppeteer, the dalang, performs epics through the night by the light of an oil lamp; UNESCO recognised it in 2003. Chinese shadow puppetry flourished in the Song dynasty and uses translucent coloured hide. India has several leather puppet traditions, and Turkey has Karagöz.",
+ "uses": [
+  "Theatre and festival posters",
+  "Storytelling and folklore illustrations",
+  "Book covers and title cards",
+  "Lantern and night market graphics"
+ ],
+ "terms": [
+  [
+   "Wayang kulit",
+   "The shadow puppet theatre of Java and Bali; kulit means skin or leather."
+  ],
+  [
+   "Dalang",
+   "The puppeteer, who moves every figure, speaks every voice and leads the music."
+  ],
+  [
+   "Penumbra",
+   "The soft outer part of a shadow, where the light is only partly blocked."
+  ]
+ ],
+ "related": [
+  "chinese-paper-cut",
+  "papel-picado",
+  "batik"
+ ],
+ "paragraphs": [
+  "A shadow figure is everything darker than a threshold. As in the platform level, the threshold is found by rank: the blurred brightness values are sorted and the one at the chosen fraction is used, so the figure always covers the share of the frame the slider asks for. The pierced pattern is laid out on a slanted lattice. At each lattice point a round hole is punched if the figure there is lighter than its surroundings, or if it lies in one of the bands where the heavily blurred brightness passes set levels. Those bands follow the forms of the picture like the rows of chisel marks on a leather puppet. Slits are added along the strongest inner edges.",
+  "A puppet held away from the cloth throws a soft shadow, so the mask is blurred by a radius set by the distance slider. The cloth is lit from behind by one lamp: brightness falls off with distance from the lamp along an eased curve and is mapped through three colours, from a dark edge through a warm middle to a hot centre, with a fine weave and some unevenness. Where the mask is solid the cloth is almost black. Painted hide is translucent, so with the tint slider up a little of the lamp’s light comes through in the picture’s own colours."
+ ],
+ "equations": [
+  {
+   "tex": "\\theta=L_{(\\lceil q\\,N\\rceil)},\\qquad m=1-S_{\\theta-0.015,\\ \\theta+0.015}(L_w)",
+   "note": "The figure: θ is the brightness at rank qN among all pixels, L_w the blurred brightness."
+  },
+  {
+   "tex": "\\text{hole at }(g_x,g_y)\\iff L_f-L_m>0\\ \\ \\text{or}\\ \\ \\big\\lvert\\operatorname{frac}(k\\,L_m)-\\tfrac12\\big\\rvert<0.15",
+   "note": "Punch rule at a lattice point: L_f is a fine blur, L_m a wide one, k between 5 and 11 bands."
+  },
+  {
+   "tex": "t=S_{0,1}\\!\\Big(1-\\frac{\\lvert\\mathbf x-\\mathbf x_{\\text{lamp}}\\rvert}{R}\\Big),\\qquad C=\\operatorname{ramp}_{\\text{edge}\\to\\text{warm}\\to\\text{hot}}(t)",
+   "note": "The lit cloth; R is 62% of the frame’s diagonal."
+  }
+ ],
+ "dials": [
+  {
+   "key": "cut",
+   "label": "How much is figure",
+   "type": "range",
+   "default": 50,
+   "min": 15,
+   "max": 85,
+   "step": 1
+  },
+  {
+   "key": "holes",
+   "label": "Pierced pattern",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "soft",
+   "label": "Distance from the cloth",
+   "type": "range",
+   "default": 30,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "tint",
+   "label": "Painted hide",
+   "type": "range",
+   "default": 25,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "cloth",
+   "label": "Light",
+   "type": "select",
+   "default": "lamp",
+   "options": [
+    "lamp",
+    "moon",
+    "rose"
+   ]
+  },
+  {
+   "key": "rods",
+   "label": "Rods",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Light the lamp again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Dense piercing shows the chisel work.",
+   "set": {
+    "holes": 100,
+    "soft": 10
+   }
+  },
+  {
+   "text": "Draw the figure back from the cloth for a large soft shadow.",
+   "set": {
+    "soft": 90,
+    "holes": 30
+   }
+  },
+  {
+   "text": "Painted hide under a rose lantern glows with colour.",
+   "set": {
+    "tint": 90,
+    "cloth": "rose"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

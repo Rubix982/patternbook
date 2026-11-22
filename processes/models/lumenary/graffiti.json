@@ -1,0 +1,148 @@
+{
+ "id": "lumenary:graffiti",
+ "name": "Graffiti",
+ "physical": "partly",
+ "process": "spray-stencilling",
+ "process_name": "Spray stencilling",
+ "class": "printing",
+ "basis": "why: 'a stencil has no grey'; how: three cut paint layers from percentiles, overspray, drips on a brick wall",
+ "note": "The tag is graffiti style; the portrait is a multi-layer aerosol stencil.",
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "A three-colour spray stencil on a brick wall, with overspray, drips and a tag.",
+  "theory_page": "treatments/lumenary/theory/01-design.md",
+  "code": "vendor/lumenary/src/engine/styles/graffiti.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Philadelphia and New York streets, with stencil work from Paris",
+  "era": "1960s and 70s onward",
+  "bestOn": "High contrast portraits and bold silhouettes"
+ },
+ "why": "A stencil has no grey: a spot of the wall is either painted or it is not. That limit is what makes stencil portraits so striking, and this treatment keeps to it with three paint colours and a bare wall. The cut points come from the picture’s own brightness percentiles, so every photograph leaves about the same share of brick showing, however light or dark it is.",
+ "how": [
+  "Paint a brick wall first, each brick slightly lighter or darker than its neighbours.",
+  "Find the 20th, 40th and 58th percentile brightness of this particular picture.",
+  "Use those points to cut three paint layers and a bare area, like a multi-layer stencil.",
+  "Add a blurred copy of the stencil at low strength as overspray, plus a fine scatter of dots.",
+  "Start a drip wherever paint sits directly above bare wall, then outline and fill the tag."
+ ],
+ "history": "Modern graffiti took shape in Philadelphia in the late 1960s and in New York in the 1970s, where tags such as TAKI 183 were noticed by the press in 1971. Stencil work followed, with artists such as Blek le Rat in Paris in the early 1980s and later Banksy, who used the speed of a cut stencil to put detailed images on walls in seconds.",
+ "uses": [
+  "Street art style posters and flyers",
+  "Streetwear and skate graphics",
+  "Music and event artwork",
+  "Textured backgrounds for social posts"
+ ],
+ "terms": [
+  [
+   "Stencil",
+   "A cut-out sheet used to apply paint only through the holes."
+  ],
+  [
+   "Overspray",
+   "The soft haze of paint that drifts past the edge of a spray."
+  ],
+  [
+   "Percentile",
+   "The value below which a given share of pixels fall. The 20th percentile is darker than 80 percent of the picture."
+  ]
+ ],
+ "related": [
+  "pop-art",
+  "comic-book",
+  "collage-art"
+ ],
+ "paragraphs": [
+  "The wall is drawn first: a brick pattern with each brick slightly lighter or darker than the others. The picture is then turned into a stencil with three paint colours and a part left bare. The thresholds are not fixed numbers; they are the 20th, 40th and 58th percentiles of this picture’s own brightness, so every photograph leaves about forty percent of the wall showing, whatever its tones.",
+  "Real spray paint is not crisp, so a blurred copy of the stencil is added at low opacity as overspray, and a fine scatter of dots falls around the painted edges. Drips start where painted pixels have bare wall directly below, and run down as a short line with a round end. The tag is outlined, then filled with the light colour and a glow."
+ ],
+ "equations": [
+  {
+   "tex": "\\text{level}=\\begin{cases}3&L<q_{0.20}\\\\2&L<q_{0.40}\\\\1&L<q_{0.58}\\\\0&\\text{otherwise (bare wall)}\\end{cases}",
+   "note": "q is a quantile of the picture’s brightness values."
+  },
+  {
+   "tex": "C=(1-\\alpha)\\,C_{\\text{sharp}}+\\alpha\\,C_{\\text{blur}},\\qquad \\alpha=0.35\\cdot\\text{overspray}",
+   "note": "Overspray: the blurred copy is blended over the sharp one."
+  }
+ ],
+ "dials": [
+  {
+   "key": "palette",
+   "label": "Cans",
+   "type": "select",
+   "default": "street",
+   "options": [
+    "street",
+    "toxic",
+    "ocean"
+   ]
+  },
+  {
+   "key": "wall",
+   "label": "Wall",
+   "type": "select",
+   "default": "brick",
+   "options": [
+    "brick",
+    "grey",
+    "plaster"
+   ]
+  },
+  {
+   "key": "spray",
+   "label": "Overspray",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "drips",
+   "label": "Drips",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "tag",
+   "label": "Tag",
+   "type": "text",
+   "default": "LUMEN"
+  },
+  {
+   "key": "seed",
+   "label": "Respray",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A grey wall with ocean cans looks cool and industrial.",
+   "set": {
+    "wall": "grey",
+    "palette": "ocean"
+   }
+  },
+  {
+   "text": "Maximum overspray and drips make a rough, fresh piece.",
+   "set": {
+    "spray": 100,
+    "drips": 100
+   }
+  },
+  {
+   "text": "Sign it with your own tag.",
+   "set": {
+    "tag": "YOURS"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

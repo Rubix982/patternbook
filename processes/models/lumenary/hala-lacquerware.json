@@ -1,0 +1,158 @@
+{
+ "id": "lumenary:hala-lacquerware",
+ "name": "Hala Lacquerware",
+ "physical": "yes",
+ "process": "lac-turnery",
+ "process_name": "Lac turnery",
+ "class": "lacquer",
+ "basis": "why: lac stick held against spinning wood, friction melts layers, lines scratched through; how: lathe-turned form, colour bands, scratched lines, polish",
+ "note": null,
+ "lumenary": {
+  "section": "L. Sindhi design",
+  "kind": "still",
+  "blurb": "Wood turned on a lathe and coated in lac, the way it is done in Hala. Bands of colour wind around the piece, and fine lines are scratched through to the layer beneath.",
+  "theory_page": "treatments/lumenary/theory/12-sindhi.md",
+  "code": "vendor/lumenary/src/engine/styles/hala-lacquerware.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Hala, Sindh",
+  "era": "Traditional craft, still practised",
+  "bestOn": "Pictures with rich colour"
+ },
+ "why": "Lacquerware is made on a lathe. While the wooden piece spins, a stick of lac, a resin that softens with heat, is held against it, and the friction melts a thin layer onto the wood. One colour after another is laid on, and fine lines are scratched through the top coat to show the colour beneath. That is why the colour runs around the piece in rings.",
+ "how": [
+  "Draw a lathe-turned piece in the dark: a vase, a cylinder or an egg-shaped jar, with a soft shadow at its foot.",
+  "Map each pixel at horizontal offset dx from the axis to an angle φ = arcsin(dx/ρ) on the surface of the cylinder, where ρ is the piece’s half-width at that height.",
+  "Wrap the picture round the piece by reading it at x = W (½ + φ/π), so it takes half a turn to run across your picture and it is squeezed near the edge.",
+  "Fill every band (as tall as the band slider times 1.3 px) with a single colour averaged from the picture.",
+  "Scratch fine lines through the top coat, and add the sheen of polished lac."
+ ],
+ "history": "Lac is the resin made by tiny insects and used for centuries across South Asia for lacquer and sealing wax. In Sindh the craft of lacquered, lathe-turned wood is closely tied to Hala, where bed legs, cradles, toys and boxes are made. It is a craft of family workshops, and demand for it has been under pressure from cheaper goods.",
+ "uses": [
+  "Furniture legs, boxes, toys and household items",
+  "Craft markets and cultural gifts",
+  "Teaching how a cylinder maps to a flat picture",
+  "Product mock-ups with a lacquer finish"
+ ],
+ "terms": [
+  [
+   "Lac",
+   "A resin made by insects, used to make lacquer."
+  ],
+  [
+   "Lathe",
+   "A machine that spins a piece of wood so it can be shaped and coated."
+  ],
+  [
+   "Arcsine",
+   "The inverse of sine, used here to find an angle from a distance."
+  ]
+ ],
+ "related": [
+  "hala-blue-pottery",
+  "truck-art",
+  "embossed-leather"
+ ],
+ "paragraphs": [
+  "Lacquerware from Hala is turned on a lathe. While the wooden piece spins, a stick of lac (a resin that softens with heat) is held against it and friction melts a thin layer onto the wood. The turner can lay on one colour after another, and fine lines are scratched through the top coat to show the colour beneath. This is why the bands of colour run round the piece in rings. The program makes this as a picture of a lathe-turned piece in the dark: a vase, a cylinder or a jar, with a soft shadow at its foot.",
+  "Everything depends on one idea. A cylinder seen from the front maps a pixel at horizontal offset dx from the axis to an angle φ = arcsin(dx/ρ) on its surface, where ρ is the piece’s half-width at that height. The picture is wrapped round the piece by reading it at x = W (½ + φ/π), so it takes half a turn to run across your picture, and near the edge of the piece the picture is squeezed, as it would be on a real cylinder. Every band (as tall as the band slider times 1.3 px) takes the average colour of its row of the picture, and a share of the local colour is mixed in. The result is matched to the nearest of seven lac colours. The edges of the picture are scratched in gold. A diffuse term cos φ darkens the sides of the piece and two narrow highlights stand for the shine of the polish."
+ ],
+ "equations": [
+  {
+   "tex": "u=\\frac{x-x_c}{\\rho(y)},\\qquad \\varphi=\\arcsin u,\\qquad x_{\\text{src}}=W\\Big(\\tfrac12+\\frac{\\varphi}{\\pi}\\Big)",
+   "note": "Wrapping the picture round a cylinder. u runs from −1 to 1 across the piece and x_src is where the picture is read. Without “wrap” it is read at x."
+  },
+  {
+   "tex": "\\frac{dx}{d\\varphi}=\\rho\\cos\\varphi\\ \\ \\Rightarrow\\ \\ \\text{picture density}\\propto\\frac{1}{\\cos\\varphi}",
+   "note": "Why the picture looks squeezed near the sides: equal steps of angle cover less and less width on screen."
+  },
+  {
+   "tex": "\\rho_{\\text{egg}}(t)=0.45\\,W\\,\\sin^{0.55}\\!\\big(\\pi(0.04+0.92\\,\\hat t)\\big),\\qquad \\rho_{\\text{cyl}}=0.33\\,W",
+   "note": "Two of the three profiles; t̂ runs 0 to 1 over the height of the piece. The vase profile is a sum of smoothstep curves."
+  },
+  {
+   "tex": "f=(0.3+0.7\\cos\\varphi)\\,\\big(1-0.45\\operatorname{smoothstep}(0.82,1,|u|)\\big),\\qquad s=0.75\\,e^{-\\left(\\frac{u+0.42}{0.16}\\right)^2}+0.3\\,e^{-\\left(\\frac{u-0.68}{0.07}\\right)^2}",
+   "note": "Shading and the two highlights, a broad one on the left and a narrow one on the right. The highlight is added with weight equal to the polish slider."
+  }
+ ],
+ "dials": [
+  {
+   "key": "shape",
+   "label": "Piece",
+   "type": "select",
+   "default": "vase",
+   "options": [
+    "vase",
+    "cylinder",
+    "egg"
+   ]
+  },
+  {
+   "key": "band",
+   "label": "Band width",
+   "type": "range",
+   "default": 6,
+   "min": 2,
+   "max": 14,
+   "step": 1
+  },
+  {
+   "key": "detail",
+   "label": "Colour follows picture",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "scratch",
+   "label": "Scratched lines",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "polish",
+   "label": "Polish",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wrap",
+   "label": "Wrap the picture round",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "An egg-shaped piece wraps the picture round a rounder form.",
+   "set": {
+    "shape": "egg",
+    "wrap": true
+   }
+  },
+  {
+   "text": "Thin bands with strong scratches look finely turned.",
+   "set": {
+    "band": 3,
+    "scratch": 95
+   }
+  },
+  {
+   "text": "Without wrapping, the picture stays flat on the piece.",
+   "set": {
+    "wrap": false,
+    "polish": 85
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

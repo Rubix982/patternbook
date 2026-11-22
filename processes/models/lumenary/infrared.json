@@ -1,0 +1,157 @@
+{
+ "id": "lumenary:infrared",
+ "name": "Infrared",
+ "physical": "yes",
+ "process": "infrared-photography",
+ "process_name": "Infrared photography",
+ "class": "photographic",
+ "basis": "why: chlorophyll reflects near-infrared so foliage glows and sky darkens; how: IR estimated from greenness and blueness, glow",
+ "note": "Estimates infrared from visible colour; the effect is modelled, not the sensing.",
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "What a camera sees just beyond red: leaves glow white or pink, skies sink to black and a dreamy halo spreads from the highlights.",
+  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "code": "vendor/lumenary/src/engine/styles/infrared.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Scientific and fine art photography",
+  "era": "1910 onward",
+  "bestOn": "Landscapes with trees, grass and open sky"
+ },
+ "why": "Chlorophyll reflects near-infrared light very strongly, so in infrared photography green leaves glow nearly white and a blue sky, which reflects very little, goes almost black. A screen can show only visible light, so this treatment estimates the infrared brightness from colour: how green a pixel is, and how blue, pushes it up or down.",
+ "how": [
+  "Measure greenness as how far green leads the larger of red and blue, scaled by the foliage slider.",
+  "Measure blueness as how far blue leads the larger of red and green, scaled by the sky slider.",
+  "Estimate infrared brightness as mostly green with a little red and blue, boosted by greenness and pulled down by blueness.",
+  "Render it as black and white, as false colour with red and blue swapped, or as pink foliage that records infrared as red.",
+  "Add a dreamy glow from the highlights of a small copy screened back on, then a light vignette and grain."
+ ],
+ "history": "The American physicist Robert W. Wood published the first infrared landscape photographs in 1910, and the glow of foliage is still called the Wood effect. Kodak’s Aerochrome film, developed in the 1940s for spotting camouflage, turned foliage red and later became a favourite of artists. Digital cameras can be converted to infrared today.",
+ "uses": [
+  "Surreal landscape and nature art",
+  "Album and book cover images",
+  "Fashion and editorial colour looks",
+  "Dreamy backgrounds"
+ ],
+ "terms": [
+  [
+   "Near-infrared",
+   "Light just beyond visible red, invisible to the eye but recorded by some sensors."
+  ],
+  [
+   "Wood effect",
+   "The bright appearance of foliage in infrared photographs."
+  ],
+  [
+   "False colour",
+   "Colour that does not come from the real scene but from a chosen mapping."
+  ]
+ ],
+ "related": [
+  "thermal-camera",
+  "night-vision",
+  "cross-processed"
+ ],
+ "paragraphs": [
+  "Chlorophyll reflects near-infrared light very strongly, so in infrared photography green leaves glow nearly white, and a blue sky, which reflects little, goes almost black. A screen can only show the visible spectrum, so the program estimates the infrared brightness from colour. The greenness is how far the green channel leads the larger of red and blue, γ = clip((G − 0.85 max(R, B)) × 3.2), scaled by the foliage slider. The blueness is clip((B − 0.9 max(R, G)) × 3), scaled by the sky slider. The estimate is mostly green and a little red and blue, boosted by the greenness and pulled down by the blueness.",
+  "Three renderings are offered. Black and white simply shows that estimate. False colour makes the channel swap used in digital infrared photography, in which red and blue exchange roles and infrared feeds the blue, so foliage turns pale cyan-white. Pink foliage records infrared as red, which makes leaves pink and shifts red objects toward yellow. A dreamy glow follows: highlights of a copy at one seventh the size are kept and screened back on. A light vignette and grain finish it."
+ ],
+ "equations": [
+  {
+   "tex": "\\gamma=\\operatorname{clip}\\big[\\,3.2\\,(G-0.85\\max(R,B))\\,\\big]\\,\\lambda,\\qquad \\beta=\\operatorname{clip}\\big[\\,3\\,(B-0.9\\max(R,G))\\,\\big]\\,\\kappa",
+   "note": "Greenness γ and blueness β; λ is the foliage slider and κ the sky slider."
+  },
+  {
+   "tex": "\\iota=\\operatorname{clip}\\big(0.18\\,R+0.62\\,G+0.1\\,B+0.65\\,\\gamma-0.5\\,\\beta\\big)",
+   "note": "The estimated infrared brightness: leaves up, sky down."
+  },
+  {
+   "tex": "(R',G',B')=\\Big(0.9\\,(1-0.35\\,\\beta)\\,B+0.12\\,\\iota,\\ \\ 0.55\\,G+0.45\\,\\iota,\\ \\ 0.55\\,R+0.55\\,\\iota+0.2\\,\\gamma\\Big)",
+   "note": "False colour: red and blue are swapped and infrared leads the blue channel."
+  }
+ ],
+ "dials": [
+  {
+   "key": "mode",
+   "label": "Film",
+   "type": "select",
+   "default": "false",
+   "options": [
+    "false",
+    "mono",
+    "pink"
+   ]
+  },
+  {
+   "key": "glow",
+   "label": "Glow",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "leaf",
+   "label": "Foliage boost",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "sky",
+   "label": "Sky darkening",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "contrast",
+   "label": "Contrast",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grain",
+   "label": "Grain",
+   "type": "range",
+   "default": 25,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Pink foliage is the classic dreamlike look.",
+   "set": {
+    "mode": "pink",
+    "leaf": 85
+   }
+  },
+  {
+   "text": "Black and white with a dark sky is stark and graphic.",
+   "set": {
+    "mode": "mono",
+    "sky": 90
+   }
+  },
+  {
+   "text": "High glow with low contrast feels soft and ethereal.",
+   "set": {
+    "glow": 85,
+    "contrast": 20
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

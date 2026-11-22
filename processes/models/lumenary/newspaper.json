@@ -1,0 +1,147 @@
+{
+ "id": "lumenary:newspaper",
+ "name": "Newspaper",
+ "physical": "partly",
+ "process": "halftone-screening",
+ "process_name": "Halftone screening",
+ "class": "printing",
+ "basis": "why: 'newspapers cannot print grey'; how: 45-degree dot lattice, radius from the square root of darkness",
+ "note": "Front-page layout is convention; the photograph is halftone.",
+ "lumenary": {
+  "section": "C. Typographic",
+  "kind": "still",
+  "blurb": "A front page: masthead, headline, columns of text and your picture as a coarse halftone photograph.",
+  "theory_page": "treatments/lumenary/theory/03-type.md",
+  "code": "vendor/lumenary/src/engine/styles/newspaper.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Printing presses and newsrooms",
+  "era": "Halftone newspapers since the 1880s",
+  "bestOn": "Strong portraits and news-like scenes"
+ },
+ "why": "Newspapers cannot print grey. They print black dots of different sizes on pale paper and rely on your eye to blend them, so a photograph is really a field of dots. This treatment lays a lattice of such dots over the picture and builds the rest of a front page around it with a masthead, a headline, rules and columns.",
+ "how": [
+  "Lay a lattice of dots rotated by 45 degrees, the angle where a regular pattern is least noticeable.",
+  "At each lattice point read the brightness and draw a dot whose radius grows with the square root of the darkness, so inked area follows darkness.",
+  "Fit the masthead to the page width by measuring and scaling it.",
+  "Wrap the headline into at most three lines, shrinking it by 8 percent steps until it fits.",
+  "Fill the columns with greeked text, bars standing in for words, and add paper grain and a warm vignette."
+ ],
+ "history": "The first halftone photograph in a daily newspaper appeared in the New York Daily Graphic in 1880, made by Stephen Horgan. Frederic Ives patented a halftone process in 1881, and crossed-line screens soon made it routine. By the early twentieth century newspapers printed photographs every day, and the dot became so familiar that artists later made it into pop art.",
+ "uses": [
+  "Parody and editorial mock-ups",
+  "Birthday and anniversary front pages",
+  "Posters with a vintage press look",
+  "Story and thumbnail graphics"
+ ],
+ "terms": [
+  [
+   "Halftone",
+   "A way of showing tone with dots whose size changes."
+  ],
+  [
+   "Masthead",
+   "The newspaper’s name at the top of the front page."
+  ],
+  [
+   "Greeking",
+   "Using bars or nonsense text to stand in for real words in a layout."
+  ]
+ ],
+ "related": [
+  "halftone",
+  "letterpress",
+  "pop-art"
+ ],
+ "paragraphs": [
+  "A printed photograph has no grey, only black dots of different sizes on white paper, small ones for light areas and large ones for dark. The eye blends them. Here the dots sit on a lattice turned 45°, the angle at which the eye notices a regular pattern least. For each lattice point the program reads the picture’s brightness L at that spot and draws a dot whose radius grows with the square root of the darkness, which makes the inked area proportional to the darkness. In the deepest tones the dots are big enough to merge and the page goes solid black.",
+  "The rest of the page is typeset around it. The masthead is fitted to the page width by measuring the text at one size and scaling; the headline is wrapped into at most three lines and shrunk by 8% steps until it fits; thin and thick rules separate the sections; and the remaining columns are filled with “greeked” text, bars of random length standing in for words, with the occasional subhead. Paper grain and a warm vignette finish it."
+ ],
+ "equations": [
+  {
+   "tex": "\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\frac{1}{\\sqrt2}\\begin{pmatrix}a+b\\\\ b-a\\end{pmatrix},\\qquad a,b\\in s\\,\\mathbb Z",
+   "note": "Lattice points: a square grid of spacing s turned by 45°."
+  },
+  {
+   "tex": "r=0.62\\,s\\,\\sqrt{1-L(x,y)}",
+   "note": "Dot radius; the inked fraction of a cell is πr²/s², proportional to the darkness 1 − L."
+  },
+  {
+   "tex": "F=\\min\\!\\left(u_0,\\ \\frac{0.98\\,w_{\\text{page}}}{w_{100}}\\cdot 100\\right)",
+   "note": "Masthead font size: the text measured at 100 px has width w₁₀₀, and is scaled to fill 98% of the page width."
+  }
+ ],
+ "dials": [
+  {
+   "key": "masthead",
+   "label": "Masthead",
+   "type": "text",
+   "default": "The Daily Lumenary"
+  },
+  {
+   "key": "headline",
+   "label": "Headline",
+   "type": "text",
+   "default": "Picture Made Entirely Of Numbers, Experts Confirm"
+  },
+  {
+   "key": "dot",
+   "label": "Dot size",
+   "type": "range",
+   "default": 6,
+   "min": 3,
+   "max": 12,
+   "step": 1
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "newsprint",
+   "options": [
+    "newsprint",
+    "grey",
+    "white"
+   ]
+  },
+  {
+   "key": "columns",
+   "label": "Columns",
+   "type": "range",
+   "default": 4,
+   "min": 3,
+   "max": 5,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Re-set type",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Large dots on grey stock look like a coarse tabloid.",
+   "set": {
+    "dot": 10,
+    "paper": "grey"
+   }
+  },
+  {
+   "text": "Fine dots make the photograph almost smooth.",
+   "set": {
+    "dot": 3
+   }
+  },
+  {
+   "text": "Write your own front page.",
+   "set": {
+    "masthead": "The Morning Post",
+    "headline": "Local Photograph Declared Wonderful"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

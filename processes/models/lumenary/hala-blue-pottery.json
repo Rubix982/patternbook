@@ -1,0 +1,171 @@
+{
+ "id": "lumenary:hala-blue-pottery",
+ "name": "Hala Blue Pottery",
+ "physical": "yes",
+ "process": "tin-glaze-painting",
+ "process_name": "Tin-glaze painting",
+ "class": "glaze",
+ "basis": "why: cobalt and turquoise painted on white glaze and fired once; how: cobalt wash, contour vines with leaves, crackle",
+ "note": "Filed under tin-glaze painting per the brief; Hala and Multan blue pottery is often painted on a white slip under an alkaline glaze rather than on tin glaze.",
+ "lumenary": {
+  "section": "L. Sindhi design",
+  "kind": "still",
+  "blurb": "Cobalt and turquoise painted on white glaze, as in the kilns of Hala. Vines follow the contours of your picture, with leaves, flowers and the fine crackle of old glaze.",
+  "theory_page": "treatments/lumenary/theory/12-sindhi.md",
+  "code": "vendor/lumenary/src/engine/styles/hala-blue-pottery.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Hala, Sindh",
+  "era": "Centuries old",
+  "bestOn": "Landscapes and pictures with soft shadows"
+ },
+ "why": "Blue pottery is painted on white glaze with cobalt and turquoise, then fired once, so the colour sinks into the glaze and cannot be changed. The painter has to know what each stroke will become. The designs are vines, leaves and small flowers, drawn so that every curve leads into the next. Here the picture becomes a cobalt wash, and vines follow its contours across the glaze.",
+ "how": [
+  "Blur the picture twice (radius smooth × 0.9 px) to a field T.",
+  "Blend the glaze colour toward cobalt by v = 0.78 w (1 − T)^1.5, where w is the wash slider, so shadows turn deep blue and highlights stay white.",
+  "Find the contour lines of T at evenly spaced levels by marching squares, join them into curves, and draw them with a width that falls from 3.9 px at the darkest contour to 1.7 px at the lightest.",
+  "Place leaves on alternate sides of each vine about every 24 px, turned 0.95 radians from the tangent, in turquoise and cobalt by turns.",
+  "Add small flowers, and the fine crackle of old glaze."
+ ],
+ "history": "Hala, a town in the Matiari district, is one of the places where blue pottery is still made in Sindh. It shares a tradition with Multan and with Persia, and Sindh has a long tradition of blue glazed tile, as seen on the Shah Jahan Mosque at Thatta (1647). Potters work in small family kilns, and the craft depends on knowledge passed from one generation to the next.",
+ "uses": [
+  "Plates, vases and tiles",
+  "Mosque and shrine decoration",
+  "Gifts and craft markets",
+  "Pattern design with a cobalt palette"
+ ],
+ "terms": [
+  [
+   "Glaze",
+   "A glassy coating fired onto pottery."
+  ],
+  [
+   "Cobalt",
+   "A mineral that gives a deep blue pigment."
+  ],
+  [
+   "Crackle",
+   "A fine web of cracks in old glaze."
+  ]
+ ],
+ "related": [
+  "azulejo",
+  "delft-blue",
+  "makli-carving"
+ ],
+ "paragraphs": [
+  "Hala, a town in the Matiari district, is one of the places where blue pottery is still made in Sindh. It shares a tradition with Multan and with Persia: a white glaze painted in cobalt blue and turquoise, then fired once, so the colour sinks into the glaze and cannot be changed. The designs are vines, leaves and small flowers. The program paints your picture as a cobalt wash and then lays vines along it.",
+  "The wash comes first. The picture is blurred twice (radius smooth × 0.9 px) to a field T, and the glaze colour is blended toward cobalt by v = 0.78 w (1 − T)^1.5, where w is the wash slider, so shadows turn deep blue and highlights stay white. Vines are the contour lines of T at evenly spaced levels, found by marching squares, joined into curves and drawn with a width that falls from 3.9 px at the darkest contour to 1.7 px at the lightest. Leaves sit on alternate sides of each vine about every 24 px, turned 0.95 radians (about 54°) from the tangent, in turquoise and cobalt by turns. Flowers (five oval petals round a turquoise centre) are placed on a jittered grid, only where the picture is dark enough. Old glaze cracks, and the program finds the cracks with Worley noise."
+ ],
+ "equations": [
+  {
+   "tex": "C=C_{\\text{glaze}}+\\big(C_{\\text{cobalt}}-C_{\\text{glaze}}\\big)\\,v,\\qquad v=0.78\\,w\\,(1-T)^{1.5}",
+   "note": "Cobalt wash. T is the doubly blurred brightness and w the wash slider (0 to 1)."
+  },
+  {
+   "tex": "\\{\\mathbf x:\\ T(\\mathbf x)=\\lambda_k\\},\\quad \\lambda_k=\\frac{k}{N},\\ \\ k=1,\\dots,N-1,\\qquad w_k=(1.7+2.2\\,(1-\\lambda_k))\\,\\mathrm{sc}",
+   "note": "Vine k is a contour of T at level λₖ. N is the “vines” slider; darker contours are drawn thicker."
+  },
+  {
+   "tex": "e=F_2-F_1<1.1\\,\\mathrm{sc}\\ \\Rightarrow\\ C\\leftarrow C\\,\\big(1-0.3\\,c\\,(1-\\tfrac{e}{1.1\\,\\mathrm{sc}})\\big)",
+   "note": "Crackle: F₁ and F₂ are the distances to the nearest and second nearest Worley points (cell 54 px), and c is the crackle slider. The line darkens the glaze."
+  },
+  {
+   "tex": "\\text{flower if } T(\\mathbf x)\\le 0.34\\,(0.4+q)\\ \\text{ and }\\ \\xi\\le q",
+   "note": "Where a flower may sit: q is the flowers slider and ξ a random number per grid point."
+  }
+ ],
+ "dials": [
+  {
+   "key": "levels",
+   "label": "Vines",
+   "type": "range",
+   "default": 8,
+   "min": 3,
+   "max": 14,
+   "step": 1
+  },
+  {
+   "key": "smooth",
+   "label": "Smoothness",
+   "type": "range",
+   "default": 5,
+   "min": 1,
+   "max": 10,
+   "step": 1
+  },
+  {
+   "key": "leaves",
+   "label": "Leaves",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "flowers",
+   "label": "Flowers",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wash",
+   "label": "Blue wash",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "crackle",
+   "label": "Crackle glaze",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ground",
+   "label": "Glaze",
+   "type": "select",
+   "default": "white",
+   "options": [
+    "white",
+    "cream",
+    "turquoise"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "A turquoise glaze gives the bright, shallow-water look.",
+   "set": {
+    "ground": "turquoise",
+    "wash": 40
+   }
+  },
+  {
+   "text": "Many vines make a dense, floral garden.",
+   "set": {
+    "levels": 13,
+    "leaves": 90,
+    "flowers": 80
+   }
+  },
+  {
+   "text": "Heavy crackle looks like an old family plate.",
+   "set": {
+    "crackle": 95,
+    "ground": "cream"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,145 @@
+{
+ "id": "lumenary:ticker-text",
+ "name": "Ticker Text",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "scrolling text rows lit by brightness (how)",
+ "note": null,
+ "lumenary": {
+  "section": "C. Typographic",
+  "kind": "live",
+  "blurb": "Rows of scrolling symbols and prices, like a trading floor wall. The picture is what the brightness spells out.",
+  "theory_page": "treatments/lumenary/theory/03-type.md",
+  "code": "vendor/lumenary/src/engine/styles/ticker-text.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Stock exchanges and news signs",
+  "era": "1860s onward",
+  "bestOn": "Contrasty pictures with bright subjects"
+ },
+ "why": "A ticker wall is rows of text sliding sideways, each carrying symbols, prices and arrows. Individually they are noise, but if every letter lights up according to the brightness of the picture it passes over, the picture appears in the flow, as if the market itself were drawing it.",
+ "how": [
+  "Build each row from short tokens of your symbols, a price and an arrow, repeated until it is wider than the screen.",
+  "Alternate the direction of the rows and give each its own speed.",
+  "Sample a small, contrast stretched copy of the picture at the centre of each letter as it is drawn.",
+  "Make the letter brighter where the picture is brighter, with a glow on the brightest.",
+  "Draw letters in batches grouped by intensity and hue so the fill colour changes only a couple of dozen times a frame."
+ ],
+ "history": "The stock ticker was invented in the 1860s: Edward Calahan’s version of 1867 printed prices on a paper tape, and Thomas Edison improved it soon after. Electric signs followed. The New York Times building in Times Square carried a moving news sign from 1928, and scrolling displays have been a symbol of fast information ever since.",
+ "uses": [
+  "Finance and business themed visuals",
+  "News and sports style overlays",
+  "Title cards with a data feel",
+  "Looping backgrounds for streams and talks"
+ ],
+ "terms": [
+  [
+   "Ticker",
+   "A device or display that shows a running stream of prices or news."
+  ],
+  [
+   "Token",
+   "A short chunk of text treated as one unit."
+  ],
+  [
+   "Batching",
+   "Grouping similar drawing operations so they run faster."
+  ]
+ ],
+ "related": [
+  "kinetic-type",
+  "split-flap",
+  "matrix-rain"
+ ],
+ "paragraphs": [
+  "A trading-floor display is rows of text sliding sideways. Each row is built from short tokens made of your symbols, a price and an arrow, for instance “LUM 217.40 ▲1.8%”, repeated until the row is wider than the screen; the text itself is random but fixed by the seed. Rows alternate direction and each has its own speed, so the whole wall never moves in step.",
+  "The picture is carried by brightness. A small, contrast-stretched copy of your picture is sampled at the centre of each letter at the moment it is drawn, and the brighter that spot the brighter the letter, so as text slides over a bright area it lights up and over a dark area it fades. The brightest letters get a glow. In green-and-red mode the hue is a property of the token (up or down) and only the intensity comes from the picture. To keep it fast, letters are drawn in batches grouped by intensity and hue, so the fill colour changes only a couple of dozen times per frame."
+ ],
+ "equations": [
+  {
+   "tex": "x_i(t)=\\Big(\\big(i\\,c+\\varepsilon\\,(v\\,\\rho\\,t+o)\\big)\\bmod T\\Big)-c,\\qquad T=n\\,c",
+   "note": "Position of character i: c is the character width, n the characters in the row, ε = ±1 the direction, v the row speed, ρ the speed slider, o an offset."
+  },
+  {
+   "tex": "\\alpha=\\operatorname{clamp}\\!\\big(0.07+\\sigma\\,B^{1.5}\\cdot1.05+(1-\\sigma)\\cdot0.55\\big)",
+   "note": "Letter intensity from the picture brightness B under it; σ is the “picture strength” slider."
+  }
+ ],
+ "dials": [
+  {
+   "key": "text",
+   "label": "Symbols",
+   "type": "text",
+   "default": "LUM PIX HUE LUX RAW ISO"
+  },
+  {
+   "key": "rows",
+   "label": "Rows",
+   "type": "range",
+   "default": 32,
+   "min": 10,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "speed",
+   "label": "Speed",
+   "type": "range",
+   "default": 45,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "picture",
+   "label": "Picture strength",
+   "type": "range",
+   "default": 80,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "market",
+   "options": [
+    "market",
+    "amber",
+    "white"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New prices",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Amber on black is an old terminal tape.",
+   "set": {
+    "colour": "amber"
+   }
+  },
+  {
+   "text": "Maximum picture strength shows the portrait clearly.",
+   "set": {
+    "picture": 100,
+    "rows": 48
+   }
+  },
+  {
+   "text": "Swap in your own symbols.",
+   "set": {
+    "text": "ART SUN SEA SKY"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

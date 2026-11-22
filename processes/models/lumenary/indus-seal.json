@@ -1,0 +1,148 @@
+{
+ "id": "lumenary:indus-seal",
+ "name": "Indus Seal",
+ "physical": "yes",
+ "process": "seal-carving",
+ "process_name": "Seal carving",
+ "class": "carving",
+ "basis": "why: seals carved in reverse in steatite and pressed into wet clay; how: signs and figure cut as lines, shown as clay impression or cut stone, lit",
+ "note": "Intaglio seal cutting, kept apart from wall relief carving.",
+ "lumenary": {
+  "section": "L. Sindhi design",
+  "kind": "still",
+  "blurb": "A stamp seal from Mohenjo-daro, about four thousand years old: a row of signs above a figure cut in lines. Your picture is the figure, and the signs read from right to left.",
+  "theory_page": "treatments/lumenary/theory/12-sindhi.md",
+  "code": "vendor/lumenary/src/engine/styles/indus-seal.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The Indus Valley civilisation, including Mohenjo-daro",
+  "era": "About 2600 to 1900 BCE",
+  "bestOn": "Animal or figure shapes with clear outlines"
+ },
+ "why": "Thousands of small square seals were found at Mohenjo-daro and the other cities of the Indus civilisation. Each is a line of signs above a figure, often a bull, an elephant or a tiger, carved in reverse so that pressing it into wet clay leaves the picture standing out. The script has never been deciphered, which makes the seals feel like messages from a very distant friend.",
+ "how": [
+  "Draw a square of side 0.8 W on a hidden canvas, with a frame and a band for the signs along the top, 0.2 of the seal’s height.",
+  "Set a row of n signs, chosen at random from eleven strokes, from the right.",
+  "Below the band, draw lines from the picture itself: edges found with a Sobel operator on a blurred copy, and hatching whose thickness rises as the picture darkens, in rows 4.6 px apart.",
+  "In clay mode, show the lines as relief pressed out of the clay; in steatite mode, show the cut stone.",
+  "Light the surface from a corner and add the grain of the material."
+ ],
+ "history": "The seals are mostly carved in steatite, a soft stone, and most are read from right to left, since the signs crowd toward the left end when the carver ran out of room. Mohenjo-daro was excavated from the 1920s and is a UNESCO World Heritage Site. The script of about four hundred signs has resisted every attempt to decipher it. The signs here are random strokes and do not spell anything.",
+ "uses": [
+  "Education about ancient Sindh and the Indus civilisation",
+  "Stamp and seal design",
+  "Poster and cover illustration",
+  "Teaching how reversed carving prints"
+ ],
+ "terms": [
+  [
+   "Steatite",
+   "A soft stone, also called soapstone, easy to carve."
+  ],
+  [
+   "Seal",
+   "A carved object used to stamp a mark in clay or wax."
+  ],
+  [
+   "Undeciphered script",
+   "A writing system whose meaning we cannot yet read."
+  ]
+ ],
+ "related": [
+  "sindhi-script",
+  "hieroglyphs",
+  "rubber-stamp"
+ ],
+ "paragraphs": [
+  "Thousands of small square seals were found at Mohenjo-daro and the other cities of the Indus civilization, which flourished from about 2600 to 1900 BCE. They are mostly carved in steatite, a soft stone, with a line of signs along the top and a figure below, often a bull, an elephant or a tiger. The script has never been deciphered. Most seals are read from right to left, since the signs crowd toward the left end when the carver ran out of room, so the program sets them out that way. When the seal is pressed into wet clay, the carved lines stand out in relief on the clay.",
+  "The picture is the figure. A square of side 0.8 W is drawn on a hidden canvas, with a frame, a band for the signs along the top (0.2 of the seal’s height), and a row of n signs chosen at random from eleven strokes, set from the right. Below the band, lines are drawn from the picture itself: edges, found with a Sobel operator on a blurred copy; hatching with thickness rising as the picture darkens, in rows 4.6 px apart; and a cross-hatch where the picture is very dark. The result is a map C that is 1 on a cut line. In clay mode the seal’s area is pressed down and the lines stand up from it. In steatite mode the lines are cut into the pale stone and filled with dark. Either way the map becomes a height map, and light from the upper left gives it relief."
+ ],
+ "equations": [
+  {
+   "tex": "C=\\max\\big(C_{\\text{signs}},\\ e,\\ h\\big),\\qquad e=\\operatorname{smoothstep}(0.05,0.15,\\lVert\\nabla T\\rVert)\\,(0.4+0.6\\,\\varepsilon)",
+   "note": "The cut lines: the signs and frame, the outline e of the picture (ε is the engraving slider), and the hatching h."
+  },
+  {
+   "tex": "h=\\Big[\\operatorname{frac}\\!\\big(\\tfrac{y}{p}\\big)<\\theta\\Big],\\qquad \\theta=\\varepsilon\\,\\operatorname{clamp}\\big(1.5\\,(0.6-T),\\,0,\\,0.78\\big)",
+   "note": "Hatching: lines every p = 4.6 px whose thickness θ rises as the tone T falls below 0.6."
+  },
+  {
+   "tex": "H_{\\text{clay}}=-0.24\\,[\\text{inside}]+0.34\\,C,\\qquad H_{\\text{steatite}}=-0.3\\,[\\text{outside}]-0.3\\,C",
+   "note": "Heights before blurring: the clay is pressed down under the seal and the cut lines leave ridges; on the stone the surround is cut away and the lines cut in."
+  },
+  {
+   "tex": "x_i=x_0+S-7\\,\\mathrm{sc}-\\big(i+\\tfrac12\\big)\\,\\frac{S-14\\,\\mathrm{sc}}{n}",
+   "note": "The centre of sign i, counted from the right-hand end of the band."
+  }
+ ],
+ "dials": [
+  {
+   "key": "mode",
+   "label": "Show as",
+   "type": "select",
+   "default": "clay",
+   "options": [
+    "clay",
+    "steatite"
+   ]
+  },
+  {
+   "key": "engrave",
+   "label": "Engraving",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "relief",
+   "label": "Depth",
+   "type": "range",
+   "default": 60,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "signs",
+   "label": "Signs",
+   "type": "range",
+   "default": 5,
+   "min": 3,
+   "max": 8,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New signs",
+   "type": "shuffle",
+   "default": 2
+  }
+ ],
+ "presets": [
+  {
+   "text": "Steatite shows the seal itself, as a museum object.",
+   "set": {
+    "mode": "steatite",
+    "relief": 80
+   }
+  },
+  {
+   "text": "More signs give a longer line of text.",
+   "set": {
+    "signs": 8,
+    "engrave": 90
+   }
+  },
+  {
+   "text": "Few signs and a deep relief look like a single impression.",
+   "set": {
+    "signs": 3,
+    "relief": 95
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

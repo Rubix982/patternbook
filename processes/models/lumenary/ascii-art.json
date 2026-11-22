@@ -1,0 +1,171 @@
+{
+ "id": "lumenary:ascii-art",
+ "name": "ASCII art",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "digital",
+ "basis": "characters chosen per cell from a darkness ramp (how)",
+ "note": "Typewriter art is the physical ancestor, but no typewriter is modelled.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "The picture rebuilt from typed characters, light to heavy.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/ascii-art.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Typewriters, line printers and early networks",
+  "era": "1960s onward",
+  "bestOn": "High contrast portraits and logos"
+ },
+ "why": "A character is a tiny picture, and some characters carry more ink than others. A full stop is nearly empty and an @ sign is nearly solid, so a row of characters can paint a row of grey tones. This treatment sorts a set of characters by how dark they are and lets each cell of your picture choose the one that matches its brightness.",
+ "how": [
+  "Measure the width of a monospace letter, and from it work out how many rows fit, since letters are taller than they are wide.",
+  "Average the picture into one value per character cell.",
+  "Apply the contrast curve to each value.",
+  "Look up a character from a ramp ordered from empty to solid, flipping the order on a light background.",
+  "Place each character individually on the grid, so alignment stays exact even if the font changes."
+ ],
+ "history": "Pictures made of typed symbols are older than computers, since typists made them from the 1890s. Kenneth Knowlton and Leon Harmon at Bell Labs built mosaic images from small printed symbols in 1966. The ASCII standard itself dates from 1963, and ASCII art spread through bulletin boards, email signatures and Usenet groups in the 1980s and 90s, wherever only plain text was available.",
+ "uses": [
+  "Terminal and README banners",
+  "Plain text emails and signatures",
+  "Developer themed posters and prints",
+  "Retro computing and hacker aesthetic posts"
+ ],
+ "terms": [
+  [
+   "Monospace",
+   "A typeface in which every character takes the same width, so columns line up."
+  ],
+  [
+   "Character ramp",
+   "A list of characters ordered from the lightest to the heaviest."
+  ],
+  [
+   "ASCII",
+   "A 1963 standard that assigned numbers to the letters, digits and symbols of English text."
+  ]
+ ],
+ "related": [
+  "dithering",
+  "matrix-rain",
+  "qr-barcode-art"
+ ],
+ "paragraphs": [
+  "The picture is sampled to a grid of cells, one per character. The number of columns is the detail slider; the number of rows follows from the font’s shape, because a letter is taller than it is wide. The program measures how wide the monospace font’s “M” is at a reference size, and from that works out the font size that makes the chosen number of characters exactly fill the width.",
+  "Each cell’s brightness, after the contrast curve, picks a character from a ramp ordered by how much ink it puts on the page: a space for empty, a full block or “@” for solid. On a dark background bright cells use dense characters; on a light background the mapping flips, so the picture is always shown in the right polarity. Every character is placed individually on the grid instead of being typeset as lines of text, so the alignment stays exact even if the browser falls back to a font that is not monospace."
+ ],
+ "equations": [
+  {
+   "tex": "\\text{fs}=\\frac{W/\\text{cols}}{a},\\qquad\\text{rows}=\\operatorname{round}\\!\\Big(\\frac{H}{\\text{fs}\\cdot\\text{spacing}}\\Big)",
+   "note": "Font size from the advance width a (in ems) of the glyph “M”."
+  },
+  {
+   "tex": "\\text{index}=\\operatorname{round}\\big(d\\,(m-1)\\big),\\qquad d=\\begin{cases}L'&\\text{light on dark}\\\\1-L'&\\text{dark on light}\\end{cases}",
+   "note": "Which of the m characters in the ramp to draw."
+  }
+ ],
+ "dials": [
+  {
+   "key": "detail",
+   "label": "Characters across",
+   "type": "range",
+   "default": 110,
+   "min": 30,
+   "max": 260,
+   "step": 2
+  },
+  {
+   "key": "charset",
+   "label": "Character set",
+   "type": "select",
+   "default": "classic",
+   "options": [
+    "classic",
+    "detailed",
+    "blocks",
+    "dots",
+    "binary"
+   ]
+  },
+  {
+   "key": "contrast",
+   "label": "Contrast",
+   "type": "range",
+   "default": 20,
+   "min": -80,
+   "max": 80,
+   "step": 1
+  },
+  {
+   "key": "spacing",
+   "label": "Line spacing",
+   "type": "range",
+   "default": 1,
+   "min": 0.8,
+   "max": 1.5,
+   "step": 0.05
+  },
+  {
+   "key": "color",
+   "label": "Coloring",
+   "type": "select",
+   "default": "single",
+   "options": [
+    "single",
+    "original"
+   ]
+  },
+  {
+   "key": "fg",
+   "label": "Characters",
+   "type": "color",
+   "default": "#f2f2f0"
+  },
+  {
+   "key": "bg",
+   "label": "Background",
+   "type": "color",
+   "default": "#0a0a0a"
+  },
+  {
+   "key": "invert",
+   "label": "Invert tones",
+   "type": "toggle",
+   "default": false
+  },
+  {
+   "key": "bold",
+   "label": "Bold glyphs",
+   "type": "toggle",
+   "default": false
+  }
+ ],
+ "presets": [
+  {
+   "text": "A small set of dots gives a delicate, newspaper-like result.",
+   "set": {
+    "charset": "dots",
+    "detail": 160
+   }
+  },
+  {
+   "text": "Binary turns the picture into a screen of zeros and ones.",
+   "set": {
+    "charset": "binary",
+    "detail": 90
+   }
+  },
+  {
+   "text": "Keep the original colours for a vivid, glowing text portrait.",
+   "set": {
+    "color": "original",
+    "bold": true
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

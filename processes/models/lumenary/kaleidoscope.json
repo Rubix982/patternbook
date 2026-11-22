@@ -1,0 +1,161 @@
+{
+ "id": "lumenary:kaleidoscope",
+ "name": "Kaleidoscope",
+ "physical": "yes",
+ "process": "kaleidoscope",
+ "process_name": "Kaleidoscope",
+ "class": "optical-device",
+ "basis": "why: two mirrors at an angle fold the view into reflected wedges; how: polar angle folded and mirrored per wedge",
+ "note": null,
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "Two mirrors, one wedge of your picture, repeated all the way round. Slide the wedge across the image and the pattern changes.",
+  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "code": "vendor/lumenary/src/engine/styles/kaleidoscope.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Optical toys",
+  "era": "1816 onward",
+  "bestOn": "Colourful, busy pictures and flowers"
+ },
+ "why": "A kaleidoscope is two mirrors set at an angle that folds a view into repeated copies of a single wedge, each reflected from the last. That reflection is what makes the joins seamless. This treatment folds the angle of every pixel into one wedge and uses it to read the picture, so a fan shaped piece of your picture repeats all the way around.",
+ "how": [
+  "For each pixel find its polar angle about the centre, subtract the turn, and take it modulo the wedge angle 2π divided by n.",
+  "If the result lies in the second half of the wedge, mirror it back so neighbouring wedges are reflections.",
+  "Use the folded angle as a direction in the source picture, and the pixel’s distance from the centre, shrunk by the zoom, as how far to look.",
+  "Reflect any coordinate that leaves the picture back in, so there are no empty areas.",
+  "Sample with bilinear interpolation and optionally darken the pixels near each mirror line by up to 40 percent."
+ ],
+ "history": "Sir David Brewster invented the kaleidoscope in Scotland in 1816 and patented it in 1817. The name comes from Greek words meaning beautiful form to see. It was a sensation within a few years, with hundreds of thousands sold in London in months, and the same mirror symmetry underlies the patterns of tiles, textiles and mandalas.",
+ "uses": [
+  "Mandala and pattern design",
+  "Textile and wallpaper concepts",
+  "Psychedelic poster and cover art",
+  "Backgrounds and loops"
+ ],
+ "terms": [
+  [
+   "Wedge",
+   "A pie slice of the picture that is repeated all around."
+  ],
+  [
+   "Reflection",
+   "Flipping a shape as though in a mirror."
+  ],
+  [
+   "Modulo",
+   "The remainder after dividing, used to wrap an angle into a range."
+  ]
+ ],
+ "related": [
+  "mandala",
+  "truchet-tiles",
+  "op-art-moire"
+ ],
+ "paragraphs": [
+  "A kaleidoscope is two mirrors set at an angle of π/n, which fold the view into n copies of one wedge, alternately reflected. For each pixel the program works out its polar angle φ about the centre, subtracts the turn, and takes it modulo the wedge angle 2π/n. If the result lies in the second half of the wedge it is mirrored back (2π/n minus the value), so neighbouring wedges are reflections of each other and their joins are seamless.",
+  "That folded angle is then used as a direction in the source picture. The point looked up is a window centre (the look-left-to-right and up-and-down sliders) plus the pixel’s distance from the centre, shrunk by the zoom, along the direction (cos, sin) of the folded angle plus the rotation of the wedge. In other words the wedge is a fan-shaped piece of the picture. When the lookup would leave the picture its coordinate is reflected back in, as with a mirror, so the pattern has no empty areas. The picture is sampled with bilinear interpolation. The optional dark joins darken the pixels within a few pixels of each mirror line by up to 40%."
+ ],
+ "equations": [
+  {
+   "tex": "\\varphi'=\\big(\\varphi-\\tau\\big)\\bmod\\frac{2\\pi}{n},\\qquad \\psi=\\begin{cases}\\varphi' & \\varphi'\\le \\pi/n\\\\[2pt] 2\\pi/n-\\varphi' & \\text{otherwise}\\end{cases}",
+   "note": "Folding the angle: τ is the turn of the pattern, n the number of mirrors."
+  },
+  {
+   "tex": "\\mathbf s=\\mathbf c_0+2\\,k\\,r\\,\\big(\\cos(\\psi+\\sigma),\\ \\sin(\\psi+\\sigma)\\big)",
+   "note": "The source point: c₀ the window centre, r the distance from the pattern’s centre, k half the zoom, σ the wedge rotation."
+  },
+  {
+   "tex": "\\operatorname{refl}_L(v)=L-\\big\\lvert\\,L-(v\\bmod 2L)\\,\\big\\rvert",
+   "note": "Reflecting a coordinate back into the picture of width (or height) L."
+  }
+ ],
+ "dials": [
+  {
+   "key": "n",
+   "label": "Mirrors",
+   "type": "range",
+   "default": 8,
+   "min": 3,
+   "max": 16,
+   "step": 1
+  },
+  {
+   "key": "turn",
+   "label": "Turn the pattern",
+   "type": "range",
+   "default": 0,
+   "min": 0,
+   "max": 360,
+   "step": 1
+  },
+  {
+   "key": "zoom",
+   "label": "Zoom into the picture",
+   "type": "range",
+   "default": 80,
+   "min": 20,
+   "max": 200,
+   "step": 1
+  },
+  {
+   "key": "sx",
+   "label": "Look left to right",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "sy",
+   "label": "Look up and down",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "spin",
+   "label": "Rotate the wedge",
+   "type": "range",
+   "default": 20,
+   "min": 0,
+   "max": 360,
+   "step": 1
+  },
+  {
+   "key": "rim",
+   "label": "Dark joins",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Twelve mirrors make a fine snowflake.",
+   "set": {
+    "n": 12,
+    "zoom": 60
+   }
+  },
+  {
+   "text": "Zoom in and slide the window to find new patterns in one picture.",
+   "set": {
+    "zoom": 150,
+    "sx": 30,
+    "sy": 70
+   }
+  },
+  {
+   "text": "Turn off the dark joins for a seamless fold.",
+   "set": {
+    "rim": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

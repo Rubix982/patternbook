@@ -14,6 +14,92 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-017 · How many physical processes lie behind Lumenary's 214 treatments?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+Lumenary's data (`vendor/lumenary/src/data`) holds 214 entries in 14 sections with 610 equations; patternbook's process
+library (`processes/`) has a template and no pages. By section, 113 entries sit where physical making is the subject
+(light and glass, physical feel, print and craft, painterly, photographic, world, Sindhi, South Asian and Islamic) and
+101 where it isn't (design movements, digital, typographic, geometric and generative, motion, subject-aware).
+
+**2. What we are doing.**
+Convert all 214 entries into patternbook's model format: one machine-readable model per entry (its steps, equations,
+dials, facts, history and credit), each filed under the physical process it models or marked as not a physical
+process (a style, a machine's effect, a geometric construction), with a process page at "listed" for every process
+found. The vendored data is read, never changed.
+
+**3. Why.**
+We don't know how many distinct processes the 214 looks come down to, how many models each process gets, or how much
+of Lumenary is about making at all. The answer decides whether the process library can be seeded from Lumenary or
+has to be written mainly from other sources.
+
+**4. What is affected.**
+- `processes/`: the models, the process pages it creates, `index.md`.
+- `processes/primitives.md`, seeded from the shared operations the models use.
+- T-019 (giving each atlas element its process) builds on the processes this card finds.
+
+**5. Conclusion.**
+- **If** at least half the entries model a physical process and those entries fall into at most a third as many
+  processes (three or more models per process on average) → we claim *the process is the right unit and Lumenary is a
+  strong seed*: process pages start from his models.
+- **If** fewer than half model a physical process, or the processes are nearly as many as the entries → we claim
+  *Lumenary is mostly a catalogue of looks*: its entries are kept as models of looks, and process pages are written
+  mainly from other sources.
+- Recorded either way: models per process, and the processes no subcontinent element in the atlas seems to use.
+
+**6. If not done.**
+The process library stays an empty template, and Lumenary stays 214 filters arranged by its own sections.
+
+**Limits (known before running):** "physical process" against "style" is a judgment for some entries (a risograph is
+a process, Bauhaus is a style, a glitch is a machine's fault); the rule is written down and applied the same way to
+all 214. His "how" steps describe what his code does, which can differ from the physical process it imitates. One
+classifier.
+
+**Result (2026-11-22):** neither branch as written; the second in substance. **115 of the 214 entries (54 %) imitate
+a physical process, and they fall into 82 processes: 1.4 models per process, with 59 processes holding a single
+model.** The first branch needed three or more per process and fails on that alone. The second needed fewer than half
+to be physical, or processes nearly as many as the entries; 82 against 115 is closer to that than to a third.
+
+| | entries |
+|---|---|
+| imitate a physical process | 88 |
+| a style, genre or tradition that rests on one process it also imitates | 27 |
+| imitate none: geometric constructions 40, digital effects 22, styles 20, motion 15, subject-aware 2 | 99 |
+
+Processes with the most models: halftone screening, relief carving and tin-glaze painting (four each); intaglio
+engraving, screen printing, paper cutting, pen and ink (three each). By family: printing 20 models, painting 14, optical
+devices 13, drawing 12, stitch 11, photographic 11, carving, cutting and glaze 5 each, the rest fewer.
+
+**Claim:** Lumenary is broad rather than deep in processes. Just over half of it imitates physical making, spread
+across 82 processes, most of them once. So a process page can start from his model for its maths and dials, but the
+rest of it (the process itself, its constraints, its imperfections, its variants across traditions) has to be written
+mainly from other sources. His entries stay as credited models either way.
+
+**Checks on the result:** five design movements were filed as styles resting on a print process (Art Deco and
+Victorian on engraving, retro and pop art on screen printing, Swiss design on halftone), against the brief, which named
+Art Deco as a style; flipping them leaves 110 physical (51 %), still 82 processes, 1.3 per process. The finding doesn't
+move.
+
+**A fault in the brief, recorded:** it named Hala blue pottery as a variant of tin-glaze painting, and the classifier
+followed it. That ware is usually described as painted on a white slip under an alkaline glaze. The tin-glaze page
+carries the note. **A gap in the card:** its two branches left the middle open (between one-third and "nearly as
+many"), and the result landed there. Not done here: the processes no atlas element uses (needs T-019) and
+`primitives.md`.
+
+**Changes made:**
+- `processes/models/lumenary/`: 214 model files, each crediting Lumenary and his commit; `processes/models/lumenary-map.tsv`: the classification.
+- `processes/`: 82 process pages at "listed", each holding its models; `index.md`.
+- `tools/process_models.mjs`: the converter. It reads `vendor/lumenary/` and never writes to it, and regenerates only
+  the block between a page's markers.
+- `runs/c017/classification-summary.md`: the classifier's rule, counts and hard calls.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-016 · Is the atlas's lean toward India Wikipedia's, or the subject's? (Pakistan's textiles and dress)
 
 **Status:** closed

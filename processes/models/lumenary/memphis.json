@@ -1,0 +1,133 @@
+{
+ "id": "lumenary:memphis",
+ "name": "Memphis",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "1980s design group's language: posterised panel among confetti shapes (how)",
+ "note": null,
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "Eighties Memphis Group: a posterised panel among squiggles, confetti and dots.",
+  "theory_page": "treatments/lumenary/theory/01-design.md",
+  "code": "vendor/lumenary/src/engine/styles/memphis.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Milan",
+  "era": "1981 to 1987",
+  "bestOn": "Playful, bright subjects and portraits"
+ },
+ "why": "The Memphis designers wanted furniture and objects that were funny, cheerful and a little rude about good taste. Their language was bright colour, cheap-looking laminates, squiggles and geometric confetti. This treatment sets a posterised picture in a panel with a hard shadow among scattered shapes, with no blur anywhere, because blur is not Memphis.",
+ "how": [
+  "Posterise the picture into four tones, using four colours from the chosen scheme.",
+  "Place it in a rounded, arched or circular panel with a solid offset shadow.",
+  "Scatter triangles, rings, squiggles, half circles, crosses and dotted rows around it at random sizes and angles.",
+  "Put some shapes on the panel’s edge so they overlap it.",
+  "Use the seed for every random choice, so shuffling is repeatable."
+ ],
+ "history": "The Memphis Group was founded in Milan in December 1980 by Ettore Sottsass with a circle of young designers, and it presented its first collection in 1981. The name is said to come from a Bob Dylan song that was playing during the founding meeting. The group’s colourful plastic laminate furniture and patterned surfaces influenced graphics, fashion and pop culture for years after it disbanded.",
+ "uses": [
+  "Brand identity for playful products and kids’ goods",
+  "Patterns for textiles and stationery",
+  "Posters and covers with an eighties flavour",
+  "Packaging for snacks and drinks"
+ ],
+ "terms": [
+  [
+   "Laminate",
+   "A thin patterned plastic sheet bonded to furniture surfaces, a Memphis signature."
+  ],
+  [
+   "Posterise",
+   "To reduce a picture to a few flat tones."
+  ],
+  [
+   "Seed",
+   "A starting number for a random generator. The same seed always gives the same result."
+  ]
+ ],
+ "related": [
+  "maximalism",
+  "pop-art",
+  "bauhaus"
+ ],
+ "paragraphs": [
+  "The Memphis Group of the 1980s used loud shapes on speckled backgrounds. The picture is posterised into four tones using four colours of the scheme (darkest tone to the darkest colour) and placed in a panel (rounded, arch or circle) with a hard offset shadow in solid ink, with no blur at all.",
+  "Around it, small triangles, rings, squiggles, half circles, crosses and rows of dots are scattered at random positions, sizes and angles, and a few more are placed on the panel’s edge so that they overlap it. The seed decides everything random, so the shuffle button re-arranges the confetti."
+ ],
+ "equations": [
+  {
+   "tex": "k=\\min\\big(3,\\ \\lfloor 4L\\rfloor\\big),\\qquad C=P_k",
+   "note": "Four equal brightness bands, one palette colour each."
+  },
+  {
+   "tex": "y_{\\text{squiggle}}(t)=0.35\\,s\\,\\sin(5\\pi t),\\qquad t\\in[0,1]",
+   "note": "The squiggle is two and a half sine waves."
+  }
+ ],
+ "dials": [
+  {
+   "key": "scheme",
+   "label": "Colours",
+   "type": "select",
+   "default": "classic",
+   "options": [
+    "classic",
+    "mint",
+    "lilac"
+   ]
+  },
+  {
+   "key": "panel",
+   "label": "Panel",
+   "type": "select",
+   "default": "rounded",
+   "options": [
+    "rounded",
+    "arch",
+    "circle"
+   ]
+  },
+  {
+   "key": "confetti",
+   "label": "Confetti",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Shuffle",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "An arch panel with mint colours is calm for Memphis.",
+   "set": {
+    "panel": "arch",
+    "scheme": "mint"
+   }
+  },
+  {
+   "text": "Turn the confetti to the maximum for a party.",
+   "set": {
+    "confetti": 100
+   }
+  },
+  {
+   "text": "A round panel in lilac makes a sticker.",
+   "set": {
+    "panel": "circle",
+    "scheme": "lilac"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

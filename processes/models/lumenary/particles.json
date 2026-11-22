@@ -1,0 +1,149 @@
+{
+ "id": "lumenary:particles",
+ "name": "Particles",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "interactive particle system with springs and cursor repulsion (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "live",
+  "blurb": "Thousands of points assemble into your image and scatter away from the cursor.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/particles.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Computer graphics and physics simulation",
+  "era": "1980s onward",
+  "bestOn": "High contrast pictures with one clear subject"
+ },
+ "why": "A particle system builds a picture out of thousands of tiny, simple things instead of one big shape. Each dot knows only two things: where its home is and how hard the cursor is pushing it away. Together they form the image, scatter when you disturb them and settle back, which looks alive although no dot is doing anything clever.",
+ "how": [
+  "Divide the picture into a grid and give each cell one particle, whose home is near the cell centre, nudged by up to 0.35 of a cell so the dots do not look like a lattice.",
+  "Take its colour from the picture, reduced to 4 bits per channel so the dots can be drawn in a few dozen batches.",
+  "Pull every particle toward its home with a spring, and slow it with damping so it settles instead of bouncing forever.",
+  "Push away any particle within 16 percent of the width of the cursor, hardest at its centre and fading to nothing at its edge.",
+  "In white mode, keep one colour and let the dot size carry the brightness."
+ ],
+ "history": "William Reeves of Lucasfilm described particle systems in 1983 after using them for the Genesis effect, the wall of fire in Star Trek II: The Wrath of Khan (1982). Fire, smoke, sparks and rain have been made this way in films and games ever since, and the spring and damper behind each dot goes back to Hooke’s law in the seventeenth century.",
+ "uses": [
+  "Fire, smoke, sparks and rain in games and film",
+  "Interactive website heroes and logos",
+  "Data visualisation of crowds or populations",
+  "Physics teaching with springs and damping"
+ ],
+ "terms": [
+  [
+   "Damping",
+   "A force that slows motion, so a spring settles instead of oscillating for ever."
+  ],
+  [
+   "Target",
+   "The home position a particle is pulled toward."
+  ],
+  [
+   "Jitter",
+   "A small random offset that breaks up a regular grid."
+  ]
+ ],
+ "related": [
+  "boids",
+  "physarum",
+  "poisson-stippling"
+ ],
+ "paragraphs": [
+  "The picture is divided into a grid, and every cell becomes one particle with a home position (its “target”) near the cell centre, nudged by a random jitter of up to 0.35 of a cell so the dots do not look like a lattice. In original-colour mode each particle takes the colour of its cell, reduced to 4 bits per channel (at most 4096 colours) so that thousands of particles can be drawn in a few dozen batches instead of changing paint thousands of times. In white mode the colour is fixed and brightness is carried by the dot’s size instead.",
+  "Motion is a damped spring simulation. Each particle is pulled toward its target with a spring of stiffness 60. When the cursor is inside the canvas, any particle within 16% of the width is pushed away, hardest at the centre of the cursor and fading smoothly to nothing at its edge. Velocity is multiplied by an exponential damping factor every frame so the particles settle rather than oscillate forever. Clicking gives each nearby particle a random impulse. The step size is clamped, so a slow frame can never make the simulation explode."
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf a_i \\;=\\; k\\,(\\mathbf T_i-\\mathbf x_i)\\;+\\;A\\Big(1-\\frac{d}{R}\\Big)^{2}\\,\\hat{\\mathbf d},\\qquad d<R=0.16\\,W",
+   "note": "Spring toward the target T plus repulsion from the cursor; d is the distance to the cursor, d-hat the direction away from it. k = 60."
+  },
+  {
+   "tex": "\\mathbf v\\leftarrow(\\mathbf v+\\mathbf a\\,\\Delta t)\\,e^{-\\gamma\\Delta t},\\qquad \\mathbf x\\leftarrow\\mathbf x+\\mathbf v\\,\\Delta t,\\quad\\gamma=11",
+   "note": "Semi-implicit Euler step with exponential damping."
+  },
+  {
+   "tex": "r_i=\\tfrac12\\,s\\,\\sigma\\,\\big(0.12+0.95\\sqrt{L_i}\\big)",
+   "note": "White mode: dot radius from cell size s, size slider σ and brightness. The square root makes dot area, not radius, track brightness."
+  }
+ ],
+ "dials": [
+  {
+   "key": "density",
+   "label": "Particles across",
+   "type": "range",
+   "default": 110,
+   "min": 50,
+   "max": 180,
+   "step": 1
+  },
+  {
+   "key": "size",
+   "label": "Particle size",
+   "type": "range",
+   "default": 1,
+   "min": 0.4,
+   "max": 2.5,
+   "step": 0.05
+  },
+  {
+   "key": "force",
+   "label": "Cursor force",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "mode",
+   "label": "Color",
+   "type": "select",
+   "default": "original",
+   "options": [
+    "original",
+    "white"
+   ]
+  },
+  {
+   "key": "bg",
+   "label": "Background",
+   "type": "color",
+   "default": "#050505"
+  },
+  {
+   "key": "seed",
+   "label": "Scatter again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Fewer, bigger particles make a bold pointillist portrait.",
+   "set": {
+    "density": 60,
+    "size": 2
+   }
+  },
+  {
+   "text": "A very strong cursor force makes the picture explode.",
+   "set": {
+    "force": 100
+   }
+  },
+  {
+   "text": "White mode shows the picture only through dot size.",
+   "set": {
+    "mode": "white",
+    "density": 150
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

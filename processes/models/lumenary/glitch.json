@@ -1,0 +1,144 @@
+{
+ "id": "lumenary:glitch",
+ "name": "Glitch",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "digital",
+ "basis": "corrupted digital signal: channel split, sliced rows, misplaced blocks (how)",
+ "note": null,
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "A corrupted signal: sliced rows, split colour channels, stolen blocks and static.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/glitch.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Corrupted digital signals and files",
+  "era": "1990s onward",
+  "bestOn": "Strong, clean subjects so the corruption stands out"
+ },
+ "why": "A glitch is a signal that was copied wrongly, and its visual vocabulary is small: colours split apart, strips slide sideways, and blocks appear in the wrong place. This treatment keeps a copy of the picture and drops pieces of that copy back at the wrong positions, which is the same kind of mistake a faulty decoder makes.",
+ "how": [
+  "Split the colour channels, taking red a few pixels from the left and blue a few from the right.",
+  "Keep a copy of the result.",
+  "Shift thin horizontal strips sideways by random distances, tinting some cyan or magenta.",
+  "Copy rectangles from one place and paste them somewhere else, some with the difference blend mode to make negatives.",
+  "Add white hairlines and speckles, using the seed for every random choice."
+ ],
+ "history": "Glitch as a creative practice grew from musicians such as Oval in the 1990s who deliberately treated scratched discs as instruments. Visual artists followed with databending, and Rosa Menkman’s Glitch Studies Manifesto of 2010 gave the field a language. Streaming errors, broken downloads and video compression bugs are the everyday cousins of the style.",
+ "uses": [
+  "Music and event artwork",
+  "Title cards and transitions",
+  "Tech and cyber themed posters",
+  "Thumbnails that need tension"
+ ],
+ "terms": [
+  [
+   "Channel split",
+   "Shifting the red, green and blue layers of a picture against each other."
+  ],
+  [
+   "Databending",
+   "Altering the data of a file on purpose to produce visual or audio errors."
+  ],
+  [
+   "Difference blend",
+   "A way of combining layers that shows how much they differ, turning equal areas black."
+  ]
+ ],
+ "related": [
+  "datamosh",
+  "pixel-sorting",
+  "retro-vhs"
+ ],
+ "paragraphs": [
+  "A glitch is a signal that was copied wrong. It starts with a channel split: the red of each pixel is taken from a few pixels to the left and the blue from a few to the right, so every edge gets a coloured fringe. A copy of this result is kept, and pieces of the copy are then drawn back over the picture.",
+  "Row slices are thin horizontal strips shifted sideways by a random distance (and drawn a second time one picture-width away, so a wrapped strip leaves no gap); some are tinted cyan or magenta. Stolen blocks are rectangles copied from one place and pasted in another, a few with the difference blend mode to turn them to negatives. White hairlines and speckles finish it. Everything random comes from the seed."
+ ],
+ "equations": [
+  {
+   "tex": "R'(x)=R(x-d),\\quad G'(x)=G(x),\\quad B'(x)=B(x+d)",
+   "note": "Channel split of d pixels."
+  },
+  {
+   "tex": "\\text{strip}(y_0,h):\\ \\ P'(x,y)=P\\big((x-\\Delta)\\bmod W,\\ y\\big),\\quad y_0\\le y<y_0+h",
+   "note": "A slice displaced by Δ with wrap-around."
+  }
+ ],
+ "dials": [
+  {
+   "key": "amount",
+   "label": "Corruption",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "slices",
+   "label": "Row slices",
+   "type": "range",
+   "default": 22,
+   "min": 0,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "rgb",
+   "label": "Channel split",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "blocks",
+   "label": "Stolen blocks",
+   "type": "range",
+   "default": 14,
+   "min": 0,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "tint",
+   "label": "Tinted slices",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Corrupt again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Maximum channel split without slices looks like a 3D print misregistered.",
+   "set": {
+    "rgb": 100,
+    "slices": 0
+   }
+  },
+  {
+   "text": "Many strips and stolen blocks give heavy corruption.",
+   "set": {
+    "slices": 55,
+    "blocks": 36
+   }
+  },
+  {
+   "text": "Turn off the tint for a more monochrome error.",
+   "set": {
+    "tint": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

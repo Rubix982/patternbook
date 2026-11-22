@@ -1,0 +1,157 @@
+{
+ "id": "lumenary:phyllotaxis",
+ "name": "Phyllotaxis",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "golden-angle seed placement (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "The pattern of a sunflower head: each seed sits a golden angle round from the last, and spirals appear in both directions.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/phyllotaxis.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Botany and mathematics",
+  "era": "Observed for centuries, explained in 1979",
+  "bestOn": "Round compositions and portraits"
+ },
+ "why": "In a sunflower the seeds sit in curving rows that run both clockwise and anticlockwise, and the number of rows is almost always two neighbouring Fibonacci numbers. The reason is simple. If each new seed is placed a fixed angle round from the last, and that angle is the golden angle, no seed ever lines up with another for long, so the seeds pack as evenly as they can.",
+ "how": [
+  "Place seed number i at angle i α from the centre, with α = 2π/φ², about 137.5 degrees.",
+  "Place it at a distance c √(i + ½) from the centre, which gives every seed an equal share of area.",
+  "Choose c = R/√n so that the n seeds just reach the picture’s edge.",
+  "Look up the colour of the picture at each seed, and let the size follow the picture’s tone by an adjustable amount.",
+  "Draw each as a disc, petal or square, turning petals along the radius."
+ ],
+ "history": "Phyllotaxis means leaf arrangement, a word from the 1750s, and its Fibonacci numbers were noted by Karl Schimper and Alexander Braun in the 1830s. The Bravais brothers recognised the golden angle in 1837. Helmut Vogel gave the simple formula in 1979, and in 1992 Stéphane Douady and Yves Couder reproduced the pattern with drops of magnetic fluid dripping onto a dish.",
+ "uses": [
+  "Natural patterns in botany and plant breeding",
+  "Logo, textile and jewellery design",
+  "Antenna and lens layouts that avoid regular gaps",
+  "Teaching the golden ratio"
+ ],
+ "terms": [
+  [
+   "Golden angle",
+   "About 137.5 degrees, the angle that divides a circle in the golden ratio."
+  ],
+  [
+   "Fibonacci numbers",
+   "The sequence 1, 1, 2, 3, 5, 8, 13, and so on, each the sum of the last two."
+  ],
+  [
+   "Parastichy",
+   "One of the spiral rows seen in a sunflower or pine cone."
+  ]
+ ],
+ "related": [
+  "l-system-trees",
+  "circle-packing",
+  "mandala"
+ ],
+ "paragraphs": [
+  "In a sunflower the seeds are packed in spirals that run both ways, and the number of spirals is nearly always two neighbouring Fibonacci numbers, such as 34 and 55. Helmut Vogel showed in 1979 that this follows from one simple rule: seed number i is placed at the angle iα from the centre and at the distance c√(i + ½), where α is the golden angle, 2π/φ² ≈ 137.5°. The square root puts the seeds at equal density, since the area inside radius r_i is π r_i² = π c² (i + ½), which grows by the same amount for each seed.",
+  "The golden angle is the most irrational of all angles, in the sense that its continued fraction [0; 2, 1, 1, 1, …] is the slowest to approximate by a fraction. No two seeds line up along a ray for long, and the spirals are only the near-alignments, which come at Fibonacci counts. The constant c is chosen so that the n seeds reach the corner of the picture: c = R/√n, with R half the diagonal. The turn between seeds slider lets you leave the golden angle and see the spiral give way to rays, which shows how special it is. Each seed is a disc, a square turned with its angle or an elliptical petal, with a size set by the spacing and by the picture’s tone, and it takes the picture’s colour."
+ ],
+ "equations": [
+  {
+   "tex": "\\theta_i=i\\,\\alpha,\\qquad r_i=c\\sqrt{i+\\tfrac12},\\qquad \\alpha=\\frac{2\\pi}{\\varphi^{2}}\\approx137.5^{\\circ}",
+   "note": "Vogel’s model: seed i in polar coordinates."
+  },
+  {
+   "tex": "c=\\frac{R}{\\sqrt n},\\qquad \\bar d=c\\sqrt{\\pi}",
+   "note": "The scale that makes n seeds fill the radius R, and the mean spacing between seeds."
+  },
+  {
+   "tex": "\\rho_i=\\tfrac12\\,\\bar d\\;\\sigma\\;1.35\\,\\big[\\,(1-f)+f\\,(0.15+h_i)\\,\\big]",
+   "note": "Seed radius: σ is the seed size slider, f the size-follows-picture slider, h_i the heaviness of the picture at the seed."
+  }
+ ],
+ "dials": [
+  {
+   "key": "dots",
+   "label": "Seeds",
+   "type": "range",
+   "default": 7000,
+   "min": 500,
+   "max": 18000,
+   "step": 100
+  },
+  {
+   "key": "angle",
+   "label": "Turn between seeds",
+   "type": "range",
+   "default": 137.51,
+   "min": 130,
+   "max": 145,
+   "step": 0.01
+  },
+  {
+   "key": "size",
+   "label": "Seed size",
+   "type": "range",
+   "default": 70,
+   "min": 20,
+   "max": 120,
+   "step": 1
+  },
+  {
+   "key": "follow",
+   "label": "Size follows the picture",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shape",
+   "label": "Seed shape",
+   "type": "select",
+   "default": "disc",
+   "options": [
+    "disc",
+    "petal",
+    "square"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "night",
+   "options": [
+    "night",
+    "cream"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "The exact golden angle gives crisp spirals.",
+   "set": {
+    "angle": 137.51
+   }
+  },
+  {
+   "text": "A tiny change of angle breaks the spirals into rays.",
+   "set": {
+    "angle": 137,
+    "dots": 12000
+   }
+  },
+  {
+   "text": "Petals make a flower head.",
+   "set": {
+    "shape": "petal",
+    "size": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,152 @@
+{
+ "id": "lumenary:rain-on-glass",
+ "name": "Rain on Glass",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "live shader: mist, running drops as tiny lenses, finger wipe (how)",
+ "note": null,
+ "lumenary": {
+  "section": "J. Motion and live",
+  "kind": "live",
+  "blurb": "A misted window with drops that run down it. Each drop turns the scene upside down, and every trail clears the fog. Move across the glass to wipe it with a finger.",
+  "theory_page": "treatments/lumenary/theory/10-motion.md",
+  "code": "vendor/lumenary/src/engine/styles/rain-on-glass.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Weather, physics and cinema",
+  "era": "Timeless, a shader favourite since the 2010s",
+  "bestOn": "Cityscapes and landscapes with soft colour"
+ },
+ "why": "A misted window hides the world behind a soft blur, and a drop of water that runs down it clears a trail of sharp glass. Each drop is also a tiny lens, which shows the scene behind it upside down. The mood is one of shelter: the weather outside, a quiet view in, and your finger drawing a line through the fog.",
+ "how": [
+  "Make the mist from the picture shrunk to a tenth of its size and enlarged again, tinted pale blue-grey, with opacity from 0.12 to 0.62 set by the mist slider.",
+  "Keep a hidden mask of where the glass has been cleared, and draw the sharp picture over the mist wherever the mask is white.",
+  "Let small drops sit still and larger ones run down in jerks, leaving a trail that clears the mask.",
+  "Draw each drop as a little lens that shows the scene upside down, with a highlight and a shadow.",
+  "Every 0.12 seconds reduce the mask by 3.5 percent so the mist slowly returns, and wipe a soft stroke 7 percent of the width wide where the pointer moves."
+ ],
+ "history": "Condensation and raindrops on windows are as old as glass, and photographers have long used them to frame a mood, from film noir streets to the wet neon cities of science fiction. In computer graphics, a rain-on-glass shader became a popular exercise in the late 2010s because it combines lenses, blur and simple physics in a few lines.",
+ "uses": [
+  "Film and game atmospheres",
+  "Calming screensavers and backgrounds",
+  "Photo and video overlays",
+  "Teaching refraction with water drops"
+ ],
+ "terms": [
+  [
+   "Condensation",
+   "Water vapour turning to liquid on a cool surface."
+  ],
+  [
+   "Refraction",
+   "The bending of light as it passes from one material to another."
+  ],
+  [
+   "Mask",
+   "A hidden layer that says where an effect is applied."
+  ]
+ ],
+ "related": [
+  "frosted-ice",
+  "glass-refraction",
+  "ink-in-water"
+ ],
+ "paragraphs": [
+  "The window is two layers: a pane misted with condensation, and the clear glass beneath it. The mist is the picture shrunk to a tenth of its size and enlarged again (a strong blur), tinted pale blue-grey with an opacity of 0.12 to 0.62 from the mist slider. A second, invisible layer is a mask that records where the glass has been cleared. Where the mask is white the sharp picture is drawn over the mist, so every drop that runs down the pane leaves a clear trail, and so does your finger when you move the pointer across it (a soft stroke 7% of the width wide). The mist comes back slowly: every 0.12 seconds the mask is reduced by 3.5%, the way condensation re-forms.",
+  "Small drops sit still, with radii from 1.2 to 5.7 px skewed toward the small end. Big drops run. A running drop speeds toward a terminal speed that grows with its size, with a smooth approach (rate 3 per second), stops now and again for 0.1 to 0.7 seconds and slows to 30% of its speed, which is the stick-and-slip of real drops, and slides sideways in proportion to the slant of the wind. It also sheds tiny droplets behind it at about 3 per second. Each drop larger than about 2.6 px is a little lens. Water on glass focuses the scene behind it, and the image in a drop is upside down. The program draws it by clipping a circle and filling it with a patch of the picture rotated by 180 degrees and 3.2 times wider than the drop, then adding a dark rim, a soft highlight and a pale ring."
+ ],
+ "equations": [
+  {
+   "tex": "C=(1-m)\\,C_{\\text{mist}}+m\\,C_{\\text{sharp}},\\qquad m\\leftarrow 0.965\\,m\\ \\ \\text{every }0.12\\ \\text{s}",
+   "note": "The pane: m is the clear-glass mask, which fades back toward mist."
+  },
+  {
+   "tex": "v\\leftarrow v+\\big(v_t-v\\big)\\min(1,\\,3\\,\\Delta t),\\qquad v_t=v_{\\text{run}}\\,\\mu\\,\\frac{r}{6},\\qquad \\Delta x=v\\,\\Delta t\\,\\tan\\alpha",
+   "note": "A running drop: v_t is the terminal speed (μ a random factor from 0.6 to 1.4 and r the radius) and α the slant."
+  },
+  {
+   "tex": "\\mathbf x_{\\text{src}}=\\mathbf c-3.2\\,(\\mathbf x-\\mathbf c)",
+   "note": "The lens of a drop: a point x inside a drop centred at c shows the picture at x_src, so the image is inverted (the minus sign) and 3.2 times larger in extent than the drop."
+  }
+ ],
+ "dials": [
+  {
+   "key": "rain",
+   "label": "Rain",
+   "type": "range",
+   "default": 55,
+   "min": 5,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "fog",
+   "label": "Mist on the glass",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "size",
+   "label": "Drop size",
+   "type": "range",
+   "default": 90,
+   "min": 30,
+   "max": 160,
+   "step": 1
+  },
+  {
+   "key": "run",
+   "label": "How fast they run",
+   "type": "range",
+   "default": 50,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wind",
+   "label": "Slant",
+   "type": "range",
+   "default": 6,
+   "min": -40,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New shower",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Heavy rain on thick mist hides the view almost completely.",
+   "set": {
+    "rain": 90,
+    "fog": 90
+   }
+  },
+  {
+   "text": "Big, slow drops show the upside-down scene clearly.",
+   "set": {
+    "size": 150,
+    "run": 20
+   }
+  },
+  {
+   "text": "Wind slants the trails like a storm.",
+   "set": {
+    "wind": 35,
+    "rain": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

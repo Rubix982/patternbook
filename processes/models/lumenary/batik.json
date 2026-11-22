@@ -1,0 +1,154 @@
+{
+ "id": "lumenary:batik",
+ "name": "Batik",
+ "physical": "yes",
+ "process": "resist-dyeing",
+ "process_name": "Resist dyeing",
+ "class": "dyeing",
+ "basis": "why: hot wax keeps dye out, drawn first then dyed; how: canting-dot outlines, dye regions with fill marks, crackle where dye crept in",
+ "note": null,
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "Wax-resist dyeing from Java. Hot wax is drawn on the cloth, the cloth is dyed, and the wax keeps its colour out. Dotted outlines, small fill marks and a web of cracks where the dye crept in.",
+  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "code": "vendor/lumenary/src/engine/styles/batik.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Java, Indonesia",
+  "era": "Centuries old",
+  "bestOn": "Pictures with clear shapes and mid tones"
+ },
+ "why": "Batik keeps dye out of cloth. Where hot wax lies, the cloth stays the colour it was, so the maker draws first, dyes next, and adds more wax between baths, working from light to dark. The look is dotted outlines, small marks that fill the shapes and a web of fine cracks where the dye crept through broken wax.",
+ "how": [
+  "Match your picture to a cream (the undyed cloth) and six dyes, according to the scheme: soga browns, bright coastal colours or indigo.",
+  "Clean the regions with a majority filter.",
+  "Draw the cream outlines in two zones around every boundary: a thin continuous line and a wider zone of dots, as a canting makes them.",
+  "Fill each dye region with its own mark: dots, dashes, crosses, rings, waves or triangles.",
+  "Add crackle, a web of lines where dye reached the cloth through broken wax."
+ ],
+ "history": "Wax-resist dyeing is found in several parts of the world, but Java developed it into a refined art. The courts of Yogyakarta and Surakarta kept strict patterns, such as parang, in soga brown and indigo, while coastal towns favoured brighter colours. The copper stamp (cap) made batik quicker in the nineteenth century. UNESCO listed Indonesian batik as intangible heritage in 2009, and Indonesia marks National Batik Day on 2 October.",
+ "uses": [
+  "Clothing, scarves and home textiles",
+  "Packaging and fashion graphics",
+  "Teaching resist techniques",
+  "Cultural festivals and tourism"
+ ],
+ "terms": [
+  [
+   "Canting",
+   "A small copper cup with a spout, used to draw lines of hot wax."
+  ],
+  [
+   "Resist",
+   "A material that keeps dye from reaching the cloth."
+  ],
+  [
+   "Soga",
+   "A brown dye from the bark of the soga tree."
+  ]
+ ],
+ "related": [
+  "mudcloth",
+  "ajrak",
+  "kente"
+ ],
+ "paragraphs": [
+  "Batik is a way of keeping dye out of cloth. Hot wax is drawn on with a canting, a small copper cup with a spout, and where the wax lies the cloth stays the colour it was. Dyeing then proceeds from light to dark, with more wax added between baths. Java’s courts developed strict patterns in soga brown and indigo, and the coast favoured brighter colours. The program matches your picture to a cream (the undyed cloth) and six dyes, cleans the regions with a majority filter, and then adds what the wax-worker does by hand.",
+  "Outlines are cream, the wax-resist line, and there are two zones around every boundary: a thin continuous line and a wider zone that holds a lattice of dots, as canting dots do. Each dye region is filled with its own small mark (dots, dashes, crosses, rings, waves or triangles, chosen by the dye), a filling called isen-isen. Finally the wax cracks. Cracks are found with a Worley cellular noise: the difference between the distances to the nearest and second nearest seed points is small along cell borders, and where it is below the vein width the dye is let in."
+ ],
+ "equations": [
+  {
+   "tex": "g=F_2(\\mathbf x)-F_1(\\mathbf x),\\qquad \\text{vein where } g<w=(0.7+1.2\\,c)\\,\\mathrm{sc}",
+   "note": "Crackle: F₁ and F₂ are the distances to the nearest and second nearest seed. g is zero on the boundary between two cells."
+  },
+  {
+   "tex": "q=0.8\\Big(1-\\frac{g}{w}\\Big),\\qquad C\\leftarrow C+q\\,(C_{\\text{dark}}-C)",
+   "note": "Dye creeping in: darkest in the middle of the crack and fading to nothing at its edge. It only applies where slow noise exceeds 0.62 − 0.4c."
+  },
+  {
+   "tex": "\\Big\\lVert\\operatorname{frac}\\!\\big(\\tfrac{\\mathbf x}{q}\\big)-\\tfrac12\\Big\\rVert<0.17",
+   "note": "The simplest isen-isen mark: a dot in every square of side q. The others are similar conditions on the same coordinates."
+  }
+ ],
+ "dials": [
+  {
+   "key": "simplify",
+   "label": "Simplify",
+   "type": "range",
+   "default": 5,
+   "min": 1,
+   "max": 10,
+   "step": 1
+  },
+  {
+   "key": "marks",
+   "label": "Fill marks",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "size",
+   "label": "Mark size",
+   "type": "range",
+   "default": 6,
+   "min": 3,
+   "max": 12,
+   "step": 1
+  },
+  {
+   "key": "crackle",
+   "label": "Crackle",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "scheme",
+   "label": "Dyes",
+   "type": "select",
+   "default": "soga",
+   "options": [
+    "soga",
+    "pesisir",
+    "indigo"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New cracks",
+   "type": "shuffle",
+   "default": 3
+  }
+ ],
+ "presets": [
+  {
+   "text": "Indigo with strong crackle looks like a worn heirloom.",
+   "set": {
+    "scheme": "indigo",
+    "crackle": 85
+   }
+  },
+  {
+   "text": "The coastal scheme is brighter and bolder.",
+   "set": {
+    "scheme": "pesisir",
+    "marks": 90
+   }
+  },
+  {
+   "text": "High simplification shows the wax-drawn regions clearly.",
+   "set": {
+    "simplify": 8,
+    "size": 9
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,177 @@
+{
+ "id": "lumenary:anime-cel",
+ "name": "Anime Cel",
+ "physical": "partly",
+ "process": "cel-painting",
+ "process_name": "Cel painting (ink and paint on celluloid)",
+ "class": "painting",
+ "basis": "why/hist: characters inked on celluloid and painted flat with one hard shadow; how: flat paints, hard shadow step, ink lines, white shine",
+ "note": "Anime conventions plus the cel process.",
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "A painted animation frame: flat colour in a handful of paints, one hard-edged shadow tone, thin ink lines and white shine on the brightest spots.",
+  "theory_page": "treatments/lumenary/theory/07-painterly.md",
+  "code": "vendor/lumenary/src/engine/styles/anime-cel.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Hand-painted cel animation",
+  "era": "1914 patent, television anime from 1963",
+  "bestOn": "Portraits and characters with clear shapes"
+ },
+ "why": "An animator has to paint the same character thousands of times, so the picture is simplified until that is possible. Every area gets one flat colour and at most one shadow tone with a hard edge, outlines are inked in a thin even line, and a white shape marks whatever shines. Those economies became a style, and the style outlived the paint.",
+ "how": [
+  "Smooth the picture with a filter that flattens areas and leaves outlines where they are.",
+  "Find a small palette of paints and give every pixel the nearest one.",
+  "Add one shadow tone, as a hard step where the picture is darker than its surroundings.",
+  "Ink lines on the dark side of edges, between unlike paints, and on small dark features such as eyes.",
+  "Paint white shine on spots that are very bright and brighter than what is round them.",
+  "Screen a blurred copy over the frame for a soft glow."
+ ],
+ "history": "Earl Hurd patented the use of clear celluloid sheets for animation in 1914: characters were inked on the front, painted on the back and photographed over a background. Japanese television animation began in earnest with Astro Boy in 1963, whose tight budget made flat colour and limited movement a virtue. Studios moved to digital ink and paint around 2000. In 2006 Winnemöller, Olsen and Gooch showed how to get the look from video in real time, with the same steps used here.",
+ "uses": [
+  "Profile pictures and avatars",
+  "Fan art and character sheets",
+  "Posters and video thumbnails",
+  "Storyboards from photo reference"
+ ],
+ "terms": [
+  [
+   "Cel",
+   "A clear sheet on which one frame of a character is inked and painted."
+  ],
+  [
+   "Bilateral filter",
+   "A blur that averages only neighbours of similar colour, so edges survive."
+  ],
+  [
+   "k-means",
+   "A method that groups values around a chosen number of centres."
+  ]
+ ],
+ "related": [
+  "comic-book",
+  "vector-art",
+  "retro-anime"
+ ],
+ "paragraphs": [
+  "A cel is painted in flat areas, so the first job is to remove everything that is not an area. The picture is smoothed with a filter that keeps edges: each pixel becomes the average of the neighbours in its row, then its column, weighted by how close they are to it in colour. Similar neighbours count fully and different ones hardly at all, so skin evens out while the outline of a face stays put. A palette is then found by k-means. Distances are measured on brightness plus two colour differences, with the colour differences weighted up, which keeps a pale skin tone apart from a grey wall of the same brightness.",
+  "Each paint gets a second, shadow tone: darker and mixed a little toward violet, as cel painters mix it. The shadow is one hard step, taken where the picture is darker than its wider surroundings. Lines come from three sources and the strongest wins: places where the smoothed picture is darker than its own blur (the dark side of every edge), boundaries between two paints that differ a lot, and small dark features such as eyes taken from the unsmoothed picture. Shine is white, placed only where a spot is both very bright and brighter than its surroundings. A soft glow is the frame shrunk, enlarged and screened over itself."
+ ],
+ "equations": [
+  {
+   "tex": "p'_i=\\frac{\\sum_j w_{ij}\\,p_j}{\\sum_j w_{ij}},\\qquad w_{ij}=\\exp\\!\\Big(-\\frac{\\lVert p_i-p_j\\rVert_1^{2}}{2\\,\\sigma^{2}}\\Big),\\quad\\sigma=76.5",
+   "note": "Edge-keeping smoothing over the pixels j within the reach of pixel i, along one row or column at a time."
+  },
+  {
+   "tex": "\\mathbf f=\\big(Y,\\ 1.7\\,(B-Y),\\ 1.7\\,(R-Y)\\big),\\qquad Y=0.299R+0.587G+0.114B",
+   "note": "The space in which paints are found and matched."
+  },
+  {
+   "tex": "s=S_{\\tau,\\,\\tau+0.014}\\big(L_{16}-L_{2}\\big),\\qquad \\tau=\\operatorname{lerp}(0.12,\\ 0.02,\\ \\text{shadow})",
+   "note": "The cel shadow: L with a wide blur minus L with a narrow one, cut to a hard step."
+  }
+ ],
+ "dials": [
+  {
+   "key": "colours",
+   "label": "Paint colours",
+   "type": "range",
+   "default": 13,
+   "min": 6,
+   "max": 20,
+   "step": 1
+  },
+  {
+   "key": "smooth",
+   "label": "Shape smoothing",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shade",
+   "label": "Cel shadow",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "lines",
+   "label": "Ink lines",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "vivid",
+   "label": "Colour",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shine",
+   "label": "Shine",
+   "type": "range",
+   "default": 30,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glow",
+   "label": "Soft glow",
+   "type": "range",
+   "default": 30,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ink",
+   "label": "Line colour",
+   "type": "select",
+   "default": "tinted",
+   "options": [
+    "tinted",
+    "dark",
+    "brown",
+    "blue"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Fewer paints and strong smoothing give the cleanest cel.",
+   "set": {
+    "colours": 8,
+    "smooth": 85
+   }
+  },
+  {
+   "text": "Heavy black lines move it toward comic inking.",
+   "set": {
+    "lines": 100,
+    "ink": "dark"
+   }
+  },
+  {
+   "text": "More shine and glow suit a bright daytime scene.",
+   "set": {
+    "shine": 75,
+    "glow": 60
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lumenary:knitted-pattern",
+ "name": "Knitted Pattern",
+ "physical": "yes",
+ "process": "colourwork-knitting",
+ "process_name": "Colourwork knitting",
+ "class": "stitch",
+ "basis": "why: plain knitting is a lattice of V-shaped stitches; how: one pixel per stitch, yarn palette, stamped V stitch, Fair Isle border",
+ "note": null,
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "A jumper knitted from your picture: rows of V-shaped stitches in a handful of yarn colours, with an optional Fair Isle border.",
+  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "code": "vendor/lumenary/src/engine/styles/knitted-pattern.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Hand knitting, with Nordic and Fair Isle traditions",
+  "era": "Knitting for about a thousand years, Fair Isle patterns from the 19th century",
+  "bestOn": "Bold, simple pictures with a few colours"
+ },
+ "why": "Plain knitting is a lattice of V shaped stitches, each made of two plump legs of yarn, and it is wider than tall. If you draw one stitch well, with round legs, plies and a shadow, you can stamp it at every grid position and it looks like a real jumper. Colour changes between stitches then give you the picture.",
+ "how": [
+  "Reduce the picture to one pixel per stitch.",
+  "Choose yarn colours by k-means and give each stitch the nearest.",
+  "For each yarn colour draw one stitch as a small picture: two ellipses tilted 0.42 radians in opposite directions with a gradient that makes them look round, slanted lines for the plies and a soft shadow.",
+  "Stamp that stitch at every position of the grid, which is about 1 to 0.74 in width to height.",
+  "Replace the top and bottom rows with a Fair Isle border, a repeating eight by seven motif of small diamonds in the darkest and lightest yarns."
+ ],
+ "history": "Knitting is known from Egypt around the eleventh century, and knitted colour patterns developed in Scandinavia and the Shetland Islands. Fair Isle gets its name from a small island in Shetland, and the style became fashionable far beyond it when the Prince of Wales wore a Fair Isle pullover in 1921.",
+ "uses": [
+  "Jumper and winter themed graphics",
+  "Cosy seasonal cards and posters",
+  "Craft patterns and charts",
+  "Textile and pattern design ideas"
+ ],
+ "terms": [
+  [
+   "Stockinette",
+   "The plain knitted fabric with V shaped stitches on one side."
+  ],
+  [
+   "Fair Isle",
+   "Stranded colour knitting with small repeating patterns."
+  ],
+  [
+   "Ply",
+   "One of the strands twisted together to make yarn."
+  ]
+ ],
+ "related": [
+  "cross-stitch",
+  "embroidery",
+  "quilt-patchwork"
+ ],
+ "paragraphs": [
+  "Plain knitting (stockinette) is a lattice of V-shaped stitches, each made of two plump legs of yarn. A knit stitch is wider than it is tall, about 1 to 0.74 here. The program draws one stitch once for every yarn colour, as a small picture: two ellipses tilted 0.42 radians in opposite directions, each filled with a gradient that is dark at the edges and bright in the middle so it looks round, with slanted lines across for the plies of the yarn and a soft shadow underneath. That sprite is then stamped at every position of the grid.",
+  "The yarn colours come from k-means on a picture with one pixel per stitch; each stitch takes the nearest. The Fair Isle border replaces the top and bottom rows (up to eight of each) with a repeating eight-by-seven motif, a lattice of small diamonds followed by a blank row and a solid row, knitted in the darkest and lightest of the chosen yarns, in the manner of a Nordic jumper."
+ ],
+ "equations": [
+  {
+   "tex": "w=\\frac{W}{n},\\qquad h=0.74\\,w,\\qquad \\text{rows}=\\Big\\lceil\\frac{H}{h}\\Big\\rceil+1",
+   "note": "Stitch width, height and number of rows for n stitches across."
+  },
+  {
+   "tex": "\\text{leg}:\\ \\ r_x=0.26\\,w,\\quad r_y=0.62\\,h,\\quad \\text{tilt}=\\mp0.42\\ \\text{rad}",
+   "note": "Each of the two legs is an ellipse of these radii."
+  }
+ ],
+ "dials": [
+  {
+   "key": "across",
+   "label": "Stitches across",
+   "type": "range",
+   "default": 46,
+   "min": 22,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "yarns",
+   "label": "Colours of yarn",
+   "type": "range",
+   "default": 6,
+   "min": 3,
+   "max": 9,
+   "step": 1
+  },
+  {
+   "key": "border",
+   "label": "Fair Isle border",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Different yarns",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "More stitches across give a finer fabric.",
+   "set": {
+    "across": 80,
+    "yarns": 8
+   }
+  },
+  {
+   "text": "Three yarn colours make it look like a classic jumper.",
+   "set": {
+    "yarns": 3
+   }
+  },
+  {
+   "text": "Turn off the Fair Isle border for a plain panel.",
+   "set": {
+    "border": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,161 @@
+{
+ "id": "lumenary:chinese-paper-cut",
+ "name": "Chinese Paper Cut",
+ "physical": "yes",
+ "process": "paper-cutting",
+ "process_name": "Paper cutting",
+ "class": "cutting",
+ "basis": "why: one sheet, every part stays joined, detail from slits, crescents and teeth; how: lights cut away, slit and crescent patterns by tone",
+ "note": "The connectedness rule is shared with piercing.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "Jianzhi: a single sheet of red paper cut with a small knife. Dark areas stay solid, midtones are cut into fine slits and crescents, and the light is cut away completely.",
+  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "code": "vendor/lumenary/src/engine/styles/chinese-paper-cut.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "China",
+  "era": "More than a thousand years old",
+  "bestOn": "Bold silhouettes and faces"
+ },
+ "why": "A paper-cut is made from one sheet, so every part has to stay joined to the rest. Fine detail therefore comes from slits, crescents and teeth rather than loose islands. Dark areas stay solid, midtones turn to lace and bright areas open out completely, which gives a graded picture from nothing but cuts. Red is the colour of luck.",
+ "how": [
+  "Compute darkness v = 1 − L from the blurred brightness L.",
+  "Cut away the paper where v is below a lower threshold T₀.",
+  "Above it, let a cut amount k rise smoothly as the picture gets lighter, deciding how wide each slit or how big each crescent is.",
+  "Write each pattern (slits, crescents, teeth or dots) as a simple condition on the pixel position with a pattern size q.",
+  "Add a border of cuts and a shadow so the paper looks lifted from the background."
+ ],
+ "history": "Paper was invented in China, and the oldest surviving paper-cuts, found in tombs at Turpan, date from about the sixth century. Windows are decorated with paper-cuts at the Spring Festival, and the character for double happiness is cut for weddings. Chinese paper-cut was added to UNESCO’s list of intangible cultural heritage in 2009.",
+ "uses": [
+  "Window decorations for festivals and weddings",
+  "Greeting cards and New Year graphics",
+  "Silhouette and stencil design",
+  "Lace-like logos and packaging"
+ ],
+ "terms": [
+  [
+   "Jianzhi",
+   "The Chinese art of paper cutting."
+  ],
+  [
+   "Positive and negative",
+   "The cut-away parts and the paper that remains."
+  ],
+  [
+   "Silhouette",
+   "A shape seen as a solid outline."
+  ]
+ ],
+ "related": [
+  "papel-picado",
+  "paper-cut-out",
+  "stained-glass"
+ ],
+ "paragraphs": [
+  "Jianzhi is cut from a single sheet, with scissors or a small knife, and red is the colour of luck. Everything must stay joined to the rest of the sheet, so fine detail is made from slits, crescents and teeth rather than from loose islands. The program works from darkness v = 1 − L, where L is the blurred brightness. Where v is below a lower threshold T₀ the paper is cut away. Above it, a cut amount k rises smoothly as the picture gets lighter, and k decides how wide each slit or how big each crescent is. Dark areas therefore stay solid, midtones turn to lace and light areas open out completely.",
+  "The four cut patterns are written as simple conditions on the pixel position, with q the pattern size. In every one, k = 0 cuts nothing and a larger k cuts more, so the open fraction follows the picture. The edge of the sheet is a frame: a solid rim, then a band of diamond-shaped holes with small round holes between them, and a flower of eight cut petals in each corner. The paper layer is blurred by one pixel and thresholded to give clean edges, textured with fine fibres and dropped onto a cream backing with a shadow."
+ ],
+ "equations": [
+  {
+   "tex": "k=\\operatorname{smoothstep}\\big(T_1+0.3,\\ T_0,\\ v\\big),\\qquad T_1=\\tfrac{p}{100},\\ \\ T_0=T_1-\\tfrac{f}{100}",
+   "note": "The cut amount: p is the “paper left” slider and f the fine cutting range. Below T₀ everything is cut."
+  },
+  {
+   "tex": "\\Big|\\operatorname{frac}\\!\\Big(\\tfrac{x+y+\\frac{q}{2}\\sin\\frac{x}{1.8q}}{q}\\Big)-\\tfrac12\\Big|<\\tfrac{k}{2}",
+   "note": "A slit: diagonal stripes with a slight wobble. A stripe of width k leaves exactly a fraction 1 − k of the paper."
+  },
+  {
+   "tex": "\\operatorname{frac}\\!\\big(\\tfrac{y}{q}\\big)<0.92\\,k\\,(1-\\tau_w),\\qquad \\tau_w=2\\Big|\\operatorname{frac}\\!\\big(\\tfrac{x}{q}+\\tfrac{\\lfloor y/q\\rfloor}{2}\\big)-\\tfrac12\\Big|",
+   "note": "Teeth: rows of triangles whose height grows with k."
+  }
+ ],
+ "dials": [
+  {
+   "key": "cut",
+   "label": "Paper left",
+   "type": "range",
+   "default": 52,
+   "min": 15,
+   "max": 85,
+   "step": 1
+  },
+  {
+   "key": "fine",
+   "label": "Fine cutting range",
+   "type": "range",
+   "default": 30,
+   "min": 5,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "pattern",
+   "label": "Cuts",
+   "type": "select",
+   "default": "slits",
+   "options": [
+    "slits",
+    "crescent",
+    "teeth",
+    "dots"
+   ]
+  },
+  {
+   "key": "size",
+   "label": "Cut size",
+   "type": "range",
+   "default": 8,
+   "min": 4,
+   "max": 16,
+   "step": 1
+  },
+  {
+   "key": "frame",
+   "label": "Border",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "red",
+   "options": [
+    "red",
+    "black",
+    "gold"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Black paper with fine crescents looks like lace.",
+   "set": {
+    "paper": "black",
+    "pattern": "crescent"
+   }
+  },
+  {
+   "text": "Keep more paper for a bolder, simpler cut.",
+   "set": {
+    "cut": 80,
+    "size": 12
+   }
+  },
+  {
+   "text": "Gold paper with teeth gives a festive border.",
+   "set": {
+    "paper": "gold",
+    "pattern": "teeth",
+    "frame": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

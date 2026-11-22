@@ -1,0 +1,139 @@
+{
+ "id": "lumenary:low-poly",
+ "name": "Low-poly",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "Delaunay triangulation of edge-weighted points (how)",
+ "note": null,
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "A mesh of flat-shaded triangles that gathers around the edges in your picture.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/low-poly.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "3D graphics and illustration",
+  "era": "1990s onward",
+  "bestOn": "Portraits, animals and landscapes with clear forms"
+ },
+ "why": "Low-poly style rebuilds a picture from a few hundred flat triangles. The skill lies in choosing where to put the corners: many near edges, where the picture changes quickly, and few on flat ground. The triangles are then joined by Delaunay triangulation, which avoids long thin slivers, and each is painted one flat colour.",
+ "how": [
+  "Place points along the frame so the mesh covers the whole picture.",
+  "Try random points, keeping one with a probability that rises with edge strength and only if it is far enough from points already kept.",
+  "Allow a smaller minimum distance near edges, so triangles are small there.",
+  "Join the points with Delaunay triangulation by the Bowyer-Watson method.",
+  "Fill each triangle with the average of four samples of the picture plus a small random brightness change."
+ ],
+ "history": "Boris Delaunay described his triangulation in 1934, and Adrian Bowyer and David Watson published the incremental algorithm independently in 1981. Polygon models defined 3D games in the 1990s, from Virtua Fighter to the first PlayStation titles. Later, artists adopted the faceted look on purpose for posters, wallpapers and logos.",
+ "uses": [
+  "Wallpapers and posters",
+  "Logos and brand patterns",
+  "Faceted portrait art",
+  "Game and app backgrounds"
+ ],
+ "terms": [
+  [
+   "Delaunay triangulation",
+   "The mesh in which no point lies inside the circle through any triangle’s corners."
+  ],
+  [
+   "Facet",
+   "One flat face of a mesh."
+  ],
+  [
+   "Mesh",
+   "A network of connected points and the shapes between them."
+  ]
+ ],
+ "related": [
+  "vector-art",
+  "isometric",
+  "wireframe-3d"
+ ],
+ "paragraphs": [
+  "The picture is turned into a mesh of triangles. First points are chosen: some along the frame, so the mesh covers the whole picture, and the rest by random trial. A trial point is kept with a probability that rises with the edge strength there, and it must be at least a minimum distance from every point already kept, with a smaller minimum near edges, so triangles are small where the picture changes quickly and large on flat ground.",
+  "The points are joined by Delaunay triangulation, the unique mesh in which no point lies inside the circumscribed circle of any triangle, which avoids long thin triangles. It is built by the Bowyer-Watson method: add the points one at a time; remove every triangle whose circle contains the new point; and join the new point to the edges of the hole. Each triangle is filled with the average of four samples of the picture and a small random brightness change."
+ ],
+ "equations": [
+  {
+   "tex": "P_{\\text{keep}}=(1-\\beta)\\,0.55+\\beta\\,(0.06+0.94\\,e),\\qquad r=b\\,(0.95-0.62\\,\\beta\\,e)",
+   "note": "Acceptance probability and minimum spacing r; β is “follow edges”, e the edge strength 0 to 1 and b = √(WH/N)."
+  },
+  {
+   "tex": "(x-u_x)^2+(y-u_y)^2<R^2",
+   "note": "Point (x, y) is inside the circumcircle of a triangle with centre u and radius R."
+  },
+  {
+   "tex": "\\begin{aligned}u_x&=\\frac{a^2(b_y-c_y)+b^2(c_y-a_y)+c^2(a_y-b_y)}{D}\\\\u_y&=\\frac{a^2(c_x-b_x)+b^2(a_x-c_x)+c^2(b_x-a_x)}{D}\\end{aligned},\\quad D=2\\big(a_x(b_y-c_y)+b_x(c_y-a_y)+c_x(a_y-b_y)\\big)",
+   "note": "Circumcentre of triangle a, b, c, where a² means a_x² + a_y². The circumradius follows from the distance to any corner."
+  }
+ ],
+ "dials": [
+  {
+   "key": "points",
+   "label": "Detail",
+   "type": "range",
+   "default": 520,
+   "min": 80,
+   "max": 1500,
+   "step": 10
+  },
+  {
+   "key": "edges",
+   "label": "Follow edges",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shade",
+   "label": "Facet shading",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "lines",
+   "label": "Facet lines",
+   "type": "toggle",
+   "default": false
+  },
+  {
+   "key": "seed",
+   "label": "Re-scatter",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A few hundred points make a bold, graphic portrait.",
+   "set": {
+    "points": 250,
+    "shade": 50
+   }
+  },
+  {
+   "text": "More points that follow the edges keep fine detail.",
+   "set": {
+    "points": 1200,
+    "edges": 90
+   }
+  },
+  {
+   "text": "Draw the facet lines to show the mesh.",
+   "set": {
+    "lines": true
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

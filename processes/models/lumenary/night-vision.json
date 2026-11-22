@@ -1,0 +1,141 @@
+{
+ "id": "lumenary:night-vision",
+ "name": "Night Vision",
+ "physical": "yes",
+ "process": "image-intensifier",
+ "process_name": "Image intensifier",
+ "class": "optical-device",
+ "basis": "why: an intensifier multiplies a few photons onto a green phosphor screen; how: gain curve, halo glow, noise, green ramp, lens mask",
+ "note": "HUD overlay is garnish.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "An image-intensifier view: green phosphor, amplified noise, a lens mask and a HUD.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/night-vision.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Military and wildlife optics",
+  "era": "1960s onward",
+  "bestOn": "Dark scenes and silhouettes"
+ },
+ "why": "An image intensifier collects a few photons, multiplies them electronically and shows them on a green phosphor screen. The result is bright but noisy, and its look is easy to recognise: green, grainy, with halos around lights and a round field of view. This treatment lifts the shadows, adds noise and scenery of the same kind.",
+ "how": [
+  "Lift the shadows with a power curve whose exponent drops as gain rises, then multiply the result.",
+  "Add a share of a blurred copy for the glow around bright things.",
+  "Add noise and rare bright speckles.",
+  "Send the result through a four-stop ramp: near black, dark green, bright green, almost white.",
+  "Mask it with a lens (one circle, or two for binoculars), dim every third row and draw the HUD."
+ ],
+ "history": "Infrared and image-intensifier devices were developed for the military in the 1940s and 50s, and the first generation of starlight scopes reached the field in the 1960s. Later generations were far more sensitive. The green colour is a design choice: the human eye can distinguish more shades of green than of other colours.",
+ "uses": [
+  "Thriller and found-footage styled scenes",
+  "Wildlife trail camera looks",
+  "Game and film overlays",
+  "Posters with a surveillance feel"
+ ],
+ "terms": [
+  [
+   "Image intensifier",
+   "A tube that amplifies faint light electronically and shows it on a phosphor screen."
+  ],
+  [
+   "Gain",
+   "How much a signal is multiplied."
+  ],
+  [
+   "Phosphor",
+   "A coating that glows when hit by electrons."
+  ]
+ ],
+ "related": [
+  "thermal-camera",
+  "scanlines-crt",
+  "futuristic"
+ ],
+ "paragraphs": [
+  "An image intensifier collects a few photons and multiplies them electronically, so everything is a bright green with a lot of noise. The treatment lifts the shadows with a power curve whose exponent drops as gain rises, multiplies the result, adds a share of a blurred copy (the glow around bright things) and adds noise and rare, bright speckles. The result goes through a four-stop colour ramp that is nearly black, then dark green, then bright green, then almost white.",
+  "A mask built from circles gives the lens: one for a monocular, two overlapping for binoculars, with a soft darkening near the rim. Every third row is slightly dimmed. The HUD is drawn in text with a crosshair."
+ ],
+ "equations": [
+  {
+   "tex": "v=L^{\\,1-0.5g}\\,(1+0.9g)+0.35\\,g\\,L_b+\\nu",
+   "note": "g is the gain from 0 to 1, L_b the blurred brightness and ν noise."
+  },
+  {
+   "tex": "C=\\operatorname{ramp}\\big(\\operatorname{clamp}(v);\\ \\text{stops}\\big)",
+   "note": "Colour from the phosphor ramp."
+  }
+ ],
+ "dials": [
+  {
+   "key": "gain",
+   "label": "Gain",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "noise",
+   "label": "Grain",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "view",
+   "label": "View",
+   "type": "select",
+   "default": "circle",
+   "options": [
+    "circle",
+    "binocular",
+    "none"
+   ]
+  },
+  {
+   "key": "tint",
+   "label": "Phosphor",
+   "type": "select",
+   "default": "green",
+   "options": [
+    "green",
+    "white"
+   ]
+  },
+  {
+   "key": "hud",
+   "label": "HUD",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Binocular view with high gain looks like a field scope.",
+   "set": {
+    "view": "binocular",
+    "gain": 85
+   }
+  },
+  {
+   "text": "A white phosphor tube is a modern look.",
+   "set": {
+    "tint": "white"
+   }
+  },
+  {
+   "text": "Heavy grain with the HUD off feels like a raw sensor.",
+   "set": {
+    "noise": 90,
+    "hud": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,163 @@
+{
+ "id": "lumenary:ralli-patchwork",
+ "name": "Ralli Patchwork",
+ "physical": "yes",
+ "process": "patchwork-quilting",
+ "process_name": "Patchwork quilting",
+ "class": "stitch",
+ "basis": "why: scraps cut into squares and triangles stitched down in rows of running thread; how: square and triangle pieces, cloth palette, seam stitches",
+ "note": "Rallis also use applique; this model pieces a grid.",
+ "lumenary": {
+  "section": "L. Sindhi design",
+  "kind": "still",
+  "blurb": "The ralli quilt of Sindh: bright scraps cut into squares and triangles, set on the diagonal, stitched down with rows of running thread.",
+  "theory_page": "treatments/lumenary/theory/12-sindhi.md",
+  "code": "vendor/lumenary/src/engine/styles/ralli-patchwork.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Sindh and its neighbouring deserts",
+  "era": "Traditional, made by women over generations",
+  "bestOn": "Bright pictures with clear blocks of colour"
+ },
+ "why": "A ralli is a quilt made from scraps. In Sindh it is a women’s art: cloth from old clothes is cut into squares and triangles, laid out in bold patterns and stitched down in rows of running thread, often in several layers. Nothing is wasted, and the result is warm, bright and personal. Your picture is cut into patches, and each takes a colour from a bright palette.",
+ "how": [
+  "Make a square grid of side s. When the diamond set is chosen, turn each point by 45° to (u, v) = ((x + y), (y − x))/√2 before applying the grid, so squares stand on their points.",
+  "Keep each square whole, cut it into two triangles by a diagonal, or into four by both.",
+  "Give each piece the colour of the picture at its own centre, with saturation raised by 1.5, snapped to the nearest of nine cloth colours (or an earthy set).",
+  "Print some pieces as cotton with dots, stripes, checks or diamonds.",
+  "Stitch dashes 4.6 px inside every seam, to hold the layers together."
+ ],
+ "history": "The word is said to come from a verb meaning to mix, which suits a cloth made of many colours. Rallis are made in Sindh and in the neighbouring regions of Thar, Cholistan and Kutch, and are often made as gifts and for a daughter’s wedding. Each family has its own colours, and the ralli remembers the clothes it was made from.",
+ "uses": [
+  "Bedspreads, throws and cushions",
+  "Wedding and dowry gifts",
+  "Patchwork and quilt design",
+  "Upcycling and sustainable fashion"
+ ],
+ "terms": [
+  [
+   "Ralli",
+   "A patchwork quilt of Sindh and nearby regions."
+  ],
+  [
+   "Running stitch",
+   "A simple stitch that passes in and out of the cloth in a line."
+  ],
+  [
+   "Patch",
+   "A piece of cloth sewn into a larger pattern."
+  ]
+ ],
+ "related": [
+  "quilt-patchwork",
+  "sashiko",
+  "sindhi-mirror-embroidery"
+ ],
+ "paragraphs": [
+  "A ralli is a quilt made from scraps, and in Sindh it is a women’s art: cloth from old clothes is cut into squares and triangles, laid out in bold patterns, and stitched down with rows of running thread, often in several layers. The word is said to come from a verb meaning to mix, which suits a cloth made of many colours. The program cuts your picture into patches and gives each one a colour from a bright palette of nine (or an earthy one).",
+  "The quilt is a square grid of side s. When the “on the diagonal” setting is chosen, the point (x, y) is turned by 45° to (u, v) = ((x + y), (y − x))/√2 before the grid is applied, so the squares stand on their points. A square can be kept whole, cut into two triangles by its diagonal, or into four by both. Each piece takes the colour of the picture at its own centre (saturation raised by 1.5), snapped to the nearest cloth colour, and some pieces are printed cotton with dots, stripes, checks or diamonds. Stitching lies 4.6 px inside every seam as dashes, in a thread that is lighter than dark patches and darker than light ones. A dark line marks the seam itself, and the patch is shaded to look puffed near it."
+ ],
+ "equations": [
+  {
+   "tex": "u=\\frac{x+y}{\\sqrt2},\\qquad v=\\frac{y-x}{\\sqrt2},\\qquad (i,j)=\\big(\\lfloor u/s\\rfloor,\\ \\lfloor v/s\\rfloor\\big)",
+   "note": "Cell index on the diagonal grid. With “square on” the rotation is skipped."
+  },
+  {
+   "tex": "d_{\\text{diag}}=\\frac{|a+b|}{\\sqrt2}\\ \\ (\\text{halves}),\\qquad d_{\\text{diag}}=\\frac{\\big||a|-|b|\\big|}{\\sqrt2}\\ \\ (\\text{quarters}),\\qquad a=f_u-\\tfrac12,\\ b=f_v-\\tfrac12",
+   "note": "The distance, in cell units, from the cut line. (f_u, f_v) is the position inside the cell. |a + b|/√2 is the distance from a point to the line a + b = 0."
+  },
+  {
+   "tex": "d_{\\text{seam}}=s\\,\\min\\!\\big(d_{\\text{edge}},\\,d_{\\text{diag}}\\big),\\qquad f=0.82+0.2\\,\\operatorname{smoothstep}\\big(0,\\,10\\,\\mathrm{sc},\\,d_{\\text{seam}}\\big)",
+   "note": "Distance to the nearest seam and the puffing of each patch: 18% darker at the seam."
+  },
+  {
+   "tex": "\\big|d_{\\text{seam}}-4.6\\,\\mathrm{sc}\\big|<0.55\\,\\mathrm{sc}\\ \\ \\wedge\\ \\ \\operatorname{frac}\\!\\Big(\\frac{0.8x+1.3y}{6.5\\,\\mathrm{sc}}\\Big)<0.55",
+   "note": "The stitch: a band 1.1 px wide, broken into dashes (55% on)."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Patch size",
+   "type": "range",
+   "default": 62,
+   "min": 22,
+   "max": 110,
+   "step": 1
+  },
+  {
+   "key": "layout",
+   "label": "Set",
+   "type": "select",
+   "default": "diamond",
+   "options": [
+    "diamond",
+    "square"
+   ]
+  },
+  {
+   "key": "split",
+   "label": "Cut",
+   "type": "select",
+   "default": "halves",
+   "options": [
+    "whole",
+    "halves",
+    "quarters"
+   ]
+  },
+  {
+   "key": "cloth",
+   "label": "Cloth",
+   "type": "select",
+   "default": "bright",
+   "options": [
+    "bright",
+    "earth"
+   ]
+  },
+  {
+   "key": "print",
+   "label": "Printed cotton",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "stitch",
+   "label": "Stitching",
+   "type": "range",
+   "default": 75,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Quarters cut in four give a lively, kaleidoscope-like quilt.",
+   "set": {
+    "split": "quarters",
+    "size": 45
+   }
+  },
+  {
+   "text": "Square set keeps the patches upright and calm.",
+   "set": {
+    "layout": "square",
+    "split": "whole"
+   }
+  },
+  {
+   "text": "Earthy cloth feels like a quilt that has been washed many times.",
+   "set": {
+    "cloth": "earth",
+    "print": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,150 @@
+{
+ "id": "lumenary:isometric",
+ "name": "Isometric",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "2:1 projection of brightness-height blocks (how)",
+ "note": null,
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "A city of blocks: height follows brightness, colour follows the picture.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/isometric.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Technical drawing, then video games",
+  "era": "1820s theory, 1980s games",
+  "bestOn": "Pictures with clear light and dark regions, such as cityscapes"
+ },
+ "why": "Isometric drawing shows three faces of a cube with no vanishing point, so every block has the same size wherever it sits. That makes it a natural way to turn a picture into a city of columns, with height following brightness. Three fixed shades on the three faces suggest a light source and give the flat blocks volume.",
+ "how": [
+  "Reduce the picture to a small grid.",
+  "Make each cell a block with the cell’s colour and a height from its brightness, after an auto-levels stretch.",
+  "Draw each block as three flat faces: a top, a left side and a right side with fixed brightness multipliers.",
+  "Project with the 2:1 dimetric view, so a step on a grid axis moves half a tile across and a quarter of a tile down.",
+  "Draw blocks in order of i plus j, from back to front, and scale the city to fit."
+ ],
+ "history": "William Farish formalised isometric projection at Cambridge in 1822, and engineers used it for technical drawings. Video games adopted it in the 1980s with titles such as Zaxxon and Q*bert, and city builders like SimCity 2000 in 1993 made it familiar. The 2:1 version used here keeps lines on whole pixel steps, which is why pixel artists prefer it.",
+ "uses": [
+  "Data and city style visualisations",
+  "Game and pixel art backgrounds",
+  "Architecture and infographic art",
+  "Playful poster work"
+ ],
+ "terms": [
+  [
+   "Isometric",
+   "Greek for equal measure: a view in which all three axes are shown at equal scale."
+  ],
+  [
+   "Dimetric 2:1",
+   "A projection where each step moves two units across for one down, loved by pixel artists."
+  ],
+  [
+   "Lambert shading",
+   "Brightness that depends on the angle between a surface and the light."
+  ]
+ ],
+ "related": [
+  "lego-voxel",
+  "low-poly",
+  "pixel-art"
+ ],
+ "paragraphs": [
+  "The picture is reduced to a small grid and every cell becomes a block. A block’s colour is the cell’s colour; its height is the cell’s brightness, stretched so the darkest cell in the picture is as low as the lightest is tall (an “auto-levels” step that keeps flat pictures from producing a flat city). Each block is drawn as three flat faces: a top, a left side and a right side.",
+  "The projection is the 2:1 “dimetric” used in pixel-art games, where every step along a grid axis moves half a tile across and a quarter of a tile down. It is not mathematically isometric (which would use 30° and a 1:1.15 ratio) but it keeps lines on whole-pixel steps and looks cleaner. Because there is no depth buffer, blocks are drawn in order of i + j, back to front, so nearer blocks cover farther ones. The three faces get fixed brightness multipliers, which is Lambert shading for a light at a fixed position, and the whole city is scaled to fit the canvas."
+ ],
+ "equations": [
+  {
+   "tex": "X=X_0+(i-j)\\,\\frac{w}{2},\\qquad Y=Y_0+(i+j)\\,\\frac{w}{4}-h",
+   "note": "Screen position of the top of block (i, j) with tile width w and block height h."
+  },
+  {
+   "tex": "h=\\Big(\\frac{L-L_{\\min}}{\\max(0.05,\\,L_{\\max}-L_{\\min})}\\Big)^{1.1}H_{\\max}+0.08",
+   "note": "Block height from normalised brightness."
+  },
+  {
+   "tex": "C_{\\text{top}}=1.08\\,C,\\qquad C_{\\text{left}}=0.62\\,C,\\qquad C_{\\text{right}}=0.40\\,C",
+   "note": "Face shading."
+  }
+ ],
+ "dials": [
+  {
+   "key": "cols",
+   "label": "Blocks across",
+   "type": "range",
+   "default": 56,
+   "min": 14,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "height",
+   "label": "Height",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "gap",
+   "label": "Gap",
+   "type": "range",
+   "default": 25,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "crop",
+   "label": "Square crop",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "mono",
+   "label": "Grayscale",
+   "type": "toggle",
+   "default": false
+  },
+  {
+   "key": "invert",
+   "label": "Dark = tall",
+   "type": "toggle",
+   "default": false
+  },
+  {
+   "key": "bg",
+   "label": "Background",
+   "type": "color",
+   "default": "#0a0a0a"
+  }
+ ],
+ "presets": [
+  {
+   "text": "Tall blocks with narrow gaps feel like a dense skyline.",
+   "set": {
+    "height": 100,
+    "gap": 10
+   }
+  },
+  {
+   "text": "Greyscale blocks look like a clean architectural model.",
+   "set": {
+    "mono": true
+   }
+  },
+  {
+   "text": "Make dark areas tall to invert the city.",
+   "set": {
+    "invert": true
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

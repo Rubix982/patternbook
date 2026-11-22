@@ -1,0 +1,157 @@
+{
+ "id": "lumenary:mono-essay",
+ "name": "Mono Essay",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "video-essay frame: sunk monochrome, thin white contours, circle, rule and caption (how)",
+ "note": "Grain and scratches are garnish, not a modelled film process.",
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "A frame from a quiet video essay: the picture sunk into grainy black and white, one thin white contour drawn round its forms, a circle, a rule and a single sentence set small and wide.",
+  "theory_page": "treatments/lumenary/theory/01-design.md",
+  "code": "vendor/lumenary/src/engine/styles/mono-essay.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Online video essays and minimalist editorial design",
+  "era": "2010s onward",
+  "bestOn": "One clear subject against a plain background"
+ },
+ "why": "A quiet essay video asks you to listen, so its pictures step back. Colour goes, the blacks deepen until most of the frame is dark, and grain makes a still image feel like film. Over that, a few thin white lines do the pointing: a contour around the forms, a circle, a rule, one short sentence. The picture becomes a diagram of an idea.",
+ "how": [
+  "Reduce the picture to brightness and stretch it to the full range.",
+  "Sink it: a smoothstep sends everything below a limit to black, and a vignette darkens the corners.",
+  "Blur a copy heavily and draw thin white lines along its levels of equal brightness, one pixel wide whatever the slope.",
+  "Find the centre of everything that stands out from the mean tone, and draw a circle and a ticked rule from it.",
+  "Add grain, a few scratches and dust, then set the sentence small with wide letter spacing."
+ ],
+ "history": "The essay film is older than the internet: Hans Richter described the form in 1940, and Chris Marker’s Sans Soleil (1983) is its best-known example. On video platforms in the 2010s the video essay became a genre of its own, often one voice over spare black-and-white visuals. The thin white diagram lines borrow from technical drawing and from the conceptual art of the 1960s, where a line and a caption could be the whole work.",
+ "uses": [
+  "Title cards for video essays",
+  "Quote posts and newsletter headers",
+  "Book and podcast cover art",
+  "Slides that carry one idea each"
+ ],
+ "terms": [
+  [
+   "Contour",
+   "A line that joins points of equal value, here equal brightness."
+  ],
+  [
+   "Vignette",
+   "A gradual darkening toward the corners of a picture."
+  ],
+  [
+   "Letter spacing",
+   "Extra room set between the letters of a word."
+  ]
+ ],
+ "related": [
+  "minimalism",
+  "editorial",
+  "contour-lines"
+ ],
+ "paragraphs": [
+  "The picture is reduced to brightness, stretched so that its darkest and lightest 2% clip, and then sunk. A smoothstep between two limits set by the “depth of the blacks” slider decides which greys survive: everything below the lower limit becomes black. The result is raised to the power 1.2 and scaled to 88%, so nothing in the frame is quite white, and a vignette takes away up to 55% more toward the corners. Grain is the sum of a per-pixel hash and a smoother value noise; a few vertical scratches and rare dust specks are drawn from the same seed.",
+  "The white contours are lines of equal brightness on a copy of the picture blurred twice with a box of radius 16 pixels. For each level, the distance from a pixel to the contour is estimated as the difference in brightness divided by the local slope, and the line is drawn where that distance is under about a pixel. Dividing by the slope is what keeps the line the same width on a gentle gradient and on a sharp edge. The circle is centred on the average position of everything that differs from the picture’s mean tone, each place weighted by the square of that difference."
+ ],
+ "equations": [
+  {
+   "tex": "v=0.88\\,S_{a,b}(L)^{1.2},\\qquad a=0.08+0.3\\,c,\\quad b=1.02-0.12\\,c",
+   "note": "Tone: L is the stretched brightness, S the smoothstep and c the “depth of the blacks” slider (0 to 1)."
+  },
+  {
+   "tex": "d\\approx\\frac{\\lvert L_w-\\ell\\rvert}{\\lvert\\nabla L_w\\rvert},\\qquad \\alpha=1-S_{0.5w,\\,1.3w}(d)",
+   "note": "Distance d to the contour at level ℓ on the blurred brightness L_w, and the opacity of a line of width w."
+  },
+  {
+   "tex": "\\mathbf c=\\frac{\\sum_i w_i\\,\\mathbf x_i}{\\sum_i w_i},\\qquad w_i=\\big(L_{w,i}-\\bar L\\big)^{2}",
+   "note": "Centre of the circle: the weighted mean position of what stands out from the mean tone."
+  }
+ ],
+ "dials": [
+  {
+   "key": "text",
+   "label": "Sentence",
+   "type": "text",
+   "default": "The quiet work comes first"
+  },
+  {
+   "key": "contrast",
+   "label": "Depth of the blacks",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grain",
+   "label": "Grain",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "lines",
+   "label": "Contour lines",
+   "type": "range",
+   "default": 2,
+   "min": 0,
+   "max": 3,
+   "step": 1
+  },
+  {
+   "key": "figure",
+   "label": "Circle and rule",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "tone",
+   "label": "Tone",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "warm",
+    "cold"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New print",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "One contour and deep blacks leave almost nothing but the line.",
+   "set": {
+    "lines": 1,
+    "contrast": 90
+   }
+  },
+  {
+   "text": "A warm tone and heavy grain look like an old print.",
+   "set": {
+    "tone": "warm",
+    "grain": 85
+   }
+  },
+  {
+   "text": "Turn the circle off and keep three contours for a map of the picture.",
+   "set": {
+    "figure": false,
+    "lines": 3
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

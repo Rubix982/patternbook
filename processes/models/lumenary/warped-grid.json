@@ -1,0 +1,164 @@
+{
+ "id": "lumenary:warped-grid",
+ "name": "Warped Grid",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "grid displaced by the brightness gradient, or stacked ridges (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "A plain grid, or a stack of horizontal ridges, pushed around by the light and shadow of your picture until the picture appears in the lines.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/warped-grid.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Data art and graphic design",
+  "era": "1970 plot, 1979 record sleeve",
+  "bestOn": "Portraits with clear light and dark regions"
+ },
+ "why": "A picture can be shown without drawing it, simply by the way it disturbs something regular. A plain grid pushed around by light and dark looks like a sheet of rubber with a picture set in it, and stacked horizontal lines that rise over bright areas look like a mountain range. The shapes appear from the lines crowding and spreading, not from any colour being filled.",
+ "how": [
+  "Blur the lightness over about 10 pixels and take its gradient by central differences.",
+  "In grid mode, move each point of the lines to x′ = x − k ∇L, so lines crowd on one side of every light-to-dark edge and spread on the other.",
+  "Give each short piece of line the picture’s colour and a thickness between 0.45 and 1.85 times the line width, from its tone.",
+  "In ridges mode, stack horizontal lines and lift each one over the picture, so bright (or dark) regions form hills.",
+  "Hide lines behind the ridges in front, so the hills look solid."
+ ],
+ "history": "The stacked-ridge picture is best known from the cover of Joy Division’s album Unknown Pleasures (1979), designed by Peter Saville. It uses a plot of radio pulses from the pulsar CP 1919 that Harold Craft made for his Cornell thesis in 1970, reprinted in the Cambridge Encyclopaedia of Astronomy. Such stacked plots are now called joy plots or ridgeline plots in data visualisation.",
+ "uses": [
+  "Record sleeves, posters and book covers",
+  "Ridgeline charts in data journalism",
+  "Terrain and signal visualisation",
+  "Textile and relief graphics"
+ ],
+ "terms": [
+  [
+   "Gradient",
+   "The direction and rate in which a value, such as brightness, changes fastest."
+  ],
+  [
+   "Ridgeline plot",
+   "A set of overlapping curves stacked one above another."
+  ],
+  [
+   "Pulsar",
+   "A spinning neutron star that sends out regular pulses of radio waves."
+  ]
+ ],
+ "related": [
+  "contour-lines",
+  "flow-field",
+  "op-art-moire"
+ ],
+ "paragraphs": [
+  "Two quite different drawings use the same idea, that a picture can be shown as the way it disturbs something regular. In the grid layout, a set of horizontal and vertical lines is pushed around by the picture’s gradient: each point is moved to x′ = x − k ∇L, where L is the lightness blurred over about 10 px and ∇L is taken by central differences. The strength k is the strength slider times 1,080 pixels (at 800 px wide). The lines crowd together on one side of every light-to-dark edge and spread on the other, as if the picture were a lens set in the page, and so the picture’s shapes appear without any of its colours being drawn. Each short piece of line takes its colour from the picture and its thickness (0.45 to 1.85 times the line width) from the tone.",
+  "The ridges layout is the old stacked-lines portrait of the pulsar radio signal made famous by the cover of Unknown Pleasures. Horizontal lines are lifted by A v^1.4, where v is the tone (light or dark, your choice) and A is up to 5.2 line spacings, tapered to 35% at the left and right edges. The lines are drawn from the top down, and each one is filled underneath with the paper colour, so that it hides the lines behind it. That hidden-line removal is the painter’s algorithm: nearer things are painted over farther ones."
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf x'=\\mathbf x-k\\,\\nabla L(\\mathbf x),\\qquad k=1080\\,\\sigma\\,\\frac{W}{800},\\qquad \\partial_xL\\approx\\frac{L(x+2)-L(x-2)}{4}",
+   "note": "Grid mode: σ is the strength slider and L the blurred lightness."
+  },
+  {
+   "tex": "y_j(x)=y_j-A\\,v(x)^{1.4}\\,e(x),\\qquad e(x)=0.35+0.65\\,\\operatorname{smoothstep}\\!\\Big(0,\\ 0.12,\\ \\frac{\\min(x,\\,W-x)}{W}\\Big)",
+   "note": "Ridges mode: A = 5.2 σ × the line spacing; e tapers the ridge toward the sides."
+  }
+ ],
+ "dials": [
+  {
+   "key": "mode",
+   "label": "Pattern",
+   "type": "select",
+   "default": "grid",
+   "options": [
+    "grid",
+    "ridges"
+   ]
+  },
+  {
+   "key": "lines",
+   "label": "Lines",
+   "type": "range",
+   "default": 56,
+   "min": 20,
+   "max": 140,
+   "step": 1
+  },
+  {
+   "key": "warp",
+   "label": "Strength",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Line width",
+   "type": "range",
+   "default": 1.3,
+   "min": 0.4,
+   "max": 4,
+   "step": 0.1
+  },
+  {
+   "key": "up",
+   "label": "Hills rise in",
+   "type": "select",
+   "default": "light",
+   "options": [
+    "light",
+    "dark"
+   ]
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "mono"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "night",
+   "options": [
+    "night",
+    "cream"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Ridges with the dark rising give a mountain portrait.",
+   "set": {
+    "mode": "ridges",
+    "up": "dark"
+   }
+  },
+  {
+   "text": "Many fine lines make the picture cleaner.",
+   "set": {
+    "lines": 120,
+    "warp": 70
+   }
+  },
+  {
+   "text": "Mono lines on cream paper look like an etching.",
+   "set": {
+    "colour": "mono",
+    "paper": "cream"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

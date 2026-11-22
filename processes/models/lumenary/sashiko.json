@@ -1,0 +1,158 @@
+{
+ "id": "lumenary:sashiko",
+ "name": "Sashiko",
+ "physical": "yes",
+ "process": "running-stitch-embroidery",
+ "process_name": "Running-stitch embroidery",
+ "class": "stitch",
+ "basis": "why: rows and columns of running stitch started on or off the beat (hitomezashi); how: parity rule per row and column, thread by brightness",
+ "note": null,
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "Japanese running stitch on indigo cloth, in the hitomezashi style. Rows and columns of stitches start on or off the beat, and a lattice of squares, diamonds and crosses appears from nothing. Thread is thicker and brighter in the light.",
+  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "code": "vendor/lumenary/src/engine/styles/sashiko.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Rural Japan",
+  "era": "Edo period onward",
+  "bestOn": "Pictures with clear light and dark areas"
+ },
+ "why": "Sashiko means little stabs. It began as a way for farming families to strengthen and mend cloth with white thread on indigo, and the stitch patterns became beautiful in their own right. In the simplest kind, hitomezashi, every row and column is stitched with running stitches, each starting either on the beat or half a beat off, and squares, crosses and diamonds appear from nothing.",
+ "how": [
+  "Write r_j and c_i for the starting beat of row j and column i, each 0 or 1.",
+  "Draw the stitch on row j between points i and i + 1 if i + r_j is even, and the stitch on column i between j and j + 1 if j + c_i is even.",
+  "At any grid point exactly one of the two horizontal stitches and exactly one of the two vertical stitches meet, so the stitches join into closed loops.",
+  "Choose the starting beats at random, or from patterns that make diamonds, waves or steps.",
+  "Draw the thread thicker and brighter where the picture is light, on indigo, black or madder cloth."
+ ],
+ "history": "Sashiko developed in rural Japan during the Edo period, when cotton was precious and clothes were patched and layered, especially in the north. Cloth mended for generations in this way is called boro. Hitomezashi patterns have also caught the interest of mathematicians in recent years, who have studied the loops and regions that they form.",
+ "uses": [
+  "Mending and visible repair",
+  "Bags, coasters and home textiles",
+  "Modern embroidery and pattern design",
+  "Teaching parity and patterns"
+ ],
+ "terms": [
+  [
+   "Hitomezashi",
+   "One-stitch sashiko, made of running stitches on a grid."
+  ],
+  [
+   "Boro",
+   "Cloth that has been mended and patched over many years."
+  ],
+  [
+   "Parity",
+   "Whether a whole number is even or odd."
+  ]
+ ],
+ "related": [
+  "cross-stitch",
+  "embroidery",
+  "quilt-patchwork"
+ ],
+ "paragraphs": [
+  "Sashiko means “little stabs”. It began as a way for farming families in Japan to mend and strengthen cloth with white thread on indigo, and the stitch patterns became beautiful in their own right. Hitomezashi, “one-stitch”, is the simplest kind. You stitch every row and every column on a grid with running stitches that are as long as the gaps between them, and you start each row and each column either on the beat or half a beat off. That is all, and yet squares, crosses and diamonds appear.",
+  "There is a tidy reason for this. Write r_j and c_i for the starting beat of row j and column i. The stitch on row j between points i and i + 1 is drawn if i + r_j is even, and the stitch on column i between j and j + 1 is drawn if j + c_i is even. At any grid point exactly one of the two horizontal stitches next to it is drawn, and exactly one of the two vertical ones, so every point is a right-angle bend. The stitches therefore form paths that never cross or branch. In the program the thread is thicker and brighter in the light parts of the picture and thin and dim in the dark ones."
+ ],
+ "equations": [
+  {
+   "tex": "h_{i,j}=\\big[(i+r_j)\\bmod 2=0\\big],\\qquad v_{i,j}=\\big[(j+c_i)\\bmod 2=0\\big]",
+   "note": "Whether the horizontal stitch (i, j) and the vertical stitch (i, j) are drawn. The bits r and c are random, alternating, or taken from a wave or a step pattern."
+  },
+  {
+   "tex": "h_{i-1,j}+h_{i,j}=1,\\qquad v_{i,j-1}+v_{i,j}=1",
+   "note": "Each grid point has one horizontal and one vertical stitch, which is why the lines turn at every point and never meet."
+  },
+  {
+   "tex": "w=s\\,\\big(0.05+0.34\\,\\omega\\,t^{1.4}\\big),\\qquad k=0.3+0.7\\,t",
+   "note": "Thread width and brightness: s is the stitch length, ω the weight slider and t the brightness of the picture under the stitch."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Stitch length",
+   "type": "range",
+   "default": 13,
+   "min": 5,
+   "max": 26,
+   "step": 1
+  },
+  {
+   "key": "pattern",
+   "label": "Pattern",
+   "type": "select",
+   "default": "random",
+   "options": [
+    "random",
+    "diamonds",
+    "waves",
+    "steps"
+   ]
+  },
+  {
+   "key": "weight",
+   "label": "Thread weight",
+   "type": "range",
+   "default": 65,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "tint",
+   "label": "Thread colour",
+   "type": "select",
+   "default": "white",
+   "options": [
+    "white",
+    "picture",
+    "gold"
+   ]
+  },
+  {
+   "key": "cloth",
+   "label": "Cloth",
+   "type": "select",
+   "default": "indigo",
+   "options": [
+    "indigo",
+    "black",
+    "madder"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New pattern",
+   "type": "shuffle",
+   "default": 3
+  }
+ ],
+ "presets": [
+  {
+   "text": "Diamonds are the classic hitomezashi pattern.",
+   "set": {
+    "pattern": "diamonds"
+   }
+  },
+  {
+   "text": "Gold thread on black looks like a night festival.",
+   "set": {
+    "tint": "gold",
+    "cloth": "black"
+   }
+  },
+  {
+   "text": "Short stitches give a fine, dense grid.",
+   "set": {
+    "size": 7,
+    "weight": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

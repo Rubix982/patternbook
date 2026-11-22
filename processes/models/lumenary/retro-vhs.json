@@ -1,0 +1,133 @@
+{
+ "id": "lumenary:retro-vhs",
+ "name": "Retro VHS",
+ "physical": "yes",
+ "process": "analogue-videotape",
+ "process_name": "Analogue videotape (VHS) recording",
+ "class": "optical-device",
+ "basis": "why: worn tape is 'a record of small mechanical failures'; how: line wobble, rolling tracking band with dropouts, chroma bleed",
+ "note": "Magnetic tape, not optics; filed in the imaging-device family. Scanline dimming overlaps the CRT entry.",
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "live",
+  "blurb": "Worn tape: colour bleed, tracking glitches, scanlines and a PLAY stamp.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/retro-vhs.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Home video recorders",
+  "era": "1976 to the early 2000s",
+  "bestOn": "Everyday scenes, party photos and street shots"
+ },
+ "why": "A worn tape is a record of small mechanical failures: the picture wobbles, colours smear, a band of noise rolls up the screen and the bottom of the frame bends. Each of those flaws is simple arithmetic on lines of the picture, and together they create the feel of a memory that has been replayed too often.",
+ "how": [
+  "Raise contrast by 12 percent and add a faint cool cast, as if the picture had been copied.",
+  "Shift every line sideways by the sum of two slow sine waves plus a little random jitter that changes 24 times a second.",
+  "Drift a tracking band down the screen, throwing lines far to the side inside it and adding dropout speckle.",
+  "Sample red, green and blue at slightly different horizontal positions for colour bleed.",
+  "Dim alternate rows, add static and corner shading, and stamp the PLAY overlay."
+ ],
+ "history": "JVC introduced VHS in Japan in 1976, and it won the format battle against Sony’s Betamax in the 1980s. Rental shops and camcorders made it the way a generation recorded birthdays, holidays and television. Each copy lost a little quality, which is why smeared colour and tracking noise now stand for nostalgia.",
+ "uses": [
+  "Found footage and horror style visuals",
+  "Music video and lyric clip looks",
+  "Nostalgia posts and stories",
+  "Intros and transitions for retro video"
+ ],
+ "terms": [
+  [
+   "Tracking",
+   "Keeping the tape head aligned with the recorded lines. When it slips, bands of noise appear."
+  ],
+  [
+   "Dropout",
+   "A short white speck or streak where the tape lost its signal."
+  ],
+  [
+   "Colour bleed",
+   "Colour that spreads sideways past the edge of an object."
+  ]
+ ],
+ "related": [
+  "scanlines-crt",
+  "glitch",
+  "vaporwave"
+ ],
+ "paragraphs": [
+  "Every flaw of a worn tape is reproduced as arithmetic on scanlines. The picture is first dubbed: contrast is raised by 12% and a faint cool cast added. Then each horizontal line of the picture is shifted sideways by an amount that is the sum of two slow sine waves (the line wobble) and a small random jitter that changes every frame at 24 frames a second. A tracking band, a few percent of the picture tall, drifts down the screen; inside it, lines are thrown far to the side by random amounts, with a bright speckle of dropout noise. The bottom of the frame always carries heavy shifting, as on a real head-switch.",
+  "Colour bleed comes from sampling the three channels at different horizontal offsets: red a few pixels to one side (averaged over two taps for a smear), green in place, blue to the other side. Alternate rows are dimmed to make scanlines, a noise table adds static, and a radial gradient darkens the corners. The “PLAY” and counter overlay is drawn as monospace text with a one-pixel offset shadow."
+ ],
+ "equations": [
+  {
+   "tex": "\\Delta x(y,t)=a_1\\sin(0.05\\,y+3.1\\,t)+a_2\\sin(0.013\\,y-1.4\\,t)+a_3\\,\\big(h(y,\\text{frame})-\\tfrac12\\big)",
+   "note": "Horizontal shift of scanline y. The a’s scale with the distortion slider and the width."
+  },
+  {
+   "tex": "\\Delta x_{\\text{band}}=\\Big(1-\\frac{\\lvert y-y_c(t)\\rvert}{b}\\Big)^{2}\\big(h-0.3\\big)\\,0.11\\,W\\,\\text{dist}",
+   "note": "Extra shift inside the tracking band of half-height b whose centre y_c moves with time."
+  },
+  {
+   "tex": "R=\\tfrac12\\big(S_r(x{+}c)+S_r(x{+}c{+}3)\\big),\\quad G=S_g(x),\\quad B=S_b(x{-}c)",
+   "note": "Colour bleed: each channel sampled at its own horizontal offset c."
+  }
+ ],
+ "dials": [
+  {
+   "key": "distortion",
+   "label": "Tracking",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "noise",
+   "label": "Tape noise",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "scan",
+   "label": "Scanlines",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "osd",
+   "label": "PLAY overlay",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Heavy tracking and noise looks like a tape found in a drawer.",
+   "set": {
+    "distortion": 90,
+    "noise": 80
+   }
+  },
+  {
+   "text": "Light distortion keeps the picture legible but unmistakably analogue.",
+   "set": {
+    "distortion": 20,
+    "scan": 30
+   }
+  },
+  {
+   "text": "Hide the PLAY overlay for a cleaner frame.",
+   "set": {
+    "osd": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

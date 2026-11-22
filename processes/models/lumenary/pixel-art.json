@@ -1,0 +1,156 @@
+{
+ "id": "lumenary:pixel-art",
+ "name": "Pixel art",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "digital",
+ "basis": "screen craft: coarse grid, palette, Bayer dither (how)",
+ "note": null,
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "A coarse grid, a small palette, and a little dithering.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/pixel-art.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Early computers and game consoles",
+  "era": "1970s onward",
+  "bestOn": "Simple subjects such as faces, objects and landscapes"
+ },
+ "why": "Pixel art is a craft of limits. With only a few dozen pixels across and a handful of colours, every pixel matters. This treatment makes the three decisions an artist makes: how coarse the grid is, which colours to allow, and how to fake the missing shades with dithering.",
+ "how": [
+  "Shrink the picture to the chosen width by repeated halving, then adjust saturation.",
+  "Choose a palette: a fixed historical one, or an adaptive one found by k-means clustering.",
+  "Add a tiny offset from a 4 × 4 Bayer pattern to each pixel.",
+  "Replace every pixel with the nearest palette colour, with green weighted a little more than red and blue.",
+  "Enlarge the small image without smoothing, so each pixel becomes a crisp square."
+ ],
+ "history": "The term pixel art was published in 1982 by Adele Goldberg and Robert Flegal at Xerox PARC, but the craft grew from game and computer hardware: the four greens of the 1989 Game Boy, the few colours of the CGA card in 1981, and the 16 colour palettes of home computers. Today it is a deliberate style, used even when hardware limits no longer apply.",
+ "uses": [
+  "Game sprites and backgrounds",
+  "Avatars and emoji",
+  "Retro posters and stickers",
+  "App icons with a handmade feel"
+ ],
+ "terms": [
+  [
+   "Palette",
+   "The fixed set of colours an image is allowed to use."
+  ],
+  [
+   "Ordered dithering",
+   "Faking in-between shades by comparing pixels with a repeating pattern of thresholds."
+  ],
+  [
+   "k-means",
+   "A method that finds a few representative colours by repeatedly averaging groups of pixels."
+  ]
+ ],
+ "related": [
+  "dithering",
+  "lego-voxel",
+  "isometric"
+ ],
+ "paragraphs": [
+  "Pixel art is three decisions: how few pixels, which colours, and how to hide the loss. The picture is reduced to the chosen width using the same halving as everywhere else and saturation is adjusted. The palette is either a fixed historical one (such as a handheld console’s four greens) or adaptive: k-means clustering finds the k colours that best represent the picture. It starts with k colours spread along the brightness order, then repeats ten times: assign every sampled pixel to its nearest colour, and move each colour to the average of its pixels. Only up to about six thousand sample pixels are used, which keeps it quick.",
+  "Each pixel is then replaced by its nearest palette colour, but first a small offset from a Bayer matrix is added, a fixed 4 × 4 pattern of thresholds. Pixels that sit between two palette colours then fall on one side or the other in a regular checkerboard-like pattern, and the eye blends them back into an intermediate tone. This is ordered dithering. Distance is measured with weights favouring green, 0.9 for red, 1.2 for green and 0.8 for blue, which approximates how sensitive we are to each. The small image is finally enlarged without smoothing, so each pixel becomes a crisp square."
+ ],
+ "equations": [
+  {
+   "tex": "B=\\frac1{16}\\begin{bmatrix}0&8&2&10\\\\12&4&14&6\\\\3&11&1&9\\\\15&7&13&5\\end{bmatrix},\\qquad c'=c+\\Big(B_{x\\bmod4,\\;y\\bmod4}-\\tfrac12\\Big)A",
+   "note": "Ordered dithering: add a position-dependent offset of amplitude A before choosing the palette colour."
+  },
+  {
+   "tex": "d^{2}=0.9\\,\\Delta R^{2}+1.2\\,\\Delta G^{2}+0.8\\,\\Delta B^{2}",
+   "note": "Weighted squared distance used to find the nearest palette colour."
+  },
+  {
+   "tex": "\\mu_c\\;\\leftarrow\\;\\frac{1}{\\lvert S_c\\rvert}\\sum_{\\mathbf p\\in S_c}\\mathbf p,\\qquad S_c=\\{\\mathbf p:\\ c=\\arg\\min_{j}\\lVert\\mathbf p-\\mu_j\\rVert\\}",
+   "note": "One k-means step (Lloyd’s algorithm), repeated ten times."
+  }
+ ],
+ "dials": [
+  {
+   "key": "width",
+   "label": "Pixels across",
+   "type": "range",
+   "default": 64,
+   "min": 24,
+   "max": 200,
+   "step": 1
+  },
+  {
+   "key": "palette",
+   "label": "Palette",
+   "type": "select",
+   "default": "adaptive",
+   "options": [
+    "adaptive",
+    "pico",
+    "gameboy",
+    "cga",
+    "mono"
+   ]
+  },
+  {
+   "key": "colors",
+   "label": "Colors (adaptive)",
+   "type": "range",
+   "default": 12,
+   "min": 2,
+   "max": 32,
+   "step": 1
+  },
+  {
+   "key": "saturation",
+   "label": "Saturation",
+   "type": "range",
+   "default": 20,
+   "min": -50,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "dither",
+   "label": "Dithering",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "grid",
+   "label": "Pixel grid",
+   "type": "toggle",
+   "default": false
+  }
+ ],
+ "presets": [
+  {
+   "text": "Game Boy green at low resolution is instantly recognisable.",
+   "set": {
+    "palette": "gameboy",
+    "width": 48
+   }
+  },
+  {
+   "text": "Eight adaptive colours with strong dithering gives a classic 16 bit scene.",
+   "set": {
+    "colors": 8,
+    "dither": 70
+   }
+  },
+  {
+   "text": "Turn on the pixel grid to see each square.",
+   "set": {
+    "grid": true,
+    "width": 40
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

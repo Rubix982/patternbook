@@ -1,0 +1,152 @@
+{
+ "id": "lumenary:gouache",
+ "name": "Gouache",
+ "physical": "yes",
+ "process": "gouache",
+ "process_name": "Gouache",
+ "class": "painting",
+ "basis": "why: opaque matte paint from a few mixed pots fills flat shapes; how: chalky k-means palette, wobbled borders, paper gaps, brush drag",
+ "note": null,
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "Flat, opaque, matte paint in a handful of colours, with hand-wobbled edges, thin gaps of bare paper and the drag of a wide brush.",
+  "theory_page": "treatments/lumenary/theory/07-painterly.md",
+  "code": "vendor/lumenary/src/engine/styles/gouache.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Illuminated manuscripts, miniatures and illustration studios",
+  "era": "Medieval onward, mid 20th century illustration",
+  "bestOn": "Posters, landscapes and portraits with clear colour shapes"
+ },
+ "why": "Gouache is opaque and matte: the colour comes from the paint itself, not from the paper behind it, so a painter works from a few mixed pots and fills flat shapes. This treatment chooses a small palette from the picture, makes the colours a little chalky, and lets the shapes wobble where a hand and a wide brush would.",
+ "how": [
+  "Find a palette by k-means clustering of the picture’s colours, then make each pot chalkier.",
+  "Blur the picture, label each pixel with its nearest palette colour, and tidy the regions with two passes of a majority filter.",
+  "Read each pixel’s label from a place displaced by smooth noise, so boundaries wobble the same way on both sides.",
+  "Show bare paper where a different label lies a few pixels away, the thin gap between flat areas.",
+  "Add long streaks of noise for brush drag and a few dry-bristle flecks."
+ ],
+ "history": "The word comes from the Italian guazzo. Opaque water-based paint was used in medieval manuscripts and in Indian and Persian miniature painting, and gouache became the favourite of poster artists and illustrators in the twentieth century. Henri Matisse painted sheets of paper with gouache to make his cut-outs, and mid-century concept artists such as Mary Blair used it for bold colour.",
+ "uses": [
+  "Poster and book illustration",
+  "Concept art and storyboards",
+  "Packaging and brand illustration",
+  "Flat, retro style prints"
+ ],
+ "terms": [
+  [
+   "Opaque",
+   "Not letting light through, so it covers what lies underneath."
+  ],
+  [
+   "Palette",
+   "The set of colours chosen for a painting."
+  ],
+  [
+   "Majority filter",
+   "A filter that gives each pixel the most common label among its neighbours."
+  ]
+ ],
+ "related": [
+  "paper-cut-out",
+  "vector-art",
+  "watercolour"
+ ],
+ "paragraphs": [
+  "Gouache is opaque and matte: the colour comes from the paint, not from the paper behind it, and a painter works from a few mixed pots. So the program chooses a palette first, by k-means clustering of the picture’s colours (the colours of paint slider sets how many), then makes the pots chalkier: saturation × 0.95 + 0.02 and lightness × 0.86 + 0.08, kept between 0.1 and 0.9. The picture is blurred (1.5 to 8.5 px), every pixel is given the label of its nearest palette colour, and two passes of a majority filter over a small neighbourhood round the ragged regions into shapes a brush could paint.",
+  "Then the hand is put back. Each pixel looks up its label at a place displaced by smooth noise (up to ±5 px), so a boundary wobbles the same way on both sides. Where a different label lies a few pixels away in any of the four directions, bare paper shows through, the thin gap left between two flat areas. A wide brush drags: long streaks of noise change the colour by a few per cent, and a few dry-bristle flecks (about 40% paper) appear where a stretched noise is high."
+ ],
+ "equations": [
+  {
+   "tex": "\\lambda(\\mathbf x)=\\arg\\min_{k}\\ \\lVert \\mathbf c(\\mathbf x)-\\mathbf p_k\\rVert^{2},\\qquad s'=0.95\\,s+0.02,\\quad l'=\\operatorname{clip}(0.86\\,l+0.08,\\,0.1,\\,0.9)",
+   "note": "Each pixel takes the label of the nearest palette colour p_k; the palette itself is softened in saturation and lightness."
+  },
+  {
+   "tex": "\\mathbf x'=\\mathbf x+2\\,w\\,\\big(\\boldsymbol\\nu(\\mathbf x)-\\tfrac12\\big)",
+   "note": "The wobble: ν is smooth 2D noise, w the hand-wobble slider (up to 5 px)."
+  },
+  {
+   "tex": "\\text{bare}=0.9\\,(0.6+0.4\\,n)\\quad\\text{if}\\ \\ \\lambda(\\mathbf x'+g\\,\\mathbf e)\\ne\\lambda(\\mathbf x')\\ \\text{for some}\\ \\mathbf e\\in\\{\\pm\\hat x,\\pm\\hat y\\}",
+   "note": "The gap of paper between two flat areas; g is the gaps slider in pixels and n fine noise."
+  }
+ ],
+ "dials": [
+  {
+   "key": "colours",
+   "label": "Colours of paint",
+   "type": "range",
+   "default": 6,
+   "min": 3,
+   "max": 10,
+   "step": 1
+  },
+  {
+   "key": "smooth",
+   "label": "Smoothness of shapes",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wobble",
+   "label": "Hand-wobbled edges",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "gaps",
+   "label": "Gaps of bare paper",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "streaks",
+   "label": "Brush drag",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New palette",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Few colours with a lot of wobble look hand painted.",
+   "set": {
+    "colours": 4,
+    "wobble": 80
+   }
+  },
+  {
+   "text": "More colours and smooth shapes read as a detailed poster.",
+   "set": {
+    "colours": 10,
+    "smooth": 80
+   }
+  },
+  {
+   "text": "No gaps and no drag make flat digital colour.",
+   "set": {
+    "gaps": 0,
+    "streaks": 0
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

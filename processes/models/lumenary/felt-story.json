@@ -1,0 +1,164 @@
+{
+ "id": "lumenary:felt-story",
+ "name": "Felt Story",
+ "physical": "yes",
+ "process": "applique",
+ "process_name": "Appliqué",
+ "class": "stitch",
+ "basis": "why: felt shapes laid over one another and held by running stitch; how: few muted colours, fuzzy edges, layer shadows, dashed stitch",
+ "note": "Felt applique; the running stitch belongs to the applique.",
+ "lumenary": {
+  "section": "E. Physical and 3D feel",
+  "kind": "still",
+  "blurb": "A picture for a felt board: a few soft colours cut from wool felt, fuzzy at the edges, laid one over another with small shadows and sewn down with running stitch.",
+  "theory_page": "treatments/lumenary/theory/05-physical.md",
+  "code": "vendor/lumenary/src/engine/styles/felt-story.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Felt boards and felt appliqué",
+  "era": "Ancient textile, twentieth-century classrooms",
+  "bestOn": "Simple subjects with a few clear colours"
+ },
+ "why": "Felt cannot hold detail. It is thick, it frays, and scissors leave a soft edge, so a felt picture is made of a few simple shapes laid one over another. Depth comes from the small shadow each layer throws, and the pieces are held by a line of running stitch just inside the edge. All of that is friendly, which is why felt is the material of the nursery.",
+ "how": [
+  "Reduce the picture to a few colours and simplify the shapes twice.",
+  "Mute the colours, as dyed wool is strong but never glossy.",
+  "Roughen every edge with fine noise.",
+  "Add the nap: matted fibres and the odd stray hair.",
+  "Shade each piece on the side away from the light, where the piece above covers it.",
+  "Sew a dashed line a few pixels inside every edge."
+ ],
+ "history": "Felt is made by matting wet wool, with no weaving, and is one of the oldest textiles known. Felt hangings with appliqué figures were found in the frozen tombs of Pazyryk in the Altai mountains, from about the fourth century BC. In the twentieth century the felt board became a teaching tool: cut-out figures cling to a felt-covered board, and a story can be told by moving them.",
+ "uses": [
+  "Children’s book and nursery art",
+  "Craft tutorials and patterns",
+  "Seasonal cards and decorations",
+  "Soft, friendly brand illustrations"
+ ],
+ "terms": [
+  [
+   "Appliqué",
+   "Decoration made by sewing cut pieces of cloth onto a larger piece."
+  ],
+  [
+   "Nap",
+   "The fuzzy surface of a cloth, made by its loose fibres."
+  ],
+  [
+   "Running stitch",
+   "The simplest stitch: the needle goes in and out along a line, leaving dashes."
+  ]
+ ],
+ "related": [
+  "paper-cut-out",
+  "quilt-patchwork",
+  "embroidery"
+ ],
+ "paragraphs": [
+  "The picture is cut into a few pieces of felt: smoothing that keeps edges, a small palette, and a majority filter applied twice so that every piece is a simple shape. Felt is dyed wool, strong in colour but never glossy, so each colour loses some saturation and its lightness is squeezed toward the middle. Scissors do not cut felt cleanly, so the boundary of every piece is displaced by fine noise before anything is drawn. The nap is three noises of different size added to the brightness, with the odd lighter hair.",
+  "Stitching needs to know how far each pixel is from the edge of its piece. A one-pixel outline, blurred twice with a box of radius r, becomes a ridge whose height falls off in a straight line with distance; multiplied by the box width it runs from 1 on the edge to 0 about 2r pixels in. The running stitch is the band where that value corresponds to six and a half pixels from the edge. It is broken into dashes by the pixel’s position along whichever axis the edge runs, and the thread is light on dark felt and dark on light. Layers are told apart by shadow: a pixel is shaded when the felt three pixels up and to the left is a different piece."
+ ],
+ "equations": [
+  {
+   "tex": "n=(2r+1)\\,B_{r}^{2}E\\ \\approx\\ 1-\\frac{d}{2r+1}",
+   "note": "Nearness to the edge: E is the one-pixel outline, B² two box blurs of radius r = 5, d the distance from the edge in pixels."
+  },
+  {
+   "tex": "\\text{stitch}\\iff\\Big\\lvert n-\\Big(1-\\frac{6.5}{2r+1}\\Big)\\Big\\rvert<\\frac{1.1}{2r+1}\\ \\ \\text{and}\\ \\ \\operatorname{frac}\\frac{a}{\\ell}<0.58",
+   "note": "A dashed line 6.5 px in from the edge: a is the position along the edge and ℓ the dash length."
+  },
+  {
+   "tex": "f=1+0.12\\,(N_{0.9}-\\tfrac12)+0.10\\,(N_{0.22}-\\tfrac12)+0.09\\,(\\eta-\\tfrac12)",
+   "note": "The nap: two value noises and a per-pixel hash η, as a factor on the felt’s colour."
+  }
+ ],
+ "dials": [
+  {
+   "key": "colours",
+   "label": "Pieces of felt",
+   "type": "range",
+   "default": 7,
+   "min": 4,
+   "max": 10,
+   "step": 1
+  },
+  {
+   "key": "simple",
+   "label": "Simple shapes",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "fuzz",
+   "label": "Fuzz",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "stitch",
+   "label": "Stitching",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shadow",
+   "label": "Layer shadow",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "set",
+   "label": "Felt",
+   "type": "select",
+   "default": "own",
+   "options": [
+    "own",
+    "nursery",
+    "autumn"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Cut again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Few pieces and heavy stitching look hand sewn.",
+   "set": {
+    "colours": 5,
+    "stitch": 100
+   }
+  },
+  {
+   "text": "The nursery box swaps in bright craft-shop colours.",
+   "set": {
+    "set": "nursery",
+    "simple": 80
+   }
+  },
+  {
+   "text": "No stitching and strong shadows look like glued layers.",
+   "set": {
+    "stitch": 0,
+    "shadow": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

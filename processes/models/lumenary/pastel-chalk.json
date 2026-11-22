@@ -1,0 +1,154 @@
+{
+ "id": "lumenary:pastel-chalk",
+ "name": "Pastel Chalk",
+ "physical": "yes",
+ "process": "chalk-pastel-drawing",
+ "process_name": "Chalk and pastel drawing",
+ "class": "drawing",
+ "basis": "why: chalk goes on toned paper for the lights, the paper gives shadows; how: short wide strokes broken by paper tooth, dust",
+ "note": null,
+ "lumenary": {
+  "section": "G. Painterly and drawn",
+  "kind": "still",
+  "blurb": "Soft pastel dragged across toned paper: the lights go on thick, the shadows are left to the paper, and the grain breaks every stroke.",
+  "theory_page": "treatments/lumenary/theory/07-painterly.md",
+  "code": "vendor/lumenary/src/engine/styles/pastel-chalk.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "European portraiture and studio drawing",
+  "era": "16th century onward, popular in the 18th and 19th centuries",
+  "bestOn": "Portraits, skies and flowers"
+ },
+ "why": "Pastel is used on toned paper. The paper’s own colour supplies the shadows and middle tones, and the chalk goes on mostly for the lights, which is why pastel pictures glow. This treatment lays short wide strokes of lifted colour, only where the picture is light, and breaks each stroke on the grain of the paper.",
+ "how": [
+  "Paint a layer of short, wide strokes in two passes, the second half the size, along a main direction with a spread of about 0.35 radians.",
+  "Give each stroke the colour of the blurred picture with saturation raised by 12 percent and lightness set to 0.9 l plus 0.1, so chalk comes out brighter and softer.",
+  "Decide how much chalk stays from how light the picture is there, times the pressure, times a slow noise, so shadows are left to the paper.",
+  "Break each stroke with the paper tooth, a mix of smooth and white noise, which spatters it into dots.",
+  "Add a few specks of loose dust and mix paper and chalk by the final coverage."
+ ],
+ "history": "Artists drew with dry coloured chalks as early as the fifteenth and sixteenth centuries, and pastel portraiture flourished in the eighteenth century with painters such as Rosalba Carriera and Jean-Étienne Liotard. Edgar Degas used pastel boldly in the 1870s to 1890s. Its soft, powdery finish is still prized for portraits and skies.",
+ "uses": [
+  "Portrait and landscape prints",
+  "Soft posters and cards",
+  "Book and album covers",
+  "Warm, textured backgrounds"
+ ],
+ "terms": [
+  [
+   "Toned paper",
+   "Paper that is coloured, so the ground shows through the drawing."
+  ],
+  [
+   "Tooth",
+   "The grain of paper that catches the chalk."
+  ],
+  [
+   "Soft pastel",
+   "Pure pigment pressed into a stick with very little binder."
+  ]
+ ],
+ "related": [
+  "charcoal-sketch",
+  "gouache",
+  "watercolour"
+ ],
+ "paragraphs": [
+  "Pastel is used on toned paper. The paper’s own colour supplies the shadows and middle tones, and the chalk goes on mostly for the lights. The program paints a layer of short, wide strokes, in two passes (the second half the size and covering about half the grid) along a main direction, which is the angle slider plus a spread of ±0.35 radians. Each stroke takes the colour of the blurred picture beneath it, with saturation raised by 12% and lightness set to 0.9 l + 0.1, so chalk comes out brighter and softer than the photograph.",
+  "How much chalk actually stays on the paper depends on two things. First, how light the picture is there: the amount is (0.15 + 1.05 L) times the pressure times a slow noise, with L a heavily blurred lightness, so shadows are left to the paper. Second, the grain. The paper tooth is a mix of smooth and white noise, and the amount has to beat a threshold that rises with the tooth slider, which breaks every stroke into a spatter of dots. A few specks of loose dust (about 1%) are added, and the final colour is the paper and the chalk mixed by the coverage."
+ ],
+ "equations": [
+  {
+   "tex": "\\text{amt}=\\operatorname{clip}\\!\\Big[(0.15+1.05\\,L_s)\\,P\\,(0.8+0.4\\,n)\\Big],\\qquad P=0.35+0.9\\,\\text{pressure}",
+   "note": "Chalk offered to the paper: L_s is the blurred lightness, n slow noise."
+  },
+  {
+   "tex": "m=\\alpha\\ \\operatorname{smoothstep}\\!\\Big(1.1\\,\\tau q-0.12(1-q)-0.05,\\ \\ 1.1\\,\\tau q+0.2+0.1(1-q),\\ \\ \\text{amt}\\Big)",
+   "note": "Coverage: α is the stroke layer’s own alpha, τ the paper tooth noise, q the tooth slider."
+  },
+  {
+   "tex": "C=C_{\\text{paper}}\\,(1-m)+C_{\\text{chalk}}\\,m",
+   "note": "Chalk over toned paper."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Stroke size",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "pressure",
+   "label": "Pressure",
+   "type": "range",
+   "default": 70,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "tooth",
+   "label": "Paper tooth",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "angle",
+   "label": "Direction of strokes",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 180,
+   "step": 1
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "slate",
+   "options": [
+    "slate",
+    "navy",
+    "kraft",
+    "black"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Redraw",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Navy paper makes the chalk look like moonlight.",
+   "set": {
+    "paper": "navy"
+   }
+  },
+  {
+   "text": "Heavy tooth with low pressure gives a dry, sparkling texture.",
+   "set": {
+    "tooth": 90,
+    "pressure": 45
+   }
+  },
+  {
+   "text": "Kraft paper with large strokes feels like a sketchbook.",
+   "set": {
+    "paper": "kraft",
+    "size": 65
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

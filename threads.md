@@ -145,6 +145,7 @@ of budget (railway stations, teak, painted facades, surahi, cinema hoardings). Q
 calling it unattested.
 **Answer:** —
 
+
 ### T-018 · Does a language model's unaided knowledge of the subcontinent's made things fall off outside India, beyond what the sources already lack?
 
 **Status:** open
@@ -156,6 +157,18 @@ score their recall against the atlas, and correct for how much each country's so
 survives the correction is evidence about the model, not the encyclopedia. The planned "unguided default" card
 (`docs/architecture.md` section 9) is its image-side twin. Literature to check first, cited from memory: benchmarks of
 everyday cultural knowledge such as BLEnD (2024), and studies of stereotyping in image generators.
+**Answer:** —
+
+### T-019 · Which physical processes make the atlas's elements, and which of them already have a model?
+
+**Status:** open (the card after C-016)
+**Parent:** C-015
+**Opened:** 2026-11-22
+**Question:** Build the first `processes/index.md` (`docs/architecture.md` section 7b): list the physical processes
+behind Lumenary's 214 entries and patternbook's own treatments, then give each of the atlas's 755 elements its
+process (or "no page yet"), and sort it as a surface look, a pattern or a form. Pairings to check rather than assume:
+kantha and running stitch (sashiko's model), dabu and resist dyeing (batik's), blue pottery and painting on tin glaze
+(Delft's, Hala's), the shadow puppets of Andhra and Kerala and pierced, lit hide.
 **Answer:** —
 
 ### T-020 · Run C-016's sweep for India, so the India-to-Pakistan ratio can be compared before and after
@@ -180,3 +193,4 @@ Wikipedia was the main cause.
 Kashmir GIs. The atlas names regions historically and by modern country together; it needs a rule for one element
 claimed by two registers, stated neutrally, with both registrations recorded and neither preferred.
 **Answer:** —
+

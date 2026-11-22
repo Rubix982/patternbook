@@ -1,0 +1,176 @@
+{
+ "id": "lumenary:dust-snap",
+ "name": "Dust Snap",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "animated grain dispersal (how)",
+ "note": null,
+ "lumenary": {
+  "section": "J. Motion and live",
+  "kind": "live",
+  "blurb": "The picture crumbles to dust, grain by grain, and the wind carries it away. Then it comes back together. Every grain keeps its own colour on the way, and on video the dust is made from the scene that is playing.",
+  "theory_page": "treatments/lumenary/theory/10-motion.md",
+  "code": "vendor/lumenary/src/engine/styles/dust-snap.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Cinema’s picture of things turning to dust",
+  "era": "Particle effects in film since the 1980s, an internet staple since 2018",
+  "bestOn": "Bold pictures, portraits and shapes with a clear edge"
+ },
+ "why": "A picture that falls apart grain by grain is more unsettling than one that simply fades, because each grain keeps its own colour and its place in the order. The viewer follows a front of loss moving across the picture with a ragged edge, and the dust it leaves carries the picture’s colours away on the wind. The return, played backwards along the same paths, is what makes it feel like a loop of loss and relief.",
+ "how": [
+  "Divide the picture into small square grains and give each the moment it will let go: mostly its place along the sweep, with noise and chance added.",
+  "Run a cycle: hold the picture, snap it, rest on the empty page, then play the snap backwards.",
+  "Grains that have not gone yet are the picture itself, copied pixel for pixel.",
+  "A grain that has let go flies along the wind at its own speed, curls a little and shrinks.",
+  "Fade each grain near the end of its flight, and leave a dark, white or ghostly page where the picture was."
+ ],
+ "history": "Things that turn to dust have a long place in film, from the sand faces of The Mummy (1999) to the drifting ash of Avengers: Infinity War (2018), which made the disappearance a shared image. In computer graphics it is done with particle systems, introduced by William Reeves at Lucasfilm in the early 1980s to make the wall of fire in Star Trek II. Each grain is a particle with its own start time, velocity and life.",
+ "uses": [
+  "Intro and outro animations",
+  "Reveal posts and film teasers",
+  "Short loops for social posts",
+  "Title cards and transitions"
+ ],
+ "terms": [
+  [
+   "Particle system",
+   "A group of many small objects, each with its own position, velocity and lifetime, used for smoke, fire and dust."
+  ],
+  [
+   "Easing",
+   "Starting or ending a movement gradually instead of at a constant speed."
+  ],
+  [
+   "Turbulence",
+   "Irregular, swirling variation added to a movement so that it does not look mechanical."
+  ]
+ ],
+ "related": [
+  "pixel-dissolve",
+  "particles",
+  "snowfall"
+ ],
+ "paragraphs": [
+  "Like Pixel Dissolve, the effect depends only on the time, so it can be scrubbed, looped and applied to a video. A cycle of 0.9 s holding, a snap of S seconds, 0.7 s resting and a return of 0.75 S gives a progress value p: 0 while the picture is whole, rising evenly to 1 during the snap, 1 while it is gone, and falling evenly back during the return, so the dust flies home along the paths it left by. S is 5.2 seconds at the slowest setting and 1.7 at the fastest. The picture is cut into square grains of side g = 3 px times width/640 at the default size. Grain i has a release time tau_i between 0 and 0.5, from its place along the sweep (left, right, top, bottom, or distance from the middle or the cursor) plus a slow value noise that bends the front and a little hash noise.",
+  "A grain is whole while p is at most tau_i. After that its flight parameter is s = clamp((p - tau_i) / 0.5), and it is drawn at its home plus v_i D s^1.25, where v_i is its own velocity, mostly the wind direction scaled by 0.35 to 1 and varied by a hash, with a slight lift, and D is 0.55 W times the drift slider. A swirl term 0.035 W s sin(7 s + phi_i), at right angles to the velocity, makes the paths curl. The grain shrinks to half its size, fades with opacity 1 - smoothstep(0.55, 1, s) and carries the colour of the picture at its home. Whole grains are copied from the picture first, and the flying ones are painted over them."
+ ],
+ "equations": [
+  {
+   "tex": "p=\\frac{t-0.9}{S}\\ \\text{(snap)},\\qquad p=1-\\frac{t-t_r}{0.75\\,S}\\ \\text{(return)}",
+   "note": "The progress of the snap: S is the snap time (5.2 s down to 1.7 s) and t_r the moment the return starts."
+  },
+  {
+   "tex": "s=\\operatorname{clamp}\\!\\Big(\\frac{p-\\tau_i}{0.5}\\Big),\\qquad \\mathbf x=\\mathbf x_i+\\mathbf v_i\\,D\\,s^{1.25}+0.035\\,W\\,s\\,\\sin(7s+\\varphi_i)\\,\\mathbf v_i^{\\perp}",
+   "note": "Where a grain is in flight: v_i is its own velocity, D the drift distance, and the last term makes the path curl."
+  },
+  {
+   "tex": "\\text{size}=g\\,(1-0.5\\,s),\\qquad \\alpha=0.96\\,\\big(1-\\operatorname{smoothstep}(0.55,\\,1,\\,s)\\big)",
+   "note": "A grain shrinks and fades as it goes."
+  }
+ ],
+ "dials": [
+  {
+   "key": "from",
+   "label": "Where it starts",
+   "type": "select",
+   "default": "left",
+   "options": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "centre",
+    "cursor",
+    "random"
+   ]
+  },
+  {
+   "key": "grain",
+   "label": "Size of the dust",
+   "type": "range",
+   "default": 3,
+   "min": 2,
+   "max": 9,
+   "step": 1
+  },
+  {
+   "key": "wind",
+   "label": "Wind direction",
+   "type": "range",
+   "default": 25,
+   "min": 0,
+   "max": 359,
+   "step": 1
+  },
+  {
+   "key": "spread",
+   "label": "How far it drifts",
+   "type": "range",
+   "default": 60,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "speed",
+   "label": "Speed",
+   "type": "range",
+   "default": 50,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "left",
+   "label": "Where the picture was",
+   "type": "select",
+   "default": "dark",
+   "options": [
+    "dark",
+    "paper",
+    "ghost"
+   ]
+  },
+  {
+   "key": "reform",
+   "label": "Comes back together",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Another gust",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Wind from the lower left and big grains look like ash in a draught.",
+   "set": {
+    "wind": 215,
+    "grain": 6
+   }
+  },
+  {
+   "text": "Start the snap from the middle and keep the page white for a bright burst.",
+   "set": {
+    "from": "centre",
+    "left": "paper",
+    "spread": 80
+   }
+  },
+  {
+   "text": "Leave a faint ghost of the picture behind and slow the snap right down.",
+   "set": {
+    "left": "ghost",
+    "speed": 15
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

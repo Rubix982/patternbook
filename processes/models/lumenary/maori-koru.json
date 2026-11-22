@@ -1,0 +1,156 @@
+{
+ "id": "lumenary:maori-koru",
+ "name": "Maori Koru",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "Archimedean spirals arranged on a grid (how)",
+ "note": "Kowhaiwhai is rafter painting; only the motif geometry is modelled.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "The koru, an unfurling silver fern frond, repeated in the way of kowhaiwhai rafter painting. Spirals grow larger and whiter in the light and fade to red and then to bare ground in the shade.",
+  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "code": "vendor/lumenary/src/engine/styles/maori-koru.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Aotearoa New Zealand",
+  "era": "Long held, painted in meeting houses for generations",
+  "bestOn": "Landscapes with soft light"
+ },
+ "why": "The koru is the unfurling frond of the silver fern, a young leaf curled into a spiral and about to open. It stands for new life and growth. In the painted rafter patterns of Māori meeting houses, kōwhaiwhai, spirals repeat along a beam in red, white and black. These patterns carry meaning for the people who hold them, so this treatment is a visual homage and not a substitute for the real thing.",
+ "how": [
+  "Draw each koru as a ribbon that starts as a short stem arriving from the side and swells into a spiral of 1.2 turns that tapers to a small round bulb.",
+  "Use an Archimedean spiral, with the radius falling in a straight line with the angle, which is not quite the logarithmic spiral of a real frond but draws the same loop.",
+  "Set korus on a staggered grid and size them by the picture’s brightness.",
+  "In flowing mode alternate orientation by a half turn, with a slight tilt that changes from row to row, so pairs make S-shaped chains. Mirrored and ring modes arrange them in other ways.",
+  "Colour them red, white and black in traditional mode, fading to bare ground in the shade, or from the picture."
+ ],
+ "history": "Kōwhaiwhai are painted on the rafters of wharenui, meeting houses, and each pattern has names and stories. The koru is also a modern symbol of New Zealand, appearing on the livery of its national airline. Māori artists today continue to carve, paint and weave using these forms, and ask that they be treated with respect.",
+ "uses": [
+  "Learning about kōwhaiwhai and Māori design",
+  "Respectful decoration and education",
+  "Spiral pattern design",
+  "Illustrations of ferns and growth"
+ ],
+ "terms": [
+  [
+   "Koru",
+   "A spiral shape based on the unfurling fern frond."
+  ],
+  [
+   "Kōwhaiwhai",
+   "Painted patterns on the rafters of Māori meeting houses."
+  ],
+  [
+   "Wharenui",
+   "A Māori meeting house."
+  ]
+ ],
+ "related": [
+  "phyllotaxis",
+  "celtic-knot",
+  "ukiyo-e"
+ ],
+ "paragraphs": [
+  "The koru is the unfurling frond of a silver fern, a young leaf curled into a spiral and about to open. It stands for new life and is used in the painted rafter patterns of Māori meeting houses, kōwhaiwhai, where spirals repeat along a beam in red, white and black. In the program a koru is a ribbon that starts as a short stem arriving from the side and swells into a spiral of 1.2 turns that tapers to a small round bulb. The turn is an Archimedean spiral, r falling in a straight line with the angle, which is not quite the logarithmic spiral of a real frond but draws the same loop.",
+  "Korus sit on a staggered grid. In flowing mode the orientation alternates by a half turn from one to the next, with a slight tilt that changes from row to row, so that pairs make S-shaped chains; in mirrored mode neighbours reflect each other; and in the ring mode every koru turns to face round the centre. Size grows with the light of the picture, R = 0.46 g (1 − 0.6 f + 0.9 f v). Bright places are white, mid-tones are red and dark places are left bare, each with a line along the middle in a contrasting colour, on a black wood-grain ground."
+ ],
+ "equations": [
+  {
+   "tex": "r(q)=R\\,(1-0.74\\,q),\\qquad \\varphi(q)=\\tfrac{\\pi}{2}+1.2\\,(2\\pi)\\,q,\\qquad q\\in[0,1]",
+   "note": "The spiral part: centre at the origin, radius falling linearly with the angle."
+  },
+  {
+   "tex": "w(q)=R\\big(0.36\\,(1-q)^{0.9}+0.13\\big),\\qquad r_{\\text{bulb}}=0.14\\,R",
+   "note": "Width along the body and the bulb at the end. The stem is a gentle swell from 0.22 R to 0.36 R."
+  },
+  {
+   "tex": "\\text{fill}=\\begin{cases}\\text{white}&v>0.55\\\\ \\text{red}&0.06\\le v\\le0.55\\\\ \\text{none}&v<0.06\\end{cases}",
+   "note": "The traditional paints, by the light of the picture where the koru sits (on the cream ground the white becomes black)."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Spiral size",
+   "type": "range",
+   "default": 64,
+   "min": 30,
+   "max": 120,
+   "step": 1
+  },
+  {
+   "key": "follow",
+   "label": "Size follows light",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "turn",
+   "label": "Direction",
+   "type": "select",
+   "default": "flow",
+   "options": [
+    "flow",
+    "mirror",
+    "ring"
+   ]
+  },
+  {
+   "key": "colour",
+   "label": "Paint",
+   "type": "select",
+   "default": "trad",
+   "options": [
+    "trad",
+    "picture"
+   ]
+  },
+  {
+   "key": "ground",
+   "label": "Ground",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "red",
+    "cream"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New order",
+   "type": "shuffle",
+   "default": 2
+  }
+ ],
+ "presets": [
+  {
+   "text": "Mirrored korus face each other like a pair of unfurling fronds.",
+   "set": {
+    "turn": "mirror"
+   }
+  },
+  {
+   "text": "Traditional red on a cream ground is the most familiar look.",
+   "set": {
+    "colour": "trad",
+    "ground": "cream"
+   }
+  },
+  {
+   "text": "Strong size following the light grows spirals where the picture is bright.",
+   "set": {
+    "follow": 100,
+    "size": 45
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

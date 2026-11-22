@@ -1,0 +1,150 @@
+{
+ "id": "lumenary:hexagon-mosaic",
+ "name": "Hexagon Mosaic",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "honeycomb cells averaged from the picture (how)",
+ "note": "Flat mode dresses cells as glazed tiles with grout, but no tile setting is modelled.",
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "A honeycomb of tiles. Each cell takes the average colour beneath it, as flat glazed tiles, shrinking cells or tumbling blocks.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/hexagon-mosaic.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Geometry and nature",
+  "era": "Ancient to modern",
+  "bestOn": "Wide views with soft colour"
+ },
+ "why": "The hexagon is the shape that divides a flat surface into equal cells with the least boundary. Bees, basalt columns, soap foam and graphene all use it for that reason. The program lays out a honeycomb and gives each cell the average colour beneath it, so the picture becomes tiles, and the gaps between become grout.",
+ "how": [
+  "Space the cell centres √3 s apart in a row, with rows 1.5 s apart and every second row shifted by half a width.",
+  "Average the picture over a disc of 0.75 s around each centre to find the cell’s colour.",
+  "In flat mode, draw each hexagon, shrink it by the gap value, and add a gentle glaze gradient and a pale inner edge.",
+  "In shrinking mode, scale the radius with the tone, 0.25 + 0.85 t, which gives a halftone.",
+  "In tumbling blocks mode, cut each hexagon into three rhombi shaded 1.14, 0.86 and 0.6 times the colour, which gives the illusion of cubes."
+ ],
+ "history": "The Greek mathematician Pappus suggested in the fourth century that bees choose hexagons because they use the least wax. The honeycomb conjecture was proved only in 1999 by Thomas Hales. The tumbling blocks pattern is an old quilt design, and hexagonal grids are used in board games, computer strategy games and weather and mapping systems.",
+ "uses": [
+  "Wall and floor tile design",
+  "Hex based game maps",
+  "Geographic data grids and heat maps",
+  "Honeycomb structures in engineering"
+ ],
+ "terms": [
+  [
+   "Honeycomb conjecture",
+   "The statement that hexagons divide a plane into equal areas with the least perimeter."
+  ],
+  [
+   "Grout",
+   "The material between tiles."
+  ],
+  [
+   "Halftone",
+   "Tone made from dots of different sizes."
+  ]
+ ],
+ "related": [
+  "quilt-patchwork",
+  "voronoi-mosaic",
+  "halftone"
+ ],
+ "paragraphs": [
+  "A honeycomb is the tiling of the plane by regular hexagons, the shape that covers a surface with the least edge. With the hexagon’s corner-to-centre distance s, the centres of a row are √3 s apart, the rows are 1.5 s apart, and each odd row is shifted by half a width. The corner angles are π/6 + mπ/3. Each cell is given the colour of the picture averaged over a disc of radius 0.75 s around its centre, so a cell is one flat, glazed tile.",
+  "Three ways of drawing the cells are offered. Flat tiles fill each cell, with a gap slider that shrinks the hexagon and lets the colour behind show as grout, and a glaze that adds a diagonal gradient (from about 20% brighter to 22% darker) and a thin pale inner edge. In shrinking cells the radius scales with the tone, 0.25 + 0.85 t, which turns the honeycomb into a halftone. In tumbling blocks each hexagon is cut into three rhombi shaded 1.14, 0.86 and 0.62 times the cell colour, which reads as a cube seen from a corner, the old tumbling-blocks quilt pattern."
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf c_{ij}=\\Big(\\sqrt3\\,s\\,\\big(j+\\tfrac12\\,(i\\bmod 2)\\big),\\ \\ \\tfrac32\\,s\\,i\\Big),\\qquad \\theta_m=\\tfrac{\\pi}{6}+\\tfrac{m\\pi}{3}",
+   "note": "Hexagon centres (row i, column j) and corner angles."
+  },
+  {
+   "tex": "r=s\\,(1-g)\\,\\big(0.25+0.85\\,t\\big)",
+   "note": "Radius in the shrinking-cells mode: g is the gap slider and t the tone (1 − tone on a cream ground)."
+  },
+  {
+   "tex": "C_{\\text{face}}=k_f\\,C_{\\text{cell}},\\qquad (k_1,\\ k_2,\\ k_3)=(1.14,\\ 0.86,\\ 0.62)",
+   "note": "Shading of the three faces of a tumbling block."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Cell size",
+   "type": "range",
+   "default": 15,
+   "min": 5,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "mode",
+   "label": "Cells as",
+   "type": "select",
+   "default": "flat",
+   "options": [
+    "flat",
+    "size",
+    "cubes"
+   ]
+  },
+  {
+   "key": "gap",
+   "label": "Gap between cells",
+   "type": "range",
+   "default": 8,
+   "min": 0,
+   "max": 30,
+   "step": 1
+  },
+  {
+   "key": "shine",
+   "label": "Glaze",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "back",
+   "label": "Behind the tiles",
+   "type": "select",
+   "default": "grout",
+   "options": [
+    "grout",
+    "night",
+    "cream"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Tumbling blocks turn the picture into a pile of cubes.",
+   "set": {
+    "mode": "cubes",
+    "size": 20
+   }
+  },
+  {
+   "text": "Shrinking cells make a halftone from hexagons.",
+   "set": {
+    "mode": "size",
+    "gap": 0
+   }
+  },
+  {
+   "text": "Small cells on a night background glow like stained glass.",
+   "set": {
+    "size": 8,
+    "back": "night"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

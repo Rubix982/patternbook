@@ -1,0 +1,154 @@
+{
+ "id": "lumenary:linocut",
+ "name": "Linocut",
+ "physical": "yes",
+ "process": "relief-block-printing",
+ "process_name": "Relief block printing (woodcut, linocut)",
+ "class": "printing",
+ "basis": "why: printed from a block with the light parts cut away; how: gouged lines thickening with darkness, V-gouge taper, roller specks",
+ "note": "Merged with woodcut (ukiyo-e) as relief block printing; split by material if preferred.",
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "Carved lino printed in one colour: solid black where the cutter left the block, gouged lines of changing width for the tones.",
+  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "code": "vendor/lumenary/src/engine/styles/linocut.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Printmaking",
+  "era": "Early 1900s onward",
+  "bestOn": "Strong portraits and landscapes with clear forms"
+ },
+ "why": "A linocut is printed from a block with the light parts cut away, so tone has to come from area and line: the darkest places are left solid, middle tones become lines that thicken with darkness, and the lights are gouged out. This treatment lays lines across the picture and bends them with the picture’s brightness, so they swing round shapes the way a carver’s hand does.",
+ "how": [
+  "Lay a set of parallel lines across the picture at the chosen angle.",
+  "Bend each line’s coordinate with slow noise and with the picture’s brightness.",
+  "For every pixel measure its distance from the middle of its line and ink it if that is smaller than a width that grows with darkness.",
+  "Add a slow swell along each line to mimic the taper of a V-shaped gouge.",
+  "Add solid ink along strong edges as carved outlines, and knock small holes in the ink with roller specks."
+ ],
+ "history": "Linoleum was patented by Frederick Walton in the 1860s as a floor covering. By the early 1900s printmakers, among them the German expressionists of Die Brücke, were carving it because it was softer than wood. Pablo Picasso made a famous series of colour linocuts in the 1950s, and the technique remains popular in schools and studios.",
+ "uses": [
+  "Poster and book cover art",
+  "Greeting cards and wrapping designs",
+  "Folk-art and craft styled illustration",
+  "Printmaking practice studies"
+ ],
+ "terms": [
+  [
+   "Gouge",
+   "A curved carving tool that removes a groove of material."
+  ],
+  [
+   "Relief print",
+   "A print made from the raised parts of a block."
+  ],
+  [
+   "Block",
+   "The piece of lino or wood that is carved and inked."
+  ]
+ ],
+ "related": [
+  "mezzotint",
+  "screen-print",
+  "rubber-stamp"
+ ],
+ "paragraphs": [
+  "A linocut is printed from a block of lino with the white parts cut away; what is left stands up and takes the ink. So tone has to be made from line and area: the darkest parts are left uncut (solid ink), the middle tones become lines whose ink width follows the darkness, and the lights are cut away almost entirely. The program lays a set of parallel lines across the picture. Each line’s coordinate is bent by slow noise and by the picture’s brightness, so the lines swing round shapes as a carver’s hand does.",
+  "At every pixel it finds how far it is from the middle of its line (0 at the centre, 1 at the gouge between lines) and inks it if that distance is smaller than a width that grows with darkness, with a slowly changing swell along each line to mimic the taper of a V-gouge. Optional carved outlines add solid ink wherever the Sobel edge strength is high. A few roller specks, noise above 0.86, knock small holes in the ink."
+ ],
+ "equations": [
+  {
+   "tex": "u=\\frac{n\\,(x\\cos\\theta+y\\sin\\theta)}{W}+3.2\\,w\\,(\\nu-\\tfrac12)+1.5\\,w\\,(\\tfrac12-L_b),\\qquad f=u-\\lfloor u\\rfloor",
+   "note": "Line coordinate: n lines across, θ the direction, w the wander slider and ν slow noise; f is the position within a line."
+  },
+  {
+   "tex": "q=\\min\\!\\big(1.08,\\ 1.12\\,d^{0.85}\\,s\\big),\\quad s=0.78+0.45\\,\\nu',\\qquad d=1-\\text{contrast}(L_b)",
+   "note": "Cut width q from the darkness d, with the taper s along the line."
+  },
+  {
+   "tex": "a=\\operatorname{smoothstep}\\big(\\lvert 2f-1\\rvert-0.08,\\ \\lvert 2f-1\\rvert+0.02,\\ q\\big)\\ \\text{if } q>0.06,\\ \\text{else }0",
+   "note": "Ink coverage a at the pixel."
+  }
+ ],
+ "dials": [
+  {
+   "key": "lines",
+   "label": "Cuts across",
+   "type": "range",
+   "default": 64,
+   "min": 24,
+   "max": 120,
+   "step": 1
+  },
+  {
+   "key": "angle",
+   "label": "Direction of cuts",
+   "type": "range",
+   "default": 38,
+   "min": 0,
+   "max": 180,
+   "step": 1
+  },
+  {
+   "key": "wave",
+   "label": "Wander",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "contrast",
+   "label": "Contrast",
+   "type": "range",
+   "default": 25,
+   "min": -40,
+   "max": 80,
+   "step": 1
+  },
+  {
+   "key": "outline",
+   "label": "Carved outlines",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "ink",
+   "label": "Ink",
+   "type": "select",
+   "default": "black",
+   "options": [
+    "black",
+    "indigo",
+    "rust",
+    "green"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Fewer, thicker cuts look bold and hand carved.",
+   "set": {
+    "lines": 36,
+    "wave": 70
+   }
+  },
+  {
+   "text": "Rust ink without outlines is softer.",
+   "set": {
+    "ink": "rust",
+    "outline": false
+   }
+  },
+  {
+   "text": "Rotate the cuts to a different direction.",
+   "set": {
+    "angle": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lumenary:banknote-engraving",
+ "name": "Banknote Engraving",
+ "physical": "yes",
+ "process": "intaglio-engraving",
+ "process_name": "Intaglio line engraving",
+ "class": "printing",
+ "basis": "why: fine engraved lines whose thickness changes with tone; how: ribbons whose half-thickness follows darkness, guilloche rosettes",
+ "note": "Guilloche is machine (rose-engine) engraving, a sub-technique.",
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "A portrait in engraved lines, as on a banknote: each line swells where the picture is dark, framed by guilloche rosettes.",
+  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "code": "vendor/lumenary/src/engine/styles/banknote-engraving.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Security printing",
+  "era": "19th century onward",
+  "bestOn": "Portraits with clear faces"
+ },
+ "why": "Banknotes were made to be difficult to forge, so their portraits are built from fine engraved lines whose thickness changes with tone, surrounded by guilloche rosettes drawn by rolling one circle inside another. This treatment does both: thick ribbons in the shadows, hairlines in the lights, and curves that look like machined lacework.",
+ "how": [
+  "Draw the picture as horizontal ribbons inside a rounded window.",
+  "Walk along each line in short steps, read the darkness beneath, and set the half thickness to a power of that darkness, capped at half the line spacing.",
+  "Shift lines down where the picture is light and up where it is dark, and add a gentle sine wave so the surface looks modelled.",
+  "Add the security devices: a faint tint of fine wavering lines, a double frame, and guilloche rosettes repeated seven times with slightly different pen offsets.",
+  "Set an invented numeral, serial number and title in a Bodoni face."
+ ],
+ "history": "Engraved banknotes grew from the engraving of plates for books and bank bills, and the early nineteenth century saw intricate machine-turned patterns added against forgery. The first postage stamp, the Penny Black of 1840, had an engine-turned background for the same reason. Today’s banknotes still combine engraving and guilloche with newer security features. The wording in this treatment is invented, and the note is not real money.",
+ "uses": [
+  "Certificates and diplomas",
+  "Vintage and heritage graphics",
+  "Portrait art with a fine line look",
+  "Stationery and invitation design"
+ ],
+ "terms": [
+  [
+   "Guilloche",
+   "An intricate pattern of interlaced curves made by machine or by a rolling circle."
+  ],
+  [
+   "Intaglio",
+   "A printing method in which ink sits in grooves cut into a metal plate."
+  ],
+  [
+   "Hypotrochoid",
+   "The curve traced by a point on a circle rolling inside a larger circle."
+  ]
+ ],
+ "related": [
+  "victorian",
+  "mezzotint",
+  "art-deco"
+ ],
+ "paragraphs": [
+  "Engraved banknote portraits are made of lines, not dots. Each line is a ribbon whose thickness changes with the tone it passes through: thick in the shadows, thin in the lights. The program draws the picture as n horizontal ribbons inside a rounded window. For each line it walks along x in short steps, reads the darkness under it and sets the half-thickness to a power of that darkness, capped at half the line spacing, so the thickest ribbons almost touch. The two edges are then joined into one filled shape.",
+  "The lines also move: they are shifted down where the picture is light and up where it is dark, and given a gentle sine wave, which makes the surface look modelled instead of printed. Around the portrait come the usual security-print devices. A faint wavering tint of very fine lines covers the note; a double frame surrounds it; and the rosettes are guilloche patterns, curves drawn by rolling one circle inside another (a hypotrochoid), repeated seven times with a slightly different pen offset so they interleave, and scaled by 0.62. A numeral, a serial number and a title are set in a Bodoni face; the wording is invented."
+ ],
+ "equations": [
+  {
+   "tex": "\\text{half}=\\min\\!\\Big(\\tfrac p2,\\ 0.52\\,p\\,d^{0.9}+0.18\\,\\sigma\\Big),\\qquad d=1-\\text{contrast}(L,0.2)",
+   "note": "Half thickness of the ribbon; p is the line spacing, σ the scale of the picture."
+  },
+  {
+   "tex": "y_c=y_i+(\\tfrac12-d)\\,1.4\\,p\\,\\kappa+0.35\\,p\\,\\kappa\\,\\sin(0.018\\,x+0.45\\,i)",
+   "note": "Centre line of ribbon i, κ being the swing slider."
+  },
+  {
+   "tex": "\\begin{aligned}x&=(R-r)\\cos t+\\delta\\cos\\!\\Big(\\tfrac{R-r}{r}\\,t\\Big)\\\\ y&=(R-r)\\sin t-\\delta\\sin\\!\\Big(\\tfrac{R-r}{r}\\,t\\Big)\\end{aligned},\\quad r=0.34R,\\ \\delta\\approx0.78R",
+   "note": "The guilloche curve (hypotrochoid), traced over eight turns of t."
+  }
+ ],
+ "dials": [
+  {
+   "key": "title",
+   "label": "Title",
+   "type": "text",
+   "default": "NOTE OF LIGHT"
+  },
+  {
+   "key": "value",
+   "label": "Value",
+   "type": "text",
+   "default": "100"
+  },
+  {
+   "key": "lines",
+   "label": "Engraved lines",
+   "type": "range",
+   "default": 84,
+   "min": 40,
+   "max": 140,
+   "step": 1
+  },
+  {
+   "key": "swing",
+   "label": "Line swing",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "ink",
+   "label": "Ink",
+   "type": "select",
+   "default": "green",
+   "options": [
+    "green",
+    "blue",
+    "brown",
+    "violet"
+   ]
+  },
+  {
+   "key": "rosettes",
+   "label": "Rosettes",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Brown ink with a high line count looks like a nineteenth century bond.",
+   "set": {
+    "ink": "brown",
+    "lines": 130
+   }
+  },
+  {
+   "text": "Strong line swing exaggerates the sculpted look.",
+   "set": {
+    "swing": 90
+   }
+  },
+  {
+   "text": "Turn off the rosettes to see only the portrait.",
+   "set": {
+    "rosettes": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

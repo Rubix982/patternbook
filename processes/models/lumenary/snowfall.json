@@ -1,0 +1,163 @@
+{
+ "id": "lumenary:snowfall",
+ "name": "Snowfall",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "animated flakes at three depths (how)",
+ "note": null,
+ "lumenary": {
+  "section": "J. Motion and live",
+  "kind": "live",
+  "blurb": "Flakes drift down in three depths, the near ones large and soft, the far ones small and sharp, while a cold light settles on your picture. Move the cursor to steer the wind.",
+  "theory_page": "treatments/lumenary/theory/10-motion.md",
+  "code": "vendor/lumenary/src/engine/styles/snowfall.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Photography, animation and weather",
+  "era": "Multiplane camera 1937",
+  "bestOn": "Landscapes with depth, houses and trees"
+ },
+ "why": "A few flakes at three depths make a room of space. Near flakes are big, fast and soft, because they are out of focus, while far ones are small, slow, sharp and faint. That mix of motion parallax and atmospheric perspective is what the brain uses to judge distance, so the snow makes the picture feel deep, with a cold light settling on it.",
+ "how": [
+  "Give each flake a depth z between 0 and 1, drawn as u^1.6 so most are far away.",
+  "Make near flakes larger (radius 2.2 + 14 z² px), faster (0.35 + 1.1 z times the base speed) and more transparent and soft, with opacity from 0.45 to 0.95.",
+  "Move each downward at (14 + 90 × fall) × (0.35 + 1.1 z) px per second, with a sideways drift from the wind and a gentle sway.",
+  "Steer the wind with the cursor and wrap flakes at the edges.",
+  "Tint the picture with a cold light and add a drift of snow along the ground."
+ ],
+ "history": "The Walt Disney studio built a multiplane camera and used it for The Old Mill in 1937, placing painted glass layers at different distances to make parallax in animation. Wilson Bentley photographed snowflakes under a microscope from 1885, and Ukichiro Nakaya classified snow crystals in the 1930s. The snow globe, a favourite souvenir, goes back to the nineteenth century.",
+ "uses": [
+  "Winter scenes in games, film and websites",
+  "Holiday cards and greetings",
+  "Teaching depth cues and parallax",
+  "Calming backgrounds"
+ ],
+ "terms": [
+  [
+   "Motion parallax",
+   "Near things appear to move faster than far things."
+  ],
+  [
+   "Atmospheric perspective",
+   "Distant things look paler and less sharp."
+  ],
+  [
+   "Multiplane camera",
+   "A camera that shoots layers at different distances to create depth."
+  ]
+ ],
+ "related": [
+  "fireflies",
+  "rain-on-glass",
+  "depth-parallax"
+ ],
+ "paragraphs": [
+  "The snow is a lesson in depth cues. Each flake has a depth z between 0 and 1, drawn as u^1.6 so that most flakes are far away. The near ones are bigger (radius 2.2 + 14 z² px), fall faster (0.35 + 1.1 z times the base fall speed), sway more, and are drawn with a soft, blurry sprite and a higher opacity (0.45 to 0.95), as the near objects are out of focus for a camera focused on the scene. The far ones are small, sharp, slow and faint. That is motion parallax together with atmospheric perspective, and it is why a dozen flakes make a room of space. Flakes wrap round at the edges.",
+  "Each flake moves with the speed v = (14 + 90 × fall) × (0.35 + 1.1 z) px per second downward and a sideways drift made of the wind times (0.3 + z) plus a sine sway of 14 × (0.4 + z) px. The wind is the wind slider plus the pointer’s offset from the middle (up to ±100 px per second), and it eases toward its target at 2 per second so a gust builds and fades. Under the snow the picture sits in a cold light: a blue wash (opacity 0.22 × the frost slider) and a luminosity blend with a cool grey (0.35 × frost) that cools and slightly mutes its colours. Snow banked on the ground is a white gradient rising from the bottom edge to up to a fifth of the height."
+ ],
+ "equations": [
+  {
+   "tex": "z=u^{1.6},\\qquad \\rho=(2.2+14\\,z^{2})\\,k,\\qquad \\alpha=\\operatorname{lerp}\\big(0.45,\\ \\alpha_1,\\ z\\big)",
+   "note": "Depth, flake radius and opacity: u is a random number in [0, 1], k the size slider and α₁ 0.8 for soft near flakes, 0.95 for sharp ones."
+  },
+  {
+   "tex": "\\dot y=(14+90\\,\\phi)\\,(0.35+1.1\\,z),\\qquad \\dot x=\\omega\\,(0.3+z)+14\\,(0.4+z)\\sin(\\varsigma\\,t+\\varphi)",
+   "note": "Motion of a flake: φ is the fall slider, ω the wind, ς and φ the flake’s own sway rate and phase."
+  },
+  {
+   "tex": "\\omega\\leftarrow\\omega+(\\omega^{*}-\\omega)\\,\\min(1,\\,2\\,\\Delta t),\\qquad \\omega^{*}=0.7\\,w+200\\,\\big(p_x-\\tfrac12\\big)",
+   "note": "The wind eases toward its target (w the wind slider, p the pointer position, in pixels per second at 720 px wide)."
+  }
+ ],
+ "dials": [
+  {
+   "key": "amount",
+   "label": "Snow",
+   "type": "range",
+   "default": 55,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "size",
+   "label": "Flake size",
+   "type": "range",
+   "default": 90,
+   "min": 30,
+   "max": 160,
+   "step": 1
+  },
+  {
+   "key": "fall",
+   "label": "Fall speed",
+   "type": "range",
+   "default": 40,
+   "min": 10,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "wind",
+   "label": "Wind",
+   "type": "range",
+   "default": 15,
+   "min": -100,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "frost",
+   "label": "Cold light on the picture",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "drift",
+   "label": "Snow on the ground",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New snowfall",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A blizzard needs heavy snow and strong wind.",
+   "set": {
+    "amount": 100,
+    "wind": 80,
+    "fall": 70
+   }
+  },
+  {
+   "text": "Few, large, slow flakes feel quiet and dreamy.",
+   "set": {
+    "amount": 20,
+    "size": 150,
+    "fall": 15
+   }
+  },
+  {
+   "text": "Strong frost and ground snow make a deep winter.",
+   "set": {
+    "frost": 90,
+    "drift": 90
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

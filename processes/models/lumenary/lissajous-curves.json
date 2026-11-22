@@ -1,0 +1,178 @@
+{
+ "id": "lumenary:lissajous-curves",
+ "name": "Lissajous Curves",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "parametric sine curves (how)",
+ "note": "Harmonograph and oscilloscope are named in the history, but neither device is modelled.",
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "The path of a point swinging sideways at one frequency and up and down at another. Ratios of whole numbers close into loops and knots.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/lissajous-curves.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Acoustics and physics",
+  "era": "1857",
+  "bestOn": "Dark backgrounds with bright centres"
+ },
+ "why": "If one point swings left and right while another swings up and down at a different rate, the pair trace a curve. Simple ratios of the two rates make loops and knots that close up. The phase decides how open the curve is, from a straight line to an ellipse and a tangled figure between.",
+ "how": [
+  "Compute x = A sin(a t + φ) and y = B sin(b t).",
+  "For whole numbers a and b, the curve closes; if they share a factor g it repeats after 2π/g.",
+  "In knot mode, draw one big curve as 2,600 short segments, with the chosen number of ribbons, each with the phase advanced by 0.22 radians.",
+  "Colour each segment from the picture at its midpoint and set its width from darkness.",
+  "In table mode, draw a grid in which the cell in column i and row j holds the curve with frequencies (i + 1, j + 1)."
+ ],
+ "history": "Jules Antoine Lissajous studied the figures in 1857 by bouncing a beam of light off mirrors attached to two tuning forks. The American navigator Nathaniel Bowditch had described them in 1815. Victorian harmonographs drew similar figures with pendulums. Oscilloscopes in X-Y mode show Lissajous figures when two signals are compared, and laser shows use them.",
+ "uses": [
+  "Comparing signal frequencies on an oscilloscope",
+  "Laser light shows",
+  "Decorative art and harmonograph prints",
+  "Teaching harmonic motion"
+ ],
+ "terms": [
+  [
+   "Frequency",
+   "The number of swings per unit time."
+  ],
+  [
+   "Phase",
+   "How far through its cycle one swing is compared with another."
+  ],
+  [
+   "Harmonograph",
+   "A pendulum machine that draws curves."
+  ]
+ ],
+ "related": [
+  "oscilloscope",
+  "spirograph",
+  "strange-attractors"
+ ],
+ "paragraphs": [
+  "A Lissajous curve is the path of a point that swings horizontally with frequency a and vertically with frequency b: x = A sin(a t + φ), y = B sin(b t). When a and b are whole numbers the curve closes and forms loops and knots; the ratio a : b gives the number of lobes along each side, and the phase φ opens or closes the figure from a line to an ellipse. If a and b share a factor g, the curve repeats after 2π/g.",
+  "Two layouts are offered. The knot is one large curve, drawn as 2,600 short segments, with the chosen number of ribbons: copies with the phase advanced by 0.22 radians each, nested like a twisted band. Each segment takes the colour of the picture at its midpoint, and its width follows the darkness, from half to twice the line width. The table is the classic Lissajous chart: a grid in which the cell in column i and row j holds the curve of frequencies (i + 1, j + 1). The cell’s curve is sized by the tone beneath it, R = 0.42 c (0.55 + 0.45 √(0.2 + h)), where c is the cell width and h the heaviness (darkness), and coloured by the picture."
+ ],
+ "equations": [
+  {
+   "tex": "x(t)=A\\sin(a\\,t+\\varphi),\\qquad y(t)=B\\sin(b\\,t),\\qquad t\\in[0,2\\pi]",
+   "note": "The curve; A and B are 47% of the width and height in the knot layout."
+  },
+  {
+   "tex": "T=\\frac{2\\pi}{\\gcd(a,\\,b)}",
+   "note": "The period of the curve for whole-number frequencies."
+  },
+  {
+   "tex": "(a,\\ b)_{ij}=(i+1,\\ j+1),\\qquad R_{ij}=0.42\\,c\\,\\big(0.55+0.45\\sqrt{0.2+h_{ij}}\\big)",
+   "note": "The table: frequencies for the cell at column i, row j, and its size from the picture’s heaviness h."
+  }
+ ],
+ "dials": [
+  {
+   "key": "mode",
+   "label": "Layout",
+   "type": "select",
+   "default": "knot",
+   "options": [
+    "knot",
+    "table"
+   ]
+  },
+  {
+   "key": "a",
+   "label": "Horizontal frequency",
+   "type": "range",
+   "default": 7,
+   "min": 1,
+   "max": 14,
+   "step": 1
+  },
+  {
+   "key": "b",
+   "label": "Vertical frequency",
+   "type": "range",
+   "default": 9,
+   "min": 1,
+   "max": 14,
+   "step": 1
+  },
+  {
+   "key": "phase",
+   "label": "Phase",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 180,
+   "step": 1
+  },
+  {
+   "key": "ribbons",
+   "label": "Ribbons",
+   "type": "range",
+   "default": 3,
+   "min": 1,
+   "max": 6,
+   "step": 1
+  },
+  {
+   "key": "cells",
+   "label": "Columns in the table",
+   "type": "range",
+   "default": 5,
+   "min": 3,
+   "max": 9,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Line width",
+   "type": "range",
+   "default": 1.6,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.1
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "night",
+   "options": [
+    "night",
+    "cream"
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "text": "Equal frequencies with a quarter-turn phase give a circle.",
+   "set": {
+    "mode": "knot",
+    "a": 5,
+    "b": 5,
+    "phase": 90
+   }
+  },
+  {
+   "text": "A 3 to 2 ratio draws a trefoil-like knot.",
+   "set": {
+    "a": 3,
+    "b": 2,
+    "ribbons": 5
+   }
+  },
+  {
+   "text": "The table shows how every ratio looks at once.",
+   "set": {
+    "mode": "table",
+    "cells": 7
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

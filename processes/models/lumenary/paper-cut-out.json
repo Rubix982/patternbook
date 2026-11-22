@@ -1,0 +1,149 @@
+{
+ "id": "lumenary:paper-cut-out",
+ "name": "Paper Cut-out",
+ "physical": "yes",
+ "process": "paper-cutting",
+ "process_name": "Paper cutting",
+ "class": "cutting",
+ "basis": "why: stacked sheets cut with scissors, each throwing a soft shadow; how: brightness bands as layers, offset blurred shadows, cut-edge light",
+ "note": null,
+ "lumenary": {
+  "section": "F. Print and craft",
+  "kind": "still",
+  "blurb": "Layers of coloured paper cut with scissors and stacked, each one throwing a soft shadow on the sheet below.",
+  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "code": "vendor/lumenary/src/engine/styles/paper-cut-out.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Folk paper cutting and modern collage",
+  "era": "Centuries old, cut-out painting in the 20th century",
+  "bestOn": "Landscapes and portraits with soft tonal masses"
+ },
+ "why": "A paper cut-out landscape is a stack of layers, each a sheet cut with scissors, each throwing a soft shadow on the one below. If you cut the picture’s brightness into bands like a contour map and stack coloured sheets, the depth is created by shadow alone. Swapping the colours changes the whole mood without changing the shapes.",
+ "how": [
+  "Blur the picture’s brightness to round off detail.",
+  "Make layer i exist wherever brightness is above the threshold i divided by n, with a very short smoothstep at the edge for a sharp cut.",
+  "Colour layers from dark at the bottom to light at the top, from a palette or from the picture’s own colours.",
+  "For each layer, shift its mask a few pixels away from the light, blur it twice, and darken the sheets beneath wherever that shadow falls outside the layer.",
+  "Composite from the bottom up, add a hairline of light at the cut edges and multiply in paper fibre."
+ ],
+ "history": "Paper cutting is a folk art in China, Poland, Mexico and many other places. In the 1940s and 1950s Henri Matisse, limited by illness, cut and arranged painted paper in large works such as The Snail, and Lotte Reiniger made silhouette animated films from cut paper in the 1920s. Layered paper shadow boxes are now a popular craft.",
+ "uses": [
+  "Layered landscape and poster art",
+  "Children’s book and craft illustration",
+  "Paper craft and shadow box designs",
+  "Greeting cards"
+ ],
+ "terms": [
+  [
+   "Layer",
+   "One sheet in a stack, each cut to a different shape."
+  ],
+  [
+   "Contour",
+   "A line or band of equal value, as on a map."
+  ],
+  [
+   "Silhouette",
+   "A solid dark shape seen against a lighter background."
+  ]
+ ],
+ "related": [
+  "papel-picado",
+  "chinese-paper-cut",
+  "origami-folds"
+ ],
+ "paragraphs": [
+  "The picture’s brightness, blurred to round off detail, is cut into bands like a contour map. Layer i is a sheet of coloured paper that exists wherever the brightness is above the threshold i/n, with a very short smoothstep at the edge so it is a sharp cut. The bottom layer is the whole sheet. Papers go from dark (bottom) to light (top), taken either from a built-in palette or from the picture’s own k-means colours sorted by brightness.",
+  "What makes it look cut and stacked is the shadow. For each layer the mask is shifted a few pixels away from the light and blurred twice; where that shifted, blurred shape falls outside the layer itself, the sheets beneath are darkened. The layers are composited from the bottom up: darken by the shadow of the layer, then replace by the layer’s colour where its mask is on. A hairline of extra light is added right at the cut edges, and paper fibre noise is multiplied in."
+ ],
+ "equations": [
+  {
+   "tex": "m_i=\\operatorname{smoothstep}\\big(\\tfrac in-0.012,\\ \\tfrac in+0.012,\\ L_b\\big),\\qquad i=1,\\dots,n-1",
+   "note": "The mask of layer i, with n layers in all."
+  },
+  {
+   "tex": "s_i=\\operatorname{blur}^{2}\\big(m_i(\\mathbf x-\\mathbf d)\\big),\\qquad \\mathbf d=5\\,\\sigma\\,(-\\cos\\alpha,\\ \\sin\\alpha)",
+   "note": "Shadow of layer i: the mask displaced away from the light (angle α) and blurred twice."
+  },
+  {
+   "tex": "C\\leftarrow\\big(C\\,(1-0.55\\,\\delta\\,s_i\\,(1-m_i))\\big)(1-m_i)+c_i\\,m_i",
+   "note": "Compositing one layer; δ is the shadow slider and c_i the colour of paper i."
+  }
+ ],
+ "dials": [
+  {
+   "key": "palette",
+   "label": "Papers",
+   "type": "select",
+   "default": "sunset",
+   "options": [
+    "sunset",
+    "ocean",
+    "forest",
+    "mono",
+    "picture"
+   ]
+  },
+  {
+   "key": "layers",
+   "label": "Layers",
+   "type": "range",
+   "default": 5,
+   "min": 3,
+   "max": 7,
+   "step": 1
+  },
+  {
+   "key": "smooth",
+   "label": "Smoothness of cuts",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "shadow",
+   "label": "Shadow",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "angle",
+   "label": "Light from",
+   "type": "range",
+   "default": 135,
+   "min": 0,
+   "max": 360,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Seven layers in forest greens feel like a mountain range.",
+   "set": {
+    "layers": 7,
+    "palette": "forest"
+   }
+  },
+  {
+   "text": "A deeper shadow gives the layers more lift.",
+   "set": {
+    "shadow": 100,
+    "smooth": 30
+   }
+  },
+  {
+   "text": "Use the picture’s own colours for the paper.",
+   "set": {
+    "palette": "picture"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

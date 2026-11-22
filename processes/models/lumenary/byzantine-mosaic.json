@@ -1,0 +1,144 @@
+{
+ "id": "lumenary:byzantine-mosaic",
+ "name": "Byzantine Mosaic",
+ "physical": "yes",
+ "process": "mosaic-setting",
+ "process_name": "Mosaic setting",
+ "class": "inlay",
+ "basis": "why: cubes pushed into wet plaster in rows that follow the shapes (andamento), gold tesserae; how: rows grown along contours, smalti palette, tilted cubes",
+ "note": null,
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "Glass and gold tesserae set into wet plaster as in the churches of Ravenna and Constantinople. The rows of tiny cubes follow the contours of the picture, and the brightest parts are set in gold leaf glass.",
+  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "code": "vendor/lumenary/src/engine/styles/byzantine-mosaic.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Ravenna and Constantinople",
+  "era": "Fifth to fifteenth century",
+  "bestOn": "Portraits and pictures with strong light and shadow"
+ },
+ "why": "Mosaic setters pushed each small cube into wet plaster at a slight angle, so the surface glitters as the viewer moves, and they laid the cubes in rows that follow the shapes, a flow called andamento. Gold tesserae, made by sealing a leaf of gold between layers of glass, catch the light of candles. The program lays its rows along the contours of the picture and sets the brightest parts in gold.",
+ "how": [
+  "Blur the picture to a smooth brightness F and find at each point the direction that runs along its contours, perpendicular to the gradient, easing to a gentle slant where F is nearly flat.",
+  "Try seeds in random order, first on a grid of 1.05 tessera widths and then on a finer one.",
+  "From a free seed, grow a row of tesserae both ways, along the flow, as far as there is room.",
+  "Colour each tessera from the picture matched to a palette of smalti (opaque glass), or use the picture’s colour, and set the brightest ones in gold.",
+  "Add dark outlines and slight tilts, so each cube catches the light differently."
+ ],
+ "history": "The mosaics of Ravenna, such as those in San Vitale (consecrated in 547) with the portraits of the emperor Justinian and the empress Theodora, and the mosaics of Constantinople, are among the best known in the world. Gold tesserae became common in Christian church decoration from around the fifth century. Mosaics later spread across the Byzantine, Islamic and Western worlds.",
+ "uses": [
+  "Church, mosque and public building decoration",
+  "Floors, murals and pool tiles",
+  "Portrait and pixel-style art",
+  "Teaching craft and andamento"
+ ],
+ "terms": [
+  [
+   "Tessera",
+   "A small cube of glass or stone used in a mosaic."
+  ],
+  [
+   "Andamento",
+   "The flow of the rows in a mosaic."
+  ],
+  [
+   "Smalti",
+   "Opaque coloured glass used for mosaic cubes."
+  ]
+ ],
+ "related": [
+  "stained-glass",
+  "voronoi-mosaic",
+  "gold-foil"
+ ],
+ "paragraphs": [
+  "The mosaics of Ravenna and Constantinople are made of tesserae, small cubes of coloured glass and stone, and of gold tesserae in which a leaf of gold is sealed between two layers of glass. The setters pushed each cube into wet plaster at a slight angle, so the surface glitters as the viewer moves, and they laid the cubes in rows that follow the shapes, a flow called andamento. The program works the same way. It blurs the picture to a smooth brightness F and finds at each point the direction that runs along its contours, perpendicular to the gradient. Where F is nearly flat the direction fades to a gentle slant, so rows go on across empty areas.",
+  "Seeds are tried in random order, first on a grid of spacing 1.05 tessera widths and then on a finer one. From a free seed a row grows both ways in steps of 1.03 tessera widths for as long as the next place is free, meaning no other tessera lies within 0.98 widths, and for at most 90 cubes. Each cube is a square of about 0.88 widths, turned to the direction of the row with a small random tilt. Cubes in the brightest places are gold, and where the picture has a sharp edge they are black. All others take the nearest of eight glass colours, or the picture’s own colour if you ask for it. A light edge and a dark edge on every cube make each look like a facet of glass."
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf d=\\frac{w\\,\\hat{\\mathbf t}+(1-w)\\,\\hat{\\mathbf b}}{\\big\\lVert w\\,\\hat{\\mathbf t}+(1-w)\\,\\hat{\\mathbf b}\\big\\rVert},\\qquad w=\\operatorname{smoothstep}\\big(0.003,\\,0.03,\\,\\lVert\\nabla F\\rVert\\big)",
+   "note": "t̂ is the unit contour direction, b̂ a slight slant (0.3 rad) and w how strong the gradient is."
+  },
+  {
+   "tex": "\\mathbf x_{n+1}=\\mathbf x_n+1.03\\,s\\,\\mathbf d(\\mathbf x_n),\\qquad \\text{place only if } \\min_j\\lVert\\mathbf x_{n+1}-\\mathbf x_j\\rVert\\ge 0.98\\,s",
+   "note": "Growing a row of tesserae of size s."
+  },
+  {
+   "tex": "\\text{gold if } L>1-0.5\\,g-0.1+0.12\\,(\\xi-\\tfrac12)",
+   "note": "Gold in the light: g is the gold slider and ξ a random number per cube, so the edge of the gold is ragged."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Tessera size",
+   "type": "range",
+   "default": 8,
+   "min": 4,
+   "max": 18,
+   "step": 1
+  },
+  {
+   "key": "gold",
+   "label": "Gold in the light",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "outline",
+   "label": "Dark outlines",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "palette",
+   "label": "Glass",
+   "type": "select",
+   "default": "smalti",
+   "options": [
+    "smalti",
+    "picture"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "New laying",
+   "type": "shuffle",
+   "default": 3
+  }
+ ],
+ "presets": [
+  {
+   "text": "Lots of gold makes the light parts shine like a church apse.",
+   "set": {
+    "gold": 95,
+    "outline": 70
+   }
+  },
+  {
+   "text": "Small tesserae give a fine, painterly portrait.",
+   "set": {
+    "size": 4,
+    "outline": 30
+   }
+  },
+  {
+   "text": "Large tesserae show the row structure.",
+   "set": {
+    "size": 16,
+    "gold": 30
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

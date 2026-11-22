@@ -1,0 +1,149 @@
+{
+ "id": "lumenary:anaglyph-3d",
+ "name": "Anaglyph 3D",
+ "physical": "yes",
+ "process": "anaglyph-stereoscopy",
+ "process_name": "Anaglyph stereoscopy",
+ "class": "optical-device",
+ "basis": "why: two eye views coloured so filter glasses separate them; how: depth-shifted left and right views combined by the glasses' colours",
+ "note": "Depth is guessed from brightness or position.",
+ "lumenary": {
+  "section": "H. Photographic and optical",
+  "kind": "still",
+  "blurb": "Two eyes, two colours: a guessed depth map pushes each eye’s view sideways, and a pair of coloured glasses puts them back together.",
+  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "code": "vendor/lumenary/src/engine/styles/anaglyph-3d.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "19th century stereoscopy",
+  "era": "1850s onward, popular in the 1950s and 2010s",
+  "bestOn": "Landscapes and scenes with a clear foreground and background"
+ },
+ "why": "Your two eyes see a scene from slightly different places, and near things shift more between the two views than far things do. A single photograph carries no depth, so the program guesses one, shifts each eye’s view sideways by it, and then colours the two views so that a pair of coloured glasses separates them again for each eye.",
+ "how": [
+  "Guess a depth map from a heavily blurred lightness: bright is near, dark is near, a ground plane in which lower means nearer, or a mix.",
+  "Shift each pixel sideways by its depth minus the focus depth, up to 46 pixels.",
+  "Look up the left view at x minus the shift, and the right view at x plus the shift, with bilinear sampling.",
+  "Pixels at the focus plane do not shift and sit at the screen, while nearer and farther ones separate in opposite directions.",
+  "Combine the two views by the glasses: red from the left and green and blue from the right for red and cyan, and so on, optionally keeping some original colour."
+ ],
+ "history": "Charles Wheatstone described the stereoscope in 1838, and Wilhelm Rollmann made the first anaglyphs in 1853 by printing two views in complementary colours. Louis Ducos du Hauron patented the process for photographs in 1891. Red and cyan 3D appeared in books, comics and cinema in the twentieth century, and again in the 2010s on early home 3D.",
+ "uses": [
+  "3D poster and comic effects",
+  "Retro science and sci-fi graphics",
+  "Teaching how depth perception works",
+  "Playful photos for glasses owners"
+ ],
+ "terms": [
+  [
+   "Parallax",
+   "The apparent shift of near objects against far ones when the viewpoint changes."
+  ],
+  [
+   "Stereoscopy",
+   "Giving an illusion of depth with two slightly different images."
+  ],
+  [
+   "Anaglyph",
+   "A picture made of two views in different colours, sorted by coloured glasses."
+  ]
+ ],
+ "related": [
+  "depth-parallax",
+  "chromatic-aberration",
+  "lenticular"
+ ],
+ "paragraphs": [
+  "The two eyes see a scene from slightly different places, and nearer things shift more between the two views than farther ones (parallax). A single photograph carries no depth, so the program guesses a depth map d from a heavily blurred lightness (two box blurs of about 6 px at 800 px). You choose the guess: bright is near, dark is near, a ground plane in which lower in the frame means nearer, or a mix of lightness (55%) and ground (45%). Each pixel is then moved sideways by s = (d − d_focus) × up to 46 px. The left view looks up the picture at x − s and the right at x + s, with bilinear sampling. Pixels at the focus plane do not shift at all and sit at the screen; nearer and farther ones separate in opposite directions.",
+  "Coloured glasses then sort the two views to the two eyes. Red and cyan: the red filter passes only the red channel, so the output takes red from the left view and green and blue from the right. Magenta and green take red and blue from the left and green from the right. Amber and blue take red from the left, blue from the right and mostly the left’s green. The keep-colour slider mixes each view with its own luminance first: at 0 each view is grey and only the fringes carry colour, at 1 the full colour of the picture is kept (and the eyes argue a little)."
+ ],
+ "equations": [
+  {
+   "tex": "s=(d-d_f)\\cdot 46\\,\\kappa\\,\\frac{W}{800},\\qquad d=\\begin{cases}L_b & \\text{bright is near}\\\\ 1-L_b & \\text{dark is near}\\\\ y/H & \\text{ground}\\\\ 0.55\\,L_b+0.45\\,y/H & \\text{mixed}\\end{cases}",
+   "note": "Disparity: d is the guessed depth from the blurred luminance L_b, d_f the focus plane and κ the depth slider."
+  },
+  {
+   "tex": "\\mathbf a=C(x-s,\\ y),\\qquad \\mathbf b=C(x+s,\\ y),\\qquad \\mathbf a'=l_a+k\\,(\\mathbf a-l_a)",
+   "note": "The two views (left a, right b) and the keep-colour mixing with each view’s own luminance l."
+  },
+  {
+   "tex": "(R,G,B)_{\\text{red-cyan}}=\\big(a'_R,\\ \\ b'_G,\\ \\ b'_B\\big)",
+   "note": "What the glasses combine; for the other pairs the channels are assigned as described above."
+  }
+ ],
+ "dials": [
+  {
+   "key": "depth",
+   "label": "Depth",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "src",
+   "label": "How depth is guessed",
+   "type": "select",
+   "default": "mix",
+   "options": [
+    "bright",
+    "dark",
+    "ground",
+    "mix"
+   ]
+  },
+  {
+   "key": "focus",
+   "label": "Focus plane",
+   "type": "range",
+   "default": 45,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glasses",
+   "label": "Glasses",
+   "type": "select",
+   "default": "rc",
+   "options": [
+    "rc",
+    "mg",
+    "ab"
+   ]
+  },
+  {
+   "key": "keep",
+   "label": "Keep original colour",
+   "type": "range",
+   "default": 65,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Deep, strong 3D with mixed depth looks dramatic through glasses.",
+   "set": {
+    "depth": 90,
+    "src": "mix"
+   }
+  },
+  {
+   "text": "Magenta and green glasses use another pair of colours.",
+   "set": {
+    "glasses": "mg"
+   }
+  },
+  {
+   "text": "Keep more original colour to hide the red and blue fringes.",
+   "set": {
+    "keep": 90
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

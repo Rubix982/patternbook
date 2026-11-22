@@ -1,0 +1,166 @@
+{
+ "id": "lumenary:l-system-trees",
+ "name": "L-system Trees",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "recursive branching grammar (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "A trunk splits, each branch splits again, and the same rule runs until the twigs end in leaves. The leaves take their colour from the picture.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/l-system-trees.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Theoretical biology",
+  "era": "1968",
+  "bestOn": "Landscapes and pictures with bright spots for leaves"
+ },
+ "why": "Plants grow by repeating one rule at every tip: a shoot grows, then splits. An L-system captures that as a grammar, a rule that rewrites a part of the plant into more parts. Run it a few times and a trunk becomes a crown of thousands of twigs, all different, all following the same rule, which is how real trees look.",
+ "how": [
+  "Draw a branch with a length and width, then start two children from its end (three with a 14 percent chance after the first generations).",
+  "Turn each child by plus or minus the spread angle times a random factor between 0.6 and 1.4, plus a share of the wind and a little jitter.",
+  "Make each child as long as the decay slider times a random 0.82 to 1.18, and 0.72 times as wide.",
+  "Stop when the depth runs out or the branch is shorter than 3 px, and place a leaf there; a few leaves appear on the way.",
+  "Colour each leaf from the picture and add a faint wash of the original behind."
+ ],
+ "history": "The Hungarian-born biologist Aristid Lindenmayer introduced L-systems in 1968 to describe how filaments of algae grow. In 1990 Przemysław Prusinkiewicz and Lindenmayer published The Algorithmic Beauty of Plants, which showed how the method draws realistic plants. Procedural trees and plants in films and games are grown with descendants of this idea.",
+ "uses": [
+  "Trees and plants in games and film",
+  "Botanical models of growth",
+  "Fractal art and plotter drawings",
+  "Teaching recursion in programming"
+ ],
+ "terms": [
+  [
+   "L-system",
+   "A set of rewriting rules that grows a string, and from it a drawing."
+  ],
+  [
+   "Recursion",
+   "A rule that uses itself to do its job."
+  ],
+  [
+   "Generation",
+   "One round of applying the rule."
+  ]
+ ],
+ "related": [
+  "space-colonization",
+  "differential-growth",
+  "phyllotaxis"
+ ],
+ "paragraphs": [
+  "Aristid Lindenmayer introduced L-systems in 1968 as a grammar for the growth of plants: a string is rewritten again and again, and a drawing is made from the result. A branching tree is the rule “a branch becomes a branch with two branches on its end”, and the program draws it by recursion. A branch of length ℓ and width w is drawn, and then two children start from its end (and, with a 14% chance beyond the first two generations, three). The children turn by ± the spread angle times a random factor between 0.6 and 1.4, plus a share (0.35) of the wind angle and a little jitter, are the decay slider times a random 0.82 to 1.18 as long, and 0.72 times as wide. The number of generations is the depth of the recursion.",
+  "A branch ends when the depth runs out or when its length falls below 3 px; there a leaf is placed, and a few leaves appear on the way (5%) near the tips. If the lengths shrink by a factor δ each generation, a tip cannot rise higher than the geometric sum ℓ₀/(1 − δ) above the root, which is why a tree stays inside the frame. All leaves are shuffled and drawn as translucent discs (82% opacity) with the colour of the picture at their position, so the tree’s crown becomes a loose, pointillist portrait. The first three generations (the trunk and main boughs) are drawn a little darker, and the faint picture behind is an option."
+ ],
+ "equations": [
+  {
+   "tex": "\\ell_{k+1}=\\delta\\,u\\,\\ell_k\\ (u\\in[0.82,\\,1.18]),\\qquad w_{k+1}=0.72\\,w_k,\\qquad a_{k+1}=a_k\\pm s\\,(0.6+0.8\\,u')+0.35\\,\\omega",
+   "note": "Length, width and direction of the children; δ the decay, s the spread, ω the wind."
+  },
+  {
+   "tex": "N\\approx\\sum_{k=0}^{g}2^{k}=2^{g+1}-1,\\qquad H\\le\\frac{\\ell_0}{1-\\delta}",
+   "note": "The number of branches for g generations, and the bound on a tree’s height."
+  }
+ ],
+ "dials": [
+  {
+   "key": "trees",
+   "label": "Trees",
+   "type": "range",
+   "default": 3,
+   "min": 1,
+   "max": 6,
+   "step": 1
+  },
+  {
+   "key": "depth",
+   "label": "Generations",
+   "type": "range",
+   "default": 10,
+   "min": 6,
+   "max": 13,
+   "step": 1
+  },
+  {
+   "key": "spread",
+   "label": "Spread of the branches",
+   "type": "range",
+   "default": 28,
+   "min": 10,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "decay",
+   "label": "Branches shorten by",
+   "type": "range",
+   "default": 76,
+   "min": 60,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "wind",
+   "label": "Wind",
+   "type": "range",
+   "default": 6,
+   "min": -30,
+   "max": 30,
+   "step": 1
+  },
+  {
+   "key": "leaf",
+   "label": "Leaf size",
+   "type": "range",
+   "default": 4.5,
+   "min": 1,
+   "max": 12,
+   "step": 0.5
+  },
+  {
+   "key": "wash",
+   "label": "Faint picture behind",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Grow again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "A wide spread with short decay gives a rounded oak.",
+   "set": {
+    "spread": 45,
+    "decay": 70,
+    "depth": 11
+   }
+  },
+  {
+   "text": "A strong wind leans the whole crown.",
+   "set": {
+    "wind": 28
+   }
+  },
+  {
+   "text": "A forest of many small trees fills the picture.",
+   "set": {
+    "trees": 6,
+    "depth": 8
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lumenary:minimalism",
+ "name": "Minimalism",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "a design movement: a few flat tones and an empty margin (how)",
+ "note": null,
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "A few flat tones, soft shapes and a lot of empty paper.",
+  "theory_page": "treatments/lumenary/theory/01-design.md",
+  "code": "vendor/lumenary/src/engine/styles/minimalism.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Art and design in Japan, Germany and the United States",
+  "era": "1950s to 1970s, and still current",
+  "bestOn": "Pictures with one clear subject and a calm background"
+ },
+ "why": "Minimalism asks what can be left out. Reducing a picture to two to five flat tones removes texture and detail and leaves only the structure, while the empty margin lets the shapes breathe. The lightest tone is the colour of the paper, so the brightest parts of the picture simply dissolve into the page.",
+ "how": [
+  "Blur the picture so that fine texture cannot leave stray specks.",
+  "Stretch brightness to use the full range, from the darkest to the lightest value that is actually present.",
+  "Cut the stretched brightness into a few equal bands.",
+  "Give each band one flat colour, found by walking from the ink colour to the paper colour.",
+  "Optionally swap one mid tone for a single accent colour, and leave an empty margin all round."
+ ],
+ "history": "Minimal art appeared in the United States in the 1960s with artists such as Donald Judd, Agnes Martin and Frank Stella. In design the roots run deeper: the architect Mies van der Rohe is famous for the phrase “less is more”, the industrial designer Dieter Rams for “less, but better”, and Japanese aesthetics for ma, the idea that empty space is itself part of the work.",
+ "uses": [
+  "Wall prints and gallery style posters",
+  "Portfolio and presentation images",
+  "Book and album covers",
+  "Calm backgrounds for websites"
+ ],
+ "terms": [
+  [
+   "Negative space",
+   "The empty area around and between shapes. In minimalism it is as important as the shapes."
+  ],
+  [
+   "Contrast stretch",
+   "Rescaling brightness so that the darkest pixel becomes black and the lightest becomes white."
+  ],
+  [
+   "Posterise",
+   "To reduce a picture to a few flat tones."
+  ]
+ ],
+ "related": [
+  "swiss-design",
+  "vector-art",
+  "mondrian"
+ ],
+ "paragraphs": [
+  "Minimalism here is a posterise with a lot of room around it. The picture is blurred first, so that fine texture cannot create stray specks, then its brightness is stretched to use the whole range from the darkest to the lightest value actually present. Without that stretch a dull, low-contrast photograph would collapse into one or two tones.",
+  "The stretched brightness is cut into n equal bands, and each band is assigned one flat colour, found by walking in a straight line from the ink colour to the paper colour. The lightest band is paper, so it simply disappears into the margin. The accent option swaps one mid-tone for a single colour, which is the only colour on the page."
+ ],
+ "equations": [
+  {
+   "tex": "v=\\operatorname{clamp}\\!\\left(\\frac{L_b-L_{\\min}}{\\max(0.05,\\;L_{\\max}-L_{\\min})}\\right)",
+   "note": "Blurred brightness stretched to 0 to 1."
+  },
+  {
+   "tex": "C_i=\\mathrm{ink}+\\frac{i}{n-1}\\,(\\mathrm{paper}-\\mathrm{ink}),\\qquad i=\\min\\big(n-1,\\ \\lfloor v\\,n\\rfloor\\big)",
+   "note": "The colour of band i, on the line from ink to paper."
+  }
+ ],
+ "dials": [
+  {
+   "key": "scheme",
+   "label": "Paper and ink",
+   "type": "select",
+   "default": "stone",
+   "options": [
+    "stone",
+    "dusk",
+    "ink",
+    "clay"
+   ]
+  },
+  {
+   "key": "tones",
+   "label": "Tones",
+   "type": "range",
+   "default": 3,
+   "min": 2,
+   "max": 5,
+   "step": 1
+  },
+  {
+   "key": "soften",
+   "label": "Soften shapes",
+   "type": "range",
+   "default": 24,
+   "min": 2,
+   "max": 60,
+   "step": 1
+  },
+  {
+   "key": "margin",
+   "label": "Empty margin",
+   "type": "range",
+   "default": 12,
+   "min": 0,
+   "max": 30,
+   "step": 1
+  },
+  {
+   "key": "accent",
+   "label": "One accent tone",
+   "type": "toggle",
+   "default": false
+  },
+  {
+   "key": "accentColor",
+   "label": "Accent",
+   "type": "color",
+   "default": "#c8452f"
+  }
+ ],
+ "presets": [
+  {
+   "text": "Use only two tones for the starkest possible version.",
+   "set": {
+    "tones": 2,
+    "scheme": "ink"
+   }
+  },
+  {
+   "text": "Add one accent colour and watch it become the focus.",
+   "set": {
+    "accent": true
+   }
+  },
+  {
+   "text": "Widen the margin and soften the shapes for a quiet, paper-print look.",
+   "set": {
+    "margin": 30,
+    "soften": 60
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

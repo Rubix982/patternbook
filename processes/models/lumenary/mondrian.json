@@ -1,0 +1,133 @@
+{
+ "id": "lumenary:mondrian",
+ "name": "Mondrian",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "style",
+ "basis": "De Stijl composition: recursive rectangle cuts and primary fills (how); no paint modelled",
+ "note": null,
+ "lumenary": {
+  "section": "A. Design movements and styles",
+  "kind": "still",
+  "blurb": "De Stijl: black grid lines that follow your edges, with primary colour blocks in the busiest cells.",
+  "theory_page": "treatments/lumenary/theory/01-design.md",
+  "code": "vendor/lumenary/src/engine/styles/mondrian.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The Netherlands",
+  "era": "1917 to 1944",
+  "bestOn": "Pictures with strong straight edges, such as buildings and interiors"
+ },
+ "why": "Piet Mondrian reduced painting to black lines and a handful of primary colours, arranged so that nothing dominates and everything balances. This treatment finds such an arrangement inside your own picture by cutting it where its edges already are. The result is a grid that still follows the scene.",
+ "how": [
+  "Start with the whole page as one rectangle.",
+  "Pick the rectangle with the most going on, measured as its brightness variance times the square root of its area, with a little randomness.",
+  "Cut it across its longer side at the place where the average brightness on the two sides differs most.",
+  "Repeat until the requested number of cells is reached.",
+  "Rank the cells by brightness: some of the darkest turn black, and red, yellow and blue go to a share of the others."
+ ],
+ "history": "Mondrian co-founded the De Stijl movement in the Netherlands, whose journal began in 1917 with Theo van Doesburg. He called his approach neoplasticism and developed his grid paintings through the 1920s and 30s. The summed-area table that makes the cuts fast is a computer graphics trick introduced by Frank Crow in 1984.",
+ "uses": [
+  "Poster and book cover art",
+  "Fashion prints, famously a 1965 Yves Saint Laurent dress",
+  "Layout inspiration for tiles and interfaces",
+  "Backgrounds for presentations"
+ ],
+ "terms": [
+  [
+   "Summed-area table",
+   "A table in which each entry holds the sum of everything above and to the left, so any rectangle’s total takes four lookups."
+  ],
+  [
+   "Variance",
+   "A measure of how much values differ from their average."
+  ],
+  [
+   "Neoplasticism",
+   "Mondrian’s name for his pure style of line and primary colour."
+  ]
+ ],
+ "related": [
+  "bauhaus",
+  "swiss-design",
+  "minimalism"
+ ],
+ "paragraphs": [
+  "Mondrian’s grids are made here by repeatedly cutting a rectangle. Start with the whole page; at each step choose the rectangle that has the most going on (its variance of brightness times the square root of its area, with a little randomness) and cut it, in the direction of its longer side, at the place where the average brightness on the two sides differs most. The cuts therefore land on the edges of the picture.",
+  "All the statistics are cheap because of a summed-area table: a table in which each entry is the sum of everything above and to the left, so the sum of any rectangle is four lookups. The cells are then ranked by their average brightness: some of the darkest become black, and red, yellow and blue go to a share of the others. The grid lines are a fixed black width and never drawn on the outer border."
+ ],
+ "equations": [
+  {
+   "tex": "S(x,y)=\\sum_{i<x,\\,j<y}L_{ij},\\qquad \\Sigma(R)=S(x_1,y_1)-S(x_0,y_1)-S(x_1,y_0)+S(x_0,y_0)",
+   "note": "Summed-area table S and the sum of any rectangle R."
+  },
+  {
+   "tex": "\\operatorname{Var}(R)=\\frac{\\Sigma_{L^2}(R)}{n}-\\left(\\frac{\\Sigma_L(R)}{n}\\right)^{2}",
+   "note": "Variance from two tables, one of L and one of L²."
+  },
+  {
+   "tex": "\\text{cut}=\\operatorname*{arg\\,max}_{c}\\ \\lvert\\mu_A-\\mu_B\\rvert\\,\\sqrt{\\min(n_A,n_B)}",
+   "note": "Choose the cut c giving the biggest difference of mean brightness between the two halves A and B."
+  }
+ ],
+ "dials": [
+  {
+   "key": "cells",
+   "label": "Divisions",
+   "type": "range",
+   "default": 12,
+   "min": 4,
+   "max": 24,
+   "step": 1
+  },
+  {
+   "key": "color",
+   "label": "Colour blocks",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Line weight",
+   "type": "range",
+   "default": 6,
+   "min": 1,
+   "max": 14,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "Reshuffle",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Many cells with thin lines make a fine, almost architectural plan.",
+   "set": {
+    "cells": 24,
+    "line": 3
+   }
+  },
+  {
+   "text": "Few cells and thick lines look just like the classic paintings.",
+   "set": {
+    "cells": 6,
+    "line": 12
+   }
+  },
+  {
+   "text": "Add more colour blocks for a livelier composition.",
+   "set": {
+    "color": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

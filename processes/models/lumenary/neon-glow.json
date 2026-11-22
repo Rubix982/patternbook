@@ -1,0 +1,154 @@
+{
+ "id": "lumenary:neon-glow",
+ "name": "Neon glow",
+ "physical": "yes",
+ "process": "neon-sign-making",
+ "process_name": "Neon sign making",
+ "class": "glass",
+ "basis": "why: a neon sign is a gas tube glowing along its length; how: edges drawn as tubes with additive halo and flicker",
+ "note": "Models the glow, not the tube bending; edge lines are not constrained to continuous tubes.",
+ "lumenary": {
+  "section": "D. Light, colour and glass",
+  "kind": "live",
+  "blurb": "Every edge becomes a glowing tube on a dark wall.",
+  "theory_page": "treatments/lumenary/theory/04-light.md",
+  "code": "vendor/lumenary/src/engine/styles/neon-glow.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Neon sign making",
+  "era": "1910s onward",
+  "bestOn": "Pictures with clear outlines, such as portraits and architecture"
+ },
+ "why": "A neon sign is a thin tube of gas that glows along its whole length, so what you see is a line with a soft halo. This treatment keeps only the edges of the picture and draws each as a tube. The glow comes from adding shrunk, smoothed copies of the line layer back at full size, which behaves like a wide halo around a hard core.",
+ "how": [
+  "Blur the picture and find its edges with the Sobel pipeline.",
+  "Keep pixels whose edge strength is above a threshold set by the detail slider and colour them with a diagonal gradient between your two neons.",
+  "Shrink the line layer four times, each by half, and draw every smaller copy back at full size with additive blending.",
+  "Add a faint copy of the original underneath if you want it.",
+  "Flicker the whole sign with two sine waves of different frequency and an occasional dip to 45 percent."
+ ],
+ "history": "Georges Claude showed neon lighting at the Paris Motor Show in 1910, and neon signs reached the United States in the early 1920s. Their colours dominated city nights for fifty years and still say “open late” to most of us. The glow trick used here is related to the mipmap pyramid, introduced by Lance Williams in 1983.",
+ "uses": [
+  "Nightlife and music posters",
+  "Cafe and bar signage mock-ups",
+  "Gaming and streaming backgrounds",
+  "Sci-fi and cyberpunk visuals"
+ ],
+ "terms": [
+  [
+   "Additive blending",
+   "Combining lights by adding their brightness, so overlaps get brighter."
+  ],
+  [
+   "Mipmap",
+   "A stack of the same image at half, quarter and smaller sizes."
+  ],
+  [
+   "Sobel",
+   "A way of measuring how quickly brightness changes, which is large on an edge."
+  ]
+ ],
+ "related": [
+  "cyberpunk",
+  "futuristic",
+  "aurora"
+ ],
+ "paragraphs": [
+  "The picture is reduced to its outlines with the blur-then-Sobel pipeline described in the foundations. Where the edge strength exceeds a threshold the pixel becomes a bright line; the threshold is chosen by the detail slider, so more detail means a lower threshold and more lines. The lines are coloured by a diagonal gradient between your two neon colours, or by a brightened copy of the original colours.",
+  "Glow is the interesting part. A true Gaussian blur of the whole image would be slow, so the line layer is shrunk four times, each time to half the size, and every smaller copy is drawn back at full size with additive blending. Smoothing during enlargement spreads each line’s light outward, and the sum of several scales behaves like a wide, soft halo around a hard core. This is the same idea as a mipmap pyramid. Finally the whole sign flickers, as old neon does, with two sine waves of different frequency and an occasional brief dip to 45%."
+ ],
+ "equations": [
+  {
+   "tex": "a=S_{\\theta,\\,2\\theta}\\big(\\lvert\\nabla L_b\\rvert\\big),\\qquad\\theta=\\operatorname{lerp}(0.26,\\,0.03,\\ \\text{detail})",
+   "note": "Line opacity: smoothstep of the edge strength of the blurred brightness L_b."
+  },
+  {
+   "tex": "C_{\\text{out}}=E+\\sum_{j=1}^{4} g\\,w_j\\,\\operatorname{up}(E_j),\\qquad w=(0.95,0.85,0.75,0.65)",
+   "note": "Additive bloom: E is the sharp line layer, E_j the same layer at 1/2^j size, up() the smooth enlargement, g the glow slider."
+  },
+  {
+   "tex": "f(t)=0.93+0.05\\sin(9.1\\,t)+0.03\\sin(23.7\\,t)",
+   "note": "Flicker brightness; multiplied by 0.45 when (0.37 t) mod 1 > 0.965."
+  }
+ ],
+ "dials": [
+  {
+   "key": "detail",
+   "label": "Line detail",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "glow",
+   "label": "Glow",
+   "type": "range",
+   "default": 75,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "mode",
+   "label": "Colors",
+   "type": "select",
+   "default": "duo",
+   "options": [
+    "duo",
+    "source"
+   ]
+  },
+  {
+   "key": "c1",
+   "label": "Neon one",
+   "type": "color",
+   "default": "#19e6ff"
+  },
+  {
+   "key": "c2",
+   "label": "Neon two",
+   "type": "color",
+   "default": "#ff2fd0"
+  },
+  {
+   "key": "base",
+   "label": "Show image",
+   "type": "range",
+   "default": 12,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "flicker",
+   "label": "Flicker",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "High detail with strong glow turns a portrait into a sign.",
+   "set": {
+    "detail": 90,
+    "glow": 95
+   }
+  },
+  {
+   "text": "Source colours keep the picture’s own palette in the tubes.",
+   "set": {
+    "mode": "source"
+   }
+  },
+  {
+   "text": "Switch off the flicker for a steady sign.",
+   "set": {
+    "flicker": false
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

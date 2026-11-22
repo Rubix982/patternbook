@@ -1,0 +1,161 @@
+{
+ "id": "lumenary:night-sky",
+ "name": "Night Sky",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "motion",
+ "basis": "twinkling stars placed by brightness, constellations, meteors (how)",
+ "note": null,
+ "lumenary": {
+  "section": "J. Motion and live",
+  "kind": "live",
+  "blurb": "The picture drawn in stars: its bright places fill with points of light that twinkle, its outlines are joined into constellations, and now and then a meteor crosses. The cursor brightens the sky around it.",
+  "theory_page": "treatments/lumenary/theory/10-motion.md",
+  "code": "vendor/lumenary/src/engine/styles/night-sky.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Star charts and astrophotography",
+  "era": "Antiquity onward",
+  "bestOn": "Bright subjects on a dark background"
+ },
+ "why": "People have always drawn pictures in the stars by joining a few bright points and letting the mind fill in the rest. This treatment runs that backwards. It starts with the picture, scatters stars most thickly where it is bright, and joins points along its outlines into constellations. Twinkle, a faint glow and the odd meteor make it a sky.",
+ "how": [
+  "Place stars at random, keeping each with a chance that grows with the picture’s brightness there.",
+  "Give each star a size, and a brightness read from the picture under it.",
+  "Make each star twinkle on its own period.",
+  "Pick the strongest outline point in each cell of a coarse grid and join neighbours with thin lines.",
+  "Lay a dark, soft, blue copy of the picture behind everything.",
+  "Brighten stars near the cursor, and send a meteor across now and then."
+ ],
+ "history": "Ptolemy listed 48 constellations in the Almagest in the second century, and most are still in use. In 1922 the International Astronomical Union fixed the modern list at 88, and in 1930 it published exact boundaries so that every star belongs to one of them. Stars twinkle because their light is bent by moving air on its way down, which is why they are steady when seen from space.",
+ "uses": [
+  "Anniversary and memorial keepsakes",
+  "Space-themed posters and invitations",
+  "Planetarium and science club graphics",
+  "Calm animated backgrounds"
+ ],
+ "terms": [
+  [
+   "Rejection sampling",
+   "Proposing random points and keeping each with a chance set by a rule."
+  ],
+  [
+   "Constellation",
+   "A named pattern of stars, or the region of sky around it."
+  ],
+  [
+   "Scintillation",
+   "The twinkling of stars, caused by turbulence in the air."
+  ]
+ ],
+ "related": [
+  "fireflies",
+  "poisson-stippling",
+  "particles"
+ ],
+ "paragraphs": [
+  "Stars are placed by rejection sampling. A random position is proposed and kept with a probability that rises steeply with the picture’s brightness there; if it is refused, another is proposed, up to 24 times. Bright areas therefore end up crowded and dark ones nearly empty. Each star has a size drawn so that most are small and a few are large, and its brightness is read from the picture under it. Twinkle is a sine wave with its own period and phase for every star, taking away up to three quarters of its light.",
+  "Constellations follow the outlines. The frame is divided into a coarse grid, the pixel with the strongest edge in each cell becomes an anchor star, and each anchor is joined to its two nearest neighbours if they are close enough. Behind everything lies the picture itself, shrunk to under a hundred pixels and recoloured to deep blue, with a band of fractal noise for the Milky Way. With a video, the stars stay where they are and only their brightness is read again from each frame. The cursor adds light to stars near it, and a meteor crosses on a path fixed by the seed every few seconds."
+ ],
+ "equations": [
+  {
+   "tex": "P(\\text{keep}\\mid\\mathbf x)=0.07+L(\\mathbf x)^{1.7}",
+   "note": "Chance that a proposed star position is kept."
+  },
+  {
+   "tex": "b_i(t)=b_i\\,\\Big(1-0.75\\,\\tau\\,\\big(\\tfrac12+\\tfrac12\\sin(2\\pi t/T_i+\\varphi_i)\\big)\\Big),\\qquad b_i=L^{1.05}\\,(0.7+0.5\\,z_i)+0.03",
+   "note": "Brightness of star i: z is its size (0 to 1), τ the twinkle slider, T between 1.2 and 4.8 seconds."
+  },
+  {
+   "tex": "\\text{link }(i,j)\\iff j\\in\\text{two nearest anchors of }i\\ \\text{and}\\ \\lvert\\mathbf a_i-\\mathbf a_j\\rvert<1.9\\,c",
+   "note": "Constellation lines; c is the size of a grid cell."
+  }
+ ],
+ "dials": [
+  {
+   "key": "stars",
+   "label": "Stars",
+   "type": "range",
+   "default": 3800,
+   "min": 600,
+   "max": 6000,
+   "step": 100
+  },
+  {
+   "key": "twinkle",
+   "label": "Twinkle",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "lines",
+   "label": "Constellations",
+   "type": "range",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "haze",
+   "label": "Glow of the picture",
+   "type": "range",
+   "default": 40,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "tint",
+   "label": "Starlight",
+   "type": "select",
+   "default": "star",
+   "options": [
+    "star",
+    "picture"
+   ]
+  },
+  {
+   "key": "meteors",
+   "label": "Meteors",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "seed",
+   "label": "Another night",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Many stars and no lines give a dense star field.",
+   "set": {
+    "stars": 6000,
+    "lines": 0
+   }
+  },
+  {
+   "text": "Few stars and many constellations look like a chart.",
+   "set": {
+    "stars": 1200,
+    "lines": 100,
+    "haze": 15
+   }
+  },
+  {
+   "text": "Starlight in the picture’s own colours keeps its mood.",
+   "set": {
+    "tint": "picture",
+    "twinkle": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

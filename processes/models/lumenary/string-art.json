@@ -1,0 +1,154 @@
+{
+ "id": "lumenary:string-art",
+ "name": "String Art",
+ "physical": "yes",
+ "process": "string-art",
+ "process_name": "String art",
+ "class": "other",
+ "basis": "why: one thread wound between nails darkens each path it covers; how: greedy nail-to-nail path subtracting thread strength",
+ "note": "A generative algorithm that models the craft (thread portraits on a circular loom), so filed as physical.",
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "One long thread wound between nails. At each turn the next nail is the one whose straight run covers the darkest part still unpainted.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/string-art.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Mathematical teaching and craft",
+  "era": "Curve stitching in the 1860s, computed portraits from 2016",
+  "bestOn": "High contrast portraits"
+ },
+ "why": "A single thread wound back and forth between nails can render a face, because every pass of the thread darkens the path it covers a little, and many thin lines add up to tone. The trick is choosing the next nail so that each pass lands on the darkest part still unpainted.",
+ "how": [
+  "Turn the picture into a target on a 240-pixel grid, where T = (1 − L)^1.2 for dark thread on a light board, or L^1.2 for pale thread on black.",
+  "Place the nails on a circle or along the frame.",
+  "From the current nail, test every other nail, skipping the nearest two on each side, and measure the mean target along each straight line.",
+  "Pick the best, halve the score of any path used before, wind the thread there and subtract the thread strength from the target along the line.",
+  "Stop at the chosen thread length or when no line scores above 0.012."
+ ],
+ "history": "Mary Everest Boole, a mathematics teacher, introduced curve stitching with cards and thread in the 1860s to teach geometry. Nail and thread pictures became a craft in the twentieth century. In 2016 the artist Petros Vrellis published a portrait made with a single thread around a circular loom, which started a wave of programs that find the thread path.",
+ "uses": [
+  "Portraits and wall art for gifts",
+  "Teaching envelopes of curves",
+  "CNC and robot drawing",
+  "Laser cut and woven designs"
+ ],
+ "terms": [
+  [
+   "Greedy algorithm",
+   "A method that picks the best-looking next step each time without looking ahead."
+  ],
+  [
+   "Envelope",
+   "The curve that a family of straight lines seems to trace."
+  ],
+  [
+   "Opacity",
+   "How much a layer hides what is beneath it."
+  ]
+ ],
+ "related": [
+  "spirograph",
+  "hilbert-curve",
+  "charcoal-sketch"
+ ],
+ "paragraphs": [
+  "String art makes a picture from one long thread wound between nails on a board, and the program winds it greedily. The picture becomes a target T on a 240-pixel grid: T = (1 − L)^1.2 for a dark thread on a light board, or L^1.2 for a pale thread on black, so T is large where thread is wanted. The nails stand on a circle or on the edge of a rectangle. At each turn, from the nail where the thread now is, every other nail is tried (the two nearest nails on either side are skipped) and the mean target along the straight line to it is measured. The best nail is chosen, a path used before has its score halved, and the thread is wound there.",
+  "Winding a line uses up some of the target, since that darkness is now covered: the strength slider s is subtracted from T along the line (never below 0). The winding stops when the chosen number of lines is reached or no line scores above 0.012. When the thread is drawn, the lines are blended by multiplying (dark thread) or adding (pale thread) with opacity a = 1.15 s (kept between 0.05 and 0.6), so the density builds up with overlap just as real threads do. In the picture-colour option each segment takes the colour of the picture at its midpoint."
+ ],
+ "equations": [
+  {
+   "tex": "j^{*}=\\arg\\max_{j}\\ \\frac{1}{\\ell_{ij}}\\sum_{\\mathbf x\\in\\text{line}(i,\\,j)}T(\\mathbf x),\\qquad T=\\begin{cases}(1-L)^{1.2}&\\text{dark thread}\\\\ L^{1.2}&\\text{pale thread}\\end{cases}",
+   "note": "The next nail j from the current nail i; ℓ is the length of the line in grid steps."
+  },
+  {
+   "tex": "T(\\mathbf x)\\leftarrow\\max\\big(0,\\ T(\\mathbf x)-s\\big)\\quad\\text{along the chosen line}",
+   "note": "The target is used up by the thread laid down."
+  },
+  {
+   "tex": "\\tau_k=(1-a)^{k}",
+   "note": "Light that survives k overlapping threads of opacity a, the reason overlapping threads build tone."
+  }
+ ],
+ "dials": [
+  {
+   "key": "shape",
+   "label": "Board",
+   "type": "select",
+   "default": "round",
+   "options": [
+    "round",
+    "frame"
+   ]
+  },
+  {
+   "key": "nails",
+   "label": "Nails",
+   "type": "range",
+   "default": 180,
+   "min": 60,
+   "max": 300,
+   "step": 4
+  },
+  {
+   "key": "lines",
+   "label": "Thread length",
+   "type": "range",
+   "default": 3000,
+   "min": 400,
+   "max": 5000,
+   "step": 50
+  },
+  {
+   "key": "strength",
+   "label": "Thread opacity",
+   "type": "range",
+   "default": 18,
+   "min": 5,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "colour",
+   "label": "Thread",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "ink",
+    "white"
+   ]
+  },
+  {
+   "key": "nailDots",
+   "label": "Show nails",
+   "type": "toggle",
+   "default": true
+  }
+ ],
+ "presets": [
+  {
+   "text": "Plenty of lines and a pale thread on a dark board shine like light.",
+   "set": {
+    "colour": "white",
+    "lines": 4500
+   }
+  },
+  {
+   "text": "A frame of nails makes a rectangular portrait.",
+   "set": {
+    "shape": "frame"
+   }
+  },
+  {
+   "text": "A fainter thread gives a softer, more graduated tone.",
+   "set": {
+    "strength": 8,
+    "lines": 5000
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

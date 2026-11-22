@@ -1,0 +1,148 @@
+{
+ "id": "lumenary:ajrak",
+ "name": "Ajrak",
+ "physical": "yes",
+ "process": "resist-dyeing",
+ "process_name": "Resist dyeing",
+ "class": "dyeing",
+ "basis": "why: resist paste keeps indigo and madder out where the cloth stays pale; how: star lattice with resist lines, dye states per block, shifted resist print",
+ "note": "Resist and mordant dyeing applied by wooden blocks, filed as the brief specifies.",
+ "lumenary": {
+  "section": "L. Sindhi design",
+  "kind": "still",
+  "blurb": "The block-printed shawl of Sindh: madder red and indigo, a lattice of eight-pointed stars, and white lines where the resist paste held the dye back.",
+  "theory_page": "treatments/lumenary/theory/12-sindhi.md",
+  "code": "vendor/lumenary/src/engine/styles/ajrak.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Sindh, on the Indus",
+  "era": "Centuries old, a cloth still made and worn today",
+  "bestOn": "Pictures with a mix of light, mid and dark tones"
+ },
+ "why": "Ajrak is made by keeping dye out of the cloth. A resist paste goes on wherever the cotton is meant to stay pale, and the cloth is then dyed in indigo and in red from madder root. The paste holds the dye back, so the white lines of the finished shawl are the places where nothing reached the cotton. The eight-pointed star and the lattice repeat across the cloth like a map of the night sky.",
+ "how": [
+  "Lay out one block for each square of side s = W / n, where n is the number of blocks across.",
+  "Inside a block, use a polar test to decide what lies under every pixel: ground, star colour or resist.",
+  "Draw the eight-pointed star with a star polygon formula, with a resist outline, a resist ring, a resist centre and a diamond with small resist dots at each corner.",
+  "Dye each block in one of three states by the picture’s tone: dark blocks have a deep ground with a red star, midtones swap the two, and light blocks have a pale ground. Size each block from 82 to 100 percent of its square by the picture.",
+  "Print the resist from a block shifted by up to 1.5 px, and show only the shifted copy as white, since a real print is never perfect."
+ ],
+ "history": "Ajrak is the block-printed cloth of Sindh, pressed onto cotton by carved wooden blocks in stages. Many Sindhis point to the trefoil-patterned shawl on the Mohenjo-daro bust as a distant ancestor, a story told with affection and not proved. The shawl is given as a gift of honour to guests, worn on the shoulder, and worn on Sindhi Cultural Day, which is celebrated on the first Sunday of December. Printing families in Sindh and across the border in Kutch have kept the craft alive.",
+ "uses": [
+  "Shawls, scarves and clothing",
+  "Gifts of honour and cultural celebrations",
+  "Pattern and textile design",
+  "Teaching resist printing and tessellation"
+ ],
+ "terms": [
+  [
+   "Resist",
+   "A paste or wax that keeps dye from reaching the cloth."
+  ],
+  [
+   "Madder",
+   "A plant whose root gives a red dye."
+  ],
+  [
+   "Block printing",
+   "Pressing carved wooden blocks onto cloth to print a pattern."
+  ]
+ ],
+ "related": [
+  "sindhi-topi",
+  "batik",
+  "ralli-patchwork"
+ ],
+ "paragraphs": [
+  "Ajrak is the block-printed cloth of Sindh. It is made by pressing carved wooden blocks onto cotton in stages: a resist paste goes on first, wherever the cloth is meant to stay pale, and the cloth is then dyed in indigo and in red from madder root. The paste keeps the dye out, so the white lines in the finished shawl are the places where nothing reached the cotton. Many Sindhis point to the trefoil-patterned shawl on the Mohenjo-daro bust as a distant ancestor, a story told with affection and not proved.",
+  "The program lays out one block per square of side s = W / n, where n is the number of blocks across. Inside a block a polar test decides which of three things lies under each pixel: ground, star colour or resist. The star has eight points, drawn with the star polygon formula below, with a resist outline, a resist ring, a resist centre, and a diamond with small resist dots at each corner. Each block is dyed in one of three states, chosen by the tone of your picture where it sits: dark blocks carry a deep ground with a red star, midtones swap the two, and light blocks have a pale ground. Block size follows the picture too, from 82% to 100%. A real print is never perfect, so the resist is printed from a block shifted by up to 1.5 px, and only the shifted copy shows white."
+ ],
+ "equations": [
+  {
+   "tex": "r(\\theta)=\\frac{R_1\\,p_y}{p_y\\cos t-p_x\\sin t},\\quad t=\\text{fold}(\\theta)\\in\\big[0,\\tfrac{\\pi}{n}\\big],\\quad \\begin{aligned}p_x&=R_2\\cos\\tfrac{\\pi}{n}-R_1\\\\ p_y&=R_2\\sin\\tfrac{\\pi}{n}\\end{aligned}",
+   "note": "The outline of an n-pointed star (n = 8 here, R₁ = 0.94 σ, R₂ = 0.55 σ): a straight line from a tip to the next notch, written in polar form. σ is the block size factor."
+  },
+  {
+   "tex": "k=\\begin{cases}0&t<0.36\\\\ 1&0.36\\le t<0.66\\\\ 2&t\\ge0.66\\end{cases},\\qquad \\sigma=0.82+0.18\\,(1-t)",
+   "note": "The dye state k and block size σ from the tone t of the picture in that block. With probability 1 − f (f is “colour follows picture”) the state is a chequerboard (i + j) mod 2 instead."
+  },
+  {
+   "tex": "z=\\begin{cases}\\text{resist}&Z(\\mathbf x+\\boldsymbol\\delta)=\\text{resist}\\\\ \\text{ground}&Z(\\mathbf x)=\\text{resist},\\ Z(\\mathbf x+\\boldsymbol\\delta)\\ne\\text{resist}\\\\ Z(\\mathbf x)&\\text{otherwise}\\end{cases}",
+   "note": "Misregistration: the block zone map Z is read twice, the second time shifted by δ = (1, 0.7) × 1.5 px × the hand-printed slider. White shows only where the shifted copy says so."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Block size",
+   "type": "range",
+   "default": 48,
+   "min": 28,
+   "max": 90,
+   "step": 1
+  },
+  {
+   "key": "follow",
+   "label": "Colour follows picture",
+   "type": "range",
+   "default": 85,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "dye",
+   "label": "Dye",
+   "type": "select",
+   "default": "classic",
+   "options": [
+    "classic",
+    "madder",
+    "indigo"
+   ]
+  },
+  {
+   "key": "border",
+   "label": "End borders",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "print",
+   "label": "Hand-printed look",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "The classic mix of red and indigo is the shawl most people picture.",
+   "set": {
+    "dye": "classic",
+    "print": 70
+   }
+  },
+  {
+   "text": "Indigo only gives a cool, deep night cloth.",
+   "set": {
+    "dye": "indigo",
+    "border": 80
+   }
+  },
+  {
+   "text": "Smaller blocks show finer detail from your picture.",
+   "set": {
+    "size": 30,
+    "follow": 100
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

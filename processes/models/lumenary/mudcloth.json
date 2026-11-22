@@ -1,0 +1,159 @@
+{
+ "id": "lumenary:mudcloth",
+ "name": "Mudcloth",
+ "physical": "yes",
+ "process": "mud-dyeing",
+ "process_name": "Mud dyeing (iron mud on tannin-treated cloth)",
+ "class": "dyeing",
+ "basis": "why: iron in fermented mud reacts with tannin in the cloth to make a fast black; how: motif per tone level, mud lines, strip seams",
+ "note": "Models the painted motif system; the chemistry is named, not modelled.",
+ "lumenary": {
+  "section": "K. World cultural",
+  "kind": "still",
+  "blurb": "Bogolan from Mali. Hand-woven cotton is painted with fermented river mud, which stains it black. Each shade of your picture is given its own motif, from bare cloth to dots, zigzags and crosses to solid mud.",
+  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "code": "vendor/lumenary/src/engine/styles/mudcloth.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "The Bamana of Mali",
+  "era": "Centuries old",
+  "bestOn": "Pictures with distinct light and dark regions"
+ },
+ "why": "Bogolanfini, mud cloth, is made by painting cloth with mud that has fermented for months. The iron in the mud reacts with tannin in the cloth to make a black that does not wash out. Here each tone of the picture is given its own motif, from bare cloth through dots, zigzags and crosses to solid mud, so the picture becomes a pattern of patterns.",
+ "how": [
+  "Set a level from 0 to 4 that rises with the picture’s darkness, and keep regions clean with a majority filter.",
+  "Give each level its own motif: bare cloth, dots, zigzag rows, crosses, and solid mud pricked with small holes.",
+  "Where two levels meet, clear the pattern within about 3.4 px of the boundary and draw a mud line about 1 px on either side.",
+  "Add a hand-painted wobble to every stroke.",
+  "Sew the cloth in narrow strips, with visible seams, as it is woven."
+ ],
+ "history": "The Bamana weave cotton in narrow strips, soak it in a tea of leaves rich in tannin, paint patterns with fermented mud and then bleach the background. The designs often carry meanings of history, proverbs and protection. In the late twentieth century the Malian designer Chris Seydou brought bogolan into fashion, and it is now worn around the world.",
+ "uses": [
+  "Fashion, cushions and home textiles",
+  "Pattern design and surface design",
+  "Teaching tone and texture with limited motifs",
+  "Cultural heritage projects"
+ ],
+ "terms": [
+  [
+   "Bogolanfini",
+   "Mud cloth, from the Bamana language of Mali."
+  ],
+  [
+   "Tannin",
+   "A plant chemical that reacts with iron to make black."
+  ],
+  [
+   "Motif",
+   "A repeated design element."
+  ]
+ ],
+ "related": [
+  "adinkra",
+  "batik",
+  "kente"
+ ],
+ "paragraphs": [
+  "Bogolanfini, “mud cloth”, is made by the Bamana of Mali. Cotton woven in narrow strips is soaked in a tea of leaves rich in tannin, designs are painted on with mud that has been fermented in a jar for months, and the iron in the mud reacts with the tannin to give a deep black that does not wash out. The background is then bleached, which leaves the black motifs on pale cloth. The strips are sewn together side by side, and the seams show.",
+  "Here the picture sets a level from 0 to 4, rising with darkness, and a majority filter keeps regions clean. Each level has its own motif: bare cloth, dots, zigzag rows, crosses, and solid mud pricked with small holes. Where two levels meet, the pattern is cleared within about 3.4 px of the boundary and a mud line about 1 px either side of it is drawn, like the outlines a painter draws first. The pattern coordinates are bent by a smooth noise (up to about 2.5 px) to give the unsteadiness of a hand, and the mud is thinner at its edges. Every 96 px a seam of stitches divides a strip from the next."
+ ],
+ "equations": [
+  {
+   "tex": "\\ell=\\min\\big(4,\\ \\lfloor 5\\,v\\rfloor\\big),\\qquad v=1-L\\ \\ (\\text{or } L \\text{ if inverted})",
+   "note": "The level from the blurred brightness L."
+  },
+  {
+   "tex": "\\bar m_\\ell\\approx\\{\\,0,\\ 0.07,\\ 0.26,\\ 0.41,\\ 0.955\\,\\}",
+   "note": "The share of cloth the motif of each level covers: nothing; dots of radius 0.15 q; a band 0.26 q wide; a cross with arms 0.3 q × 0.84 q; and solid mud with holes of radius 0.12 q."
+  },
+  {
+   "tex": "m_2:\\ \\Big|\\operatorname{frac}\\!\\Big(\\tfrac{y+\\frac{q}{2}\\tau}{q}\\Big)-\\tfrac12\\Big|<0.13,\\qquad \\tau=2\\,\\Big|\\operatorname{frac}\\tfrac{x}{q}-\\tfrac12\\Big|",
+   "note": "The zigzag motif: a band bent by the triangle wave τ."
+  }
+ ],
+ "dials": [
+  {
+   "key": "size",
+   "label": "Motif size",
+   "type": "range",
+   "default": 12,
+   "min": 6,
+   "max": 24,
+   "step": 1
+  },
+  {
+   "key": "smooth",
+   "label": "Simplify",
+   "type": "range",
+   "default": 5,
+   "min": 1,
+   "max": 10,
+   "step": 1
+  },
+  {
+   "key": "outline",
+   "label": "Outlines",
+   "type": "range",
+   "default": 70,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "hand",
+   "label": "Hand-painted wobble",
+   "type": "range",
+   "default": 55,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "strips",
+   "label": "Strip seams",
+   "type": "toggle",
+   "default": true
+  },
+  {
+   "key": "cloth",
+   "label": "Cloth",
+   "type": "select",
+   "default": "cream",
+   "options": [
+    "cream",
+    "ochre",
+    "rust"
+   ]
+  },
+  {
+   "key": "invert",
+   "label": "Mud on the light",
+   "type": "toggle",
+   "default": false
+  }
+ ],
+ "presets": [
+  {
+   "text": "Mud on the light parts reverses the picture.",
+   "set": {
+    "invert": true
+   }
+  },
+  {
+   "text": "Larger motifs and strong outlines read like painted cloth.",
+   "set": {
+    "size": 20,
+    "outline": 95
+   }
+  },
+  {
+   "text": "Rust cloth gives a warm, earthy palette.",
+   "set": {
+    "cloth": "rust",
+    "hand": 80
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

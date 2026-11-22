@@ -1,0 +1,148 @@
+{
+ "id": "lumenary:datamosh",
+ "name": "Datamosh",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "digital",
+ "basis": "compressed-video motion vectors applied again and again (how)",
+ "note": null,
+ "lumenary": {
+  "section": "B. Digital and technical",
+  "kind": "still",
+  "blurb": "Video compression gone wrong: blocks of the picture keep sliding on old motion and smear into each other.",
+  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "code": "vendor/lumenary/src/engine/styles/datamosh.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Video compression errors",
+  "era": "2000s onward",
+  "bestOn": "Scenes with strong shapes and plenty of colour"
+ },
+ "why": "Video files save space by storing most frames as instructions: this block came from over there, moved by this much. If the frame that resets the picture is deleted, the instructions keep being applied to old pixels, and colour drags along the motion. Here the picture is split into blocks, each with a motion vector, and the vectors are applied again and again.",
+ "how": [
+  "Split the picture into square blocks.",
+  "Give each block a motion vector from smooth value noise, so neighbours move together in a swirl.",
+  "Run several frames, each time replacing a block by the block one vector behind it, with a little random variation.",
+  "With a probability that falls over time, refresh a block from the original so the picture is not entirely lost.",
+  "Shrink some blocks to one pixel and enlarge them for the flat, blocky patches of damaged video."
+ ],
+ "history": "Datamoshing appeared in experimental video in the mid 2000s, with early work by artists such as Takeshi Murata, and reached a wide audience through music videos around 2009 and 2010. It exploits the structure of compressed video, in which a few full frames are followed by many frames that only describe change.",
+ "uses": [
+  "Music video and visualiser looks",
+  "Transitions and title sequences",
+  "Experimental poster art",
+  "Thumbnails with a motion feel"
+ ],
+ "terms": [
+  [
+   "Motion vector",
+   "An arrow that says how far and in which direction a block of pixels moved between frames."
+  ],
+  [
+   "I-frame",
+   "A full frame in a compressed video, which resets the picture."
+  ],
+  [
+   "Value noise",
+   "Smooth random variation made by blending random values placed on a grid."
+  ]
+ ],
+ "related": [
+  "glitch",
+  "pixel-sorting",
+  "retro-vhs"
+ ],
+ "paragraphs": [
+  "Video compression stores most frames as instructions: “this block came from over there, moved by this much”. Datamoshing deletes the frame that resets the picture, so the instructions keep being applied to old pixels. The treatment imitates this. The picture is split into square blocks, and each block gets a motion vector from smooth value noise, so neighbouring blocks move together in a swirl.",
+  "The picture is then run through several frames. In each one, every block is replaced by the block that lies one motion vector behind it, in the previous frame, with a little random variation. After many frames paint is dragged along the vectors, like a smear. Two things keep it from losing the picture completely: with some probability, which falls over time, a block is refreshed from the original, and at the end some blocks are shrunk to one pixel per block and enlarged, which gives the flat, blocky patches of a damaged video."
+ ],
+ "equations": [
+  {
+   "tex": "F_{f+1}(\\mathbf b)=F_f\\big(\\mathbf b-\\rho\\,\\mathbf v_{\\mathbf b}\\big),\\qquad \\rho\\sim U(0.6,1.4)",
+   "note": "The block at position b takes the content of the block displaced backwards by its motion vector v."
+  },
+  {
+   "tex": "P_{\\text{refresh}}(f)=\\tfrac12\\,\\text{keep}\\,\\Big(1-\\frac{f}{F}\\Big)",
+   "note": "Chance that a block is restored from the original in frame f of F."
+  }
+ ],
+ "dials": [
+  {
+   "key": "block",
+   "label": "Block size",
+   "type": "range",
+   "default": 18,
+   "min": 8,
+   "max": 48,
+   "step": 2
+  },
+  {
+   "key": "frames",
+   "label": "Smear length",
+   "type": "range",
+   "default": 12,
+   "min": 2,
+   "max": 50,
+   "step": 1
+  },
+  {
+   "key": "motion",
+   "label": "Motion",
+   "type": "range",
+   "default": 40,
+   "min": 5,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "keep",
+   "label": "Keep original",
+   "type": "range",
+   "default": 35,
+   "min": 0,
+   "max": 80,
+   "step": 1
+  },
+  {
+   "key": "flat",
+   "label": "Flat blocks",
+   "type": "range",
+   "default": 8,
+   "min": 0,
+   "max": 40,
+   "step": 1
+  },
+  {
+   "key": "seed",
+   "label": "New motion",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Long smears with little of the original look like pure paint dragged across the page.",
+   "set": {
+    "frames": 40,
+    "keep": 5
+   }
+  },
+  {
+   "text": "Bigger blocks make a rougher, more digital collapse.",
+   "set": {
+    "block": 40,
+    "flat": 25
+   }
+  },
+  {
+   "text": "Low motion keeps the picture readable.",
+   "set": {
+    "motion": 15,
+    "keep": 70
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}

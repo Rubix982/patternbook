@@ -1,0 +1,172 @@
+{
+ "id": "lumenary:differential-growth",
+ "name": "Differential Growth",
+ "physical": "no",
+ "process": null,
+ "process_name": null,
+ "class": "geometric",
+ "basis": "growing loop with springs and repulsion (how)",
+ "note": null,
+ "lumenary": {
+  "section": "I. Geometric and generative",
+  "kind": "still",
+  "blurb": "A closed loop that keeps adding points. Neighbours pull together, strangers push apart, and the line folds into coral. Shadows fold tighter than lights.",
+  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "code": "vendor/lumenary/src/engine/styles/differential-growth.js",
+  "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
+ },
+ "facts": {
+  "from": "Biology and generative design",
+  "era": "2010s",
+  "bestOn": "Pictures with mid tones and shadows"
+ },
+ "why": "When a skin grows faster than what lies under it, it has to fold. The folds of a brain, a lettuce leaf, a coral and a ruffled collar all come about this way. The program models a growing line: neighbours pull together, strangers push apart, and extra points are inserted as the line stretches, so it buckles into coral. Shadows fold tighter than lights.",
+ "how": [
+  "Hold a closed loop of points with a rest length ℓ.",
+  "Add a spring to each neighbour (0.22 times the stretch), a smoothing pull toward the midpoint of the neighbours (0.06), and a repulsion from non-adjacent points closer than about 2.6 ℓ.",
+  "Push points back from the picture’s margin, add a little jitter and limit each step to half a rest length.",
+  "Insert a point wherever an edge has stretched beyond 1.55 ℓ, and sometimes in longer edges, so the loop lengthens.",
+  "Let the picture change ℓ locally, so folds are smaller in the shadows, and use a spatial hash to keep the search fast."
+ ],
+ "history": "Biologists and mathematicians have studied how growth creates folds for a long time. A 2014 gel model of the developing brain, by Tuomas Tallinen, L. Mahadevan and colleagues, showed that the folds of the cortex follow from a swelling outer layer on a core. Studios such as Nervous System and artists such as Anders Hoff brought differential growth into design from the 2010s.",
+ "uses": [
+  "Jewellery, lamps and lace-like design",
+  "Models of brain folding and tissue growth",
+  "Generative art and plotter drawings",
+  "Organic textures for 3D art"
+ ],
+ "terms": [
+  [
+   "Cortex",
+   "The folded outer layer of the brain."
+  ],
+  [
+   "Rest length",
+   "The length at which a spring pulls neither way."
+  ],
+  [
+   "Spatial hash",
+   "A grid used to find nearby points quickly."
+  ]
+ ],
+ "related": [
+  "reaction-diffusion",
+  "l-system-trees",
+  "physarum"
+ ],
+ "paragraphs": [
+  "Many natural folds, from the cortex of a brain to a lettuce leaf or a coral, come from growth that is not matched to the space available. The program models it with a closed loop of points. Each point feels a spring to its two neighbours that pulls it to a rest length ℓ (the force is 0.22 times the stretch), a smoothing pull toward the midpoint of its neighbours (0.06), a repulsion from every other non-adjacent point closer than about 2.6 ℓ (of strength (1 − d/R)² × 0.5 ℓ), a push back from the picture’s margin, and a tiny random jitter. The step of a point is limited to half a rest length. A spatial hash keeps the repulsion search close to linear in the number of points.",
+  "Growth is the insertion of points. Wherever an edge has stretched beyond 1.55 ℓ a point is added at its midpoint, and any edge longer than 0.7 ℓ may get one with a probability of 3.5% per round. The loop lengthens but has to fit in the same sheet, so it buckles, and the repulsion makes it fold rather than cross itself. The picture sets the rest length: ℓ is reduced where the picture is heavy (dark on light paper), down to 0.55 times, so shadows fold into finer, tighter detail and the lights stay open. Each edge is then drawn with a width (0.55 to 1.65 times the line width) and a colour from the picture. The run takes 180 to 540 rounds, or stops at 3,000 to 14,000 points."
+ ],
+ "equations": [
+  {
+   "tex": "\\mathbf F_i=0.22\\sum_{j\\in\\{i-1,\\,i+1\\}}\\big(\\lVert\\mathbf p_j-\\mathbf p_i\\rVert-\\ell_i\\big)\\,\\hat{\\mathbf e}_{ij}+0.06\\Big(\\tfrac{\\mathbf p_{i-1}+\\mathbf p_{i+1}}{2}-\\mathbf p_i\\Big)",
+   "note": "Springs to the two neighbours and the smoothing pull; ê is the unit vector from i to j."
+  },
+  {
+   "tex": "\\mathbf F^{\\text{rep}}_i=\\sum_{j}\\Big(1-\\frac{d_{ij}}{R_{ij}}\\Big)^{2}0.5\\,\\ell_i\\,\\hat{\\mathbf e}_{ji},\\qquad R_{ij}=1.3\\,(\\ell_i+\\ell_j),\\ \\ d_{ij}<R_{ij}",
+   "note": "Repulsion from the other points that are not neighbours on the loop."
+  },
+  {
+   "tex": "\\ell(\\mathbf x)=\\ell_0\\big[(1-f)+f\\,\\big(0.55+1.0\\,(1-h)\\big)\\big]",
+   "note": "The picture sets the rest length: h is the heaviness at x and f the tightness slider."
+  }
+ ],
+ "dials": [
+  {
+   "key": "edge",
+   "label": "Fold size",
+   "type": "range",
+   "default": 6,
+   "min": 3,
+   "max": 14,
+   "step": 0.5
+  },
+  {
+   "key": "grow",
+   "label": "How far it grows",
+   "type": "range",
+   "default": 70,
+   "min": 20,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "seeds",
+   "label": "Starting loops",
+   "type": "range",
+   "default": 4,
+   "min": 1,
+   "max": 6,
+   "step": 1
+  },
+  {
+   "key": "follow",
+   "label": "Picture sets the tightness",
+   "type": "range",
+   "default": 60,
+   "min": 0,
+   "max": 100,
+   "step": 1
+  },
+  {
+   "key": "line",
+   "label": "Line width",
+   "type": "range",
+   "default": 1.5,
+   "min": 0.5,
+   "max": 4,
+   "step": 0.1
+  },
+  {
+   "key": "colour",
+   "label": "Colour",
+   "type": "select",
+   "default": "picture",
+   "options": [
+    "picture",
+    "ink"
+   ]
+  },
+  {
+   "key": "paper",
+   "label": "Paper",
+   "type": "select",
+   "default": "cream",
+   "options": [
+    "cream",
+    "night"
+   ]
+  },
+  {
+   "key": "seed",
+   "label": "Grow again",
+   "type": "shuffle",
+   "default": 1
+  }
+ ],
+ "presets": [
+  {
+   "text": "Small folds make fine, brain-like coral.",
+   "set": {
+    "edge": 3,
+    "grow": 90
+   }
+  },
+  {
+   "text": "Large folds make bold, ruffled shapes.",
+   "set": {
+    "edge": 13,
+    "seeds": 2
+   }
+  },
+  {
+   "text": "Ink on night paper looks like lace.",
+   "set": {
+    "colour": "ink",
+    "paper": "night"
+   }
+  }
+ ],
+ "credit": "Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged."
+}
