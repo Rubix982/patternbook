@@ -14,6 +14,45 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-040 · Does BiRefNet, run in tiles at the photo's own resolution, read fine lattices as well as brightness does?
+
+**Status:** open
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-039: BiRefNet, run on a 1024 px copy of each photo, reads the white marble and the deep-relief screens brightness
+lost, but thickens fine bars and closes small openings, so it agrees with brightness on 11 of 17 screens (14 were
+needed); the Met screens' bars read 0.295 and 0.717 on its masks.
+
+**2. What we are doing.**
+Run the same BiRefNet (onnx-community/BiRefNet-ONNX) over tiles: squares of 512 px of the photo, enlarged twice to the
+model's 1024 px input, overlapping by a quarter, their outputs blended with a raised-cosine weight; then the same three
+checks as C-039, unchanged: agreement with C-031's brightness openings on the 17 (intersection over union inside the
+openings' hull, 0.85 or more on at least 14), the two left-out screens by eye on a sheet, and the Met screens' bars.
+
+**3. Why.**
+We don't know whether C-039's disagreement on fine lattices is the 1024 px copy's doing, which decides whether one
+model's mask can serve all 19 screens.
+
+**4. What is affected.**
+- `tools/screen_masks.py` (tiled), `runs/c040/`; if both checks pass: `pieces/jali/samples.tsv` (the two left-out
+  screens measured on this mask), `measures.tsv`, C-031's ranges recomputed with them (the old kept), and C-034's and
+  C-033's readings left as they were (noted).
+
+**5. Conclusion.**
+- **If** it agrees on at least 14 of 17 and reads both left-out screens by eye → the tiled mask is the reader's where
+  brightness fails; the two screens rejoin C-031's set (19 jalis) and its ranges are recomputed.
+- **If** it agrees on fewer → the fine-lattice fault isn't only the copy's size; T-038 stays open.
+- **Bars:** under 0.3 or over 0.6 on the two Met screens, read as C-039 did.
+
+**6. If not done.**
+Each photo needs the one method that reads it, chosen by eye, and the two screens stay out.
+
+**Limits (known before running):** the same as C-039's; a tile sees only part of the screen, which a model trained on
+whole objects may read differently.
+
+---
+
 ## C-039 · Can SAM 2.1 or BiRefNet give a jali photo's openings where brightness can't?
 
 **Status:** closed
