@@ -1,0 +1,86 @@
+[
+ {
+  "row": 1,
+  "id": "vam-O40069",
+  "layout": "B",
+  "aspect": 0.677
+ },
+ {
+  "row": 2,
+  "id": "vam-O40077",
+  "layout": "B",
+  "aspect": 0.735
+ },
+ {
+  "row": 3,
+  "id": "met-453344",
+  "layout": "C",
+  "aspect": 0.708
+ },
+ {
+  "row": 4,
+  "id": "vam-O40068",
+  "layout": "B",
+  "aspect": 0.656
+ },
+ {
+  "row": 5,
+  "id": "vam-O470734",
+  "layout": "D",
+  "aspect": 1.016
+ },
+ {
+  "row": 6,
+  "id": "vam-O40065",
+  "layout": "A",
+  "aspect": 0.63
+ },
+ {
+  "row": 7,
+  "id": "vam-O15488",
+  "layout": "A",
+  "aspect": 1.054
+ },
+ {
+  "row": 8,
+  "id": "vam-O40067",
+  "layout": "A",
+  "aspect": 0.627
+ },
+ {
+  "row": 9,
+  "id": "met-453241",
+  "layout": "A",
+  "aspect": 0.547
+ },
+ {
+  "row": 10,
+  "id": "vam-O40070",
+  "layout": "B",
+  "aspect": 0.79
+ },
+ {
+  "row": 11,
+  "id": "vam-O40078",
+  "layout": "B",
+  "aspect": 0.794
+ },
+ {
+  "row": 12,
+  "id": "met-453343",
+  "layout": "C",
+  "aspect": 0.703
+ },
+ {
+  "row": 13,
+  "id": "vam-O40071",
+  "layout": "B",
+  "aspect": 0.774
+ },
+ {
+  "row": 14,
+  "id": "vam-O40073",
+  "layout": "A",
+  "aspect": 1.089
+ }
+]

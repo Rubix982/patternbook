@@ -88,6 +88,47 @@ export function frameField(kind, x0, y0, x1, y1) {
   return (x, y) => arch(x, y) && cusps.every(([cx, cy]) => (x - cx) ** 2 + (y - cy) ** 2 > rc * rc);
 }
 
+// ---- composition (C-037): real jalis' four layouts round the field ----
+// Fractions are of the slab's width; archRadius of the field's width. A: a plain margin (`plain`), the field a rectangle. B: plain
+// sides and bottom, a wider top, the field a pointed arch with a solid moulding inside its edge, solid spandrels. C: a
+// plain outer margin, a band of small pierced motifs, a plain inner strip, then an arch with a solid moulding and the
+// spandrels pierced with the field's pattern. D: a thin plain edge, a band of motifs, a plain strip, a rectangle.
+export const LAYOUT_DEFAULTS = { plain: 0.14, sideMargin: 0.155, topMargin: 0.265, archRadius: 0.59, outer: 0.05, band: 0.06,
+  inner: 0.025, moulding: 0.02, edge: 0.02, motif: 'quatrefoil' };
+const MOTIFS = {
+  quatrefoil: (u, v, r) => [[0.42, 0], [-0.42, 0], [0, 0.42], [0, -0.42]].some(([a, b]) => (u - a * r) ** 2 + (v - b * r) ** 2 < (0.45 * r) ** 2),
+  diamond: (u, v, r) => Math.abs(u) + Math.abs(v) < 0.85 * r,
+  cross: (u, v, r) => (Math.abs(u) < 0.3 * r && Math.abs(v) < 0.9 * r) || (Math.abs(v) < 0.3 * r && Math.abs(u) < 0.9 * r),
+};
+export function composeLayout(o, sx0, sy0, sx1, sy1) {
+  const L = { ...LAYOUT_DEFAULTS, ...o }, Ws = sx1 - sx0, kind = o.layout;
+  let x0, y0, x1, y1, ring = null;
+  if (kind === 'A') { const m = L.plain * Ws; [x0, y0, x1, y1] = [sx0 + m, sy0 + m, sx1 - m, sy1 - m]; }
+  else if (kind === 'B') { const m = L.sideMargin * Ws; [x0, y0, x1, y1] = [sx0 + m, sy0 + L.topMargin * Ws, sx1 - m, sy1 - m]; }
+  else {
+    const e = (kind === 'C' ? L.outer : L.edge) * Ws, b = L.band * Ws, n = L.inner * Ws;
+    ring = { a0: [sx0 + e, sy0 + e, sx1 - e, sy1 - e], a1: [sx0 + e + b, sy0 + e + b, sx1 - e - b, sy1 - e - b] };
+    [x0, y0, x1, y1] = [sx0 + e + b + n, sy0 + e + b + n, sx1 - e - b - n, sy1 - e - b - n];
+  }
+  const Wf = x1 - x0, R = Math.max(L.archRadius, 0.501) * Wf, rise = Math.sqrt(R * R - (R - Wf / 2) ** 2), ys = y0 + rise, cl = x0 + R, cr = x1 - R;
+  const arch = (x, y, inset) => x >= x0 + inset && x < x1 - inset && y < y1 - inset && (y >= ys || ((x - cl) ** 2 + (y - ys) ** 2 <= (R - inset) ** 2 && (x - cr) ** 2 + (y - ys) ** 2 <= (R - inset) ** 2));
+  const rect = (x, y) => x >= x0 && x < x1 && y >= y0 && y < y1, mo = L.moulding * Ws;
+  let pattern;
+  if (kind === 'A' || kind === 'D') pattern = rect;
+  else if (kind === 'B') pattern = (x, y) => arch(x, y, mo);
+  else pattern = (x, y) => rect(x, y) && (arch(x, y, mo) || !arch(x, y, -mo)) && !(x < x0 + mo || x >= x1 - mo || y >= y1 - mo || y < y0 + mo);
+  // the band's motifs: evenly along each side of the ring's centre line, as many as fit at 1.4 band widths apart
+  const motifs = [];
+  if (ring) {
+    const [p0, q0, p1, q1] = ring.a0, b = ring.a1[0] - ring.a0[0], c = [p0 + b / 2, q0 + b / 2, p1 - b / 2, q1 - b / 2];
+    const side = (xa, ya, xb, yb) => { const len = Math.hypot(xb - xa, yb - ya), n = Math.max(2, Math.round(len / (1.4 * b))); for (let k = 0; k < n; k++) motifs.push([xa + ((xb - xa) * k) / n, ya + ((yb - ya) * k) / n]); };
+    side(c[0], c[1], c[2], c[1]); side(c[2], c[1], c[2], c[3]); side(c[2], c[3], c[0], c[3]); side(c[0], c[3], c[0], c[1]);
+  }
+  const shape = MOTIFS[L.motif] || MOTIFS.quatrefoil, mr = ring ? 0.32 * (ring.a1[0] - ring.a0[0]) : 0;
+  const open = ring ? (x, y) => { for (const [cx, cy] of motifs) { const u = x - cx, v = y - cy; if (Math.abs(u) < mr && Math.abs(v) < mr && shape(u, v, mr)) return true; } return false; } : () => false;
+  return { pattern, open, field: [x0, y0, x1, y1], motifs: motifs.length };
+}
+
 // ---- the design ----
 // opts: width, height (the image), margin (empty round the slab), border (solid frame width), frame ('rect',
 // 'pointed', 'cusped'), tiling (a TILINGS name), kind ('strands' or 'cells'), angle (contact angle, degrees), across
@@ -109,13 +150,15 @@ export function frameField(kind, x0, y0, x1, y1) {
 //   bedding    how much the stone's horizontal layers differ in softness (0 even to 1), acting only through age (a
 //              hypothesis, not measured).
 export const DESIGN_DEFAULTS = { width: 1100, height: 1400, margin: 90, border: 70, frame: 'rect', tiling: '4.8.8', kind: 'strands', angle: 67.5,
-  across: 7, barOverOpening: 0.45, hand: 0.15, thickness: 3.5, seed: 1, drift: 0.16, jitter: 0.048, round: 0, wear: 0, barSpread: 0, age: 0, bedding: 0.5 };
+  across: 7, barOverOpening: 0.45, hand: 0.15, thickness: 3.5, seed: 1, drift: 0.16, jitter: 0.048, round: 0, wear: 0, barSpread: 0, age: 0, bedding: 0.5, layout: 'none' };
 
 export function designJali(options = {}) {
   const o = { ...DESIGN_DEFAULTS, ...options }, W = o.width, H = o.height;
   const sx0 = o.margin, sy0 = o.margin, sx1 = W - o.margin, sy1 = H - o.margin;
-  const fx0 = sx0 + o.border, fy0 = sy0 + o.border, fx1 = sx1 - o.border, fy1 = sy1 - o.border;
-  const inSlab = (x, y) => x >= sx0 && x < sx1 && y >= sy0 && y < sy1, inField = frameField(o.frame, fx0, fy0, fx1, fy1);
+  const comp = o.layout && o.layout !== 'none' ? composeLayout(o, sx0, sy0, sx1, sy1) : null;
+  const [fx0, fy0, fx1, fy1] = comp ? comp.field : [sx0 + o.border, sy0 + o.border, sx1 - o.border, sy1 - o.border];
+  const inSlab = (x, y) => x >= sx0 && x < sx1 && y >= sy0 && y < sy1, inField = comp ? comp.pattern : frameField(o.frame, fx0, fy0, fx1, fy1);
+  const motifOpen = comp ? comp.open : () => false;
   const a = (fx1 - fx0) / o.across, T = TILINGS[o.tiling](a), [[ax, ay], [bx, by]] = T.vectors;
   const ox = (fx0 + fx1) / 2, oy = (fy0 + fy1) / 2, theta = (o.angle * Math.PI) / 180;
   // the lines over the slab: every repeat whose polygons can reach it
@@ -175,6 +218,7 @@ export function designJali(options = {}) {
     const px = x + 0.5, py = y + 0.5, p = y * W + x;
     if (!inSlab(px, py)) continue;
     slab[p] = 1;
+    if (motifOpen(px, py)) continue; // a band's pierced motif
     if (!inField(px, py)) { stone[p] = 1; continue; }
     const wl = bar * (1 + o.hand * (0.35 * noise2(px / S, py / S, o.seed) + 0.12 * noise2((px * 5) / S, (py * 5) / S, o.seed + 7)));
     if (dmin[p] <= wl / 2) stone[p] = 1;

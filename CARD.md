@@ -14,6 +14,61 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-037 · Can the generator compose a screen in real jalis' four layouts, so that whole generated screens can't be told from whole real ones?
+
+**Status:** open
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-034 found four layouts covering 15 of 19 jalis, with plain borders of 0.13 to 0.17 of the slab's width and arches
+rising 0.39 to 0.44 of their width above where they narrow to 95 % (a radius of about 0.55 to 0.63 of the field's
+width; the generator's is 0.85). The generator has no border band, moulding or pierced spandrels. In C-035 and C-036 the
+writer picked the generated pattern in 12 of 36 rows, below chance, perhaps because a photo's ragged mask edge reads as
+"generated" (T-045).
+
+**2. What we are doing.**
+Add a `layout` dial to the generator (`none`, the old frame, by default, so earlier designs don't change):
+- **A**: a plain margin, the field a rectangle;
+- **B**: plain margins at the sides and bottom, a wider one at the top, the field a pointed arch of radius `archRadius`
+  (of the field's width), a solid moulding band following the arch, the spandrels solid (their carving is relief, which a
+  mask can't show);
+- **C**: a plain outer margin, a band of small pierced motifs all round, a plain inner strip, the field a pointed arch
+  with a solid moulding, the spandrels pierced with the field's pattern;
+- **D**: a thin plain edge, a band of small pierced motifs, a plain inner strip, the field a rectangle.
+Margins and arch radius are drawn within C-034's ranges (A margin 0.13 to 0.15; B margins 0.145 to 0.167 and top 0.23 to
+0.30, radius 0.55 to 0.63); C's and D's bands, strips and C's radius are read by eye from their three photos and labelled
+as guesses. Then one pick in two blocks:
+1. **Whole screens:** each of C-034's 14 jalis that have masks (5 A, 6 B, 2 C, 1 D) beside a generated screen of the
+   same layout (pattern by C-032's rule, design k for the k-th row, other dials within the ranges), both whole, as masks
+   smoothed alike (a blur of 0.15 bar widths before the threshold), scaled to the same height; seven on each side.
+2. **T-045's check:** C-036's 12 A rows again, the same crops, with both sides smoothed alike the same way.
+
+**3. Why.**
+We don't know whether the generator can compose a screen the way real ones are composed, so that a whole screen gives
+no more away than its pattern did, or whether the writer's earlier picks turned on the photos' ragged edges.
+
+**4. What is affected.**
+- `engine/core/jali-design.js` (`layout` and its dials), `engine/check/jali-compose.mjs`, `tools/jali_blind.py`
+  (`make3`, `score3`), `runs/c037/`; `pieces/jali/grammar.md`, `processes/primitives.md` (`arch-frame`).
+- C-032 to C-036's designs stay as they were (`layout` `none`).
+
+**5. Conclusion.**
+- **Whole screens:** **if** the writer picks the generated one in 11 or more of 14 (1 in 35 by guessing) → composed
+  screens give themselves away; the card records what gave them away. **If** 10 or fewer → whole generated screens can't
+  be reliably told from real ones, at the level of a mask.
+- **T-045:** **if** the smoothed rows score 6 or more of 12 (C-036's same rows: 4) → the photos' ragged edges were the
+  cue that turned the writer's picks below chance. **If** 4 or fewer → the cue is elsewhere. **5** → inconclusive.
+
+**6. If not done.**
+Generated screens stay one pattern in a box, the largest difference the writer saw, and the earlier picks stay hard to
+read.
+
+**Limits (known before running):** one judge, who has seen these real screens and C-036's crops before; layouts C and
+D rest on three screens, their bands and strips read by eye; carving in relief (B's spandrels, every moulding) is
+invisible in a mask; the generator has no rosettes at more than one size, which both C screens have.
+
+---
+
 ## C-036 · Do bars cut one by one, from uneven stone, and worn by time, make generated jalis harder to tell from real ones?
 
 **Status:** closed

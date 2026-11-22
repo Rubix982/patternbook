@@ -1,0 +1,15 @@
+id	role	family	frame	material	date	place	width_mm	height_mm	depth_mm	licence	image	page	settings	status	note
+screen-01	design	geometric	B	generated						generated (patternbook)	runs/c037/designs/screen-01.png			measured	strands on 6.6.6, layout B
+screen-02	design	geometric	B	generated						generated (patternbook)	runs/c037/designs/screen-02.png			measured	strands on 4.8.8, layout B
+screen-03	design	geometric	C	generated						generated (patternbook)	runs/c037/designs/screen-03.png			measured	strands on 3.12.12, layout C
+screen-04	design	geometric	B	generated						generated (patternbook)	runs/c037/designs/screen-04.png			measured	cells on 4.6.12, layout B
+screen-05	design	geometric	D	generated						generated (patternbook)	runs/c037/designs/screen-05.png			measured	strands on 3.6.3.6, layout D
+screen-06	design	geometric	A	generated						generated (patternbook)	runs/c037/designs/screen-06.png			measured	strands on 4.4.4.4, layout A
+screen-07	design	geometric	A	generated						generated (patternbook)	runs/c037/designs/screen-07.png			measured	strands on 6.6.6, layout A
+screen-08	design	geometric	A	generated						generated (patternbook)	runs/c037/designs/screen-08.png			measured	cells on 4.8.8, layout A
+screen-09	design	geometric	A	generated						generated (patternbook)	runs/c037/designs/screen-09.png			measured	strands on 3.12.12, layout A
+screen-10	design	geometric	B	generated						generated (patternbook)	runs/c037/designs/screen-10.png			measured	strands on 4.6.12, layout B
+screen-11	design	geometric	B	generated						generated (patternbook)	runs/c037/designs/screen-11.png			measured	strands on 3.6.3.6, layout B
+screen-12	design	geometric	C	generated						generated (patternbook)	runs/c037/designs/screen-12.png			measured	cells on 4.4.4.4, layout C
+screen-13	design	geometric	B	generated						generated (patternbook)	runs/c037/designs/screen-13.png			measured	strands on 6.6.6, layout B
+screen-14	design	geometric	A	generated						generated (patternbook)	runs/c037/designs/screen-14.png			measured	strands on 4.8.8, layout A

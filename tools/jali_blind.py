@@ -188,6 +188,113 @@ def score2(run, code):
     print({g: f"{v['correct']} of {v['of']}" for g, v in res["by_group"].items()})
 
 
+# ---- C-037: whole screens, and C-036's pattern rows again, both smoothed alike ----
+def smooth_mask(op, bar_px):
+    """Open (True) where the openings, blurred by 0.15 bar widths, stay above half: a photo's ragged edge and a design's
+    clean one come out alike."""
+    f = ndi.gaussian_filter(op.astype(float), max(0.5, 0.15 * bar_px))
+    return f >= 0.5
+
+
+def paint(open_mask, outside=None):
+    rgb = np.where(open_mask[..., None], np.array([236, 230, 220], np.uint8), np.array([43, 38, 34], np.uint8)).astype(np.uint8)
+    if outside is not None:
+        rgb[outside] = [255, 255, 255]
+    return Image.fromarray(rgb)
+
+
+def whole(path, st, bar_px, height=520):
+    crop = [int(v) for v in st["crop"].split(",")] if "crop" in st else None
+    rgb, L = sm.load(path, crop)
+    stone, screen, op = sm.segment(L, "flip" in st, float(st.get("thr", 0)))
+    lab, n = label(op, connectivity=1, return_num=True)
+    if n:
+        mr = ndi.maximum(ndi.distance_transform_edt(op), lab, index=np.arange(1, n + 1))
+        op = op & ~np.isin(lab, np.nonzero(2 * mr < 6)[0] + 1)
+    ys, xs = np.nonzero(screen)
+    sl = (slice(ys.min(), ys.max() + 1), slice(xs.min(), xs.max() + 1))
+    # anything outside the slab inside its bounding box is drawn as stone: a photographed slab's chipped, skewed outline
+    # (and the page showing through at its corners) would give a real screen away by its photograph
+    im = paint(smooth_mask(op, bar_px)[sl] & screen[sl])
+    w = max(1, round(im.width * height / im.height))
+    return im.resize((w, height), Image.LANCZOS)
+
+
+def crop_smooth(op, repeat, reps, bar_px, side=480):
+    hull = convex_hull_image(op)
+    cy, cx = [int(round(v)) for v in ndi.center_of_mass(hull)]
+    half = int(round(reps * repeat / 2))
+    while half > 10:
+        y0, y1, x0, x1 = cy - half, cy + half, cx - half, cx + half
+        if y0 >= 0 and x0 >= 0 and y1 <= hull.shape[0] and x1 <= hull.shape[1] and hull[y0:y1, x0:x1].all():
+            break
+        half -= 2
+    m = smooth_mask(op, bar_px)[cy - half:cy + half, cx - half:cx + half]
+    return paint(m).resize((side, side), Image.LANCZOS)
+
+
+def make3(run):
+    samples = {r["id"]: r for r in csv.DictReader(open("pieces/jali/samples.tsv"), delimiter="\t")}
+    c031 = {r["id"]: r for r in json.load(open("runs/c031/measures.json"))}
+    reals = json.load(open(os.path.join(run, "reals.json")))
+    rec = json.load(open(os.path.join(run, "designs", "recipes.json")))
+    rnd = random.Random(37)
+    rows, imgs = [], {}
+    sides = ["L"] * 7 + ["R"] * 7
+    rnd.shuffle(sides)
+    for re_, sd in zip(reals, sides):
+        ri, gi = re_["id"], f"screen-{re_['row']:02d}"
+        st = dict(kv.split("=") if "=" in kv else (kv, "1") for kv in samples[ri]["settings"].split(";") if kv)
+        imgs[("W", ri)] = whole(samples[ri]["image"], st, c031[ri]["bar_px"])
+        imgs[("W", gi)] = whole(os.path.join(run, "designs", f"{gi}.png"), {}, rec[gi]["bar"])
+        rows.append({"block": "whole", "generated_id": gi, "real_id": ri, "layout": re_["layout"], "generated": sd})
+    k36 = [r for r in json.load(open("runs/c036/blind/key.json"))["rows"] if r["group"] == "A"]
+    mA = {r["id"]: r for r in json.load(open("runs/c035/measure/measures.json"))}
+    sides = ["L"] * 6 + ["R"] * 6
+    rnd.shuffle(sides)
+    for r36, sd in zip(k36, sides):
+        gi, ri = r36["generated_id"], r36["real_id"]
+        st = dict(kv.split("=") if "=" in kv else (kv, "1") for kv in samples[ri]["settings"].split(";") if kv)
+        imgs[("P", ri, gi)] = crop_smooth(openings_of(samples[ri]["image"], st), c031[ri]["opening_px"] + c031[ri]["bar_px"], r36["real_repeats"], c031[ri]["bar_px"])
+        imgs[("P", gi, ri)] = crop_smooth(openings_of(os.path.join("runs/c035/designs", f"{gi}.png"), {}), mA[gi]["opening_px"] + mA[gi]["bar_px"], r36["generated_repeats"], mA[gi]["bar_px"])
+        rows.append({"block": "pattern", "generated_id": gi, "real_id": ri, "generated": sd, "as_in_c036_row": r36})
+    os.makedirs(os.path.join(run, "blind"), exist_ok=True)
+    json.dump({"rows": rows}, open(os.path.join(run, "blind", "key.json"), "w"), indent=1)
+    html_rows = []
+    for k, row in enumerate(rows):
+        if k == 0:
+            html_rows.append('<h2>Whole screens</h2>')
+        if k == 14:
+            html_rows.append('<h2>Patterns, again</h2>')
+        if row["block"] == "whole":
+            g, r = imgs[("W", row["generated_id"])], imgs[("W", row["real_id"])]
+        else:
+            g, r = imgs[("P", row["generated_id"], row["real_id"])], imgs[("P", row["real_id"], row["generated_id"])]
+        left, right = (g, r) if row["generated"] == "L" else (r, g)
+        html_rows.append(f'<div class="pair" data-i="{k}"><div class="n">{k + 1}</div>'
+                         f'<button data-side="L"><img alt="" src="data:image/png;base64,{b64(left)}"></button>'
+                         f'<button data-side="R"><img alt="" src="data:image/png;base64,{b64(right)}"></button></div>')
+    html = PAGE.replace("{{ROWS}}", "\n".join(html_rows)).replace("of 12 picked", "of 26 picked").replace("n===12", "n===26") \
+        .replace("[...Array(12).keys()]", "[...Array(26).keys()]").replace("When all twelve are picked", "When all twenty-six are picked") \
+        .replace("max-width:820px", "max-width:1040px").replace("h1{font-size:22px;margin:0 0 8px}", "h1{font-size:22px;margin:0 0 8px}h2{font-size:18px;margin:32px 0 0}") \
+        .replace("align-items:center", "align-items:start")
+    open(os.path.join(run, "blind", "pick.html"), "w").write(html)
+    print(f"{len(rows)} rows -> {os.path.join(run, 'blind', 'pick.html')}")
+
+
+def score3(run, code):
+    key = json.load(open(os.path.join(run, "blind", "key.json")))["rows"]
+    code = code.strip().upper()
+    assert len(code) == len(key) and set(code) <= {"L", "R"}, "the code is one L or R per row"
+    res = {"code": code, "rows": [{"row": k + 1, **{kk: vv for kk, vv in r.items() if kk != "as_in_c036_row"}, "picked": c, "correct": c == r["generated"]}
+                                  for k, (c, r) in enumerate(zip(code, key))], "by_block": {}}
+    for b in ("whole", "pattern"):
+        rs = [x for x in res["rows"] if x["block"] == b]
+        res["by_block"][b] = {"correct": sum(x["correct"] for x in rs), "of": len(rs), "picked_left": sum(x["picked"] == "L" for x in rs)}
+    json.dump(res, open(os.path.join(run, "result.json"), "w"), indent=1)
+    print({b: f"{v['correct']} of {v['of']}" for b, v in res["by_block"].items()})
+
+
 PAGE = """<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Jali blind pick</title><style>
 :root{--bg:#f6f3ee;--ink:#231f1b;--mute:#6b645c;--line:#d8d1c7;--pick:#b5532c}
@@ -230,6 +337,10 @@ if __name__ == "__main__":
         make(run)
     elif cmd == "make2":
         make2(run)
+    elif cmd == "make3":
+        make3(run)
+    elif cmd == "score3":
+        score3(run, sys.argv[-1])
     elif cmd == "score2":
         score2(run, sys.argv[-1])
     else:
