@@ -75,6 +75,8 @@ A real screen is composed round its pattern. Four layouts cover 15 of C-031's 19
 | D (1) | a band of small motifs, a plain edge of 0.02 | rectangle | | | one fine repeat |
 
 All 19 are mirror-symmetric about the vertical axis. The four that follow no layout are composed on their centre: a
-medallion, an arabesque, a tree, a repeat with a door. The generator's frames (`rect`, `pointed`, `cusped`) have none of
-the border band, moulding, finial or spandrels yet, and its pointed arch (radius 0.85 of the width) is taller than any
-measured one.
+medallion, an arabesque, a tree, a repeat with a door. C-037 gave the generator these layouts (`layout` A to D, with
+`plain`, `sideMargin`, `topMargin`, `archRadius`, `outer`, `band`, `inner`, `moulding`, `edge`, `motif`); its older
+frames (`rect`, `pointed`, `cusped`, with an arch of radius 0.85, taller than any measured one) stay for `layout` `none`.
+As masks, whole screens it composed were picked out in 3 of 14 rows. Carving in relief (B's spandrels, the mouldings,
+the finial) and rosettes at more than one size are still missing.

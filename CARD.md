@@ -16,7 +16,7 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ## C-037 · Can the generator compose a screen in real jalis' four layouts, so that whole generated screens can't be told from whole real ones?
 
-**Status:** open
+**Status:** closed
 **Opened:** 2026-11-22
 
 **1. Where we are.**
@@ -66,6 +66,36 @@ read.
 **Limits (known before running):** one judge, who has seen these real screens and C-036's crops before; layouts C and
 D rest on three screens, their bands and strips read by eye; carving in relief (B's spandrels, every moulding) is
 invisible in a mask; the generator has no rosettes at more than one size, which both C screens have.
+
+**How it ran.** The generator's `layout` dial draws A to D (`runs/c037/look/`); `none`, the default, leaves every earlier
+design as it was (checked: the same stone). Its own `margin` (the empty space round the slab) first collided with
+layout A's plain margin, renamed `plain`. Each generated screen took its real partner's slab proportions, so the shape
+of the slab gave nothing away. Before the page was shown, the whole real masks still had their photographed outlines
+(chipped, skewed, the page showing at their corners) against the designs' clean rectangles; both were redrawn as their
+bounding rectangle with anything outside the slab in stone, the same pairs and sides kept.
+
+**Result (2026-11-22): whole screens, 3 of 14 picked (11 needed to say they give themselves away): whole generated
+screens, composed in real jalis' layouts, can't be reliably told from whole real ones as masks. T-045: the smoothed
+pattern rows, 4 of 12, the same as before smoothing: the photos' ragged edges weren't the cue.** (`runs/c037/result.json`)
+
+**What the picks now measure.** 3 of 14 is below chance (about 1 in 35 by guessing, one-sided), and with C-035 and
+C-036 the writer has picked the generated one in 19 of 62 rows, where guessing gives 31 (about 1 in 600). The rows show
+how: the writer picked the left image in all 7 whole-screen rows and all 6 pattern rows where the real screen was on the
+left, and in 3 of 7 and 4 of 6 where the generated one was. The writer reliably takes the real screen for the generated
+one. A reading, untested: real screens carry more irregularity at the scale of several repeats (rows that bow, spacing
+that wanders, a photo's perspective) than the generator's jitter and drift, and the writer reads that as "where we are
+periodically adding chaos" (C-036). With one judge whose cue runs backwards, these picks say the generator's designs
+don't stand out; they can't say the designs look real (T-046).
+
+**Claim:** shown as masks, whole screens composed by the generator in the four layouts real jalis use were picked out
+in 3 of 14 rows, and smoothing both sides' edges left the pattern rows where they were (4 of 12). Over three picks one
+judge took real jalis for generated ones in 43 of 62 rows.
+
+**Changes made:** `engine/core/jali-design.js` (`layout`, `composeLayout`, `LAYOUT_DEFAULTS`), `engine/check/jali-compose.mjs`,
+`tools/jali_blind.py` (`make3`, `score3`), `runs/c037/`; `pieces/jali/grammar.md`, `processes/primitives.md`
+(`arch-frame`), `threads.md` (T-045 answered, T-046).
+
+**Closed:** 2026-11-22
 
 ---
 

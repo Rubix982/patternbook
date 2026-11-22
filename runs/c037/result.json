@@ -1,0 +1,265 @@
+{
+ "code": "LLLRLRRRLLLLLLRRLLLLLLLLLL",
+ "rows": [
+  {
+   "row": 1,
+   "block": "whole",
+   "generated_id": "screen-01",
+   "real_id": "vam-O40069",
+   "layout": "B",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 2,
+   "block": "whole",
+   "generated_id": "screen-02",
+   "real_id": "vam-O40077",
+   "layout": "B",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 3,
+   "block": "whole",
+   "generated_id": "screen-03",
+   "real_id": "met-453344",
+   "layout": "C",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "row": 4,
+   "block": "whole",
+   "generated_id": "screen-04",
+   "real_id": "vam-O40068",
+   "layout": "B",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "row": 5,
+   "block": "whole",
+   "generated_id": "screen-05",
+   "real_id": "vam-O470734",
+   "layout": "D",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 6,
+   "block": "whole",
+   "generated_id": "screen-06",
+   "real_id": "vam-O40065",
+   "layout": "A",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "row": 7,
+   "block": "whole",
+   "generated_id": "screen-07",
+   "real_id": "vam-O15488",
+   "layout": "A",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "row": 8,
+   "block": "whole",
+   "generated_id": "screen-08",
+   "real_id": "vam-O40067",
+   "layout": "A",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "row": 9,
+   "block": "whole",
+   "generated_id": "screen-09",
+   "real_id": "met-453241",
+   "layout": "A",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "row": 10,
+   "block": "whole",
+   "generated_id": "screen-10",
+   "real_id": "vam-O40070",
+   "layout": "B",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 11,
+   "block": "whole",
+   "generated_id": "screen-11",
+   "real_id": "vam-O40078",
+   "layout": "B",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 12,
+   "block": "whole",
+   "generated_id": "screen-12",
+   "real_id": "met-453343",
+   "layout": "C",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "row": 13,
+   "block": "whole",
+   "generated_id": "screen-13",
+   "real_id": "vam-O40071",
+   "layout": "B",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 14,
+   "block": "whole",
+   "generated_id": "screen-14",
+   "real_id": "vam-O40073",
+   "layout": "A",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 15,
+   "block": "pattern",
+   "generated_id": "design-22",
+   "real_id": "vam-O40078",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "row": 16,
+   "block": "pattern",
+   "generated_id": "design-11",
+   "real_id": "vam-O40070",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "row": 17,
+   "block": "pattern",
+   "generated_id": "design-27",
+   "real_id": "met-453343",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "row": 18,
+   "block": "pattern",
+   "generated_id": "design-02",
+   "real_id": "vam-O167205",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 19,
+   "block": "pattern",
+   "generated_id": "design-01",
+   "real_id": "vam-O40071",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 20,
+   "block": "pattern",
+   "generated_id": "design-07",
+   "real_id": "vam-O15488",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "row": 21,
+   "block": "pattern",
+   "generated_id": "design-17",
+   "real_id": "vam-O40067",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 22,
+   "block": "pattern",
+   "generated_id": "design-26",
+   "real_id": "vam-O442441",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "row": 23,
+   "block": "pattern",
+   "generated_id": "design-12",
+   "real_id": "vam-O40077",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "row": 24,
+   "block": "pattern",
+   "generated_id": "design-20",
+   "real_id": "vam-O40065",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 25,
+   "block": "pattern",
+   "generated_id": "design-16",
+   "real_id": "met-453344",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  },
+  {
+   "row": 26,
+   "block": "pattern",
+   "generated_id": "design-13",
+   "real_id": "vam-O40069",
+   "generated": "R",
+   "picked": "L",
+   "correct": false
+  }
+ ],
+ "by_block": {
+  "whole": {
+   "correct": 3,
+   "of": 14,
+   "picked_left": 10
+  },
+  "pattern": {
+   "correct": 4,
+   "of": 12,
+   "picked_left": 10
+  }
+ }
+}

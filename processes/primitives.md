@@ -910,7 +910,11 @@ rectangle, a cusped one has small lobes of stone along its curves.
 $\sqrt{R^2-(R-W/2)^2}$; a point is in the arch if within $R$ of both centres; cusps are discs of radius $0.055W$ at
 five even steps along each arc.
 **Helpers:** `engine/core/jali-design.js` (`frameField`).
-**Entered:** C-032. The cusps read as steps rather than lobes (`runs/c032/designs-sheet.jpg`).
+**Entered:** C-032. The cusps read as steps rather than lobes (`runs/c032/designs-sheet.jpg`). **C-037** adds real
+jalis' four layouts round the field (`composeLayout`): a plain margin; plain sides with a wider top and a pointed arch of
+radius 0.55 to 0.63 of the field's width with a solid moulding band inside its edge; a band of small pierced motifs
+(quatrefoils, crosses or diamonds, 1.4 band widths apart) with pierced spandrels outside the moulding; a thin edge, a
+band and a rectangle. Proportions from C-034's measures; C's and D's bands read by eye.
 
 ### carving-errors
 **Name:** what the carving got slightly wrong

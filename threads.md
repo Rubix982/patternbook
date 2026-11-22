@@ -448,5 +448,19 @@ overshoots.
 screens for generated ones, and said they could see "where we are periodically adding chaos". If the cue is a photo
 mask's ragged edge, a pick with the real crops' edges smoothed like the designs' should bring the count back to chance
 or above; if it isn't, the cue is in the pattern.
-**Answer:** —
+**Answer:** C-037: smoothed alike, the same rows scored 4 of 12 again; the edges weren't the cue. The writer still took
+the real screen for the generated one in most rows (T-046).
 
+
+
+### T-046 · How should realism be judged, once one judge's cue runs backwards?
+
+**Status:** open
+**Parent:** C-037
+**Opened:** 2026-11-22
+**Question:** Over C-035 to C-037 the writer picked the generated jali in 19 of 62 rows (about 1 in 600 by chance),
+reliably taking real ones for generated. Candidates: other judges who haven't seen the samples (T-015); control rows
+in the same pick (real beside real, generated beside generated) to show a judge's lean; asking "which is real?" in half
+the rows; and a reading of the real screens' irregularity at the scale of several repeats, so the generator can carry it.
+**Answer:** —
+\n
