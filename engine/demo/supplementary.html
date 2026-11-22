@@ -28,7 +28,7 @@
   <p class="lede">The primitive <code>supplementary-weft</code> (card C-020): an extra, thicker weft laid over a woven
     ground along pattern lines, on the face only where the figure is, tied down by a binding warp end every few ends.
     Discontinuous (jamdani, Banarasi kadhua), continuous (floats on the back) or cutwork (the back's floats clipped);
-    switch to the back to tell them apart. Served pages only (GitHub Pages or <code>python3 -m http.server</code>).</p>
+    switch to the back to tell them apart.</p>
   <div class="wrap">
     <canvas id="c" width="560" height="560"></canvas>
     <form id="f">
@@ -59,9 +59,10 @@
     </form>
   </div>
 </main>
-<script type="module">
-  import { STRUCTURES, paint, DEFAULTS } from '../core/weave.js';
-  import { figured, MOTIFS, layout, band } from '../core/supplementary.js';
+<script src="../engine.js"></script>
+<script>
+  const { STRUCTURES, paint, DEFAULTS } = PatternbookEngine.weave;
+  const { figured, MOTIFS, layout, band } = PatternbookEngine.supplementary;
   const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
   for (const n of Object.keys(STRUCTURES)) f.elements.ground.add(new Option(n, n));
   const colours = (s, d) => { const v = s.split(/[\s,]+/).filter((x) => /^#?[0-9a-f]{6}$/i.test(x)).map((x) => (x[0] === '#' ? x : '#' + x)); return v.length ? v : d; };

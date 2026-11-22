@@ -28,8 +28,7 @@
   <h1>Weave from a draft</h1>
   <p class="lede">The primitive <code>weave-draft</code> (card C-019): which warp end is over the weft at each crossing,
     and cloth drawn from it with the imperfections of hand weaving. Colour orders repeat across the ends and down the
-    picks, so stripes and checks come from the order alone. Served pages only: open it from GitHub Pages or a local
-    server (<code>python3 -m http.server</code>), since it loads the engine as a module.</p>
+    picks, so stripes and checks come from the order alone.</p>
   <div class="wrap">
     <canvas id="c" width="560" height="560"></canvas>
     <form id="f">
@@ -55,8 +54,9 @@
     </form>
   </div>
 </main>
-<script type="module">
-  import { STRUCTURES, cloth, paint, drawdown } from '../core/weave.js';
+<script src="../engine.js"></script>
+<script>
+  const { STRUCTURES, cloth, paint, drawdown } = PatternbookEngine.weave;
   const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
   const sel = f.elements.structure;
   for (const n of Object.keys(STRUCTURES)) sel.add(new Option(n, n));
