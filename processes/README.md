@@ -37,7 +37,7 @@ the treatments that apply looks to pages in `treatments/`.
 Any implementation of a process is a model of it, credited to whoever made it:
 
 - **patternbook's own treatments and primitives** (`treatments/`, `engine/`). Their theory is on the process pages and
-  in `primitives.md`; `treatments/theory/` keeps one-line pointers to where each note went.
+  in `primitives.md`.
 - **Lumenary** by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary). His engine is the base of `engine/`
   (see `../NOTICE.md`); his theory data and theory pages are in `sources/`, as received. Each process page
   carries his models in full, credited; improvements are offered back to him.

@@ -1,3 +1,7 @@
+_Note (2026-11-22): kept as C-014's agents read it. The bundle it names is now `engine/engine.js`, which sets
+`window.PatternbookEngine` (the same functions are `PatternbookEngine.studio`), and the catalogue is
+`engine/CATALOG.md`._
+
 # Using the Lumenary image engine in a page
 
 Lumenary (by Mursal Furqan Kumbhar) is a library of 214 image treatments: print processes,

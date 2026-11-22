@@ -182,8 +182,8 @@ the process it imitates in <code>processes/</code>.</p>
       (t.kind === 'live' ? ' · live' : ' · still') + '<br>' + (t.blurb || '') +
       (file ? '<br><span class="k">Theory and maths: <code>processes/sources/theory-pages/' + file + '</code></span>' : '');
     var snippet = t.kind === 'live'
-      ? "// Live treatments run as animations:\nLumenary.animate('" + t.id + "', sourceCanvas, " + JSON.stringify(params) + ", targetCanvas);"
-      : "// On a patternbook page, after loading lumenary/lumenary.js and treatments.js:\nTreatments.treatAll('svg[role=img]', { treatment: 'lumenary:" + t.id + "', params: " + JSON.stringify(params) + " });";
+      ? "// Live styles run as animations:\nPatternbookEngine.studio.animate('" + t.id + "', sourceCanvas, " + JSON.stringify(params) + ", targetCanvas);"
+      : "// On a patternbook page, after loading ../engine/engine.js and treatments.js:\nTreatments.treatAll('svg[role=img]', { treatment: 'style:" + t.id + "', params: " + JSON.stringify(params) + " });";
     $('usage').innerHTML = '<pre>' + snippet.replace(/</g, '&lt;') + '</pre>';
   }
 
