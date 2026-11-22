@@ -14,6 +14,82 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-035 · Can the writer tell the generator's patterns from real jalis' when the photograph, the labels and the frame are taken away?
+
+**Status:** open
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-033 gave the generator real jalis' measured irregularity (meeting points off by 0.048 of a lattice step, drifting
+0.16 over three), and the writer, looking at a labelled sheet of designs beside a real screen, finds it harder to tell
+which is real. C-032 designed a blind pick for this and never ran it, because its designs failed the measuring first.
+
+**2. What we are doing.**
+Run C-032's blind pick on the generator as it is now: 12 pairs, each a generated design and a real jali, shown as
+masks (solid dark, open light), cropped to five repeats round the field's centre, scaled so the repeats match, blurred
+and thresholded alike, left and right at random, no labels; the writer clicks the one they think was generated. The
+generated designs are the first 12 drawn by C-032's rule (continuing past design 24 if needed) that measure inside real
+jalis' ranges, with the measured irregularity; the real ones are the 12 of C-031's 15 geometric jalis picked by seed 32.
+
+**3. Why.**
+We don't know whether the writer's impression holds when nothing but the pattern is left to judge, and C-036 needs the
+number this gives as its starting point.
+
+**4. What is affected.**
+- `tools/jali_blind.py`, `engine/check/jali-blind.mjs`, `runs/c035/` (the designs, their measures, the key and the
+  result). The pick page and the real crops stay on this machine (`runs/c035/blind/`, git-ignored), since the V&A's
+  photos are free for non-commercial use only.
+- C-036's starting number.
+
+**5. Conclusion.**
+- **If** the writer picks the generated one in 10 or more of 12 (1 in 50 by guessing) → the patterns still give
+  themselves away; the card records what the writer says gave them away.
+- **If** 9 or fewer → at the level of the pattern (as masks, five repeats, no frame) the writer can't reliably tell
+  generated from real.
+- Either way the count is C-036's starting point.
+
+**6. If not done.**
+The writer's impression stays unmeasured, and C-036 can't show whether uneven bars help.
+
+**Limits (known before running):** one judge, who has seen these real screens on earlier sheets and may recognise them;
+the generator's six tilings don't include the girih rosettes of some real screens, so a pattern's family may give it
+away apart from how it is drawn; masks from photographs keep some of a photo's noise after the blur and threshold.
+
+---
+
+## C-036 · Do bars cut one by one, from uneven stone, and worn by time, make generated jalis harder to tell from real ones?
+
+**Status:** drafted. Opens after C-035, with its count as the starting point.
+
+**1. Where we are.**
+How much bars differ from one another, each read by its median width (a check before this card, 2026-11-22):
+
+| What's compared | How much bars differ from one another |
+|---|---|
+| The generator's exact designs | 1 to 6 % |
+| The clean 19th-century V&A panels | 5 to 14 % |
+| The two 16th-century Met screens | about 85 % |
+
+The two Met screens stood in buildings for centuries, which fits the writer's point that time wears them further. It
+isn't proof: they also have the finest bars in the smallest photos, which inflates the reading. Along a single bar the
+clean real ones are fairly even (2 to 6 %). The generator's `hand` dial varies width smoothly across neighbouring bars;
+at its strongest it reaches about 9 % between bars.
+
+**2. What we are doing.** (To be written at opening.) Model unevenness as three processes, each with its own dial:
+1. **Cutting: each bar its own width.** Every bar between two meeting points gets its own width, drawn round the bar
+   width with a spread of roughly 8 to 12 %, from the clean panels. Every screen comes out different and can still be
+   remade from its seed.
+2. **The stone itself.** Sandstone has softer and harder layers, so it wears in bands running one way. A hypothesis,
+   not measured.
+3. **Age.** Erosion follows exposure: thin bars and edges go first, the top and outer face more than the inside, dirt
+   gathers in hollows. One `age` dial from freshly cut, like the 19th-century panels, to centuries in place, like the
+   Met screens; with only two or three old screens it is a weak first calibration, and labelled as one.
+Then the same blind pick as C-035, on designs drawn with them.
+
+**3 to 6.** Written at opening, with C-035's count.
+
+---
+
 ## C-034 · What is a jali's composition beyond its pattern, and do a few layouts cover most real screens?
 
 **Status:** closed

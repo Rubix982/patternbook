@@ -1,0 +1,103 @@
+{
+ "code": "LLRRRLRRRRRR",
+ "correct": 5,
+ "of": 12,
+ "pairs": [
+  {
+   "pair": 1,
+   "left": "design-27",
+   "right": "vam-O40065",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "pair": 2,
+   "left": "design-02",
+   "right": "vam-O40071",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "pair": 3,
+   "left": "vam-O15488",
+   "right": "design-12",
+   "generated": "R",
+   "picked": "R",
+   "correct": true
+  },
+  {
+   "pair": 4,
+   "left": "design-01",
+   "right": "vam-O40070",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "pair": 5,
+   "left": "design-16",
+   "right": "met-453343",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "pair": 6,
+   "left": "design-11",
+   "right": "vam-O442441",
+   "generated": "L",
+   "picked": "L",
+   "correct": true
+  },
+  {
+   "pair": 7,
+   "left": "design-17",
+   "right": "met-453344",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "pair": 8,
+   "left": "design-22",
+   "right": "vam-O40067",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "pair": 9,
+   "left": "design-26",
+   "right": "vam-O167205",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "pair": 10,
+   "left": "vam-O40078",
+   "right": "design-07",
+   "generated": "R",
+   "picked": "R",
+   "correct": true
+  },
+  {
+   "pair": 11,
+   "left": "design-13",
+   "right": "vam-O40069",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  },
+  {
+   "pair": 12,
+   "left": "design-20",
+   "right": "vam-O40077",
+   "generated": "L",
+   "picked": "R",
+   "correct": false
+  }
+ ]
+}
