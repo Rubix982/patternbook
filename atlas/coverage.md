@@ -1,0 +1,122 @@
+# Coverage
+
+_Generated from the domain files by `runs/c015/merge_atlas.py` (C-015, 2026-11-22); not edited by hand._
+
+**755 elements** across 10 domains, **796 candidate branches**. 222 were in the first-pass sketch; **533 (71%) were found only by the sources.** 14 elements are filed in one domain and linked from another.
+
+## By domain and family
+
+| domain | family | elements | candidate branches | in first pass |
+|---|---|---|---|---|
+| Architecture | Openings, screens and gateways | 9 | 4 | 4 |
+| Architecture | Roofs, domes, towers and finials | 16 | 17 | 8 |
+| Architecture | Arches, pillars, brackets and eaves | 13 | 0 | 6 |
+| Architecture | Temple plan and parts | 13 | 3 | 1 |
+| Architecture | Buddhist and Himalayan monastic buildings | 11 | 4 | 2 |
+| Architecture | Buildings for worship and commemoration | 9 | 5 | 6 |
+| Architecture | Houses, palaces, forts and civic buildings | 18 | 3 | 6 |
+| Architecture | Rest houses and travellers' lodgings | 6 | 1 | 1 |
+| Architecture | Courts, halls and pavilions | 9 | 2 | 4 |
+| Architecture | Surfaces and ornament | 15 | 7 | 5 |
+| Architecture | Materials and construction techniques | 12 | 0 | 6 |
+| Architecture | Lineages | 53 | 14 | 26 |
+| **Architecture** | | **184** | **60** | **75** |
+| Gardens and water | Gardens | 3 | 3 | 2 |
+| Gardens and water | Garden water features | 4 | 0 | 2 |
+| Gardens and water | Stepped water: wells, tanks and ghats | 5 | 11 | 3 |
+| Gardens and water | Water supply and harvesting | 4 | 0 | 0 |
+| **Gardens and water** | | **16** | **14** | **7** |
+| Textiles and dress | Printing, painting and resist dyeing of cloth | 11 | 31 | 6 |
+| Textiles and dress | Patterned handloom weaving (saris and yardage) | 8 | 95 | 5 |
+| Textiles and dress | Named handwoven cloths and furnishings | 17 | 14 | 1 |
+| Textiles and dress | Fibres and silks | 7 | 7 | 0 |
+| Textiles and dress | Himalayan and north-eastern loom textiles | 7 | 35 | 0 |
+| Textiles and dress | Shawls and woollens | 14 | 13 | 1 |
+| Textiles and dress | Carpets, durries and floor textiles | 6 | 15 | 2 |
+| Textiles and dress | Embroidery | 24 | 67 | 9 |
+| Textiles and dress | Metal-thread work and trims | 8 | 6 | 3 |
+| Textiles and dress | Appliqué, patchwork and quilts | 8 | 3 | 1 |
+| Textiles and dress | Draped and wrapped garments | 25 | 23 | 3 |
+| Textiles and dress | Upper garments | 27 | 5 | 3 |
+| Textiles and dress | Lower garments | 18 | 10 | 2 |
+| Textiles and dress | Ensembles and named regional dress | 18 | 14 | 1 |
+| Textiles and dress | Headgear | 21 | 12 | 1 |
+| Textiles and dress | Footwear | 8 | 6 | 3 |
+| **Textiles and dress** | | **227** | **356** | **41** |
+| Jewellery and adornment | Head and hair ornaments | 7 | 0 | 2 |
+| Jewellery and adornment | Ear ornaments | 6 | 0 | 2 |
+| Jewellery and adornment | Nose ornaments | 1 | 7 | 1 |
+| Jewellery and adornment | Neck ornaments | 7 | 10 | 2 |
+| Jewellery and adornment | Arm, wrist and hand ornaments | 5 | 8 | 2 |
+| Jewellery and adornment | Waist ornaments | 2 | 0 | 0 |
+| Jewellery and adornment | Ankle and foot ornaments | 2 | 3 | 1 |
+| Jewellery and adornment | Techniques and named styles | 8 | 7 | 5 |
+| Jewellery and adornment | Bead and stone materials | 2 | 2 | 0 |
+| Jewellery and adornment | Regional jewellery traditions | 5 | 43 | 0 |
+| **Jewellery and adornment** | | **45** | **80** | **15** |
+| Body and floor | Floor and threshold drawing | 10 | 15 | 5 |
+| Body and floor | Skin decoration | 6 | 0 | 2 |
+| Body and floor | Hair adornment | 2 | 1 | 1 |
+| **Body and floor** | | **18** | **16** | **8** |
+| Painting and depiction | Court and manuscript painting | 12 | 38 | 6 |
+| Painting and depiction | Scroll, cloth and pata painting | 6 | 9 | 5 |
+| Painting and depiction | Himalayan Buddhist painting | 2 | 1 | 1 |
+| Painting and depiction | Folk, tribal and wall painting | 11 | 9 | 3 |
+| Painting and depiction | Murals and frescoes | 9 | 13 | 3 |
+| Painting and depiction | Company, academic and modern painting | 4 | 9 | 3 |
+| Painting and depiction | Popular images and prints | 4 | 1 | 3 |
+| **Painting and depiction** | | **48** | **80** | **24** |
+| Objects and crafts | Ceramics, terracotta and tile | 13 | 15 | 3 |
+| Objects and crafts | Archaeological pottery wares | 8 | 12 | 0 |
+| Objects and crafts | Metalwork | 18 | 32 | 6 |
+| Objects and crafts | Woodwork | 6 | 17 | 4 |
+| Objects and crafts | Furniture | 4 | 1 | 2 |
+| Objects and crafts | Stone carving and inlay | 2 | 13 | 1 |
+| Objects and crafts | Paper, papier-mâché and pith | 4 | 16 | 2 |
+| Objects and crafts | Fibre, grass, cane and bamboo | 11 | 5 | 0 |
+| Objects and crafts | Glass, horn, bone and shell | 5 | 8 | 0 |
+| Objects and crafts | Leatherwork | 2 | 0 | 0 |
+| Objects and crafts | Lighting | 3 | 3 | 2 |
+| Objects and crafts | Household vessels and smoking pipes | 2 | 0 | 2 |
+| Objects and crafts | Toys, dolls and games | 8 | 16 | 1 |
+| Objects and crafts | Puppets | 3 | 11 | 1 |
+| Objects and crafts | Masks | 6 | 0 | 0 |
+| Objects and crafts | Musical instrument making | 9 | 10 | 0 |
+| Objects and crafts | GI handicrafts not placed by the fetched sources | 13 | 6 | 0 |
+| **Objects and crafts** | | **117** | **165** | **24** |
+| Script and lettering | Perso-Arabic calligraphic hands | 5 | 3 | 4 |
+| Script and lettering | Perso-Arabic alphabets of subcontinental languages | 3 | 0 | 2 |
+| Script and lettering | Brahmic scripts in current use | 19 | 0 | 5 |
+| Script and lettering | Historical and regional scripts | 14 | 2 | 0 |
+| Script and lettering | Other Brahmic scripts listed in Category:Brahmic scripts (not read) | 18 | 0 | 0 |
+| Script and lettering | Writing surfaces and lettering in public places | 4 | 3 | 4 |
+| **Script and lettering** | | **63** | **8** | **15** |
+| Street, transport and signs | Decorated goods vehicles | 3 | 10 | 3 |
+| Street, transport and signs | Rickshaws and small passenger vehicles | 3 | 4 | 3 |
+| Street, transport and signs | Animal-drawn vehicles and draught-animal decoration | 6 | 0 | 1 |
+| Street, transport and signs | Boats | 4 | 0 | 1 |
+| Street, transport and signs | Tents and temporary shelters | 1 | 0 | 1 |
+| **Street, transport and signs** | | **17** | **14** | **9** |
+| Ritual and festival objects | Doorway and festival gateway decorations | 3 | 1 | 2 |
+| Ritual and festival objects | Festival lamps and lanterns | 2 | 0 | 1 |
+| Ritual and festival objects | Kites | 1 | 0 | 1 |
+| Ritual and festival objects | Festival images and processional structures | 10 | 2 | 0 |
+| Ritual and festival objects | Ritual vessels and instruments | 4 | 0 | 0 |
+| **Ritual and festival objects** | | **20** | **3** | **4** |
+
+## Countries the sources name
+
+Counted from the regions column of every element, the same way for all ten domains. An element counts for each country its sources name.
+
+| country | elements |
+|---|---|
+| India | 504 |
+| Pakistan | 165 |
+| Bangladesh | 65 |
+| Nepal | 53 |
+| Bhutan | 31 |
+| Sri Lanka | 69 |
+| Maldives | 9 |
+| none named | 95 |
+
+334 elements (44%) are attested for India alone. This is the sources' bias as much as the subject's: English Wikipedia has far more articles, categories and registered geographical indications for India than for its neighbours (see `atlas/README.md`, Limits).

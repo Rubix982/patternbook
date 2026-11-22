@@ -121,3 +121,24 @@ value is just *any* specific instruction, not human sources.
 **Opened:** 2026-11-16
 **Question:** Every pick so far has one judge. Saif: "we can explore more usages and see what people would like." Run the existing blind pairs (C-008, C-011, C-014) past a few other people, including designers, and check whether their picks agree with his.
 **Answer:** —
+
+### T-016 · How far does the atlas's lean toward India come from the sources rather than the subject?
+
+**Status:** open
+**Parent:** C-015
+**Opened:** 2026-11-22
+**Question:** C-015's elements are attested for India 504 times against Pakistan 165, Bangladesh 65, Nepal 53, Bhutan 31
+and the Maldives 9, all from English Wikipedia. Re-enumerate the thinnest countries from other sources (the official
+geographical-indication registers, national craft bodies, museum collections searched by country, Wikipedias in Urdu,
+Sindhi, Punjabi, Bengali, Nepali and Sinhala) and see how much each count moves.
+**Answer:** —
+
+### T-017 · Do the first-pass items C-015 never queried exist under other names?
+
+**Status:** open
+**Parent:** C-015
+**Opened:** 2026-11-22
+**Question:** About 40 first-pass items found no source (`atlas/unattested.md`), and some were never queried for lack
+of budget (railway stations, teak, painted facades, surahi, cinema hoardings). Query each by its other names before
+calling it unattested.
+**Answer:** —

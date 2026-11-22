@@ -14,6 +14,95 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-015 · How much of the subcontinent's made world does a memory sketch miss?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+`docs/atlas.md` has a first pass written from memory: architecture in 8 families and about 77 named elements, nine
+other domains at family level only (about 46 named groups), and no element attested by any source.
+
+**2. What we are doing.**
+Enumerate every domain down to element level from sources (Wikipedia's category trees and list pages through its
+API, Wikidata, and the geographical-indication registers of India, Pakistan and Bangladesh as listed on Wikipedia),
+each element with at least one source URL, its regions (historical and modern country) and any named regional
+varieties as candidate branches; then compare the result with the memory pass. Queries and fetches are saved in
+`runs/c015/`.
+
+**3. Why.**
+We don't know how wide the subject is in countable terms, where memory was thin, or how unevenly the sources cover
+the subcontinent's countries. The permutation passes (one element at a time, with samples) need a list that came
+from sources, or they inherit memory's gaps.
+
+**4. What is affected.**
+- `docs/atlas.md`'s first pass, replaced by per-domain lists in `atlas/`.
+- The order of the permutation passes (thin domains and regions early).
+- The coverage baseline every later pass is measured against.
+
+**5. Conclusion.**
+- **If** elements found only by the sources make up at least 25 % of the final list → we claim *a memory sketch is
+  not a fit basis for the atlas*, and every later pass starts from sources.
+- **If** under 25 % → we claim *the memory sketch was a fair skeleton*, and sources mainly add attestations and
+  branches.
+- Either way: memory items no source attests are kept out of the atlas (listed separately, not deleted), and the
+  share of elements attested only for India, against those attested for Pakistan, Bangladesh, Sri Lanka, Nepal,
+  Bhutan or the Maldives, is recorded as the sources' bias to correct in sampling.
+
+**6. If not done.**
+Every permutation pass starts from a list one person remembered, and the atlas's gaps become invisible.
+
+**Limits (known before running):** Wikipedia's categories are uneven and partly English-language framing; a Wikipedia
+article attests that an element is named and documented, not what it looks like (that is the samples' job); "element"
+against "branch" is a judgment call, recorded where it was hard.
+
+**Result (2026-11-22):** first branch. **Of 755 elements found, 533 (71 %) came only from the sources.** A memory
+sketch is not a fit basis for the atlas; every later pass starts from sources.
+
+Three passes ran in parallel (architecture and gardens; textiles, jewellery and body; painting, crafts, script,
+street and ritual), about 230 requests to English Wikipedia's API between them. Merged, with 14 elements found twice
+filed once and four homonyms qualified:
+
+| Domain | Elements | Candidate branches | In the first pass |
+|---|---|---|---|
+| Architecture | 184 | 60 | 75 |
+| Gardens and water | 16 | 14 | 7 |
+| Textiles and dress | 227 | 356 | 41 |
+| Jewellery and adornment | 45 | 80 | 15 |
+| Body and floor | 18 | 16 | 8 |
+| Painting and depiction | 48 | 80 | 24 |
+| Objects and crafts | 117 | 165 | 24 |
+| Script and lettering | 63 | 8 | 15 |
+| Street, transport and signs | 17 | 14 | 9 |
+| Ritual and festival objects | 20 | 3 | 4 |
+| **Total** | **755** (94 families) | **796** | **222** |
+
+**What memory missed most:** Sri Lanka, Nepal, Bhutan and north-east India almost entirely (moonstones and guard
+stones, dhunge dhara water spouts, Bhutan's thirteen arts, the Mizo puan and the mekhela sador); the parts of a temple;
+Bengal's chala and ratna roofs; rest houses as a building type; the sari's named drapes (about 20) and about 80 named
+handloom weaves; appliqué and metal-thread work; puppets and masks; about 40 scripts; archaeological wares.
+About 40 first-pass items found no source (`atlas/unattested.md`).
+
+**The sources' bias, recorded:** elements attested for India 504, Pakistan 165, Sri Lanka 69, Bangladesh 65, Nepal 53,
+Bhutan 31, Maldives 9; 95 name no country; 334 (44 %) are attested for India alone.
+
+**Limits that matter:** English Wikipedia only; India's geographical-indication table shows only part of the 822 it
+claims, Pakistan has no list there and Bangladesh's is incomplete; about 50 rows rest on a navigation box or category
+membership; some regions were inferred, not read (flagged in `atlas/judgment-calls.md`); rate limiting left some
+first-pass items unqueried (unconfirmed, not disproved). All in `atlas/README.md`.
+
+**Changes made:**
+- `atlas/`: ten domain files, `coverage.md`, `unattested.md`, `boundary.md`, `judgment-calls.md`, `README.md`.
+- `runs/c015/`: the three passes' full output, their request logs, `merge_atlas.py`, `stats.json`, and the memory
+  sketch the card checked.
+- `docs/atlas.md`: the memory sketch replaced by the enumeration's summary; the order of work now puts correcting
+  the sources' bias before the first samples.
+- T-016 opened: the sources' bias. T-017 opened: first-pass items never queried.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-014 · Does giving an agent the Lumenary engine move its pages off the AI look?
 
 **Status:** closed
