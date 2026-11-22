@@ -16,7 +16,7 @@ var PatternbookEngine = (() => {
     }
     return to;
   };
-  var __toCommonJS = (mod5) => __copyProps(__defProp({}, "__esModule", { value: true }), mod5);
+  var __toCommonJS = (mod6) => __copyProps(__defProp({}, "__esModule", { value: true }), mod6);
 
   // engine/index.js
   var engine_exports = {};
@@ -26,6 +26,7 @@ var PatternbookEngine = (() => {
     dye: () => dye_exports,
     field: () => field_exports,
     kantha: () => kantha_exports,
+    mirror: () => mirror_exports,
     random: () => random_exports,
     supplementary: () => supplementary_exports,
     weave: () => weave_exports
@@ -502,7 +503,8 @@ var PatternbookEngine = (() => {
     arcLength: () => arcLength,
     chained: () => chained,
     holes: () => holes,
-    stitch: () => stitch
+    stitch: () => stitch,
+    straight: () => straight
   });
   var hexRgb4 = (h) => {
     const n = parseInt(String(h).replace("#", ""), 16);
@@ -593,10 +595,9 @@ var PatternbookEngine = (() => {
     const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / l2));
     return [Math.hypot(px - ax - t * dx, py - ay - t * dy), t];
   }
-  function stitch(img, paths, opts = {}) {
-    const o = { ...CHAIN_DEFAULTS, ...opts };
+  function threadPainter(img, o) {
     const { width: W, height: H, rgb, top } = img;
-    const C = hexRgb4(o.colour), seed = o.seed || 1, half = o.thread / 2;
+    const C = hexRgb4(o.colour), half = o.thread / 2;
     const put = (x, y, d, along, across) => {
       if (x < 0 || y < 0 || x >= W || y >= H) return;
       let sh = 1 - o.round * 0.5 * (d / half) ** 2;
@@ -617,6 +618,16 @@ var PatternbookEngine = (() => {
         if (d < taper) put(x, y, d * (half / taper), t * len, d / taper);
       }
     };
+    return { put, tube, half };
+  }
+  function straight(img, segments, opts = {}) {
+    const o = { ...CHAIN_DEFAULTS, ...opts }, { tube, half } = threadPainter(img, o);
+    for (const [[ax, ay], [bx, by]] of segments) tube(ax, ay, bx, by, half * (o.widen ?? 1));
+    return img;
+  }
+  function stitch(img, paths, opts = {}) {
+    const o = { ...CHAIN_DEFAULTS, ...opts };
+    const seed = o.seed || 1, { put, tube, half } = threadPainter(img, o);
     for (const [pi, path] of paths.entries()) {
       const P = holes(path, { link: o.link, jitter: o.jitter, wander: o.wander, seed: seed + pi * 13 });
       for (let k = 0; k + 1 < P.length; k++) {
@@ -1039,5 +1050,143 @@ var PatternbookEngine = (() => {
     frame: (x0, y0, x1, y1, w) => (x, y) => x >= x0 && x < x1 && y >= y0 && y < y1 && !(x >= x0 + w && x < x1 - w && y >= y0 + w && y < y1 - w) ? 1 : 0,
     union: (...ms) => (x, y) => Math.max(...ms.map((m) => m(x, y)))
   };
+
+  // engine/core/mirror.js
+  var mirror_exports = {};
+  __export(mirror_exports, {
+    MIRROR_DEFAULTS: () => MIRROR_DEFAULTS,
+    lattice: () => lattice,
+    mirrored: () => mirrored,
+    openingRadius: () => openingRadius
+  });
+  var hexRgb6 = (h) => {
+    const n = parseInt(String(h).replace("#", ""), 16);
+    return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255];
+  };
+  var mod5 = (a, n) => (a % n + n) % n;
+  var smooth = (a, b, x) => {
+    const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+    return t * t * (3 - 2 * t);
+  };
+  var MIRROR_DEFAULTS = {
+    // the ring
+    grid: 4,
+    pull: 0.7,
+    overlap: 0.2,
+    reach: 0.3,
+    link: 4,
+    loop: 2.6,
+    thread: 1.6,
+    ring: "shisha",
+    colour: "#c8452a",
+    // the glass and what it reflects
+    curve: 0.5,
+    tilt: 0.12,
+    light: [0.25, -0.35],
+    glint: 0.12,
+    room: "#56606c",
+    ceiling: "#c4ced6",
+    lamp: "#fffaf0",
+    // the hand
+    roundness: 0.05,
+    offset: 0.04,
+    turn: 8,
+    jitter: 0.12,
+    wanderLeg: 0.15,
+    tarnish: 0.05
+  };
+  function openingRadius(n, pull, a0, mean) {
+    if (!n) return () => mean;
+    const half = Math.PI / n, secMean = Math.log(1 / Math.cos(half) + Math.tan(half)) / half;
+    const apothem = mean / (1 + (1 - pull) * (secMean - 1));
+    return (a) => {
+      const phi = mod5(a - a0 + half, 2 * half) - half;
+      return apothem * (1 + (1 - pull) * (1 / Math.cos(phi) - 1));
+    };
+  }
+  function mirrored(opts) {
+    const o = { ...MIRROR_DEFAULTS, ...opts };
+    const W = o.width, H = o.height, seed = o.seed || 1;
+    const img = cloth({ ...o, unit: o.ground || STRUCTURES.plain, seed, ground: o.groundColour ?? "#3a3330" });
+    const room = hexRgb6(o.room), ceiling = hexRgb6(o.ceiling), lamp = hexRgb6(o.lamp);
+    const out = [];
+    for (const [m, mi] of (o.mirrors || []).entries()) {
+      const { x: cx, y: cy, r } = mi, h = (k) => hash2(m, k, seed + 211) * 2 - 1;
+      const harm = [2, 3, 4].map((k, i) => [k, h(1 + i) / k, Math.PI * h(4 + i)]);
+      const R = (a) => r * (1 + o.roundness * harm.reduce((s, [k, amp, ph]) => s + amp * Math.cos(k * a + ph), 0));
+      const tx = o.tilt * h(7), ty = o.tilt * h(8);
+      const oa = Math.PI * h(9), od = o.offset * r * Math.abs(h(10));
+      const ox = cx + od * Math.cos(oa), oy = cy + od * Math.sin(oa);
+      const ro = openingRadius(o.grid, o.pull, o.turn * h(11) * Math.PI / 180, r * (1 - o.overlap));
+      const x0 = Math.max(0, Math.floor(cx - 1.3 * r)), x1 = Math.min(W - 1, Math.ceil(cx + 1.3 * r));
+      const y0 = Math.max(0, Math.floor(cy - 1.3 * r)), y1 = Math.min(H - 1, Math.ceil(cy + 1.3 * r));
+      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+        const dx = x + 0.5 - cx, dy = y + 0.5 - cy, d = Math.hypot(dx, dy), a = Math.atan2(dy, dx), Ra = R(a);
+        if (d >= Ra) continue;
+        let nx = o.curve * (dx / r) + tx, ny = o.curve * (dy / r) + ty, nz = 1;
+        const nl = Math.hypot(nx, ny, nz);
+        nx /= nl;
+        ny /= nl;
+        nz /= nl;
+        const rx = 2 * nz * nx, ry = 2 * nz * ny;
+        const up = smooth(-1, 1, -ry * 2.2);
+        const g = Math.exp(-((rx - o.light[0]) ** 2 + (ry - o.light[1]) ** 2) / (2 * o.glint ** 2));
+        const wear = (1 - 0.3 * smooth(0.88, 1, d / Ra)) * (1 - o.tarnish * (0.5 + 0.5 * noise2(x / 5, y / 5, seed + 223 + m)));
+        const p = (y * W + x) * 3;
+        for (let c = 0; c < 3; c++) img.rgb[p + c] = Math.min(1, 0.88 * wear * ((room[c] * (1 - up) + ceiling[c] * up) * (1 - g) + lamp[c] * g));
+        img.top[y * W + x] = 7;
+      }
+      const colour = Array.isArray(o.colours) && o.colours.length ? o.colours[m % o.colours.length] : o.colour;
+      const th = o.thread, thread = { colour, thread: th, link: o.link, loop: o.loop, jitter: o.jitter, wander: 0.1, seed: seed + 307 * (m + 1) };
+      const N = 600, outer = Array.from({ length: N + 1 }, (_, k) => {
+        const a = 2 * Math.PI * k / N;
+        const rr = R(a) + o.reach * r;
+        return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)];
+      });
+      outer[N] = outer[0];
+      const inner = Array.from({ length: N + 1 }, (_, k) => {
+        const a = 2 * Math.PI * k / N;
+        const rr = ro(a);
+        return [ox + rr * Math.cos(a), oy + rr * Math.sin(a)];
+      });
+      inner[N] = inner[0];
+      let stitches = 0;
+      if (o.ring === "chain") {
+        const rows = [inner];
+        for (let k = 1; k * o.loop < o.reach * r + o.overlap * r; k++) {
+          const f = k * o.loop;
+          rows.push(Array.from({ length: N + 1 }, (_, j) => {
+            const a = 2 * Math.PI * j / N;
+            const rr = Math.min(ro(a) + f, R(a) + o.reach * r);
+            return [ox + rr * Math.cos(a), oy + rr * Math.sin(a)];
+          }));
+          rows[rows.length - 1][N] = rows[rows.length - 1][0];
+        }
+        stitch(img, rows, { ...thread, kind: o.rowKind || "chain" });
+      } else {
+        const P = holes(outer, thread);
+        stitches = P.length - 1;
+        const base = [];
+        for (let k = 0; k < stitches; k++) {
+          const a = Math.atan2(P[k][1] - oy, P[k][0] - ox) + o.wanderLeg * (2 * Math.PI / stitches) * h(20 + k);
+          base.push([ox + ro(a) * Math.cos(a), oy + ro(a) * Math.sin(a)]);
+        }
+        straight(img, base.map((b, k) => [b, P[k]]), thread);
+        straight(img, base.map((b, k) => [b, base[(k + 1) % stitches]]), { ...thread, widen: 1.25 });
+        stitch(img, [outer], { ...thread, kind: "chain" });
+      }
+      out.push({ x: cx, y: cy, r, stitches });
+    }
+    return { ...img, mirrors: out };
+  }
+  function lattice(W, H, spacing, r, margin = 0) {
+    const out = [], dy = spacing * Math.sqrt(3) / 2;
+    for (let j = 0; ; j++) {
+      const y = margin + r + j * dy;
+      if (y > H - margin - r) break;
+      for (let x = margin + r + (j % 2 ? spacing / 2 : 0); x <= W - margin - r; x += spacing) out.push({ x, y, r });
+    }
+    return out;
+  }
   return __toCommonJS(engine_exports);
 })();

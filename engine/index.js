@@ -7,3 +7,4 @@ export * as chain from './core/chain.js';
 export * as field from './core/field.js';
 export * as kantha from './core/kantha.js';
 export * as dye from './core/dye.js';
+export * as mirror from './core/mirror.js';

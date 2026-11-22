@@ -103,10 +103,11 @@ function segDist(px, py, ax, ay, bx, by) {
 //   link, loop, thread    link length, loop width and thread thickness, in pixels
 //   jitter, wander, swell  how much link length, the holes' position and loop width vary
 //   twist        the ply's diagonal highlights; round: how strongly the thread's roundness shades it
-export function stitch(img, paths, opts = {}) {
-  const o = { ...CHAIN_DEFAULTS, ...opts };
+// A painter for one thread on an image: `put` lays a pixel of thread (d from the thread's middle, `along` it), `tube`
+// a straight stitch from (ax, ay) to (bx, by) of half-width w, tapered a little at its ends.
+function threadPainter(img, o) {
   const { width: W, height: H, rgb, top } = img;
-  const C = hexRgb(o.colour), seed = o.seed || 1, half = o.thread / 2;
+  const C = hexRgb(o.colour), half = o.thread / 2;
   const put = (x, y, d, along, across) => {
     if (x < 0 || y < 0 || x >= W || y >= H) return;
     let sh = 1 - o.round * 0.5 * (d / half) ** 2;
@@ -125,6 +126,20 @@ export function stitch(img, paths, opts = {}) {
       if (d < taper) put(x, y, d * (half / taper), t * len, d / taper);
     }
   };
+  return { put, tube, half };
+}
+
+// Straight stitches, each a segment [[ax, ay], [bx, by]], in one thread (options as `stitch`: colour, thread, round,
+// twist). Used for the legs and loops of a ring of shisha stitch (C-025).
+export function straight(img, segments, opts = {}) {
+  const o = { ...CHAIN_DEFAULTS, ...opts }, { tube, half } = threadPainter(img, o);
+  for (const [[ax, ay], [bx, by]] of segments) tube(ax, ay, bx, by, half * (o.widen ?? 1));
+  return img;
+}
+
+export function stitch(img, paths, opts = {}) {
+  const o = { ...CHAIN_DEFAULTS, ...opts };
+  const seed = o.seed || 1, { put, tube, half } = threadPainter(img, o);
   for (const [pi, path] of paths.entries()) {
     const P = holes(path, { link: o.link, jitter: o.jitter, wander: o.wander, seed: seed + pi * 13 });
     for (let k = 0; k + 1 < P.length; k++) {

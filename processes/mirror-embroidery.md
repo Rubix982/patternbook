@@ -14,6 +14,9 @@ status: listed
 
 # Mirror embroidery
 
+patternbook's own model of a mirror held by a grid and a ring of shisha stitch is `mirror-inset`
+(`processes/primitives.md`; `engine/core/mirror.js`, C-025).
+
 Listed by C-017 from the models filed under it. Sections 1-7 and 9 of `_template.md` (the process, its constraints, its imperfections, the maths, dials, variants, what it makes, sources) are not written yet.
 
 ## 8. Models

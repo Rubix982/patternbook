@@ -235,3 +235,23 @@ spacing in photographs of dabu once the atlas has samples, and set both from the
 edge differs; a 10-90 % width can't see that, and a 5 % reach was too noisy to use. Candidates: the reach of warp-top and
 weft-top pixels separately, or the area dye covers past the edge per unit of edge. Decide before the next dyeing card.
 **Answer:** —
+
+### T-026 · Does a real shisha opening keep its grid's square, and by how much?
+
+**Status:** open
+**Parent:** C-025
+**Opened:** 2026-11-22
+**Question:** `mirror-inset` pulls a square grid 70 % of the way to a circle, which leaves the opening's order-4 harmonic
+at about 0.9 px on a 24 px mirror. That the opening keeps the square is inferred from tutorials. Measure the opening's
+harmonics in photographs of Sindhi, Kutch and Baloch mirror work once the atlas has samples, and set `pull` from them.
+**Answer:** —
+
+### T-027 · What share of mirrors on a worn piece catch the light, and how far apart are their glints?
+
+**Status:** open
+**Parent:** C-025
+**Opened:** 2026-11-22
+**Question:** with a tilt of up to 0.12 and the lamp where it is, 17 of 23 modelled mirrors glint strongly. Count
+glinting mirrors and their glints' scatter in photographs of mirror work, and set `tilt`, `curve` and the lamp from
+them (older blown-glass mirrors and machine-cut ones separately, if photographs allow).
+**Answer:** —

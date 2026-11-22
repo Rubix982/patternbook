@@ -6,7 +6,7 @@ patternbook's own primitives, written where no Lumenary model covers an operatio
 - `core/`: the primitives, as ES modules with no dependencies: `random.js` (seeded randomness and noise),
   `weave.js` (`weave-draft`, C-019), `supplementary.js` (`supplementary-weft`, C-020), `darning.js`
   (`counted-darning`, C-021), `chain.js` (`chain-stitch`, C-022), `field.js` and `kantha.js` (`contour-rows`,
-  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024).
+  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024), `mirror.js` (`mirror-inset`, C-025).
 - `check/`: each card's read-back check, run with Node (`node engine/check/weave.mjs`), the sheets
   (`node engine/check/weave-sheet.mjs runs/c019/weave-sheet.png`), and the shared read-back code (`readback.mjs`).
 - `demo/`: a page per primitive with every dial. They open straight from disk.
@@ -34,3 +34,8 @@ patternbook's own primitives, written where no Lumenary model covers an operatio
 - **A width can't see what lives in the tail.** Dye wicking along the warp and the weft spreads with the same variance
   in every direction; only its far edge reaches further along the threads. A 10-90 % width of the edge reads it as
   slightly narrower along the threads (C-024).
+- **A control has to be readable at the test's size.** C-025's control for a ring's direction was chain stitch alone;
+  at a 4 px link in a 1.6 px thread it is a solid mesh of one-pixel eyes, 85 % thread, with no direction to read, so it
+  read 23° from radial where at least 45° was set. Look at the control up close before trusting its number.
+- **Don't ask every instance to show what an imperfection can hide.** C-025 asked every mirror to glint; the discs'
+  tilt, which the same card wanted to see, moves some glints under the ring.

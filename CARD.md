@@ -14,6 +14,106 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-025 · Can a mirror be held to cloth by a grid of holding threads and a ring of shisha stitch, so that the opening, the ring's stitches, the grid's shape and the glass's reflection all read back?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-018 found the mirror inset in two Lumenary models only (sindhi-mirror-embroidery, sindhi-topi), with the ring of
+holding stitches and the glass's shine drawn as a radial gradient in their code, not written as equations. Wikipedia's
+shisha page says the mirrors are "attached and surrounded by filling and ladder stitches" in Sindh, that chips of mica
+came first, that mirror discs were made from the Mughal period, and that today's are "machine-cut glass ... with a
+silvered backing"; it does not say how a mirror is held. Embroidery tutorials (Needle 'n Thread) describe the
+traditional shisha stitch as a buttonhole stitch and a chain stitch combined, worked over a square grid of holding
+threads laid across the mirror, passing under more of the grid's threads at its corners.
+
+**2. What we are doing.**
+Write `engine/core/mirror.js`: each mirror a disc of glass, a square grid of holding threads across it, and a ring of
+shisha stitch: a buttonhole loop over the grid at the inner edge, a straight leg out across the glass's rim, and a chain
+stitch into the cloth at the outer edge, one of each per stitch; the glass reflecting a room and a light, by its
+curvature and its tilt. Then read the opening, the ring's stitches, the grid's shape and the reflection back from the
+image.
+
+**3. Why.**
+We don't know whether a ring built stitch by stitch over a grid gives an opening and a ring a reader can measure as the
+process says they should be (an enclosed opening smaller than the glass, legs that radiate, a count set by the chain's
+link, an opening that keeps the grid's square), or whether a curved, tilted glass gives each mirror its own glint.
+
+**4. What is affected.**
+- `engine/core/mirror.js`, its check, sheet and demo; the engine bundle; `engine/core/chain.js` gains an exported
+  straight-stitch painter (its chain and running stitches must draw exactly as before).
+- `processes/primitives.md`: a `mirror-inset` entry; `processes/mirror-embroidery.md`: a pointer.
+- The atlas's shisha, Sindhi and Kutch embroidery, Rabari and Banjara work, Baloch dress.
+
+**5. Conclusion.**
+At the defaults, on a lattice of mirrors, from the image alone (the mirrors' planned centres and sizes are the design
+drawn on the cloth, which a reader knows):
+- opening: every mirror's opening is enclosed by thread (100 % of mirrors), and its area is 40 to 85 % of the glass's;
+- stitches: in the ring's middle, between its inner and outer edges, thread runs within 15° of radial (median), against
+  at least 45° for a ring of chain stitch alone around the same mirrors; the legs counted around that middle are within
+  10 % of the stitches planned, in at least 90 % of mirrors;
+- grid: of the opening outline's harmonics of order 2 to 12, the strongest is order 4 in at least 80 % of mirrors; with
+  no grid (a round opening), order 4's median amplitude is under half of what it is with the grid;
+- reflection: in a curved glass, each opening's brightest 2 % is at least 0.25 brighter than its median in at least
+  90 % of mirrors, and under 0.1 in a flat, untilted glass; the glints' offsets from their mirrors' centres scatter at
+  least 3 times as much with the glasses tilted as with them untilted, and by under 0.05 of a radius untilted.
+- **If** all hold → we claim *mirror work is covered*: the inset, its ring, its grid and its glint.
+- **If** the opening and the stitches hold and the grid doesn't → the ring is right and the opening's shape is not
+  carried by the grid (or the reader can't see it).
+- **If** the reflection fails → the glass is a flat patch and the card says what is missing.
+
+**6. If not done.**
+Shisha, one of the atlas's widest crafts (Sindh, Balochistan, Kutch, Rajasthan, Afghanistan), stays a gradient-filled
+circle in two unshared models.
+
+**Limits (known before running):** the shisha stitch is drawn as its three parts (loop, leg, chain); its knots are not.
+That the opening keeps the grid's square is inferred from the tutorials' corners, not from photographs of old work.
+Curved glass is assumed for older mirrors (cut from blown glass) and is not sourced; modern machine-cut glass is flat,
+which the curvature dial covers. The room the glass reflects is a gradient and a light, not the wearer's surroundings.
+Likeness to real mirror work is a later blind pick.
+
+**Result (2026-11-22):** the opening and the grid hold; the stitches and the reflection fail as written, the first
+because its control can't be read at this size, the second because it asked every mirror to glint. **On 23 mirrors at
+the defaults, from the image alone: every opening is enclosed by thread, at 58 % of its glass's area (0.576 to 0.580);
+the ring's thread runs 9.5° from radial (median), and its legs number 48 or 49 against 49 planned, in every mirror;
+order 4 is the opening's strongest harmonic in all 23 (0.89 px, against 0.08 px with no grid); curved glass shows a
+glint 0.32 above its opening's median brightness (median over mirrors), flat glass 0.01; the glints scatter 0.145 of a
+radius with the discs tilted and 0.008 untilted.**
+
+The ring of chain stitch alone, the control for the ring's direction, read 23° from radial where at least 45° was set.
+At a 4 px link in a 1.6 px thread it is a solid mesh, 85 % thread in the ring's middle, whose only edges are one-pixel
+eyes, so it has no direction to read. Rings of running stitch, added after the run and not counted, read 58°: the
+measure does see thread that runs round. Only 17 of 23 mirrors glint by at least 0.25, where 90 % was set; with the
+discs untilted, all 23 do. The tilt moves the lamp's reflection, and for some discs it moves it under the ring. The
+card asked for two things the same imperfection works against, and the result is not changed to meet it. That the
+glass is not a flat patch is plain from the flat control and from the scatter, so the card's third branch ("the glass
+is a flat patch") does not describe what failed.
+
+**At more variation** (glass roundness, the opening off centre, the grid's turn, stitch spacing, the legs' lean, tilt,
+tarnish): at twice the defaults everything above holds except the glints (16 of 23); at three times the legs number 42
+to 48 against 49 (9 of 23 within 10 %), because legs that lean and crowd merge, and 11 of 23 glint.
+
+**Found before the run, by looking at the first sheet:** the glass's normal had the wrong sign, so it was a dish, not a
+dome: its top reflected the room below and its glint sat on the wrong side. Fixed before the check first ran.
+
+**Claim:** the mirror inset is covered: an enclosed opening smaller than its glass, a ring whose legs radiate and
+number what the chain's link plans, an opening that keeps the grid's square, and curved glass that catches the lamp in
+its own place on each disc. Not every disc shows its glint, which is what tilted glass does; how many do on real work is
+T-027.
+
+**Changes made:**
+- `engine/core/mirror.js`; `engine/core/chain.js` (the thread painter shared, and `straight` exported; the chain and
+  kantha checks' outputs are byte-for-byte unchanged); `engine/check/mirror.mjs`, `mirror-sheet.mjs`;
+  `engine/demo/mirror.html`; the engine bundle (all seven demo pages' scripts run against it and paint).
+- `processes/primitives.md`: `mirror-inset`; `processes/mirror-embroidery.md`: a pointer to it; `engine/README.md`:
+  two lessons.
+- `runs/c025/`; threads T-026 (the opening's square in real work), T-027 (how many mirrors glint).
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-024 · Can a cloth's colours come from dye baths taken in sequence, so that the colours follow the dyes' rules, change when the order changes, and carry the resist's cracks, the blocks' registration and the dye's wicking?
 
 **Status:** closed
