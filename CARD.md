@@ -83,10 +83,10 @@ result here is not changed to meet it.
 
 **Bugs found on the way, and what was rechecked.** Kantha's row spacing was called `gap`, which the weave reads as the
 share of each thread's space left open: it drew no thread. Supplementary weft and darning passed their weave structure
-as `ground`, which the weave reads as the colour in its gaps: their gap pixels were invalid (NaN) in their sheets and
-demos. Every layer now passes the gaps' colour as `groundColour`, and the weave refuses anything but a colour. After
-the fix, the checks of C-019 to C-022 were rerun: their results are unchanged (darning's bagh still fails at 18 %);
-their sheets were redrawn. A zero-length path could stop the stitch placement from ending (`holes()` now returns no
+as `ground`, which the weave reads as the colour in its gaps: the colour parser turned it into black, so their gaps were
+drawn black in their sheets, demos and checks (first described here as invalid values; they weren't). Every layer now passes the gaps' colour as `groundColour`, and the weave refuses anything but a colour. After
+the fix, the checks of C-019 to C-022 were rerun: their results at the defaults are unchanged (darning's bagh still
+fails at 18 %); C-020's imperfection sweep is not (see the correction under C-020); their sheets were redrawn. A zero-length path could stop the stitch placement from ending (`holes()` now returns no
 holes for a path shorter than a pixel).
 
 **Claim:** kantha's contour-following rows are covered, and the quilting's ripple is tied to the rows and readable by
@@ -346,6 +346,14 @@ loom; the back tells them apart.
 - `runs/c020/check.json`, `runs/c020/supplementary-sheet.png`.
 
 **Closed:** 2026-11-22
+
+**Correction (2026-11-22, found during C-023):** "all nine pass at 1.5 and twice the defaults" was measured with the
+cloth's gaps drawn black by a bug: `figured` passed its weave structure as `ground`, which the weave reads as the gaps'
+colour, and the colour parser turned it into black (0, 0, 0), which the read-back counts as dark warp. With the gaps in
+their intended mid-grey (`groundColour`), all nine still pass at 1.5 times the defaults, but at twice only six do: the
+vine-and-buti figure fails in all three kinds. Forcing the black gaps back reproduces nine of nine, so the colour is the
+whole cause. The results at the defaults, and the confusion test, are unchanged. `runs/c020/check.json` now holds the
+corrected sweep.
 
 ---
 
