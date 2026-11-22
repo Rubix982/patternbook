@@ -58,18 +58,36 @@
   "Each pin is a damped spring chasing a target height. The target comes from the brightness l of the picture over the pin, with the contrast lifted: t = clamp(1.3 (l - 0.5) + 0.5)^0.8, or 1 minus that if the dark parts should stand out, plus a travelling ripple 0.08 w sin(2 pi (1.3 x/n_x + 0.9 y/n_y) - 1.5 tau), with w the ripple slider and tau the time. The height h obeys h'' = k (t - h) - c h', stepped in pieces of at most 16 ms. The springiness slider sets k between 60 and 14 and the damping c from just over critical to about a third of it, which is the difference between a pin that creeps into place and one that rebounds.",
   "The cursor is a Gaussian of width 0.075 of the picture. Where it is, a pin is pushed down at once to a cap of 1 - g, where g is the Gaussian times a hold factor that eases to 1 while the cursor is inside; its velocity is cut so that it does not bounce upward, and the spring takes it back as the cursor moves on. Each pin is then drawn in its cell as a sphere of radius rho = 0.6 + 0.33 H, where H is its height times the relief slider. The normal at offset (u, v) is (u, v, sqrt(rho^2 - u^2 - v^2)) / rho; the diffuse term is its dot product with the light direction (-0.42, -0.52, 0.74), normalised, and the highlight is (2 n_z (n . L) - L_z)^36, stronger for tall pins. The head is brightened by (0.3 + 0.9 diffuse)(0.3 + 1.05 H), and the gap between pins is near black with a thin rim of light on the shaft of tall ones."
  ],
+ "primitives": [
+  "particle-motion",
+  "relief-shading",
+  "specular-highlight"
+ ],
  "equations": [
   {
    "tex": "h''=k\\,(t-h)-c\\,h',\\qquad k\\in[14,60],\\quad c=2\\sqrt{k}\\,\\big(1.05-0.73\\,s\\big)",
-   "note": "A pin chases its target t; s is the springiness slider (0 to 1)."
+   "note": "A pin chases its target t; s is the springiness slider (0 to 1).",
+   "primitives": [
+    "particle-motion"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\rho=0.6+0.33\\,H,\\qquad \\mathbf n=\\Big(\\tfrac{u}{\\rho},\\ \\tfrac{v}{\\rho},\\ \\sqrt{1-\\tfrac{u^{2}+v^{2}}{\\rho^{2}}}\\Big)",
-   "note": "A head’s radius grows with its height H, and its normal follows the sphere."
+   "note": "A head’s radius grows with its height H, and its normal follows the sphere.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "B=(0.3+0.9\\,\\mathbf n\\!\\cdot\\!\\mathbf L)(0.3+1.05\\,H),\\qquad S=(2n_z\\,\\mathbf n\\!\\cdot\\!\\mathbf L-L_z)^{36}",
-   "note": "Brightness of a head and its specular highlight."
+   "note": "Brightness of a head and its specular highlight.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

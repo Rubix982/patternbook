@@ -58,18 +58,33 @@
   "The meander takes its name from the river Maiandros, which winds. The key pattern runs round Greek pots from the geometric period onward. In black-figure vases the painter draws in a slip that fires black on the red-orange clay. In red-figure vases the ground is painted black and the figures are left in the colour of the clay, and the program offers both, together with a white-ground style. A key unit is drawn in a band six units high. Its line goes up the left side, along the top, down the right, back toward the left, up again and then a short way right, and sits on a rule at the bottom. The unit repeats every eight units, and alternate bands are mirrored and shifted by half a period.",
   "The width of the paint follows the picture. Each segment of the pattern reads the shade v at its middle, which is the darkness of the picture for black paint and the brightness for red-figure, and draws its line with a width between 0.18 and about 1.2 units. Dark places get thick, heavy fret and light places a thread. The hook is made of straight segments of lengths 6, 5, 4, 3, 2 and 1.5, which is 21.5 units, and with the rule underneath and the pair of border rules the paint covers a fraction of the band that grows with the line width. The clay itself is mottled, and a share of the picture is multiplied into it (screened on the black ground of the red-figure style)."
  ],
+ "primitives": [
+  "tone-curve",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "w=u\\,\\Big(0.18+\\beta\\,\\big(1-f+f\\,v^{0.9}\\big)\\Big),\\qquad u=\\frac{\\text{key size}}{6}",
-   "note": "Line width at a segment: β is the weight slider and f the weight-follows-picture slider."
+   "note": "Line width at a segment: β is the weight slider and f the weight-follows-picture slider.",
+   "primitives": [
+    "tone-line-screen",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\ell_{\\text{hook}}=6+5+4+3+2+1.5=21.5\\,u,\\qquad \\ell_{\\text{cell}}=21.5\\,u+8\\,u+16\\,u",
-   "note": "Length of line in one 8 u by 9 u cell: the hook, the rule it stands on, and the two border rules."
+   "note": "Length of line in one 8 u by 9 u cell: the hook, the rule it stands on, and the two border rules.",
+   "primitives": [],
+   "bespoke": "constants"
   },
   {
    "tex": "\\phi\\approx\\frac{\\ell_{\\text{cell}}\\,w}{8u\\cdot 9u}=0.63\\,\\frac{w}{u}",
-   "note": "The share of the clay covered by paint: about 11% at the thinnest line and up to 75% at the heaviest, which is how the line weight draws the picture."
+   "note": "The share of the clay covered by paint: about 11% at the thinnest line and up to 75% at the heaviest, which is how the line weight draws the picture.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,18 +58,36 @@
   "A daguerreotype is an image on a silver plate polished like a mirror. Tilted one way the plate reflects something dark and the picture looks like a positive; tilted the other way it reflects something bright and the picture seems to turn into a negative. The tilt slider mixes the lightness with its inverse, v = (1 − 0.92 t) L + 0.92 t (1 − L), then adds a little contrast about the middle. Three tones (silver, blue and gold) are each a ramp of a dark, a mid and a light colour. The lenses of the day were soft, so the picture is blurred by 0.5 to 3.5 px.",
   "Tarnish creeps in from the edge of the plate. Let e be the distance to the edge of the window (0 at the edge, 1 in the middle). A ring is open where e plus a noise is below a reach that grows with the tarnish slider, and its colours cycle through blue, violet and amber as sin(16 e + 5 n + offset) with the three colour channels one third of a turn apart, the same kind of thin-film interference as an oil slick. Polish marks, scratches and dust are added to the plate, and a brass mat (a gradient with metal grain, bevel rings and a band of glare) frames it in an oval or a rectangle."
  ],
+ "primitives": [
+  "sheet-edge",
+  "smooth-noise",
+  "soft-threshold",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "v=\\operatorname{clip}\\Big(1.18\\,\\big[(1-0.92\\,\\tau)\\,L+0.92\\,\\tau\\,(1-L)-\\tfrac12\\big]+\\tfrac12\\Big)",
-   "note": "The mirror: τ is the tilt slider and L the softened lightness."
+   "note": "The mirror: τ is the tilt slider and L the softened lightness.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{ring}=\\operatorname{smoothstep}\\big(\\rho,\\ 0,\\ e+0.22\\,(n-\\tfrac12)\\big),\\qquad \\rho=0.04+0.34\\,T",
-   "note": "Where the tarnish reaches; T is the tarnish slider and n noise."
+   "note": "Where the tarnish reaches; T is the tarnish slider and n noise.",
+   "primitives": [
+    "soft-threshold",
+    "smooth-noise",
+    "sheet-edge"
+   ],
+   "bespoke": null
   },
   {
    "tex": "c_j=\\tfrac12+\\tfrac12\\sin\\!\\Big(16\\,e+5\\,n+\\tfrac{2\\pi j}{3}\\Big),\\qquad j=0,1,2\\ \\ (R,G,B)",
-   "note": "The iridescent colour of the tarnish: three phases of a thin-film interference."
+   "note": "The iridescent colour of the tarnish: three phases of a thin-film interference.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

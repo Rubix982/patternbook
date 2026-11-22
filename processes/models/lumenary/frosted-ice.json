@@ -58,18 +58,39 @@
   "Frosted glass scatters light, so the first step is blurring the picture strongly, each colour channel separately, with two box blurs. The frost itself is made from noise. Two layers of smooth value noise bend the coordinates (a “warp”), and a ridged version of the noise, 1 − |2n − 1|, is computed at two scales, so lines appear where the noise crosses its middle value: they look like cracks and crystal edges. Raising that to the fifth power keeps only the strongest ridges. A scatter of single bright pixels adds sparkle, and the same warp shifts the blurred picture sideways by a few pixels, as ice does.",
   "Frost is thicker toward the edges of a pane, so its amount grows with distance from the centre. The result is pushed toward a pale icy blue. Finally comes the clear patch, a stroke wiped by a hand: the distance of each pixel to a curved path of points, wobbled by low-frequency noise so the edge is not a perfect ellipse. Inside the stroke the sharp picture shows; just outside it, the wiped-away frost piles up in a brighter ridge."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "mix-over",
+  "sdf-shape",
+  "sheet-edge",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "q=1-\\lvert 2\\,n(x\\,\\phi+5w_x,\\ y\\,\\phi+5w_y)-1\\rvert,\\qquad \\text{crystal}=(0.65\\,q_1+0.35\\,q_2)^{5}",
-   "note": "Ridged noise at two scales, with warp w; φ is the frost frequency (a little lower vertically)."
+   "note": "Ridged noise at two scales, with warp w; φ is the frost frequency (a little lower vertically).",
+   "primitives": [
+    "smooth-noise",
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{white}=\\operatorname{clamp}\\!\\big(f\\,(0.14+0.55\\,\\text{crystal})+0.22\\,f\\,\\varsigma\\big),\\qquad f=\\phi_0\\,(0.55+0.45\\,e)",
-   "note": "How much white frost covers a pixel: φ₀ is the frost slider, e the nearness to the pane edge and ς 1 on sparkle pixels."
+   "note": "How much white frost covers a pixel: φ₀ is the frost slider, e the nearness to the pane edge and ς 1 on sparkle pixels.",
+   "primitives": [
+    "sheet-edge"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow C+(C_{\\text{ice}}-C)\\,(0.28\\,f+0.7\\,\\text{white}),\\qquad m=1-\\operatorname{smoothstep}\\big(0.84\\,\\rho_0,\\ 0.97\\,\\rho_0,\\ d\\big)",
-   "note": "Tint toward pale ice; m is how clear the wiped patch is at distance d from its path, of radius ρ₀."
+   "note": "Tint toward pale ice; m is how clear the wiped patch is at distance d from its path, of radius ρ₀.",
+   "primitives": [
+    "mix-over",
+    "sdf-shape"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

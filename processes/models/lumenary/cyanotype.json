@@ -58,18 +58,43 @@
   "A cyanotype is made by coating paper with iron salts and exposing it to sunlight; where light strikes, the salts turn Prussian blue, and where it does not they wash away and leave white paper. The treatment maps brightness onto that chemistry. The picture is stretched, shifted by the exposure slider and given contrast; the result runs a five-colour ramp from deep blue (shadows) to near white (highlights). Tea toning and green toning swap in a different ramp.",
   "Hand-coated paper is never even. Two noises, one slow and blotchy, one long and thin like a brush stroke, change the tone slightly (the uneven-coating slider). The coating stops short of the sheet edge in a ragged line made from two more noises, and where the liquid pooled at the boundary the print is darker; outside the edge the bare cream paper shows. A fine fibre noise is multiplied over everything."
  ],
+ "primitives": [
+  "colour-ramp",
+  "multiply-blend",
+  "sheet-edge",
+  "smooth-noise",
+  "soft-threshold",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "t=\\operatorname{clamp}\\big(\\text{contrast}\\big(L+0.4\\,\\epsilon+\\pi,\\ c\\big)\\big),\\qquad \\pi=0.28\\,u\\,(n_1-\\tfrac12)+0.12\\,u\\,(n_2-\\tfrac12)",
-   "note": "Tone t: ε is the exposure slider, c the contrast and u the uneven-coating slider."
+   "note": "Tone t: ε is the exposure slider, c the contrast and u the uneven-coating slider.",
+   "primitives": [
+    "tone-curve",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=\\text{ramp}(t),\\qquad c=\\operatorname{smoothstep}(-2\\sigma,\\ 2\\sigma,\\ e-m+\\rho)",
-   "note": "Colour from the five-stop ramp; c is how coated the pixel is: e the distance to the sheet edge, m = 0.055 of the short side, ρ the ragged-edge noise, σ the picture scale."
+   "note": "Colour from the five-stop ramp; c is how coated the pixel is: e the distance to the sheet edge, m = 0.055 of the short side, ρ the ragged-edge noise, σ the picture scale.",
+   "primitives": [
+    "colour-ramp",
+    "soft-threshold",
+    "sheet-edge"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow C\\,\\big(1-0.8\\,p\\big),\\qquad p=0.22\\,c\\,\\big(1-\\operatorname{smoothstep}(0,\\ 9\\sigma,\\ e-m+\\rho)\\big)",
-   "note": "Darkening where the liquid pooled along the edge."
+   "note": "Darkening where the liquid pooled along the edge.",
+   "primitives": [
+    "multiply-blend",
+    "soft-threshold",
+    "sheet-edge"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

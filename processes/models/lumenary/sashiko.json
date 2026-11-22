@@ -58,18 +58,40 @@
   "Sashiko means “little stabs”. It began as a way for farming families in Japan to mend and strengthen cloth with white thread on indigo, and the stitch patterns became beautiful in their own right. Hitomezashi, “one-stitch”, is the simplest kind. You stitch every row and every column on a grid with running stitches that are as long as the gaps between them, and you start each row and each column either on the beat or half a beat off. That is all, and yet squares, crosses and diamonds appear.",
   "There is a tidy reason for this. Write r_j and c_i for the starting beat of row j and column i. The stitch on row j between points i and i + 1 is drawn if i + r_j is even, and the stitch on column i between j and j + 1 is drawn if j + c_i is even. At any grid point exactly one of the two horizontal stitches next to it is drawn, and exactly one of the two vertical ones, so every point is a right-angle bend. The stitches therefore form paths that never cross or branch. In the program the thread is thicker and brighter in the light parts of the picture and thin and dim in the dark ones."
  ],
+ "primitives": [
+  "running-stitch",
+  "seeded-random",
+  "stitch-grid",
+  "tone-curve",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "h_{i,j}=\\big[(i+r_j)\\bmod 2=0\\big],\\qquad v_{i,j}=\\big[(j+c_i)\\bmod 2=0\\big]",
-   "note": "Whether the horizontal stitch (i, j) and the vertical stitch (i, j) are drawn. The bits r and c are random, alternating, or taken from a wave or a step pattern."
+   "note": "Whether the horizontal stitch (i, j) and the vertical stitch (i, j) are drawn. The bits r and c are random, alternating, or taken from a wave or a step pattern.",
+   "primitives": [
+    "stitch-grid",
+    "running-stitch",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "h_{i-1,j}+h_{i,j}=1,\\qquad v_{i,j-1}+v_{i,j}=1",
-   "note": "Each grid point has one horizontal and one vertical stitch, which is why the lines turn at every point and never meet."
+   "note": "Each grid point has one horizontal and one vertical stitch, which is why the lines turn at every point and never meet.",
+   "primitives": [
+    "stitch-grid"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w=s\\,\\big(0.05+0.34\\,\\omega\\,t^{1.4}\\big),\\qquad k=0.3+0.7\\,t",
-   "note": "Thread width and brightness: s is the stitch length, ω the weight slider and t the brightness of the picture under the stitch."
+   "note": "Thread width and brightness: s is the stitch length, ω the weight slider and t the brightness of the picture under the stitch.",
+   "primitives": [
+    "tone-mark-size",
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

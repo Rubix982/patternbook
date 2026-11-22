@@ -59,18 +59,43 @@
   "A shadow figure is everything darker than a threshold. As in the platform level, the threshold is found by rank: the blurred brightness values are sorted and the one at the chosen fraction is used, so the figure always covers the share of the frame the slider asks for. The pierced pattern is laid out on a slanted lattice. At each lattice point a round hole is punched if the figure there is lighter than its surroundings, or if it lies in one of the bands where the heavily blurred brightness passes set levels. Those bands follow the forms of the picture like the rows of chisel marks on a leather puppet. Slits are added along the strongest inner edges.",
   "A puppet held away from the cloth throws a soft shadow, so the mask is blurred by a radius set by the distance slider. The cloth is lit from behind by one lamp: brightness falls off with distance from the lamp along an eased curve and is mapped through three colours, from a dark edge through a warm middle to a hot centre, with a fine weave and some unevenness. Where the mask is solid the cloth is almost black. Painted hide is translucent, so with the tint slider up a little of the lamp’s light comes through in the picture’s own colours."
  ],
+ "primitives": [
+  "colour-ramp",
+  "dog-lines",
+  "iso-contours",
+  "lattice-repeat",
+  "soft-threshold",
+  "tone-bands",
+  "vignette"
+ ],
  "equations": [
   {
    "tex": "\\theta=L_{(\\lceil q\\,N\\rceil)},\\qquad m=1-S_{\\theta-0.015,\\ \\theta+0.015}(L_w)",
-   "note": "The figure: θ is the brightness at rank qN among all pixels, L_w the blurred brightness."
+   "note": "The figure: θ is the brightness at rank qN among all pixels, L_w the blurred brightness.",
+   "primitives": [
+    "tone-bands",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{hole at }(g_x,g_y)\\iff L_f-L_m>0\\ \\ \\text{or}\\ \\ \\big\\lvert\\operatorname{frac}(k\\,L_m)-\\tfrac12\\big\\rvert<0.15",
-   "note": "Punch rule at a lattice point: L_f is a fine blur, L_m a wide one, k between 5 and 11 bands."
+   "note": "Punch rule at a lattice point: L_f is a fine blur, L_m a wide one, k between 5 and 11 bands.",
+   "primitives": [
+    "lattice-repeat",
+    "dog-lines",
+    "iso-contours"
+   ],
+   "bespoke": null
   },
   {
    "tex": "t=S_{0,1}\\!\\Big(1-\\frac{\\lvert\\mathbf x-\\mathbf x_{\\text{lamp}}\\rvert}{R}\\Big),\\qquad C=\\operatorname{ramp}_{\\text{edge}\\to\\text{warm}\\to\\text{hot}}(t)",
-   "note": "The lit cloth; R is 62% of the frame’s diagonal."
+   "note": "The lit cloth; R is 62% of the frame’s diagonal.",
+   "primitives": [
+    "colour-ramp",
+    "vignette"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

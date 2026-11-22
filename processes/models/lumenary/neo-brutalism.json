@@ -58,18 +58,34 @@
   "Neo-brutalism is flat colour, thick black borders and shadows that do not blur. The picture is first cropped to fill a window (the larger of the width and height ratios decides the scale, and the centre is kept), then blurred and measured for brightness. The brightness range is cut into n equal bands and each band is given one colour from a bright palette, so the picture becomes a poster of flat colour regions, with colours spread evenly through the palette.",
   "Black outlines come from Sobel again, here with a harder smoothstep so lines are crisp, and a heavier weight meaning a wider neighbourhood. The card sits on a plain coloured background, with a black rectangle of the same size drawn offset by the shadow distance, with no blur at all, which is the whole of the “hard shadow”. A title bar with three flat squares and a title, drawn in the same black as the borders, is optional chrome. Border width and shadow offset are tied to the picture width, so the look is the same at any export size."
  ],
+ "primitives": [
+  "edge-outline",
+  "mix-over",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\text{band}=\\min\\big(n-1,\\ \\lfloor L\\cdot n\\rfloor\\big),\\qquad C=P\\!\\left[\\operatorname{round}\\!\\Big(\\tfrac{\\text{band}}{n-1}(m-1)\\Big)\\right]",
-   "note": "Pick one of m palette colours P for each of n brightness bands."
+   "note": "Pick one of m palette colours P for each of n brightness bands.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "e=S_{\\theta,1.25\\theta}(\\lvert\\nabla L_b\\rvert),\\quad\\theta=0.34-0.27\\cdot\\text{ink},\\qquad C_{\\text{out}}=(1-e)\\,C+e\\,C_{\\text{black}}",
-   "note": "Black outline strength e."
+   "note": "Black outline strength e.",
+   "primitives": [
+    "edge-outline",
+    "mix-over"
+   ],
+   "bespoke": null
   },
   {
    "tex": "k=\\max\\!\\Big(\\frac{w}{W},\\frac{h}{H}\\Big),\\qquad\\text{source rect}=\\Big(\\tfrac{w}{k},\\tfrac{h}{k}\\Big)\\ \\text{centred}",
-   "note": "Cover-crop of the picture into a w × h window."
+   "note": "Cover-crop of the picture into a w × h window.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

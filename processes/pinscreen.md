@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: pin-art, relation: same}
-primitives: []
+primitives: [particle-motion, relief-shading, specular-highlight]
 sources: []
 status: listed
 ---

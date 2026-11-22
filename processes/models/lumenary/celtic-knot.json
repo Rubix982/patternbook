@@ -58,18 +58,32 @@
   "Interlace is the signature of insular art, the style of the Book of Kells and the great stone crosses of Ireland: ribbons that pass over and under each other for ever. The simplest way to draw it is a plait, a lattice of straight strands at ±45° where each strand goes over the next one it meets, then under, then over. The program draws exactly that, at the pixel level. Two coordinates u = (x + y)/c and v = (x − y)/c run along the two diagonals. The strand going one way sits where u is near the middle of its unit cell, and the other where v is.",
   "Where the two overlap, the strand on top is decided by the parity of the cell, ⌊u⌋ + ⌊v⌋. Walking along a strand one cell at a time changes one of the two integers by one, so the parity flips at every crossing and the strand alternates over and under without ever having to be told. Each length of strand between two crossings takes its colour from the picture at its middle. Each strand is shaded as a cylinder, with a highlight, a dark outline at its edges, and a shadow on the lower strand next to the crossing. A gold stud sits in the diamond-shaped gap at each lattice point."
  ],
+ "primitives": [
+  "cylinder-shading",
+  "lattice-repeat"
+ ],
  "equations": [
   {
    "tex": "u=\\frac{x+y}{c},\\qquad v=\\frac{x-y}{c},\\qquad \\Big|\\operatorname{frac}(u)-\\tfrac12\\Big|<h\\ \\ \\text{or}\\ \\ \\Big|\\operatorname{frac}(v)-\\tfrac12\\Big|<h",
-   "note": "The two families of strands, with h half the ribbon width (the width slider divided by 200)."
+   "note": "The two families of strands, with h half the ribbon width (the width slider divided by 200).",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{strand }u\\text{ is on top}\\iff(\\lfloor u\\rfloor+\\lfloor v\\rfloor)\\ \\text{is even}",
-   "note": "Over and under, set by the cell parity."
+   "note": "Over and under, set by the cell parity.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "s=\\frac{d}{h},\\qquad f=0.55+0.5\\sqrt{1-s^2}-0.18\\,s+0.25\\,e^{-\\left(\\frac{s+0.38}{0.16}\\right)^2}",
-   "note": "Cylinder shading: s runs −1 to 1 across the ribbon, with a soft highlight just off centre. The outline darkens where |s| passes 0.78."
+   "note": "Cylinder shading: s runs −1 to 1 across the ribbon, with a soft highlight just off centre. The outline darkens where |s| passes 0.78.",
+   "primitives": [
+    "cylinder-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

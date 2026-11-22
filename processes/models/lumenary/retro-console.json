@@ -59,18 +59,35 @@
   "The picture is shrunk until its longer side has the chosen number of lines, and a mesh of squares about one eleventh of the frame high is laid over it. Every corner of the mesh is nudged by a random amount and then rounded to a whole pixel, which is what early consoles did to the corners of their polygons. Each square is split into two triangles, and inside a triangle the place the texture is read from is a straight blend of its three corners. That blend ignores perspective, so the picture kinks along the diagonal of every square and seems to swim. Each triangle is also lit as one flat face, a few percent lighter or darker than its neighbour.",
   "Distance is faked by height in the frame: the upper part fades toward a fog colour taken from the average of the top third of the picture. Finally the colour is cut to the chosen depth, 32, 8 or 4 levels a channel. A value between two levels is rounded up or down by comparing its remainder with a 4 by 4 Bayer matrix, so a smooth gradient becomes a regular weave of two neighbouring shades instead of a band. Scan lines darken the lower part of every picture line, and the game display is drawn into the small frame so that its pixels match the picture’s."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "mix-over",
+  "ordered-dither"
+ ],
  "equations": [
   {
    "tex": "\\mathbf u=(1-s-t)\\,\\mathbf v_{00}+s\\,\\mathbf v_{10}+t\\,\\mathbf v_{01},\\qquad s+t<1",
-   "note": "Where a pixel reads the texture: s and t are its position inside the square, v the nudged and rounded corners. The other triangle uses the three remaining corners the same way."
+   "note": "Where a pixel reads the texture: s and t are its position inside the square, v the nudged and rounded corners. The other triangle uses the three remaining corners the same way.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "q=\\Big\\lfloor\\frac{c}{\\Delta}\\Big\\rfloor+\\Big[\\operatorname{frac}\\frac{c}{\\Delta}>\\tfrac12+\\big(B_{x,y}-\\tfrac12\\big)\\,a\\Big],\\qquad \\Delta=\\frac{255}{n-1}",
-   "note": "Ordered dithering of a channel value c to n levels: B is the Bayer threshold at the pixel (0 to 1) and a the dithering slider."
+   "note": "Ordered dithering of a channel value c to n levels: B is the Bayer threshold at the pixel (0 to 1) and a the dithering slider.",
+   "primitives": [
+    "ordered-dither"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow C+(C_{\\text{fog}}-C)\\cdot f\\cdot\\max\\!\\Big(0,\\,1-\\frac{y}{0.62\\,h}\\Big)\\,(0.55+0.45\\,L)",
-   "note": "Fog: strongest at the top of the frame, gone below 62% of its height; f is the fog slider."
+   "note": "Fog: strongest at the top of the frame, gone below 62% of its height; f is the fog slider.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

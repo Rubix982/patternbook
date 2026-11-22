@@ -58,18 +58,35 @@
   "The picture is never changed, only looked up in a different place. For every output pixel the program computes an offset and reads the source pixel at the shifted position. The offsets form a smooth, slowly moving vector field built from sines whose phases are themselves bent by other sines (a simple form of domain warping), which is what gives the motion its liquid, non-repeating look.",
   "To keep it fast the field is calculated only at nodes six pixels apart and then blended up to every pixel bilinearly. Three effects ride on top. The cursor adds a ripple: a ring-shaped wave that decays exponentially with distance and travels outward over time. Colour split reads the red, green and blue channels at slightly different strengths of the same offset, so the channels drift apart like a prism. Sheen brightens or dims each pixel according to the vertical slope of the field, as if the surface were catching light."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "misregistration"
+ ],
  "equations": [
   {
    "tex": "f_1=\\sin\\!\\big(5.5F v+1.3\\tau+1.6\\sin(3.1F u+0.7\\tau)\\big),\\quad f_2=\\cos\\!\\big(5.0F u-1.1\\tau+1.5\\sin(2.7F v-0.9\\tau)\\big)",
-   "note": "The two components of the field at normalised position (u, v), wave scale F and time τ."
+   "note": "The two components of the field at normalised position (u, v), wave scale F and time τ.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf d=A\\,(f_1,f_2)\\;+\\;e^{-\\rho/(0.2W)}\\sin(0.07\\rho-7t)\\,\\max(A,0.02W)\\,0.9\\,\\hat{\\boldsymbol\\rho}",
-   "note": "Total displacement; A = strength × 0.07 W. The second term is the cursor ripple at distance ρ."
+   "note": "Total displacement; A = strength × 0.07 W. The second term is the cursor ripple at distance ρ.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "R(\\mathbf x)=S(\\mathbf x+\\mathbf d(1+s)),\\quad G(\\mathbf x)=S(\\mathbf x+\\mathbf d),\\quad B(\\mathbf x)=S(\\mathbf x+\\mathbf d(1-s))",
-   "note": "Colour split: each channel samples the source S at a different multiple of the offset."
+   "note": "Colour split: each channel samples the source S at a different multiple of the offset.",
+   "primitives": [
+    "misregistration",
+    "coordinate-warp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

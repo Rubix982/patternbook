@@ -59,18 +59,29 @@
   "A film grade moves colour by tone. Saturation is set first, by scaling each channel’s distance from the pixel’s brightness. Then comes split toning: one tint is added to the shadows and another to the highlights, with weights that are the squares of darkness and of brightness, so mid tones are barely touched. In the default grade the shadows gain blue and green and the highlights gain red, which sets skin, which is orange, against everything else. An S-shaped curve about mid grey adds contrast.",
   "Lenses and film add the rest. Bloom isolates the bright parts, blurs them widely and blends them back in a warm tone. Streaks use a stricter mask of only the brightest lights and blur it along the rows alone, three times, which approximates a wide Gaussian in one direction; the result is added in blue, as a cylindrical anamorphic lens smears a point of light into a horizontal line. Corners are darkened, and grain is made strongest in the mid tones. The bars bring the frame toward the chosen shape, but each stops at one eighth of the height so an upright picture is not reduced to a strip."
  ],
+ "primitives": [
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "C\\leftarrow C+2k\\,\\big((1-l)^{2}\\,\\mathbf s+l^{2}\\,\\mathbf h\\big)",
-   "note": "Split toning: s and h are the shadow and highlight tints, l the brightness, k the grade strength."
+   "note": "Split toning: s and h are the shadow and highlight tints, l the brightness, k the grade strength.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "v\\leftarrow v+1.6\\,c\\,\\big(3v^{2}-2v^{3}-v\\big)",
-   "note": "Contrast: a blend toward the smoothstep curve; c is the grade’s contrast times k."
+   "note": "Contrast: a blend toward the smoothstep curve; c is the grade’s contrast times k.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{bar}=\\min\\!\\Big(\\frac{H-W/\\rho}{2},\\ \\frac{H}{8}\\Big)",
-   "note": "Height of each black bar for a frame of ratio ρ, when the picture is taller than that ratio."
+   "note": "Height of each black bar for a frame of ratio ρ, when the picture is taller than that ratio.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

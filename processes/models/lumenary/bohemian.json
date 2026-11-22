@@ -58,14 +58,23 @@
   "Boho colour is earthy and soft, and its signature shape is the rainbow arch. The picture is shown inside an arch window, and the arches around it get wider by a fixed gap each ring and take their colours in turn from an earthy palette. A warm tone is laid over the photograph by multiplying it with a pale orange, then a faint brown on top.",
   "A pale sun with rays sits behind the arches, a row of dots marks the ground, and the pampas grass at each side is a fan of curved strokes with small feathery ellipses along their outer half, each one randomly longer or shorter."
  ],
+ "primitives": [
+  "multiply-blend"
+ ],
  "equations": [
   {
    "tex": "r_i=r_0+i\\,g,\\qquad i=1,\\dots,n_{\\text{rings}}",
-   "note": "Radius of ring i: the window radius plus i times the gap g."
+   "note": "Radius of ring i: the window radius plus i times the gap g.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "C'=C\\,\\big((1-a)+a\\,\\tfrac{T}{255}\\big),\\qquad a=0.85\\cdot\\text{warmth}",
-   "note": "Multiply blend with the tint T; the blend strength a follows the warm tone slider."
+   "note": "Multiply blend with the tint T; the blend strength a follows the warm tone slider.",
+   "primitives": [
+    "multiply-blend"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: ink-wash, relation: same}
-primitives: []
+primitives: [mix-over, soft-threshold, tone-bands, tooth-threshold]
 sources: []
 status: listed
 ---

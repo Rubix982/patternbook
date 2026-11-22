@@ -58,18 +58,34 @@
   "A spirograph curve is a hypotrochoid: the path of a pen held in a hole of a small wheel (radius r) that rolls without slipping around the inside of a larger ring (radius R). With the ring scaled to 1 and k = r/R, the pen is at (1 − k) cos t + h cos(((1 − k)/k) t) horizontally and (1 − k) sin t − h sin(((1 − k)/k) t) vertically, where h is the pen’s distance from the wheel’s centre. The curve closes when the wheel has gone round q = N / gcd(n, N) times, for a wheel of n teeth in a ring of N = 144 teeth, and that is the number of turns drawn.",
   "In the single-curve layout one large curve is drawn as many short segments (220 per turn). Each segment is coloured by the picture at its midpoint, so the picture appears through the weaving. The rosettes layout is a grid of small spirographs, each with a random wheel ratio from a list of coprime pairs (2/5, 3/7, 3/8 and so on) and a random pen hole. Each is scaled to fit its cell, using the largest radius the curve reaches, (1 − k) + h, and its colour is that of the picture at the cell’s centre. With size follows the picture the rosette is smaller in the highlights or the shadows, so the grid forms a halftone."
  ],
+ "primitives": [
+  "parametric-curve",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "\\begin{aligned}x(t)&=(1-k)\\cos t+h\\cos\\!\\Big(\\tfrac{1-k}{k}\\,t\\Big)\\\\ y(t)&=(1-k)\\sin t-h\\sin\\!\\Big(\\tfrac{1-k}{k}\\,t\\Big)\\end{aligned}\\qquad k=\\frac{n}{N}",
-   "note": "The hypotrochoid for a wheel of n teeth in a ring of N = 144; h = 1.6 k × the pen-hole slider."
+   "note": "The hypotrochoid for a wheel of n teeth in a ring of N = 144; h = 1.6 k × the pen-hole slider.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "q=\\frac{N}{\\gcd(n,\\,N)},\\qquad t\\in[0,\\ 2\\pi q]",
-   "note": "The curve closes after q turns."
+   "note": "The curve closes after q turns.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\rho_{\\max}=(1-k)+h,\\qquad R_{\\text{cell}}=\\frac{c\\,f}{2\\,\\rho_{\\max}}",
-   "note": "Scale for a rosette: c is the cell size, f the size-follows-picture factor (0.42 to 1)."
+   "note": "Scale for a rosette: c is the cell size, f the size-follows-picture factor (0.42 to 1).",
+   "primitives": [
+    "tone-mark-size"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

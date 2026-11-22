@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: risograph, relation: same}
-primitives: []
+primitives: [misregistration, multiply-blend, seeded-random, smooth-noise, tone-curve, tooth-threshold]
 sources: []
 status: listed
 ---

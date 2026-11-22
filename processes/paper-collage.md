@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: collage-art, relation: same}
-primitives: []
+primitives: [seeded-random]
 sources: []
 status: listed
 ---

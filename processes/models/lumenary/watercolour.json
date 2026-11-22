@@ -58,18 +58,37 @@
   "A watercolour wash is thin pigment carried by water. You see the paper through it, so a stroke can only ever darken the white underneath, and the program works in pigment (how dark each colour channel is) laid over a paper colour. The picture is first blurred, with a radius of 2 to 11 px set by the bleed slider, to stand in for water spreading. Each pixel then reads that blurred picture from a place nudged by slow noise (about ±3.5 px), the wobble of a wet brush, and each channel is pulled 55% of the way toward the nearest of seven levels, because washes settle in flat tonal steps.",
   "The pigment at a pixel is the darkness times a handful of small effects. Very light areas get nothing at all, since a painter leaves the paper bare for the highlights. Broad noise (±21%) makes the wash bloom unevenly, and fine noise makes the pigment granulate, settling in the hollows of the paper. Where the picture has an edge the pigment pools, as it does at the rim of a drying wash, and the dark rims slider controls how much. The result darkens the paper colour; an optional unpainted border with a ragged inner edge, and a faint fibre pattern, finish the sheet."
  ],
+ "primitives": [
+  "image-gradient",
+  "multiply-blend",
+  "soft-threshold",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\tilde v=v+0.55\\left(\\frac{\\operatorname{round}(7v)}{7}-v\\right)",
-   "note": "Each channel v (0 to 1) of the blurred picture is flattened toward seven levels."
+   "note": "Each channel v (0 to 1) of the blurred picture is flattened toward seven levels.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "m=\\operatorname{clip}\\Big[(1-\\tilde v)\\;s\\;\\ell\\;b\\;g\\;\\big(1+1.1\\,\\rho\\,e\\big)\\Big]",
-   "note": "s is the colour strength (0.45 to 1.2), ℓ = 1 − smoothstep(0.8, 0.97, L) the lift that keeps highlights bare, b bloom, g granulation, ρ the rim slider and e = smoothstep(0.015, 0.09, edge strength) the pooling at edges."
+   "note": "s is the colour strength (0.45 to 1.2), ℓ = 1 − smoothstep(0.8, 0.97, L) the lift that keeps highlights bare, b bloom, g granulation, ρ the rim slider and e = smoothstep(0.015, 0.09, edge strength) the pooling at edges.",
+   "primitives": [
+    "soft-threshold",
+    "image-gradient"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=C_{\\text{paper}}\\,\\big(1-0.94\\,m\\big)",
-   "note": "The pigment only darkens the paper beneath it, channel by channel."
+   "note": "The pigment only darkens the paper beneath it, channel by channel.",
+   "primitives": [
+    "multiply-blend"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

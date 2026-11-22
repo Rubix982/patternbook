@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: kente, relation: same}
-primitives: []
+primitives: [coarse-grid, cylinder-shading, lattice-repeat, palette-snap, saturation-adjust, seeded-random]
 sources: []
 status: listed
 ---

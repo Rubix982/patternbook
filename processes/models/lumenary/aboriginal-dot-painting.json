@@ -58,22 +58,40 @@
   "The acrylic dot paintings of the Western Desert began at Papunya in 1971, when men of several language groups began to paint on boards and canvas the designs that belonged to their Country and its stories. Dots were used in part to cover the sacred meaning of a design from people who were not meant to read it. This treatment borrows only the visual technique, rows of dots in earth colours on dark ground, and cannot carry what a real work carries, so please read it as a tribute and not as a copy.",
   "To build the rings the picture’s brightness is blurred heavily to a smooth field F. Marching squares finds the contour lines where F crosses each of n evenly spaced levels, the segments are chained into curves, and dots of radius R are placed along each curve every 2.3 R of arc length, with a little jitter. Each dot is a disc with a small highlight and a small shadow so it reads as a blob of paint. Because the contours of a smooth field crowd together where it changes quickly, dots bunch up along the edges of your picture and thin out across flat areas. Fine dots on a staggered lattice fill the ground between the rings."
  ],
+ "primitives": [
+  "iso-contours",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\{\\mathbf x:\\ F(\\mathbf x)=\\ell_i\\},\\qquad \\ell_i=0.07+0.86\\,\\frac{i+\\tfrac12}{n}",
-   "note": "The ring i is the contour of the blurred brightness F at level ℓᵢ."
+   "note": "The ring i is the contour of the blurred brightness F at level ℓᵢ.",
+   "primitives": [
+    "iso-contours"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\Delta=2.3\\,R,\\qquad N\\approx\\frac{\\Lambda}{\\Delta}",
-   "note": "Dots sit Δ apart along a contour of length Λ, so a longer ring simply holds more of them."
+   "note": "Dots sit Δ apart along a contour of length Λ, so a longer ring simply holds more of them.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "\\delta x\\approx\\frac{0.86}{n\\,\\lVert\\nabla F\\rVert}",
-   "note": "The spacing between neighbouring rings: it shrinks where the gradient of F is large, which is why dots crowd at edges."
+   "note": "The spacing between neighbouring rings: it shrinks where the gradient of F is large, which is why dots crowd at edges.",
+   "primitives": [
+    "iso-contours"
+   ],
+   "bespoke": null
   },
   {
    "tex": "j=\\min\\big(5,\\ \\lfloor 6\\,\\ell\\rfloor\\big)",
-   "note": "Dot colour by light level: ℓ picks one of six ochres from deep red up to cream."
+   "note": "Dot colour by light level: ℓ picks one of six ochres from deep red up to cream.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

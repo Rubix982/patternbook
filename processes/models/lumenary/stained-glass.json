@@ -58,18 +58,37 @@
   "Stained glass is a mosaic of coloured pieces held in lead strips. The pieces here come from cellular noise: a random site in every square of a coarse grid, with each pixel belonging to the nearest site, which makes irregular convex shapes. Each piece’s colour is the picture, blurred to about the size of a piece, read at the site, then made more saturated and brighter, like glass lit from behind.",
   "Lead lies on the boundary between two pieces: a pixel is lead where the distance to the nearest site and to the second nearest nearly match, that is where F2 − F1 is below the lead width. Lead is a dark bar with a soft highlight along its crown. Glass is not flat: it is darker toward the lead and brighter in the middle of a piece (a smoothstep of the distance to the site), rippled by two layers of noise, and lit by a backlight whose strength you set and which fades away from the top left."
  ],
+ "primitives": [
+  "crackle-network",
+  "saturation-adjust",
+  "soft-threshold",
+  "voronoi-cells"
+ ],
  "equations": [
   {
    "tex": "\\text{lead}\\iff F_2-F_1<\\lambda,\\qquad \\lambda=0.9\\,\\sigma\\,\\ell",
-   "note": "Where lead lies: F₁ and F₂ are the distances to the nearest and second-nearest sites, ℓ the lead slider and σ the picture scale."
+   "note": "Where lead lies: F₁ and F₂ are the distances to the nearest and second-nearest sites, ℓ the lead slider and σ the picture scale.",
+   "primitives": [
+    "crackle-network"
+   ],
+   "bespoke": null
   },
   {
    "tex": "k=\\big(0.55+0.55\\,m+\\rho\\big)\\,\\big(0.58+0.42\\,\\beta\\big)\\,\\gamma\\,\\big(0.78+0.22\\,q\\big),\\qquad m=1-\\operatorname{smoothstep}(0.1s,\\ 0.7s,\\ F_1)",
-   "note": "Glass brightness: m is the nearness to the middle of the piece, ρ the ripple, β the backlight slider, γ the fade across the picture and q the distance from the lead."
+   "note": "Glass brightness: m is the nearness to the middle of the piece, ρ the ripple, β the backlight slider, γ the fade across the picture and q the distance from the lead.",
+   "primitives": [
+    "voronoi-cells",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "(h,\\ s,\\ l)\\mapsto\\big(h,\\ \\operatorname{clamp}(1.35\\,s+0.12),\\ \\operatorname{clamp}(0.78\\,l+0.14,\\ 0.22,\\ 0.78)\\big)",
-   "note": "Colour of a piece, in hue, saturation and lightness."
+   "note": "Colour of a piece, in hue, saturation and lightness.",
+   "primitives": [
+    "saturation-adjust"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

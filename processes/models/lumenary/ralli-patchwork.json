@@ -58,22 +58,45 @@
   "A ralli is a quilt made from scraps, and in Sindh it is a women’s art: cloth from old clothes is cut into squares and triangles, laid out in bold patterns, and stitched down with rows of running thread, often in several layers. The word is said to come from a verb meaning to mix, which suits a cloth made of many colours. The program cuts your picture into patches and gives each one a colour from a bright palette of nine (or an earthy one).",
   "The quilt is a square grid of side s. When the “on the diagonal” setting is chosen, the point (x, y) is turned by 45° to (u, v) = ((x + y), (y − x))/√2 before the grid is applied, so the squares stand on their points. A square can be kept whole, cut into two triangles by its diagonal, or into four by both. Each piece takes the colour of the picture at its own centre (saturation raised by 1.5), snapped to the nearest cloth colour, and some pieces are printed cotton with dots, stripes, checks or diamonds. Stitching lies 4.6 px inside every seam as dashes, in a thread that is lighter than dark patches and darker than light ones. A dark line marks the seam itself, and the patch is shaded to look puffed near it."
  ],
+ "primitives": [
+  "lattice-repeat",
+  "running-stitch",
+  "sdf-shape",
+  "soft-threshold"
+ ],
  "equations": [
   {
    "tex": "u=\\frac{x+y}{\\sqrt2},\\qquad v=\\frac{y-x}{\\sqrt2},\\qquad (i,j)=\\big(\\lfloor u/s\\rfloor,\\ \\lfloor v/s\\rfloor\\big)",
-   "note": "Cell index on the diagonal grid. With “square on” the rotation is skipped."
+   "note": "Cell index on the diagonal grid. With “square on” the rotation is skipped.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "d_{\\text{diag}}=\\frac{|a+b|}{\\sqrt2}\\ \\ (\\text{halves}),\\qquad d_{\\text{diag}}=\\frac{\\big||a|-|b|\\big|}{\\sqrt2}\\ \\ (\\text{quarters}),\\qquad a=f_u-\\tfrac12,\\ b=f_v-\\tfrac12",
-   "note": "The distance, in cell units, from the cut line. (f_u, f_v) is the position inside the cell. |a + b|/√2 is the distance from a point to the line a + b = 0."
+   "note": "The distance, in cell units, from the cut line. (f_u, f_v) is the position inside the cell. |a + b|/√2 is the distance from a point to the line a + b = 0.",
+   "primitives": [
+    "sdf-shape"
+   ],
+   "bespoke": null
   },
   {
    "tex": "d_{\\text{seam}}=s\\,\\min\\!\\big(d_{\\text{edge}},\\,d_{\\text{diag}}\\big),\\qquad f=0.82+0.2\\,\\operatorname{smoothstep}\\big(0,\\,10\\,\\mathrm{sc},\\,d_{\\text{seam}}\\big)",
-   "note": "Distance to the nearest seam and the puffing of each patch: 18% darker at the seam."
+   "note": "Distance to the nearest seam and the puffing of each patch: 18% darker at the seam.",
+   "primitives": [
+    "sdf-shape",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\big|d_{\\text{seam}}-4.6\\,\\mathrm{sc}\\big|<0.55\\,\\mathrm{sc}\\ \\ \\wedge\\ \\ \\operatorname{frac}\\!\\Big(\\frac{0.8x+1.3y}{6.5\\,\\mathrm{sc}}\\Big)<0.55",
-   "note": "The stitch: a band 1.1 px wide, broken into dashes (55% on)."
+   "note": "The stitch: a band 1.1 px wide, broken into dashes (55% on).",
+   "primitives": [
+    "running-stitch"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

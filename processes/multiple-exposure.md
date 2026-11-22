@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: double-exposure, relation: same}
   - {by: lumenary, id: chronophotograph, relation: same}
-primitives: []
+primitives: [additive-blend, decay-trail, frame-history, mix-over, multiply-blend, parametric-curve, soft-threshold, tone-curve]
 sources: []
 status: listed
 ---

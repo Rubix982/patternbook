@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: letterpress, relation: same}
-primitives: []
+primitives: [blur, mix-over, relief-shading, tone-dot-lattice]
 sources: []
 status: listed
 ---

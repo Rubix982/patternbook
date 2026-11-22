@@ -58,14 +58,25 @@
   "Plain knitting (stockinette) is a lattice of V-shaped stitches, each made of two plump legs of yarn. A knit stitch is wider than it is tall, about 1 to 0.74 here. The program draws one stitch once for every yarn colour, as a small picture: two ellipses tilted 0.42 radians in opposite directions, each filled with a gradient that is dark at the edges and bright in the middle so it looks round, with slanted lines across for the plies of the yarn and a soft shadow underneath. That sprite is then stamped at every position of the grid.",
   "The yarn colours come from k-means on a picture with one pixel per stitch; each stitch takes the nearest. The Fair Isle border replaces the top and bottom rows (up to eight of each) with a repeating eight-by-seven motif, a lattice of small diamonds followed by a blank row and a solid row, knitted in the darkest and lightest of the chosen yarns, in the manner of a Nordic jumper."
  ],
+ "primitives": [
+  "stitch-grid"
+ ],
  "equations": [
   {
    "tex": "w=\\frac{W}{n},\\qquad h=0.74\\,w,\\qquad \\text{rows}=\\Big\\lceil\\frac{H}{h}\\Big\\rceil+1",
-   "note": "Stitch width, height and number of rows for n stitches across."
+   "note": "Stitch width, height and number of rows for n stitches across.",
+   "primitives": [
+    "stitch-grid"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{leg}:\\ \\ r_x=0.26\\,w,\\quad r_y=0.62\\,h,\\quad \\text{tilt}=\\mp0.42\\ \\text{rad}",
-   "note": "Each of the two legs is an ellipse of these radii."
+   "note": "Each of the two legs is an ellipse of these radii.",
+   "primitives": [
+    "stitch-grid"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

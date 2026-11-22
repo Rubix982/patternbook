@@ -58,18 +58,33 @@
   "The Voronoi cell of a seed is the set of points nearer to that seed than to any other. Here the seeds are scattered by rejection sampling: a random point is accepted with probability equal to an importance value that is high where the picture has strong edges (the Sobel strength, scaled to its maximum and boosted ×2.2) and low (0.06) where it is flat, so cells crowd together around the detail. The gather-in-detail slider mixes this importance with a uniform 1. Every pixel is given the label of its nearest seed by jump flooding, which finds nearest seeds in about log₂ of the picture size passes instead of comparing against all of them.",
   "Lloyd relaxation then moves each seed to the centroid of its cell, weighted by the importance squared, and the labels are recomputed. A few rounds even out the cells and give the soft, almost organic look of a cracked glaze, while still keeping more of them where the picture is detailed. Each cell is painted with the mean colour of the picture within it. The faceting slider adds a gentle dome of light across each cell, and the borders slider darkens the pixels next to a neighbouring cell by up to 55%."
  ],
+ "primitives": [
+  "importance-sampling",
+  "voronoi-cells"
+ ],
  "equations": [
   {
    "tex": "\\lambda(\\mathbf x)=\\arg\\min_{i}\\ \\lVert\\mathbf x-\\mathbf s_i\\rVert,\\qquad P(\\text{accept }\\mathbf s)=\\text{imp}(\\mathbf s)",
-   "note": "Cell labels, and the rejection rule for seeds."
+   "note": "Cell labels, and the rejection rule for seeds.",
+   "primitives": [
+    "voronoi-cells",
+    "importance-sampling"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{imp}=(1-\\delta)+\\delta\\,\\Big(0.06+0.94\\,\\min\\!\\big(1,\\ 2.2\\,\\tfrac{E}{E_{\\max}}\\big)\\Big)",
-   "note": "Importance: E is the edge strength, δ the gather-in-detail slider."
+   "note": "Importance: E is the edge strength, δ the gather-in-detail slider.",
+   "primitives": [
+    "importance-sampling"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf s_i\\leftarrow\\frac{\\sum_{\\mathbf x\\in V_i}w(\\mathbf x)\\,\\mathbf x}{\\sum_{\\mathbf x\\in V_i}w(\\mathbf x)},\\qquad w=\\text{imp}^{2}+0.002",
-   "note": "One round of Lloyd relaxation."
+   "note": "One round of Lloyd relaxation.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

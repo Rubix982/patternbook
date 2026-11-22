@@ -58,18 +58,35 @@
   "The snow is a lesson in depth cues. Each flake has a depth z between 0 and 1, drawn as u^1.6 so that most flakes are far away. The near ones are bigger (radius 2.2 + 14 z² px), fall faster (0.35 + 1.1 z times the base fall speed), sway more, and are drawn with a soft, blurry sprite and a higher opacity (0.45 to 0.95), as the near objects are out of focus for a camera focused on the scene. The far ones are small, sharp, slow and faint. That is motion parallax together with atmospheric perspective, and it is why a dozen flakes make a room of space. Flakes wrap round at the edges.",
   "Each flake moves with the speed v = (14 + 90 × fall) × (0.35 + 1.1 z) px per second downward and a sideways drift made of the wind times (0.3 + z) plus a sine sway of 14 × (0.4 + z) px. The wind is the wind slider plus the pointer’s offset from the middle (up to ±100 px per second), and it eases toward its target at 2 per second so a gust builds and fades. Under the snow the picture sits in a cold light: a blue wash (opacity 0.22 × the frost slider) and a luminosity blend with a cool grey (0.35 × frost) that cools and slightly mutes its colours. Snow banked on the ground is a white gradient rising from the bottom edge to up to a fifth of the height."
  ],
+ "primitives": [
+  "ease-toward-target",
+  "particle-motion",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "z=u^{1.6},\\qquad \\rho=(2.2+14\\,z^{2})\\,k,\\qquad \\alpha=\\operatorname{lerp}\\big(0.45,\\ \\alpha_1,\\ z\\big)",
-   "note": "Depth, flake radius and opacity: u is a random number in [0, 1], k the size slider and α₁ 0.8 for soft near flakes, 0.95 for sharp ones."
+   "note": "Depth, flake radius and opacity: u is a random number in [0, 1], k the size slider and α₁ 0.8 for soft near flakes, 0.95 for sharp ones.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\dot y=(14+90\\,\\phi)\\,(0.35+1.1\\,z),\\qquad \\dot x=\\omega\\,(0.3+z)+14\\,(0.4+z)\\sin(\\varsigma\\,t+\\varphi)",
-   "note": "Motion of a flake: φ is the fall slider, ω the wind, ς and φ the flake’s own sway rate and phase."
+   "note": "Motion of a flake: φ is the fall slider, ω the wind, ς and φ the flake’s own sway rate and phase.",
+   "primitives": [
+    "particle-motion"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\omega\\leftarrow\\omega+(\\omega^{*}-\\omega)\\,\\min(1,\\,2\\,\\Delta t),\\qquad \\omega^{*}=0.7\\,w+200\\,\\big(p_x-\\tfrac12\\big)",
-   "note": "The wind eases toward its target (w the wind slider, p the pointer position, in pixels per second at 720 px wide)."
+   "note": "The wind eases toward its target (w the wind slider, p the pointer position, in pixels per second at 720 px wide).",
+   "primitives": [
+    "ease-toward-target"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

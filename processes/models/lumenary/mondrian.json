@@ -58,18 +58,25 @@
   "Mondrian’s grids are made here by repeatedly cutting a rectangle. Start with the whole page; at each step choose the rectangle that has the most going on (its variance of brightness times the square root of its area, with a little randomness) and cut it, in the direction of its longer side, at the place where the average brightness on the two sides differs most. The cuts therefore land on the edges of the picture.",
   "All the statistics are cheap because of a summed-area table: a table in which each entry is the sum of everything above and to the left, so the sum of any rectangle is four lookups. The cells are then ranked by their average brightness: some of the darkest become black, and red, yellow and blue go to a share of the others. The grid lines are a fixed black width and never drawn on the outer border."
  ],
+ "primitives": [],
  "equations": [
   {
    "tex": "S(x,y)=\\sum_{i<x,\\,j<y}L_{ij},\\qquad \\Sigma(R)=S(x_1,y_1)-S(x_0,y_1)-S(x_1,y_0)+S(x_0,y_0)",
-   "note": "Summed-area table S and the sum of any rectangle R."
+   "note": "Summed-area table S and the sum of any rectangle R.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\operatorname{Var}(R)=\\frac{\\Sigma_{L^2}(R)}{n}-\\left(\\frac{\\Sigma_L(R)}{n}\\right)^{2}",
-   "note": "Variance from two tables, one of L and one of L²."
+   "note": "Variance from two tables, one of L and one of L².",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\text{cut}=\\operatorname*{arg\\,max}_{c}\\ \\lvert\\mu_A-\\mu_B\\rvert\\,\\sqrt{\\min(n_A,n_B)}",
-   "note": "Choose the cut c giving the biggest difference of mean brightness between the two halves A and B."
+   "note": "Choose the cut c giving the biggest difference of mean brightness between the two halves A and B.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

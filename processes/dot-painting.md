@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: pointillism, relation: analogous}
   - {by: lumenary, id: aboriginal-dot-painting, relation: analogous}
-primitives: []
+primitives: [hue-shift, iso-contours, saturation-adjust, seeded-random, tone-bands]
 sources: []
 status: listed
 ---

@@ -58,18 +58,38 @@
   "Thick oil paint stands up from the canvas, and most of what we read as paint is light and shadow on that relief. So two pictures are made with the same brush strokes: a colour map and a height map. Short fat strokes are scattered over a jittered grid (spacing about 0.95 of the brush size), with a second pass at half the size covering a third of the grid for the details. Each stroke takes the colour of the blurred picture at its centre, varied by ±6%, and lies at an angle that mixes two directions: along the picture’s edges (the gradient direction turned by 90 degrees) and a loose random direction near −40 degrees. The mix weight is the follow-the-shapes slider times the local edge strength.",
   "In the height map each stroke is a little ridged landscape: a base height, three thin parallel bristle furrows along its length, and bright lips at both sides where paint piles up. The map is blurred slightly and its slopes are taken by finite differences, scaled by the thickness slider. From the slopes comes a surface normal, and the light does the rest: a diffuse term for the broad shading and a Blinn-Phong highlight for the wet shine, with the light direction set by the angle slider."
  ],
+ "primitives": [
+  "edge-tangent-field",
+  "relief-shading",
+  "seeded-random",
+  "specular-highlight"
+ ],
  "equations": [
   {
    "tex": "\\theta=\\arg\\Big(w\\,e^{\\,i(\\varphi+\\pi/2)}+(1-w)\\,e^{\\,i\\theta_0}\\Big),\\qquad w=f\\cdot\\operatorname{clip}\\big(12\\,\\lVert\\nabla L\\rVert\\big)",
-   "note": "Stroke angle: φ is the gradient direction, θ₀ the loose random direction, f the follow-the-shapes slider."
+   "note": "Stroke angle: φ is the gradient direction, θ₀ the loose random direction, f the follow-the-shapes slider.",
+   "primitives": [
+    "edge-tangent-field",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf n=\\frac{(s_x,\\;s_y,\\;1)}{\\sqrt{s_x^2+s_y^2+1}}",
-   "note": "s_x and s_y are the slopes of the height map, magnified by 1 to 9 with the thickness slider."
+   "note": "s_x and s_y are the slopes of the height map, magnified by 1 to 9 with the thickness slider.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=C_{\\text{paint}}\\Big(0.5+0.62\\,\\frac{\\max(0,\\mathbf n\\cdot\\mathbf l)}{l_z}\\Big)+140\\,\\sigma\\,\\max\\!\\big(0,\\ \\mathbf n\\cdot\\hat{\\mathbf h}\\big)^{26}",
-   "note": "Diffuse shading plus a specular glint. l is the unit light direction (l_z = 0.7 before normalising), h its half-vector with the viewer, σ the wet shine slider."
+   "note": "Diffuse shading plus a specular glint. l is the unit light direction (l_z = 0.7 before normalising), h its half-vector with the viewer, σ the wet shine slider.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

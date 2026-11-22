@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: mezzotint, relation: same}
-primitives: []
+primitives: [seeded-random, smooth-noise, tone-curve, tooth-threshold]
 sources: []
 status: listed
 ---

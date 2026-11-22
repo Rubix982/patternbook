@@ -21,8 +21,9 @@ So the pages shelf's print treatments, the atlas's crafts, and the treatments an
 C-017 (2026-11-22) converted Lumenary's 214 treatments into models (`models/lumenary/<id>.json`, from the
 classification in `models/lumenary-map.tsv`) and listed the 82 processes they imitate, each with a page at "listed"
 holding its models. `index.md` has them all, and the 99 entries that imitate no physical process. Regenerate with
-`node tools/process_models.mjs`; it only rewrites the block between a page's models markers. `primitives.md` is not
-written yet. Giving atlas elements their processes is T-019 (`threads.md`).
+`node tools/process_models.mjs`; it only rewrites the block between a page's models markers. `primitives.md` was
+written in C-018 from tags on all 610 of the models' equations. Giving atlas elements their processes is T-019
+(`threads.md`).
 
 ## Where models come from
 

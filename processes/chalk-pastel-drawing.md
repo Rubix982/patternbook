@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: pastel-chalk, relation: same}
   - {by: lumenary, id: chalkboard, relation: same}
-primitives: []
+primitives: [edge-outline, material-ground, mix-over, smooth-noise, soft-threshold, tooth-threshold]
 sources: []
 status: listed
 ---

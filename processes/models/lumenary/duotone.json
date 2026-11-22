@@ -58,14 +58,26 @@
   "Duotone throws away colour and keeps tone. Each pixel’s brightness is first bent by a power curve so that the “midpoint” slider decides which brightness lands exactly halfway between the two colours, then given more or less contrast, and finally used as the mix between your shadow colour and your highlight colour. Black becomes the first, white the second, and everything else is a straight blend of the two.",
   "Because only one number per pixel survives, the effect depends entirely on the tonal map of the picture, which is why a good duotone starts from a picture with strong light and shade. A little film grain is added at the end to stop the smooth gradients from banding."
  ],
+ "primitives": [
+  "colour-ramp",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "t=\\operatorname{clamp}\\!\\Big(\\big(L^{\\gamma}-\\tfrac12\\big)(1+c)+\\tfrac12\\Big),\\qquad \\gamma=\\frac{\\ln 0.5}{\\ln m}",
-   "note": "Tone t: L is brightness, m the midpoint slider (0.2 to 0.8; L = m maps to ½) and c the contrast slider."
+   "note": "Tone t: L is brightness, m the midpoint slider (0.2 to 0.8; L = m maps to ½) and c the contrast slider.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{pixel}=A+(B-A)\\,t",
-   "note": "A is the shadow colour and B the highlight colour, mixed per channel."
+   "note": "A is the shadow colour and B the highlight colour, mixed per channel.",
+   "primitives": [
+    "colour-ramp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

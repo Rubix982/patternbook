@@ -58,14 +58,28 @@
   "Minimalism here is a posterise with a lot of room around it. The picture is blurred first, so that fine texture cannot create stray specks, then its brightness is stretched to use the whole range from the darkest to the lightest value actually present. Without that stretch a dull, low-contrast photograph would collapse into one or two tones.",
   "The stretched brightness is cut into n equal bands, and each band is assigned one flat colour, found by walking in a straight line from the ink colour to the paper colour. The lightest band is paper, so it simply disappears into the margin. The accent option swaps one mid-tone for a single colour, which is the only colour on the page."
  ],
+ "primitives": [
+  "auto-levels",
+  "colour-ramp",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "v=\\operatorname{clamp}\\!\\left(\\frac{L_b-L_{\\min}}{\\max(0.05,\\;L_{\\max}-L_{\\min})}\\right)",
-   "note": "Blurred brightness stretched to 0 to 1."
+   "note": "Blurred brightness stretched to 0 to 1.",
+   "primitives": [
+    "auto-levels"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_i=\\mathrm{ink}+\\frac{i}{n-1}\\,(\\mathrm{paper}-\\mathrm{ink}),\\qquad i=\\min\\big(n-1,\\ \\lfloor v\\,n\\rfloor\\big)",
-   "note": "The colour of band i, on the line from ink to paper."
+   "note": "The colour of band i, on the line from ink to paper.",
+   "primitives": [
+    "tone-bands",
+    "colour-ramp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

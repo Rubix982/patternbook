@@ -58,18 +58,35 @@
   "Cross processing means developing a film in the chemistry meant for another kind of film. The three dye layers then respond to light in unusual ways, each with its own tone curve, so the shadows lean toward one hue, the highlights toward another and the contrast jumps. The program stores each look as a list of knots for each channel, for example the blue curve of slide film in colour-negative chemistry starts at 0.17 and ends at 0.74, and joins them with a Catmull-Rom spline, a smooth curve that passes through every knot. The curve is evaluated once for each of the 256 input values and kept as a lookup table.",
   "Each channel of each pixel is looked up in its own table, and the strength slider mixes the original with the result. Saturation is then scaled around the luminance (0.7 to 1.6) and blacks can be lifted by up to 10% for the faded look. A vignette and grain complete the film. The three looks are slide film in colour chemistry, negative film in slide chemistry, and a teal and amber grade."
  ],
+ "primitives": [
+  "saturation-adjust",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "y(t)=\\tfrac12\\Big[\\,2p_1+(p_2-p_0)\\,t+(2p_0-5p_1+4p_2-p_3)\\,t^2+(3p_1-p_0-3p_2+p_3)\\,t^3\\Big]",
-   "note": "Catmull-Rom spline through the knots p₀ … p₃; t runs from 0 to 1 between p₁ and p₂."
+   "note": "Catmull-Rom spline through the knots p₀ … p₃; t runs from 0 to 1 between p₁ and p₂.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "c'=(1-a)\\,c+a\\,\\operatorname{LUT}_c(c)",
-   "note": "Each channel c through its own table, mixed by the strength a."
+   "note": "Each channel c through its own table, mixed by the strength a.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=f+(1-f)\\operatorname{clip}\\big(l+\\sigma\\,(c'-l)\\big),\\qquad \\sigma=0.7+0.9\\,s,\\ \\ f\\le 0.1",
-   "note": "Saturation s around the luminance l, then faded blacks f."
+   "note": "Saturation s around the luminance l, then faded blacks f.",
+   "primitives": [
+    "saturation-adjust",
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

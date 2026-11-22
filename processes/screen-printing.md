@@ -8,7 +8,7 @@ models:
   - {by: lumenary, id: retro, relation: analogous}
   - {by: lumenary, id: pop-art, relation: analogous}
   - {by: lumenary, id: screen-print, relation: same}
-primitives: []
+primitives: [edge-outline, material-ground, misregistration, multiply-blend, ordered-dither, soft-threshold, tone-bands, tone-curve, tone-dot-lattice]
 sources: []
 status: listed
 ---

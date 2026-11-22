@@ -9,7 +9,7 @@ models:
   - {by: lumenary, id: comic-book, relation: analogous}
   - {by: lumenary, id: newspaper, relation: analogous}
   - {by: lumenary, id: halftone, relation: same}
-primitives: []
+primitives: [edge-outline, tone-bands, tone-curve, tone-dot-lattice, tone-line-screen]
 sources: []
 status: listed
 ---

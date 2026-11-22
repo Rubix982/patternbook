@@ -58,18 +58,39 @@
   "On a summer night the picture sits in near darkness, and each firefly lights the patch of it beneath. Every firefly has a position, a heading and its own rhythm. The heading drifts smoothly: its rate of change is 5 × (n − ½) where n is slow noise, so the flight curves lazily, and the speed is set by the slider with a slight upward float. Fireflies leave one edge and re-enter at the opposite one. When the pointer is inside the picture it draws them in: within half the picture’s width the pull is 55 px per second at the pointer and falls off linearly with distance. Each blinks on its own period of 1.4 to 3.8 seconds and its own phase, with a brightness b = lerp(1, w^2.2, blink), where w = ½ + ½ sin(2πt/T + φ); the power makes each flash short and the dark between them long.",
   "The lighting is built in layers. First a near-black field with the picture at a fraction 1 − night of its brightness. Then a mask is painted: each firefly stamps a soft radial sprite (radius 30 to 125 px times 0.6 to 1.1, according to its brightness) at an opacity equal to b, and stamps combine as 1 − Π(1 − bᵢ gᵢ), so overlapping lights add up without ever exceeding 1. The sharp picture seen through this mask is added to the dark base with additive blending. Last, each firefly draws a small halo in its colour (green-gold, amber, cool white or pink) and a bright white core, also additively."
  ],
+ "primitives": [
+  "additive-blend",
+  "flicker",
+  "mask-clip",
+  "particle-motion",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "\\dot a=5\\,\\big(n(0.4\\,t+s)-\\tfrac12\\big),\\qquad \\mathbf v=\\big(\\cos a,\\ \\sin a\\big)\\,v_0\\,\\kappa-(0,\\,4)",
-   "note": "A firefly’s heading a and velocity: n is slow noise, s the firefly’s own offset and κ its personal speed factor (0.6 to 1.4)."
+   "note": "A firefly’s heading a and velocity: n is slow noise, s the firefly’s own offset and κ its personal speed factor (0.6 to 1.4).",
+   "primitives": [
+    "particle-motion",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "b=(1-\\beta)+\\beta\\Big(\\tfrac12+\\tfrac12\\sin\\big(\\tfrac{2\\pi t}{T}+\\varphi\\big)\\Big)^{2.2}",
-   "note": "The blinking: β is the blinking slider, T the firefly’s period and φ its phase."
+   "note": "The blinking: β is the blinking slider, T the firefly’s period and φ its phase.",
+   "primitives": [
+    "flicker"
+   ],
+   "bespoke": null
   },
   {
    "tex": "m=1-\\prod_i\\big(1-b_i\\,g_i(\\mathbf x)\\big),\\qquad C=C_{\\text{night}}+0.9\\,m\\,C_{\\text{picture}}+\\sum_i b_i\\,h_i(\\mathbf x)\\,\\mathbf c",
-   "note": "The light mask m, and the final colour: g and h are the radial profiles of the mask and halo sprites, c the firefly colour."
+   "note": "The light mask m, and the final colour: g and h are the radial profiles of the mask and halo sprites, c the firefly colour.",
+   "primitives": [
+    "additive-blend",
+    "mask-clip"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

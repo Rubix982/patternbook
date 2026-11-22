@@ -58,22 +58,41 @@
   "In Tamil Nadu and the south of India, women draw a kolam at the door each morning in rice flour, so that ants and birds are fed as they pass. The most common kind starts with a lattice of dots, called pulli, and a line that loops round them. Mathematicians and computer scientists have studied kolams since the 1970s, as pictures made by simple rules. The program places dots on a square lattice with the chosen spacing, and for each square of four dots it decides which of two figures to draw from the tone of your picture.",
   "The first figure is the loop round the dots. A quarter circle of radius s/2 is drawn about each corner of the square, turning inward, so that four neighbouring squares draw a full circle round the dot they share, and the circles of neighbouring dots touch at the middle of the edge between them. The second figure is the diamond joining the midpoints of the four sides. For the tone t (less the density slider), a square is empty if t ≥ 0.78. It has only the loops if 0.62 ≤ t < 0.78, only the diamond if 0.4 ≤ t < 0.62, and both if t < 0.4, which is why dark places turn into diamonds and petals. Symmetry is made by folding the point where the picture is read, so that the left and right (and with four-fold symmetry the top and bottom) read the same tones. The flour is a canvas of its own, with grainy edges and a soft glow, laid over a floor texture."
  ],
+ "primitives": [
+  "lattice-repeat",
+  "symmetry-fold",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "n_x=\\Big\\lfloor\\frac{W}{s}\\Big\\rfloor-1,\\qquad \\mathbf p_{i,j}=\\big(o_x+i\\,s,\\ o_y+j\\,s\\big),\\quad 0\\le i\\le n_x,\\ 0\\le j\\le n_y",
-   "note": "The dot lattice. Offsets o_x, o_y centre it on the canvas, and there are (nₓ + 1)(n_y + 1) dots."
+   "note": "The dot lattice. Offsets o_x, o_y centre it on the canvas, and there are (nₓ + 1)(n_y + 1) dots.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{diamond}:\\ t<0.62,\\qquad \\text{loops}:\\ t<0.78\\ \\wedge\\ \\big(t<0.4\\ \\vee\\ t\\ge0.62\\big),\\qquad t=T(\\mathbf c)-\\delta",
-   "note": "Which figures a square gets. T is the blurred tone at the square’s centre c, and δ is the density slider divided by 100."
+   "note": "Which figures a square gets. T is the blurred tone at the square’s centre c, and δ is the density slider divided by 100.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "x\\leftarrow x_c-|x-x_c|,\\qquad y\\leftarrow y_c-|y-y_c|\\ \\ (\\text{four-fold only})",
-   "note": "Folding the lookup point for mirror symmetry."
+   "note": "Folding the lookup point for mirror symmetry.",
+   "primitives": [
+    "symmetry-fold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w=0.11\\,s\\,\\omega,\\qquad r_{\\text{dot}}=0.075\\,s\\,\\max(0.7,\\,\\omega)",
-   "note": "Line width and dot radius from the line weight slider ω."
+   "note": "Line width and dot radius from the line weight slider ω.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

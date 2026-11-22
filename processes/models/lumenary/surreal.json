@@ -58,14 +58,30 @@
   "The picture melts. Every pixel is drawn from a point higher up in the original, so the image appears to slide downwards, and the slide grows towards the bottom. How far a column slides varies smoothly from side to side because it is driven by value noise; the drips slider changes the width of the noise, so more drips means narrower tongues.",
   "A dream grade pulls the colours toward a tint, more at the top (sky) than the bottom, then a pale second sun with a halo and a faint reflection and a few flat-bottomed clouds are drawn on top."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "mix-over",
+  "smooth-noise",
+  "soft-threshold"
+ ],
  "equations": [
   {
    "tex": "\\Delta(x,y)=A\\,S(0.18,1,t)\\,\\big(0.25+0.75\\,(0.75\\,n_1+0.25\\,n_2)\\big)\\,(t+0.2),\\qquad t=\\frac{y}{H}",
-   "note": "How far the pixel is pulled down. A = melt × 0.34 H, S is smoothstep and n₁, n₂ are value noise at two scales."
+   "note": "How far the pixel is pulled down. A = melt × 0.34 H, S is smoothstep and n₁, n₂ are value noise at two scales.",
+   "primitives": [
+    "coordinate-warp",
+    "smooth-noise",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{out}}=C\\,(1-k-s_k)+T\\,L\\,k+S(t)\\,s_k\\,1.4,\\quad k=0.28,\\ s_k=0.22\\,(1-t)",
-   "note": "The colour grade: T is the tint, S(t) the sky colour at height t."
+   "note": "The colour grade: T is the tint, S(t) the sky colour at height t.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

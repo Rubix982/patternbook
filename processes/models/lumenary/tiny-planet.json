@@ -59,18 +59,34 @@
   "For an output pixel at offset (dx, dy) from the centre, the angle is theta = atan2(dy, dx) plus the turn, and the radius is r. The picture’s column is u = theta / 2 pi times the number of times round, and its row comes from the radius through the inverse of a curve g. With s running from 0 at the bottom row to 1 at the top row, g(s) = (1 - k) s + k tan(s phi / 2) / tan(phi / 2), where k is the curve slider and phi = 2.45 radians is the width of the projected view. At k = 0 this is the plain polar map, with the radius growing evenly with the row; at k = 1 it is the stereographic projection of a sphere, which crowds the lower rows into the middle. A pixel at radius r reads the row s = g^-1 (r / R), where R is the planet’s radius, found by a binary search in a table of 1024 values of g.",
   "Near the centre one output pixel spans many picture pixels, because a whole row is squeezed into a short circle of radius r. The sampler therefore averages up to 12 samples round the circle, and up to 3 along the radius, which removes the moire of stripes that a single sample would give. The two sides are joined either by mirroring or by cross-fading the last 14% of the width into the first with a smoothstep weight. Beyond the top row the sky is a strip made from the average colour of the top 5% of each column, blurred sideways round the loop, and faded towards its overall average as the radius approaches the far pole of the sphere, at s = pi / phi."
  ],
+ "primitives": [
+  "blur",
+  "coordinate-warp"
+ ],
  "equations": [
   {
    "tex": "g(s)=(1-k)\\,s+k\\,\\frac{\\tan(s\\varphi/2)}{\\tan(\\varphi/2)},\\qquad \\varphi=2.45",
-   "note": "How far from the centre row s lands: k is the curve slider, and s runs from 0 at the bottom to 1 at the top."
+   "note": "How far from the centre row s lands: k is the curve slider, and s runs from 0 at the bottom to 1 at the top.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\theta=\\operatorname{atan2}(\\Delta y,\\Delta x)+\\tau,\\qquad u=\\frac{n\\,\\theta}{2\\pi},\\qquad s=g^{-1}\\!\\big(r/R\\big)",
-   "note": "The picture is read at column u and row s: n is the number of times round and tau the turn."
+   "note": "The picture is read at column u and row s: n is the number of times round and tau the turn.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "N_\\theta=\\Big\\lceil \\frac{0.86\\,n\\,W}{2\\pi r}\\Big\\rceil\\quad(\\le 12)",
-   "note": "How many samples are averaged round a circle of radius r, so that the centre stays smooth."
+   "note": "How many samples are averaged round a circle of radius r, so that the centre stays smooth.",
+   "primitives": [
+    "blur"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

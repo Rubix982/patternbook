@@ -58,18 +58,37 @@
   "Outlines are found with the blur-then-Sobel pipeline, but they are not drawn where they are. The edge map is looked up three times at each pixel, each time at a position nudged by a different slow noise, and the strongest of the three is kept. One true outline therefore appears as three lines that wander apart and together, like a pen going over the same contour again. Each pass is also faded in small patches by a hash, so the lines skip.",
   "Shadows are hatched. The pixel’s position along a diagonal, divided by the spacing of the strokes, tells how far it is from the nearest stroke centre; it is inked if it is close enough and the picture there is dark enough. A second set of strokes on the other diagonal is added only in the deepest shadows. The finished line layer is drawn with additive blending, then again from copies shrunk to a quarter and a tenth of the size. Enlarging a small copy smears each line outward, and the sum is a hard core inside a soft halo. The rainbow pen takes its hue from the position on the page."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "edge-outline",
+  "glow-bloom",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "a=\\max_{j=1,2,3}\\ S_{\\theta,\\,2.3\\theta}\\Big(E\\big(\\mathbf x+A\\,\\mathbf n_j(\\mathbf x)\\big)\\Big),\\qquad \\theta=\\operatorname{lerp}(0.17,\\ 0.035,\\ \\text{detail})",
-   "note": "Line opacity: the edge map E read at three noisy offsets n_j of size A = 1.5 + 9 × wobble pixels."
+   "note": "Line opacity: the edge map E read at three noisy offsets n_j of size A = 1.5 + 9 × wobble pixels.",
+   "primitives": [
+    "edge-outline",
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s=\\Big\\lvert\\operatorname{frac}\\frac{x+y+\\delta}{p}-\\tfrac12\\Big\\rvert,\\qquad \\text{hatch}=\\big(1-S_{0.05,\\,0.11}(s)\\big)\\cdot S_{0.5,\\,0.62}(1-L)",
-   "note": "First hatching direction: strokes every p = 11 px, drawn where the picture is dark. δ is a slow sway."
+   "note": "First hatching direction: strokes every p = 11 px, drawn where the picture is dark. δ is a slow sway.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=E+g\\,\\big(\\operatorname{up}(E_{1/4})+\\operatorname{up}(E_{1/10})\\big)+0.28\\,E",
-   "note": "The glow: the line layer E plus enlarged small copies, all added; g grows with the glow slider."
+   "note": "The glow: the line layer E plus enlarged small copies, all added; g grows with the glow slider.",
+   "primitives": [
+    "glow-bloom"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

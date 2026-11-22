@@ -59,18 +59,33 @@
   "The picture is averaged down to one colour for each stitch, and a small palette of wools is found on that tiny image by k-means. Every stitch then takes the wool nearest to its own colour. Wool is matt, so the palette loses a little saturation and its lightness is squeezed away from pure black and white. When a basket of fixed colours is chosen instead, each palette colour is given a different colour from the basket, matched by its rank from dark to light and then by hue, so the picture keeps its tonal order.",
   "One stitch is two strands of yarn leaning together into a V. Each strand is drawn three times along the same line: wide and dark, then narrower in the wool’s colour, then a thin light line off to one side. Together they read as a round thread lit from the left. Rows are worked back and forth, so every second row sits half a stitch across and its strands overlap the other way round. The shell border is the same stitch repeated five times around a shared foot, fanned by a fixed angle. Fuzz is a little noise and the occasional bright fibre over the whole piece."
  ],
+ "primitives": [
+  "stitch-grid"
+ ],
  "equations": [
   {
    "tex": "w=\\frac{W-2e}{n},\\qquad \\text{rows}=\\operatorname{round}\\!\\Big(\\frac{H-2e}{0.86\\,w}\\Big)",
-   "note": "Stitch width w from n stitches across and the border width e. Stitches are a little shorter than wide."
+   "note": "Stitch width w from n stitches across and the border width e. Stitches are a little shorter than wide.",
+   "primitives": [
+    "stitch-grid"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{strand}:\\ (0.22w,\\ 0.1h)\\to(0.5w,\\ 0.92h),\\qquad (0.78w,\\ 0.1h)\\to(0.5w,\\ 0.92h)",
-   "note": "The two strands of one stitch, in a cell w wide and h tall. Line width is 0.36 w."
+   "note": "The two strands of one stitch, in a cell w wide and h tall. Line width is 0.36 w.",
+   "primitives": [
+    "stitch-grid"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\theta_q=(q-2)\\cdot0.42\\ \\text{rad},\\qquad q=0,\\dots,4",
-   "note": "The five stitches of one shell, fanned about its foot."
+   "note": "The five stitches of one shell, fanned about its foot.",
+   "primitives": [
+    "stitch-grid"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

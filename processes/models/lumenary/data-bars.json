@@ -58,18 +58,35 @@
   "The picture is averaged down to a grid with one cell for each bar. A cell’s value is its brightness, or one minus its brightness when bars are to stand tall on the dark parts. Each row of the grid has its own baseline, and a bar rises from it to a height in proportion to the value, never quite to nothing: the smallest bar is 3% of the full height. Read from a distance the rows of bars are a coarse halftone; read up close each row is an honest chart of the brightness along one strip of the picture.",
   "The three looks differ only in how a bar is filled. Flat bars take the cell’s own colour, a little more saturated. Gold bars ignore the colour and read a ramp of five golds by the value, with a light stripe and a dark flank to suggest polished metal. Blocks add a side and a top, each a parallelogram pushed back and up by the same offset, one darker and one lighter than the face. That is an oblique projection, the kind used in spreadsheet charts."
  ],
+ "primitives": [
+  "colour-ramp",
+  "projection-3d",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "h=H_{\\text{full}}\\,(0.03+0.97\\,v),\\qquad v=L\\ \\text{or}\\ 1-L",
-   "note": "Bar height from the cell value v. H_full is 86% of the row height."
+   "note": "Bar height from the cell value v. H_full is 86% of the row height.",
+   "primitives": [
+    "tone-mark-size"
+   ],
+   "bespoke": null
   },
   {
    "tex": "t=0.2+0.8\\,v,\\qquad C_{\\text{gold}}=\\operatorname{ramp}(t)",
-   "note": "Gold look: the value picks a place on a ramp from dark bronze to pale gold."
+   "note": "Gold look: the value picks a place on a ramp from dark bronze to pale gold.",
+   "primitives": [
+    "colour-ramp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "(x,\\,y,\\,z)\\ \\mapsto\\ \\big(x+z,\\ y-\\tfrac12 z\\big)",
-   "note": "Blocks: a point z behind the face is drawn to the right and half as far up."
+   "note": "Blocks: a point z behind the face is drawn to the right and half as far up.",
+   "primitives": [
+    "projection-3d"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

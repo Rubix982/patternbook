@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: byzantine-mosaic, relation: same}
-primitives: []
+primitives: [edge-tangent-field, poisson-disc, seeded-random, soft-threshold, streamline-trace, tone-bands]
 sources: []
 status: listed
 ---

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: embroidery, relation: same}
-primitives: []
+primitives: [edge-tangent-field]
 sources: []
 status: listed
 ---

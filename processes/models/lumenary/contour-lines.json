@@ -58,18 +58,34 @@
   "A contour line joins the points of a landscape that have the same height. The program reads the picture’s lightness as height, F(x, y), after smoothing it by the slider’s radius, and draws the lines F = k/n for k = 1, …, n − 1, where n is the number of heights. To find a line it uses marching squares: the picture is covered by little cells (about 1.5 px wide), and the cells whose corners are partly above and partly below the level are crossed by the line. Its position on a side comes from linear interpolation, t = (level − F_a)/(F_b − F_a). The pieces are chained into long polylines and drawn as smooth quadratic curves. Where the picture changes quickly the lines crowd together, since their spacing is about 1/(n |∇F|), as on a map where the hill is steep.",
   "Mapmakers draw every fifth or so line heavier (an index contour) and tint the bands between. Both are here: the heavier line is 1.9 times as thick, set by the heavier-line-every slider. The tint is a hypsometric ramp from green through ochre and brown to snow-white, evaluated at the middle of each band, or the picture’s own colours flattened to the band by scaling each colour by (0.55 + 0.6 b)/(0.55 + 0.6 F). Lines can be ink, brown like old maps, or the colour of the picture darkened."
  ],
+ "primitives": [
+  "iso-contours",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "C_k=\\Big\\{\\mathbf x:\\ F(\\mathbf x)=\\tfrac{k}{n}\\Big\\},\\qquad \\Delta s\\approx\\frac{1}{n\\,\\lVert\\nabla F\\rVert}",
-   "note": "The contour of height k/n and the spacing between neighbouring lines."
+   "note": "The contour of height k/n and the spacing between neighbouring lines.",
+   "primitives": [
+    "iso-contours"
+   ],
+   "bespoke": null
   },
   {
    "tex": "t=\\frac{\\lambda-F_a}{F_b-F_a}",
-   "note": "Where a contour crosses a cell side between corner values F_a and F_b, for the level λ (marching squares)."
+   "note": "Where a contour crosses a cell side between corner values F_a and F_b, for the level λ (marching squares).",
+   "primitives": [
+    "iso-contours"
+   ],
+   "bespoke": null
   },
   {
    "tex": "b=\\frac{\\lfloor nF\\rfloor+\\tfrac12}{n}",
-   "note": "The band value that picks the tint between two lines."
+   "note": "The band value that picks the tint between two lines.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

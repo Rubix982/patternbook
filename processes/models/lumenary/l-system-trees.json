@@ -58,14 +58,19 @@
   "Aristid Lindenmayer introduced L-systems in 1968 as a grammar for the growth of plants: a string is rewritten again and again, and a drawing is made from the result. A branching tree is the rule “a branch becomes a branch with two branches on its end”, and the program draws it by recursion. A branch of length ℓ and width w is drawn, and then two children start from its end (and, with a 14% chance beyond the first two generations, three). The children turn by ± the spread angle times a random factor between 0.6 and 1.4, plus a share (0.35) of the wind angle and a little jitter, are the decay slider times a random 0.82 to 1.18 as long, and 0.72 times as wide. The number of generations is the depth of the recursion.",
   "A branch ends when the depth runs out or when its length falls below 3 px; there a leaf is placed, and a few leaves appear on the way (5%) near the tips. If the lengths shrink by a factor δ each generation, a tip cannot rise higher than the geometric sum ℓ₀/(1 − δ) above the root, which is why a tree stays inside the frame. All leaves are shuffled and drawn as translucent discs (82% opacity) with the colour of the picture at their position, so the tree’s crown becomes a loose, pointillist portrait. The first three generations (the trunk and main boughs) are drawn a little darker, and the faint picture behind is an option."
  ],
+ "primitives": [],
  "equations": [
   {
    "tex": "\\ell_{k+1}=\\delta\\,u\\,\\ell_k\\ (u\\in[0.82,\\,1.18]),\\qquad w_{k+1}=0.72\\,w_k,\\qquad a_{k+1}=a_k\\pm s\\,(0.6+0.8\\,u')+0.35\\,\\omega",
-   "note": "Length, width and direction of the children; δ the decay, s the spread, ω the wind."
+   "note": "Length, width and direction of the children; δ the decay, s the spread, ω the wind.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "N\\approx\\sum_{k=0}^{g}2^{k}=2^{g+1}-1,\\qquad H\\le\\frac{\\ell_0}{1-\\delta}",
-   "note": "The number of branches for g generations, and the bound on a tree’s height."
+   "note": "The number of branches for g generations, and the bound on a tree’s height.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

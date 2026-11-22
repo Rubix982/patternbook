@@ -59,18 +59,40 @@
   "A radiograph is a negative: dense things stop the rays and stay pale on the film. The treatment therefore turns the stretched brightness over, so that the dark parts of the picture shine. Structure is then added by unsharp masking: each pixel is pushed away from the average of its surroundings, taken from a copy blurred twice with a box of radius 14 pixels. Edge strength from the Sobel operator is added on top, which makes outlines glow the way the dense shell of a bone does, and a power of 1.25 deepens the mid tones.",
   "Noise is added in proportion to how dark a pixel is, because in a real exposure the grainiest areas are the ones that received the fewest photons. The collimator, the pair of lead shutters that limits the beam, is a soft-edged rectangle that leaves the border of the film almost unexposed. Colour comes last: each channel is blended from the film’s base colour to its full density along a slightly different curve, red slowest and blue fastest, which gives the blue cast of medical film. A soft glow, a lead letter and a line of exposure data finish the plate."
  ],
+ "primitives": [
+  "colour-ramp",
+  "grain-overlay",
+  "image-gradient",
+  "tone-curve",
+  "unsharp-mask"
+ ],
  "equations": [
   {
    "tex": "v\\leftarrow\\operatorname{clamp}\\!\\big(v+s\\,(v-\\bar v)+k\\,\\lvert\\nabla L\\rvert\\big)^{1.25},\\qquad v=1-L",
-   "note": "Structure: v̄ is the wide blur of v, s the structure slider times 1.5 and k the bright-edges slider times 1.6."
+   "note": "Structure: v̄ is the wide blur of v, s the structure slider times 1.5 and k the bright-edges slider times 1.6.",
+   "primitives": [
+    "unsharp-mask",
+    "image-gradient",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "v\\leftarrow v+g\\,\\eta\\,\\big(0.4+0.6\\,(1-v)\\big)",
-   "note": "Mottle: η is noise between −1 and 1, g the mottle slider times 0.16."
+   "note": "Mottle: η is noise between −1 and 1, g the mottle slider times 0.16.",
+   "primitives": [
+    "grain-overlay"
+   ],
+   "bespoke": null
   },
   {
    "tex": "R=\\operatorname{lerp}(b_R,f_R,\\,0.4t^{2}+0.6t),\\quad G=\\operatorname{lerp}(b_G,f_G,\\,t),\\quad B=\\operatorname{lerp}(b_B,f_B,\\,t^{0.82})",
-   "note": "From film base b to full density f; t is the eased value 0.35 S(v) + 0.65 v."
+   "note": "From film base b to full density f; t is the eased value 0.35 S(v) + 0.65 v.",
+   "primitives": [
+    "colour-ramp",
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

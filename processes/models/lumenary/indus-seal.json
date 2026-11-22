@@ -58,22 +58,41 @@
   "Thousands of small square seals were found at Mohenjo-daro and the other cities of the Indus civilization, which flourished from about 2600 to 1900 BCE. They are mostly carved in steatite, a soft stone, with a line of signs along the top and a figure below, often a bull, an elephant or a tiger. The script has never been deciphered. Most seals are read from right to left, since the signs crowd toward the left end when the carver ran out of room, so the program sets them out that way. When the seal is pressed into wet clay, the carved lines stand out in relief on the clay.",
   "The picture is the figure. A square of side 0.8 W is drawn on a hidden canvas, with a frame, a band for the signs along the top (0.2 of the seal’s height), and a row of n signs chosen at random from eleven strokes, set from the right. Below the band, lines are drawn from the picture itself: edges, found with a Sobel operator on a blurred copy; hatching with thickness rising as the picture darkens, in rows 4.6 px apart; and a cross-hatch where the picture is very dark. The result is a map C that is 1 on a cut line. In clay mode the seal’s area is pressed down and the lines stand up from it. In steatite mode the lines are cut into the pale stone and filled with dark. Either way the map becomes a height map, and light from the upper left gives it relief."
  ],
+ "primitives": [
+  "edge-outline",
+  "tone-line-screen",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "C=\\max\\big(C_{\\text{signs}},\\ e,\\ h\\big),\\qquad e=\\operatorname{smoothstep}(0.05,0.15,\\lVert\\nabla T\\rVert)\\,(0.4+0.6\\,\\varepsilon)",
-   "note": "The cut lines: the signs and frame, the outline e of the picture (ε is the engraving slider), and the hatching h."
+   "note": "The cut lines: the signs and frame, the outline e of the picture (ε is the engraving slider), and the hatching h.",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
   },
   {
    "tex": "h=\\Big[\\operatorname{frac}\\!\\big(\\tfrac{y}{p}\\big)<\\theta\\Big],\\qquad \\theta=\\varepsilon\\,\\operatorname{clamp}\\big(1.5\\,(0.6-T),\\,0,\\,0.78\\big)",
-   "note": "Hatching: lines every p = 4.6 px whose thickness θ rises as the tone T falls below 0.6."
+   "note": "Hatching: lines every p = 4.6 px whose thickness θ rises as the tone T falls below 0.6.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "H_{\\text{clay}}=-0.24\\,[\\text{inside}]+0.34\\,C,\\qquad H_{\\text{steatite}}=-0.3\\,[\\text{outside}]-0.3\\,C",
-   "note": "Heights before blurring: the clay is pressed down under the seal and the cut lines leave ridges; on the stone the surround is cut away and the lines cut in."
+   "note": "Heights before blurring: the clay is pressed down under the seal and the cut lines leave ridges; on the stone the surround is cut away and the lines cut in.",
+   "primitives": [
+    "tone-to-height"
+   ],
+   "bespoke": null
   },
   {
    "tex": "x_i=x_0+S-7\\,\\mathrm{sc}-\\big(i+\\tfrac12\\big)\\,\\frac{S-14\\,\\mathrm{sc}}{n}",
-   "note": "The centre of sign i, counted from the right-hand end of the band."
+   "note": "The centre of sign i, counted from the right-hand end of the band.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

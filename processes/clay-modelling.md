@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: clay-3d, relation: same}
   - {by: lumenary, id: plasticine, relation: same}
-primitives: []
+primitives: [blur, relief-shading, specular-highlight, tone-to-height]
 sources: []
 status: listed
 ---

@@ -58,18 +58,34 @@
   "The Mexica carved in stone, and the best known piece is the Sun Stone, a disc whose rings hold the twenty signs for the days of the ritual count. Twenty signs run against thirteen numbers to give the 260 days of the sacred year. The program makes a wall of square tablets, each with a raised plate, a raised border and one of eleven glyphs (the spiral of wind, the five-dot movement sign, the stepped fret, the sun, the serpent, the flower, water, the flint, the house, the face and an eight-pointed star), drawn with strokes of different widths. The plate is higher where your picture is brighter: its height is 0.18 + 0.4 t, the border adds 0.22 and the glyph 0.42.",
   "The heights are painted on a hidden grey canvas, blurred by about a pixel, and lit as a relief. The slope of the surface is found from differences of height. Light from the chosen direction brightens the faces that look toward it. Cracks and corners are darkened by an occlusion term, which is large where the surface is lower than its own blur. A wash of the picture’s colours is mixed into the stone, and the glyphs carry stronger paint, because the Mexica painted their stone. Weathering adds long streaks and patches of lichen."
  ],
+ "primitives": [
+  "relief-shading",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "H=\\rho\\,h_{\\text{canvas}}+0.25\\,\\bar L,\\qquad h_{\\text{plate}}=0.18+0.4\\,t",
-   "note": "The height map: ρ is the depth slider, h_canvas the drawn heights and L̄ a broad blur of the picture’s brightness, which gives the whole wall a gentle swell."
+   "note": "The height map: ρ is the depth slider, h_canvas the drawn heights and L̄ a broad blur of the picture’s brightness, which gives the whole wall a gentle swell.",
+   "primitives": [
+    "tone-to-height"
+   ],
+   "bespoke": null
   },
   {
    "tex": "f=\\operatorname{clamp}\\big(0.74+0.7\\,(\\mathbf s\\cdot\\mathbf l),\\ 0.3,\\ 1.45\\big)\\,(1-a),\\qquad \\mathbf s=-k\\,\\nabla H",
-   "note": "Relief lighting: l = (cos α, sin α) is the direction to the light and k = 22 + 70 ρ scales the slope."
+   "note": "Relief lighting: l = (cos α, sin α) is the direction to the light and k = 22 + 70 ρ scales the slope.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "a=\\operatorname{clamp}\\big(2.4\\,(\\bar H-H),\\ 0,\\ 0.55\\big)",
-   "note": "Occlusion: where the height H is below its own blur H̄ (a groove) the surface is darkened by up to 55%."
+   "note": "Occlusion: where the height H is below its own blur H̄ (a groove) the surface is darkened by up to 55%.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

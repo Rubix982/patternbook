@@ -9,7 +9,7 @@ models:
   - {by: lumenary, id: delft-blue, relation: same}
   - {by: lumenary, id: talavera, relation: same}
   - {by: lumenary, id: hala-blue-pottery, relation: same}
-primitives: []
+primitives: [crackle-network, edge-tangent-field, importance-sampling, iso-contours, lattice-repeat, mix-over, multiply-blend, seeded-random, star-rosette-motif, streamline-trace, tone-bands, tone-curve, tone-mark-size]
 sources: []
 status: listed
 ---

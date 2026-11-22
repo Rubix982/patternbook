@@ -58,18 +58,25 @@
   "The Penrose tiling uses two rhombi, a thin one with angles of 36 and 144 degrees and a thick one with 72 and 108, which together cover the plane without ever repeating. It has local five-fold symmetry, which no periodic tiling can have. The program builds it from Robinson triangles, the halves of the rhombi. It starts with ten thin triangles arranged round the centre in a decagon, then repeatedly deflates every triangle into smaller ones. A thin triangle becomes two (one of each kind) and a thick one becomes three, with the new vertices dividing the old edges in the golden ratio φ = (1 + √5)/2.",
   "Each deflation shrinks the edges by 1/φ and multiplies the number of triangles by φ² ≈ 2.618, the larger eigenvalue of the substitution matrix. The subdivisions slider sets how many rounds are made. For colour, each triangle looks up the picture at its centroid. In picture mode the thick tiles are made 4% lighter and the thin ones 6% darker, so the two shapes can be told apart; in duo mode they take gold and teal, shaded by the picture’s tone; in mixed mode the picture colour and the duo colour are mixed 60:40. Optional lines trace the triangles’ outer edges."
  ],
+ "primitives": [],
  "equations": [
   {
    "tex": "P=A+\\frac{B-A}{\\varphi},\\qquad Q=B+\\frac{A-B}{\\varphi},\\qquad R=B+\\frac{C-B}{\\varphi},\\qquad \\varphi=\\frac{1+\\sqrt5}{2}",
-   "note": "The new vertices when a triangle ABC is deflated."
+   "note": "The new vertices when a triangle ABC is deflated.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\begin{pmatrix}n_0'\\\\ n_1'\\end{pmatrix}=\\begin{pmatrix}1&1\\\\ 1&2\\end{pmatrix}\\begin{pmatrix}n_0\\\\ n_1\\end{pmatrix},\\qquad \\lambda=\\frac{3\\pm\\sqrt5}{2}=\\varphi^{2},\\ \\varphi^{-2}",
-   "note": "Counts of thin (n₀) and thick (n₁) triangles; the growth per round is φ² ≈ 2.618."
+   "note": "Counts of thin (n₀) and thick (n₁) triangles; the growth per round is φ² ≈ 2.618.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "N_k\\approx 10\\,\\varphi^{2k},\\qquad \\ell_k=\\ell_0\\,\\varphi^{-k}",
-   "note": "Number of triangles and edge length after k deflations."
+   "note": "Number of triangles and edge length after k deflations.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

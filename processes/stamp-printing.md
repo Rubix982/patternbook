@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: rubber-stamp, relation: same}
   - {by: lumenary, id: adinkra, relation: analogous}
-primitives: []
+primitives: [multiply-blend, seeded-random, smooth-noise, tone-dot-lattice, tooth-threshold]
 sources: []
 status: listed
 ---

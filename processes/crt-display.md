@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: scanlines-crt, relation: same}
-primitives: []
+primitives: [coordinate-warp]
 sources: []
 status: listed
 ---

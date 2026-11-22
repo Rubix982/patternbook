@@ -58,18 +58,37 @@
   "Letterpress is printing with a raised plate pressed into thick cotton paper, so the ink arrives with a physical dent. The treatment builds the plate first, as black on transparent: a 45° halftone of your picture, two rules and the title. That layer becomes an ink map a(x, y) between 0 and 1.",
   "The paper is then treated as a height field. The ink map is softened with two small blurs (the paper’s give) and its slope is measured with a Sobel filter. Light comes from the top left, so the lower-right wall of every dent is lit and the upper-left wall falls in shadow, which is how the impression shows. Paper tone gets a little fibre and speckle noise. Ink is the one chosen colour, a touch darker at the edges where it squashes outward, and the “ink wear” slider knocks small holes in it, the way a worn plate prints."
  ],
+ "primitives": [
+  "blur",
+  "mix-over",
+  "relief-shading",
+  "tone-dot-lattice"
+ ],
  "equations": [
   {
    "tex": "r=0.72\\,s\\,\\sqrt{1-L}",
-   "note": "Halftone dot radius on the plate; s is the dot spacing."
+   "note": "Halftone dot radius on the plate; s is the dot spacing.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "v=1-5.2\\,\\delta\\,(G_x+G_y)-0.07\\,\\delta\\,\\tilde a+\\eta,\\qquad \\tilde a=\\text{blur}^2(a)",
-   "note": "Paper shading v: δ is the impression slider, G the Sobel slopes of the softened ink map, η small noise."
+   "note": "Paper shading v: δ is the impression slider, G the Sobel slopes of the softened ink map, η small noise.",
+   "primitives": [
+    "relief-shading",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=v\\,\\Big(P+k\\,\\big(\\sigma\\,I-P\\big)\\Big),\\qquad k=a\\,(1-h)",
-   "note": "Final colour: paper P toward ink I by the ink amount k; h is 0.55 on worn speckles and σ shades the ink."
+   "note": "Final colour: paper P toward ink I by the ink amount k; h is 0.55 on worn speckles and σ shades the ink.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

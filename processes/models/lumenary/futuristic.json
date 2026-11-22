@@ -58,14 +58,25 @@
   "The picture becomes a heads-up display. Brightness is mapped through a five-stop ramp, from near-black through deep blue to the chosen tint and finally almost white, so the darkest areas stay dark and only the highlights glow. A faint grid and brackets in the corners sit on top.",
   "The brightest region is found on purpose: the brightness is blurred heavily (radius one fortieth of the width) so that a single hot pixel cannot win, and the position of the maximum becomes the target. Concentric rings, tick marks and a crosshair are drawn there, and the readout prints the target’s position as fractions of the width and height together with its brightness. Edges are found with the Sobel pipeline and drawn as glowing lines."
  ],
+ "primitives": [
+  "blur",
+  "bright-spot-pick"
+ ],
  "equations": [
   {
    "tex": "(t_x,t_y)=\\operatorname*{arg\\,max}_{x,y}\\;(L*B_r)(x,y),\\qquad r=\\frac{W}{40}",
-   "note": "The target is the maximum of the blurred brightness."
+   "note": "The target is the maximum of the blurred brightness.",
+   "primitives": [
+    "bright-spot-pick",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{readout}=\\left(\\frac{t_x}{W},\\ \\frac{t_y}{H},\\ 100\\,L_b(t)\\right)",
-   "note": "What the X, Y and LUM numbers show."
+   "note": "What the X, Y and LUM numbers show.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

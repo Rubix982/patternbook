@@ -58,14 +58,26 @@
   "Vector illustrations are flat areas of colour with clean edges, and the way to get that from a photograph is to cut the picture into a small palette. First the picture is blurred (so that grain does not produce islands) and its saturation is raised. Then k-means clustering finds the k colours that best describe it: start with k random colours from the picture, assign every pixel to the nearest one, move each colour to the average of its pixels, and repeat.",
   "Every pixel then takes its cluster’s colour. The edges between clusters are still stair-stepped, so the flat image is blurred and each pixel is snapped back to the nearest palette colour, which rounds the corners. Finally the pixels whose neighbour belongs to a different cluster are darkened to draw the outline. The blurs are written as arithmetic on the pixel arrays rather than as browser filters, so they work in every browser."
  ],
+ "primitives": [
+  "kmeans-palette",
+  "saturation-adjust"
+ ],
  "equations": [
   {
    "tex": "c_i\\leftarrow\\frac{1}{\\lvert S_i\\rvert}\\sum_{p\\in S_i}p,\\qquad S_i=\\{\\,p:\\ \\lVert p-c_i\\rVert\\le\\lVert p-c_j\\rVert\\ \\forall j\\,\\}",
-   "note": "One k-means step: assign each pixel to its nearest centre, then move the centre to the mean of its pixels."
+   "note": "One k-means step: assign each pixel to its nearest centre, then move the centre to the mean of its pixels.",
+   "primitives": [
+    "kmeans-palette"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C'=\\ell+s\\,(C-\\ell),\\qquad \\ell=0.299R+0.587G+0.114B",
-   "note": "Saturation s: each channel moves away from (s > 1) or towards (s < 1) the grey value ℓ."
+   "note": "Saturation s: each channel moves away from (s > 1) or towards (s < 1) the grey value ℓ.",
+   "primitives": [
+    "saturation-adjust"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

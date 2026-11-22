@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: daguerreotype, relation: same}
-primitives: []
+primitives: [sheet-edge, smooth-noise, soft-threshold, tone-curve]
 sources: []
 status: listed
 ---

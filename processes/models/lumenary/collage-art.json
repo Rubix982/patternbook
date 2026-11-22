@@ -58,14 +58,23 @@
   "The photograph is cut into a grid of pieces, and each piece is drawn as a torn rectangle: its outline is a rectangle with 28 points, each moved by a random amount, so the edge wobbles like torn paper. The torn shape is filled with the matching part of the picture, a little larger than its cell so neighbours overlap, and a shadow below it makes the paper look lifted.",
   "Pieces are rotated and moved by random amounts scaled by the scatter slider, and drawn in random order so that some lie over others. Underneath, scraps of plain coloured paper and a speckled desk give the scene depth. Strips of translucent tape are placed on a few pieces."
  ],
+ "primitives": [
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "\\text{source rect}=\\left(\\frac{(i+\\tfrac12)c_w-0.53\\,c_w}{0.86},\\ \\frac{(j+\\tfrac12)c_h-0.53\\,c_h}{0.86},\\ \\frac{1.06\\,c_w}{0.86},\\ \\frac{1.06\\,c_h}{0.86}\\right)",
-   "note": "The part of the photograph shown on piece (i, j) of size c_w × c_h; the photograph fills 86% of the page."
+   "note": "The part of the photograph shown on piece (i, j) of size c_w × c_h; the photograph fills 86% of the page.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "\\theta=0.7\\,(\\xi-\\tfrac12)\\cdot\\text{scatter},\\qquad \\xi\\sim U(0,1)",
-   "note": "The random rotation of each piece."
+   "note": "The random rotation of each piece.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

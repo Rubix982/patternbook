@@ -58,18 +58,25 @@
   "In 2007 Adam Runions and colleagues described how veins in a leaf and branches in a tree can be grown by competition for space. Scatter a cloud of attractors (the food), thick where you want growth. Start a few nodes at the roots. Each round, every attractor finds the nearest node within a sensing distance (the reach slider, a share of the picture’s width), and every node with at least one attractor in its care grows a new node: a step D away in the direction of the sum of the unit vectors to its attractors, with a tiny jitter. Any attractor that comes within 2.4 D of a node is eaten. The loop ends when no attractor is influencing anything, after 900 rounds, or at 40,000 nodes.",
   "The picture decides where the food is: an attractor is kept with probability (1 − f) + f (0.03 + 0.97 h^1.4), where h is the heaviness of the picture there, so branches grow toward the dark parts and the picture appears as the density of the network. The roots can be along the bottom, in the middle (a vein network) or all around the edge. For thickness the program counts the descendants of each node, and draws a branch with a width proportional to the square root of that count: the cross-section area then adds up at every junction, which is Leonardo da Vinci’s rule for tree branches. Each segment takes the picture’s colour."
  ],
+ "primitives": [],
  "equations": [
   {
    "tex": "\\mathbf n_v=\\sum_{a\\in S(v)}\\frac{\\mathbf a-\\mathbf v}{\\lVert\\mathbf a-\\mathbf v\\rVert},\\qquad \\mathbf v_{\\text{new}}=\\mathbf v+D\\,\\frac{\\mathbf n_v}{\\lVert\\mathbf n_v\\rVert}",
-   "note": "Growth of node v toward the attractors S(v) that it is nearest to (within the sensing distance)."
+   "note": "Growth of node v toward the attractors S(v) that it is nearest to (within the sensing distance).",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\text{eat }\\mathbf a\\ \\text{ if }\\ \\min_v\\lVert\\mathbf a-\\mathbf v\\rVert<2.4\\,D",
-   "note": "The kill distance."
+   "note": "The kill distance.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "w_i=1.5\\,w_0\\sqrt{\\frac{c_i}{c_{\\max}}},\\qquad c_i=1+\\sum_{j\\in\\text{children}(i)}c_j",
-   "note": "Branch width from the number c of nodes it feeds, so that areas add up at junctions."
+   "note": "Branch width from the number c of nodes it feeds, so that areas add up at junctions.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

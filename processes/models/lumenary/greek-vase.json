@@ -58,18 +58,37 @@
   "The picture is first given a local contrast boost, T = l + 0.85 (l - l_bar), with l_bar a wide blur, after a small blur has taken out the grain. A threshold t, from 0.16 to 0.62 with the slider for how much is painted, cuts it in two with a soft edge of 0.035. For black-figure the glaze mask is G = smoothstep(t + 0.035, t - 0.035, T), the dark shapes; for red-figure it is 1 - smoothstep(1 - t - 0.035, 1 - t + 0.035, T), the ground. The mask is blurred and sharpened again with smoothstep(0.4, 0.6) so that outlines are smooth. The border is a row of meander hooks drawn as a stroked path on a separate canvas, and added to the mask.",
   "The clay is a base colour times a mottling of fractal noise (plus or minus 10%), a fine grain and a slight darkening next to the glaze; the glaze is near black with a faint sheen of noise. Scratched lines are where the Sobel gradient of the brightness exceeds a limit that falls as the scratch slider rises, together with thin dark features; they are mixed in as clay colour inside the glaze for black-figure, and as glaze inside the clay for red-figure. For the added colours, the blurred picture is read where the glaze is: if its chroma is above 0.14 it is painted crimson where it is warmer than blue, and white where it is cooler. Finally the pot is shaded by 1 - 0.62 c s^2.3, where s is the distance from the centre line (0 to 1) and c the curve slider, with a soft highlight on the left, and aged by stains, a net of cracks from the edges of a cellular (Voronoi) pattern, and a few chips of bare clay."
  ],
+ "primitives": [
+  "crackle-network",
+  "cylinder-shading",
+  "soft-threshold",
+  "unsharp-mask"
+ ],
  "equations": [
   {
    "tex": "T=\\ell+0.85\\,(\\ell-\\bar\\ell),\\qquad G=\\operatorname{smoothstep}(t+0.035,\\ t-0.035,\\ T)",
-   "note": "Black-figure: the glaze mask G is where the boosted brightness T falls below the threshold t."
+   "note": "Black-figure: the glaze mask G is where the boosted brightness T falls below the threshold t.",
+   "primitives": [
+    "unsharp-mask",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{shade}=1-0.62\\,c\\,|2u-1|^{2.3}",
-   "note": "The curve of the pot: u is the position across the picture (0 to 1) and c the curve slider."
+   "note": "The curve of the pot: u is the position across the picture (0 to 1) and c the curve slider.",
+   "primitives": [
+    "cylinder-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{crack}=1-\\operatorname{smoothstep}\\big(0.5\\sigma,\\ 1.5\\sigma,\\ 0.9\\,(d_2-d_1)\\big)",
-   "note": "A net of cracks from a Voronoi pattern: d_1 and d_2 are the distances to the nearest and second nearest points, and sigma is the picture scale."
+   "note": "A net of cracks from a Voronoi pattern: d_1 and d_2 are the distances to the nearest and second nearest points, and sigma is the picture scale.",
+   "primitives": [
+    "crackle-network"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

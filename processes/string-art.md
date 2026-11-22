@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: string-art, relation: same}
-primitives: []
+primitives: [multiply-blend, tone-curve]
 sources: []
 status: listed
 ---

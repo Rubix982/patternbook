@@ -58,14 +58,27 @@
   "Brightness is read as altitude. The picture is sampled onto a grid (up to 170 columns by the chosen number of lines), lightly blurred, and every grid point becomes a 3D point whose height is its brightness. The program then does what a 3D engine does, by hand: rotate the terrain about the vertical axis (the yaw, which follows your cursor or turns by itself), tilt it toward the camera (the pitch), and project it onto the screen with perspective, so that nearer points are drawn larger.",
   "In ridgeline mode there is no depth buffer. Instead the lines are drawn from the back of the terrain to the front, and each line is first filled with the background colour below it. A closer ridge therefore hides the lines behind it, which is the painter’s algorithm and the way the famous pulsar album cover was drawn. Line opacity and thickness increase toward the front for a sense of depth. Mesh mode skips the fill and draws both rows and columns."
  ],
+ "primitives": [
+  "projection-3d",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "\\begin{aligned}X&=x\\cos\\psi-z\\sin\\psi,\\qquad Z=x\\sin\\psi+z\\cos\\psi\\\\ Y'&=y\\cos\\varphi-Z\\sin\\varphi,\\qquad Z'=Z\\cos\\varphi+y\\sin\\varphi\\end{aligned}",
-   "note": "Yaw ψ about the vertical axis, then pitch φ. (x, y, z) is the terrain point, with y = height × brightness."
+   "note": "Yaw ψ about the vertical axis, then pitch φ. (x, y, z) is the terrain point, with y = height × brightness.",
+   "primitives": [
+    "projection-3d",
+    "tone-to-height"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s=\\frac{S\\,D}{D-Z'},\\qquad (x_{\\text{screen}},y_{\\text{screen}})=(c_x+X\\,s,\\ c_y-Y'\\,s),\\quad D=3.2",
-   "note": "Perspective projection from a camera at distance D; points with larger Z′ (nearer) get a larger scale s."
+   "note": "Perspective projection from a camera at distance D; points with larger Z′ (nearer) get a larger scale s.",
+   "primitives": [
+    "projection-3d"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

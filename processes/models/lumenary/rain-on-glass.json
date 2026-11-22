@@ -58,18 +58,39 @@
   "The window is two layers: a pane misted with condensation, and the clear glass beneath it. The mist is the picture shrunk to a tenth of its size and enlarged again (a strong blur), tinted pale blue-grey with an opacity of 0.12 to 0.62 from the mist slider. A second, invisible layer is a mask that records where the glass has been cleared. Where the mask is white the sharp picture is drawn over the mist, so every drop that runs down the pane leaves a clear trail, and so does your finger when you move the pointer across it (a soft stroke 7% of the width wide). The mist comes back slowly: every 0.12 seconds the mask is reduced by 3.5%, the way condensation re-forms.",
   "Small drops sit still, with radii from 1.2 to 5.7 px skewed toward the small end. Big drops run. A running drop speeds toward a terminal speed that grows with its size, with a smooth approach (rate 3 per second), stops now and again for 0.1 to 0.7 seconds and slows to 30% of its speed, which is the stick-and-slip of real drops, and slides sideways in proportion to the slant of the wind. It also sheds tiny droplets behind it at about 3 per second. Each drop larger than about 2.6 px is a little lens. Water on glass focuses the scene behind it, and the image in a drop is upside down. The program draws it by clipping a circle and filling it with a patch of the picture rotated by 180 degrees and 3.2 times wider than the drop, then adding a dark rim, a soft highlight and a pale ring."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "decay-trail",
+  "ease-toward-target",
+  "mix-over",
+  "particle-motion"
+ ],
  "equations": [
   {
    "tex": "C=(1-m)\\,C_{\\text{mist}}+m\\,C_{\\text{sharp}},\\qquad m\\leftarrow 0.965\\,m\\ \\ \\text{every }0.12\\ \\text{s}",
-   "note": "The pane: m is the clear-glass mask, which fades back toward mist."
+   "note": "The pane: m is the clear-glass mask, which fades back toward mist.",
+   "primitives": [
+    "mix-over",
+    "decay-trail"
+   ],
+   "bespoke": null
   },
   {
    "tex": "v\\leftarrow v+\\big(v_t-v\\big)\\min(1,\\,3\\,\\Delta t),\\qquad v_t=v_{\\text{run}}\\,\\mu\\,\\frac{r}{6},\\qquad \\Delta x=v\\,\\Delta t\\,\\tan\\alpha",
-   "note": "A running drop: v_t is the terminal speed (μ a random factor from 0.6 to 1.4 and r the radius) and α the slant."
+   "note": "A running drop: v_t is the terminal speed (μ a random factor from 0.6 to 1.4 and r the radius) and α the slant.",
+   "primitives": [
+    "particle-motion",
+    "ease-toward-target"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf x_{\\text{src}}=\\mathbf c-3.2\\,(\\mathbf x-\\mathbf c)",
-   "note": "The lens of a drop: a point x inside a drop centred at c shows the picture at x_src, so the image is inverted (the minus sign) and 3.2 times larger in extent than the drop."
+   "note": "The lens of a drop: a point x inside a drop centred at c shows the picture at x_src, so the image is inverted (the minus sign) and 3.2 times larger in extent than the drop.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

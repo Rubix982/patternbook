@@ -59,18 +59,39 @@
   "The plate is a running maximum. Every exposure is a copy of the picture with its background crushed, E = l^0.92 smoothstep(a, a + 0.4, l) tinted silver or sepia, where l is the brightness and a is the black point (0 to 0.55). The newest exposure has weight 1 and one that is j exposures old has weight (1 - j/K)^x, with K the number of exposures and x between 0.35 and 3.2 from the fade slider. The plate is P = max over j of w_j E_j, taken for each colour channel, which is exactly what a second flash does to a film that already holds an image: it can only add light.",
   "A new exposure is stored every g milliseconds from the latest video frame, so the exposures are g apart. A still picture has no past to store, so it is shrunk to half size, given a soft oval edge, and moved on a path x(t) = 0.29 W sin(1.3 t) with a small bounce 0.03 H sin(2.6 t + 0.8); the exposures are the same picture at earlier points on that path. In the mode that keeps only what moves, the still background is found as the per-pixel median of the newest frame, one from the middle of the trail and the oldest; each exposure is mixed in where it differs from that background by more than 22 levels, and the background itself is dimmed by half."
  ],
+ "primitives": [
+  "decay-trail",
+  "frame-history",
+  "parametric-curve",
+  "soft-threshold",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "E=\\ell^{0.92}\\,\\operatorname{smoothstep}(a,\\ a+0.4,\\ \\ell),\\qquad w_j=\\Big(1-\\frac{j}{K}\\Big)^{x}",
-   "note": "An exposure with its background crushed, and the weight of an exposure that is j steps old."
+   "note": "An exposure with its background crushed, and the weight of an exposure that is j steps old.",
+   "primitives": [
+    "tone-curve",
+    "soft-threshold",
+    "decay-trail"
+   ],
+   "bespoke": null
   },
   {
    "tex": "P=\\max_{j}\\ \\big(w_j\\,E_j\\big)",
-   "note": "The plate keeps the brightest value that any exposure gave, in each colour channel."
+   "note": "The plate keeps the brightest value that any exposure gave, in each colour channel.",
+   "primitives": [
+    "frame-history"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf x(t)=\\big(0.29\\,W\\sin 1.3t,\\ \\ 0.03\\,H\\sin(2.6t+0.8)\\big)",
-   "note": "The path a still picture is swung along, so that there is motion to record."
+   "note": "The path a still picture is swung along, so that there is motion to record.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

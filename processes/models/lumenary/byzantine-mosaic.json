@@ -58,18 +58,41 @@
   "The mosaics of Ravenna and Constantinople are made of tesserae, small cubes of coloured glass and stone, and of gold tesserae in which a leaf of gold is sealed between two layers of glass. The setters pushed each cube into wet plaster at a slight angle, so the surface glitters as the viewer moves, and they laid the cubes in rows that follow the shapes, a flow called andamento. The program works the same way. It blurs the picture to a smooth brightness F and finds at each point the direction that runs along its contours, perpendicular to the gradient. Where F is nearly flat the direction fades to a gentle slant, so rows go on across empty areas.",
   "Seeds are tried in random order, first on a grid of spacing 1.05 tessera widths and then on a finer one. From a free seed a row grows both ways in steps of 1.03 tessera widths for as long as the next place is free, meaning no other tessera lies within 0.98 widths, and for at most 90 cubes. Each cube is a square of about 0.88 widths, turned to the direction of the row with a small random tilt. Cubes in the brightest places are gold, and where the picture has a sharp edge they are black. All others take the nearest of eight glass colours, or the picture’s own colour if you ask for it. A light edge and a dark edge on every cube make each look like a facet of glass."
  ],
+ "primitives": [
+  "edge-tangent-field",
+  "poisson-disc",
+  "seeded-random",
+  "soft-threshold",
+  "streamline-trace",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\mathbf d=\\frac{w\\,\\hat{\\mathbf t}+(1-w)\\,\\hat{\\mathbf b}}{\\big\\lVert w\\,\\hat{\\mathbf t}+(1-w)\\,\\hat{\\mathbf b}\\big\\rVert},\\qquad w=\\operatorname{smoothstep}\\big(0.003,\\,0.03,\\,\\lVert\\nabla F\\rVert\\big)",
-   "note": "t̂ is the unit contour direction, b̂ a slight slant (0.3 rad) and w how strong the gradient is."
+   "note": "t̂ is the unit contour direction, b̂ a slight slant (0.3 rad) and w how strong the gradient is.",
+   "primitives": [
+    "edge-tangent-field",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf x_{n+1}=\\mathbf x_n+1.03\\,s\\,\\mathbf d(\\mathbf x_n),\\qquad \\text{place only if } \\min_j\\lVert\\mathbf x_{n+1}-\\mathbf x_j\\rVert\\ge 0.98\\,s",
-   "note": "Growing a row of tesserae of size s."
+   "note": "Growing a row of tesserae of size s.",
+   "primitives": [
+    "streamline-trace",
+    "poisson-disc"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{gold if } L>1-0.5\\,g-0.1+0.12\\,(\\xi-\\tfrac12)",
-   "note": "Gold in the light: g is the gold slider and ξ a random number per cube, so the edge of the gold is ragged."
+   "note": "Gold in the light: g is the gold slider and ξ a random number per cube, so the edge of the gold is ragged.",
+   "primitives": [
+    "tone-bands",
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

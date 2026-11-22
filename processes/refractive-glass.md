@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: glass-refraction, relation: same}
-primitives: []
+primitives: [coordinate-warp, misregistration]
 sources: []
 status: listed
 ---

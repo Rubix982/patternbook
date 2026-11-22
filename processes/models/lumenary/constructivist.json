@@ -58,14 +58,23 @@
   "Constructivist posters are red, black and cream, with strong diagonals. The photograph is reduced to two tones with a hard threshold, black below and cream above. The threshold is the median of the picture’s own brightness (nudged by the contrast slider), so that about half the picture is black, however light or dark the original.",
   "It is then clipped into a rectangle rotated by the poster angle, with a red wedge multiplied across it, a black frame, two heavy red bars and a black disc. The slogan sits in a black slab set on a smaller slant than the picture."
  ],
+ "primitives": [
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "C=\\begin{cases}\\text{black}&L<q_{\\,0.5-\\text{contrast}/600}\\\\\\text{cream}&\\text{otherwise}\\end{cases}",
-   "note": "Two-tone threshold at a quantile q of the picture’s brightness."
+   "note": "Two-tone threshold at a quantile q of the picture’s brightness.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\begin{bmatrix}x'\\\\y'\\end{bmatrix}=\\begin{bmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{bmatrix}\\begin{bmatrix}x\\\\y\\end{bmatrix}",
-   "note": "The rotation applied to the photo, wedge and bars (θ is the poster angle)."
+   "note": "The rotation applied to the photo, wedge and bars (θ is the poster angle).",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

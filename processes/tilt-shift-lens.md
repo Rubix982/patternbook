@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: tilt-shift, relation: same}
-primitives: []
+primitives: [blur, saturation-adjust, soft-threshold, tone-curve]
 sources: []
 status: listed
 ---

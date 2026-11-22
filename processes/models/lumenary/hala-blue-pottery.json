@@ -58,22 +58,50 @@
   "Hala, a town in the Matiari district, is one of the places where blue pottery is still made in Sindh. It shares a tradition with Multan and with Persia: a white glaze painted in cobalt blue and turquoise, then fired once, so the colour sinks into the glaze and cannot be changed. The designs are vines, leaves and small flowers. The program paints your picture as a cobalt wash and then lays vines along it.",
   "The wash comes first. The picture is blurred twice (radius smooth × 0.9 px) to a field T, and the glaze colour is blended toward cobalt by v = 0.78 w (1 − T)^1.5, where w is the wash slider, so shadows turn deep blue and highlights stay white. Vines are the contour lines of T at evenly spaced levels, found by marching squares, joined into curves and drawn with a width that falls from 3.9 px at the darkest contour to 1.7 px at the lightest. Leaves sit on alternate sides of each vine about every 24 px, turned 0.95 radians (about 54°) from the tangent, in turquoise and cobalt by turns. Flowers (five oval petals round a turquoise centre) are placed on a jittered grid, only where the picture is dark enough. Old glaze cracks, and the program finds the cracks with Worley noise."
  ],
+ "primitives": [
+  "crackle-network",
+  "importance-sampling",
+  "iso-contours",
+  "mix-over",
+  "multiply-blend",
+  "seeded-random",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "C=C_{\\text{glaze}}+\\big(C_{\\text{cobalt}}-C_{\\text{glaze}}\\big)\\,v,\\qquad v=0.78\\,w\\,(1-T)^{1.5}",
-   "note": "Cobalt wash. T is the doubly blurred brightness and w the wash slider (0 to 1)."
+   "note": "Cobalt wash. T is the doubly blurred brightness and w the wash slider (0 to 1).",
+   "primitives": [
+    "mix-over",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\{\\mathbf x:\\ T(\\mathbf x)=\\lambda_k\\},\\quad \\lambda_k=\\frac{k}{N},\\ \\ k=1,\\dots,N-1,\\qquad w_k=(1.7+2.2\\,(1-\\lambda_k))\\,\\mathrm{sc}",
-   "note": "Vine k is a contour of T at level λₖ. N is the “vines” slider; darker contours are drawn thicker."
+   "note": "Vine k is a contour of T at level λₖ. N is the “vines” slider; darker contours are drawn thicker.",
+   "primitives": [
+    "iso-contours"
+   ],
+   "bespoke": null
   },
   {
    "tex": "e=F_2-F_1<1.1\\,\\mathrm{sc}\\ \\Rightarrow\\ C\\leftarrow C\\,\\big(1-0.3\\,c\\,(1-\\tfrac{e}{1.1\\,\\mathrm{sc}})\\big)",
-   "note": "Crackle: F₁ and F₂ are the distances to the nearest and second nearest Worley points (cell 54 px), and c is the crackle slider. The line darkens the glaze."
+   "note": "Crackle: F₁ and F₂ are the distances to the nearest and second nearest Worley points (cell 54 px), and c is the crackle slider. The line darkens the glaze.",
+   "primitives": [
+    "crackle-network",
+    "multiply-blend"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{flower if } T(\\mathbf x)\\le 0.34\\,(0.4+q)\\ \\text{ and }\\ \\xi\\le q",
-   "note": "Where a flower may sit: q is the flowers slider and ξ a random number per grid point."
+   "note": "Where a flower may sit: q is the flowers slider and ξ a random number per grid point.",
+   "primitives": [
+    "importance-sampling",
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

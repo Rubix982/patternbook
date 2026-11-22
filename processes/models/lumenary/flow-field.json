@@ -58,18 +58,37 @@
   "A streamline is a curve that is everywhere tangent to a vector field. The field here is made of a direction angle θ taken from smooth noise, θ = 2π × 2.2 × fbm(νx), so that it swirls without ever jumping. Where the picture has an edge, the field is bent toward the tangent of the edge, the direction perpendicular to the gradient of the lightness, with a weight w = follow × smoothstep(0.015, 0.12, |∇L|). Streamlines then run along outlines instead of across them, and the picture’s shapes appear as the places where the flow turns.",
   "To keep the lines evenly spaced and uncrossed the program uses the method of Jobard and Lefer (1997). Seeds are laid on a jittered grid and shuffled. A seed is accepted only if it is at least 0.8 of the spacing from every existing line point. From it a line is traced both ways in steps of 0.45 of the spacing (up to 260 each way), and it stops as soon as the next point would come too close to another line, or to its own older points (the most recent 14 steps are exempt, so it does not stop itself). The check looks only in a 5 × 5 neighbourhood of a grid with cells of spacing/√2. Each line is drawn as a smooth curve whose width follows the tone at its middle and whose colour is the picture’s there."
  ],
+ "primitives": [
+  "edge-tangent-field",
+  "poisson-disc",
+  "smooth-noise",
+  "streamline-trace"
+ ],
  "equations": [
   {
    "tex": "\\mathbf d=\\frac{(1-w)\\,(\\cos\\theta,\\ \\sin\\theta)+w\\,\\mathbf t}{\\big\\lVert(1-w)\\,(\\cos\\theta,\\ \\sin\\theta)+w\\,\\mathbf t\\big\\rVert},\\qquad \\mathbf t=\\frac{(-\\partial_y L,\\ \\partial_x L)}{\\lVert\\nabla L\\rVert}",
-   "note": "Field direction: θ from noise, t the edge tangent, w the follow weight."
+   "note": "Field direction: θ from noise, t the edge tangent, w the follow weight.",
+   "primitives": [
+    "edge-tangent-field",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf x_{j+1}=\\mathbf x_j+h\\,\\mathbf d(\\mathbf x_j),\\qquad h=0.45\\,s",
-   "note": "One step of a streamline; s is the line spacing."
+   "note": "One step of a streamline; s is the line spacing.",
+   "primitives": [
+    "streamline-trace"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{stop if }\\ \\lVert\\mathbf x_{j+1}-\\mathbf y\\rVert<0.8\\,s\\ \\ \\text{for any other line point }\\mathbf y",
-   "note": "The separation rule that keeps the lines evenly spaced."
+   "note": "The separation rule that keeps the lines evenly spaced.",
+   "primitives": [
+    "poisson-disc"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

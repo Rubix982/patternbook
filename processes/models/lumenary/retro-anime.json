@@ -59,18 +59,36 @@
   "The flat paint is made the same way as in the cel treatment, with heavier outlines. What changes is the age of the materials. Old cel paint photographed on film does not reach black or white, so each paint’s darkest tones are lifted toward navy and its lightest warmed toward cream, both in proportion to the fade slider, and saturation is trimmed. Outlines were photocopied onto the cel, and the copy breaks up where the toner ran thin, so line opacity is multiplied by a thresholded noise.",
   "Three faults of the camera and the tape are then added. Light spreads inside film around anything bright: the highlights are isolated, blurred widely and added back in a warm tone, which is the halo. Colour bleed reads the red channel a few pixels to the left and the blue a few pixels to the right, and mixes every pixel with its horizontal neighbours. Grain is a hash plus a smoother noise, and the corners darken. Star glints are drawn on the brightest spots that are far enough apart: four thin kites each, the upright pair longer than the level pair, over a small round bloom."
  ],
+ "primitives": [
+  "glow-bloom",
+  "misregistration",
+  "soft-threshold"
+ ],
  "equations": [
   {
    "tex": "C\\leftarrow C+(C_{\\text{navy}}-C)\\cdot0.5f\\,\\big(1-S_{0,\\,0.5}(l)\\big),\\qquad C\\leftarrow C+(C_{\\text{cream}}-C)\\cdot0.4f\\,S_{0.6,\\,1}(l)",
-   "note": "Ageing of a paint of lightness l; f is the fade slider."
+   "note": "Ageing of a paint of lightness l; f is the fade slider.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "R'(x)=R(x-b),\\qquad G'(x)=G(x),\\qquad B'(x)=B(x+b),\\qquad b=\\operatorname{round}(3\\cdot\\text{bleed})",
-   "note": "Colour bleed along each row."
+   "note": "Colour bleed along each row.",
+   "primitives": [
+    "misregistration"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow C+(C_{\\text{halo}}-C)\\cdot0.75\\,k\\cdot B_{9}^{2}\\,S_{0.72,\\,0.95}(Y)",
-   "note": "The halo: bright parts, blurred twice with a box of radius 9, blended toward a warm white; k is the halo slider."
+   "note": "The halo: bright parts, blurred twice with a box of radius 9, blended toward a warm white; k is the halo slider.",
+   "primitives": [
+    "glow-bloom",
+    "soft-threshold"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

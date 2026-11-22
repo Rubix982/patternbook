@@ -58,18 +58,37 @@
   "Ink in still water spreads by two means: it is carried along by slow currents (advection) and it diffuses. The program uses up to 6,500 ink particles. A drop is a burst of about 380 particles (times the ink-in-each-drop slider) in a small disc 9 px across, each given a small outward push. Every particle is carried by a flow made from curl noise. If ψ(x, y, t) is a smooth scalar noise, the velocity v = (∂ψ/∂y, −∂ψ/∂x) has zero divergence, which means the flow is incompressible. The ink therefore swirls and curls without bunching up or leaving gaps, as real ink in water does. The gradient is measured by central differences over 6 px, the velocity is damped by 0.9 per step so it follows the currents with some inertia, and a little random jitter and a gentle sinking are added.",
   "Each particle draws a translucent disc on a persistent canvas whose radius grows as 1 + 0.45 × its age, with an opacity of 0.07 (1 − age/life)^0.6, so the layers add up as 1 − Π(1 − a) and darken where the ink is thick. The ink’s colour is that of the picture where the drop was released, made 1.5 times as saturated and set to 0.82 of its brightness on light water or 1.25 of it on dark water, so each drop is a distinct hue. The release spot is chosen from six random candidates as the one with the most colour (largest difference between its strongest and weakest channel). The canvas is pulled back toward the water colour at every frame, by 7% down to 0.3% per frame at 30 per second according to how long the ink lingers. Moving the pointer across the water releases small drops."
  ],
+ "primitives": [
+  "decay-trail",
+  "mix-over",
+  "particle-motion",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "\\mathbf v=F\\,\\Big(\\frac{\\partial\\psi}{\\partial y},\\ -\\frac{\\partial\\psi}{\\partial x}\\Big),\\qquad \\nabla\\!\\cdot\\mathbf v=0",
-   "note": "Curl noise: ψ is smooth noise that also drifts with time, F the strength of the currents."
+   "note": "Curl noise: ψ is smooth noise that also drifts with time, F the strength of the currents.",
+   "primitives": [
+    "smooth-noise",
+    "particle-motion"
+   ],
+   "bespoke": null
   },
   {
    "tex": "a_{\\text{total}}=1-\\prod_i\\big(1-a_i\\big),\\qquad a_i=0.07\\,\\Big(1-\\frac{\\text{age}}{\\text{life}}\\Big)^{0.6}\\Big(0.6+0.4\\,q\\Big)",
-   "note": "Layered translucent discs; q is the ink-per-drop slider."
+   "note": "Layered translucent discs; q is the ink-per-drop slider.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow(1-\\lambda)\\,C+\\lambda\\,C_{\\text{water}},\\qquad \\lambda=\\operatorname{lerp}\\big(0.07,\\ 0.003,\\ \\ell\\big)\\,30\\,\\Delta t",
-   "note": "The ink thins out: ℓ is the linger slider."
+   "note": "The ink thins out: ℓ is the linger slider.",
+   "primitives": [
+    "decay-trail"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

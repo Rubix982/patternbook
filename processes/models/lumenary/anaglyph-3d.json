@@ -58,18 +58,34 @@
   "The two eyes see a scene from slightly different places, and nearer things shift more between the two views than farther ones (parallax). A single photograph carries no depth, so the program guesses a depth map d from a heavily blurred lightness (two box blurs of about 6 px at 800 px). You choose the guess: bright is near, dark is near, a ground plane in which lower in the frame means nearer, or a mix of lightness (55%) and ground (45%). Each pixel is then moved sideways by s = (d − d_focus) × up to 46 px. The left view looks up the picture at x − s and the right at x + s, with bilinear sampling. Pixels at the focus plane do not shift at all and sit at the screen; nearer and farther ones separate in opposite directions.",
   "Coloured glasses then sort the two views to the two eyes. Red and cyan: the red filter passes only the red channel, so the output takes red from the left view and green and blue from the right. Magenta and green take red and blue from the left and green from the right. Amber and blue take red from the left, blue from the right and mostly the left’s green. The keep-colour slider mixes each view with its own luminance first: at 0 each view is grey and only the fringes carry colour, at 1 the full colour of the picture is kept (and the eyes argue a little)."
  ],
+ "primitives": [
+  "channel-mix",
+  "coordinate-warp",
+  "saturation-adjust"
+ ],
  "equations": [
   {
    "tex": "s=(d-d_f)\\cdot 46\\,\\kappa\\,\\frac{W}{800},\\qquad d=\\begin{cases}L_b & \\text{bright is near}\\\\ 1-L_b & \\text{dark is near}\\\\ y/H & \\text{ground}\\\\ 0.55\\,L_b+0.45\\,y/H & \\text{mixed}\\end{cases}",
-   "note": "Disparity: d is the guessed depth from the blurred luminance L_b, d_f the focus plane and κ the depth slider."
+   "note": "Disparity: d is the guessed depth from the blurred luminance L_b, d_f the focus plane and κ the depth slider.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\mathbf a=C(x-s,\\ y),\\qquad \\mathbf b=C(x+s,\\ y),\\qquad \\mathbf a'=l_a+k\\,(\\mathbf a-l_a)",
-   "note": "The two views (left a, right b) and the keep-colour mixing with each view’s own luminance l."
+   "note": "The two views (left a, right b) and the keep-colour mixing with each view’s own luminance l.",
+   "primitives": [
+    "coordinate-warp",
+    "saturation-adjust"
+   ],
+   "bespoke": null
   },
   {
    "tex": "(R,G,B)_{\\text{red-cyan}}=\\big(a'_R,\\ \\ b'_G,\\ \\ b'_B\\big)",
-   "note": "What the glasses combine; for the other pairs the channels are assigned as described above."
+   "note": "What the glasses combine; for the other pairs the channels are assigned as described above.",
+   "primitives": [
+    "channel-mix"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

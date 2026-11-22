@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: gold-foil, relation: same}
-primitives: []
+primitives: [smooth-noise, soft-threshold]
 sources: []
 status: listed
 ---

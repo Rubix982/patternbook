@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: kintsugi, relation: same}
-primitives: []
+primitives: [colour-ramp, coordinate-warp, crackle-network, cylinder-shading, seeded-random, smooth-noise]
 sources: []
 status: listed
 ---

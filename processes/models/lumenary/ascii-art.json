@@ -58,14 +58,23 @@
   "The picture is sampled to a grid of cells, one per character. The number of columns is the detail slider; the number of rows follows from the font’s shape, because a letter is taller than it is wide. The program measures how wide the monospace font’s “M” is at a reference size, and from that works out the font size that makes the chosen number of characters exactly fill the width.",
   "Each cell’s brightness, after the contrast curve, picks a character from a ramp ordered by how much ink it puts on the page: a space for empty, a full block or “@” for solid. On a dark background bright cells use dense characters; on a light background the mapping flips, so the picture is always shown in the right polarity. Every character is placed individually on the grid instead of being typeset as lines of text, so the alignment stays exact even if the browser falls back to a font that is not monospace."
  ],
+ "primitives": [
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\text{fs}=\\frac{W/\\text{cols}}{a},\\qquad\\text{rows}=\\operatorname{round}\\!\\Big(\\frac{H}{\\text{fs}\\cdot\\text{spacing}}\\Big)",
-   "note": "Font size from the advance width a (in ems) of the glyph “M”."
+   "note": "Font size from the advance width a (in ems) of the glyph “M”.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "\\text{index}=\\operatorname{round}\\big(d\\,(m-1)\\big),\\qquad d=\\begin{cases}L'&\\text{light on dark}\\\\1-L'&\\text{dark on light}\\end{cases}",
-   "note": "Which of the m characters in the ramp to draw."
+   "note": "Which of the m characters in the ramp to draw.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,18 +58,35 @@
   "Air bends light. How much depends on its density, through the Gladstone-Dale relation n − 1 = Kρ, and density depends on temperature, ρ ∝ 1/T at constant pressure. So warm air rising from the ground is a swirling mix of slightly different refractive indices, and the rays that pass through it are deflected a little differently from moment to moment. That is the shimmer over a hot road. The program displaces each pixel’s lookup of the picture by a vector built from fractal noise stretched in the vertical direction (the horizontal frequency is 1.3 times the vertical one’s 0.45, in units of the ripple size), and the noise scrolls upward as time goes on, so the ripples rise. The displacement is up to 3.2% of the width at full strength, a little less sideways than up and down, with a slight net lift.",
   "A heat weight w from 0 to 1 says how hot each place is. It rises from the bottom as smoothstep(0.1, 1, y/H)^1.3 for heat from the ground, is a broad Gaussian blob for heat from the middle, or is 0.8 everywhere. The pointer adds a Gaussian flame around itself that eases in at 4 per second and out at 2 per second. Red and blue light are bent by slightly different amounts (dispersion), and the program reads the three channels with the displacement scaled by 1 − s, 1 and 1 + s, which gives colour fringes at edges; s is 0.9 × the colour fringes slider. The warm tint adds red and yellow in proportion to the local displacement. The field is computed on a lattice of 6 px cells at half size and interpolated bilinearly."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "misregistration",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "n-1=K\\rho,\\qquad \\rho\\propto\\frac{1}{T}",
-   "note": "Why warm air bends light: hot air is thinner, so its refractive index is lower."
+   "note": "Why warm air bends light: hot air is thinner, so its refractive index is lower.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\mathbf d=A\\,w\\,\\Big(2\\big(\\nu_1-\\tfrac12\\big),\\ \\ 1.1\\big(\\nu_2-\\tfrac12\\big)-0.12\\Big),\\qquad \\nu=\\operatorname{fbm}\\big(1.3\\,\\lambda u,\\ 0.45\\,\\lambda v+1.4\\,\\tau\\big)",
-   "note": "Displacement of the lookup: A is 0.032 × strength × width, w the heat weight, λ the ripple frequency, τ the time."
+   "note": "Displacement of the lookup: A is 0.032 × strength × width, w the heat weight, λ the ripple frequency, τ the time.",
+   "primitives": [
+    "coordinate-warp",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_j(\\mathbf x)=I_j\\big(\\mathbf x+(1+(j-1)\\,s)\\,\\mathbf d\\big),\\qquad j=0,1,2\\ \\ (R,G,B)",
-   "note": "Each colour channel is looked up with its own share of the displacement."
+   "note": "Each colour channel is looked up with its own share of the displacement.",
+   "primitives": [
+    "misregistration",
+    "coordinate-warp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

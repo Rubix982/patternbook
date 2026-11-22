@@ -59,18 +59,29 @@
   "The picture is cut into a grid of cards, each showing its own part. On the deal, the cards are given a shuffled order and start one after another over a second and a half. Each flies from below the frame to its place along an ease-out cubic, turning as it goes. After that, nothing is simulated: every card’s pose is a formula of time with its own phase and speed, so the cards never fall into step.",
   "A card is a flat rectangle turned about its vertical and horizontal axes and seen from straight ahead. Seen that way a rotation by an angle simply narrows the card by the cosine of the angle, so each card is drawn with two scale factors, and when the cosine about the vertical axis goes negative the back is drawn. The more a card is turned from the light the darker it gets. Its height above the table is another sine; the shadow is drawn further from the card and fainter as it rises. Near the cursor a flip value eases toward one and adds half a turn to the angle, then eases back more slowly."
  ],
+ "primitives": [
+  "ease-toward-target"
+ ],
  "equations": [
   {
    "tex": "k=1-(1-e)^{3},\\qquad e=\\operatorname{clamp}\\!\\Big(\\frac{t-t_i}{0.75}\\Big)",
-   "note": "The deal: card i starts at time t_i and settles over three quarters of a second."
+   "note": "The deal: card i starts at time t_i and settles over three quarters of a second.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "s_x=\\cos\\theta_y,\\qquad \\theta_y=0.75\\,T\\sin(0.8\\,\\omega_i t+1.7\\varphi_i)+\\pi\\,f_i",
-   "note": "Width of a card as it turns about its vertical axis: T is the tilt slider, f the flip value (0 to 1)."
+   "note": "Width of a card as it turns about its vertical axis: T is the tilt slider, f the flip value (0 to 1).",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "f_i\\leftarrow f_i+(f^{*}-f_i)\\,\\min(1,\\ r\\,\\Delta t),\\qquad r=7\\ \\text{toward }1,\\ 2.2\\ \\text{toward }0",
-   "note": "The flip eases quickly over when the cursor is near and slowly back."
+   "note": "The flip eases quickly over when the cursor is near and slowly back.",
+   "primitives": [
+    "ease-toward-target"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

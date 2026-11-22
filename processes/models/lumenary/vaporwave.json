@@ -59,18 +59,32 @@
   "Vaporwave takes a sunset palette to extremes. Brightness goes through a ramp from deep violet through magenta to cyan and near-white. A chromatic offset then takes the red of each pixel from a few pixels to the left and the blue from a few pixels to the right, which splits the colours at every edge like a misaligned print.",
   "The sun is a disc with a vertical gradient, with horizontal bars cut out of it (the bars get thicker lower down). The floor is a perspective grid: lines run from a vanishing point on the horizon to equally spaced points along the bottom edge, and horizontal lines are bunched together near the horizon with a power law. The caption is converted to full-width characters, the wide letters of vaporwave, by shifting each character’s code."
  ],
+ "primitives": [
+  "misregistration",
+  "projection-3d"
+ ],
  "equations": [
   {
    "tex": "y_k=h+(H-h)\\left(\\frac{k}{14}\\right)^{2.1},\\qquad k=1,\\dots,13",
-   "note": "Height of the k-th horizontal grid line below the horizon h."
+   "note": "Height of the k-th horizontal grid line below the horizon h.",
+   "primitives": [
+    "projection-3d"
+   ],
+   "bespoke": null
   },
   {
    "tex": "R=R_{\\text{src}}(x-s),\\quad G=G_{\\text{src}}(x),\\quad B=B_{\\text{src}}(x+s)",
-   "note": "Colour shift of s pixels."
+   "note": "Colour shift of s pixels.",
+   "primitives": [
+    "misregistration"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{full-width}(c)=c+\\mathrm{0xFEE0}",
-   "note": "The Unicode full-width form of a Latin letter or digit."
+   "note": "The Unicode full-width form of a Latin letter or digit.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

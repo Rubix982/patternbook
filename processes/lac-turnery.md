@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: hala-lacquerware, relation: same}
-primitives: []
+primitives: [coordinate-warp, cylinder-shading, soft-threshold]
 sources: []
 status: listed
 ---

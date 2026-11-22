@@ -58,14 +58,23 @@
   "A thermal camera has a small sensor and shows temperature as false colour. To imitate the coarse sensor, the picture is cut into cells (the sensor pixel), and each cell takes the brightness at its centre; a very small amount of noise per cell is added. Brightness is treated as heat, with contrast stretched about the middle, and the heat value goes through the chosen colour ramp.",
   "The hot spot is the maximum of the heat over a coarse grid (it ignores the borders so the label stays on the picture) and the reading is a straight line from 18 °C to 38 °C. The scale bar draws the same ramp from top to bottom with three labels."
  ],
+ "primitives": [
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "h=\\operatorname{clamp}\\big((L_b-\\tfrac12)\\,k+\\tfrac12\\big),\\qquad k=1+1.7\\cdot\\text{contrast}",
-   "note": "Heat from the blurred brightness."
+   "note": "Heat from the blurred brightness.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "T=18+20\\,h\\ \\ {}^{\\circ}\\mathrm{C}",
-   "note": "The temperature shown for heat h between 0 and 1."
+   "note": "The temperature shown for heat h between 0 and 1.",
+   "primitives": [],
+   "bespoke": "constants"
   }
  ],
  "dials": [

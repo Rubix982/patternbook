@@ -58,18 +58,35 @@
   "Jianzhi is cut from a single sheet, with scissors or a small knife, and red is the colour of luck. Everything must stay joined to the rest of the sheet, so fine detail is made from slits, crescents and teeth rather than from loose islands. The program works from darkness v = 1 − L, where L is the blurred brightness. Where v is below a lower threshold T₀ the paper is cut away. Above it, a cut amount k rises smoothly as the picture gets lighter, and k decides how wide each slit or how big each crescent is. Dark areas therefore stay solid, midtones turn to lace and light areas open out completely.",
   "The four cut patterns are written as simple conditions on the pixel position, with q the pattern size. In every one, k = 0 cuts nothing and a larger k cuts more, so the open fraction follows the picture. The edge of the sheet is a frame: a solid rim, then a band of diamond-shaped holes with small round holes between them, and a flower of eight cut petals in each corner. The paper layer is blurred by one pixel and thresholded to give clean edges, textured with fine fibres and dropped onto a cream backing with a shadow."
  ],
+ "primitives": [
+  "lattice-repeat",
+  "soft-threshold",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "k=\\operatorname{smoothstep}\\big(T_1+0.3,\\ T_0,\\ v\\big),\\qquad T_1=\\tfrac{p}{100},\\ \\ T_0=T_1-\\tfrac{f}{100}",
-   "note": "The cut amount: p is the “paper left” slider and f the fine cutting range. Below T₀ everything is cut."
+   "note": "The cut amount: p is the “paper left” slider and f the fine cutting range. Below T₀ everything is cut.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\Big|\\operatorname{frac}\\!\\Big(\\tfrac{x+y+\\frac{q}{2}\\sin\\frac{x}{1.8q}}{q}\\Big)-\\tfrac12\\Big|<\\tfrac{k}{2}",
-   "note": "A slit: diagonal stripes with a slight wobble. A stripe of width k leaves exactly a fraction 1 − k of the paper."
+   "note": "A slit: diagonal stripes with a slight wobble. A stripe of width k leaves exactly a fraction 1 − k of the paper.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\operatorname{frac}\\!\\big(\\tfrac{y}{q}\\big)<0.92\\,k\\,(1-\\tau_w),\\qquad \\tau_w=2\\Big|\\operatorname{frac}\\!\\big(\\tfrac{x}{q}+\\tfrac{\\lfloor y/q\\rfloor}{2}\\big)-\\tfrac12\\Big|",
-   "note": "Teeth: rows of triangles whose height grows with k."
+   "note": "Teeth: rows of triangles whose height grows with k.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

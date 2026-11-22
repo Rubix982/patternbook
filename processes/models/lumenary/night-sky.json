@@ -59,18 +59,35 @@
   "Stars are placed by rejection sampling. A random position is proposed and kept with a probability that rises steeply with the picture’s brightness there; if it is refused, another is proposed, up to 24 times. Bright areas therefore end up crowded and dark ones nearly empty. Each star has a size drawn so that most are small and a few are large, and its brightness is read from the picture under it. Twinkle is a sine wave with its own period and phase for every star, taking away up to three quarters of its light.",
   "Constellations follow the outlines. The frame is divided into a coarse grid, the pixel with the strongest edge in each cell becomes an anchor star, and each anchor is joined to its two nearest neighbours if they are close enough. Behind everything lies the picture itself, shrunk to under a hundred pixels and recoloured to deep blue, with a band of fractal noise for the Milky Way. With a video, the stars stay where they are and only their brightness is read again from each frame. The cursor adds light to stars near it, and a meteor crosses on a path fixed by the seed every few seconds."
  ],
+ "primitives": [
+  "flicker",
+  "importance-sampling",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "P(\\text{keep}\\mid\\mathbf x)=0.07+L(\\mathbf x)^{1.7}",
-   "note": "Chance that a proposed star position is kept."
+   "note": "Chance that a proposed star position is kept.",
+   "primitives": [
+    "importance-sampling",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "b_i(t)=b_i\\,\\Big(1-0.75\\,\\tau\\,\\big(\\tfrac12+\\tfrac12\\sin(2\\pi t/T_i+\\varphi_i)\\big)\\Big),\\qquad b_i=L^{1.05}\\,(0.7+0.5\\,z_i)+0.03",
-   "note": "Brightness of star i: z is its size (0 to 1), τ the twinkle slider, T between 1.2 and 4.8 seconds."
+   "note": "Brightness of star i: z is its size (0 to 1), τ the twinkle slider, T between 1.2 and 4.8 seconds.",
+   "primitives": [
+    "flicker",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{link }(i,j)\\iff j\\in\\text{two nearest anchors of }i\\ \\text{and}\\ \\lvert\\mathbf a_i-\\mathbf a_j\\rvert<1.9\\,c",
-   "note": "Constellation lines; c is the size of a grid cell."
+   "note": "Constellation lines; c is the size of a grid cell.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

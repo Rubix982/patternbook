@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: felt-story, relation: same}
-primitives: []
+primitives: [blur, grain-overlay, label-boundary, running-stitch]
 sources: []
 status: listed
 ---

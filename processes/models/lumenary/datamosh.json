@@ -58,14 +58,29 @@
   "Video compression stores most frames as instructions: “this block came from over there, moved by this much”. Datamoshing deletes the frame that resets the picture, so the instructions keep being applied to old pixels. The treatment imitates this. The picture is split into square blocks, and each block gets a motion vector from smooth value noise, so neighbouring blocks move together in a swirl.",
   "The picture is then run through several frames. In each one, every block is replaced by the block that lies one motion vector behind it, in the previous frame, with a little random variation. After many frames paint is dragged along the vectors, like a smear. Two things keep it from losing the picture completely: with some probability, which falls over time, a block is refreshed from the original, and at the end some blocks are shrunk to one pixel per block and enlarged, which gives the flat, blocky patches of a damaged video."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "frame-history",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "F_{f+1}(\\mathbf b)=F_f\\big(\\mathbf b-\\rho\\,\\mathbf v_{\\mathbf b}\\big),\\qquad \\rho\\sim U(0.6,1.4)",
-   "note": "The block at position b takes the content of the block displaced backwards by its motion vector v."
+   "note": "The block at position b takes the content of the block displaced backwards by its motion vector v.",
+   "primitives": [
+    "coordinate-warp",
+    "frame-history",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "P_{\\text{refresh}}(f)=\\tfrac12\\,\\text{keep}\\,\\Big(1-\\frac{f}{F}\\Big)",
-   "note": "Chance that a block is restored from the original in frame f of F."
+   "note": "Chance that a block is restored from the original in frame f of F.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

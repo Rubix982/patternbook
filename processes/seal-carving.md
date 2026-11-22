@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: indus-seal, relation: same}
-primitives: []
+primitives: [edge-outline, tone-line-screen, tone-to-height]
 sources: []
 status: listed
 ---

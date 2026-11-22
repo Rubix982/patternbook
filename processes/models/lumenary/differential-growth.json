@@ -58,18 +58,29 @@
   "Many natural folds, from the cortex of a brain to a lettuce leaf or a coral, come from growth that is not matched to the space available. The program models it with a closed loop of points. Each point feels a spring to its two neighbours that pulls it to a rest length ℓ (the force is 0.22 times the stretch), a smoothing pull toward the midpoint of its neighbours (0.06), a repulsion from every other non-adjacent point closer than about 2.6 ℓ (of strength (1 − d/R)² × 0.5 ℓ), a push back from the picture’s margin, and a tiny random jitter. The step of a point is limited to half a rest length. A spatial hash keeps the repulsion search close to linear in the number of points.",
   "Growth is the insertion of points. Wherever an edge has stretched beyond 1.55 ℓ a point is added at its midpoint, and any edge longer than 0.7 ℓ may get one with a probability of 3.5% per round. The loop lengthens but has to fit in the same sheet, so it buckles, and the repulsion makes it fold rather than cross itself. The picture sets the rest length: ℓ is reduced where the picture is heavy (dark on light paper), down to 0.55 times, so shadows fold into finer, tighter detail and the lights stay open. Each edge is then drawn with a width (0.55 to 1.65 times the line width) and a colour from the picture. The run takes 180 to 540 rounds, or stops at 3,000 to 14,000 points."
  ],
+ "primitives": [
+  "importance-sampling"
+ ],
  "equations": [
   {
    "tex": "\\mathbf F_i=0.22\\sum_{j\\in\\{i-1,\\,i+1\\}}\\big(\\lVert\\mathbf p_j-\\mathbf p_i\\rVert-\\ell_i\\big)\\,\\hat{\\mathbf e}_{ij}+0.06\\Big(\\tfrac{\\mathbf p_{i-1}+\\mathbf p_{i+1}}{2}-\\mathbf p_i\\Big)",
-   "note": "Springs to the two neighbours and the smoothing pull; ê is the unit vector from i to j."
+   "note": "Springs to the two neighbours and the smoothing pull; ê is the unit vector from i to j.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\mathbf F^{\\text{rep}}_i=\\sum_{j}\\Big(1-\\frac{d_{ij}}{R_{ij}}\\Big)^{2}0.5\\,\\ell_i\\,\\hat{\\mathbf e}_{ji},\\qquad R_{ij}=1.3\\,(\\ell_i+\\ell_j),\\ \\ d_{ij}<R_{ij}",
-   "note": "Repulsion from the other points that are not neighbours on the loop."
+   "note": "Repulsion from the other points that are not neighbours on the loop.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\ell(\\mathbf x)=\\ell_0\\big[(1-f)+f\\,\\big(0.55+1.0\\,(1-h)\\big)\\big]",
-   "note": "The picture sets the rest length: h is the heaviness at x and f the tightness slider."
+   "note": "The picture sets the rest length: h is the heaviness at x and f the tightness slider.",
+   "primitives": [
+    "importance-sampling"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

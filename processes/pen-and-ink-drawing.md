@@ -8,7 +8,7 @@ models:
   - {by: lumenary, id: parchment, relation: analogous}
   - {by: lumenary, id: blind-contour, relation: same}
   - {by: lumenary, id: poisson-stippling, relation: same}
-primitives: []
+primitives: [image-gradient, importance-sampling, material-ground, poisson-disc, seeded-random, sheet-edge, smooth-noise, tone-curve, tone-line-screen, tone-mark-size]
 sources: []
 status: listed
 ---

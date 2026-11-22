@@ -8,7 +8,7 @@ models:
   - {by: lumenary, id: paper-cut-out, relation: same}
   - {by: lumenary, id: papel-picado, relation: same}
   - {by: lumenary, id: chinese-paper-cut, relation: same}
-primitives: []
+primitives: [blur, lattice-repeat, mix-over, multiply-blend, soft-threshold, tone-bands, tone-curve, tone-dot-lattice, tone-line-screen]
 sources: []
 status: listed
 ---

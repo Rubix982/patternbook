@@ -58,14 +58,26 @@
   "The picture is cut into square tiles, and each tile is replaced by one geometric shape, as in a Bauhaus poster. The shape depends on brightness in five bands: darkest tiles become full squares, then quarter circles, half circles, circles, and the lightest a small dot, so tone is carried by how much of the tile the shape fills. The colour depends on hue: reds become red, yellows and greens become yellow, everything else blue; very dark tiles are black, and low-saturation tiles are black, paper or blue by brightness.",
   "The orientation of a quarter or half circle follows the picture’s own edges. The Sobel gradient at the tile gives a direction, and that direction is quantised into one of four quadrants, so the curves lean along contours. The variation slider reassigns some tiles at random using a generator seeded from the tile’s index and the seed, so “Shuffle” gives another reproducible design and the same seed always gives the same poster."
  ],
+ "primitives": [
+  "edge-tangent-field",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\text{shape}=\\begin{cases}\\text{square}&L<0.22\\\\ \\text{quarter}&L<0.45\\\\ \\text{half}&L<0.66\\\\ \\text{circle}&L<0.84\\\\ \\text{dot}&\\text{otherwise}\\end{cases}",
-   "note": "Shape by brightness band."
+   "note": "Shape by brightness band.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{corner}=\\Big\\lfloor\\frac{\\operatorname{atan2}(g_y,g_x)+\\pi}{2\\pi}\\cdot4\\Big\\rfloor\\bmod 4",
-   "note": "Quarter-turn orientation from the edge direction at the tile."
+   "note": "Quarter-turn orientation from the edge direction at the tile.",
+   "primitives": [
+    "edge-tangent-field"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

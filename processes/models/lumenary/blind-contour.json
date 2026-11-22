@@ -58,18 +58,34 @@
   "In a blind contour drawing the artist looks at the subject, never at the page, and the pen stays on the paper, so the line wanders and lands near but not on the edge. The program first finds the edges (the Sobel gradient of a lightly blurred, stretched lightness). It divides the picture into cells of 3 to 6.5 px, depending on the detail slider, and keeps the strongest edge pixel in each cell if it is above a threshold between 0.03 and 0.1. These points are then chained. Start at the first unused point, jump to the nearest unused point within 2.6 cells, and repeat until nothing is near enough; then lift the pen and start a new line. Lines shorter than four points are dropped. A grid of cells makes the nearest-point search fast.",
   "The wandering is added to every point: smooth noise travelling along the drawing (up to 14 px at full drift) plus a little random jitter (35% of that). The points are joined with quadratic curves that pass through the midpoints between neighbours, which turns a polyline into one continuous pen line with no corners. Each stroke has its own width (0.8 to 1.3 times the weight slider) and is drawn at 88% opacity on a speckled paper."
  ],
+ "primitives": [
+  "image-gradient",
+  "seeded-random",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "\\mathcal P=\\Big\\{\\ \\arg\\max_{\\text{cell}}E\\ :\\ \\max_{\\text{cell}}E>\\vartheta\\ \\Big\\},\\qquad \\vartheta=0.1-0.07\\,D",
-   "note": "Edge points: the strongest Sobel response E in each cell, if above the threshold set by the detail slider D."
+   "note": "Edge points: the strongest Sobel response E in each cell, if above the threshold set by the detail slider D.",
+   "primitives": [
+    "image-gradient"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf q_{i+1}=\\arg\\min_{\\mathbf q\\in\\mathcal P\\,\\setminus\\,\\text{used}}\\lVert\\mathbf q-\\mathbf q_i\\rVert\\qquad\\text{if}\\quad\\lVert\\mathbf q_{i+1}-\\mathbf q_i\\rVert<2.6\\,g",
-   "note": "Chaining the points into one pen line; g is the cell size."
+   "note": "Chaining the points into one pen line; g is the cell size.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\tilde{\\mathbf q}_i=\\mathbf q_i+2A\\,\\big(\\boldsymbol\\nu(0.0045\\,i)-\\tfrac12\\big)+0.35\\,A\\,\\big(\\mathbf u-\\tfrac12\\big)",
-   "note": "The hand drifts: ν is smooth noise along the line, u random numbers in [0, 1], A = 14 px × the drift slider."
+   "note": "The hand drifts: ν is smooth noise along the line, u random numbers in [0, 1], A = 14 px × the drift slider.",
+   "primitives": [
+    "smooth-noise",
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,18 +58,35 @@
   "The koru is the unfurling frond of a silver fern, a young leaf curled into a spiral and about to open. It stands for new life and is used in the painted rafter patterns of Māori meeting houses, kōwhaiwhai, where spirals repeat along a beam in red, white and black. In the program a koru is a ribbon that starts as a short stem arriving from the side and swells into a spiral of 1.2 turns that tapers to a small round bulb. The turn is an Archimedean spiral, r falling in a straight line with the angle, which is not quite the logarithmic spiral of a real frond but draws the same loop.",
   "Korus sit on a staggered grid. In flowing mode the orientation alternates by a half turn from one to the next, with a slight tilt that changes from row to row, so that pairs make S-shaped chains; in mirrored mode neighbours reflect each other; and in the ring mode every koru turns to face round the centre. Size grows with the light of the picture, R = 0.46 g (1 − 0.6 f + 0.9 f v). Bright places are white, mid-tones are red and dark places are left bare, each with a line along the middle in a contrasting colour, on a black wood-grain ground."
  ],
+ "primitives": [
+  "parametric-curve",
+  "tone-bands",
+  "variable-width-stroke"
+ ],
  "equations": [
   {
    "tex": "r(q)=R\\,(1-0.74\\,q),\\qquad \\varphi(q)=\\tfrac{\\pi}{2}+1.2\\,(2\\pi)\\,q,\\qquad q\\in[0,1]",
-   "note": "The spiral part: centre at the origin, radius falling linearly with the angle."
+   "note": "The spiral part: centre at the origin, radius falling linearly with the angle.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w(q)=R\\big(0.36\\,(1-q)^{0.9}+0.13\\big),\\qquad r_{\\text{bulb}}=0.14\\,R",
-   "note": "Width along the body and the bulb at the end. The stem is a gentle swell from 0.22 R to 0.36 R."
+   "note": "Width along the body and the bulb at the end. The stem is a gentle swell from 0.22 R to 0.36 R.",
+   "primitives": [
+    "variable-width-stroke"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{fill}=\\begin{cases}\\text{white}&v>0.55\\\\ \\text{red}&0.06\\le v\\le0.55\\\\ \\text{none}&v<0.06\\end{cases}",
-   "note": "The traditional paints, by the light of the picture where the koru sits (on the cream ground the white becomes black)."
+   "note": "The traditional paints, by the light of the picture where the koru sits (on the cream ground the white becomes black).",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

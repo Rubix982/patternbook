@@ -58,18 +58,39 @@
   "Gouache is opaque and matte: the colour comes from the paint, not from the paper behind it, and a painter works from a few mixed pots. So the program chooses a palette first, by k-means clustering of the picture’s colours (the colours of paint slider sets how many), then makes the pots chalkier: saturation × 0.95 + 0.02 and lightness × 0.86 + 0.08, kept between 0.1 and 0.9. The picture is blurred (1.5 to 8.5 px), every pixel is given the label of its nearest palette colour, and two passes of a majority filter over a small neighbourhood round the ragged regions into shapes a brush could paint.",
   "Then the hand is put back. Each pixel looks up its label at a place displaced by smooth noise (up to ±5 px), so a boundary wobbles the same way on both sides. Where a different label lies a few pixels away in any of the four directions, bare paper shows through, the thin gap left between two flat areas. A wide brush drags: long streaks of noise change the colour by a few per cent, and a few dry-bristle flecks (about 40% paper) appear where a stretched noise is high."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "label-boundary",
+  "palette-snap",
+  "saturation-adjust",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "\\lambda(\\mathbf x)=\\arg\\min_{k}\\ \\lVert \\mathbf c(\\mathbf x)-\\mathbf p_k\\rVert^{2},\\qquad s'=0.95\\,s+0.02,\\quad l'=\\operatorname{clip}(0.86\\,l+0.08,\\,0.1,\\,0.9)",
-   "note": "Each pixel takes the label of the nearest palette colour p_k; the palette itself is softened in saturation and lightness."
+   "note": "Each pixel takes the label of the nearest palette colour p_k; the palette itself is softened in saturation and lightness.",
+   "primitives": [
+    "palette-snap",
+    "saturation-adjust"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf x'=\\mathbf x+2\\,w\\,\\big(\\boldsymbol\\nu(\\mathbf x)-\\tfrac12\\big)",
-   "note": "The wobble: ν is smooth 2D noise, w the hand-wobble slider (up to 5 px)."
+   "note": "The wobble: ν is smooth 2D noise, w the hand-wobble slider (up to 5 px).",
+   "primitives": [
+    "coordinate-warp",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{bare}=0.9\\,(0.6+0.4\\,n)\\quad\\text{if}\\ \\ \\lambda(\\mathbf x'+g\\,\\mathbf e)\\ne\\lambda(\\mathbf x')\\ \\text{for some}\\ \\mathbf e\\in\\{\\pm\\hat x,\\pm\\hat y\\}",
-   "note": "The gap of paper between two flat areas; g is the gaps slider in pixels and n fine noise."
+   "note": "The gap of paper between two flat areas; g is the gaps slider in pixels and n fine noise.",
+   "primitives": [
+    "label-boundary"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: phulkari, relation: same}
-primitives: []
+primitives: [sdf-shape, seeded-random, stitch-grid]
 sources: []
 status: listed
 ---

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: lomography, relation: analogous}
-primitives: []
+primitives: [additive-blend, saturation-adjust, tone-curve]
 sources: []
 status: listed
 ---

@@ -60,18 +60,37 @@
   "Each camera frame is built pixel by pixel: the colour is washed to 55% saturation, or turned to grey, or mapped to a green ramp from (l - 110) x 1.45 + 120, then multiplied by the vignette and a flicker factor and added to noise taken from a hash of the pixel and the frame number. Compression then works on blocks about W/80 pixels wide: each block is pulled towards its mean by a factor that falls from 1 to 0.22 as the compression slider rises, and with probability 0.045 Q^2 a block keeps its previous contents. A new frame is made only every 1/fps seconds, and between frames the last one is shown with every other line darkened by 12%, for interlacing.",
   "The tracking box comes from a grid 20 cells wide. On a video each cell sums the colour change since the last camera frame; on a still picture it sums the strength of the edges (a Sobel filter). The grid is blurred by one cell, the highest cell is found, and the box is the bounding box of the cells within three of it that score above 45% of it. The box moves 40% of the way to its target at every camera frame, so it follows smoothly. On a still picture the detector swaps to the second best place every 3.2 seconds."
  ],
+ "primitives": [
+  "coarse-grid",
+  "coordinate-warp",
+  "frame-history",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "f=1-1.6\\,k\\,r^{2}+0.1\\,k,\\qquad \\mathbf p_{\\text{src}}=\\mathbf c+\\frac{\\mathbf p-\\mathbf c}{\\max(0.35,\\ f)}",
-   "note": "The barrel lens: r is the distance from the centre in half diagonals and k is 0.55 times the lens slider."
+   "note": "The barrel lens: r is the distance from the centre in half diagonals and k is 0.55 times the lens slider.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C'=\\bar C_b+(1-0.78\\,Q)\\,(C-\\bar C_b)",
-   "note": "Compression: every pixel of a block moves towards the block average; Q is the compression slider (0 to 1)."
+   "note": "Compression: every pixel of a block moves towards the block average; Q is the compression slider (0 to 1).",
+   "primitives": [
+    "coarse-grid"
+   ],
+   "bespoke": null
   },
   {
    "tex": "P(\\text{block frozen})=0.045\\,Q^{2}",
-   "note": "The chance, at each camera frame, that a block keeps its old contents."
+   "note": "The chance, at each camera frame, that a block keeps its old contents.",
+   "primitives": [
+    "seeded-random",
+    "frame-history"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

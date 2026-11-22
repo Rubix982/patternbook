@@ -58,14 +58,28 @@
   "The wall is drawn first: a brick pattern with each brick slightly lighter or darker than the others. The picture is then turned into a stencil with three paint colours and a part left bare. The thresholds are not fixed numbers; they are the 20th, 40th and 58th percentiles of this picture’s own brightness, so every photograph leaves about forty percent of the wall showing, whatever its tones.",
   "Real spray paint is not crisp, so a blurred copy of the stencil is added at low opacity as overspray, and a fine scatter of dots falls around the painted edges. Drips start where painted pixels have bare wall directly below, and run down as a short line with a round end. The tag is outlined, then filled with the light colour and a glow."
  ],
+ "primitives": [
+  "blur",
+  "mix-over",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\text{level}=\\begin{cases}3&L<q_{0.20}\\\\2&L<q_{0.40}\\\\1&L<q_{0.58}\\\\0&\\text{otherwise (bare wall)}\\end{cases}",
-   "note": "q is a quantile of the picture’s brightness values."
+   "note": "q is a quantile of the picture’s brightness values.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=(1-\\alpha)\\,C_{\\text{sharp}}+\\alpha\\,C_{\\text{blur}},\\qquad \\alpha=0.35\\cdot\\text{overspray}",
-   "note": "Overspray: the blurred copy is blended over the sharp one."
+   "note": "Overspray: the blurred copy is blended over the sharp one.",
+   "primitives": [
+    "mix-over",
+    "blur"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

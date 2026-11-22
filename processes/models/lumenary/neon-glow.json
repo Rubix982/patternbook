@@ -58,18 +58,35 @@
   "The picture is reduced to its outlines with the blur-then-Sobel pipeline described in the foundations. Where the edge strength exceeds a threshold the pixel becomes a bright line; the threshold is chosen by the detail slider, so more detail means a lower threshold and more lines. The lines are coloured by a diagonal gradient between your two neon colours, or by a brightened copy of the original colours.",
   "Glow is the interesting part. A true Gaussian blur of the whole image would be slow, so the line layer is shrunk four times, each time to half the size, and every smaller copy is drawn back at full size with additive blending. Smoothing during enlargement spreads each line’s light outward, and the sum of several scales behaves like a wide, soft halo around a hard core. This is the same idea as a mipmap pyramid. Finally the whole sign flickers, as old neon does, with two sine waves of different frequency and an occasional brief dip to 45%."
  ],
+ "primitives": [
+  "edge-outline",
+  "flicker",
+  "glow-bloom"
+ ],
  "equations": [
   {
    "tex": "a=S_{\\theta,\\,2\\theta}\\big(\\lvert\\nabla L_b\\rvert\\big),\\qquad\\theta=\\operatorname{lerp}(0.26,\\,0.03,\\ \\text{detail})",
-   "note": "Line opacity: smoothstep of the edge strength of the blurred brightness L_b."
+   "note": "Line opacity: smoothstep of the edge strength of the blurred brightness L_b.",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{out}}=E+\\sum_{j=1}^{4} g\\,w_j\\,\\operatorname{up}(E_j),\\qquad w=(0.95,0.85,0.75,0.65)",
-   "note": "Additive bloom: E is the sharp line layer, E_j the same layer at 1/2^j size, up() the smooth enlargement, g the glow slider."
+   "note": "Additive bloom: E is the sharp line layer, E_j the same layer at 1/2^j size, up() the smooth enlargement, g the glow slider.",
+   "primitives": [
+    "glow-bloom"
+   ],
+   "bespoke": null
   },
   {
    "tex": "f(t)=0.93+0.05\\sin(9.1\\,t)+0.03\\sin(23.7\\,t)",
-   "note": "Flicker brightness; multiplied by 0.45 when (0.37 t) mod 1 > 0.965."
+   "note": "Flicker brightness; multiplied by 0.45 when (0.37 t) mod 1 > 0.965.",
+   "primitives": [
+    "flicker"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

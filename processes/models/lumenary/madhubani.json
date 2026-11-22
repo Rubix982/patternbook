@@ -58,22 +58,42 @@
   "Madhubani, or Mithila, painting comes from the Mithila region of Bihar and the neighbouring parts of Nepal. Women painted it on the walls of houses, especially for weddings, with twigs and cotton-wrapped sticks and with pigments from turmeric, indigo, soot, flowers and clay. Its most striking habit is to leave no space empty: every figure is outlined and then filled with its own pattern of lines, dots, scales or waves. The program does this by colour. It reduces the picture to eight pigments and gives most of them a fill pattern.",
   "The picture is blurred and snapped to the eight pigments (madder red, turmeric, leaf green, indigo, lamp black, paper, saffron and earth), cleaned with a majority filter and outlined in black wherever two colours meet. Inside each region a pattern is added, chosen by the pigment: a diamond lattice on red, dots on yellow, waves on green, fish-scale arcs on blue, dots in paper white on black, concentric rings on saffron and stripes in paper white on earth. The pattern repeats every q = 1.6 × size px, and its coordinates wobble with a sine wave so that the lines look drawn by hand. A border of triangles in four colours is set round the painting between rules of black."
  ],
+ "primitives": [
+  "lattice-repeat",
+  "mix-over"
+ ],
  "equations": [
   {
    "tex": "\\Big|\\operatorname{frac}\\!\\big(\\tfrac{x+y}{q}\\big)-\\tfrac12\\Big|<0.07\\ \\ \\text{or}\\ \\ \\Big|\\operatorname{frac}\\!\\big(\\tfrac{x-y}{q}\\big)-\\tfrac12\\Big|<0.07",
-   "note": "The lattice of diagonal lines in red regions. Lines of width 0.14 q in each of two directions, so about 1 − 0.86² ≈ 26% of the region is covered."
+   "note": "The lattice of diagonal lines in red regions. Lines of width 0.14 q in each of two directions, so about 1 − 0.86² ≈ 26% of the region is covered.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\Big\\lVert\\operatorname{frac}\\!\\big(\\tfrac{\\mathbf x}{q}\\big)-\\tfrac12\\Big\\rVert<0.17\\quad(\\phi=\\pi\\cdot0.17^2\\approx0.09)",
-   "note": "The dot pattern: a dot in every square. Its covering fraction φ is about 9%."
+   "note": "The dot pattern: a dot in every square. Its covering fraction φ is about 9%.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\operatorname{frac}(5\\rho)<0.32,\\ \\ \\rho=\\Big\\lVert\\operatorname{frac}\\!\\big(\\tfrac{\\mathbf x}{1.6\\,q}\\big)-\\tfrac12\\Big\\rVert<\\tfrac12",
-   "note": "Concentric rings in saffron regions: five rings per unit of radius, each about a third of the ring spacing."
+   "note": "Concentric rings in saffron regions: five rings per unit of radius, each about a third of the ring spacing.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow C+\\tau\\,\\big(C_{\\text{line}}-C\\big),\\qquad \\tau=0.9\\,\\kappa,\\quad C_{\\text{line}}=\\begin{cases}\\text{paper}&\\text{black, earth}\\\\ \\text{ink}&\\text{otherwise}\\end{cases}",
-   "note": "The fill line is blended with strength 0.9 κ, where κ is the pattern strength slider (0 to 1), so light lines are drawn on the dark pigments and dark lines on the others."
+   "note": "The fill line is blended with strength 0.9 κ, where κ is the pattern strength slider (0 to 1), so light lines are drawn on the dark pigments and dark lines on the others.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

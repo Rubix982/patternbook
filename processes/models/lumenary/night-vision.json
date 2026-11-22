@@ -58,14 +58,28 @@
   "An image intensifier collects a few photons and multiplies them electronically, so everything is a bright green with a lot of noise. The treatment lifts the shadows with a power curve whose exponent drops as gain rises, multiplies the result, adds a share of a blurred copy (the glow around bright things) and adds noise and rare, bright speckles. The result goes through a four-stop colour ramp that is nearly black, then dark green, then bright green, then almost white.",
   "A mask built from circles gives the lens: one for a monocular, two overlapping for binoculars, with a soft darkening near the rim. Every third row is slightly dimmed. The HUD is drawn in text with a crosshair."
  ],
+ "primitives": [
+  "colour-ramp",
+  "grain-overlay",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "v=L^{\\,1-0.5g}\\,(1+0.9g)+0.35\\,g\\,L_b+\\nu",
-   "note": "g is the gain from 0 to 1, L_b the blurred brightness and ν noise."
+   "note": "g is the gain from 0 to 1, L_b the blurred brightness and ν noise.",
+   "primitives": [
+    "tone-curve",
+    "grain-overlay"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=\\operatorname{ramp}\\big(\\operatorname{clamp}(v);\\ \\text{stops}\\big)",
-   "note": "Colour from the phosphor ramp."
+   "note": "Colour from the phosphor ramp.",
+   "primitives": [
+    "colour-ramp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

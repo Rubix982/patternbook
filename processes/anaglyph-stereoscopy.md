@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: anaglyph-3d, relation: same}
-primitives: []
+primitives: [channel-mix, coordinate-warp, saturation-adjust]
 sources: []
 status: listed
 ---

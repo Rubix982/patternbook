@@ -58,22 +58,43 @@
   "Pakistani truck art covers a lorry from bumper to roof in flat enamel colour, painted flowers, birds, poetry and a frame of chains and rosettes, with strips of shiny reflective tape (chamak patti) that glitter in headlights. Every part is made by a specialist: the painter, the woodcarver and the metalworker. The program keeps the look in four steps: reduce the picture to a few loud colours, outline them in black, add glints, and wrap everything in a frame.",
   "Colour reduction first. The picture is blurred (radius = simplify × 1.2 px) and its saturation is raised by half. Each pixel then takes the nearest of nine enamel colours, using a distance that weights red, green and blue the way the eye does (the “redmean” formula below). A majority filter over a 5 × 5 window, run twice, removes specks so that regions are flat, as brush-painted ones are. A black outline is drawn wherever the colour index changes and is then grown by up to 2 px. The brightest places (tone above 0.74) are crossed by diagonal bands of white light, like chrome. The frame, as wide as 11% of the shorter side, has a red outer rim, a yellow field with a row of flowers and leaves, a row of pearls and a corner rosette of twelve petals."
  ],
+ "primitives": [
+  "lattice-repeat",
+  "mix-over",
+  "palette-snap",
+  "soft-threshold"
+ ],
  "equations": [
   {
    "tex": "d^2=\\Big(2+\\frac{\\bar r}{256}\\Big)\\Delta r^2+4\\,\\Delta g^2+\\Big(2+\\frac{255-\\bar r}{256}\\Big)\\Delta b^2,\\qquad \\bar r=\\frac{r_1+r_2}{2}",
-   "note": "The “redmean” colour distance used to find the nearest enamel colour. It is a cheap approximation of how different two colours look."
+   "note": "The “redmean” colour distance used to find the nearest enamel colour. It is a cheap approximation of how different two colours look.",
+   "primitives": [
+    "palette-snap"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w=\\operatorname{round}\\big((0.2+2.2\\,o)\\,\\mathrm{sc}\\big),\\qquad C\\leftarrow(1-e)\\,C+e\\,C_{\\text{ink}},\\quad e=\\min(1,\\,1.4\\,o)",
-   "note": "Outline width w and strength e from the outline slider o (0 to 1)."
+   "note": "Outline width w and strength e from the outline slider o (0 to 1).",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   },
   {
    "tex": "g=\\operatorname{smoothstep}(0.74,\\,0.92,\\,t)\\cdot s\\cdot\\begin{cases}150&\\operatorname{frac}\\!\\big(\\frac{0.8x+0.6y}{7\\,\\mathrm{sc}}\\big)<0.42\\\\ 40&\\text{otherwise}\\end{cases}",
-   "note": "Chrome gloss added to the colour: s is the gloss slider and t the tone. The two levels make bands of light."
+   "note": "Chrome gloss added to the colour: s is the gloss slider and t the tone. The two levels make bands of light.",
+   "primitives": [
+    "soft-threshold",
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "m=\\operatorname{round}\\big(0.11\\,\\min(W,H)\\,\\varphi\\big)",
-   "note": "Frame width, with φ the frame slider (0 to 1). Below 6 px the frame is dropped."
+   "note": "Frame width, with φ the frame slider (0 to 1). Below 6 px the frame is dropped.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

@@ -59,18 +59,37 @@
   "The picture is cut into a few pieces of felt: smoothing that keeps edges, a small palette, and a majority filter applied twice so that every piece is a simple shape. Felt is dyed wool, strong in colour but never glossy, so each colour loses some saturation and its lightness is squeezed toward the middle. Scissors do not cut felt cleanly, so the boundary of every piece is displaced by fine noise before anything is drawn. The nap is three noises of different size added to the brightness, with the odd lighter hair.",
   "Stitching needs to know how far each pixel is from the edge of its piece. A one-pixel outline, blurred twice with a box of radius r, becomes a ridge whose height falls off in a straight line with distance; multiplied by the box width it runs from 1 on the edge to 0 about 2r pixels in. The running stitch is the band where that value corresponds to six and a half pixels from the edge. It is broken into dashes by the pixel’s position along whichever axis the edge runs, and the thread is light on dark felt and dark on light. Layers are told apart by shadow: a pixel is shaded when the felt three pixels up and to the left is a different piece."
  ],
+ "primitives": [
+  "blur",
+  "grain-overlay",
+  "label-boundary",
+  "running-stitch"
+ ],
  "equations": [
   {
    "tex": "n=(2r+1)\\,B_{r}^{2}E\\ \\approx\\ 1-\\frac{d}{2r+1}",
-   "note": "Nearness to the edge: E is the one-pixel outline, B² two box blurs of radius r = 5, d the distance from the edge in pixels."
+   "note": "Nearness to the edge: E is the one-pixel outline, B² two box blurs of radius r = 5, d the distance from the edge in pixels.",
+   "primitives": [
+    "label-boundary",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{stitch}\\iff\\Big\\lvert n-\\Big(1-\\frac{6.5}{2r+1}\\Big)\\Big\\rvert<\\frac{1.1}{2r+1}\\ \\ \\text{and}\\ \\ \\operatorname{frac}\\frac{a}{\\ell}<0.58",
-   "note": "A dashed line 6.5 px in from the edge: a is the position along the edge and ℓ the dash length."
+   "note": "A dashed line 6.5 px in from the edge: a is the position along the edge and ℓ the dash length.",
+   "primitives": [
+    "running-stitch"
+   ],
+   "bespoke": null
   },
   {
    "tex": "f=1+0.12\\,(N_{0.9}-\\tfrac12)+0.10\\,(N_{0.22}-\\tfrac12)+0.09\\,(\\eta-\\tfrac12)",
-   "note": "The nap: two value noises and a per-pixel hash η, as a factor on the felt’s colour."
+   "note": "The nap: two value noises and a per-pixel hash η, as a factor on the felt’s colour.",
+   "primitives": [
+    "grain-overlay"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

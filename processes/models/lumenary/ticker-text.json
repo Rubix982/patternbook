@@ -58,14 +58,26 @@
   "A trading-floor display is rows of text sliding sideways. Each row is built from short tokens made of your symbols, a price and an arrow, for instance “LUM 217.40 ▲1.8%”, repeated until the row is wider than the screen; the text itself is random but fixed by the seed. Rows alternate direction and each has its own speed, so the whole wall never moves in step.",
   "The picture is carried by brightness. A small, contrast-stretched copy of your picture is sampled at the centre of each letter at the moment it is drawn, and the brighter that spot the brighter the letter, so as text slides over a bright area it lights up and over a dark area it fades. The brightest letters get a glow. In green-and-red mode the hue is a property of the token (up or down) and only the intensity comes from the picture. To keep it fast, letters are drawn in batches grouped by intensity and hue, so the fill colour changes only a couple of dozen times per frame."
  ],
+ "primitives": [
+  "scroll-loop",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "x_i(t)=\\Big(\\big(i\\,c+\\varepsilon\\,(v\\,\\rho\\,t+o)\\big)\\bmod T\\Big)-c,\\qquad T=n\\,c",
-   "note": "Position of character i: c is the character width, n the characters in the row, ε = ±1 the direction, v the row speed, ρ the speed slider, o an offset."
+   "note": "Position of character i: c is the character width, n the characters in the row, ε = ±1 the direction, v the row speed, ρ the speed slider, o an offset.",
+   "primitives": [
+    "scroll-loop"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\alpha=\\operatorname{clamp}\\!\\big(0.07+\\sigma\\,B^{1.5}\\cdot1.05+(1-\\sigma)\\cdot0.55\\big)",
-   "note": "Letter intensity from the picture brightness B under it; σ is the “picture strength” slider."
+   "note": "Letter intensity from the picture brightness B under it; σ is the “picture strength” slider.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

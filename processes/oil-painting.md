@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: oil-impasto, relation: same}
   - {by: lumenary, id: impressionist, relation: analogous}
-primitives: []
+primitives: [edge-tangent-field, hue-shift, importance-sampling, relief-shading, seeded-random, specular-highlight, streamline-trace]
 sources: []
 status: listed
 ---

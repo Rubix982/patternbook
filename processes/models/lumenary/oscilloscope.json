@@ -58,14 +58,25 @@
   "The picture is drawn as a stack of waveforms, in the manner of the well-known stacked plot of a pulsar’s pulses. There is one trace for each of n rows of the picture. Along the trace, its height above its baseline is the brightness of the picture at that point, raised to the power 1.5 so that only the brightest parts make tall peaks. Both ends are flattened to the baseline so the lines meet the frame.",
   "Traces are drawn from the back (top) to the front (bottom). To hide the parts of earlier traces that would be behind a later one, each trace fills the area below itself with the screen colour before it is stroked, which is the painter’s algorithm. The graticule has eight columns by ten rows with fine ticks on the centre lines. Glow is two blurred copies added on top."
  ],
+ "primitives": [
+  "tone-curve",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "y_i(t)=b_i-A\\,L_b(t,\\,b_i)^{1.5}\\,e(t),\\qquad e(t)=\\min\\!\\big(1,\\ 14\\min(t,1-t)\\big)",
-   "note": "Height of trace i at position t from 0 to 1; b is the baseline and e the taper at the ends."
+   "note": "Height of trace i at position t from 0 to 1; b is the baseline and e the taper at the ends.",
+   "primitives": [
+    "tone-line-screen",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "A=\\Delta b\\,\\big(1.2+4.2\\cdot\\text{amp}\\big)",
-   "note": "The amplitude, in multiples of the spacing between traces."
+   "note": "The amplitude, in multiples of the spacing between traces.",
+   "primitives": [],
+   "bespoke": "constants"
   }
  ],
  "dials": [

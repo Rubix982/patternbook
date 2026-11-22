@@ -58,18 +58,37 @@
   "Diné, or Navajo, weaving is done on an upright loom, and the tradition says that Spider Woman taught the people to weave. Every block of colour is a short run of weft pulled tight, so edges that are not square have to be stepped, and a diagonal becomes a staircase. Regional styles are known by their wool: the red grounds of Ganado, the natural greys and browns of Two Grey Hills. The program lays a grid of cells (the yarn blocks) over the picture and gives each the nearest colour of the chosen wool, or, for the natural greys, a grey picked by its brightness.",
   "Symmetry is made by reading the picture folded: for left-to-right mirroring the sample x becomes min(x, W − x), and for four-way symmetry y is folded as well. Serrating shifts the sample point a quarter of a cell one way on even rows and the other way on odd rows (half a cell between neighbours), so that vertical edges turn into the zigzag teeth of real rugs. A border can be added: stripes, or the stepped zigzag, which is a triangle wave z(a) of the position a along the edge, and the red cells are those whose distance d from the border satisfies d − 2 = z or d − 2 = 4 − z, making a chain of diamonds. Each cell shows rows of yarn, a little fuzz and a slight darkening where one block meets the next, and fringe hangs from the ends."
  ],
+ "primitives": [
+  "cylinder-shading",
+  "lattice-repeat",
+  "seeded-random",
+  "symmetry-fold"
+ ],
  "equations": [
   {
    "tex": "x'=\\min(x,\\ W-x),\\qquad y'=\\min(y,\\ H-y)",
-   "note": "Mirroring in the sample point: the right-hand side of the rug is a reflection of the left, and with four-way symmetry the bottom of the top."
+   "note": "Mirroring in the sample point: the right-hand side of the rug is a reflection of the left, and with four-way symmetry the bottom of the top.",
+   "primitives": [
+    "symmetry-fold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "z(a)=\\min\\big(a\\bmod 8,\\ 8-(a\\bmod 8)\\big),\\qquad \\text{red if } d-2\\in\\{z(a),\\ 4-z(a)\\}",
-   "note": "The stepped zigzag border. d is the distance in cells from the rug’s edge and a the cell’s position along it."
+   "note": "The stepped zigzag border. d is the distance in cells from the rug’s edge and a the cell’s position along it.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "f=\\Big(0.74+0.26\\sin\\big(\\pi\\,\\operatorname{frac}(2\\,y_c)\\big)\\Big)\\,\\big(0.93+0.14\\,\\xi\\big),\\qquad y_c=\\tfrac{y-y_0}{c}",
-   "note": "Yarn: two ridges of weft per cell (y_c is the position across the cell) with a fuzz noise ξ."
+   "note": "Yarn: two ridges of weft per cell (y_c is the position across the cell) with a fuzz noise ξ.",
+   "primitives": [
+    "cylinder-shading",
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

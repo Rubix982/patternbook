@@ -12,6 +12,9 @@
 //                                         regenerated, so hand-written sections are never overwritten
 //   processes/index.md                    every process with its models, the entries that aren't physical processes,
 //                                         and the counts C-017 measures
+//   processes/primitives.md               (C-018) refreshes each entry's "Applied by" line from
+//                                         processes/models/lumenary-equation-tags.tsv; the rest of the file is hand-written
+// The models and process pages also carry the primitives their equations apply, from the same tags.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -46,6 +49,22 @@ for (const l of lines.slice(1)) {
   const c = l.split('\t');
   const r = Object.fromEntries(head.map((h, i) => [h.trim(), (c[i] || '').trim()]));
   map[r.id] = r;
+}
+
+// patternbook's tags (C-018): which primitives each equation applies, or what kind of bespoke maths it is
+const tagPath = join(out, 'models', 'lumenary-equation-tags.tsv');
+const tags = {};
+if (existsSync(tagPath)) {
+  const tl = readFileSync(tagPath, 'utf8').split('\n').filter((l) => l.trim());
+  const th = tl[0].split('\t');
+  for (const l of tl.slice(1)) {
+    const c = l.split('\t');
+    const r = Object.fromEntries(th.map((h, i) => [h.trim(), (c[i] || '').trim()]));
+    (tags[r.model_id] ||= {})[Number(r.eq_index)] = {
+      primitives: r.primitives ? r.primitives.split(',').map((x) => x.trim()).filter(Boolean) : [],
+      bespoke: r.bespoke_kind || null,
+    };
+  }
 }
 
 const dial = (p) => {
@@ -92,7 +111,11 @@ for (const sec of SECTIONS.filter((s) => s.enabled)) {
       terms: x.terms || [],
       related: x.related || [],
       paragraphs: t.paragraphs || [],
-      equations: (t.equations || []).map((e) => ({ tex: e.tex, note: e.note })),
+      primitives: [...new Set(Object.values(tags[`lumenary:${s.id}`] || {}).flatMap((q) => q.primitives))].sort(),
+      equations: (t.equations || []).map((e, i) => {
+        const q = (tags[`lumenary:${s.id}`] || {})[i];
+        return q ? { tex: e.tex, note: e.note, primitives: q.primitives, bespoke: q.bespoke } : { tex: e.tex, note: e.note };
+      }),
       dials: (s.params || []).map(dial),
       presets: x.tips || [],
       credit: CREDIT,
@@ -112,6 +135,10 @@ const block = (pid, ms) => [START, '',
     `${(m.why || m.lumenary.blurb || '').replace(/\s+/g, ' ').slice(0, 260)}${(m.why || '').length > 260 ? '…' : ''} ` +
     `Model: \`processes/models/lumenary/${m.id.split(':')[1]}.json\`${m.lumenary.theory_page ? `; theory: \`${m.lumenary.theory_page}\`` : ''}.`),
   '', `_Models from Lumenary by Mursal Furqan Kumbhar, credited in each model file._`, '', END].join('\n');
+const primLine = (ms, cur) => {
+  const had = ((cur || '').match(/^primitives: \[(.*)\]$/m) || [, ''])[1].split(',').map((x) => x.trim()).filter(Boolean);
+  return `primitives: [${[...new Set([...had, ...ms.flatMap((m) => m.primitives || [])])].sort().join(', ')}]`;
+};
 let created = 0;
 for (const [pid, ms] of Object.entries(byProcess)) {
   const f = join(out, `${pid}.md`);
@@ -120,7 +147,7 @@ for (const [pid, ms] of Object.entries(byProcess)) {
     writeFileSync(f, [
       '---', `id: ${pid}`, `name: ${ms[0].process_name || pid}`, `family: ${fam}`, 'materials: []', 'makes: []',
       'models:', ...ms.map((m) => `  - {by: lumenary, id: ${m.id.split(':')[1]}, relation: ${m.physical === 'partly' ? 'analogous' : 'same'}}`),
-      'primitives: []', 'sources: []', 'status: listed', '---', '',
+      primLine(ms), 'sources: []', 'status: listed', '---', '',
       `# ${ms[0].process_name || pid}`, '',
       'Listed by C-017 from the models filed under it. Sections 1-7 and 9 of `_template.md` (the process, its constraints, ' +
       'its imperfections, the maths, dials, variants, what it makes, sources) are not written yet.', '',
@@ -128,10 +155,45 @@ for (const [pid, ms] of Object.entries(byProcess)) {
     ].join('\n'));
     created++;
   } else {
-    const cur = readFileSync(f, 'utf8');
+    let cur = readFileSync(f, 'utf8');
+    cur = cur.replace(/^primitives: \[.*\]$/m, primLine(ms, cur));
     const i = cur.indexOf(START), j = cur.indexOf(END);
-    if (i >= 0 && j > i) writeFileSync(f, cur.slice(0, i) + block(pid, ms) + cur.slice(j + END.length));
+    writeFileSync(f, i >= 0 && j > i ? cur.slice(0, i) + block(pid, ms) + cur.slice(j + END.length) : cur);
   }
+}
+
+// primitives.md: refresh each entry's "Applied by" block (C-018)
+const primPath = join(out, 'primitives.md');
+let primStats = null;
+if (existsSync(primPath)) {
+  const use = {};
+  for (const m of models) for (const [i, e] of m.equations.entries()) for (const p of e.primitives || []) {
+    const u = (use[p] ||= { models: new Set(), eqs: 0, procs: new Set() });
+    u.models.add(m.id.split(':')[1]); u.eqs++; if (m.process) u.procs.add(m.process);
+  }
+  const lines = readFileSync(primPath, 'utf8').split('\n').filter((l) => !/^<!-- applied:/.test(l));
+  const outl = [];
+  let cur = null;
+  const flush = () => {
+    if (!cur) return;
+    const u = use[cur];
+    while (outl.length && outl[outl.length - 1] === '') outl.pop();
+    outl.push(`<!-- applied:${cur} (generated by tools/process_models.mjs) -->` + (u
+      ? `**Applied by:** ${u.models.size} model${u.models.size === 1 ? '' : 's'} (${u.eqs} equation${u.eqs === 1 ? '' : 's'})` +
+        `${u.models.size >= 3 ? ', shared' : ''}: ${[...u.models].sort().join(', ')}.` +
+        (u.procs.size ? ` Processes: ${[...u.procs].sort().map((q) => `[${q}](${q}.md)`).join(', ')}.` : '')
+      : '**Applied by:** no written equation (it may still be used in code).'), '');
+    cur = null;
+  };
+  for (const l of lines) {
+    if (/^#{2,3} /.test(l)) flush();
+    const h = l.match(/^### ([a-z0-9-]+)\s*$/);
+    if (h) cur = h[1];
+    if (!/^\*\*Applied by:\*\*/.test(l)) outl.push(l);
+  }
+  flush();
+  writeFileSync(primPath, outl.join('\n').replace(/\n{3,}/g, '\n\n'));
+  primStats = { primitives: Object.keys(use).length, shared: Object.values(use).filter((u) => u.models.size >= 3).length };
 }
 
 // the index, with C-017's counts
@@ -158,4 +220,4 @@ const idx = ['# Process index', '',
   ...Object.entries(notPhys).sort().map(([k, ms]) => `- **${k}** (${ms.length}): ${ms.map((m) => m.id.split(':')[1]).join(', ')}`),
   ''];
 writeFileSync(join(out, 'index.md'), idx.join('\n'));
-console.log(JSON.stringify({ models: n, physical: phys, partly, none: n - phys - partly, processes: procs, dist, created, missing }));
+console.log(JSON.stringify({ models: n, physical: phys, partly, none: n - phys - partly, processes: procs, dist, created, missing, primStats }));

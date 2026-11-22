@@ -58,18 +58,32 @@
   "Bogolanfini, “mud cloth”, is made by the Bamana of Mali. Cotton woven in narrow strips is soaked in a tea of leaves rich in tannin, designs are painted on with mud that has been fermented in a jar for months, and the iron in the mud reacts with the tannin to give a deep black that does not wash out. The background is then bleached, which leaves the black motifs on pale cloth. The strips are sewn together side by side, and the seams show.",
   "Here the picture sets a level from 0 to 4, rising with darkness, and a majority filter keeps regions clean. Each level has its own motif: bare cloth, dots, zigzag rows, crosses, and solid mud pricked with small holes. Where two levels meet, the pattern is cleared within about 3.4 px of the boundary and a mud line about 1 px either side of it is drawn, like the outlines a painter draws first. The pattern coordinates are bent by a smooth noise (up to about 2.5 px) to give the unsteadiness of a hand, and the mud is thinner at its edges. Every 96 px a seam of stitches divides a strip from the next."
  ],
+ "primitives": [
+  "lattice-repeat",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\ell=\\min\\big(4,\\ \\lfloor 5\\,v\\rfloor\\big),\\qquad v=1-L\\ \\ (\\text{or } L \\text{ if inverted})",
-   "note": "The level from the blurred brightness L."
+   "note": "The level from the blurred brightness L.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\bar m_\\ell\\approx\\{\\,0,\\ 0.07,\\ 0.26,\\ 0.41,\\ 0.955\\,\\}",
-   "note": "The share of cloth the motif of each level covers: nothing; dots of radius 0.15 q; a band 0.26 q wide; a cross with arms 0.3 q × 0.84 q; and solid mud with holes of radius 0.12 q."
+   "note": "The share of cloth the motif of each level covers: nothing; dots of radius 0.15 q; a band 0.26 q wide; a cross with arms 0.3 q × 0.84 q; and solid mud with holes of radius 0.12 q.",
+   "primitives": [],
+   "bespoke": "constants"
   },
   {
    "tex": "m_2:\\ \\Big|\\operatorname{frac}\\!\\Big(\\tfrac{y+\\frac{q}{2}\\tau}{q}\\Big)-\\tfrac12\\Big|<0.13,\\qquad \\tau=2\\,\\Big|\\operatorname{frac}\\tfrac{x}{q}-\\tfrac12\\Big|",
-   "note": "The zigzag motif: a band bent by the triangle wave τ."
+   "note": "The zigzag motif: a band bent by the triangle wave τ.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: neon-glow, relation: same}
-primitives: []
+primitives: [edge-outline, flicker, glow-bloom]
 sources: []
 status: listed
 ---

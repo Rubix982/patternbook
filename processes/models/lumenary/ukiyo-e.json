@@ -58,22 +58,50 @@
   "A woodblock print is made one colour at a time. The carver cuts a block of cherry wood for the black key line and one more block for every colour, and the printer presses damp paper onto each block in turn, lining the sheet up against two small notches in the bench. Because each block can only lay down a flat colour, the picture has to be reduced to a few areas of solid colour before anything else is done. Here the picture is blurred (radius 0.9 × the simplify slider) and its saturation is raised a little, then every pixel is matched to the nearest of eight pigments an Edo printer would have had: Prussian blue, vermilion, ochre, sage, pink, grey-brown, paper and sumi ink. A majority filter over a 5 × 5 neighbourhood, run twice, removes the specks that a knife could never cut.",
   "The key line is drawn where the colour index changes and wherever the gradient of the lightly blurred brightness is steep. Bokashi, the graded wash a printer wipes onto the block with a damp cloth, is a blend toward Prussian blue over the top 38% of the sheet and toward pink over the bottom 18%. The wood grain shows through the pigment as long streaks (noise stretched about 87 times further along x than along y) and darkens it by up to about 20%. Misregistration is the tell of a real print: the colour layer is read from a position shifted by a pixel or two while the key line stays where it is."
  ],
+ "primitives": [
+  "edge-outline",
+  "label-boundary",
+  "mix-over",
+  "mode-filter",
+  "palette-snap",
+  "saturation-adjust",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "k(\\mathbf x)=\\arg\\min_j\\ d\\big(\\mathbf c'(\\mathbf x),\\,\\mathbf p_j\\big),\\qquad s'=1.15\\,s+0.04",
-   "note": "Each pixel takes the index of the nearest pigment p_j to its blurred colour c′ (saturation s raised to s′), using a redmean-weighted colour distance."
+   "note": "Each pixel takes the index of the nearest pigment p_j to its blurred colour c′ (saturation s raised to s′), using a redmean-weighted colour distance.",
+   "primitives": [
+    "palette-snap",
+    "saturation-adjust"
+   ],
+   "bespoke": null
   },
   {
    "tex": "k'(\\mathbf x)=\\arg\\max_j\\ \\big|\\{\\mathbf y\\in N(\\mathbf x):\\ k(\\mathbf y)=j\\}\\big|",
-   "note": "The majority filter: the most common index among the neighbours N(x) wins."
+   "note": "The majority filter: the most common index among the neighbours N(x) wins.",
+   "primitives": [
+    "mode-filter"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\lambda=\\max\\!\\Big(e_{\\text{idx}}\\,\\big(0.5+0.5\\,w\\big),\\ w\\,\\operatorname{smoothstep}\\big(\\tau,\\,2.1\\tau,\\,\\lVert\\nabla L\\rVert\\big)\\Big),\\qquad \\tau=0.24-0.17\\,w",
-   "note": "The key line: e_idx is 1 on a boundary between colours, ‖∇L‖ the gradient of the lightly blurred brightness and w the key line slider (0 to 1). The ink is mixed in with strength λ, at most 0.95."
+   "note": "The key line: e_idx is 1 on a boundary between colours, ‖∇L‖ the gradient of the lightly blurred brightness and w the key line slider (0 to 1). The ink is mixed in with strength λ, at most 0.95.",
+   "primitives": [
+    "label-boundary",
+    "edge-outline"
+   ],
+   "bespoke": null
   },
   {
    "tex": "t_{\\text{top}}=b\\Big(1-\\tfrac{y}{0.38H}\\Big)_+^{1.5}\\big(0.5+0.2\\,n\\big),\\qquad C\\leftarrow(1-t)\\,C+t\\,C_{\\text{blue}}",
-   "note": "Bokashi at the top: b is the slider and n a slow noise that makes the edge of the fade uneven."
+   "note": "Bokashi at the top: b is the slider and n a slow noise that makes the edge of the fade uneven.",
+   "primitives": [
+    "mix-over",
+    "smooth-noise"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

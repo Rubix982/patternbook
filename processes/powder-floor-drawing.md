@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: kolam, relation: analogous}
-primitives: []
+primitives: [lattice-repeat, symmetry-fold, tone-bands]
 sources: []
 status: listed
 ---

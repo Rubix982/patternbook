@@ -58,18 +58,35 @@
   "A honeycomb is the tiling of the plane by regular hexagons, the shape that covers a surface with the least edge. With the hexagon’s corner-to-centre distance s, the centres of a row are √3 s apart, the rows are 1.5 s apart, and each odd row is shifted by half a width. The corner angles are π/6 + mπ/3. Each cell is given the colour of the picture averaged over a disc of radius 0.75 s around its centre, so a cell is one flat, glazed tile.",
   "Three ways of drawing the cells are offered. Flat tiles fill each cell, with a gap slider that shrinks the hexagon and lets the colour behind show as grout, and a glaze that adds a diagonal gradient (from about 20% brighter to 22% darker) and a thin pale inner edge. In shrinking cells the radius scales with the tone, 0.25 + 0.85 t, which turns the honeycomb into a halftone. In tumbling blocks each hexagon is cut into three rhombi shaded 1.14, 0.86 and 0.62 times the cell colour, which reads as a cube seen from a corner, the old tumbling-blocks quilt pattern."
  ],
+ "primitives": [
+  "facet-shading",
+  "lattice-repeat",
+  "tone-dot-lattice"
+ ],
  "equations": [
   {
    "tex": "\\mathbf c_{ij}=\\Big(\\sqrt3\\,s\\,\\big(j+\\tfrac12\\,(i\\bmod 2)\\big),\\ \\ \\tfrac32\\,s\\,i\\Big),\\qquad \\theta_m=\\tfrac{\\pi}{6}+\\tfrac{m\\pi}{3}",
-   "note": "Hexagon centres (row i, column j) and corner angles."
+   "note": "Hexagon centres (row i, column j) and corner angles.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "r=s\\,(1-g)\\,\\big(0.25+0.85\\,t\\big)",
-   "note": "Radius in the shrinking-cells mode: g is the gap slider and t the tone (1 − tone on a cream ground)."
+   "note": "Radius in the shrinking-cells mode: g is the gap slider and t the tone (1 − tone on a cream ground).",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{face}}=k_f\\,C_{\\text{cell}},\\qquad (k_1,\\ k_2,\\ k_3)=(1.14,\\ 0.86,\\ 0.62)",
-   "note": "Shading of the three faces of a tumbling block."
+   "note": "Shading of the three faces of a tumbling block.",
+   "primitives": [
+    "facet-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

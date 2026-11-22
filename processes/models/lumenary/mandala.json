@@ -58,18 +58,32 @@
   "The Sanskrit word means “circle”. In the Buddhist and Hindu traditions a mandala is a plan of a sacred world, built from the centre outward in rings, and the sand mandalas of Tibet are made grain by grain and then swept away. The program has no meaning of its own to give them, but it builds the geometry faithfully. The centre is the middle of the canvas, the rings reach to the corners, and there are K of them, each of thickness Δ = R_max/(K + 0.7). The symmetry is n₀-fold rotational: every ring repeats its motif a whole multiple of n₀ times.",
   "A ring’s count is chosen so its motifs are about as wide as the ring is thick, and every second ring is turned by half a step so petals sit in the gaps of the ring before it. Six motifs take turns: lotus petals, beads, triangles, scallops, diamonds and leaf pairs. Each is drawn in the colour of your picture at its own place (or, if you choose to mirror the colours, at the matching place in a single wedge so that the colour pattern is symmetrical too), outlined in gold, with a lighter inner shape. At the heart is a star of n₀ points."
  ],
+ "primitives": [
+  "lattice-repeat",
+  "symmetry-fold"
+ ],
  "equations": [
   {
    "tex": "\\rho_o(k)=R_{\\max}-k\\,\\Delta,\\qquad \\Delta=\\frac{R_{\\max}}{K+0.7},\\qquad R_{\\max}=\\tfrac12\\sqrt{W^2+H^2}",
-   "note": "The outer radius of ring k."
+   "note": "The outer radius of ring k.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "n_k=n_0\\,\\max\\!\\Big(1,\\ \\operatorname{round}\\frac{2\\pi\\,\\rho_m}{1.15\\,n_0\\,\\Delta}\\Big)",
-   "note": "The number of motifs in a ring of mid radius ρ_m: a multiple of n₀, so each ring is as symmetric as the whole."
+   "note": "The number of motifs in a ring of mid radius ρ_m: a multiple of n₀, so each ring is as symmetric as the whole.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\vartheta'=\\min\\big(\\vartheta_s,\\ \\tfrac{2\\pi}{n_0}-\\vartheta_s\\big),\\qquad \\vartheta_s=\\big(\\vartheta+\\tfrac{\\pi}{2}\\big)\\bmod\\tfrac{2\\pi}{n_0}",
-   "note": "Mirrored colours: an angle is folded into a single wedge, where the picture is read, so the colours repeat as the shapes do."
+   "note": "Mirrored colours: an angle is folded into a single wedge, where the picture is read, so the colours repeat as the shapes do.",
+   "primitives": [
+    "symmetry-fold"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

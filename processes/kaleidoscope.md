@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: kaleidoscope, relation: same}
-primitives: []
+primitives: [coordinate-warp, symmetry-fold]
 sources: []
 status: listed
 ---

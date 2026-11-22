@@ -58,14 +58,23 @@
   "The cover is built like a layout program would build it. The photograph fills the page; for the monochrome and warm options its pixels are first converted in code (a weighted grey with extra contrast, or a mix of the original and a sepia colour matrix), so the result does not depend on browser filters. Dark gradients at the top and bottom keep the white type readable whatever the picture is.",
   "The masthead is measured and scaled so that it spans exactly the width of the page. The headline is wrapped greedily on spaces; if it needs more than three lines the type shrinks by 10% until it fits. The barcode is a run of bars with random widths from a fixed seed, so it is the same every time."
  ],
+ "primitives": [
+  "channel-mix"
+ ],
  "equations": [
   {
    "tex": "\\begin{aligned}R'&=0.393R+0.769G+0.189B\\\\G'&=0.349R+0.686G+0.168B\\\\B'&=0.272R+0.534G+0.131B\\end{aligned}",
-   "note": "The sepia colour matrix. The warm option blends 45% of it with the original colour."
+   "note": "The sepia colour matrix. The warm option blends 45% of it with the original colour.",
+   "primitives": [
+    "channel-mix"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s=\\min\\!\\Big(19u,\\ \\frac{0.88\\,W}{w_{100}}\\cdot 100\\Big)",
-   "note": "Masthead size s: w₁₀₀ is the measured width of the word at size 100, and u is one percent of the shorter side."
+   "note": "Masthead size s: w₁₀₀ is the measured width of the word at size 100, and u is one percent of the shorter side.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

@@ -58,18 +58,38 @@
   "Leather has two surfaces at once: the pebbled grain of the hide and the shape pressed into it by a hot die. Both are one height map. The grain is cellular noise: scatter a random site in every square of a grid, and for each pixel find the distance F1 to the nearest site and F2 to the second nearest. Where F2 − F1 is small the pixel lies on the boundary between two cells, which becomes a crease; near a site it is the top of a little dome. The picture, stretched and blurred, is added on top so that bright parts stand proud.",
   "The slope of the combined height gives the normal. Light comes from the top left; leather is lit with a broad, soft highlight (a low power of the half-vector product) because its finish is satin, not mirror. A tone factor then lifts the low, pressed-in parts a little and dims the raised ones, which softens the relief so the picture stays readable. The stitching is a row of short thread dashes along a rectangle inset from the edge, each drawn three times: a dark offset shadow, a cream thread, and a thin highlight."
  ],
+ "primitives": [
+  "crackle-network",
+  "relief-shading",
+  "tone-to-height",
+  "voronoi-cells"
+ ],
  "equations": [
   {
    "tex": "h=L_b\\Big(0.7+\\tfrac{e}{40}\\Big)+0.07\\,g\\,\\Big(\\operatorname{smoothstep}(0,\\,0.22\\,s,\\,F_2-F_1)\\,\\big(0.55+0.45\\,d\\big)-1\\Big)",
-   "note": "Height: L_b is the blurred picture, e the emboss slider, g the grain slider, s the grain spacing and d the dome term below."
+   "note": "Height: L_b is the blurred picture, e the emboss slider, g the grain slider, s the grain spacing and d the dome term below.",
+   "primitives": [
+    "tone-to-height",
+    "crackle-network",
+    "voronoi-cells"
+   ],
+   "bespoke": null
   },
   {
    "tex": "d=\\max\\!\\Big(0,\\ 1-\\Big(\\frac{F_1}{0.75\\,s}\\Big)^{2}\\Big)",
-   "note": "The dome of one pebble: highest at its site, zero at 0.75 s."
+   "note": "The dome of one pebble: highest at its site, zero at 0.75 s.",
+   "primitives": [
+    "voronoi-cells"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{shade}=\\big(0.3+0.85\\,(\\mathbf n\\cdot\\mathbf l)^{+}\\big)\\big(0.9+0.2\\,(1-L_b)\\big)",
-   "note": "Diffuse shading; the second bracket is the tone factor, 1.1 where the picture is dark and 0.9 where it is bright."
+   "note": "Diffuse shading; the second bracket is the tone factor, 1.1 where the picture is dark and 0.9 where it is bright.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

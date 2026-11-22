@@ -58,18 +58,31 @@
   "The page is parchment (a radial gradient, a few faint stains) with a double border in ink. The sentence is then lettered in a flowing script on lines that rise or fall by the slant you choose. What makes it a portrait is that the letters change size: where the picture is dark they are very large and heavy, and since each letter only advances about 62% of its own width, neighbouring letters pile up on each other and the ink builds into black. In the light parts they are small and thin and the parchment shows between them.",
   "Spaces advance by a fixed fraction of the size, and every letter is turned to follow the baseline with a tiny random wobble. The picture is stretched and blurred as in Handwritten, so the tones are smooth. An optional red seal, a rounded square with a pale inner frame and a single letter, is stamped in the bottom corner. Layering rather than drawing is the whole idea: tone comes from how many letters overlap, much as it does in an engraving."
  ],
+ "primitives": [
+  "tone-curve",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "s=b\\,\\big(0.3+1.45\\,d^{1.15}\\big),\\qquad b=1.7\\,\\frac{0.8\\,H}{n}",
-   "note": "Letter size from darkness d; b is a base size set by the number of lines n."
+   "note": "Letter size from darkness d; b is a base size set by the number of lines n.",
+   "primitives": [
+    "tone-mark-size",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\Delta x=\\max(0.12\\,s,\\;0.62\\,w)\\ \\ \\text{(letters)},\\qquad \\Delta x=0.3\\,s\\ \\ \\text{(spaces)}",
-   "note": "How far the pen moves after a letter of measured width w."
+   "note": "How far the pen moves after a letter of measured width w.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "y(x)=y_0+m\\,(x-\\tfrac W2),\\qquad m=0.35\\tan\\theta,\\qquad \\alpha=0.3+0.55\\,d",
-   "note": "The sloping baseline for a slant of θ, and the ink opacity."
+   "note": "The sloping baseline for a slant of θ, and the ink opacity.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

@@ -58,22 +58,40 @@
   "Sindhi is written in the Arabic script with extra letters of its own, for sounds that Arabic does not have: ٻ ڀ ٽ ٿ ڄ ڃ ڇ ڌ ڏ ڙ ڪ ڳ ڱ ڻ and others. The letters join, and each takes a different shape at the start, the middle and the end of a word. The program does not do the joining itself; it gives each word to the browser, which shapes it with the Noto Naskh Arabic font, and sets the text right to left. The word list is short and is made of everyday words: Sindh, the Indus, love, peace, earth, light, a friend, language, book, water, sun, moon, art, poem, melody, knowledge, gift and lamp. It was drafted without a native proofread, so treat the spelling as provisional.",
   "Each line has a pitch of 1.45 times the letter size. Words fill the line from the right, one after another, with a gap of 0.32 to 0.42 of the font size. The size of each word follows your picture: the program measures the word at the base size, reads the tone v of the picture at its middle (the brightness on a dark page, the darkness on a cream one) and sets the size again from v. The words are bold where v is above 0.45. Where the picture is bright, the words are large and heavy; where it is dark, small and thin. The page therefore reads as a calligraphic portrait."
  ],
+ "primitives": [
+  "seeded-random",
+  "tone-bands",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "f_s=s\\,\\big(1-\\tfrac{\\kappa}{2}+\\kappa\\,v\\big),\\qquad \\text{weight}=\\begin{cases}700&v>0.45\\\\ 400&\\text{otherwise}\\end{cases}",
-   "note": "Font size from tone: s is the letter size and κ the “size follows light” slider. v = 0 gives half size at κ = 1, and v = 1 gives one and a half."
+   "note": "Font size from tone: s is the letter size and κ the “size follows light” slider. v = 0 gives half size at κ = 1, and v = 1 gives one and a half.",
+   "primitives": [
+    "tone-mark-size",
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "x_{n+1}=x_n-w_n-f_s\\,(0.32+0.1\\,\\xi),\\qquad w_n=\\text{measured width of word } n",
-   "note": "Setting a line from right to left. ξ is a random number per word."
+   "note": "Setting a line from right to left. ξ is a random number per word.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "y_r=(r+1)\\cdot1.45\\,s,\\qquad N_{\\text{lines}}\\approx\\frac{H}{1.45\\,s}",
-   "note": "Line positions."
+   "note": "Line positions.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "k_{\\text{ink}}=0.45+0.6\\,v\\ \\ (\\text{gold}),\\qquad k_{\\text{ink}}=0.75+0.4\\,v\\ \\ (\\text{picture colours, dark page})",
-   "note": "Ink brightness also follows tone, so the bright areas are lit from within."
+   "note": "Ink brightness also follows tone, so the bright areas are lit from within.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

@@ -58,18 +58,33 @@
   "Chlorophyll reflects near-infrared light very strongly, so in infrared photography green leaves glow nearly white, and a blue sky, which reflects little, goes almost black. A screen can only show the visible spectrum, so the program estimates the infrared brightness from colour. The greenness is how far the green channel leads the larger of red and blue, γ = clip((G − 0.85 max(R, B)) × 3.2), scaled by the foliage slider. The blueness is clip((B − 0.9 max(R, G)) × 3), scaled by the sky slider. The estimate is mostly green and a little red and blue, boosted by the greenness and pulled down by the blueness.",
   "Three renderings are offered. Black and white simply shows that estimate. False colour makes the channel swap used in digital infrared photography, in which red and blue exchange roles and infrared feeds the blue, so foliage turns pale cyan-white. Pink foliage records infrared as red, which makes leaves pink and shifts red objects toward yellow. A dreamy glow follows: highlights of a copy at one seventh the size are kept and screened back on. A light vignette and grain finish it."
  ],
+ "primitives": [
+  "channel-mix"
+ ],
  "equations": [
   {
    "tex": "\\gamma=\\operatorname{clip}\\big[\\,3.2\\,(G-0.85\\max(R,B))\\,\\big]\\,\\lambda,\\qquad \\beta=\\operatorname{clip}\\big[\\,3\\,(B-0.9\\max(R,G))\\,\\big]\\,\\kappa",
-   "note": "Greenness γ and blueness β; λ is the foliage slider and κ the sky slider."
+   "note": "Greenness γ and blueness β; λ is the foliage slider and κ the sky slider.",
+   "primitives": [
+    "channel-mix"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\iota=\\operatorname{clip}\\big(0.18\\,R+0.62\\,G+0.1\\,B+0.65\\,\\gamma-0.5\\,\\beta\\big)",
-   "note": "The estimated infrared brightness: leaves up, sky down."
+   "note": "The estimated infrared brightness: leaves up, sky down.",
+   "primitives": [
+    "channel-mix"
+   ],
+   "bespoke": null
   },
   {
    "tex": "(R',G',B')=\\Big(0.9\\,(1-0.35\\,\\beta)\\,B+0.12\\,\\iota,\\ \\ 0.55\\,G+0.45\\,\\iota,\\ \\ 0.55\\,R+0.55\\,\\iota+0.2\\,\\gamma\\Big)",
-   "note": "False colour: red and blue are swapped and infrared leads the blue channel."
+   "note": "False colour: red and blue are swapped and infrared leads the blue channel.",
+   "primitives": [
+    "channel-mix"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

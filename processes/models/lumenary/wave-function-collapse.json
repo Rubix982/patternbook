@@ -58,18 +58,32 @@
   "Wave function collapse (Maxim Gumin, 2016) borrows its name and its picture of a superposition from quantum mechanics, but it is a constraint-solving algorithm. Here a tile is a square with a line leaving through any of its four sides (north, east, south, west), a 4-bit number, so there are 16 tiles. The single rule is that two neighbouring tiles must agree on the side they share: either both have a line through it or neither does. The edge of the sheet is closed, so no line leaves the picture. At the start every cell may be any of the 16 tiles, a set held as a 16-bit mask.",
   "The solver picks the cell with the fewest tiles still possible (its lowest entropy, with a little random noise of 0.4 to break ties) and collapses it: one of its remaining tiles is chosen by chance. The chances come from the picture. Each tile k has a weight exp(−(n_k − target)²/1.1), where n_k is the number of line ends on the tile and the target is higher in the heavy, dark parts of the picture and lower in the light, set by the density slider; the empty tile has its weight multiplied by 0.3. The choice is then propagated: neighbours lose the tiles that no longer agree, and so do their neighbours, until nothing more changes. A cell left with no possibility is drawn blank. The tiles are drawn as straight lines, rounded corner arcs or chamfered corners."
  ],
+ "primitives": [
+  "importance-sampling",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "c^{*}=\\arg\\min_{c\\ \\text{uncollapsed}}\\big(\\,\\lvert D_c\\rvert+0.4\\,u\\,\\big)",
-   "note": "The next cell to collapse: |D_c| is the number of tiles still possible there, u a random number in [0, 1]."
+   "note": "The next cell to collapse: |D_c| is the number of tiles still possible there, u a random number in [0, 1].",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w_k=m_k\\,\\exp\\!\\Big(-\\frac{(n_k-\\tau)^{2}}{1.1}\\Big),\\qquad \\tau=(1-\\delta)\\,1.6+\\delta\\,(0.3+3.2\\,h)",
-   "note": "Chance weight of tile k: n_k its line ends, m_k = 0.3 for the empty tile and 1 otherwise, h the heaviness of the picture under the cell, δ the density slider."
+   "note": "Chance weight of tile k: n_k its line ends, m_k = 0.3 for the empty tile and 1 otherwise, h the heaviness of the picture under the cell, δ the density slider.",
+   "primitives": [
+    "importance-sampling"
+   ],
+   "bespoke": null
   },
   {
    "tex": "k'\\ \\text{allowed next to }k\\ \\text{on side }d\\iff\\big[k\\ \\&\\ b_d\\neq0\\big]=\\big[k'\\ \\&\\ b_{d+2}\\neq0\\big]",
-   "note": "The adjacency rule on bits: the shared side must either have a line on both tiles or on neither (d + 2 is the opposite side)."
+   "note": "The adjacency rule on bits: the shared side must either have a line on both tiles or on neither (d + 2 is the opposite side).",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

@@ -58,14 +58,30 @@
   "Y2K design is glossy, pale and slightly translucent. Brightness goes through a colour ramp for the chosen scheme (with a gentle power curve that lifts the shadows), a white highlight fades from the top over a curved edge like light on plastic, and sparkles are scattered where the picture is bright. A sparkle is a four-pointed star, drawn with a soft white glow.",
   "The optional window is a rectangle with a rounded hole cut into a brushed-metal gradient, a title bar in two of the scheme’s colours and three traffic-light buttons. Sparkle positions are chosen by trying random points and keeping those where the brightness beats a randomised threshold between 0.62 and 0.87."
  ],
+ "primitives": [
+  "colour-ramp",
+  "importance-sampling",
+  "seeded-random",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "C=\\operatorname{ramp}\\!\\big(L^{0.85};\\ \\text{scheme stops}\\big)",
-   "note": "Brightness through the scheme’s colour ramp."
+   "note": "Brightness through the scheme’s colour ramp.",
+   "primitives": [
+    "colour-ramp",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{keep a sparkle at }(x,y)\\ \\text{if}\\ L(x,y)>0.62+0.25\\,\\xi,\\quad \\xi\\sim U(0,1)",
-   "note": "Rejection sampling: random points are kept only on bright places."
+   "note": "Rejection sampling: random points are kept only on bright places.",
+   "primitives": [
+    "importance-sampling",
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,18 +58,35 @@
   "A blueprint is a drawing, so the picture is turned into lines. Edges come from the usual blur-then-Sobel pass, with the line weight slider setting the Sobel step so thicker lines mean looking at a coarser neighbourhood. Shading is not done with grey but with hatching, as draughtsmen do: where the blurred picture is darker than a threshold a field of diagonal lines is drawn, and where it is darker still a second set at the opposite diagonal crosses it. The lines are one pixel wide, repeated every sp pixels, and found by testing a position’s remainder, so no line has to be drawn at all.",
   "A drafting grid is added the same way (a minor line every 1/40 of the width, with every fifth line stronger). Each pixel’s final colour is a straight mix of the paper colour and the line colour by the strength a of all these things, so lines have soft edges. The sheet furniture is drawn on top: a double border, dimension lines with arrowheads (a filled triangle at each end, rotated to the line’s angle), a title block, and registration crosses at the edge midpoints."
  ],
+ "primitives": [
+  "edge-outline",
+  "mix-over",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "a=\\max\\Big(S_{\\theta,1.7\\theta}(\\lvert\\nabla L_b\\rvert),\\ a_{\\text{hatch}},\\ a_{\\text{grid}}\\Big)",
-   "note": "Line strength at a pixel is the strongest of edge, hatching and grid."
+   "note": "Line strength at a pixel is the strongest of edge, hatching and grid.",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
   },
   {
    "tex": "a_{\\text{hatch}}=\\begin{cases}0.5&D>\\lambda_1\\ \\text{and}\\ (x+y)\\bmod s<w\\\\0.4&D>\\lambda_2+0.2\\ \\text{and}\\ (x-y)\\bmod s<w\\end{cases},\\qquad D=1-\\bar L",
-   "note": "Cross-hatching: D is local darkness; the modulo picks out evenly spaced diagonals."
+   "note": "Cross-hatching: D is local darkness; the modulo picks out evenly spaced diagonals.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=C_{\\text{paper}}+(C_{\\text{line}}-C_{\\text{paper}})\\,a",
-   "note": "Linear mix of paper and ink."
+   "note": "Linear mix of paper and ink.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: madhubani, relation: analogous}
   - {by: lumenary, id: warli, relation: analogous}
-primitives: []
+primitives: [importance-sampling, lattice-repeat, mix-over, seeded-random, tone-curve, tone-mark-size]
 sources: []
 status: listed
 ---

@@ -58,22 +58,42 @@
   "Abhla bharat is mirror embroidery: small discs of reflective glass or mica are held to the cloth with a lattice of stitches that cross over the edge, and then the thread is worked round them in rings. It is done on shirts, cushions, camel decorations and the cloth of the bride. The program lays mirrors on a triangular lattice. Each row is 0.866 s below the last (that is √3/2, the height of an equilateral triangle) and every other row is shifted by half a spacing, so every mirror has six neighbours at the same distance.",
   "Thread colours are taken from the picture under each mirror. The colour is pushed to higher saturation (× 1.7) and gives the main thread c₁, scaled by 0.92 + 0.28 t. The partner thread c₂ has its hue turned by 0.45 of a full circle (162°, close to the opposite), and the petal thread c₃ is pale. Around each mirror go ten leaf-shaped stitches and then a ring of short spokes, alternating c₁ and c₂, and between neighbouring mirrors small crosses of seed stitch fill the gaps at the centres of the lattice triangles. The mirror itself shows a piece of your picture: a square 6.8 mirror radii wide is shrunk into the disc and flipped left to right, as a curved glass would show it, with a highlight and a darker rim."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "hue-shift",
+  "lattice-repeat"
+ ],
  "equations": [
   {
    "tex": "\\mathbf p_{i,j}=\\Big(i\\,s+\\tfrac{s}{2}\\,(j \\bmod 2),\\ \\ j\\,\\tfrac{\\sqrt3}{2}\\,s\\Big)",
-   "note": "The mirror lattice. Row j sits √3/2 s below row j − 1 and odd rows are shifted by half a step."
+   "note": "The mirror lattice. Row j sits √3/2 s below row j − 1 and odd rows are shifted by half a step.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "r_m=0.37\\,s\\,\\mu,\\qquad \\phi=\\frac{\\pi r_m^2}{s\\cdot\\frac{\\sqrt3}{2}s}=\\frac{2\\pi}{\\sqrt3}\\,(0.37\\,\\mu)^2",
-   "note": "Mirror radius (μ is the mirror size slider, 0.25 to 0.8) and the fraction of the cloth that is glass."
+   "note": "Mirror radius (μ is the mirror size slider, 0.25 to 0.8) and the fraction of the cloth that is glass.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "\\mathbf q_1=\\mathbf p+\\big(\\tfrac{s}{2},\\ \\tfrac{\\sqrt3}{6}s\\big),\\qquad \\mathbf q_2=\\mathbf p+\\big(s,\\ \\tfrac{\\sqrt3}{3}s\\big)",
-   "note": "The seed stitches sit at the centres of the two triangles that each lattice point owns (one third and two thirds of the way down a triangle of height dy)."
+   "note": "The seed stitches sit at the centres of the two triangles that each lattice point owns (one third and two thirds of the way down a triangle of height dy).",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{magnification}=\\frac{2\\,r_m}{2\\times3.4\\,r_m}=\\frac{1}{3.4},\\qquad h_2=h_1+0.45",
-   "note": "The mirror shrinks the surrounding picture by a factor of 3.4. The second thread’s hue h₂ is the first hue plus 0.45 of a turn."
+   "note": "The mirror shrinks the surrounding picture by a factor of 3.4. The second thread’s hue h₂ is the first hue plus 0.45 of a turn.",
+   "primitives": [
+    "coordinate-warp",
+    "hue-shift"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

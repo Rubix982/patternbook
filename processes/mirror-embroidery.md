@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: sindhi-mirror-embroidery, relation: same}
   - {by: lumenary, id: sindhi-topi, relation: same}
-primitives: []
+primitives: [coordinate-warp, hue-shift, lattice-repeat]
 sources: []
 status: listed
 ---

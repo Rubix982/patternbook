@@ -58,18 +58,31 @@
   "When two sets of fine regular lines overlap, broad dark and light bands appear that are in neither set. They are the beats of the two patterns, the same effect as two close musical notes giving a slow throb. The program draws two sets. The first is a plain set of parallel lines (or rings, or gentle waves) of period p. The second has the same period but is turned by the angle slider, or has its centre shifted for rings. For two sets of equal period at an angle α the bands are p / (2 sin(α/2)) apart, so a small turn makes wide, dramatic fringes.",
   "The picture enters in two ways. First it bends the second set: the coordinate across its lines is shifted by up to 9 periods times (L − ½), where L is the lightness, so the lines swerve around shapes and the beats trace them. Second, it sets the weight: the duty cycle of the second set is mixed between ½ and 0.12 + 0.76 (1 − L), so lines are thick in the dark and thin in the light. Each stripe is anti-aliased with a smoothstep one pixel wide, and the two sets combine as ink coverage, as if printed one over the other."
  ],
+ "primitives": [
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "\\Lambda=\\frac{p}{2\\sin(\\alpha/2)}",
-   "note": "Spacing of the moiré bands for equal periods p and a relative turn α."
+   "note": "Spacing of the moiré bands for equal periods p and a relative turn α.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "u_2'=u_2+\\omega\\,\\big(L-\\tfrac12\\big),\\qquad \\omega=9\\,\\text{warp}",
-   "note": "The picture bends the second set: u₂ is the coordinate across its lines, in periods."
+   "note": "The picture bends the second set: u₂ is the coordinate across its lines, in periods.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{cov}=1-(1-A)(1-B),\\qquad A=1-\\operatorname{smoothstep}\\!\\big(\\tfrac{\\delta_A}{2}-a,\\ \\tfrac{\\delta_A}{2}+a,\\ \\operatorname{dist}(u_1)\\big)",
-   "note": "Ink coverage of the union; dist(u) = |u − ⌊u⌋ − ½| is the distance to the nearest stripe centre, a = 0.8 px / period the anti-alias width, δ the duty cycle."
+   "note": "Ink coverage of the union; dist(u) = |u − ⌊u⌋ − ½| is the distance to the nearest stripe centre, a = 0.8 px / period the anti-alias width, δ the duty cycle.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

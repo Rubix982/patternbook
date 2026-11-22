@@ -58,18 +58,29 @@
   "A dither fakes shades with a handful of colours. The picture is first shrunk (the pixel-size slider) and stretched for contrast. For palettes of four tones or fewer, only brightness is used and the nearest palette tone is found by brightness; for colour palettes the nearest colour is found with a weighting that suits human vision.",
   "There are two families. Ordered dithering compares each pixel with a fixed pattern of thresholds (Bayer’s matrices, built by repeatedly tiling and scaling a smaller one) and rounds up or down accordingly, giving a regular crosshatch. Error diffusion rounds the pixel and pushes the rounding error onto neighbours that have not been processed yet: Floyd-Steinberg spreads it over four of them, Atkinson spreads only three quarters of it over six, which keeps highlights and shadows cleaner and is the look of the first Macintosh."
  ],
+ "primitives": [
+  "ordered-dither"
+ ],
  "equations": [
   {
    "tex": "M_{2n}=\\begin{bmatrix}4M_n&4M_n+2\\\\4M_n+3&4M_n+1\\end{bmatrix}",
-   "note": "Bayer matrix recursion; the entries are then normalised to the range −½ to +½."
+   "note": "Bayer matrix recursion; the entries are then normalised to the range −½ to +½.",
+   "primitives": [
+    "ordered-dither"
+   ],
+   "bespoke": null
   },
   {
    "tex": "e=p-q(p),\\qquad p_j\\leftarrow p_j+w_j\\,e",
-   "note": "Error diffusion: p is the pixel, q(p) its palette colour and w the neighbour weights."
+   "note": "Error diffusion: p is the pixel, q(p) its palette colour and w the neighbour weights.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\text{Floyd-Steinberg: }\\tfrac{7}{16},\\tfrac{3}{16},\\tfrac{5}{16},\\tfrac{1}{16}\\qquad\\text{Atkinson: }\\tfrac18\\ \\text{ on six neighbours}",
-   "note": "The two diffusion kernels."
+   "note": "The two diffusion kernels.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

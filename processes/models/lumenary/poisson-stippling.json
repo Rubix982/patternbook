@@ -58,18 +58,39 @@
   "Stippling makes tone from dots. Placing them at random leaves clumps and gaps that look wrong, whereas placing them on a grid shows the grid. Poisson-disk sampling is in between: dots are random, but no two are closer than a minimum distance. Here the minimum distance is not fixed but follows the picture: r(x) = r_max − (r_max − r_min) h^γ, where h is the heaviness (darkness on light paper) and γ the contrast slider. Random points are tried (up to 4.5 times the area divided by r_min², at most 900,000), and a point is kept if its distance to every dot already kept is at least the mean of the two radii, (r_p + r_q)/2. A grid of cells r_max wide means only the nine nearest cells are searched.",
   "The result is blue noise: even in texture, with no long-range pattern. Because each dot excludes a disc of about r around it, the number of dots per unit area goes roughly as 1/r², so the density rises quickly as the spacing shrinks, and the shadows are dark. The dots are also larger in the shadows, by up to 1.95 times (1 + 0.95 h²), and their colour is black, sepia, cream on night paper or the picture’s own, darkened."
  ],
+ "primitives": [
+  "importance-sampling",
+  "poisson-disc",
+  "tone-curve",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "r(\\mathbf x)=r_{\\max}-\\big(r_{\\max}-r_{\\min}\\big)\\,h(\\mathbf x)^{\\gamma}",
-   "note": "The local minimum spacing; h is the heaviness of the picture at x."
+   "note": "The local minimum spacing; h is the heaviness of the picture at x.",
+   "primitives": [
+    "poisson-disc",
+    "importance-sampling",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{keep }\\mathbf p\\ \\Longleftrightarrow\\ \\lVert\\mathbf p-\\mathbf q\\rVert\\ \\ge\\ \\tfrac12\\big(r(\\mathbf p)+r(\\mathbf q)\\big)\\quad\\text{for every kept }\\mathbf q",
-   "note": "The acceptance rule of the dart throwing."
+   "note": "The acceptance rule of the dart throwing.",
+   "primitives": [
+    "poisson-disc"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\rho(\\mathbf x)\\propto\\frac{1}{r(\\mathbf x)^{2}},\\qquad \\rho_{\\text{dot}}=r_p\\,k\\,\\big(1+0.95\\,h^{2}\\big)",
-   "note": "Approximate density of dots, and the drawn dot radius (k is the dot size slider)."
+   "note": "Approximate density of dots, and the drawn dot radius (k is the dot size slider).",
+   "primitives": [
+    "importance-sampling",
+    "tone-mark-size"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

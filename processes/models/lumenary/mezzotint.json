@@ -58,14 +58,30 @@
   "Mezzotint begins with a copper plate roughened all over with a rocker, so that it holds ink as a dense field of pits and prints solid black. The engraver then burnishes the plate smooth where the picture should be lighter; smoother copper holds less ink. Tone is therefore made from the density of tiny pits, not from lines or dots.",
   "The program does the same in reverse. A random value, a mix of 62% white noise (per grain cell) and 38% smooth noise, stands for how rough the plate is at each point. Darkness is raised to a power (the burnishing slider controls how much) and compared with that value: where darkness wins, the pixel takes ink, softened by a smoothstep of width ±0.1. Dark areas win nearly everywhere and are black; light areas win only at the roughest pits and stay white with scattered black specks, which is exactly the velvet gradation of the original. A bevelled edge shows where the plate pressed into the paper."
  ],
+ "primitives": [
+  "seeded-random",
+  "smooth-noise",
+  "tone-curve",
+  "tooth-threshold"
+ ],
  "equations": [
   {
    "tex": "d=(1-L)^{\\,0.8+0.5\\,b},\\qquad n=0.62\\,r+0.38\\,\\nu",
-   "note": "Darkness after burnishing b (0 to 1), and the roughness n of the plate (r white noise per grain cell, ν smooth noise)."
+   "note": "Darkness after burnishing b (0 to 1), and the roughness n of the plate (r white noise per grain cell, ν smooth noise).",
+   "primitives": [
+    "tone-curve",
+    "smooth-noise",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "a=\\operatorname{smoothstep}\\big(t-0.1,\\ t+0.1,\\ 1.08\\,d\\big),\\qquad t=\\tfrac12+(n-\\tfrac12)(1.1-0.3\\,b)",
-   "note": "Ink coverage a at a pixel."
+   "note": "Ink coverage a at a pixel.",
+   "primitives": [
+    "tooth-threshold"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

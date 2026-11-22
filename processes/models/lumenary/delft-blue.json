@@ -58,18 +58,39 @@
   "Delftware was the Dutch answer to Chinese porcelain in the seventeenth century. It is earthenware coated with white tin glaze and painted in cobalt before the glaze is fired. The painter’s brush follows the form of the thing being drawn, and darker passages are built up by going over them more than once. The program does the same. It blurs your picture heavily to a smooth brightness field F, finds at every point the direction along which F does not change, which is perpendicular to its gradient, and lays strokes along those lines so they curve round shapes.",
   "Seeds are scattered on a jittered grid and shuffled. In each of the layers a seed paints only if the brightness there is below a threshold that falls from 0.70 by 0.17 for each layer, so a dark place is painted over several times and a light place once or not at all. A stroke follows the field in both directions for the chosen length, flipping the field’s sign when needed so that it keeps going the same way. The plate has a painted rim of ticks and dots between rings, a soft highlight on the glaze, and a net of cracks from Worley noise, 16 px across, bent slightly so that the lines are not straight."
  ],
+ "primitives": [
+  "edge-tangent-field",
+  "importance-sampling",
+  "seeded-random",
+  "streamline-trace",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "\\mathbf t=\\frac{\\big(-\\partial_y F,\\ \\partial_x F\\big)}{\\lVert\\nabla F\\rVert},\\qquad \\mathbf x_{n+1}=\\mathbf x_n+\\Delta\\,\\mathbf t(\\mathbf x_n)",
-   "note": "A stroke follows the isophote, the line of equal brightness. Δ is 2.6 px and the sign of t is chosen to agree with the previous step. Where the gradient is nearly zero a fixed angle of about 0.7 radians takes over."
+   "note": "A stroke follows the isophote, the line of equal brightness. Δ is 2.6 px and the sign of t is chosen to agree with the previous step. Where the gradient is nearly zero a fixed angle of about 0.7 radians takes over.",
+   "primitives": [
+    "edge-tangent-field",
+    "streamline-trace"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{paint if } T(\\mathbf x_0)\\le\\theta_\\ell+0.08\\,(\\xi-\\tfrac12),\\qquad \\theta_\\ell=0.70-0.17\\,\\ell",
-   "note": "Layer ℓ threshold, tested on T, a lightly blurred brightness (the heavy blur F only steers the strokes). ξ is a random number per seed, so the limit is a little ragged."
+   "note": "Layer ℓ threshold, tested on T, a lightly blurred brightness (the heavy blur F only steers the strokes). ξ is a random number per seed, so the limit is a little ragged.",
+   "primitives": [
+    "importance-sampling",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\alpha=0.2+0.5\\,\\frac{\\theta_\\ell-T}{\\theta_\\ell},\\qquad w=w_0\\,\\big(0.7+0.5\\,(1-T)\\big)",
-   "note": "The darker the place, the more opaque and the wider the stroke."
+   "note": "The darker the place, the more opaque and the wider the stroke.",
+   "primitives": [
+    "tone-mark-size"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

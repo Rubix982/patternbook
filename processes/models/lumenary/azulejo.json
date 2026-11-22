@@ -58,18 +58,35 @@
   "The word comes from the Arabic for “small polished stone”. Spain and Portugal took up painted tiles in the sixteenth century, and in Portugal blue and white came to cover churches, stations and the fronts of houses. The painter works with cobalt oxide on an unfired glaze of tin that is white and opaque. The cobalt sinks in as the tile is fired and cannot be changed, so the thickness of the paint sets how dark the blue is. The program mimics that. The picture is blurred twice and mapped to a four-stop ramp from deep cobalt through a mid blue and a pale wash to white glaze, with a streak of noise that stands in for the brush.",
   "Tiles are laid on a grid with a thin grout line and a small bevel that is lit from the top left. A pattern is painted on every tile in which the corner of one tile holds a quarter of a rosette, so four tiles together make a whole flower, and a small flower sits in the middle of each. The pattern is blended in the dark pigment on the light parts of the picture and in white glaze on the dark parts, so it is never lost. Edge detection adds a fine brush outline, and a Worley crackle gives the glaze its hairline cracks."
  ],
+ "primitives": [
+  "lattice-repeat",
+  "mix-over",
+  "star-rosette-motif"
+ ],
  "equations": [
   {
    "tex": "a=\\min(u,1-u),\\quad b=\\min(v,1-v),\\quad \\rho=\\sqrt{a^2+b^2},\\quad \\theta=\\operatorname{atan2}(b,a)",
-   "note": "Distances from the nearest tile corner, in tile units (u and v run 0 to 1 across the tile)."
+   "note": "Distances from the nearest tile corner, in tile units (u and v run 0 to 1 across the tile).",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{petal if } \\rho<0.3\\,\\big(0.56+0.44\\,|\\cos 4\\theta|\\big),\\qquad \\text{ring if } |\\rho-0.4|<0.014",
-   "note": "The quarter rosette. |cos 4θ| has eight lobes round a full circle, so four tiles meeting make eight petals."
+   "note": "The quarter rosette. |cos 4θ| has eight lobes round a full circle, so four tiles meeting make eight petals.",
+   "primitives": [
+    "star-rosette-motif"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow C+q\\,(P-C),\\qquad q=0.15+0.8\\,p,\\quad P=\\begin{cases}\\text{cobalt}&\\text{wash}>\\tfrac12\\\\ \\text{glaze}&\\text{otherwise}\\end{cases}",
-   "note": "The painted pattern: p is the slider, and P the pigment chosen so it always contrasts with the wash beneath."
+   "note": "The painted pattern: p is the slider, and P the pigment chosen so it always contrasts with the wash beneath.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,18 +58,34 @@
   "A cellular automaton is a grid of cells, each alive or dead, that all update together by a rule that looks only at its eight neighbours. The rules here are of the “Life-like” kind: a dead cell becomes alive if its number of living neighbours is in the birth set B, and a living cell stays alive if the number is in the survival set S. Conway’s Life is B3/S23, HighLife B36/S23, Day and Night B3678/S34678, Coral B3/S45678 and Maze B3/S12345. The grid wraps at the edges, like the surface of a torus.",
   "The picture sets where life begins: each cell is alive at the start with probability clip(d (0.25 + 1.5 τ)), where d is the crowding slider and τ the picture’s tone (stretched to the full range), so the picture appears as a density of life, thicker in the light parts. The generations per second slider sets the speed (at most six generations per frame). Dead cells remember: the afterglow value h is 1 while a cell lives and then shrinks each frame by the afterglow factor, which draws fading ghosts behind the moving patterns. If the sheet becomes quiet, with less than 5% alive when the generation count is a multiple of 60, a scatter of new cells (12% × tone) is added. Pressing and dragging plants a 7 × 7 patch of random cells (55% of them alive)."
  ],
+ "primitives": [
+  "decay-trail",
+  "importance-sampling",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "s_{t+1}(i)=\\begin{cases}[\\,n_i\\in S\\,]&\\text{if } s_t(i)=1\\\\[2pt] [\\,n_i\\in B\\,]&\\text{if } s_t(i)=0\\end{cases},\\qquad n_i=\\sum_{j\\in\\text{8 neighbours}}s_t(j)",
-   "note": "The update rule; B and S are the birth and survival sets of the chosen rule."
+   "note": "The update rule; B and S are the birth and survival sets of the chosen rule.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "P(s_0=1)=\\operatorname{clip}\\big[\\,d\\,(0.25+1.5\\,\\tau)\\,\\big]",
-   "note": "Initial state, with the tone τ of the picture and the crowding d."
+   "note": "Initial state, with the tone τ of the picture and the crowding d.",
+   "primitives": [
+    "importance-sampling",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "h_{t+1}=\\begin{cases}1&\\text{alive}\\\\ \\gamma\\,h_t&\\text{dead}\\end{cases}",
-   "note": "The afterglow, with γ the afterglow slider."
+   "note": "The afterglow, with γ the afterglow slider.",
+   "primitives": [
+    "decay-trail"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

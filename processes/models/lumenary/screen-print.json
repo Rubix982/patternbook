@@ -58,18 +58,39 @@
   "Screen printing pushes ink through a mesh with a stencil, one colour at a time. The picture is cut into brightness bands, one per ink, from light to dark: the lightest ink (say yellow) covers every pixel darker than 0.84, the next covers everything darker than 0.62, then 0.41, then 0.21. So a dark region receives all the inks, one on top of the other, and a light region only the first.",
   "Inks are transparent and are combined by multiplication, so the overlap of yellow and red is orange and the full stack is nearly black, as in a real print. Three imperfections make it feel physical. Each pass is shifted by its own small random offset (misregistration). The threshold is wobbled by smooth noise, so the edges are slightly ragged. And the ink film is a little uneven, with a faint cross-hatch from the mesh. With fewer inks the program picks a subset (the second and fourth for two, the first, third and fourth for three)."
  ],
+ "primitives": [
+  "material-ground",
+  "misregistration",
+  "multiply-blend",
+  "soft-threshold",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\text{cov}_k=1-\\operatorname{smoothstep}\\big(\\vartheta_k-0.012,\\ \\vartheta_k+0.012,\\ L(\\mathbf x+\\mathbf o_k)+r\\big),\\qquad \\vartheta=(0.84,\\,0.62,\\,0.41,\\,0.21)",
-   "note": "Coverage by ink k: o_k is that pass’s offset and r the edge noise."
+   "note": "Coverage by ink k: o_k is that pass’s offset and r the edge noise.",
+   "primitives": [
+    "tone-bands",
+    "misregistration",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=C_{\\text{paper}}\\prod_k\\Big(1-\\text{cov}_k\\,\\phi_k\\,\\big(1-I_k/255\\big)\\Big),\\qquad \\phi_k=0.93+0.07\\,n",
-   "note": "Multiply overprint; φ is the unevenness of the ink film."
+   "note": "Multiply overprint; φ is the unevenness of the ink film.",
+   "primitives": [
+    "multiply-blend"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w=1-0.07\\,m\\,\\Big(\\tfrac12+\\tfrac12\\cos\\tfrac{2\\pi x}{\\lambda}\\cos\\tfrac{2\\pi y}{\\lambda}\\Big)",
-   "note": "Mesh texture: m is the slider and λ the mesh spacing."
+   "note": "Mesh texture: m is the slider and λ the mesh spacing.",
+   "primitives": [
+    "material-ground"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: split-flap, relation: same}
-primitives: []
+primitives: [seeded-random, tone-bands, tone-curve]
 sources: []
 status: listed
 ---

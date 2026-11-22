@@ -59,18 +59,37 @@
   "The picture is first simplified into a handful of flat shapes: smoothing that keeps edges, a small palette found by k-means, and a majority filter that rounds the shapes off. Height is then invented for each shape. A map that is 0 on every outline and 1 elsewhere is blurred twice, so the zeros spread inward as a slope, and the result is raised to the power 2.2. Each shape ends up with the cross-section of a cushion: low at the seam, level in the middle. The inflation slider sets the blur radius, that is, how far in from the seam the swelling reaches.",
   "The slopes of that height map give a surface normal at every pixel, and the normal is lit. Diffuse light is wrapped, so the side turned away from the lamp is dim, not black, as on a soft translucent toy. The sheen is the Blinn-Phong highlight computed twice, once tight and once broad. Seams are darkened, each shape drops a small shadow on its neighbour on the side away from the light, and a rim of cool light is added where the surface turns away from the viewer. The colour underneath is four parts flat paint to one part smoothed picture, so faces keep a little of their gradient."
  ],
+ "primitives": [
+  "blur",
+  "relief-shading",
+  "specular-highlight",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "h=\\Big(B_{r/2}^{2}\\,B_{r}^{2}\\,[\\text{not an outline}]\\Big)^{2.2}",
-   "note": "Height: B² is two box blurs of the given radius; r runs from 4 to 11 pixels with the inflation slider."
+   "note": "Height: B² is two box blurs of the given radius; r runs from 4 to 11 pixels with the inflation slider.",
+   "primitives": [
+    "tone-to-height",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "d=\\operatorname{clamp}\\big(0.62\\,(\\mathbf n\\cdot\\mathbf l)+0.42\\big),\\qquad \\mathbf n=\\frac{(s_x,\\ s_y,\\ 1)}{\\sqrt{s_x^{2}+s_y^{2}+1}}",
-   "note": "Wrapped diffuse light from the normal n, built from the slopes of h, and the light direction l."
+   "note": "Wrapped diffuse light from the normal n, built from the slopes of h, and the light direction l.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s=g\\,\\big(0.85\\,(\\mathbf n\\cdot\\mathbf h)^{46}+0.12\\,(\\mathbf n\\cdot\\mathbf h)^{7}\\big),\\qquad \\mathbf h=\\frac{\\mathbf l+\\mathbf v}{\\lvert\\mathbf l+\\mathbf v\\rvert}",
-   "note": "Sheen: a tight and a broad highlight around the half vector h; v points at the viewer, g is the sheen slider."
+   "note": "Sheen: a tight and a broad highlight around the half vector h; v points at the viewer, g is the sheen slider.",
+   "primitives": [
+    "specular-highlight"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

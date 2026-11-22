@@ -58,18 +58,37 @@
   "Modelling clay comes in a few flat colours, so the picture is first reduced to a small box of them. The pixels are blurred a little, k-means finds the k most typical colours (made more saturated and pulled toward the middle of the lightness range, like fresh clay), every pixel takes its nearest colour, and a majority vote over neighbouring pixels removes isolated specks. What is left is a map of regions, each one piece of clay.",
   "Each region is then puffed up into its own pillow. The region’s mask (1 inside, 0 outside) is blurred twice, so it is high in the middle and falls away at the rim, and raised to the power 1.5 to round the top. Soft round hollows (thumb dents) are subtracted at random places and a little low-frequency noise adds the hand-worked unevenness. The slope of that height map gives a surface normal, which is lit with one diffuse light and a tight specular highlight (the gloss slider). Pixels whose neighbours two steps away belong to a different piece are darkened, which draws the creases between pieces."
  ],
+ "primitives": [
+  "blur",
+  "relief-shading",
+  "specular-highlight",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "h(\\mathbf x)=\\Big(\\operatorname{blur}^{2}(m_c)\\Big)^{1.5}(\\mathbf x)\\ \\ \\text{inside piece } c,\\qquad h\\leftarrow h-a\\,e^{-\\lVert\\mathbf x-\\mathbf c\\rVert^{2}/r^{2}}",
-   "note": "The pillow height of piece c from its mask m_c, and a thumb dent of depth a and radius r at c."
+   "note": "The pillow height of piece c from its mask m_c, and a thumb dent of depth a and radius r at c.",
+   "primitives": [
+    "tone-to-height",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s=\\big(0.34+0.8\\,(\\mathbf n\\cdot\\mathbf l)^{+}\\big)\\big(0.78+0.22\\min(1,\\,h+0.2)\\big)\\,\\kappa",
-   "note": "Shading: κ is 0.72 on a seam and 1 elsewhere."
+   "note": "Shading: κ is 0.72 on a seam and 1 elsewhere.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{spec}=0.9\\,g\\,\\left(\\Big(\\tfrac{\\mathbf n\\cdot\\mathbf m}{\\lVert\\mathbf m\\rVert}\\Big)^{+}\\right)^{42}",
-   "note": "Gloss highlight; g is the gloss slider and m the half vector between light and viewer."
+   "note": "Gloss highlight; g is the gloss slider and m the half vector between light and viewer.",
+   "primitives": [
+    "specular-highlight"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

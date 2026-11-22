@@ -58,14 +58,28 @@
   "Cross-stitch counts. The cloth (aida) is a grid of holes and every stitch fills one square, so the picture is first shrunk to one pixel per square, the “stitches across” slider. The colours are then limited to the box of flosses you chose: k-means clustering finds the k most representative colours of the small picture (made slightly more saturated) and each square takes the nearest one. The “bare” option skips squares lighter than 0.86, leaving the cloth showing.",
   "Each stitch is a cross of two strokes drawn with round caps, inset from the corners of its square. All the back strokes (one diagonal) are drawn first in a slightly darker shade, then a soft offset shadow, then the front strokes in the true colour (the other diagonal), then a thin pale highlight along each front thread to suggest twist. The cloth itself is drawn first: faint threads along every grid line, and a small dark hole at every corner."
  ],
+ "primitives": [
+  "coarse-grid",
+  "palette-snap",
+  "stitch-grid"
+ ],
  "equations": [
   {
    "tex": "s=\\frac{W}{n},\\qquad \\text{inset}=0.15\\,s,\\qquad \\text{thread width}=0.34\\,s",
-   "note": "Geometry of a stitch for n stitches across."
+   "note": "Geometry of a stitch for n stitches across.",
+   "primitives": [
+    "stitch-grid"
+   ],
+   "bespoke": null
   },
   {
    "tex": "c(i,j)=\\arg\\min_{f\\in F}\\ \\big\\lVert \\bar P_{ij}-f\\big\\rVert_{\\text{redmean}}",
-   "note": "Each square takes the floss in the set F nearest to the average colour of its pixels; redmean is a distance that weights red and blue by brightness."
+   "note": "Each square takes the floss in the set F nearest to the average colour of its pixels; redmean is a distance that weights red and blue by brightness.",
+   "primitives": [
+    "coarse-grid",
+    "palette-snap"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

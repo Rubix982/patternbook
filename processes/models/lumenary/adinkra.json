@@ -58,22 +58,43 @@
   "Adinkra cloth comes from the Akan peoples of Ghana and Côte d’Ivoire. Symbols are carved into pieces of calabash and stamped onto cotton with a dark dye boiled from tree bark. The cloth was first worn at funerals, and the word is often given as meaning “goodbye”. Each symbol carries a saying: the heart of patience and tolerance, the fern of endurance, the ram’s horns of strength and humility. The program carries ten of them (rings, heart, sankofa, horns, star, fern, twist, comb, handcuffs and tree), drawn with strokes and fills and cut with small details.",
   "The cloth is divided into squares by three-line rules made with a comb, as on the real cloth. In each square the program reads the shade v of your picture, which is its darkness on light cloth and its brightness on dark cloth, and stamps a symbol whose size grows with v. Very light squares are left bare. Since a stamp’s area grows as the square of its size, the ink on the cloth rises quickly with darkness, which gives the picture its depth. The ink is never even: its opacity is multiplied by a fine noise, so some of it is thin or missing, as with a real stamp."
  ],
+ "primitives": [
+  "multiply-blend",
+  "smooth-noise",
+  "tone-dot-lattice"
+ ],
  "equations": [
   {
    "tex": "u=0.45\\,s\\,\\big(1-f+f\\,(0.3+0.7\\,v)\\big),\\qquad \\text{stamp only if } v\\ge 0.12",
-   "note": "Half the stamp size: s is the square size and f the size-follows-shade slider."
+   "note": "Half the stamp size: s is the square size and f the size-follows-shade slider.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\rho_{\\text{ink}}\\propto\\frac{u^2}{s^2}\\propto\\big(0.3+0.7\\,v\\big)^2",
-   "note": "The share of a square covered by ink, for filled symbols."
+   "note": "The share of a square covered by ink, for filled symbols.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "a=\\operatorname{clamp}\\big(0.55+0.9\\,n(\\mathbf x),\\,0,\\,1\\big)",
-   "note": "Uneven inking: the alpha of the stamped layer is scaled by a noise n of wavelength about 5 px."
+   "note": "Uneven inking: the alpha of the stamped layer is scaled by a noise n of wavelength about 5 px.",
+   "primitives": [
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{cloth}}\\leftarrow C_{\\text{cloth}}\\,\\big((1-\\beta)+\\beta\\,C_{\\text{picture}}\\big)",
-   "note": "A multiply blend with strength β = 0.7 × the tint slider, which dyes light cloth with the picture. Indigo and red cloth use a screen blend at 0.35 instead."
+   "note": "A multiply blend with strength β = 0.7 × the tint slider, which dyes light cloth with the picture. Indigo and red cloth use a screen blend at 0.35 instead.",
+   "primitives": [
+    "multiply-blend"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

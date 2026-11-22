@@ -58,18 +58,39 @@
   "The fill is a posterisation of a blurred copy of the frame. With brightness l from 0 to 1, after a blur of about 2.2 pixels at 640 wide, the band is chosen from l' = l + 0.14 b (nu - 1/2), where nu is value noise that changes with the drawing number and b is the boil slider. The tones are n bands of width 1/n; the pixel keeps its own colour, scaled so that its brightness becomes the middle of its band, q/l, then pushed away from grey by a saturation factor of 0.75 to 1.65 and mixed with the blurred original by the wash slider.",
   "The ink is the Sobel gradient magnitude of the brightness passed through a smoothstep from a to 1.7a, where a falls from 0.34 to 0.09 as the line slider rises; above half strength the line is thickened with a blur and a second threshold. Two smooth random fields, each value noise on a grid of 8 pixels and read back bilinearly, are renewed for every drawing and say how far to shift each pixel: one, up to 2.4 px times the boil, for the ink, and a different one, up to 5.5 px times the slip, for the colour. Because they differ, the fill and the line drift against each other. A new drawing is made every 1/24 s times 1, 2 or 3; in between, the last drawing is shown unchanged, which is the twos of animation."
  ],
+ "primitives": [
+  "edge-outline",
+  "misregistration",
+  "mix-over",
+  "smooth-noise",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\ell'=\\ell+0.14\\,b\\,(\\nu-\\tfrac12),\\qquad q=\\frac{\\lfloor n\\,\\ell'\\rfloor+\\tfrac12}{n},\\qquad \\mathbf C=\\frac{q}{\\ell}\\,\\mathbf C_0",
-   "note": "Posterising: l is the brightness, n the number of tones, b the boil slider and nu value noise renewed for every drawing."
+   "note": "Posterising: l is the brightness, n the number of tones, b the boil slider and nu value noise renewed for every drawing.",
+   "primitives": [
+    "tone-bands",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "m=\\operatorname{smoothstep}(a,\\ 1.7a,\\ |\\nabla\\ell|),\\qquad a=0.34-0.25\\,L",
-   "note": "The ink line: the gradient is a Sobel filter and L is the line slider (0 to 1)."
+   "note": "The ink line: the gradient is a Sobel filter and L is the line slider (0 to 1).",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf C_{\\text{out}}=(1-m)\\,\\mathbf C(\\mathbf p+\\mathbf d_C)+m\\,\\mathbf C_{\\text{ink}},\\qquad m=m(\\mathbf p+\\mathbf d_L)",
-   "note": "The colour and the ink are read at different shifts, so they never agree exactly."
+   "note": "The colour and the ink are read at different shifts, so they never agree exactly.",
+   "primitives": [
+    "misregistration",
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

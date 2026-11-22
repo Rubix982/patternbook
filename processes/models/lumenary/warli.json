@@ -58,22 +58,45 @@
   "Warli painting belongs to the Warli people of Maharashtra and Gujarat. It is painted on the red-brown mud walls of houses, in white rice paste, with a bamboo stick, and is often made for weddings. The vocabulary is small: a circle, a triangle and a square, said to come from the sun and the moon, mountains and trees, and a field or a hut. A human is two triangles meeting at their tips, with a circle for a head and stick limbs, and a crowd of them dances in a ring. The program fills the wall with such figures and lets the picture decide where the crowd gathers.",
   "The wall is a texture of two noises, a broad one 90 px across and a fine one 5 px across. Candidate positions lie on a staggered grid with spacing 0.82 u (u is the figure size), each shifted by a random amount of up to a quarter of the spacing. At each position the picture’s tone t sets the chance that anything is drawn there: p = min(1, 1.15 d (1 − t)^1.5), where d is the crowd slider. Dark places therefore hold a thick crowd and light places stay empty. What is drawn is chosen at random: a figure 60% of the time, a tree 16%, a bird 10%, a hut 10% and a sun 4%. Its size also follows the picture, from 0.8 u in light places to 1.2 u in dark. A border of two frames and a chain of triangles is added when it is switched on."
  ],
+ "primitives": [
+  "importance-sampling",
+  "seeded-random",
+  "tone-curve",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "p(t)=\\min\\!\\big(1,\\ 1.15\\,d\\,(1-t)^{1.5}\\big)",
-   "note": "The chance that a grid position holds a drawing, from the tone t and crowd slider d."
+   "note": "The chance that a grid position holds a drawing, from the tone t and crowd slider d.",
+   "primitives": [
+    "importance-sampling",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "N\\approx\\sum_{\\text{sites}}p(t)\\ \\approx\\ \\frac{A}{(0.82\\,u)^2}\\ \\overline{p}",
-   "note": "The expected number of drawings in an area A."
+   "note": "The expected number of drawings in an area A.",
+   "primitives": [
+    "importance-sampling"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s=u\\,\\big(0.8+0.4\\,(1-t)\\big)",
-   "note": "The size of a figure, from the tone."
+   "note": "The size of a figure, from the tone.",
+   "primitives": [
+    "tone-mark-size"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{kind}=\\begin{cases}\\text{person}&h<0.60\\\\ \\text{tree}&h<0.76\\\\ \\text{bird}&h<0.86\\\\ \\text{hut}&h<0.96\\\\ \\text{sun}&\\text{otherwise}\\end{cases}",
-   "note": "The pick, with h a random number fixed by the position and the seed. Figures are drawn from the top of the wall down so lower ones overlap higher ones."
+   "note": "The pick, with h a random number fixed by the position and the seed. Figures are drawn from the top of the wall down so lower ones overlap higher ones.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

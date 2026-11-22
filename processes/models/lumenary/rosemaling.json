@@ -58,18 +58,39 @@
   "Rosemaling, “rose painting”, grew up in the valleys of Norway in the eighteenth century, where country painters decorated chests, bowls and walls in imitation of the grander baroque and rococo styles of the towns. It is built from a few brush strokes (the C-scroll, the S-scroll, the teardrop petal, the leaf), and the painter loads the brush with two colours so that every stroke has a light edge and a dark one. The program lays motifs on a staggered grid of spacing g and decides which motif by the brightness v of your picture there: a flower where v is above 0.62, a pair of scrolls from 0.32 to 0.62, and a spray of three leaves below that.",
   "Size follows brightness too: R = g (0.3 + 0.34 v). The colour is the nearest of six folk paints (red, ochre, green, blue, cream and brick) to the picture’s colour, and each paint has a partner for the flower’s centre. Scrolls are tapering ribbons that spiral inward, drawn in pairs turning opposite ways, flowers have petals that are ellipses laid around the centre with a pale highlight, and every shape has a thin dark outline. Scrolls are drawn first, then leaves, then flowers, smallest first, so the largest blossoms sit on top."
  ],
+ "primitives": [
+  "parametric-curve",
+  "star-rosette-motif",
+  "tone-bands",
+  "tone-mark-size",
+  "variable-width-stroke"
+ ],
  "equations": [
   {
    "tex": "\\text{kind}=\\begin{cases}\\text{flower}&v>0.62\\\\ \\text{scroll}&0.32<v\\le0.62\\\\ \\text{leaves}&\\text{otherwise}\\end{cases},\\qquad R=g\\,(0.3+0.34\\,v)",
-   "note": "Motif choice and size (each size is also multiplied by a random 0.92 to 1.08). Places with v below 0.07 (1.4 − d), where d is the density slider, are left bare."
+   "note": "Motif choice and size (each size is also multiplied by a random 0.92 to 1.08). Places with v below 0.07 (1.4 − d), where d is the density slider, are left bare.",
+   "primitives": [
+    "tone-bands",
+    "tone-mark-size"
+   ],
+   "bespoke": null
   },
   {
    "tex": "r(t)=R\\,(1-0.78\\,t),\\qquad \\varphi(t)=\\varphi_0\\pm 1.35\\,(2\\pi)\\,t,\\qquad w(t)=R\\big(0.34\\,(1-t)^{0.8}+0.05\\big)",
-   "note": "A scroll: a spiral inward over 1.35 turns, drawn as a ribbon that tapers from thick to thin."
+   "note": "A scroll: a spiral inward over 1.35 turns, drawn as a ribbon that tapers from thick to thin.",
+   "primitives": [
+    "parametric-curve",
+    "variable-width-stroke"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\varphi_i=\\frac{2\\pi i}{n}-\\frac{\\pi}{2},\\qquad i=0,\\dots,n-1",
-   "note": "The directions of the n petals of a flower, starting from the top."
+   "note": "The directions of the n petals of a flower, starting from the top.",
+   "primitives": [
+    "star-rosette-motif"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

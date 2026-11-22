@@ -58,14 +58,27 @@
   "Domain warping is a technique popularised by Inigo Quilez: rather than computing a value f(p) of noise, compute it at a point that noise has moved, f(p + h(p)). Here the idea is turned toward a picture. Each pixel asks the picture for its colour not at its own place but at a displaced one, x + d(x), and the displacement d is made from fractal noise. With one layer d is the noise q = (fbm(p), fbm(p + c₁)). With two layers the noise is evaluated again at a point that q has moved, r = (fbm(p + 4q + c₂), fbm(p + 4q + c₃)). With three layers the process is repeated once more. Each warp feeds into the next, which gives the folded, marbled flow. The fractal noise fbm is a normalised sum of three octaves with amplitudes ½, ¼, ⅛.",
   "To keep the animation fast the field is computed on a coarse lattice of 5 px cells, at half the size of the picture, and interpolated bilinearly. Time slowly shifts the offsets c in different directions, so the folds drift, and the pointer smoothly moves the noise’s origin, so you can steer the pattern. A lookup that would leave the picture is mirrored back in, so it never runs out. The shading adds a little light and dark following the noise value itself, k = 1 + s (f − ½) × 0.9, which makes the folds look like dyed marbling."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "\\mathbf q=\\big(\\operatorname{fbm}(\\mathbf p),\\ \\operatorname{fbm}(\\mathbf p+\\mathbf c_1)\\big),\\qquad \\mathbf r=\\big(\\operatorname{fbm}(\\mathbf p+4\\mathbf q+\\mathbf c_2),\\ \\operatorname{fbm}(\\mathbf p+4\\mathbf q+\\mathbf c_3)\\big)",
-   "note": "Two layers of warping; a third repeats the step with r in place of q."
+   "note": "Two layers of warping; a third repeats the step with r in place of q.",
+   "primitives": [
+    "smooth-noise",
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C(\\mathbf x)=k\\;I\\Big(\\mathbf x+2A\\,\\big(\\mathbf w-\\tfrac12\\big)\\,W_h\\Big),\\qquad k=1+0.9\\,s\\,\\big(f-\\tfrac12\\big)",
-   "note": "The warped lookup: w is the last layer’s noise, A = 0.34 × the amount slider, W_h the width of the working picture, f the noise value that shades the folds and s the shading slider."
+   "note": "The warped lookup: w is the last layer’s noise, A = 0.34 × the amount slider, W_h the width of the working picture, f the noise value that shades the folds and s the shading slider.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,18 +58,41 @@
   "Kente is woven by the Asante and the Ewe of Ghana on a narrow loom that makes a band only a hand’s breadth wide. The long bands are cut and sewn edge to edge, and a large cloth uses a couple of dozen of them. In a warp-faced band the lengthwise threads hide the weft completely, so the colour you see is the colour of the warp, and where the weaver wants a pattern a block of weft is floated across on the surface instead. The program follows that structure. Each strip is four cells wide, the cells are as tall as 1.2 of their width, and odd strips are offset by half a cell so that the blocks do not line up across seams.",
   "Every cell takes the nearest of seven cloth colours (gold, red, green, black, blue, white, orange) to your picture’s colour. Inside a strip, blocks of three units in height (a unit is half the strip width) are either warp-faced, drawn as vertical threads with an accent thread on every sixth one, or weft-float blocks that carry a small diamond, zigzag, check or cross motif in the strip’s accent colour. Threads are shaded across their width so each looks like a rounded yarn, and the seam between strips is a dark line at half brightness."
  ],
+ "primitives": [
+  "coarse-grid",
+  "cylinder-shading",
+  "lattice-repeat",
+  "palette-snap",
+  "saturation-adjust",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "y'=y+\\tfrac{h_c}{2}\\,(s\\bmod 2),\\qquad h_c=1.2\\,\\tfrac{w_s}{4}",
-   "note": "Odd strips s are offset by half a cell height h_c; w_s is the strip width."
+   "note": "Odd strips s are offset by half a cell height h_c; w_s is the strip width.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "P(\\text{weft block})=0.75\\,m,\\qquad f=1-0.3\\,\\rho\\,\\big(1-\\sin\\pi u\\big)",
-   "note": "The chance that a block is a float motif (m is the slider), and the rounded-thread shading: u runs 0 to 1 across one thread and ρ is the thread relief slider. The coefficient is 0.3 for floats and 0.32 for warp threads."
+   "note": "The chance that a block is a float motif (m is the slider), and the rounded-thread shading: u runs 0 to 1 across one thread and ρ is the thread relief slider. The coefficient is 0.3 for floats and 0.32 for warp threads.",
+   "primitives": [
+    "seeded-random",
+    "cylinder-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "k=\\arg\\min_j\\ d\\big(\\mathbf c',\\mathbf p_j\\big),\\qquad \\mathbf c'=\\operatorname{boost}\\big(\\bar{\\mathbf c}\\big)",
-   "note": "The cell colour: the blurred picture colour with saturation raised by 1.5, matched to the cloth palette."
+   "note": "The cell colour: the blurred picture colour with saturation raised by 1.5, matched to the cloth palette.",
+   "primitives": [
+    "palette-snap",
+    "saturation-adjust",
+    "coarse-grid"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

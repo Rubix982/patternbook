@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: truck-art, relation: analogous}
-primitives: []
+primitives: [lattice-repeat, mix-over, palette-snap, soft-threshold]
 sources: []
 status: listed
 ---

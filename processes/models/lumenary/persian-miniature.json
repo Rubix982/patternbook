@@ -58,22 +58,43 @@
   "A Persian miniature is a small painting made for a book. The painter uses flat areas of mineral colour (lapis from the mines of Badakhshan, vermilion, malachite green, turmeric yellow and burnished gold leaf), draws fine ink outlines, and does not cast shadows. Space is made by stacking things up the page, and meadows are pricked with tufts of grass and small flowers. A frame of gold rules, a blue band with gold teardrops and a ground of ivory paper surrounds the page. The program follows the same recipe.",
   "The picture is blurred (simplify × 1.1 px), made 25% more saturated, and snapped to one of nine pigments by the redmean distance used on the Truck Art page. Specks are removed by a majority filter, run twice over a 5 × 5 window. Outlines in dark brown ink are drawn where the colour index changes, with a strength of 0.8 × the ink slider. There are no shadows, but the painter’s trick for depth is fine parallel hatching, and the program uses it where the picture is dark: hatch lines every 3.1 px, at a slant, darken the colour by up to 34%. Tufts of grass (on green and turquoise, and sometimes elsewhere) and flecks of gold are scattered on a jittered grid of 30 px wherever there is no outline. The frame is built from ivory, a lapis band, gold rules, a red hairline and gold teardrops spaced 0.55 m apart, where m is the frame width."
  ],
+ "primitives": [
+  "label-boundary",
+  "mix-over",
+  "seeded-random",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "f=0.93+0.14\\,t-\\eta\\,0.34\\,\\operatorname{smoothstep}(0.42,\\,0.15,\\,t)\\,\\big[\\operatorname{frac}\\!\\big(\\tfrac{0.7x+y}{3.1\\,\\mathrm{sc}}\\big)<0.26\\big]",
-   "note": "Brightness of the flat colour. The second term is the hatching: η is the hatching slider, and it only applies where the tone t is below 0.42."
+   "note": "Brightness of the flat colour. The second term is the hatching: η is the hatching slider, and it only applies where the tone t is below 0.42.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow(1-\\lambda)\\,C+\\lambda\\,C_{\\text{ink}},\\qquad \\lambda=0.8\\,\\iota\\ \\ \\text{on an edge}",
-   "note": "Ink outline with strength λ, where ι is the ink slider (0 to 1) and C_ink is the dark brown (42, 26, 16)."
+   "note": "Ink outline with strength λ, where ι is the ink slider (0 to 1) and C_ink is the dark brown (42, 26, 16).",
+   "primitives": [
+    "label-boundary",
+    "mix-over"
+   ],
+   "bespoke": null
   },
   {
    "tex": "r_{\\text{gold}}=(1+1.6\\,\\xi)\\,\\mathrm{sc}\\,(0.6+0.6\\,\\gamma),\\qquad \\alpha=0.5+0.5\\,\\gamma",
-   "note": "Size and opacity of a fleck of gold: ξ is a random number and γ the gold slider."
+   "note": "Size and opacity of a fleck of gold: ξ is a random number and γ the gold slider.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "m=\\operatorname{round}\\big(0.1\\,\\min(W,H)\\,\\varphi\\big),\\qquad \\text{lapis band at inset }0.64\\,m,\\ \\text{width }0.5\\,m",
-   "note": "The frame. It is dropped when m is under 8 px."
+   "note": "The frame. It is dropped when m is under 8 px.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

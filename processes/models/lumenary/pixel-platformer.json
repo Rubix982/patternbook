@@ -59,18 +59,31 @@
   "A tile is eight game pixels square, and the number of tiles across fixes the size of a game pixel. The picture is sampled at four by four points per tile; their average gives the tile its colour and its brightness. Which tiles are solid is decided by rank, not by a fixed brightness: all the tile brightnesses are sorted, and the value at the chosen fraction of the list becomes the threshold. A dark photograph and a pale one therefore both produce a level with the same share of ground.",
   "A solid tile is drawn as a block: its colour, a lighter edge above and to the left, a darker edge below and to the right, and two courses of brick. A solid tile with open air above it is a ledge and grows a cap of grass with a ragged lower edge. Open tiles show the picture itself at four blocks to the tile, so it stays readable behind the level. Colours are made more saturated and then rounded to 32 levels a channel, which is how sixteen-bit consoles stored them. A coin is hung above a ledge with a probability set by the slider, wherever the two tiles above it are free."
  ],
+ "primitives": [
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "g=\\operatorname{round}\\!\\Big(\\frac{W}{8\\,n}\\Big),\\qquad T=8\\,g",
-   "note": "Size of a game pixel g and of a tile T, from the canvas width W and n tiles across."
+   "note": "Size of a game pixel g and of a tile T, from the canvas width W and n tiles across.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "\\theta=L_{(\\lceil q\\,N\\rceil)},\\qquad \\text{solid}\\iff L_{ij}\\le\\theta",
-   "note": "The threshold is the brightness of the tile at rank qN in sorted order; q is the “how much is solid” slider."
+   "note": "The threshold is the brightness of the tile at rank qN in sorted order; q is the “how much is solid” slider.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "c'=\\frac{255}{31}\\,\\operatorname{round}\\!\\Big(\\frac{31\\,c}{255}\\Big)",
-   "note": "Five bits a channel: 32 levels."
+   "note": "Five bits a channel: 32 levels.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

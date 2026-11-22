@@ -58,18 +58,34 @@
   "A kaleidoscope is two mirrors set at an angle of π/n, which fold the view into n copies of one wedge, alternately reflected. For each pixel the program works out its polar angle φ about the centre, subtracts the turn, and takes it modulo the wedge angle 2π/n. If the result lies in the second half of the wedge it is mirrored back (2π/n minus the value), so neighbouring wedges are reflections of each other and their joins are seamless.",
   "That folded angle is then used as a direction in the source picture. The point looked up is a window centre (the look-left-to-right and up-and-down sliders) plus the pixel’s distance from the centre, shrunk by the zoom, along the direction (cos, sin) of the folded angle plus the rotation of the wedge. In other words the wedge is a fan-shaped piece of the picture. When the lookup would leave the picture its coordinate is reflected back in, as with a mirror, so the pattern has no empty areas. The picture is sampled with bilinear interpolation. The optional dark joins darken the pixels within a few pixels of each mirror line by up to 40%."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "symmetry-fold"
+ ],
  "equations": [
   {
    "tex": "\\varphi'=\\big(\\varphi-\\tau\\big)\\bmod\\frac{2\\pi}{n},\\qquad \\psi=\\begin{cases}\\varphi' & \\varphi'\\le \\pi/n\\\\[2pt] 2\\pi/n-\\varphi' & \\text{otherwise}\\end{cases}",
-   "note": "Folding the angle: τ is the turn of the pattern, n the number of mirrors."
+   "note": "Folding the angle: τ is the turn of the pattern, n the number of mirrors.",
+   "primitives": [
+    "symmetry-fold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf s=\\mathbf c_0+2\\,k\\,r\\,\\big(\\cos(\\psi+\\sigma),\\ \\sin(\\psi+\\sigma)\\big)",
-   "note": "The source point: c₀ the window centre, r the distance from the pattern’s centre, k half the zoom, σ the wedge rotation."
+   "note": "The source point: c₀ the window centre, r the distance from the pattern’s centre, k half the zoom, σ the wedge rotation.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\operatorname{refl}_L(v)=L-\\big\\lvert\\,L-(v\\bmod 2L)\\,\\big\\rvert",
-   "note": "Reflecting a coordinate back into the picture of width (or height) L."
+   "note": "Reflecting a coordinate back into the picture of width (or height) L.",
+   "primitives": [
+    "symmetry-fold"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

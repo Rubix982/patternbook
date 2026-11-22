@@ -58,18 +58,38 @@
   "A linocut is printed from a block of lino with the white parts cut away; what is left stands up and takes the ink. So tone has to be made from line and area: the darkest parts are left uncut (solid ink), the middle tones become lines whose ink width follows the darkness, and the lights are cut away almost entirely. The program lays a set of parallel lines across the picture. Each line’s coordinate is bent by slow noise and by the picture’s brightness, so the lines swing round shapes as a carver’s hand does.",
   "At every pixel it finds how far it is from the middle of its line (0 at the centre, 1 at the gouge between lines) and inks it if that distance is smaller than a width that grows with darkness, with a slowly changing swell along each line to mimic the taper of a V-gouge. Optional carved outlines add solid ink wherever the Sobel edge strength is high. A few roller specks, noise above 0.86, knock small holes in the ink."
  ],
+ "primitives": [
+  "smooth-noise",
+  "tone-curve",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "u=\\frac{n\\,(x\\cos\\theta+y\\sin\\theta)}{W}+3.2\\,w\\,(\\nu-\\tfrac12)+1.5\\,w\\,(\\tfrac12-L_b),\\qquad f=u-\\lfloor u\\rfloor",
-   "note": "Line coordinate: n lines across, θ the direction, w the wander slider and ν slow noise; f is the position within a line."
+   "note": "Line coordinate: n lines across, θ the direction, w the wander slider and ν slow noise; f is the position within a line.",
+   "primitives": [
+    "tone-line-screen",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "q=\\min\\!\\big(1.08,\\ 1.12\\,d^{0.85}\\,s\\big),\\quad s=0.78+0.45\\,\\nu',\\qquad d=1-\\text{contrast}(L_b)",
-   "note": "Cut width q from the darkness d, with the taper s along the line."
+   "note": "Cut width q from the darkness d, with the taper s along the line.",
+   "primitives": [
+    "tone-line-screen",
+    "tone-curve",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "a=\\operatorname{smoothstep}\\big(\\lvert 2f-1\\rvert-0.08,\\ \\lvert 2f-1\\rvert+0.02,\\ q\\big)\\ \\text{if } q>0.06,\\ \\text{else }0",
-   "note": "Ink coverage a at the pixel."
+   "note": "Ink coverage a at the pixel.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

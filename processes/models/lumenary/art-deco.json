@@ -58,18 +58,36 @@
   "Art deco’s signature is geometric ornament in metal. Two engraving techniques are available, both of which turn brightness into the thickness of a gold line rather than into tone. In “Lines” mode the picture is covered with horizontal bands; at every position along a band the band’s thickness is set by the brightness there, so bright areas get fat lines and dark areas hairlines, the technique of banknote engraving. The band is built as a polygon: along the top edge going right, then back along the bottom edge going left.",
   "“Sunburst” does the same with rays fanning from a point below the picture. A ray is a direction; stepping along it samples brightness, and the ray’s width at distance r is capped at its angular share of the circle (so neighbouring rays never overlap) and shrunk by brightness. The metal is a five-stop gradient laid diagonally across the whole picture, which is what makes it read as polished gold, silver or copper. Frame ornament (double border, corner fans of three arcs and radial ticks, midpoint diamonds) is drawn with arcs and short lines, and the title is set in Bodoni with extra letter-spacing."
  ],
+ "primitives": [
+  "tone-curve",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "w(x)=\\text{step}\\,\\big(0.05+0.9\\,L(x,y_c)^{0.9}\\big)",
-   "note": "Thickness of a line band at x; y_c is the band’s centre line."
+   "note": "Thickness of a line band at x; y_c is the band’s centre line.",
+   "primitives": [
+    "tone-line-screen",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\hat{\\mathbf d}_k=(\\sin\\alpha_k,\\,-\\cos\\alpha_k),\\quad\\alpha_k=-\\beta+\\big(k+\\tfrac12\\big)\\Delta\\alpha,\\quad\\beta=82^{\\circ}",
-   "note": "Direction of ray k."
+   "note": "Direction of ray k.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w(r)=\\min\\!\\Big(0.96\\,\\Delta\\alpha\\,r,\\ \\ \\Delta\\alpha\\,r\\,\\big(0.05+0.9\\,L^{0.9}\\big)\\Big)",
-   "note": "Ray width at distance r from the origin: never wider than its slice Δα·r."
+   "note": "Ray width at distance r from the origin: never wider than its slice Δα·r.",
+   "primitives": [
+    "tone-line-screen",
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

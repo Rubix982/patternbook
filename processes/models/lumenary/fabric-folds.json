@@ -58,18 +58,34 @@
   "Cloth hung from above falls in folds that run in one direction. Each fold is a wave across the cloth: a sine of position, measured along the hang direction. To make the cloth drape over your picture, the picture’s brightness is added inside the sine, so the folds bend wherever the picture changes; a slow noise also nudges the position, so the folds wander. A second sine at 2.3 times the frequency, and a bump proportional to brightness, give the folds secondary ripples and make the shape of the picture stand out.",
   "The slope of this height map is the surface normal. Cloth is lit with a diffuse term plus a broad specular highlight, and one more thing that distinguishes it from stone: a soft rim of light at grazing angles, where fibres standing up scatter light, proportional to (1 − n_z)². A woven grain, a product of two cosines at a thread spacing of a couple of pixels, dims the shading slightly. The cloth is either the picture’s own colours (softened) printed on the fabric, or one chosen colour."
  ],
+ "primitives": [
+  "relief-shading",
+  "specular-highlight",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "\\varphi=2\\pi\\big(f\\,u+w\\,L_b\\big),\\qquad u=\\frac{x\\cos\\theta+y\\sin\\theta}{W}+\\eta",
-   "note": "Phase of the folds: f is the number of folds, w = 1.6 × the “picture bends the folds” slider, θ the hang direction and η the slow wander."
+   "note": "Phase of the folds: f is the number of folds, w = 1.6 × the “picture bends the folds” slider, θ the hang direction and η the slow wander.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "h=0.62\\sin\\varphi+0.22\\sin(2.3\\,\\varphi+1.3+2L_b)+0.35\\,L_b",
-   "note": "Height map of the cloth."
+   "note": "Height map of the cloth.",
+   "primitives": [
+    "tone-to-height"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=\\text{base}\\,\\big(0.28+0.82\\,(\\mathbf n\\cdot\\mathbf l)^{+}\\big)\\,g+255\\,\\sigma\\Big(0.45\\,\\big((\\mathbf n\\cdot\\mathbf m)^{+}\\big)^{18}+0.35\\,(1-n_z)^{2}\\Big)",
-   "note": "Final colour: g is the weave factor (about 0.93 to 1), σ the sheen slider, m the half vector; the last term is the rim light of standing fibres."
+   "note": "Final colour: g is the weave factor (about 0.93 to 1), σ the sheen slider, m the half vector; the last term is the rim light of standing fibres.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

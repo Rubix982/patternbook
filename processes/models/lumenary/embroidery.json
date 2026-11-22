@@ -58,14 +58,25 @@
   "Embroidered pictures are drawn with short glossy threads laid in the direction the shape runs. The program scatters a jittered grid of stroke centres over the picture and puts them in random order. For each one it finds the direction of the picture’s edge: the gradient (the slope of brightness) points across an edge, so the thread runs perpendicular to it. Where there is no edge the thread would have no direction at all, so a lazy angle is used instead: a base angle plus a random shift that is constant over each 16-pixel square. The two directions are blended by an amount that grows with the edge strength and with the “follow the shapes” slider.",
   "The k floss colours come from k-means on the picture, and each stroke takes the floss nearest to the colour of a quarter-size copy at its centre. It is drawn three times: a dark, offset shadow, the thread itself in a brightness varied by about ±10%, and a thin lighter line slightly to one side for the sheen. The background is linen, flecks of short horizontal and vertical threads. The hoop is a wooden ellipse with a highlight, with the area outside it dark."
  ],
+ "primitives": [
+  "edge-tangent-field"
+ ],
  "equations": [
   {
    "tex": "\\theta_e=\\operatorname{atan2}(G_x,\\,-G_y),\\qquad w=\\phi\\ \\operatorname{clamp}(14\\,\\lvert\\nabla L\\rvert)",
-   "note": "Thread direction along the edge (the gradient G turned by 90°), and the weight w of edge-following; φ is the follow slider."
+   "note": "Thread direction along the edge (the gradient G turned by 90°), and the weight w of edge-following; φ is the follow slider.",
+   "primitives": [
+    "edge-tangent-field"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\theta=\\operatorname{atan2}\\!\\big(w\\sin\\theta_e+(1-w)\\sin\\theta_0,\\ \\ w\\cos\\theta_e+(1-w)\\cos\\theta_0\\big)",
-   "note": "Blend with the lazy direction θ₀ by adding unit vectors."
+   "note": "Blend with the lazy direction θ₀ by adding unit vectors.",
+   "primitives": [
+    "edge-tangent-field"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

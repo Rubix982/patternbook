@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: linocut, relation: same}
   - {by: lumenary, id: ukiyo-e, relation: analogous}
-primitives: []
+primitives: [edge-outline, label-boundary, mix-over, mode-filter, palette-snap, saturation-adjust, smooth-noise, tone-curve, tone-line-screen]
 sources: []
 status: listed
 ---

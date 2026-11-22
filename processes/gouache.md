@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: gouache, relation: same}
   - {by: lumenary, id: persian-miniature, relation: analogous}
-primitives: []
+primitives: [coordinate-warp, label-boundary, mix-over, palette-snap, saturation-adjust, seeded-random, smooth-noise, tone-line-screen]
 sources: []
 status: listed
 ---

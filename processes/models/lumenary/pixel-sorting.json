@@ -58,14 +58,23 @@
   "Pixel sorting takes runs of pixels and puts them in order. Walk along a column (or row); wherever the brightness is inside the chosen band, start collecting pixels, and stop when it leaves the band or when the run reaches a random cap (the streak length). Sort the collected pixels by a key, and write them back in sorted order. Pixels outside the band are never touched, so a sharp structure remains in the places the sorting skips.",
   "The key can be brightness, red, blue or hue. Bright regions sorted from dark to light grow a smear that gets brighter as it goes; reversing the order flips the direction. The cost is a sort per run, so it is O(N log n) for runs of length n."
  ],
+ "primitives": [
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "\\text{run}=\\{\\,p_t,\\dots,p_{e-1}\\ :\\ \\ell\\le L(p_i)\\le h\\,\\},\\qquad e-t\\le\\text{cap}",
-   "note": "Pixels in the brightness band [ℓ, h], up to a maximum length."
+   "note": "Pixels in the brightness band [ℓ, h], up to a maximum length.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "H=\\frac{1}{6}\\begin{cases}\\big((G-B)/c\\big)\\bmod 6&\\max=R\\\\(B-R)/c+2&\\max=G\\\\(R-G)/c+4&\\max=B\\end{cases},\\quad c=\\max-\\min",
-   "note": "The hue key, from 0 to 1."
+   "note": "The hue key, from 0 to 1.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

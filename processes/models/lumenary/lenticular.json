@@ -58,18 +58,37 @@
   "A lenticular print is a sheet of tiny cylindrical lenses laid over two pictures that have been cut into thin strips and interlaced, A B A B. Each lens sends the A strip to your eye from one viewing angle and the B strip from another, so as you move the picture seems to flip. The program makes the second picture from the first by one of five alterations (a negative, a night-blue ramp, the opposite hues, black and white or sepia), then for each lens of width w it works out how far across the lens each column is, u = (x/w) mod 1. The lens shows picture A where u is below a split point and B above it. The split point follows the tilt: split = ½ (1 + θ).",
   "The tilt θ is a number between −1 and 1. It follows your pointer across the picture (the left edge is −1, the right edge 1) with a smooth, exponential catch-up, and when the pointer is away it sways by itself as a slow sine wave. The two pictures also slide in opposite directions with the tilt, by up to 1.4 lens widths, which is the parallax that makes a lenticular look deep. The lens shine adds a bright band that moves across each lens, darkens the lens edges and the seam, so the strips read as ribbed plastic."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "cylinder-shading",
+  "ease-toward-target",
+  "lattice-repeat"
+ ],
  "equations": [
   {
    "tex": "u=\\frac{x}{w}\\bmod 1,\\qquad \\text{show B if }\\ u\\ge\\tfrac12\\,(1+\\theta)",
-   "note": "w is the lens width in pixels and θ the tilt."
+   "note": "w is the lens width in pixels and θ the tilt.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\theta\\ \\leftarrow\\ \\theta+(\\theta^{*}-\\theta)\\,\\big(1-e^{-7\\,\\Delta t}\\big),\\qquad \\theta^{*}=\\begin{cases}2p_x-1&\\text{pointer inside}\\\\ 0.95\\,s\\,\\sin(0.75\\,t)&\\text{otherwise}\\end{cases}",
-   "note": "The tilt eases toward its target; p_x is the pointer’s horizontal position (0 to 1) and s the sway slider."
+   "note": "The tilt eases toward its target; p_x is the pointer’s horizontal position (0 to 1) and s the sway slider.",
+   "primitives": [
+    "ease-toward-target"
+   ],
+   "bespoke": null
   },
   {
    "tex": "x_{\\text{src}}=x\\mp\\theta\\,\\delta,\\quad \\delta=1.4\\,P\\,w;\\qquad k=1+S\\Big(0.3\\,e^{-(u-h)^{2}/0.018}-0.12\\,\\operatorname{smoothstep}(0.62,\\,1,\\,\\lvert 2u-1\\rvert)\\Big)",
-   "note": "Parallax shift (minus for A, plus for B; P the parallax slider) and the shine multiplier; h = ½ + 0.38 θ is where the glint sits in each lens, S the shine slider."
+   "note": "Parallax shift (minus for A, plus for B; P the parallax slider) and the shine multiplier; h = ½ + 0.38 θ is where the glint sits in each lens, S the shine slider.",
+   "primitives": [
+    "coordinate-warp",
+    "cylinder-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

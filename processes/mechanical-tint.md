@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: manga, relation: analogous}
-primitives: []
+primitives: [image-gradient, soft-threshold, tone-dot-lattice, unsharp-mask]
 sources: []
 status: listed
 ---

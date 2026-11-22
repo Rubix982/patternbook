@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: rosemaling, relation: analogous}
-primitives: []
+primitives: [parametric-curve, star-rosette-motif, tone-bands, tone-mark-size, variable-width-stroke]
 sources: []
 status: listed
 ---

@@ -58,18 +58,39 @@
   "The picture’s brightness, blurred to round off detail, is cut into bands like a contour map. Layer i is a sheet of coloured paper that exists wherever the brightness is above the threshold i/n, with a very short smoothstep at the edge so it is a sharp cut. The bottom layer is the whole sheet. Papers go from dark (bottom) to light (top), taken either from a built-in palette or from the picture’s own k-means colours sorted by brightness.",
   "What makes it look cut and stacked is the shadow. For each layer the mask is shifted a few pixels away from the light and blurred twice; where that shifted, blurred shape falls outside the layer itself, the sheets beneath are darkened. The layers are composited from the bottom up: darken by the shadow of the layer, then replace by the layer’s colour where its mask is on. A hairline of extra light is added right at the cut edges, and paper fibre noise is multiplied in."
  ],
+ "primitives": [
+  "blur",
+  "mix-over",
+  "multiply-blend",
+  "soft-threshold",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "m_i=\\operatorname{smoothstep}\\big(\\tfrac in-0.012,\\ \\tfrac in+0.012,\\ L_b\\big),\\qquad i=1,\\dots,n-1",
-   "note": "The mask of layer i, with n layers in all."
+   "note": "The mask of layer i, with n layers in all.",
+   "primitives": [
+    "tone-bands",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s_i=\\operatorname{blur}^{2}\\big(m_i(\\mathbf x-\\mathbf d)\\big),\\qquad \\mathbf d=5\\,\\sigma\\,(-\\cos\\alpha,\\ \\sin\\alpha)",
-   "note": "Shadow of layer i: the mask displaced away from the light (angle α) and blurred twice."
+   "note": "Shadow of layer i: the mask displaced away from the light (angle α) and blurred twice.",
+   "primitives": [
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C\\leftarrow\\big(C\\,(1-0.55\\,\\delta\\,s_i\\,(1-m_i))\\big)(1-m_i)+c_i\\,m_i",
-   "note": "Compositing one layer; δ is the shadow slider and c_i the colour of paper i."
+   "note": "Compositing one layer; δ is the shadow slider and c_i the colour of paper i.",
+   "primitives": [
+    "mix-over",
+    "multiply-blend"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

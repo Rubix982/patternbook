@@ -58,18 +58,39 @@
   "The picture is reduced to a small grid and every cell becomes a block. A block’s colour is the cell’s colour; its height is the cell’s brightness, stretched so the darkest cell in the picture is as low as the lightest is tall (an “auto-levels” step that keeps flat pictures from producing a flat city). Each block is drawn as three flat faces: a top, a left side and a right side.",
   "The projection is the 2:1 “dimetric” used in pixel-art games, where every step along a grid axis moves half a tile across and a quarter of a tile down. It is not mathematically isometric (which would use 30° and a 1:1.15 ratio) but it keeps lines on whole-pixel steps and looks cleaner. Because there is no depth buffer, blocks are drawn in order of i + j, back to front, so nearer blocks cover farther ones. The three faces get fixed brightness multipliers, which is Lambert shading for a light at a fixed position, and the whole city is scaled to fit the canvas."
  ],
+ "primitives": [
+  "auto-levels",
+  "facet-shading",
+  "projection-3d",
+  "tone-curve",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "X=X_0+(i-j)\\,\\frac{w}{2},\\qquad Y=Y_0+(i+j)\\,\\frac{w}{4}-h",
-   "note": "Screen position of the top of block (i, j) with tile width w and block height h."
+   "note": "Screen position of the top of block (i, j) with tile width w and block height h.",
+   "primitives": [
+    "projection-3d"
+   ],
+   "bespoke": null
   },
   {
    "tex": "h=\\Big(\\frac{L-L_{\\min}}{\\max(0.05,\\,L_{\\max}-L_{\\min})}\\Big)^{1.1}H_{\\max}+0.08",
-   "note": "Block height from normalised brightness."
+   "note": "Block height from normalised brightness.",
+   "primitives": [
+    "auto-levels",
+    "tone-curve",
+    "tone-mark-size"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{top}}=1.08\\,C,\\qquad C_{\\text{left}}=0.62\\,C,\\qquad C_{\\text{right}}=0.40\\,C",
-   "note": "Face shading."
+   "note": "Face shading.",
+   "primitives": [
+    "facet-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

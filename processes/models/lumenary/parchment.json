@@ -58,18 +58,36 @@
   "The skin is built first. A fractal noise gives broad mottling, the distance to the nearest edge (with its threshold wobbled by more noise) gives the darker rim that handling leaves, and the product of two thresholded noises gives foxing, the rusty freckles of old leaves. These add up to a stain amount that blends a pale vellum colour toward a brown one; the age slider scales all three. A fine hash and a value noise stand in for the pores of the hide.",
   "The picture is drawn the way an engraver shades: with parallel lines whose thickness carries the tone. The lines run on a slight slant and a slow wave. At each pixel the distance to the nearest line centre is compared with a width that grows with darkness, so pale areas get hairlines and dark areas nearly solid ink. Past a darker threshold a second set crosses the first. Outlines come from the Sobel operator. The ink is then thinned by noise, since it sits unevenly on skin, and faded in patches. The border, the ruled lines, the red capital and the script are ordinary canvas drawing on top."
  ],
+ "primitives": [
+  "material-ground",
+  "sheet-edge",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "s=\\operatorname{clamp}\\big(0.9\\,a\\,(m-0.35)+\\text{rim}\\,(0.35+0.5a)+0.5\\,a\\,\\text{fox}\\big)",
-   "note": "Stain amount: m is the mottling noise, a the age slider. The skin colour is a blend from vellum to brown by s."
+   "note": "Stain amount: m is the mottling noise, a the age slider. The skin colour is a blend from vellum to brown by s.",
+   "primitives": [
+    "material-ground",
+    "sheet-edge"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\alpha_1=1-S_{0.8w,\\,0.8w+0.22}(d_1),\\qquad w=\\operatorname{clamp}\\big(1.25\\,(D-0.22)\\big)\\cdot h",
-   "note": "Hatching: d₁ is the distance to the nearest line centre (0 to 1), D the darkness of the picture, h the hatching slider."
+   "note": "Hatching: d₁ is the distance to the nearest line centre (0 to 1), D the darkness of the picture, h the hatching slider.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "d_1=2\\,\\Big\\lvert\\operatorname{frac}\\!\\Big(\\frac{y+0.35x+6\\sin(0.012y+0.004x)}{p}\\Big)-\\tfrac12\\Big\\rvert",
-   "note": "Lines every p = 5.2 px, slanted and gently waved."
+   "note": "Lines every p = 5.2 px, slanted and gently waved.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

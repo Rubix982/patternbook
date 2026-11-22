@@ -58,18 +58,33 @@
   "A steel engraving builds tone from lines. The portrait is drawn as many horizontal lines whose thickness follows the darkness underneath, so a dark area is a row of fat lines that nearly touch, and a light one has hairlines or gaps. The lines wander gently up and down with a sine wave, which gives the hand-cut look.",
   "In the darkest places a second set of diagonal lines is added (cross-hatching), but each diagonal pen stroke lifts wherever the picture is lighter than a threshold. The cameo is clipped to an oval, framed by two rules and a ring of 72 beads; the page has a double border with a rosette in each corner and a caption between two rules."
  ],
+ "primitives": [
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "t(x,i)=1.05\\,\\big(1-L(x,y_i)\\big)\\,\\Delta y",
-   "note": "Thickness of line i at column x; Δy is the line spacing."
+   "note": "Thickness of line i at column x; Δy is the line spacing.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "y(x,i)=y_i+0.18\\,\\Delta y\\,\\sin(0.045\\,x+0.7\\,i)",
-   "note": "The gentle waver of each line."
+   "note": "The gentle waver of each line.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{hatch where}\\quad L<0.4\\cdot\\text{cross}+0.05",
-   "note": "Cross-hatching is only drawn on dark places."
+   "note": "Cross-hatching is only drawn on dark places.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

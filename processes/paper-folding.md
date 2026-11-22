@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: origami-folds, relation: same}
-primitives: []
+primitives: [facet-shading, seeded-random]
 sources: []
 status: listed
 ---

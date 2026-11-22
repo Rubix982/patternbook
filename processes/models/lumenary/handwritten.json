@@ -58,18 +58,36 @@
   "The page is drawn first: paper, ruled lines (or a square grid), a red margin and three binder holes. Then your sentence is written out one letter at a time, left to right, line after line, starting again from the beginning whenever it runs out. Before writing, the picture’s brightness is stretched so that its darkest 2% become black and its lightest 2% white, then blurred, so each letter reads a smooth tone and not one noisy pixel.",
   "A pen presses harder where the picture is dark. For every letter the program looks at the darkness d just above its baseline and makes the letter larger, bolder (weight 700 once d passes one half) and more opaque. Where d is under 0.07 the pen lifts and nothing is written, so the paper shows through the highlights. Each letter is also turned by a random couple of degrees at most and its size varies by a few percent, which is what stops it looking typeset. The “Pen pressure” slider widens the gap between light and heavy writing."
  ],
+ "primitives": [
+  "auto-levels",
+  "blur",
+  "seeded-random",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "v=\\operatorname{clamp}\\!\\left(\\frac{L-L_{2\\%}}{\\max(0.08,\\;L_{98\\%}-L_{2\\%})}\\right),\\qquad d=1-\\bar v",
-   "note": "Brightness stretched between its 2nd and 98th percentiles, blurred (the bar), and turned into darkness d."
+   "note": "Brightness stretched between its 2nd and 98th percentiles, blurred (the bar), and turned into darkness d.",
+   "primitives": [
+    "auto-levels",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s=1.28\\,q\\,\\big(0.62+(0.55+0.35\\,\\pi)\\,d\\big)\\,(0.94+0.12\\,u),\\qquad q=\\frac{0.9\\,H}{n}",
-   "note": "Letter size: q is the line pitch for n lines, π the pressure slider (0 to 1) and u a random number from 0 to 1."
+   "note": "Letter size: q is the line pitch for n lines, π the pressure slider (0 to 1) and u a random number from 0 to 1.",
+   "primitives": [
+    "tone-mark-size",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\alpha=\\min\\!\\big(1,\\;0.16+d\\,(0.7+0.55\\,\\pi)\\big)",
-   "note": "Ink opacity of one letter."
+   "note": "Ink opacity of one letter.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

@@ -59,14 +59,25 @@
   "The base is a duotone-plus: a five-stop ramp from black through the first neon, the second neon and a hot highlight. Two edge maps are then drawn as glowing lines, a fine one in the second neon and a wider one in the first, offset by a fraction of a pixel so they never quite overlap, which gives the lines a coloured fringe.",
   "Rain is a few hundred short slanted strokes of random length and transparency. The glitch shifts some thin horizontal bands sideways by copying their pixels. Scanlines darken every third row. The neon sign is the same text drawn three times, with a wide blur, a narrow blur and finally sharp white, and it sometimes flickers."
  ],
+ "primitives": [
+  "colour-ramp",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "C=\\operatorname{ramp}\\!\\big(L^{0.9};\\ \\text{black},\\ 0.35A,\\ A,\\ B,\\ C_{\\mathrm{hi}}\\big)",
-   "note": "Brightness through the five-stop ramp."
+   "note": "Brightness through the five-stop ramp.",
+   "primitives": [
+    "colour-ramp",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{row } y \\text{ darkened by } 18\\% \\ \\text{ when }\\ y \\bmod 3=0",
-   "note": "The scanline rule."
+   "note": "The scanline rule.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

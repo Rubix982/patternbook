@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: crayon-cartoon, relation: same}
-primitives: []
+primitives: [coordinate-warp, seeded-random, smooth-noise, tooth-threshold]
 sources: []
 status: listed
 ---

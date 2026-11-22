@@ -58,14 +58,26 @@
   "Maximalism refuses to leave anything empty. The brightness (with a little extra contrast) is cut into n bands. Each band gets two colours that are far apart on the colour wheel, and a repeating pattern decides, pixel by pixel, which of the two shows: stripes, checks, dots, waves, diagonals or diamonds. Neighbouring bands use different patterns, so the picture is drawn entirely out of clashing textures.",
   "The colours are spread round the wheel in equal steps and then moved by the seed, so the remix button changes the whole scheme but keeps the structure. Darker bands are also darker colours. A border of alternating beads, each with a pale centre, frames the whole thing."
  ],
+ "primitives": [
+  "hue-shift",
+  "lattice-repeat"
+ ],
  "equations": [
   {
    "tex": "h_i=\\left(h_0+0.92\\,\\frac{i}{n}+0.137\\,\\text{seed}\\right)\\bmod 1,\\qquad h_i'=h_i+0.38",
-   "note": "Hue of the two colours of band i."
+   "note": "Hue of the two colours of band i.",
+   "primitives": [
+    "hue-shift"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{stripe}(x,y)=\\left\\lfloor\\frac{x+y}{s}\\right\\rfloor\\bmod 2,\\qquad \\text{check}(x,y)=\\left(\\left\\lfloor\\frac{x}{s}\\right\\rfloor+\\left\\lfloor\\frac{y}{s}\\right\\rfloor\\right)\\bmod 2",
-   "note": "Two of the seven pattern functions. The pattern value picks one of the two colours."
+   "note": "Two of the seven pattern functions. The pattern value picks one of the two colours.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: stained-glass, relation: same}
-primitives: []
+primitives: [crackle-network, saturation-adjust, soft-threshold, voronoi-cells]
 sources: []
 status: listed
 ---

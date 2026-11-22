@@ -58,18 +58,31 @@
   "A printed photograph has no grey, only black dots of different sizes on white paper, small ones for light areas and large ones for dark. The eye blends them. Here the dots sit on a lattice turned 45°, the angle at which the eye notices a regular pattern least. For each lattice point the program reads the picture’s brightness L at that spot and draws a dot whose radius grows with the square root of the darkness, which makes the inked area proportional to the darkness. In the deepest tones the dots are big enough to merge and the page goes solid black.",
   "The rest of the page is typeset around it. The masthead is fitted to the page width by measuring the text at one size and scaling; the headline is wrapped into at most three lines and shrunk by 8% steps until it fits; thin and thick rules separate the sections; and the remaining columns are filled with “greeked” text, bars of random length standing in for words, with the occasional subhead. Paper grain and a warm vignette finish it."
  ],
+ "primitives": [
+  "tone-dot-lattice"
+ ],
  "equations": [
   {
    "tex": "\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\frac{1}{\\sqrt2}\\begin{pmatrix}a+b\\\\ b-a\\end{pmatrix},\\qquad a,b\\in s\\,\\mathbb Z",
-   "note": "Lattice points: a square grid of spacing s turned by 45°."
+   "note": "Lattice points: a square grid of spacing s turned by 45°.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "r=0.62\\,s\\,\\sqrt{1-L(x,y)}",
-   "note": "Dot radius; the inked fraction of a cell is πr²/s², proportional to the darkness 1 − L."
+   "note": "Dot radius; the inked fraction of a cell is πr²/s², proportional to the darkness 1 − L.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "F=\\min\\!\\left(u_0,\\ \\frac{0.98\\,w_{\\text{page}}}{w_{100}}\\cdot 100\\right)",
-   "note": "Masthead font size: the text measured at 100 px has width w₁₀₀, and is scaled to fill 98% of the page width."
+   "note": "Masthead font size: the text measured at 100 px has width w₁₀₀, and is scaled to fill 98% of the page width.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

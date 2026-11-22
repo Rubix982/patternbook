@@ -58,18 +58,25 @@
   "Each tile and each cell of the grid is described by a signature of 15 numbers: the mean red, green and blue of its four quarters, and of the whole. The library holds square crops at four sizes, 0.11, 0.17, 0.26 and 0.4 of the picture’s short side, at positions on a jittered grid, together with a mirrored copy of each. For a cell, the cost of tile t is D(t) = the sum of (s_cell - s_t)^2 over the first 12 numbers (the four quarters) + 0.35 lambda u_t, where u_t is the number of times t has been used and lambda rises from 1 to 1401 with the variety slider. The cheapest tile wins, except that it can never be the tile to the left or the one above.",
   "The tile is then fitted to its cell. Its pixels v are moved towards the cell’s mean colour m_c: v' = (1 - k) v + k (m_c + delta (v - m_t)), where m_t is the tile’s own mean, k is the colour match slider, and delta = 0.38 + 0.62 (1 - |l - 128| / 128) keeps less detail in very dark and very light cells, where a real print would have little contrast. At k = 1 every tile has exactly the average colour of its cell, and detail is all that remains of the original tile. The gap, up to 10% of a cell on each side, shows the grout."
  ],
+ "primitives": [],
  "equations": [
   {
    "tex": "D(t)=\\sum_{q=1}^{12}\\big(\\sigma_q^{\\text{cell}}-\\sigma_q^{t}\\big)^{2}+0.35\\,\\lambda\\,u_t,\\qquad \\lambda=1+1400\\,V",
-   "note": "The cost of using tile t in a cell: u_t is how often it is already used and V is the variety slider (0 to 1)."
+   "note": "The cost of using tile t in a cell: u_t is how often it is already used and V is the variety slider (0 to 1).",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "v'=(1-k)\\,v+k\\,\\big(m_c+\\delta\\,(v-m_t)\\big)",
-   "note": "Colour fitting: v is a tile pixel, m_t the tile’s mean, m_c the cell’s mean and k the colour match."
+   "note": "Colour fitting: v is a tile pixel, m_t the tile’s mean, m_c the cell’s mean and k the colour match.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\delta=0.38+0.62\\Big(1-\\frac{|\\ell-128|}{128}\\Big)",
-   "note": "How much of the tile’s own detail is kept, by the brightness l of the cell."
+   "note": "How much of the tile’s own detail is kept, by the brightness l of the cell.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

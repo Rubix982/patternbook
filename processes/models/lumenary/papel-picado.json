@@ -58,18 +58,36 @@
   "Papel picado, “punched paper”, is made by stacking fifty or so sheets of tissue and tapping steel chisels through them with a mallet. The banners are strung across streets and altars for fiestas and for the Day of the Dead. In the program each banner is a rectangle of width w and height 1.18 w with a zigzag lower edge (seven teeth, depth 0.07 h) and a fold at the top where the string runs. Rows of banners hang from straight lines, alternate rows are shifted by half a banner, and each one is tilted by a few hundredths of a radian.",
   "The cuts are made by painting in destination-out mode, so they remove paper and show whatever is behind. A border of small holes runs inside the edge, and the middle is a 7 × 7 lattice of cells. At the centre of each cell the program reads the blurred brightness t of your picture and sets the hole radius from it, so bright places get wide holes and dark places get pin-pricks. The tissue is thin, so a share of the picture is also painted over the paper itself, and a soft shadow falls behind the whole sheet."
  ],
+ "primitives": [
+  "mix-over",
+  "tone-curve",
+  "tone-dot-lattice"
+ ],
  "equations": [
   {
    "tex": "r=\\frac{c}{2}\\,\\big(0.1+0.95\\,t^{0.85}\\big)\\,\\big(0.5+h\\big),\\qquad r\\le 0.62\\,c",
-   "note": "Hole radius in a lattice cell of side c: t is the picture’s brightness there and h the hole size slider (0.3 to 1). Holes under 0.9 px are skipped."
+   "note": "Hole radius in a lattice cell of side c: t is the picture’s brightness there and h the hole size slider (0.3 to 1). Holes under 0.9 px are skipped.",
+   "primitives": [
+    "tone-dot-lattice",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\phi\\approx\\frac{\\pi r^2}{c^2}=\\frac{\\pi}{4}\\,\\big(0.1+0.95\\,t^{0.85}\\big)^2\\,(0.5+h)^2",
-   "note": "The fraction of each cell that is open, for round holes. It is how much of the picture shows through."
+   "note": "The fraction of each cell that is open, for round holes. It is how much of the picture shows through.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=(1-\\alpha)\\,C_{\\text{paper}}+\\alpha\\,C_{\\text{picture}},\\qquad \\alpha=0.55\\,\\sigma",
-   "note": "The tissue is a little see-through: σ is the see-through slider."
+   "note": "The tissue is a little see-through: σ is the see-through slider.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

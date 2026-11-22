@@ -58,14 +58,19 @@
   "Any closed curve can be built from circles. Write the curve as a complex number z(t) and the Fourier series says z(t) = Σ c_k e^(2πikt), where each term is a circle of radius |c_k| turning k times per cycle (backwards for negative k), and each rides on the rim of the one before it. This is the old idea of epicycles, which Ptolemy used for the planets, made exact. The program finds an outline in your picture by marching squares on a lightly blurred, half-size copy at a level chosen by the slider, preferring a long closed contour (an open one is traced there and back, so it closes). It resamples the outline at 1,024 points of equal arc length and computes all 1,024 coefficients by a direct discrete Fourier transform, once.",
   "The coefficients are sorted by size, and the circles slider keeps the largest ones. The sum of the squares of the coefficients left out is exactly the mean-square error of the drawing (Parseval’s identity), so every extra circle adds detail in order of importance; with a handful the outline is a smooth blob, with a few hundred it is a drawing. The positions of the pen tip are worked out for 1,400 moments of the cycle, and the visible trail is the most recent part of them (the trail length slider), fading with age. With show the circles on, the chain of turning circles and their spokes is drawn from the biggest to the smallest. The period slider is the number of seconds for one full drawing."
  ],
+ "primitives": [],
  "equations": [
   {
    "tex": "z(t)=\\sum_{k}c_k\\,e^{\\,2\\pi i\\,k\\,t},\\qquad c_k=\\frac{1}{M}\\sum_{m=0}^{M-1}z_m\\,e^{-2\\pi i\\,k\\,m/M},\\quad M=1024",
-   "note": "The series and its discrete coefficients; the circle k has radius |c_k| and turns k times per cycle."
+   "note": "The series and its discrete coefficients; the circle k has radius |c_k| and turns k times per cycle.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\varepsilon^{2}=\\frac1M\\sum_{m}\\big\\lvert z_m-\\hat z_m\\big\\rvert^{2}=\\sum_{k\\notin K}\\lvert c_k\\rvert^{2}",
-   "note": "Parseval: the squared error of a drawing with the set K of kept circles."
+   "note": "Parseval: the squared error of a drawing with the set K of kept circles.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

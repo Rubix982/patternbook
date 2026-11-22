@@ -58,14 +58,26 @@
   "The Memphis Group of the 1980s used loud shapes on speckled backgrounds. The picture is posterised into four tones using four colours of the scheme (darkest tone to the darkest colour) and placed in a panel (rounded, arch or circle) with a hard offset shadow in solid ink, with no blur at all.",
   "Around it, small triangles, rings, squiggles, half circles, crosses and rows of dots are scattered at random positions, sizes and angles, and a few more are placed on the panel’s edge so that they overlap it. The seed decides everything random, so the shuffle button re-arranges the confetti."
  ],
+ "primitives": [
+  "parametric-curve",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "k=\\min\\big(3,\\ \\lfloor 4L\\rfloor\\big),\\qquad C=P_k",
-   "note": "Four equal brightness bands, one palette colour each."
+   "note": "Four equal brightness bands, one palette colour each.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "y_{\\text{squiggle}}(t)=0.35\\,s\\,\\sin(5\\pi t),\\qquad t\\in[0,1]",
-   "note": "The squiggle is two and a half sine waves."
+   "note": "The squiggle is two and a half sine waves.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

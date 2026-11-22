@@ -58,14 +58,26 @@
   "The picture is reduced to a small grid of colour points (the mesh), and their colours are pushed a little: saturation up, contrast around mid-lightness up, both controlled by the vividness slider. The output is not the picture but a smooth surface that passes through those colours, built by interpolating between the four nearest mesh points with eased weights so there are no visible seams or creases.",
   "The motion comes from warping where the surface is read. Every output pixel looks up the mesh at a position that has been pushed around by two nested sine waves that change slowly with time, so the colours drift like oil on water without the mesh itself ever changing. The surface is computed at no more than 180 pixels wide, which is plenty for something so smooth, and the canvas’s own smoothing scales it up to size. A tile of noise is laid over the top using the “overlay” blend to add a trace of film grain that stops the soft gradients from banding."
  ],
+ "primitives": [
+  "bilinear-sample",
+  "coordinate-warp"
+ ],
  "equations": [
   {
    "tex": "u=u_0+w\\,\\sin\\!\\big(3.4v_0+0.9\\tau+1.2\\sin(2.2u_0+0.6\\tau)\\big),\\quad v=v_0+w\\,\\cos\\!\\big(3.0u_0-0.8\\tau+1.2\\sin(2.6v_0-0.5\\tau)\\big)",
-   "note": "Warped lookup position; w = warp × 0.16."
+   "note": "Warped lookup position; w = warp × 0.16.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C(u,v)=\\sum_{a,b\\in\\{0,1\\}}\\omega_a(e_x)\\,\\omega_b(e_y)\\,P_{i+a,\\,j+b},\\qquad e=3f^{2}-2f^{3}",
-   "note": "Bilinear blend of the four nearest mesh colours P with eased fractional weights."
+   "note": "Bilinear blend of the four nearest mesh colours P with eased fractional weights.",
+   "primitives": [
+    "bilinear-sample"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

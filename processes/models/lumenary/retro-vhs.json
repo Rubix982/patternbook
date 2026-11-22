@@ -58,18 +58,36 @@
   "Every flaw of a worn tape is reproduced as arithmetic on scanlines. The picture is first dubbed: contrast is raised by 12% and a faint cool cast added. Then each horizontal line of the picture is shifted sideways by an amount that is the sum of two slow sine waves (the line wobble) and a small random jitter that changes every frame at 24 frames a second. A tracking band, a few percent of the picture tall, drifts down the screen; inside it, lines are thrown far to the side by random amounts, with a bright speckle of dropout noise. The bottom of the frame always carries heavy shifting, as on a real head-switch.",
   "Colour bleed comes from sampling the three channels at different horizontal offsets: red a few pixels to one side (averaged over two taps for a smear), green in place, blue to the other side. Alternate rows are dimmed to make scanlines, a noise table adds static, and a radial gradient darkens the corners. The “PLAY” and counter overlay is drawn as monospace text with a one-pixel offset shadow."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "misregistration",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "\\Delta x(y,t)=a_1\\sin(0.05\\,y+3.1\\,t)+a_2\\sin(0.013\\,y-1.4\\,t)+a_3\\,\\big(h(y,\\text{frame})-\\tfrac12\\big)",
-   "note": "Horizontal shift of scanline y. The a’s scale with the distortion slider and the width."
+   "note": "Horizontal shift of scanline y. The a’s scale with the distortion slider and the width.",
+   "primitives": [
+    "coordinate-warp",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\Delta x_{\\text{band}}=\\Big(1-\\frac{\\lvert y-y_c(t)\\rvert}{b}\\Big)^{2}\\big(h-0.3\\big)\\,0.11\\,W\\,\\text{dist}",
-   "note": "Extra shift inside the tracking band of half-height b whose centre y_c moves with time."
+   "note": "Extra shift inside the tracking band of half-height b whose centre y_c moves with time.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "R=\\tfrac12\\big(S_r(x{+}c)+S_r(x{+}c{+}3)\\big),\\quad G=S_g(x),\\quad B=S_b(x{-}c)",
-   "note": "Colour bleed: each channel sampled at its own horizontal offset c."
+   "note": "Colour bleed: each channel sampled at its own horizontal offset c.",
+   "primitives": [
+    "misregistration"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

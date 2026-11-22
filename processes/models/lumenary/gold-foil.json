@@ -58,18 +58,33 @@
   "Foil stamping lays a thin metal film onto card wherever a heated die touches it. Here the die is your picture: the foil goes where the picture is bright (or, with the toggle, where it is dark). Coverage is a smoothstep around a threshold set by the coverage slider, with a ragged edge from a little noise, so the boundary looks torn, not cut. The rest of the card shows its own colour with fine grain.",
   "Foil is crumpled, so its surface is a field of creases. The program builds a height map from ridged noise, the function 1 − |2n − 1| of smooth noise, which has sharp creases where the noise crosses its middle value, at three scales (the finer two weighted less) and bends the coordinates with a slow warp so the creases wander. The slope gives a normal, and the up-and-down tilt picks a position on a strip of colours that stands for what a metal sheet reflects: dark at the edges, bright in the middle. Each tiny panel therefore flashes a different tone. A thin brighter rim is added along the edge of the stamped area."
  ],
+ "primitives": [
+  "smooth-noise",
+  "soft-threshold"
+ ],
  "equations": [
   {
    "tex": "c=\\operatorname{smoothstep}\\big(t-0.05,\\ t+0.05,\\ L_b+\\rho\\big),\\qquad t=1-\\tfrac{\\text{cover}}{100}",
-   "note": "Foil coverage c; ρ is a small noise that roughens the edge."
+   "note": "Foil coverage c; ρ is a small noise that roughens the edge.",
+   "primitives": [
+    "soft-threshold",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "h_c=0.6\\,R(f_0)+0.3\\,R(2.3f_0)+0.1\\,R(5.1f_0),\\qquad R(f)=1-\\lvert 2\\,n(f\\mathbf x)-1\\rvert",
-   "note": "Crumple height from ridged noise R; f₀ = 1.5 × the facet slider ÷ the picture width."
+   "note": "Crumple height from ridged noise R; f₀ = 1.5 × the facet slider ÷ the picture width.",
+   "primitives": [
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "t_{\\text{env}}=0.5+1.25\\,n_y+0.55\\,n_x+0.28\\,(L-0.5)",
-   "note": "Position on the foil’s colour strip from the tilt (n_x, n_y) of the normal and the picture brightness."
+   "note": "Position on the foil’s colour strip from the tilt (n_x, n_y) of the normal and the picture brightness.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

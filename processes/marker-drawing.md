@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: whiteboard, relation: same}
-primitives: []
+primitives: [edge-outline, palette-snap]
 sources: []
 status: listed
 ---

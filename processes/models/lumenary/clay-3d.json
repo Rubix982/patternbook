@@ -58,18 +58,38 @@
   "Clay is a lighting calculation. The picture’s brightness, blurred twice so the surface is soft, is treated as a height map: bright is raised, dark is pressed in. At each pixel the slope of that surface is measured with central differences, which gives a surface normal, the direction the clay faces. The flatter the surface, the more the normal points straight at the viewer.",
   "The normal is then lit by a single light whose direction you set with the angle slider. Two terms are added. Diffuse (Lambert) lighting is brightest where the surface faces the light. The specular term, a Blinn-Phong highlight raised to a high power, adds the small glossy shine of damp clay. Ambient occlusion is faked by darkening where the blurred brightness is low, as if hollows catch less light. “Fingerprints” are value noise at two scales added to the slope before lighting, so the surface acquires the dents of a hand. Finally the colours are desaturated and pulled toward a mid-lightness so they read as pigment in clay rather than as a photograph."
  ],
+ "primitives": [
+  "relief-shading",
+  "specular-highlight",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "\\mathbf n=\\frac{\\big(-k\\,\\partial_xL_b,\\ -k\\,\\partial_yL_b,\\ 1\\big)}{\\left\\lVert\\big(-k\\,\\partial_xL_b,\\ -k\\,\\partial_yL_b,\\ 1\\big)\\right\\rVert},\\qquad\\partial_xL_b\\approx\\tfrac12\\big(L_b(x{+}1)-L_b(x{-}1)\\big)",
-   "note": "Surface normal from the blurred brightness; k is the depth slider."
+   "note": "Surface normal from the blurred brightness; k is the depth slider.",
+   "primitives": [
+    "relief-shading",
+    "tone-to-height"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf l=\\frac{(\\cos\\alpha,\\,-\\sin\\alpha,\\,0.7)}{\\lVert\\cdot\\rVert},\\qquad\\mathbf h=\\frac{\\mathbf l+(0,0,1)}{\\lVert\\cdot\\rVert}",
-   "note": "Light direction from the angle α, and the half-vector for the highlight."
+   "note": "Light direction from the angle α, and the half-vector for the highlight.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
   },
   {
    "tex": "I=(0.3+0.78\\,\\max(0,\\mathbf n\\!\\cdot\\!\\mathbf l))\\,(0.82+0.18\\,L_b)\\;+\\;0.22\\,(\\mathbf n\\!\\cdot\\!\\mathbf h)^{28}",
-   "note": "Diffuse × ambient occlusion, plus the specular highlight."
+   "note": "Diffuse × ambient occlusion, plus the specular highlight.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

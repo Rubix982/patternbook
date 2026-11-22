@@ -58,14 +58,23 @@
   "A cathode-ray tube has a curved face, so the picture is bent. For each pixel of the output the program works out where on the flat picture it should come from, using a barrel distortion: the further a point is from the centre, the further out it samples, and the corners fall off the edge of the picture and turn black, which gives the rounded corners. The sampled colour is an interpolation of the four nearest pixels.",
   "Three tube effects are multiplied in. The phosphor mask makes every third column favour red, green or blue (or darkens every third column, for an aperture grille). Scanlines dim a soft band once per line pair. Static is a hash of the pixel position. Finally, two blurred copies are added on top for bloom, then a vignette, a glass reflection and a bezel with a rounded window."
  ],
+ "primitives": [
+  "coordinate-warp"
+ ],
  "equations": [
   {
    "tex": "f(x,y)=\\frac{1+k\\,(n_x^{2}+n_y^{2})}{1+k},\\qquad k=0.34\\cdot\\text{curve},\\quad n\\in[-1,1]",
-   "note": "Barrel distortion factor; the output pixel at normalised position n samples the source at n·f."
+   "note": "Barrel distortion factor; the output pixel at normalised position n samples the source at n·f.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s(y)=1-0.55\\,\\sigma\\left(\\tfrac12+\\tfrac12\\cos\\frac{2\\pi y}{p}\\right)",
-   "note": "The scanline dip: σ is the scanline slider and p the line period in pixels."
+   "note": "The scanline dip: σ is the scanline slider and p the line period in pixels.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

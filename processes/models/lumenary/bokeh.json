@@ -58,18 +58,39 @@
   "Out of focus, every point of light in a scene becomes a small image of the lens opening, and the blur that results is called bokeh. The program first makes a cheap blur: the picture is shrunk to between about 35 and 200 pixels across (the out-of-focus slider sets how far) and enlarged again, laid at 78% on a near-black field. Then it places discs of light. A grid of cells of about 1.05 times the disc size is laid over the picture and each cell is given one candidate disc at a jittered position. The candidate is kept with a probability that rises steeply with the brightness of the small picture at that point, scaled by the how-many-lights slider, so highlights become discs and shadows stay dark.",
   "A kept disc takes the colour of the picture there, boosted toward full brightness, and is drawn with additive blending at low opacity, so where discs overlap their light adds up. A thin brighter ring is drawn on its rim, as in lenses whose bokeh is brighter at the edge. The aperture shape is a regular polygon (a hexagon for six blades, a pentagon for five), a ten-point star whose points alternate between the full radius and 0.48 of it, a heart made of two Bézier curves, or a plain circle. Each disc has a random size (0.45 to 1.3 times the size slider, a bit bigger when the light is bright) and a random rotation."
  ],
+ "primitives": [
+  "additive-blend",
+  "importance-sampling",
+  "seeded-random",
+  "soft-threshold",
+  "star-rosette-motif"
+ ],
  "equations": [
   {
    "tex": "P(\\text{disc})=\\operatorname{smoothstep}\\big(0.7\\,\\vartheta,\\ \\vartheta+0.35,\\ l\\big)\\,\\big(0.04+0.62\\,\\delta\\big)",
-   "note": "The chance that a cell holds a disc: l is the lightness of the small picture, ϑ the lights-come-from threshold, δ the density."
+   "note": "The chance that a cell holds a disc: l is the lightness of the small picture, ϑ the lights-come-from threshold, δ the density.",
+   "primitives": [
+    "importance-sampling",
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf v_j=\\mathbf c+\\rho_j\\big(\\cos(\\theta_0+\\tfrac{2\\pi j}{m}),\\ \\sin(\\theta_0+\\tfrac{2\\pi j}{m})\\big),\\qquad \\rho_j=\\begin{cases}r & \\text{polygon}\\\\ r,\\ 0.48\\,r\\ \\text{alternately} & \\text{star}\\end{cases}",
-   "note": "The vertices of a disc: m is 6, 5 or 10 and θ₀ a random turn."
+   "note": "The vertices of a disc: m is 6, 5 or 10 and θ₀ a random turn.",
+   "primitives": [
+    "star-rosette-motif",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=\\min\\Big(255,\\ \\sum_i \\alpha_i\\,\\mathbf c_i\\,\\mathbb 1_{\\text{disc}_i}(\\mathbf x)\\Big),\\qquad \\alpha_i=0.05+0.15\\,g\\,\\big(0.5+0.5\\,l_i\\big)",
-   "note": "Additive blending of the discs over the blurred picture; g is the brightness slider."
+   "note": "Additive blending of the discs over the blurred picture; g is the brightness slider.",
+   "primitives": [
+    "additive-blend"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

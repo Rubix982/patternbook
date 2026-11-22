@@ -58,18 +58,38 @@
   "A rubber stamp prints one flat colour or nothing, so the picture is cut to black and white: a pixel is inked where its brightness (stretched and blurred a little) is below the “where the ink goes” slider, after adding a small random wobble so the edge is ragged. A double border and a banner with the word, cut out of the banner, are drawn on the same plate.",
   "Inking is never even. Three things remove ink from the plate: a slow noise for uneven pressure (ink strength between about 0.6 and 1), a mid-scale noise whose high values mark worn patches where the ink is almost gone, and a scatter of single-pixel pinholes. All three scale with the worn-rubber slider. The inked layer is then turned about the centre by the tilt angle and combined with the paper by multiplication, as ink soaking into the fibres darkens whatever is beneath it."
  ],
+ "primitives": [
+  "multiply-blend",
+  "seeded-random",
+  "smooth-noise",
+  "tooth-threshold"
+ ],
  "equations": [
   {
    "tex": "\\text{inked}\\iff L_b+0.12\\,(n-\\tfrac12)+0.05\\,(r-\\tfrac12)<\\tau,\\qquad \\tau=\\tfrac{\\text{cut}}{100}",
-   "note": "Where the stamp carries ink; n is smooth noise and r a random number."
+   "note": "Where the stamp carries ink; n is smooth noise and r a random number.",
+   "primitives": [
+    "tooth-threshold",
+    "smooth-noise",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\alpha=0.96\\ \\kappa\\ \\big(0.62+0.38\\,n_1+0.14\\,(n_2-\\tfrac12)\\big)\\ \\chi_{\\text{wear}}\\ \\chi_{\\text{pin}}",
-   "note": "Ink opacity: κ is 1 on the plate; χ is 0.1 on worn patches and 0 on pinholes."
+   "note": "Ink opacity: κ is 1 on the plate; χ is 0.1 on worn patches and 0 on pinholes.",
+   "primitives": [
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{out}}=C_{\\text{paper}}\\cdot\\big(1-\\alpha\\,(1-C_{\\text{ink}}/255)\\big)",
-   "note": "Multiply blend of ink and paper."
+   "note": "Multiply blend of ink and paper.",
+   "primitives": [
+    "multiply-blend"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

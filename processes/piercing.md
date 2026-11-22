@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: shadow-puppet, relation: same}
   - {by: lumenary, id: mughal-jali, relation: same}
-primitives: []
+primitives: [blur, colour-ramp, dog-lines, iso-contours, lattice-repeat, sdf-shape, soft-threshold, star-rosette-motif, tone-bands, vignette]
 sources: []
 status: listed
 ---

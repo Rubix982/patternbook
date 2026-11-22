@@ -59,18 +59,38 @@
   "The picture is reduced to a few simple shapes, and each shape’s colour is swapped for the nearest crayon in a box of sixteen after being made more vivid. Two shapes that land on the same crayon are treated as one, with no outline between them. Nothing drawn by a small hand is straight, so every shape is pushed about before drawing: each pixel looks up its shape at a position shifted by slow value noise. Outlines are the boundaries of the shifted shapes, thickened.",
   "Crayon is wax dragged over rough paper. Each colour is given one stroke direction, and the pixel’s coordinates are rotated into it. A noise stretched about nineteen times longer along the stroke than across it gives the streaks. A second, fine noise is the tooth of the paper. Wax lands where the sum of the two clears a threshold that the pressure slider lowers, so light pressure leaves paper showing in the hollows. Close to an outline the coverage is cut by about half, because a child lifts the crayon before reaching the line."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "seeded-random",
+  "smooth-noise",
+  "tooth-threshold"
+ ],
  "equations": [
   {
    "tex": "u=x\\cos a+y\\sin a,\\qquad v=-x\\sin a+y\\cos a,\\qquad a=\\pi\\cdot\\operatorname{hash}(\\text{colour})",
-   "note": "Coordinates along (u) and across (v) the stroke direction of one colour."
+   "note": "Coordinates along (u) and across (v) the stroke direction of one colour.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{cover}=S_{0.82-0.75w,\\ 1.05-0.55w}\\big(0.62\\,N(0.42v,\\ 0.022u)+0.5\\,\\text{tooth}\\big)",
-   "note": "How much wax lands: N is value noise, w the pressure slider (0.1 to 1)."
+   "note": "How much wax lands: N is value noise, w the pressure slider (0.1 to 1).",
+   "primitives": [
+    "tooth-threshold",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{shape}(x,y)=\\text{shape}_0\\big(x+A\\,(2N_1-1),\\ y+A\\,(2N_2-1)\\big),\\qquad A=7\\cdot\\text{wobble}",
-   "note": "The wobble: shapes are read at a position displaced by up to A pixels."
+   "note": "The wobble: shapes are read at a position displaced by up to A pixels.",
+   "primitives": [
+    "coordinate-warp",
+    "smooth-noise"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

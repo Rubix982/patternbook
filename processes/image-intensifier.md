@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: night-vision, relation: same}
-primitives: []
+primitives: [colour-ramp, grain-overlay, tone-curve]
 sources: []
 status: listed
 ---

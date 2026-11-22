@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: greek-vase, relation: same}
-primitives: []
+primitives: [crackle-network, cylinder-shading, soft-threshold, unsharp-mask]
 sources: []
 status: listed
 ---

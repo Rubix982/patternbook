@@ -58,18 +58,36 @@
   "Engraved banknote portraits are made of lines, not dots. Each line is a ribbon whose thickness changes with the tone it passes through: thick in the shadows, thin in the lights. The program draws the picture as n horizontal ribbons inside a rounded window. For each line it walks along x in short steps, reads the darkness under it and sets the half-thickness to a power of that darkness, capped at half the line spacing, so the thickest ribbons almost touch. The two edges are then joined into one filled shape.",
   "The lines also move: they are shifted down where the picture is light and up where it is dark, and given a gentle sine wave, which makes the surface look modelled instead of printed. Around the portrait come the usual security-print devices. A faint wavering tint of very fine lines covers the note; a double frame surrounds it; and the rosettes are guilloche patterns, curves drawn by rolling one circle inside another (a hypotrochoid), repeated seven times with a slightly different pen offset so they interleave, and scaled by 0.62. A numeral, a serial number and a title are set in a Bodoni face; the wording is invented."
  ],
+ "primitives": [
+  "parametric-curve",
+  "tone-curve",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "\\text{half}=\\min\\!\\Big(\\tfrac p2,\\ 0.52\\,p\\,d^{0.9}+0.18\\,\\sigma\\Big),\\qquad d=1-\\text{contrast}(L,0.2)",
-   "note": "Half thickness of the ribbon; p is the line spacing, σ the scale of the picture."
+   "note": "Half thickness of the ribbon; p is the line spacing, σ the scale of the picture.",
+   "primitives": [
+    "tone-line-screen",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "y_c=y_i+(\\tfrac12-d)\\,1.4\\,p\\,\\kappa+0.35\\,p\\,\\kappa\\,\\sin(0.018\\,x+0.45\\,i)",
-   "note": "Centre line of ribbon i, κ being the swing slider."
+   "note": "Centre line of ribbon i, κ being the swing slider.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\begin{aligned}x&=(R-r)\\cos t+\\delta\\cos\\!\\Big(\\tfrac{R-r}{r}\\,t\\Big)\\\\ y&=(R-r)\\sin t-\\delta\\sin\\!\\Big(\\tfrac{R-r}{r}\\,t\\Big)\\end{aligned},\\quad r=0.34R,\\ \\delta\\approx0.78R",
-   "note": "The guilloche curve (hypotrochoid), traced over eight turns of t."
+   "note": "The guilloche curve (hypotrochoid), traced over eight turns of t.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

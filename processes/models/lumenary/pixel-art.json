@@ -58,18 +58,35 @@
   "Pixel art is three decisions: how few pixels, which colours, and how to hide the loss. The picture is reduced to the chosen width using the same halving as everywhere else and saturation is adjusted. The palette is either a fixed historical one (such as a handheld console’s four greens) or adaptive: k-means clustering finds the k colours that best represent the picture. It starts with k colours spread along the brightness order, then repeats ten times: assign every sampled pixel to its nearest colour, and move each colour to the average of its pixels. Only up to about six thousand sample pixels are used, which keeps it quick.",
   "Each pixel is then replaced by its nearest palette colour, but first a small offset from a Bayer matrix is added, a fixed 4 × 4 pattern of thresholds. Pixels that sit between two palette colours then fall on one side or the other in a regular checkerboard-like pattern, and the eye blends them back into an intermediate tone. This is ordered dithering. Distance is measured with weights favouring green, 0.9 for red, 1.2 for green and 0.8 for blue, which approximates how sensitive we are to each. The small image is finally enlarged without smoothing, so each pixel becomes a crisp square."
  ],
+ "primitives": [
+  "kmeans-palette",
+  "ordered-dither",
+  "palette-snap"
+ ],
  "equations": [
   {
    "tex": "B=\\frac1{16}\\begin{bmatrix}0&8&2&10\\\\12&4&14&6\\\\3&11&1&9\\\\15&7&13&5\\end{bmatrix},\\qquad c'=c+\\Big(B_{x\\bmod4,\\;y\\bmod4}-\\tfrac12\\Big)A",
-   "note": "Ordered dithering: add a position-dependent offset of amplitude A before choosing the palette colour."
+   "note": "Ordered dithering: add a position-dependent offset of amplitude A before choosing the palette colour.",
+   "primitives": [
+    "ordered-dither"
+   ],
+   "bespoke": null
   },
   {
    "tex": "d^{2}=0.9\\,\\Delta R^{2}+1.2\\,\\Delta G^{2}+0.8\\,\\Delta B^{2}",
-   "note": "Weighted squared distance used to find the nearest palette colour."
+   "note": "Weighted squared distance used to find the nearest palette colour.",
+   "primitives": [
+    "palette-snap"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mu_c\\;\\leftarrow\\;\\frac{1}{\\lvert S_c\\rvert}\\sum_{\\mathbf p\\in S_c}\\mathbf p,\\qquad S_c=\\{\\mathbf p:\\ c=\\arg\\min_{j}\\lVert\\mathbf p-\\mu_j\\rVert\\}",
-   "note": "One k-means step (Lloyd’s algorithm), repeated ten times."
+   "note": "One k-means step (Lloyd’s algorithm), repeated ten times.",
+   "primitives": [
+    "kmeans-palette"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

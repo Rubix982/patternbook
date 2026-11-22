@@ -58,14 +58,27 @@
   "The sheet is a grid of squares. In each square the paper is folded in one of three ways, chosen at random: four small triangles meeting at the centre, or two triangles along one of the diagonals. Every triangle is a flat facet that takes its colour from the picture at its centre (slightly softened, so it looks like coloured paper), or plain white if you choose that.",
   "What makes it look folded is shading. Each facet leans in a direction (outward from the centre for the four-facet fold, perpendicular to the diagonal for the two-facet folds). A facet leaning toward the light is brightened and one leaning away is darkened, in proportion to the dot product of its direction and the light direction in the picture plane, with a random sign per square and a small random tilt per facet. Crease lines are drawn on top as a dark line with a pale line one pixel beside it, which is how a real fold looks, and a fine grain finishes the paper."
  ],
+ "primitives": [
+  "facet-shading",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "\\text{shade}=1+\\phi\\,\\Big(0.62\\,\\varepsilon\\,(\\mathbf d\\cdot\\mathbf l)+0.5\\,(r-\\tfrac12)\\Big)",
-   "note": "Brightness factor of a facet: φ is the fold-strength slider, ε = ±1 per square, d the facet’s direction, l the light direction and r a random number."
+   "note": "Brightness factor of a facet: φ is the fold-strength slider, ε = ±1 per square, d the facet’s direction, l the light direction and r a random number.",
+   "primitives": [
+    "facet-shading",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{fold}\\ \\in\\ \\{4\\text{ triangles about the centre},\\ \\diagdown\\ \\text{split},\\ \\diagup\\ \\text{split}\\},\\qquad P\\approx 0.34,\\ 0.33,\\ 0.33",
-   "note": "The three fold types, chosen with roughly equal chance (0.34, 0.33 and 0.33)."
+   "note": "The three fold types, chosen with roughly equal chance (0.34, 0.33 and 0.33).",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -14,6 +14,99 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-018 · How much of Lumenary's maths is shared operations, and how much is written once per treatment?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+The 214 models (C-017) carry 610 equations with notes; Lumenary's six foundation pages cover the tools every treatment
+shares. In the code, the engine exports 82 helper functions and 57 of them are imported by three or more treatments,
+nearly all low-level (pixel access, seeded randomness, smoothing, blurs, noise, edges, colour conversion, palette
+matching, clustering); only a few are craft-level (cloth fill, carved stone, wood fill, star polygons).
+`processes/primitives.md` doesn't exist.
+
+**2. What we are doing.**
+Tag each of the 610 equations with the primitives it applies, from a vocabulary built first from the foundation pages,
+the shared code and a sample of the equations and then frozen, marking the equations that apply no shared operation
+as written for one treatment; then write `processes/primitives.md` from the tags.
+
+**3. Why.**
+We don't know whether the treatments are mostly composed from shared operations or mostly bespoke maths. The answer
+says whether the atlas's new treatments can be written by composing primitives (and so whether primitives become the
+engine's core), and which operations the subcontinent's processes need that no treatment has yet.
+
+**4. What is affected.**
+- `processes/primitives.md`, new; the `primitives` fields of the 214 models and of the 82 process pages.
+- Whether `engine/core/` (`docs/architecture.md` section 7) is built around primitives.
+- METHOD 2c step 4, which would then write an element's maths by composing them.
+
+**5. Conclusion.**
+A primitive counts as shared when three or more models apply it.
+- **If** at least 70 % of the 610 equations apply a shared primitive, and 40 or fewer shared primitives cover them →
+  we claim *Lumenary's maths is compositional*: primitives become the engine's core, and new treatments are written
+  mainly by composing them.
+- **If** under 50 % → we claim *it is mostly bespoke*: `primitives.md` records the shared parts, and new treatments are
+  written per process, with no core library yet.
+- **Between 50 and 70 %** → mixed: record which families compose and which don't, and build the core only for the
+  families that compose.
+- Recorded either way: the operations the subcontinent's processes need that no primitive covers yet.
+
+**6. If not done.**
+Each new treatment re-derives operations already written dozens of times over, and METHOD 2c step 4 has nothing to
+compose from.
+
+**Limits (known before running):** the vocabulary is one classifier's; where one primitive ends and the next begins is
+a judgment, so the count of primitives matters less than the share of equations covered; an equation can apply
+several primitives; his equations describe his code, which may simplify the physics.
+
+**Result (2026-11-22):** first branch on the headline; the middle band once foundation-level operations are set aside.
+**489 of the 610 equations (80 %) apply a shared primitive, and 31 shared primitives are enough to reach 70 % of all
+equations** (the best 10 reach 46 %, the best 20 reach 60 %, the best 40 reach 75 %). 68 primitives were applied, 58 of
+them shared. The other 116 equations are bespoke: 85 written for one treatment (41 of them geometric constructions:
+Penrose tilings, L-systems, reaction-diffusion), 25 layout, 6 constants.
+
+**The card's wording, recorded.** "40 or fewer shared primitives cover them" can be read as the number needed to reach
+the 70 % (31: met) or as the number of shared primitives in all (58: not met). The card's limits, written before the
+run, said the count matters less than the share covered, so the first reading is taken; both are stated here.
+
+**How much it depends on judgment.** Without the 18 primitives added after the freeze: 69.2 %, just under the line.
+Without foundation-level operations that carry no craft (seeded random numbers, smoothstep, tone curves, blur, simple
+blends): 65.9 %, the middle band. By class, the making classes compose most: drawing 92 %, printing 91 %, photographic
+91 %, stitch 88 %, carving and glaze 94 % (fewer equations); geometric constructions least (59 %), then styles (63 %)
+and digital effects (74 %). Without the foundation-level operations the making classes still hold up (stitch 84 %,
+carving 88 %, glaze 81 %, drawing 78 %, printing 71 %), while photographic drops to 52 % and cutting to 43 %.
+
+**Claim:** Lumenary's maths is compositional at the level of image operations, and its craft classes compose at the
+level of craft operations too. Either reading points the same way: build `engine/core/` around the primitives the
+making families use (tone-modulated line and dot screens, lattice repeats, relief shading and tone-to-height,
+misregistration, crackle networks, stitch grids, resist masks), and write geometric constructions per treatment.
+
+**The equations undercount the code.** Shared helpers are imported far more widely than their operations are written
+down: blur by 89 treatments against 17 models' equations, saturation changes 59 against 10, palette snapping 26
+against 10, brightness from RGB 19 against none.
+
+**What the subcontinent's crafts need that no primitive covers yet:** supplementary weft (jamdani, brocade) and chain
+stitch (aari, tambour, Kutch and Sindh chain work), not at all; weave structure from a draft, darning on the cloth's
+own threads, glaze with thickness (pooling, breaking, slip trailing), several dye baths in sequence (ajrak's resist,
+mordant and overdyeing), cutting inlay from veined stone, the mirror inset with its ring of holding stitches, and light
+through a thick pierced screen, only in part. Multi-block registration is covered by composing misregistration,
+lattice repeat and multiply blend; low relief and pierced screens are covered.
+
+**Changes made:**
+- `processes/primitives.md`, new: the 71 entries with their maths, the helpers that implement them, a generated
+  "Applied by" line each, and the gaps above.
+- `processes/models/lumenary-equation-tags.tsv`: the 610 tags. The 214 model files gain `primitives` and per-equation
+  tags; the 82 process pages gain their `primitives` line.
+- `tools/process_models.mjs`: reads the tags; refreshes the "Applied by" lines (a second run changes nothing).
+- `runs/c018/`: the summary with its hard calls, the vocabulary as frozen before tagging and as final, the code-import
+  counts.
+- `docs/architecture.md` section 7b: the result, and which primitives `engine/core/` starts from.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-017 · How many physical processes lie behind Lumenary's 214 treatments?
 
 **Status:** closed

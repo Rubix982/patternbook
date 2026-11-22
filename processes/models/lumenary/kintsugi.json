@@ -58,22 +58,49 @@
   "Kintsugi, “golden joinery”, mends broken pottery with lacquer mixed with gold powder, and it leaves the break visible, even celebrated. The program breaks your picture the way a bowl breaks: with cracks that wander. It first bends the coordinates with smooth noise, by up to about 0.35 of the shard size at full jaggedness, and then finds the Worley cells of the bent plane. Where the distance to the nearest seed equals the distance to the second nearest, two shards meet, and that line is the crack. The width of the gold is set where the difference g = F₂ − F₁ is below the seam width w.",
   "Each shard is put back a little out of true: it reads the picture from a point shifted by up to the misalignment amount, with its own random shift, and it has its own slight brightness. Close to a seam the glaze thickens and darkens, and right at the edge the pale body of the pot shows through. A random share of shards, set by the lost-pieces slider, is missing altogether and filled in gold. The gold is a four-stop ramp from dark bronze to pale yellow, lit as two soft ridges on either side of the crack, with a fine noise to give the surface a hammered texture."
  ],
+ "primitives": [
+  "colour-ramp",
+  "coordinate-warp",
+  "crackle-network",
+  "cylinder-shading",
+  "seeded-random",
+  "smooth-noise"
+ ],
  "equations": [
   {
    "tex": "g(\\mathbf x)=F_2(\\mathbf x)-F_1(\\mathbf x),\\qquad \\text{gold where } g<w",
-   "note": "Worley cells of side S with their distances F₁ ≤ F₂ to the two nearest seeds. g = 0 on the shared boundary of two shards."
+   "note": "Worley cells of side S with their distances F₁ ≤ F₂ to the two nearest seeds. g = 0 on the shared boundary of two shards.",
+   "primitives": [
+    "crackle-network"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf x'=\\mathbf x+J\\Big(2\\,\\big(\\operatorname{fbm}(2\\mathbf x/S)-\\tfrac12\\big)+\\tfrac12\\,\\big(\\operatorname{vnoise}(8.3\\,\\mathbf x/S)-\\tfrac12\\big)\\Big)",
-   "note": "The wandering crack: the coordinates are displaced by a broad noise and a finer ripple before the cells are found (the y shift uses a second copy of the noise). J is 0.35 S times the jaggedness slider."
+   "note": "The wandering crack: the coordinates are displaced by a broad noise and a finer ripple before the cells are found (the y shift uses a second copy of the noise). J is 0.35 S times the jaggedness slider.",
+   "primitives": [
+    "coordinate-warp",
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf x_{\\text{src}}=\\mathbf x+2\\,\\delta\\,\\big(h_1-\\tfrac12,\\ h_2-\\tfrac12\\big),\\qquad \\delta=7\\,\\mu\\,\\mathrm{sc}",
-   "note": "Each shard reads the picture from a shifted place: h₁ and h₂ are fixed random numbers for the shard and μ the misalignment slider."
+   "note": "Each shard reads the picture from a shifted place: h₁ and h₂ are fixed random numbers for the shard and μ the misalignment slider.",
+   "primitives": [
+    "coordinate-warp",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{gold}=\\operatorname{ramp}\\big(0.35+0.5\\,b(f)+\\eta\\big),\\qquad f=\\frac{g}{w},\\quad b(\\tfrac12)=\\tfrac{\\sqrt2}{2},\\ b(0)=b(1)=0",
-   "note": "Lit gold: b is zero on the crack and on the seam’s edge and highest between, giving a rolled bead. η is fine noise."
+   "note": "Lit gold: b is zero on the crack and on the seam’s edge and highest between, giving a rolled bead. η is fine noise.",
+   "primitives": [
+    "colour-ramp",
+    "cylinder-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -9,7 +9,7 @@ models:
   - {by: lumenary, id: aztec-glyphs, relation: analogous}
   - {by: lumenary, id: hieroglyphs, relation: analogous}
   - {by: lumenary, id: makli-carving, relation: same}
-primitives: []
+primitives: [blur, relief-shading, sdf-shape, smooth-noise, star-rosette-motif, tone-dot-lattice, tone-to-height]
 sources: []
 status: listed
 ---

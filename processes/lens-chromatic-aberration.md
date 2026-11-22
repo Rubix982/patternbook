@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: chromatic-aberration, relation: same}
-primitives: []
+primitives: [bilinear-sample, blur, coordinate-warp, misregistration]
 sources: []
 status: listed
 ---

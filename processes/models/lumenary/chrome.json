@@ -58,22 +58,43 @@
   "Chrome is a mirror, so what you see in it is not the object but the room around it. To fake that, the picture’s brightness is treated as a height map: bright parts are hills. Two blurs of different size are mixed so the shapes are smooth but still have some fine detail. The slope of the map at each pixel gives a surface normal, a unit arrow that points out of the surface; the steeper the slope, the more the arrow leans.",
   "A leaning surface reflects a different part of the sky. The reflected direction is worked out from the normal, and its up-and-down part chooses a position on a strip that stands for the world: dark sky overhead, a bright band near the horizon, a hard edge where the horizon is, then a darker ground and a light floor. The “horizon” slider shifts where flat areas land on the strip. A small, hard highlight, a specular spot from a light at the top left, is added on top. Gold and cobalt use different strips."
  ],
+ "primitives": [
+  "blur",
+  "relief-shading",
+  "specular-highlight",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "h=0.82\\,\\overline{L}_{r}+0.18\\,\\overline{L}_{r/3}",
-   "note": "Height map: two box blurs of radius r and r/3 mixed."
+   "note": "Height map: two box blurs of radius r and r/3 mixed.",
+   "primitives": [
+    "tone-to-height",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf n=\\frac{(-k\\,G_x,\\ -k\\,G_y,\\ 1)}{\\lVert(-k\\,G_x,\\ -k\\,G_y,\\ 1)\\rVert},\\qquad \\mathbf r=\\big(2n_zn_x,\\ 2n_zn_y\\big)",
-   "note": "Normal from the Sobel slopes G (k grows with the relief slider) and the sideways part of the mirror direction for a viewer looking straight down."
+   "note": "Normal from the Sobel slopes G (k grows with the relief slider) and the sideways part of the mirror direction for a viewer looking straight down.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "t=t_0+0.4\\,r_y+0.08\\,r_x+0.08\\,h,\\qquad t_0=0.12+0.42\\,\\eta",
-   "note": "Position on the environment strip (0 top, 1 bottom); η is the horizon slider."
+   "note": "Position on the environment strip (0 top, 1 bottom); η is the horizon slider.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\text{spec}=\\left(\\max\\!\\Big(0,\\ \\frac{\\mathbf n\\cdot\\mathbf m}{\\lVert\\mathbf m\\rVert}\\Big)\\right)^{90}",
-   "note": "The highlight; m is halfway between the light direction and the viewer."
+   "note": "The highlight; m is halfway between the light direction and the viewer.",
+   "primitives": [
+    "specular-highlight"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

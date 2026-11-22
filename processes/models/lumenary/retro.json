@@ -58,14 +58,28 @@
   "This is a 1970s screen print. A palette of six warm colours is thinned to n of them, evenly spaced, and the brightness (with adjustable contrast) is cut into n bands, one colour per band. Real screen prints never register perfectly, so before the cut a tiny ordered offset is added to each pixel. It breaks the edge between bands into a slightly ragged line instead of a ruler-straight one.",
   "Three swooping stripes, a layer of film grain and a cream border with rounded corners finish the look. The border is a rectangle with a rounded hole cut out of it, filled with the even-odd rule."
  ],
+ "primitives": [
+  "ordered-dither",
+  "tone-bands",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "d(x,y)=0.045\\left(\\frac{4\\,(x\\ \\&\\ 3)+(y\\ \\&\\ 3)}{16}-\\tfrac12\\right)",
-   "note": "Ordered offset from a 4 × 4 pattern; & 3 keeps the low two bits."
+   "note": "Ordered offset from a 4 × 4 pattern; & 3 keeps the low two bits.",
+   "primitives": [
+    "ordered-dither"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{band}=\\operatorname{clamp}\\big(\\lfloor (c(L)+d)\\,n\\rfloor,\\ 0,\\ n-1\\big)",
-   "note": "c(L) is the brightness after the contrast slider."
+   "note": "c(L) is the brightness after the contrast slider.",
+   "primitives": [
+    "tone-bands",
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

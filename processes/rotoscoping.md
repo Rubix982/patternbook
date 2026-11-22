@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: rotoscope, relation: same}
-primitives: []
+primitives: [edge-outline, misregistration, mix-over, smooth-noise, tone-bands]
 sources: []
 status: listed
 ---

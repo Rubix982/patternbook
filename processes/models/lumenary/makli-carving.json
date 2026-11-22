@@ -58,18 +58,37 @@
   "The Makli necropolis, near Thatta, is one of the largest burial grounds in the world, and its tombs from the fourteenth to the eighteenth centuries are carved in sandstone and limestone with rosettes, lozenges, arcades and flowing foliage. The soft stone has been worn by the sun, by rain and by the salt in the air. The program fills the page with a repeating cell of relief and lights it like a wall.",
   "The relief is a height map. In the eight-petal rosette, the outer edge of the flower is at radius p(θ) = 0.8 (0.52 + 0.48 |cos 4θ|), the petals are raised to 0.62 with a thin groove along their middle, a boss rises to 0.95 at the centre, a ring surrounds the flower, and corner ornaments rise to 0.55. The lozenge pattern has a diamond plate, a groove, a centre boss and corners. In both, the picture sets how deep the carving is: the height of the pattern is multiplied by 0.12 + 1.15 T², where T is the blurred brightness, so bright regions are deeply cut and dark regions are shallow. Light from the chosen direction, a darkening where the surface is lower than its own blur (ambient occlusion), a stain of the picture’s colour, long water streaks and patches of lichen finish the surface."
  ],
+ "primitives": [
+  "relief-shading",
+  "sdf-shape",
+  "star-rosette-motif",
+  "tone-to-height"
+ ],
  "equations": [
   {
    "tex": "p(\\theta)=0.8\\,\\big(0.52+0.48\\,|\\cos4\\theta|\\big),\\qquad h_{\\text{petal}}=0.62\\,\\operatorname{smoothstep}\\big(-w,\\,w,\\,p(\\theta)-\\rho\\big)",
-   "note": "The rosette’s outline and petal height. w = 0.05 is the softness of the edge, and ρ the distance from the cell’s centre (cell coordinates from −1 to 1)."
+   "note": "The rosette’s outline and petal height. w = 0.05 is the softness of the edge, and ρ the distance from the cell’s centre (cell coordinates from −1 to 1).",
+   "primitives": [
+    "star-rosette-motif",
+    "sdf-shape"
+   ],
+   "bespoke": null
   },
   {
    "tex": "H=P\\,\\big(0.12+1.15\\,T^2\\big)+0.9\\,T_s+\\eta",
-   "note": "The final height map: P is the carved pattern, T the picture’s blurred brightness, T_s a much broader blur (which gives a gentle swell) and η a fine noise."
+   "note": "The final height map: P is the carved pattern, T the picture’s blurred brightness, T_s a much broader blur (which gives a gentle swell) and η a fine noise.",
+   "primitives": [
+    "tone-to-height"
+   ],
+   "bespoke": null
   },
   {
    "tex": "f=\\operatorname{clamp}\\!\\big(0.74+0.7\\,(\\mathbf s\\cdot\\mathbf l),\\ 0.3,\\ 1.45\\big)\\,(1-a),\\qquad a=\\operatorname{clamp}\\big(2.4\\,(\\bar H-H),\\,0,\\,0.55\\big)",
-   "note": "Lighting by the slope s = −k∇H (k = 70 × depth) against the light direction l, and occlusion a where the height is below its own blur H̄."
+   "note": "Lighting by the slope s = −k∇H (k = 70 × depth) against the light direction l, and occlusion a where the height is below its own blur H̄.",
+   "primitives": [
+    "relief-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,18 +58,35 @@
   "Three ideas make a photograph look inked. First, posterisation: brightness is snapped to a small number of levels, and the colour is rescaled so each pixel keeps its hue but takes the flat brightness of its level, giving the large flat areas of printed colour. Saturation is then pushed up around the pixel’s own grey value, which is the “pop” slider.",
   "Second, outlines: the same blur-then-Sobel edge detector as in neon glow, but here the edge strength darkens the pixel toward black, so outlines are inked rather than glowing. Third, Ben-Day dots, the mechanical dot patterns of old printing. In the darker (but not black) tones a lattice of dots is laid on a 45° grid, and a pixel is darkened if it falls inside a dot whose radius grows as the tone gets darker. Rotating coordinates by 45° is just a sum and difference scaled by 1/√2."
  ],
+ "primitives": [
+  "edge-outline",
+  "tone-bands",
+  "tone-dot-lattice"
+ ],
  "equations": [
   {
    "tex": "q=\\frac{\\operatorname{round}\\big(L\\,(n-1)\\big)}{n-1},\\qquad C'=C\\cdot\\frac{q+0.06}{L+0.06}",
-   "note": "Posterise to n levels and rescale colour to the new brightness; the 0.06 keeps blacks stable."
+   "note": "Posterise to n levels and rescale colour to the new brightness; the 0.06 keeps blacks stable.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "u=\\frac{x+y}{\\sqrt2\\,s},\\quad v=\\frac{y-x}{\\sqrt2\\,s},\\qquad\\text{dot if }\\sqrt{(u-\\lfloor u\\rceil)^2+(v-\\lfloor v\\rceil)^2}<0.18+0.32\\Big(1-\\frac{q}{0.62}\\Big)",
-   "note": "Dot lattice at 45° with spacing s; ⌊·⌉ rounds to the nearest integer. Applied for tones 0.02 < q < 0.62; dots darken colour to 50%."
+   "note": "Dot lattice at 45° with spacing s; ⌊·⌉ rounds to the nearest integer. Applied for tones 0.02 < q < 0.62; dots darken colour to 50%.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{out}}=C\\,\\big(1-S_{\\theta,1.35\\theta}(\\lvert\\nabla L_b\\rvert)\\big)",
-   "note": "Ink: edge strength darkens toward black."
+   "note": "Ink: edge strength darkens toward black.",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

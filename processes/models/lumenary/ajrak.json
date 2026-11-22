@@ -58,18 +58,39 @@
   "Ajrak is the block-printed cloth of Sindh. It is made by pressing carved wooden blocks onto cotton in stages: a resist paste goes on first, wherever the cloth is meant to stay pale, and the cloth is then dyed in indigo and in red from madder root. The paste keeps the dye out, so the white lines in the finished shawl are the places where nothing reached the cotton. Many Sindhis point to the trefoil-patterned shawl on the Mohenjo-daro bust as a distant ancestor, a story told with affection and not proved.",
   "The program lays out one block per square of side s = W / n, where n is the number of blocks across. Inside a block a polar test decides which of three things lies under each pixel: ground, star colour or resist. The star has eight points, drawn with the star polygon formula below, with a resist outline, a resist ring, a resist centre, and a diamond with small resist dots at each corner. Each block is dyed in one of three states, chosen by the tone of your picture where it sits: dark blocks carry a deep ground with a red star, midtones swap the two, and light blocks have a pale ground. Block size follows the picture too, from 82% to 100%. A real print is never perfect, so the resist is printed from a block shifted by up to 1.5 px, and only the shifted copy shows white."
  ],
+ "primitives": [
+  "misregistration",
+  "resist-mask",
+  "seeded-random",
+  "star-rosette-motif",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "r(\\theta)=\\frac{R_1\\,p_y}{p_y\\cos t-p_x\\sin t},\\quad t=\\text{fold}(\\theta)\\in\\big[0,\\tfrac{\\pi}{n}\\big],\\quad \\begin{aligned}p_x&=R_2\\cos\\tfrac{\\pi}{n}-R_1\\\\ p_y&=R_2\\sin\\tfrac{\\pi}{n}\\end{aligned}",
-   "note": "The outline of an n-pointed star (n = 8 here, R₁ = 0.94 σ, R₂ = 0.55 σ): a straight line from a tip to the next notch, written in polar form. σ is the block size factor."
+   "note": "The outline of an n-pointed star (n = 8 here, R₁ = 0.94 σ, R₂ = 0.55 σ): a straight line from a tip to the next notch, written in polar form. σ is the block size factor.",
+   "primitives": [
+    "star-rosette-motif"
+   ],
+   "bespoke": null
   },
   {
    "tex": "k=\\begin{cases}0&t<0.36\\\\ 1&0.36\\le t<0.66\\\\ 2&t\\ge0.66\\end{cases},\\qquad \\sigma=0.82+0.18\\,(1-t)",
-   "note": "The dye state k and block size σ from the tone t of the picture in that block. With probability 1 − f (f is “colour follows picture”) the state is a chequerboard (i + j) mod 2 instead."
+   "note": "The dye state k and block size σ from the tone t of the picture in that block. With probability 1 − f (f is “colour follows picture”) the state is a chequerboard (i + j) mod 2 instead.",
+   "primitives": [
+    "tone-bands",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "z=\\begin{cases}\\text{resist}&Z(\\mathbf x+\\boldsymbol\\delta)=\\text{resist}\\\\ \\text{ground}&Z(\\mathbf x)=\\text{resist},\\ Z(\\mathbf x+\\boldsymbol\\delta)\\ne\\text{resist}\\\\ Z(\\mathbf x)&\\text{otherwise}\\end{cases}",
-   "note": "Misregistration: the block zone map Z is read twice, the second time shifted by δ = (1, 0.7) × 1.5 px × the hand-printed slider. White shows only where the shifted copy says so."
+   "note": "Misregistration: the block zone map Z is read twice, the second time shifted by δ = (1, 0.7) × 1.5 px × the hand-printed slider. White shows only where the shifted copy says so.",
+   "primitives": [
+    "misregistration",
+    "resist-mask"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,14 +58,26 @@
   "A glitch is a signal that was copied wrong. It starts with a channel split: the red of each pixel is taken from a few pixels to the left and the blue from a few to the right, so every edge gets a coloured fringe. A copy of this result is kept, and pieces of the copy are then drawn back over the picture.",
   "Row slices are thin horizontal strips shifted sideways by a random distance (and drawn a second time one picture-width away, so a wrapped strip leaves no gap); some are tinted cyan or magenta. Stolen blocks are rectangles copied from one place and pasted in another, a few with the difference blend mode to turn them to negatives. White hairlines and speckles finish it. Everything random comes from the seed."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "misregistration"
+ ],
  "equations": [
   {
    "tex": "R'(x)=R(x-d),\\quad G'(x)=G(x),\\quad B'(x)=B(x+d)",
-   "note": "Channel split of d pixels."
+   "note": "Channel split of d pixels.",
+   "primitives": [
+    "misregistration"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{strip}(y_0,h):\\ \\ P'(x,y)=P\\big((x-\\Delta)\\bmod W,\\ y\\big),\\quad y_0\\le y<y_0+h",
-   "note": "A slice displaced by Δ with wrap-around."
+   "note": "A slice displaced by Δ with wrap-around.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

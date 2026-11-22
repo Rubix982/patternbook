@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: sticker, relation: same}
-primitives: []
+primitives: [blur, coordinate-warp, dilate]
 sources: []
 status: listed
 ---

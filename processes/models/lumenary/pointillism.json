@@ -58,18 +58,33 @@
   "Seurat’s idea was not to mix paint on the palette but to put pure dots side by side and let the viewer’s eye mix them (optical mixture). The program blurs the picture to the scale of one dot, then throws dots of random position and size onto a plain ground. The number of dots is set so that, on average, a given pixel lies under 2 to 6 of them (the coverage slider). The radius is 1.5 to 7 px, and each dot varies from 0.72 to 1.22 times that.",
   "Every dot takes the colour of the blurred picture under its centre and then wanders a little in hue, saturation and lightness (HSL), by an amount set by the colour jitter slider. Saturation is lifted so the colours are purer than the photograph, hue shifts by up to ±0.045 of the colour wheel, and lightness by ±0.1. Up to 7% of the dots (at full jitter) take the opposite hue at lower saturation, the flecks of complement that make a shadow vibrate in the divisionist manner. Because dots overlap at random, a few spots of ground show through, and the chance of that is a Poisson one."
  ],
+ "primitives": [
+  "hue-shift",
+  "saturation-adjust",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "n=\\frac{(2+4c)\\,W\\,H}{\\pi\\,r^{2}}",
-   "note": "Number of dots for coverage slider c (0 to 1) and nominal radius r."
+   "note": "Number of dots for coverage slider c (0 to 1) and nominal radius r.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "P(\\text{bare})\\approx e^{-\\lambda},\\qquad \\lambda\\approx 0.96\\,(2+4c)",
-   "note": "Chance that a pixel is under no dot at all (the 0.96 allows for the spread of dot sizes)."
+   "note": "Chance that a pixel is under no dot at all (the 0.96 allows for the spread of dot sizes).",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "h'=h+0.09\\,v\\,(u_1-\\tfrac12),\\quad s'=s\\,(1.08+0.3\\,v)+0.04,\\quad l'=l+0.2\\,v\\,(u_2-\\tfrac12)",
-   "note": "The jitter in hue, saturation and lightness; v is the colour jitter slider and u₁, u₂ are random numbers in [0, 1]."
+   "note": "The jitter in hue, saturation and lightness; v is the colour jitter slider and u₁, u₂ are random numbers in [0, 1].",
+   "primitives": [
+    "saturation-adjust",
+    "seeded-random",
+    "hue-shift"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

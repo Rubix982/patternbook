@@ -58,22 +58,44 @@
   "Jali means a net or a lattice. The Mughals carved them from single slabs of marble and red sandstone to screen windows, tombs and balconies: Shah Jahan’s screens round the cenotaphs at the Taj Mahal, and the windows of Salim Chishti’s tomb at Fatehpur Sikri. They let in air and a broken light, and they hide the people behind. The program turns this into a picture: the stone is a slab with openings, your picture is the scene behind it, and the sun throws the lattice across the scene.",
   "Each opening is described by a margin function that is positive inside the hole and negative in the stone, measured in pixels. For the eight-point star, the margin is the star’s polar radius (the same star polygon formula as in the Ajrak page) minus the distance from the cell’s centre, combined with a diamond at the corners. For the six-point star the plane is split into hexagons: the point (x, y) is turned into hexagonal coordinates, rounded to the nearest hexagon, and the star is drawn about that hexagon’s centre. The mask M is the margin passed through a smoothstep 1.8 px wide. It is blurred to give a soft stone edge, and its slope gives a bevel lit by the sun. The scene is drawn only through the openings, and each pixel looks up the mask at a point shifted along the sun’s direction by the stone’s thickness, so the scene is dark where the lattice would cast a shadow."
  ],
+ "primitives": [
+  "blur",
+  "lattice-repeat",
+  "sdf-shape",
+  "star-rosette-motif"
+ ],
  "equations": [
   {
    "tex": "q=\\frac{\\frac{\\sqrt3}{3}x-\\frac{y}{3}}{\\sigma},\\qquad r=\\frac{\\frac23\\,y}{\\sigma},\\qquad (q,\\,-q-r,\\,r)\\ \\to\\ \\text{nearest integer triple summing to }0",
-   "note": "Hexagonal (cube) coordinates for the six-point star lattice, σ = 0.62 s. After rounding each part, the one with the largest rounding error is reset so the three still add up to zero."
+   "note": "Hexagonal (cube) coordinates for the six-point star lattice, σ = 0.62 s. After rounding each part, the one with the largest rounding error is reset so the three still add up to zero.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathrm{margin}=\\max\\big(m_1,\\,m_2\\big)\\,\\frac{s}{2},\\qquad m_1=r_\\star(\\theta)-\\rho,\\quad m_2=0.34\\,h-\\big[(1-|u|)+(1-|v|)\\big]",
-   "note": "The eight-point opening in a cell with coordinates u, v from −1 to 1. r⋆ is the star radius with R₁ = 0.92 h and R₂ = 0.5 h, and h = 0.45 + 0.55 × the opening slider. Union of two shapes is the maximum of their margins."
+   "note": "The eight-point opening in a cell with coordinates u, v from −1 to 1. r⋆ is the star radius with R₁ = 0.92 h and R₂ = 0.5 h, and h = 0.45 + 0.55 × the opening slider. Union of two shapes is the maximum of their margins.",
+   "primitives": [
+    "sdf-shape",
+    "star-rosette-motif"
+   ],
+   "bespoke": null
   },
   {
    "tex": "M=\\operatorname{smoothstep}\\big(-0.9,\\,0.9,\\,\\mathrm{margin}\\big),\\qquad \\text{lit}=M_b\\big(\\mathbf x+\\mathbf l\\,d\\big),\\quad d=26\\,\\mathrm{sc}\\,\\tau",
-   "note": "The mask, and the sun lookup: τ is the thickness slider, l the unit vector of the sun’s direction and M_b the blurred mask."
+   "note": "The mask, and the sun lookup: τ is the thickness slider, l the unit vector of the sun’s direction and M_b the blurred mask.",
+   "primitives": [
+    "sdf-shape",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "f_{\\text{view}}=(0.38+0.9\\,g)\\,(0.42+0.7\\,\\text{lit})",
-   "note": "How bright the scene is behind an opening: g is the light slider."
+   "note": "How bright the scene is behind an opening: g is the light slider.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

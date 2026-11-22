@@ -58,18 +58,37 @@
   "Pop art comes from comic printing. The brightness is divided into n bands and each band is printed in one flat ink. To soften the jump from one band to the next, the Ben-Day trick is used: inside a band, the next ink appears as dots that grow as the pixel gets closer to the next band, just as a printer’s dots grow in a darker tint.",
   "The dots sit on a staggered grid (every second column is shifted by half a cell). A dot’s radius is proportional to how far through the band the pixel is. Outlines come from the edge strength with a threshold, drawn in the darkest ink. The grid layout repeats the picture four times in a 2 × 2 panel with a different set of inks for each, the way Warhol did."
  ],
+ "primitives": [
+  "edge-outline",
+  "tone-bands",
+  "tone-curve",
+  "tone-dot-lattice"
+ ],
  "equations": [
   {
    "tex": "u=n\\,c(L),\\qquad b=\\min(n-1,\\lfloor u\\rfloor),\\qquad f=u-b",
-   "note": "Band b and the position f (0 to 1) inside it."
+   "note": "Band b and the position f (0 to 1) inside it.",
+   "primitives": [
+    "tone-bands",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{dot}:\\ \\ (x_c)^2+(y_c)^2<\\big(0.72\\,s\\,f\\big)^2",
-   "note": "A pixel is inside a dot of the next ink when its distance from the cell centre is less than 0.72·s·f."
+   "note": "A pixel is inside a dot of the next ink when its distance from the cell centre is less than 0.72·s·f.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\lvert\\nabla L\\rvert>0.35-0.28\\cdot\\text{outline}",
-   "note": "Where the outline ink replaces everything else."
+   "note": "Where the outline ink replaces everything else.",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

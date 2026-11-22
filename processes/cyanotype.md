@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: blueprint, relation: analogous}
   - {by: lumenary, id: cyanotype, relation: same}
-primitives: []
+primitives: [colour-ramp, edge-outline, mix-over, multiply-blend, sheet-edge, smooth-noise, soft-threshold, tone-curve, tone-line-screen]
 sources: []
 status: listed
 ---

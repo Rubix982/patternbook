@@ -58,22 +58,35 @@
   "The Sindhi topi is a round cap with a notch cut for the forehead. It is embroidered all over in rings of triangles, diamonds and tiny mirrors, and it is worn with the ajrak at weddings and on Sindhi Cultural Day. The program draws it as if you were looking down on the crown, where the rings are circles and the pattern is easiest to see. There are K rings between an inner radius r₀ = 0.11 R and 0.96 R, each of width h = (0.96 R − r₀)/K, and four kinds of ornament take turns going outward: triangles, diamonds, zigzags and mirrors.",
   "Each ring is cut into n cells, with n = 2 ⌈(2π ρ / (c h)) / 2⌉, where ρ is the ring’s middle radius and c the cell shape slider. n is always even so triangles can alternate pointing out and in. Odd rings are turned by half a cell, as in real caps. A cell’s colour is chosen from the eight thread colours of the topi by finding the nearest to the picture’s (saturated) colour at the middle of the cell. The ground of the ring alternates between cream and black. In the centre a ring of twelve petals surrounds a larger mirror, and the edge is a scalloped rim of round beads."
  ],
+ "primitives": [
+  "lattice-repeat"
+ ],
  "equations": [
   {
    "tex": "h=\\frac{0.96\\,R-r_0}{K},\\qquad r_0=0.11\\,R,\\qquad \\rho_k=r_0+\\big(k+\\tfrac12\\big)h",
-   "note": "Ring width and the middle radius of ring k (k = 0 is innermost)."
+   "note": "Ring width and the middle radius of ring k (k = 0 is innermost).",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "n_k=\\Big\\lceil \\tfrac12\\max\\!\\Big(8,\\ \\operatorname{round}\\frac{2\\pi\\rho_k}{c\\,h}\\Big)\\Big\\rceil\\times 2,\\qquad \\alpha_j=\\frac{2\\pi j}{n_k}+(k \\bmod 2)\\frac{\\pi}{n_k}",
-   "note": "Number of cells in ring k, made even, and the start angle of cell j. Odd rings are shifted by half a cell."
+   "note": "Number of cells in ring k, made even, and the start angle of cell j. Odd rings are shifted by half a cell.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{ornament}(k)=\\{\\text{triangle, diamond, zigzag, mirror}\\}[\\,k \\bmod 4\\,]",
-   "note": "The order of ornaments from the centre outward."
+   "note": "The order of ornaments from the centre outward.",
+   "primitives": [],
+   "bespoke": "constants"
   },
   {
    "tex": "r_{\\text{scallop}}=\\frac{2\\pi\\,(0.99\\,R)}{N_s}\\cdot\\frac{1}{2.2},\\qquad N_s=\\operatorname{round}\\frac{2\\pi(0.99\\,R)}{0.9\\,h}",
-   "note": "The beads on the rim are a little larger than half their spacing, so they overlap into a scallop."
+   "note": "The beads on the rim are a little larger than half their spacing, so they overlap into a scallop.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

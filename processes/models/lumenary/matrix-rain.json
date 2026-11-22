@@ -58,14 +58,28 @@
   "The picture is reduced to one value per character cell. Each column has its own fall speed, trail length and starting offset, all fixed by the seed, so a column is a repeating drop. The head of a drop at time t is a position that moves down at that column’s speed and wraps round after it has left the bottom and its trail has gone. Behind the head the brightness falls off along the trail.",
   "The picture shows through in two ways: a drop is brighter where the picture is brighter, and even between drops the bright parts of the picture hold a faint, constant glow of characters. The characters change at random, using a hash of the column, row and time, slowly in the trail and fast at the head. The head is drawn white with a glow. Characters are batched into ten brightness levels so that the program only changes the paint colour ten times a frame."
  ],
+ "primitives": [
+  "decay-trail",
+  "scroll-loop",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "h_c(t)=\\big(t\\,r\\,s_c+o_c\\big)\\bmod(N+\\ell_c+6)-0.2\\,\\ell_c",
-   "note": "Head position of column c in rows. r is the speed slider, s the column speed, o its offset, N the number of rows and ℓ the trail length."
+   "note": "Head position of column c in rows. r is the speed slider, s the column speed, o its offset, N the number of rows and ℓ the trail length.",
+   "primitives": [
+    "scroll-loop"
+   ],
+   "bespoke": null
   },
   {
    "tex": "a=\\left(1-\\tfrac{d}{\\ell}\\right)^{1.6}\\big(1-\\sigma+\\sigma\\,(0.3+1.25\\,B)\\big)+0.62\\,\\sigma\\,B^{1.4}",
-   "note": "Brightness of the character d rows behind the head. B is the picture brightness at the cell and σ the picture strength."
+   "note": "Brightness of the character d rows behind the head. B is the picture brightness at the cell and σ the picture strength.",
+   "primitives": [
+    "decay-trail",
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

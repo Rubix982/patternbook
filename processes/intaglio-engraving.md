@@ -8,7 +8,7 @@ models:
   - {by: lumenary, id: art-deco, relation: analogous}
   - {by: lumenary, id: victorian, relation: analogous}
   - {by: lumenary, id: banknote-engraving, relation: same}
-primitives: []
+primitives: [parametric-curve, tone-curve, tone-line-screen]
 sources: []
 status: listed
 ---

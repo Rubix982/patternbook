@@ -58,18 +58,37 @@
   "Impressionist painting works from coarse to fine, and so does the program, in three passes with brush radii R from about 7 to 21, 3.4 to 10 and 1.8 to 5.4 px (set by the brush size slider). The first pass paints over a very blurry copy of the picture, enlarged to the canvas. In the second and third passes the canvas is compared with a reference, the picture blurred to a radius of R/2. On a grid of cells 1.15 R wide, five random samples measure the colour error; a stroke is placed at the worst sample only if the average error per channel exceeds a threshold, so small brushes work where the picture still has detail. This is the layered-stroke method described by Hertzmann in 1998.",
   "A stroke follows the isophote, the line of constant brightness, so it runs along an edge instead of across it. The direction is the gradient of the blurred luminance turned by 90 degrees. The stroke takes steps of 0.9 R, up to a length set by the stroke length slider, and stops early if the reference colour has drifted too far from the stroke’s colour. The colour is then toned in the Impressionist spirit: saturation is raised, lightness lifted a little, and the darks are pushed toward violet, since shadows were painted with colour, not black. A faint woven pattern can be multiplied in for canvas."
  ],
+ "primitives": [
+  "edge-tangent-field",
+  "hue-shift",
+  "importance-sampling",
+  "streamline-trace"
+ ],
  "equations": [
   {
    "tex": "\\bar e=\\frac{1}{15}\\sum_{k=1}^{5}\\big(\\lvert\\Delta R\\rvert+\\lvert\\Delta G\\rvert+\\lvert\\Delta B\\rvert\\big)_k>\\tau,\\qquad \\tau=60\\,(1-D)+8",
-   "note": "A stroke is placed in a cell only if the mean error exceeds τ; D is the detail slider (the first pass paints everywhere)."
+   "note": "A stroke is placed in a cell only if the mean error exceeds τ; D is the detail slider (the first pass paints everywhere).",
+   "primitives": [
+    "importance-sampling"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf d=\\frac{\\big(-\\partial_y L,\\ \\ \\partial_x L\\big)}{\\lVert\\nabla L\\rVert},\\qquad \\mathbf x_{j+1}=\\mathbf x_j+0.9\\,R\\,\\mathbf d_j",
-   "note": "Stroke path along the isophote of the blurred luminance L (the sign is kept the same as the previous step so the stroke does not fold back)."
+   "note": "Stroke path along the isophote of the blurred luminance L (the sign is kept the same as the previous step so the stroke does not fold back).",
+   "primitives": [
+    "edge-tangent-field",
+    "streamline-trace"
+   ],
+   "bespoke": null
   },
   {
    "tex": "h'=h+\\min\\!\\big(0.5,\\ 1.4\\,g\\,(0.4-l)\\big)\\,(0.72-h)\\qquad (l<0.4)",
-   "note": "Shadow colour: dark hues slide toward violet (0.72 of the colour wheel); g is the sunlit colour slider."
+   "note": "Shadow colour: dark hues slide toward violet (0.72 of the colour wheel); g is the sunlit colour slider.",
+   "primitives": [
+    "hue-shift"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

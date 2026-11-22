@@ -58,14 +58,25 @@
   "Craig Reynolds showed in 1986 that the flocking of birds needs no leader, only three rules that each bird applies to its neighbours: separation (steer away from those too close), alignment (steer toward their average heading) and cohesion (steer toward their average position). The program applies them to birds that see the neighbours within 46 px (at 720 px wide), found through a hash grid. Alignment has strength 1.6 times the flocking slider, cohesion 1.2 times it, and separation is a push away from anything within 0.38 of the sensing distance, growing to 220 as it nears. A little random force is added, and the speed is clamped between 0.45 and 1 times the top speed. The world wraps round like a torus.",
   "Two forces come from the picture and from you. The pull toward light is the gradient of the picture’s normalised lightness (a Sobel gradient), times the pull slider, so birds climb toward the bright parts. The pointer attracts birds within 40% of the picture’s width, and repels them while pressed. Most of all, each bird paints. On every step it draws a line from its last position to its new one on a persistent canvas, in the colour of the picture beneath it, and the flock slowly paints the picture. The comet look fades that canvas by 14% each step so only trails remain, and shows the birds as small arrowheads. The painting is done inside the step, so the first-frame thumbnail has paint on it."
  ],
+ "primitives": [
+  "image-gradient",
+  "particle-motion"
+ ],
  "equations": [
   {
    "tex": "\\mathbf f_i=1.6\\,\\Phi\\,(\\bar{\\mathbf v}-\\mathbf v_i)+1.2\\,\\Phi\\,(\\bar{\\mathbf x}-\\mathbf x_i)+220\\sum_{j:\\,d_{ij}<0.38\\,\\rho}\\Big(1-\\frac{d_{ij}}{0.38\\,\\rho}\\Big)\\frac{\\mathbf x_i-\\mathbf x_j}{d_{ij}}",
-   "note": "Alignment, cohesion and separation; Φ is the flocking slider, ρ the sensing distance, and the bars are averages over neighbours."
+   "note": "Alignment, cohesion and separation; Φ is the flocking slider, ρ the sensing distance, and the bars are averages over neighbours.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\mathbf f_i\\mathrel{+}=\\sigma\\,\\nabla L(\\mathbf x_i)+\\text{noise},\\qquad \\mathbf v_i\\leftarrow\\mathbf v_i\\,\\frac{\\operatorname{clip}\\big(\\lVert\\mathbf v_i\\rVert,\\ 0.45\\,v_{\\max},\\ v_{\\max}\\big)}{\\lVert\\mathbf v_i\\rVert}",
-   "note": "The pull toward light (σ the pull slider) and the speed limit."
+   "note": "The pull toward light (σ the pull slider) and the speed limit.",
+   "primitives": [
+    "image-gradient",
+    "particle-motion"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

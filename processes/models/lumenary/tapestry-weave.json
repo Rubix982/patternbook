@@ -58,14 +58,26 @@
   "In a tapestry the weft, a coloured wool, is passed back and forth over a hidden warp, packed so tightly that the warp disappears and the picture is made of horizontal rows. The program divides the picture into rows (the passes of weft slider) and into cells about as wide as a row is tall, takes one colour per cell from a picture of that size, and limits the colours to k wool colours by k-means. Odd rows are shifted by half a cell, as in real weaving, and the row boundaries wave a little (the wobble slider) because hand-beaten weft is never straight.",
   "The lighting is within each row: a pass of wool is round, so it is bright in the middle and dark where it dips against its neighbours, a sine raised to the power 0.55. Cells alternate slightly in brightness in a checkerboard to show the over-under of the weave. Fine noise along the row is the fuzz of the wool. Where the row dips, the dark warp shows through, by an amount set by the visible-warp slider. The fringe at the bottom is the loose ends of the warp, drawn as pale curved threads."
  ],
+ "primitives": [
+  "cylinder-shading",
+  "soft-threshold"
+ ],
  "equations": [
   {
    "tex": "k=\\big(0.34+0.8\\,b\\big)\\,o\\,\\Big(0.9+0.1\\sin\\pi f_x\\Big),\\qquad b=\\big(\\sin\\pi f_y\\big)^{0.55}",
-   "note": "Brightness of the wool: f_y and f_x are the positions across the row and across the cell (0 to 1), o is 1 or 0.9 in a checkerboard."
+   "note": "Brightness of the wool: f_y and f_x are the positions across the row and across the cell (0 to 1), o is 1 or 0.9 in a checkerboard.",
+   "primitives": [
+    "cylinder-shading"
+   ],
+   "bespoke": null
   },
   {
    "tex": "k\\leftarrow k\\,\\Big(1-\\omega\\,g\\,\\big(0.35+0.35\\,w\\big)\\Big),\\ \\ w=\\tfrac12+\\tfrac12\\sin\\tfrac{2\\pi x}{c},\\qquad g=1-\\operatorname{smoothstep}\\big(0,\\ 0.14,\\ \\min(f_y,1-f_y)\\big)",
-   "note": "The warp showing through at the edges of a row; ω is the visible-warp slider, c the cell width and the sine-based factor the pattern of the hidden warp threads."
+   "note": "The warp showing through at the edges of a row; ω is the visible-warp slider, c the cell width and the sine-based factor the pattern of the hidden warp threads.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

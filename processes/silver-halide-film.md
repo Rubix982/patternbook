@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: film-grain, relation: same}
-primitives: []
+primitives: [glow-bloom, grain-overlay, soft-threshold, tone-curve]
 sources: []
 status: listed
 ---

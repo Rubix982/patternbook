@@ -58,14 +58,26 @@
   "The picture is reduced to one pixel per stud, so a stud is an average of its patch. A brick has one of a fixed set of real brick colours, so each stud takes the nearest colour in the set. Distance between colours uses a weighting that gives the red channel more weight when the colours are bright and the blue more when they are dark, which is closer to how colours look than a plain distance. Before the nearest colour is found, a small offset from a 4 × 4 Bayer pattern is added, so that smooth gradients become a mixture of two brick colours instead of one hard step.",
   "Each stud is a short cylinder drawn with a shadow, a darker side, a lighter top and a pale arc of shine. The brick under it gets a light top and left edge and dark bottom and right edge."
  ],
+ "primitives": [
+  "facet-shading",
+  "palette-snap"
+ ],
  "equations": [
   {
    "tex": "d^2=\\Big(2+\\frac{\\bar r}{256}\\Big)\\Delta R^2+4\\,\\Delta G^2+\\Big(2+\\frac{255-\\bar r}{256}\\Big)\\Delta B^2,\\qquad \\bar r=\\frac{R_1+R_2}{2}",
-   "note": "The “redmean” colour distance."
+   "note": "The “redmean” colour distance.",
+   "primitives": [
+    "palette-snap"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{stud}}\\in\\{0.74\\,C,\\ 1.07\\,C\\}",
-   "note": "The side of the stud is drawn at 74% of the brick colour and the top at 107%."
+   "note": "The side of the stud is drawn at 74% of the brick colour and the top at 107%.",
+   "primitives": [
+    "facet-shading"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

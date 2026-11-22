@@ -58,18 +58,38 @@
   "A glass lens bends each colour of light by a slightly different amount, a property called dispersion. The result is lateral chromatic aberration: the red, green and blue images are enlarged by slightly different factors, so they separate more the farther they are from the centre of the picture. The program does what the lens does. In the radial mode the green channel stays where it is, the red channel is read from a point u further out, and the blue from a point u further in. The shift has the size A/2 × [(1 − e) + 2.2 e ρ²], where ρ is the distance from the centre divided by the half-diagonal and e the strongest-at-the-edges slider, so with e = 1 it grows with the square of the distance.",
   "The sideways mode shifts red and blue by a fixed amount along one direction (the angle slider), like a prism, optionally growing toward the edges. The full-spectrum mode takes seven samples along the line from −u to +u. Red takes its weight from the + end, blue from the − end and green from the middle, and each channel’s weights are normalised to add up to 1, so a flat colour comes through unchanged and an edge is smeared into a rainbow. A soft glow (a tenth-scale copy, screened on) is optional."
  ],
+ "primitives": [
+  "bilinear-sample",
+  "blur",
+  "coordinate-warp",
+  "misregistration"
+ ],
  "equations": [
   {
    "tex": "\\lvert\\mathbf u\\rvert=\\frac{A}{2}\\Big[(1-e)+2.2\\,e\\,\\rho^{2}\\Big],\\qquad \\mathbf u\\parallel(\\mathbf x-\\mathbf c),\\quad \\rho=\\frac{\\lVert\\mathbf x-\\mathbf c\\rVert}{R}",
-   "note": "Radial shift: A is the amount in pixels, e the edge slider, c the centre and R the half-diagonal."
+   "note": "Radial shift: A is the amount in pixels, e the edge slider, c the centre and R the half-diagonal.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "R'(\\mathbf x)=R(\\mathbf x+\\mathbf u),\\qquad G'(\\mathbf x)=G(\\mathbf x),\\qquad B'(\\mathbf x)=B(\\mathbf x-\\mathbf u)",
-   "note": "The three channels are sampled at different places (bilinear interpolation)."
+   "note": "The three channels are sampled at different places (bilinear interpolation).",
+   "primitives": [
+    "misregistration",
+    "bilinear-sample"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C'_c(\\mathbf x)=\\sum_{k=0}^{6} w_c(k)\\;C_c\\!\\Big(\\mathbf x+\\mathbf u\\,\\big(\\tfrac{k}{3}-1\\big)\\Big),\\qquad w_c\\propto\\max\\big(0,\\ 1-\\gamma_c\\lvert t_k-t_c\\rvert\\big)",
-   "note": "Full-spectrum mode: t_k = k/6; t_c = 1, ½, 0 and γ_c = 1.7, 2.3, 1.7 for red, green and blue; weights add up to 1."
+   "note": "Full-spectrum mode: t_k = k/6; t_c = 1, ½, 0 and γ_c = 1.7, 2.3, 1.7 for red, green and blue; weights add up to 1.",
+   "primitives": [
+    "misregistration",
+    "blur"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

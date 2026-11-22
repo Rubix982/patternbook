@@ -58,18 +58,35 @@
   "The words are rendered in an extra-heavy typeface, repeated along each row with a gap between repeats, and every row slides at its own speed in alternating directions. The speed of row i is a base speed times a factor that cycles through three values, and each row starts at a different phase, so the rows never line up and the composition keeps changing.",
   "The picture appears through the letters by masking. All filled rows are drawn in white into a separate mask canvas; the picture (brightened first) is drawn into a third canvas, and the “destination-in” blend keeps the picture only where the mask is opaque. Nothing is cut out pixel by pixel: the compositor does a per-pixel multiplication of picture by mask for us. Outline rows are drawn directly as strokes on top of the background. The brighten slider is a gamma curve applied through a 256-entry lookup table, so the cost is one table read per channel."
  ],
+ "primitives": [
+  "mask-clip",
+  "scroll-loop",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "\\text{offset}_i=\\Big(t\\,v_i\\,d_i+0.31\\,i\\,w\\Big)\\bmod w,\\qquad v_i=\\tfrac{s}{100}\\,0.32\\,W\\,\\big(0.6+0.25\\,(i\\bmod 3)\\big)",
-   "note": "Horizontal position of row i: direction d_i = ±1 alternates, w is the width of one repeat of the words."
+   "note": "Horizontal position of row i: direction d_i = ±1 alternates, w is the width of one repeat of the words.",
+   "primitives": [
+    "scroll-loop"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_{\\text{out}}=C_{\\text{picture}}\\cdot M_\\alpha",
-   "note": "Destination-in compositing: picture colour times the mask’s alpha."
+   "note": "Destination-in compositing: picture colour times the mask’s alpha.",
+   "primitives": [
+    "mask-clip"
+   ],
+   "bespoke": null
   },
   {
    "tex": "g=1-\\tfrac12\\,\\frac{\\text{lift}}{100},\\qquad c'=255\\,\\Big(\\frac{c}{255}\\Big)^{g}",
-   "note": "Gamma lift; g < 1 brightens the mid-tones."
+   "note": "Gamma lift; g < 1 brightens the mid-tones.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

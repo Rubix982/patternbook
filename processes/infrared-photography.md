@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: infrared, relation: same}
-primitives: []
+primitives: [channel-mix]
 sources: []
 status: listed
 ---

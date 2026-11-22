@@ -58,18 +58,29 @@
   "A fractal flame (Scott Draves, 2003) is found by a game of chance. Pick a point. Choose one of three or four transforms at random (each with its own weight), apply it, and plot where the point lands; repeat a few million times. Each transform is an affine map (a rotation, scale and shift) followed by two nonlinear variations V mixed with weights w₁ + w₂ = 1. The variations are named, familiar curves: sinusoidal, spherical (dividing by r²), swirl, horseshoe, polar, handkerchief, heart, disc, spiral, julia, bubble and fisheye. They fold the plane, and the folds are what makes a flame look like smoke and fabric. The first 24 steps are thrown away, and the points are accumulated in a histogram.",
   "Colour is carried by a running mean: each transform has a colour index c_i and the point’s colour moves halfway toward it at every step, so a pixel’s colour is the average of the routes by which it was reached. Since many random sets of transforms make dull or empty pictures, the program tries up to 60 seeds. For each it plots 30,000 points, finds the middle 94% of their range, and keeps the candidate only if it is a real picture (a decent extent and at least 130 of 24 × 24 cells occupied); the view is then fitted to that range. The histogram is shown by log-density tone mapping, the standard flame trick that lets a dense core glow and faint filaments remain visible, with a white-hot core added where the density is highest. With rotational symmetry s > 1, each point is rotated by a random multiple of 2π/s."
  ],
+ "primitives": [
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "(x,y)\\ \\leftarrow\\ w_1\\,V_{j_1}\\!\\big(A_i(x,y)\\big)+w_2\\,V_{j_2}\\!\\big(A_i(x,y)\\big),\\qquad A_i(x,y)=(a\\,x+b\\,y+e,\\ c\\,x+d\\,y+f)",
-   "note": "One step of the chaos game with the randomly chosen transform i."
+   "note": "One step of the chaos game with the randomly chosen transform i.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "V_{\\text{sph}}=\\frac{(x,\\,y)}{r^{2}},\\qquad V_{\\text{swirl}}=\\big(x\\sin r^{2}-y\\cos r^{2},\\ \\ x\\cos r^{2}+y\\sin r^{2}\\big)",
-   "note": "Two of the twelve variations (spherical and swirl), with r² = x² + y²."
+   "note": "Two of the twelve variations (spherical and swirl), with r² = x² + y².",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "t=\\operatorname{clip}\\!\\Big[\\Big(\\frac{\\ln(1+n)}{\\ln(1+n_{\\max})}\\Big)^{0.72}B\\Big],\\qquad C=(1-t)\\,C_{\\text{bg}}+1.25\\,\\frac{t}{n}\\sum c\\ +\\ 0.35\\cdot255\\,t^{3.5}",
-   "note": "Log-density tone mapping: n is the hit count of a pixel, B the brightness slider, Σc the sum of the colours that landed there."
+   "note": "Log-density tone mapping: n is the hit count of a pixel, B the brightness slider, Σc the sum of the colours that landed there.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

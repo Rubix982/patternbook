@@ -58,18 +58,37 @@
   "Glass bends light, so what you see through it comes from somewhere else. For every output pixel the program decides where in the picture to look, and takes that colour instead. Ribbed glass is a row of cylinder lenses: within each rib the sampling point runs across a wider part of the picture than the rib itself, and backwards, so each rib shows a squeezed, mirrored slice of the scene. Glass beads are tiny spheres on a hexagonal grid doing the same in two directions, and the sheet between them is dark. Bubbles are the opposite kind of lens: they magnify the middle of the disc, because the sampling radius is smaller than the pixel’s own radius.",
   "Glass bends blue more than red, so the three colour channels are each sampled with a slightly different strength, which gives coloured fringes. Each lens is also shaded: beads are darker toward the rim, both kinds get a small bright window reflection at the top left, and bubbles get a thin ring of light at the edge. Lenses are drawn one at a time inside their bounding boxes (largest bubble first), so the cost is the area of the lenses, not of lenses times pixels."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "misregistration"
+ ],
  "equations": [
   {
    "tex": "x'_c=x_0-u\\,\\frac w2\\,(0.3+3.2\\,\\beta)\\,f_c,\\qquad f_R=1+2\\delta,\\ f_G=1,\\ f_B=1-2\\delta",
-   "note": "Ribbed glass: x₀ is the rib centre, u from −1 to 1 the position in the rib, w its width, β the bend slider, δ = 0.1 × the colour-split slider."
+   "note": "Ribbed glass: x₀ is the rib centre, u from −1 to 1 the position in the rib, w its width, β the bend slider, δ = 0.1 × the colour-split slider.",
+   "primitives": [
+    "coordinate-warp",
+    "misregistration"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf p'_c=\\mathbf c-\\mathbf n\\,R\\,(0.6+1.9\\,\\beta)\\,f_c",
-   "note": "Glass bead: n is the pixel’s position in the bead (−1 to 1), R its radius; the minus sign inverts the image."
+   "note": "Glass bead: n is the pixel’s position in the bead (−1 to 1), R its radius; the minus sign inverts the image.",
+   "primitives": [
+    "coordinate-warp",
+    "misregistration"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf p'_c=\\mathbf c+\\hat{\\mathbf n}\\,R\\,\\rho^{\\,e_c},\\qquad \\rho=\\lVert\\mathbf n\\rVert,\\quad e_c=(1+1.1\\,\\beta)\\big(1+(c-1)\\,\\delta\\big)",
-   "note": "Bubble: a pixel at radius ρ looks at radius ρ^e, nearer the centre, so the middle is magnified."
+   "note": "Bubble: a pixel at radius ρ looks at radius ρ^e, nearer the centre, so the middle is magnified.",
+   "primitives": [
+    "coordinate-warp",
+    "misregistration"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

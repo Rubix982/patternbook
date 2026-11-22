@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: retro-vhs, relation: same}
-primitives: []
+primitives: [coordinate-warp, misregistration, seeded-random]
 sources: []
 status: listed
 ---

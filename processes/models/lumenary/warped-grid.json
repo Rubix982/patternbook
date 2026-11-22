@@ -58,14 +58,32 @@
   "Two quite different drawings use the same idea, that a picture can be shown as the way it disturbs something regular. In the grid layout, a set of horizontal and vertical lines is pushed around by the picture’s gradient: each point is moved to x′ = x − k ∇L, where L is the lightness blurred over about 10 px and ∇L is taken by central differences. The strength k is the strength slider times 1,080 pixels (at 800 px wide). The lines crowd together on one side of every light-to-dark edge and spread on the other, as if the picture were a lens set in the page, and so the picture’s shapes appear without any of its colours being drawn. Each short piece of line takes its colour from the picture and its thickness (0.45 to 1.85 times the line width) from the tone.",
   "The ridges layout is the old stacked-lines portrait of the pulsar radio signal made famous by the cover of Unknown Pleasures. Horizontal lines are lifted by A v^1.4, where v is the tone (light or dark, your choice) and A is up to 5.2 line spacings, tapered to 35% at the left and right edges. The lines are drawn from the top down, and each one is filled underneath with the paper colour, so that it hides the lines behind it. That hidden-line removal is the painter’s algorithm: nearer things are painted over farther ones."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "image-gradient",
+  "soft-threshold",
+  "tone-curve",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "\\mathbf x'=\\mathbf x-k\\,\\nabla L(\\mathbf x),\\qquad k=1080\\,\\sigma\\,\\frac{W}{800},\\qquad \\partial_xL\\approx\\frac{L(x+2)-L(x-2)}{4}",
-   "note": "Grid mode: σ is the strength slider and L the blurred lightness."
+   "note": "Grid mode: σ is the strength slider and L the blurred lightness.",
+   "primitives": [
+    "coordinate-warp",
+    "image-gradient"
+   ],
+   "bespoke": null
   },
   {
    "tex": "y_j(x)=y_j-A\\,v(x)^{1.4}\\,e(x),\\qquad e(x)=0.35+0.65\\,\\operatorname{smoothstep}\\!\\Big(0,\\ 0.12,\\ \\frac{\\min(x,\\,W-x)}{W}\\Big)",
-   "note": "Ridges mode: A = 5.2 σ × the line spacing; e tapers the ridge toward the sides."
+   "note": "Ridges mode: A = 5.2 σ × the line spacing; e tapers the ridge toward the sides.",
+   "primitives": [
+    "tone-line-screen",
+    "tone-curve",
+    "soft-threshold"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

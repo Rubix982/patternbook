@@ -58,18 +58,34 @@
   "A real split-flap board holds a drum of characters; to show a letter, the drum flips through every character before it, one flap at a time. The program does exactly that. The picture becomes a grid of cells, and each cell’s brightness picks a target position on its drum (a ten-symbol drum running from blank to heavy, or the alphabet and digits). A cell showing target number t flips t times at a fixed 70 milliseconds a flap.",
   "Cells do not start together. Each has a delay that grows with its column and row plus a small random amount from a coordinate hash, so the picture resolves in a diagonal ripple. After a hold, the board flips on through the rest of the drum back to blank, and the cycle repeats. A single flap is drawn in two halves: in the first half of its turn the top flap falls, shrinking vertically toward the hinge; in the second half the new bottom flap opens out. The vertical scale of a hinged card seen from the side is the cosine of its angle; the code uses a straight line from 1 to 0 to 1 as a cheap stand-in for that cosine, which looks the same at this speed."
  ],
+ "primitives": [
+  "seeded-random",
+  "tone-bands",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "t_i=\\operatorname{round}\\big(L'_i\\,(M-1)\\big),\\qquad L'=\\operatorname{clamp}\\big((L-\\tfrac12)\\cdot1.4+\\tfrac12\\big)",
-   "note": "Target drum position of cell i on a drum of M characters."
+   "note": "Target drum position of cell i on a drum of M characters.",
+   "primitives": [
+    "tone-bands",
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\delta_{x,y}=0.011\\,x+0.009\\,y+0.08\\,h(x,y),\\qquad s=\\Big\\lfloor\\frac{\\tau-\\delta}{0.07}\\Big\\rfloor",
-   "note": "Start delay of a cell, and the number of flaps it has completed at time τ."
+   "note": "Start delay of a cell, and the number of flaps it has completed at time τ.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{scale}=\\begin{cases}1-2f&0\\le f<\\tfrac12\\ \\text{(top flap falls)}\\\\2f-1&\\tfrac12\\le f<1\\ \\text{(bottom flap opens)}\\end{cases}\\ \\approx\\ \\lvert\\cos\\pi f\\rvert",
-   "note": "Vertical scale of the moving flap during one flip, f being progress through it."
+   "note": "Vertical scale of the moving flap during one flip, f being progress through it.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

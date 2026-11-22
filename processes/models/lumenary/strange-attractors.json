@@ -58,18 +58,29 @@
   "A strange attractor is the shape drawn by a point that follows a simple rule forever: the point never repeats and never escapes, and nearby starting points move apart exponentially (the sign of chaos) while still staying on one fine, filamented set. Two such maps are used. Clifford’s is x′ = sin(a y) + c cos(a x), y′ = sin(b x) + d cos(b y); Peter de Jong’s is x′ = sin(a y) − cos(b x), y′ = sin(c x) − cos(d y). A small change in the four numbers a, b, c and d gives a completely different picture, and three sets that are known to make good pictures are provided for each map.",
   "Each frame 48 points are followed for 1,100 steps each, and every landing is added to a density histogram the size of half the picture. The histogram is dimmed by the linger factor on every frame, so the image is a running average that shows the attractor as a glowing cloud. Because |x′| and |y′| cannot be bigger than 1 + |c| and 1 + |d| for Clifford (and 2 for de Jong), the picture is scaled to fit those bounds exactly. The four numbers drift in time, each by a sine of its own speed and an amount set by the drift slider (up to 0.22), so the attractor breathes; the pointer adds up to ±0.3 to a and b. The brightness is a log-density tone map, and either a flame ramp or the picture’s own colours (each cell’s average) give the colour."
  ],
+ "primitives": [
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "\\begin{aligned}x'&=\\sin(a\\,y)+c\\cos(a\\,x)\\\\ y'&=\\sin(b\\,x)+d\\cos(b\\,y)\\end{aligned}\\qquad\\qquad \\begin{aligned}x'&=\\sin(a\\,y)-\\cos(b\\,x)\\\\ y'&=\\sin(c\\,x)-\\cos(d\\,y)\\end{aligned}",
-   "note": "Clifford (left) and de Jong (right) maps."
+   "note": "Clifford (left) and de Jong (right) maps.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "a(t)=a_0+0.22\\,\\delta\\,\\sin(\\omega_a t+\\phi_a)+0.6\\,\\big(p_x-\\tfrac12\\big),\\qquad\\text{similarly }b,\\ c,\\ d",
-   "note": "The drifting parameters: δ is the drift slider, p the pointer position (the pointer acts on a and b only)."
+   "note": "The drifting parameters: δ is the drift slider, p the pointer position (the pointer acts on a and b only).",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "v=\\operatorname{clip}\\Big[\\Big(\\frac{\\ln(1+n)}{\\ln(1+n_{\\max}/2)}\\Big)^{1.2}G\\Big]",
-   "note": "The log-density tone map: n is the number of landings in a cell and G the glow slider."
+   "note": "The log-density tone map: n is the number of landings in a cell and G the glow slider.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

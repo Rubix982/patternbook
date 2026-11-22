@@ -59,18 +59,32 @@
   "Three things happen to light in water, and each is one line of arithmetic per pixel. First, the picture sways. Every output pixel reads the source at a position pushed sideways and up and down by two slow sine waves whose phases are bent by other sines, and blends the four nearest source pixels so straight edges bend smoothly. Second, colour is absorbed. Water takes red first and blue last, so each channel is multiplied by a factor that falls with depth, fastest for red, and the result is fogged toward the water’s own colour. Depth grows toward the bottom of the frame.",
   "Third, caustics. Ripples on the surface act as lenses and gather sunlight into bright lines. Three sets of bent ripples are added together, and light is placed wherever the sum passes through zero; a fourth power thins those crossings into the net seen on the floor of a pool. It is stronger near the top and on bright surfaces. The frame is computed at half size and the sines come from a table of 1024 values, which keeps it at video rate. Sun rays are slanted shafts drawn with additive blending, bubbles are small simulated circles that rise and wobble, and the drifting specks are placed by a formula of time."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "multiply-blend"
+ ],
  "equations": [
   {
    "tex": "x'=x+A\\sin\\!\\big(9v+1.3t+1.2\\sin(5u+0.7t)\\big),\\qquad y'=y+0.6A\\cos\\!\\big(8u-1.1t+1.1\\sin(6v+0.5t)\\big)",
-   "note": "The swell: where pixel (x, y) is read from. A is the swell slider times 2.2% of the width."
+   "note": "The swell: where pixel (x, y) is read from. A is the swell slider times 2.2% of the width.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C_c\\leftarrow C_c\\,(1-k_c\\,D),\\qquad D=d\\,(0.4+0.6v),\\qquad \\mathbf k=(0.92,\\ 0.30,\\ 0.10)",
-   "note": "Absorption per channel in tropical water: red is lost about nine times faster than blue. d is the depth slider."
+   "note": "Absorption per channel in tropical water: red is lost about nine times faster than blue. d is the depth slider.",
+   "primitives": [
+    "multiply-blend"
+   ],
+   "bespoke": null
   },
   {
    "tex": "n=\\max\\!\\big(0,\\ 1-1.15\\,\\lvert f_1+f_2+f_3\\rvert\\big),\\qquad \\text{light}\\propto n^{4}",
-   "note": "Caustics: f are three bent sine ripples; the net is where their sum is near zero."
+   "note": "Caustics: f are three bent sine ripples; the net is where their sum is near zero.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

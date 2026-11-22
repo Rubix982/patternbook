@@ -58,18 +58,29 @@
   "David Hilbert described in 1891 a curve that passes through every cell of a square grid and never crosses itself. The curve of order k covers a 2ᵏ × 2ᵏ grid in 4ᵏ steps. It is built by recursion: divide the square into four quarters, draw a curve of the next lower order in each (the two at the bottom turned by a quarter turn, one clockwise and one anti-clockwise), and join them end to end. The program does not recurse. It converts the step number d, two binary digits at a time, into a grid position: for s = 1, 2, 4, …, take rx = (t >> 1) & 1 and ry = (t xor rx) & 1, turn and flip the partial position if ry = 0, add s·rx and s·ry, and shift t by two bits.",
   "Neighbouring steps are always neighbouring cells, so the line is continuous. Its useful property is locality: points close along the curve are close in the plane (the converse is not always true). The line is drawn from cell centre to cell centre, with the width set by the weight slider and made to follow the picture’s heaviness, and each segment takes the colour of the picture at its midpoint. The total length of the line is (4ᵏ − 1) cells of width W/2ᵏ, almost 2ᵏ times the width of the picture, which is why high orders look like a dense engraving."
  ],
+ "primitives": [
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "n=2^{k},\\qquad \\text{cells}=n^{2}=4^{k},\\qquad \\text{length}=\\big(4^{k}-1\\big)\\frac{W}{2^{k}}\\approx2^{k}\\,W",
-   "note": "Grid, number of cells and the length of the line for order k."
+   "note": "Grid, number of cells and the length of the line for order k.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "r_x=\\big\\lfloor t/2\\big\\rfloor\\,\\&\\,1,\\quad r_y=(t\\oplus r_x)\\,\\&\\,1,\\quad (x,y)\\leftarrow(x+s\\,r_x,\\ \\ y+s\\,r_y)",
-   "note": "One step of the conversion from the number along the curve to its place (after the rotation of the partial position when r_y = 0)."
+   "note": "One step of the conversion from the number along the curve to its place (after the rotation of the partial position when r_y = 0).",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "w=c\\,\\lambda\\,\\big[(1-f)+f\\,(0.2+1.1\\,h)\\big]",
-   "note": "Line width: c is the cell width, λ the weight slider, f the follow slider, h the heaviness beneath."
+   "note": "Line width: c is the cell width, λ the weight slider, f the follow slider, h the heaviness beneath.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

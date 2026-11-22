@@ -58,18 +58,32 @@
   "String art makes a picture from one long thread wound between nails on a board, and the program winds it greedily. The picture becomes a target T on a 240-pixel grid: T = (1 − L)^1.2 for a dark thread on a light board, or L^1.2 for a pale thread on black, so T is large where thread is wanted. The nails stand on a circle or on the edge of a rectangle. At each turn, from the nail where the thread now is, every other nail is tried (the two nearest nails on either side are skipped) and the mean target along the straight line to it is measured. The best nail is chosen, a path used before has its score halved, and the thread is wound there.",
   "Winding a line uses up some of the target, since that darkness is now covered: the strength slider s is subtracted from T along the line (never below 0). The winding stops when the chosen number of lines is reached or no line scores above 0.012. When the thread is drawn, the lines are blended by multiplying (dark thread) or adding (pale thread) with opacity a = 1.15 s (kept between 0.05 and 0.6), so the density builds up with overlap just as real threads do. In the picture-colour option each segment takes the colour of the picture at its midpoint."
  ],
+ "primitives": [
+  "multiply-blend",
+  "tone-curve"
+ ],
  "equations": [
   {
    "tex": "j^{*}=\\arg\\max_{j}\\ \\frac{1}{\\ell_{ij}}\\sum_{\\mathbf x\\in\\text{line}(i,\\,j)}T(\\mathbf x),\\qquad T=\\begin{cases}(1-L)^{1.2}&\\text{dark thread}\\\\ L^{1.2}&\\text{pale thread}\\end{cases}",
-   "note": "The next nail j from the current nail i; ℓ is the length of the line in grid steps."
+   "note": "The next nail j from the current nail i; ℓ is the length of the line in grid steps.",
+   "primitives": [
+    "tone-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "T(\\mathbf x)\\leftarrow\\max\\big(0,\\ T(\\mathbf x)-s\\big)\\quad\\text{along the chosen line}",
-   "note": "The target is used up by the thread laid down."
+   "note": "The target is used up by the thread laid down.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\tau_k=(1-a)^{k}",
-   "note": "Light that survives k overlapping threads of opacity a, the reason overlapping threads build tone."
+   "note": "Light that survives k overlapping threads of opacity a, the reason overlapping threads build tone.",
+   "primitives": [
+    "multiply-blend"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

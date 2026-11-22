@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: batik, relation: same}
   - {by: lumenary, id: ajrak, relation: same}
-primitives: []
+primitives: [crackle-network, lattice-repeat, misregistration, mix-over, resist-mask, seeded-random, star-rosette-motif, tone-bands]
 sources: []
 status: listed
 ---

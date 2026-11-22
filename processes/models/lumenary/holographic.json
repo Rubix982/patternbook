@@ -58,18 +58,29 @@
   "Real holographic foil changes colour with the viewing angle. Here the “angle” is replaced by a coordinate that mixes three things: the pixel’s own brightness, its position across a tilted axis, and time. That coordinate is wrapped into the range 0 to 1 and used as a hue, looked up in a precomputed table of 512 fully saturated colours. Because brightness is part of the coordinate, the rainbow follows the shapes in your picture rather than lying on top of it like a gradient.",
   "The foil colour is mixed with the base picture (greyscale or original) in proportion to the intensity slider, and weighted by brightness so shadows stay dark. A soft white band, shaped like a Gaussian bell across the tilted axis, sweeps over the surface; hovering moves it to the cursor. Finally, sparkle sets a tiny random fraction of the brighter pixels to white every tenth of a second, using a coordinate hash so each frame’s glitter is different but cheap."
  ],
+ "primitives": [
+  "mix-over"
+ ],
  "equations": [
   {
    "tex": "h=\\operatorname{frac}\\!\\big(\\sigma\\,L+0.9\\,(u\\cos\\theta+v\\sin\\theta)+\\tau\\big),\\qquad\\theta=0.6\\ \\text{rad}",
-   "note": "Hue of the foil at a pixel: brightness L, spread σ, position along the tilted axis, drift τ."
+   "note": "Hue of the foil at a pixel: brightness L, spread σ, position along the tilted axis, drift τ.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "C=(1-k)\\,C_{\\text{base}}+k\\,C_{\\text{foil}}(h)\\,(0.35+0.9L)",
-   "note": "Mix of base picture and foil; k is the intensity slider."
+   "note": "Mix of base picture and foil; k is the intensity slider.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{band}=e^{-q^{2}}\\,b\\cdot0.75,\\qquad q=\\frac{(u\\cos\\theta+v\\sin\\theta)-p}{w}",
-   "note": "The moving light band: a Gaussian of width w centred at position p."
+   "note": "The moving light band: a Gaussian of width w centred at position p.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

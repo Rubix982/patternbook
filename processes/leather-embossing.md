@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: embossed-leather, relation: same}
-primitives: []
+primitives: [crackle-network, relief-shading, tone-to-height, voronoi-cells]
 sources: []
 status: listed
 ---

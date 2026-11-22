@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: bokeh, relation: same}
-primitives: []
+primitives: [additive-blend, importance-sampling, seeded-random, soft-threshold, star-rosette-motif]
 sources: []
 status: listed
 ---

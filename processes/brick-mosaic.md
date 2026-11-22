@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: lego-voxel, relation: same}
-primitives: []
+primitives: [facet-shading, palette-snap]
 sources: []
 status: listed
 ---

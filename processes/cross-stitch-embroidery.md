@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: cross-stitch, relation: same}
-primitives: []
+primitives: [coarse-grid, palette-snap, stitch-grid]
 sources: []
 status: listed
 ---

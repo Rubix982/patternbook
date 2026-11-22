@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: lenticular, relation: same}
-primitives: []
+primitives: [coordinate-warp, cylinder-shading, ease-toward-target, lattice-repeat]
 sources: []
 status: listed
 ---

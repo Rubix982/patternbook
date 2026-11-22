@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: mudcloth, relation: same}
-primitives: []
+primitives: [lattice-repeat, tone-bands]
 sources: []
 status: listed
 ---

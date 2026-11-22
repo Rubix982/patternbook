@@ -198,6 +198,14 @@ lattices, stitch fields, crackle networks, relief shading from a height and a li
 once, with its maths, and linked to the processes and implementations that use it. A new treatment or generator is
 written by composing primitives, and a process that needs one that doesn't exist yet names the gap.
 
+**Measured in C-018.** 80 % of the equations in Lumenary's 214 models apply a primitive shared by three or more of
+them, and 31 primitives reach 70 % of all equations; without foundation-level operations (random numbers, smoothstep,
+tone curves, blur, simple blends) the share is 66 %. The making classes compose most (stitch, carving, glaze,
+drawing, printing), geometric constructions least. So `engine/core/` starts from the primitives the making families
+use, and geometric constructions are written per treatment. The crafts' gaps (supplementary weft, chain stitch, weave
+drafts, glaze thickness, dye baths in sequence, inlay from veined stone, mirror insets, light through thick screens) are
+listed in `processes/primitives.md`.
+
 **Where models come from.** Any implementation of a process counts as a model of it, credited to whoever made it:
 
 - **patternbook's own treatments and generators.** The theory notes for `press`, `riso`, `halftone` and `hatch` move

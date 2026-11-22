@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: charcoal-sketch, relation: same}
-primitives: []
+primitives: [coordinate-warp, edge-outline, mix-over, seeded-random, smooth-noise, tooth-threshold]
 sources: []
 status: listed
 ---

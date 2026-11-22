@@ -1,0 +1,611 @@
+model_id	eq_index	primitives	bespoke_kind	note
+lumenary:aboriginal-dot-painting	0	iso-contours		rings are contours of blurred brightness
+lumenary:aboriginal-dot-painting	1		layout	dot spacing along a ring
+lumenary:aboriginal-dot-painting	2	iso-contours		ring spacing shrinks with the gradient (contour property)
+lumenary:aboriginal-dot-painting	3	tone-bands		one of six ochres by light level
+lumenary:adinkra	0	tone-dot-lattice		stamp size on a square grid follows shade (AM screen with a stamp as spot)
+lumenary:adinkra	1	tone-dot-lattice		ink share of a square grows with the square of stamp size
+lumenary:adinkra	2	smooth-noise		uneven inking: stamped alpha scaled by noise
+lumenary:adinkra	3	multiply-blend		cloth dyed by the picture with a multiply blend
+lumenary:ajrak	0	star-rosette-motif		eight-point star outline in polar form
+lumenary:ajrak	1	tone-bands,seeded-random		dye state by tone thresholds; random chequerboard override
+lumenary:ajrak	2	misregistration,resist-mask		resist zone map read twice with a shift
+lumenary:anaglyph-3d	0		specific	disparity from depth guessed from blurred brightness [also seen elsewhere but not shared: depth-from-tone]
+lumenary:anaglyph-3d	1	coordinate-warp,saturation-adjust		left and right views read at x minus/plus disparity; mix toward own luminance
+lumenary:anaglyph-3d	2	channel-mix		red from left view, green and blue from right
+lumenary:anime-cel	0	bilateral-smooth		edge-keeping smoothing
+lumenary:anime-cel	1	palette-snap,kmeans-palette		luma-chroma space in which paints are found and matched
+lumenary:anime-cel	2	dog-lines,soft-threshold		cel shadow: wide blur minus narrow blur cut to a step
+lumenary:art-deco	0	tone-line-screen,tone-curve		line band thickness follows brightness to the power 0.9
+lumenary:art-deco	1	tone-line-screen		directions of the radial ray screen
+lumenary:art-deco	2	tone-line-screen,tone-curve		ray width follows brightness, capped by its slice
+lumenary:ascii-art	0		layout	font size and row count
+lumenary:ascii-art	1	tone-bands		character from a density ramp by tone
+lumenary:aurora	0	decay-trail		upward smear: running max with a decay factor
+lumenary:aurora	1	tone-curve		intensity shaped by a smoothstep-like curve
+lumenary:aurora	2	colour-ramp,additive-blend		colour from a ramp added to the sky
+lumenary:aztec-glyphs	0	tone-to-height		height from drawn glyphs plus broad-blurred brightness
+lumenary:aztec-glyphs	1	relief-shading		slope against light direction
+lumenary:aztec-glyphs	2	relief-shading		occlusion where height is below its blur
+lumenary:azulejo	0	lattice-repeat		distances from the nearest tile corner in tile units
+lumenary:azulejo	1	star-rosette-motif		quarter rosette by abs(cos 4 theta) petals
+lumenary:azulejo	2	mix-over		painted pattern laid over the wash
+lumenary:banknote-engraving	0	tone-line-screen,tone-curve		engraved line half-thickness from darkness (contrast, power 0.9)
+lumenary:banknote-engraving	1	tone-line-screen		line centre displaced by darkness plus sine swing
+lumenary:banknote-engraving	2	parametric-curve		guilloche hypotrochoid
+lumenary:batik	0	crackle-network		crackle veins where F2 minus F1 is small
+lumenary:batik	1	crackle-network,mix-over,resist-mask		dye creeps into the cracked wax
+lumenary:batik	2	lattice-repeat		isen-isen dot in every square
+lumenary:bauhaus	0	tone-bands		shape by brightness band
+lumenary:bauhaus	1	edge-tangent-field		quarter-turn tile orientation from edge direction
+lumenary:blind-contour	0	image-gradient		strongest Sobel response per cell above a threshold
+lumenary:blind-contour	1		specific	greedy nearest-neighbour chaining of edge points [also seen elsewhere but not shared: greedy-path]
+lumenary:blind-contour	2	smooth-noise,seeded-random		hand drift by smooth noise plus jitter
+lumenary:blueprint	0	edge-outline		line strength: max of edge outline, hatching, grid
+lumenary:blueprint	1	tone-line-screen		cross-hatching layers switched on by darkness
+lumenary:blueprint	2	mix-over		paper and ink linear mix
+lumenary:bohemian	0		layout	ring radii
+lumenary:bohemian	1	multiply-blend		warm tint by multiply
+lumenary:boids	0		specific	alignment, cohesion, separation forces [also seen elsewhere but not shared: flocking]
+lumenary:boids	1	image-gradient,particle-motion		pull toward light along the brightness gradient; speed limit
+lumenary:bokeh	0	importance-sampling,soft-threshold		chance a cell holds a disc rises with lightness
+lumenary:bokeh	1	star-rosette-motif,seeded-random		polygon or star aperture vertices, random turn
+lumenary:bokeh	2	additive-blend		discs added over the blurred picture
+lumenary:byzantine-mosaic	0	edge-tangent-field,soft-threshold		row direction follows contour where gradient is strong
+lumenary:byzantine-mosaic	1	streamline-trace,poisson-disc		rows of tesserae grown along the field with minimum spacing
+lumenary:byzantine-mosaic	2	tone-bands,seeded-random		gold above a brightness threshold with random ragged edge
+lumenary:calligraphy-portrait	0	tone-mark-size,tone-curve		letter size from darkness
+lumenary:calligraphy-portrait	1		layout	pen advance after a letter
+lumenary:calligraphy-portrait	2		layout	sloping baseline and ink opacity
+lumenary:cctv	0	coordinate-warp		barrel lens
+lumenary:cctv	1	coarse-grid		block compression: pixels pulled to the block average
+lumenary:cctv	2	seeded-random,frame-history		chance a block keeps its old contents
+lumenary:cellular-automata	0		specific	birth/survival update rule [also seen elsewhere but not shared: cellular-automaton]
+lumenary:cellular-automata	1	importance-sampling,seeded-random		initial live cells with probability from tone
+lumenary:cellular-automata	2	decay-trail		afterglow decays by a factor
+lumenary:celtic-knot	0	lattice-repeat		two families of diagonal strands from frac coordinates
+lumenary:celtic-knot	1		specific	over/under by cell parity [also seen elsewhere but not shared: over-under]
+lumenary:celtic-knot	2	cylinder-shading		cylinder shading across the ribbon with a highlight
+lumenary:chalkboard	0	material-ground		slate ground: mottling noise, wipes, dust
+lumenary:chalkboard	1	soft-threshold,tooth-threshold		chalk wanted from tone; sticks where the board tooth allows
+lumenary:chalkboard	2	edge-outline,tooth-threshold		outlines broken by the tooth
+lumenary:charcoal-sketch	0	tooth-threshold,smooth-noise,seeded-random		paper tooth (smooth plus white noise) decides which pressures stick
+lumenary:charcoal-sketch	1	edge-outline,coordinate-warp		outline redrawn from edge strength at three noise-shifted positions
+lumenary:charcoal-sketch	2	mix-over		paper and charcoal mix by coverage
+lumenary:chinese-paper-cut	0	soft-threshold		cut amount from tone
+lumenary:chinese-paper-cut	1	tone-line-screen		diagonal slits whose width follows the cut amount
+lumenary:chinese-paper-cut	2	lattice-repeat		rows of teeth whose height grows with the cut amount
+lumenary:chromatic-aberration	0	coordinate-warp		radial shift field growing to the edge
+lumenary:chromatic-aberration	1	misregistration,bilinear-sample		channels sampled at shifted places
+lumenary:chromatic-aberration	2	misregistration,blur		spectral smear: weighted sum of shifted samples per channel
+lumenary:chrome	0	tone-to-height,blur		height from two box blurs of brightness
+lumenary:chrome	1	relief-shading		normal from Sobel slopes and the mirror direction [also seen elsewhere but not shared: env-reflection]
+lumenary:chrome	2		specific	position on the environment strip [also seen elsewhere but not shared: env-reflection]
+lumenary:chrome	3	specular-highlight		Blinn-Phong highlight power 90
+lumenary:chronophotograph	0	tone-curve,soft-threshold,decay-trail		exposure with background crushed; older exposures fade
+lumenary:chronophotograph	1	frame-history		plate keeps the brightest value over past exposures
+lumenary:chronophotograph	2	parametric-curve		Lissajous path the still is swung along
+lumenary:cinematic	0		specific	shadow and highlight tints [also seen elsewhere but not shared: split-toning]
+lumenary:cinematic	1	tone-curve		contrast blended toward smoothstep
+lumenary:cinematic	2		layout	letterbox bar height
+lumenary:circle-packing	0	poisson-disc		largest circle that fits given others and gap; accept above minimum
+lumenary:circle-packing	1	tone-mark-size,tone-curve		radius asked for by tone
+lumenary:circuit-board	0	edge-tangent-field		trace along the edge tangent quantised to four directions
+lumenary:circuit-board	1		specific	trace width from edge strength
+lumenary:clay-3d	0	relief-shading,tone-to-height		normal from blurred brightness as height
+lumenary:clay-3d	1	relief-shading,specular-highlight		light direction and half-vector
+lumenary:clay-3d	2	relief-shading,specular-highlight		diffuse times occlusion plus specular
+lumenary:collage-art	0		layout	source rectangle of each piece
+lumenary:collage-art	1	seeded-random		random rotation per piece
+lumenary:comic-book	0	tone-bands		posterise to n levels and rescale colour
+lumenary:comic-book	1	tone-dot-lattice		45-degree dot lattice, radius from tone
+lumenary:comic-book	2	edge-outline		edge strength darkens toward black
+lumenary:constructivist	0	tone-bands		two-tone threshold at a brightness quantile
+lumenary:constructivist	1		layout	rotation of photo, wedge, bars
+lumenary:contour-lines	0	iso-contours		contour of height k/n
+lumenary:contour-lines	1	iso-contours		marching-squares crossing
+lumenary:contour-lines	2	tone-bands		band value picks the tint
+lumenary:crayon-cartoon	0	seeded-random		stroke frame per colour at a hashed angle
+lumenary:crayon-cartoon	1	tooth-threshold,smooth-noise		wax lands where streaky noise plus tooth passes a pressure threshold
+lumenary:crayon-cartoon	2	coordinate-warp,smooth-noise		shapes read at a noise-displaced position (wobble)
+lumenary:cross-processed	0	tone-curve		Catmull-Rom curve through knots
+lumenary:cross-processed	1	tone-curve		each channel through its own curve
+lumenary:cross-processed	2	saturation-adjust,tone-curve		saturation about luminance; faded blacks
+lumenary:cross-stitch	0	stitch-grid		stitch cell geometry for n stitches across
+lumenary:cross-stitch	1	coarse-grid,palette-snap		cell average snapped to nearest floss (redmean)
+lumenary:cyanotype	0	tone-curve,smooth-noise		contrast curve with uneven-coating noise
+lumenary:cyanotype	1	colour-ramp,soft-threshold,sheet-edge		five-stop ramp; coated area by distance to ragged sheet edge
+lumenary:cyanotype	2	multiply-blend,soft-threshold,sheet-edge		darkening where liquid pooled along the edge
+lumenary:cyberpunk	0	colour-ramp,tone-curve		brightness through a five-stop ramp
+lumenary:cyberpunk	1		specific	every third row darkened [also seen elsewhere but not shared: scanlines]
+lumenary:daguerreotype	0	tone-curve		mirror tilt mixes positive and negative, contrast about mid-grey
+lumenary:daguerreotype	1	soft-threshold,smooth-noise,sheet-edge		tarnish reaching in from the edge
+lumenary:daguerreotype	2		specific	thin-film interference colour, three phases [also seen elsewhere but not shared: iridescence]
+lumenary:data-bars	0	tone-mark-size		bar height from cell value
+lumenary:data-bars	1	colour-ramp		bronze-to-gold ramp
+lumenary:data-bars	2	projection-3d		oblique projection of blocks
+lumenary:datamosh	0	coordinate-warp,frame-history,seeded-random		block takes content displaced by its motion vector from the previous frame
+lumenary:datamosh	1	seeded-random		chance a block is refreshed
+lumenary:delft-blue	0	edge-tangent-field,streamline-trace		brush stroke follows the isophote
+lumenary:delft-blue	1	importance-sampling,seeded-random		stroke seed painted only where tone is below the layer threshold, ragged by a random term
+lumenary:delft-blue	2	tone-mark-size		stroke opacity and width grow with darkness
+lumenary:depth-parallax	0		specific	depth invented from blurred brightness and height in frame [also seen elsewhere but not shared: depth-from-tone]
+lumenary:depth-parallax	1	coordinate-warp		output pixel reads from a depth-dependent shifted position
+lumenary:depth-parallax	2	ease-toward-target		camera eases toward its target
+lumenary:differential-growth	0		specific	springs to neighbours and smoothing pull
+lumenary:differential-growth	1		specific	repulsion from non-neighbour points
+lumenary:differential-growth	2	importance-sampling		rest length (local spacing) set by heaviness
+lumenary:dithering	0	ordered-dither		Bayer matrix recursion
+lumenary:dithering	1		specific	quantisation error pushed to neighbours [also seen elsewhere but not shared: error-diffusion]
+lumenary:dithering	2		specific	Floyd-Steinberg and Atkinson kernels [also seen elsewhere but not shared: error-diffusion]
+lumenary:domain-warp	0	smooth-noise,coordinate-warp		nested fBm domain warping
+lumenary:domain-warp	1	coordinate-warp		picture read at the warped position, folds shaded
+lumenary:double-exposure	0	soft-threshold		window mask from blurred brightness
+lumenary:double-exposure	1	multiply-blend,tone-curve		scene brightness scaled by a curve of the photo
+lumenary:double-exposure	2	mix-over,additive-blend		scene inside the window over the base, plus a screen blend
+lumenary:duotone	0	tone-curve		midpoint gamma and contrast
+lumenary:duotone	1	colour-ramp		shadow-to-highlight two-colour map
+lumenary:dust-snap	0		specific	snap progress timing
+lumenary:dust-snap	1	particle-motion		grain flight path with curl
+lumenary:dust-snap	2	soft-threshold		grain shrinks and fades by a smoothstep in progress
+lumenary:editorial	0	channel-mix		sepia colour matrix
+lumenary:editorial	1		layout	masthead size
+lumenary:embossed-leather	0	tone-to-height,crackle-network,voronoi-cells		height from blurred picture plus pebble grain
+lumenary:embossed-leather	1	voronoi-cells		pebble dome from distance to site
+lumenary:embossed-leather	2	relief-shading		diffuse shading times tone factor
+lumenary:embroidery	0	edge-tangent-field		thread direction along the edge, weight from gradient
+lumenary:embroidery	1	edge-tangent-field		blend with the lazy direction
+lumenary:fabric-folds	0		specific	fold phase bent by the picture
+lumenary:fabric-folds	1	tone-to-height		cloth height from sines plus blurred brightness
+lumenary:fabric-folds	2	relief-shading,specular-highlight		diffuse, weave factor, specular sheen and fibre rim light
+lumenary:felt-story	0	label-boundary,blur		nearness to the edge from the blurred one-pixel outline
+lumenary:felt-story	1	running-stitch		dashed running stitch inset from the edge
+lumenary:felt-story	2	grain-overlay		felt nap: two value noises plus a hash as a colour factor
+lumenary:film-grain	0	tone-curve		toe and shoulder film curve
+lumenary:film-grain	1	grain-overlay		grain strongest in midtones
+lumenary:film-grain	2	glow-bloom,soft-threshold		halation from highlights of the downscaled picture
+lumenary:fireflies	0	particle-motion,smooth-noise		heading steered by slow noise
+lumenary:fireflies	1	flicker		blink cycle
+lumenary:fireflies	2	additive-blend,mask-clip		light mask reveals the picture; halos added
+lumenary:flow-field	0	edge-tangent-field,smooth-noise		field direction from edge tangent and noise
+lumenary:flow-field	1	streamline-trace		one streamline step
+lumenary:flow-field	2	poisson-disc		separation rule keeps lines evenly spaced
+lumenary:flying-cards	0		specific	ease-out cubic deal timing [also seen elsewhere but not shared: ease-curve]
+lumenary:flying-cards	1		specific	card width as it turns about its axis
+lumenary:flying-cards	2	ease-toward-target		flip eases toward its target
+lumenary:fourier-epicycles	0		specific	Fourier series and DFT coefficients
+lumenary:fourier-epicycles	1		specific	Parseval error of kept circles
+lumenary:fractal-flame	0		specific	chaos-game step
+lumenary:fractal-flame	1		specific	two variations
+lumenary:fractal-flame	2	tone-curve		log-density tone mapping
+lumenary:frosted-ice	0	smooth-noise,coordinate-warp		ridged noise at two scales with warp
+lumenary:frosted-ice	1	sheet-edge		frost coverage thicker near the pane edge, sparkle
+lumenary:frosted-ice	2	mix-over,sdf-shape		tint toward ice; wiped patch by distance to path
+lumenary:futuristic	0	bright-spot-pick,blur		target at the maximum of blurred brightness
+lumenary:futuristic	1		layout	readout numbers
+lumenary:girih	0		specific	pentagrid of five line families [also seen elsewhere but not shared: pentagrid]
+lumenary:girih	1		specific	rhomb corners at a crossing [also seen elsewhere but not shared: pentagrid]
+lumenary:girih	2		specific	Hankin rule
+lumenary:girih	3		specific	intersection parameter; golden ratio of rhomb counts
+lumenary:glass-refraction	0	coordinate-warp,misregistration		ribbed glass lookup with per-channel split
+lumenary:glass-refraction	1	coordinate-warp,misregistration		glass bead inverts the lookup, per channel
+lumenary:glass-refraction	2	coordinate-warp,misregistration		bubble magnifies the middle, per channel
+lumenary:glassmorphism	0	blur		downscale factor for the frost blur
+lumenary:glassmorphism	1	mix-over		tint over blur
+lumenary:glassmorphism	2		layout	corner radius
+lumenary:glitch	0	misregistration		channel split
+lumenary:glitch	1	coordinate-warp		strip displaced with wrap-around
+lumenary:glow-sketch	0	edge-outline,coordinate-warp		line opacity from edge map read at noisy offsets
+lumenary:glow-sketch	1	tone-line-screen		hatching strokes drawn where dark
+lumenary:glow-sketch	2	glow-bloom		line layer plus enlarged small copies added
+lumenary:gold-foil	0	soft-threshold,smooth-noise		foil coverage threshold with edge-roughening noise
+lumenary:gold-foil	1	smooth-noise		crumple height from ridged noise at three scales
+lumenary:gold-foil	2		specific	position on the foil colour strip from normal tilt [also seen elsewhere but not shared: env-reflection]
+lumenary:gouache	0	palette-snap,saturation-adjust		nearest palette label; palette softened
+lumenary:gouache	1	coordinate-warp,smooth-noise		hand wobble displacement
+lumenary:gouache	2	label-boundary		paper gap where labels differ at an offset
+lumenary:gradient-mesh	0	coordinate-warp		sinusoidally warped lookup
+lumenary:gradient-mesh	1	bilinear-sample		eased bilinear blend of mesh colours
+lumenary:graffiti	0	tone-bands		paint levels at brightness quantiles
+lumenary:graffiti	1	mix-over,blur		overspray: blurred copy over sharp
+lumenary:greek-meander	0	tone-line-screen,tone-curve		meander line width follows the picture
+lumenary:greek-meander	1		constants	line length in one key cell
+lumenary:greek-meander	2	tone-line-screen		painted share vs line width
+lumenary:greek-vase	0	unsharp-mask,soft-threshold		boosted brightness thresholded into the glaze mask
+lumenary:greek-vase	1	cylinder-shading		shading across the pot's curve
+lumenary:greek-vase	2	crackle-network		crackle net from F2 minus F1
+lumenary:hala-blue-pottery	0	mix-over,tone-curve		cobalt wash laid over glaze
+lumenary:hala-blue-pottery	1	iso-contours		vines as contours of blurred tone
+lumenary:hala-blue-pottery	2	crackle-network,multiply-blend		crackle line darkens the glaze
+lumenary:hala-blue-pottery	3	importance-sampling,seeded-random		flower placed where dark enough and a random draw passes
+lumenary:hala-lacquerware	0	coordinate-warp		picture wrapped round a cylinder
+lumenary:hala-lacquerware	1	coordinate-warp		why the wrap squeezes near the sides
+lumenary:hala-lacquerware	2		specific	turned profiles
+lumenary:hala-lacquerware	3	cylinder-shading,soft-threshold		cosine shading and two highlights across the turned piece
+lumenary:halftone	0	tone-dot-lattice		rotated dot lattice
+lumenary:halftone	1	tone-dot-lattice,tone-curve		dot radius from ink with contrast curve
+lumenary:halftone	2		specific	RGB to CMYK [also seen elsewhere but not shared: cmyk-separation]
+lumenary:handwritten	0	auto-levels,blur		percentile stretch, blurred, to darkness
+lumenary:handwritten	1	tone-mark-size,seeded-random		letter size from darkness with random jitter
+lumenary:handwritten	2		specific	ink opacity of one letter
+lumenary:heat-haze	0		specific	physics of refractive index in warm air
+lumenary:heat-haze	1	coordinate-warp,smooth-noise		fBm displacement of the lookup
+lumenary:heat-haze	2	misregistration,coordinate-warp		each channel takes its own share of the displacement
+lumenary:hexagon-mosaic	0	lattice-repeat		hexagon centres and corner angles
+lumenary:hexagon-mosaic	1	tone-dot-lattice		hex cell radius shrinks with tone
+lumenary:hexagon-mosaic	2	facet-shading		three face shades of a tumbling block
+lumenary:hieroglyphs	0	tone-to-height		sunk-relief height plus broad blur of brightness
+lumenary:hieroglyphs	1	tone-dot-lattice		sign size in its cell from brightness
+lumenary:hieroglyphs	2	relief-shading		relief lighting with occlusion
+lumenary:hilbert-curve	0		specific	grid size and curve length for order k
+lumenary:hilbert-curve	1		specific	Hilbert index to position step
+lumenary:hilbert-curve	2	tone-line-screen		line width follows heaviness
+lumenary:hologram-hud	0	image-gradient		opacity from brightness and gradient magnitude
+lumenary:hologram-hud	1	flicker		flicker and dropout
+lumenary:hologram-hud	2	ease-toward-target		reticle eases toward target
+lumenary:holographic	0		specific	foil hue from brightness and position [also seen elsewhere but not shared: iridescence]
+lumenary:holographic	1	mix-over		foil mixed over the base
+lumenary:holographic	2		specific	moving Gaussian light band
+lumenary:impressionist	0	importance-sampling		stroke placed only where colour error is high
+lumenary:impressionist	1	edge-tangent-field,streamline-trace		stroke path along the isophote
+lumenary:impressionist	2	hue-shift		dark hues slide toward violet
+lumenary:indus-seal	0	edge-outline		cut lines: signs, edge outline, hatching combined by max
+lumenary:indus-seal	1	tone-line-screen		hatching thickness rises as tone falls
+lumenary:indus-seal	2	tone-to-height		clay and steatite heights from the cut lines
+lumenary:indus-seal	3		layout	centre of sign i in the band
+lumenary:infrared	0	channel-mix		greenness and blueness from channel differences
+lumenary:infrared	1	channel-mix		estimated infrared brightness from weighted channels
+lumenary:infrared	2	channel-mix		false colour: red and blue swapped, infrared into blue
+lumenary:ink-in-water	0	smooth-noise,particle-motion		curl-noise velocity field advects the ink
+lumenary:ink-in-water	1	mix-over		translucent discs layered by alpha accumulation
+lumenary:ink-in-water	2	decay-trail		ink thins toward water each frame
+lumenary:ink-wash	0	tone-bands,soft-threshold		flat tones with short ramps
+lumenary:ink-wash	1	tooth-threshold,soft-threshold		dry brush: ink skips where streaky noise is high
+lumenary:ink-wash	2	mix-over		ink mixed over paper by concentration
+lumenary:isometric	0	projection-3d		isometric screen position of block top
+lumenary:isometric	1	auto-levels,tone-curve,tone-mark-size		block height from min-max normalised brightness
+lumenary:isometric	2	facet-shading		top, left, right face shading
+lumenary:kaleidoscope	0	symmetry-fold		angle folded into one mirror wedge
+lumenary:kaleidoscope	1	coordinate-warp		polar source point for the folded angle
+lumenary:kaleidoscope	2	symmetry-fold		coordinate reflected back into the picture
+lumenary:kente	0	lattice-repeat		odd strips offset by half a cell
+lumenary:kente	1	seeded-random,cylinder-shading		random float blocks; rounded-thread shading
+lumenary:kente	2	palette-snap,saturation-adjust,coarse-grid		cell colour boosted and matched to the cloth palette
+lumenary:kinetic-type	0	scroll-loop		row offsets scroll and wrap
+lumenary:kinetic-type	1	mask-clip		picture kept only inside the letters
+lumenary:kinetic-type	2	tone-curve		gamma lift
+lumenary:kintsugi	0	crackle-network		gold where F2 minus F1 is small
+lumenary:kintsugi	1	coordinate-warp,smooth-noise		crack wanders: coordinates displaced by noise before cells are found
+lumenary:kintsugi	2	coordinate-warp,seeded-random		each shard reads the picture from a random shifted place
+lumenary:kintsugi	3	colour-ramp,cylinder-shading		lit gold bead: rounded profile across the seam on a ramp
+lumenary:knitted-pattern	0	stitch-grid		stitch width, height, rows for n across
+lumenary:knitted-pattern	1	stitch-grid		each stitch drawn as two tilted ellipse legs
+lumenary:kolam	0	lattice-repeat		dot lattice
+lumenary:kolam	1	tone-bands		figure type by tone threshold
+lumenary:kolam	2	symmetry-fold		mirror fold of the lookup point
+lumenary:kolam	3		layout	line width and dot radius
+lumenary:l-system-trees	0		specific	branch length, width, angle recursion
+lumenary:l-system-trees	1		specific	branch count and height bound
+lumenary:lego-voxel	0	palette-snap		redmean distance to brick colours
+lumenary:lego-voxel	1	facet-shading		stud side and top shades
+lumenary:lenticular	0	lattice-repeat		interleaved strips under each lens
+lumenary:lenticular	1	ease-toward-target		tilt eases toward its target
+lumenary:lenticular	2	coordinate-warp,cylinder-shading		parallax shift; glint across each cylindrical lens
+lumenary:letterpress	0	tone-dot-lattice		halftone dot radius on the plate
+lumenary:letterpress	1	relief-shading,blur		impression shading from slopes of the softened ink map
+lumenary:letterpress	2	mix-over		paper toward ink, worn speckles
+lumenary:linocut	0	tone-line-screen,smooth-noise		wandering line coordinate
+lumenary:linocut	1	tone-line-screen,tone-curve,smooth-noise		cut width from darkness, tapering along the line
+lumenary:linocut	2	tone-line-screen		ink coverage within the line
+lumenary:liquid-morph	0	coordinate-warp		sinusoidal displacement field
+lumenary:liquid-morph	1	coordinate-warp		total displacement with cursor ripple
+lumenary:liquid-morph	2	misregistration,coordinate-warp		channels sample at different multiples of the offset
+lumenary:lissajous-curves	0	parametric-curve		Lissajous curve
+lumenary:lissajous-curves	1	parametric-curve		period for whole-number frequencies
+lumenary:lissajous-curves	2	tone-mark-size		table of frequencies; curve size from heaviness
+lumenary:lomography	0	saturation-adjust		saturation about luminance with a per-channel colour cast
+lumenary:lomography	1	tone-curve		contrast curve
+lumenary:lomography	2	additive-blend		light leak screened over the picture
+lumenary:low-poly	0	importance-sampling,poisson-disc		acceptance probability and minimum spacing from edge strength
+lumenary:low-poly	1		specific	in-circumcircle test [also seen elsewhere but not shared: delaunay]
+lumenary:low-poly	2		specific	circumcentre of a triangle [also seen elsewhere but not shared: delaunay]
+lumenary:madhubani	0	lattice-repeat		diagonal line lattice fill
+lumenary:madhubani	1	lattice-repeat		dot in every square
+lumenary:madhubani	2	lattice-repeat		concentric rings in each cell
+lumenary:madhubani	3	mix-over		fill line blended over the pigment
+lumenary:makli-carving	0	star-rosette-motif,sdf-shape		rosette outline and soft-edged petal height
+lumenary:makli-carving	1	tone-to-height		height from carved pattern, blurred tone, swell, noise
+lumenary:makli-carving	2	relief-shading		slope lighting with occlusion
+lumenary:mandala	0		layout	outer radius of ring k
+lumenary:mandala	1	lattice-repeat		polar lattice: motif count per ring, a multiple of n0
+lumenary:mandala	2	symmetry-fold		angle folded into one wedge for colour lookup
+lumenary:mandelbrot-fill	0		specific	Mandelbrot and Julia orbits
+lumenary:mandelbrot-fill	1	coordinate-warp		orbit trap reads the picture at the orbit position
+lumenary:mandelbrot-fill	2		specific	smooth escape count
+lumenary:manga	0	unsharp-mask		local contrast: brightness plus its difference from a wide blur
+lumenary:manga	1	tone-dot-lattice		screentone dot with inked share delta
+lumenary:manga	2	soft-threshold,image-gradient		speed lines only in light flat places
+lumenary:maori-koru	0	parametric-curve		spiral radius falling with angle
+lumenary:maori-koru	1	variable-width-stroke		width along the body of the koru
+lumenary:maori-koru	2	tone-bands		paint by light level
+lumenary:marble-museum	0	tone-to-height,blur		height from broad and fine blurs of brightness
+lumenary:marble-museum	1	relief-shading		diffuse light times hollow darkening
+lumenary:marble-museum	2	smooth-noise		marble veins from ridged warped noise
+lumenary:matrix-rain	0	scroll-loop		column head position wraps with time
+lumenary:matrix-rain	1	decay-trail,tone-curve		trail fades behind the head, modulated by picture brightness
+lumenary:maximalism	0	hue-shift		band hues stepped round the wheel, second colour offset
+lumenary:maximalism	1	lattice-repeat		stripe and check pattern functions
+lumenary:memphis	0	tone-bands		four brightness bands, one colour each
+lumenary:memphis	1	parametric-curve		sine squiggle
+lumenary:metaballs	0		specific	metaball kernel and summed field
+lumenary:metaballs	1	soft-threshold		body where the field passes a level
+lumenary:metaballs	2	relief-shading,specular-highlight		shading from field gradient plus gloss
+lumenary:mezzotint	0	tone-curve,smooth-noise,seeded-random		darkness after burnishing; plate roughness from white and smooth noise
+lumenary:mezzotint	1	tooth-threshold		ink holds where darkness exceeds the rough plate threshold
+lumenary:minimalism	0	auto-levels		min-max stretch of blurred brightness
+lumenary:minimalism	1	tone-bands,colour-ramp		band colour on the line from ink to paper
+lumenary:mondrian	0		specific	summed-area table
+lumenary:mondrian	1		specific	variance of a rectangle from two tables [also seen elsewhere but not shared: adaptive-split]
+lumenary:mondrian	2		specific	best cut by mean difference [also seen elsewhere but not shared: adaptive-split]
+lumenary:mono-essay	0	tone-curve		smoothstep tone curve
+lumenary:mono-essay	1	iso-contours		distance to a contour level and line opacity
+lumenary:mono-essay	2		specific	circle centre at the weighted mean of what stands out
+lumenary:mudcloth	0	tone-bands		level from blurred brightness
+lumenary:mudcloth	1		constants	motif coverage per level
+lumenary:mudcloth	2	lattice-repeat		zigzag band motif
+lumenary:mughal-jali	0	lattice-repeat		hex cube coordinates for the star lattice
+lumenary:mughal-jali	1	sdf-shape,star-rosette-motif		eight-point opening as union of margins
+lumenary:mughal-jali	2	sdf-shape,blur		opening mask; sunlight read through the blurred mask at an offset [also seen elsewhere but not shared: drop-shadow]
+lumenary:mughal-jali	3		specific	brightness behind an opening
+lumenary:navajo-weave	0	symmetry-fold		mirrored sample point
+lumenary:navajo-weave	1	lattice-repeat		stepped zigzag border repeating along the edge
+lumenary:navajo-weave	2	cylinder-shading,seeded-random		two rounded weft ridges per cell with fuzz
+lumenary:neo-brutalism	0	tone-bands		palette colour per brightness band
+lumenary:neo-brutalism	1	edge-outline,mix-over		black outline laid over the colour
+lumenary:neo-brutalism	2		layout	cover-crop
+lumenary:neon-glow	0	edge-outline		line opacity from edge strength
+lumenary:neon-glow	1	glow-bloom		additive bloom from downscaled copies
+lumenary:neon-glow	2	flicker		flicker from two sines and dropouts
+lumenary:newspaper	0	tone-dot-lattice		45-degree dot lattice
+lumenary:newspaper	1	tone-dot-lattice		dot radius from darkness
+lumenary:newspaper	2		layout	masthead font size
+lumenary:night-sky	0	importance-sampling,tone-curve		star kept with probability from brightness
+lumenary:night-sky	1	flicker,tone-curve		star twinkle; brightness from picture
+lumenary:night-sky	2		specific	constellation links to the two nearest anchors (a neighbour graph, not a path)
+lumenary:night-vision	0	tone-curve,grain-overlay		intensifier gain curve plus noise
+lumenary:night-vision	1	colour-ramp		phosphor ramp
+lumenary:oil-impasto	0	edge-tangent-field,seeded-random		stroke angle from gradient direction blended with a random direction
+lumenary:oil-impasto	1	relief-shading		normal from height-map slopes
+lumenary:oil-impasto	2	relief-shading,specular-highlight		diffuse plus wet specular glint
+lumenary:op-art-moire	0		specific	moire band spacing for two turned gratings
+lumenary:op-art-moire	1	tone-line-screen		picture bends the second line set
+lumenary:op-art-moire	2	tone-line-screen		anti-aliased coverage of two line sets, union
+lumenary:origami-folds	0	facet-shading,seeded-random		facet brightness from facet direction against light, random variation
+lumenary:origami-folds	1	seeded-random		fold type chosen at random
+lumenary:oscilloscope	0	tone-line-screen,tone-curve		traces displaced by blurred brightness
+lumenary:oscilloscope	1		constants	amplitude in trace spacings
+lumenary:papel-picado	0	tone-dot-lattice,tone-curve		hole radius in each lattice cell from brightness
+lumenary:papel-picado	1	tone-dot-lattice		open fraction of a cell
+lumenary:papel-picado	2	mix-over		see-through tissue over the picture
+lumenary:paper-cut-out	0	tone-bands,soft-threshold		layer masks at tone levels
+lumenary:paper-cut-out	1	blur		shadow: mask displaced from the light and blurred twice [also seen elsewhere but not shared: drop-shadow]
+lumenary:paper-cut-out	2	mix-over,multiply-blend		layer composited with its shadow darkening below
+lumenary:parchment	0	material-ground,sheet-edge		vellum stains from mottling, rim and foxing
+lumenary:parchment	1	tone-line-screen		hatching width from darkness, anti-aliased by distance to line centre
+lumenary:parchment	2	tone-line-screen		slanted waved line coordinate
+lumenary:particles	0	particle-motion		spring to target plus cursor repulsion
+lumenary:particles	1	particle-motion		semi-implicit Euler with damping
+lumenary:particles	2	tone-dot-lattice		dot radius per cell from brightness (area tracks tone)
+lumenary:pastel-chalk	0	smooth-noise		chalk offered from blurred lightness, pressure, noise
+lumenary:pastel-chalk	1	tooth-threshold		coverage where chalk exceeds the paper tooth
+lumenary:pastel-chalk	2	mix-over		chalk over toned paper
+lumenary:pencil-hatching	0	tone-line-screen,smooth-noise		stroke coordinate with hand wobble
+lumenary:pencil-hatching	1	tone-line-screen		stroke width past each layer's darkness threshold
+lumenary:pencil-hatching	2	tone-line-screen,seeded-random		coverage, max over layers, random pressure
+lumenary:penrose-tiling	0		specific	triangle deflation vertices
+lumenary:penrose-tiling	1		specific	thin/thick triangle count growth
+lumenary:penrose-tiling	2		specific	triangle count and edge length after k deflations
+lumenary:persian-miniature	0	tone-line-screen		hatching on flat colour where tone is low
+lumenary:persian-miniature	1	label-boundary,mix-over		ink outline on region edges
+lumenary:persian-miniature	2	seeded-random		gold fleck size and opacity
+lumenary:persian-miniature	3		layout	frame and lapis band
+lumenary:photomosaic	0		specific	tile cost: signature distance plus reuse penalty
+lumenary:photomosaic	1		specific	tile colour shifted toward the cell mean
+lumenary:photomosaic	2		specific	tile detail kept by cell brightness
+lumenary:phulkari	0	stitch-grid		stitch direction per cell for diamonds
+lumenary:phulkari	1	stitch-grid,seeded-random		stitch length with hashed variation
+lumenary:phulkari	2	stitch-grid,sdf-shape		coverage by distance to the stitch segment
+lumenary:phyllotaxis	0		specific	Vogel golden-angle spiral
+lumenary:phyllotaxis	1		layout	scale to fill radius, mean spacing
+lumenary:phyllotaxis	2	tone-mark-size		seed radius from heaviness
+lumenary:physarum	0		specific	agent sensor readings
+lumenary:physarum	1		specific	agent steering rule
+lumenary:physarum	2	blur,decay-trail		trail diffused by a 3x3 kernel and decayed
+lumenary:pin-art	0	particle-motion		pin spring-damper toward target
+lumenary:pin-art	1	relief-shading		sphere normal of a pin head
+lumenary:pin-art	2	relief-shading,specular-highlight		head brightness and highlight
+lumenary:pixel-art	0	ordered-dither		Bayer offset before palette choice
+lumenary:pixel-art	1	palette-snap		weighted RGB distance to palette
+lumenary:pixel-art	2	kmeans-palette		k-means step
+lumenary:pixel-dissolve	0	soft-threshold		block progress by smoothstep of phase and order [also seen elsewhere but not shared: ease-curve]
+lumenary:pixel-dissolve	1	particle-motion,smooth-noise,seeded-random		block flight along the wind with noise
+lumenary:pixel-dissolve	2		specific	block shrinks and fades
+lumenary:pixel-platformer	0		layout	game pixel and tile size
+lumenary:pixel-platformer	1	tone-bands		solid threshold at a brightness rank
+lumenary:pixel-platformer	2	tone-bands		five bits a channel
+lumenary:pixel-sorting	0	tone-bands		run of pixels inside a brightness band
+lumenary:pixel-sorting	1		specific	hue sort key
+lumenary:plasticine	0	tone-to-height,blur		pillow height from blurred piece mask, thumb dent
+lumenary:plasticine	1	relief-shading		diffuse shading with seam darkening
+lumenary:plasticine	2	specular-highlight		gloss highlight
+lumenary:pointillism	0		specific	dot count for coverage
+lumenary:pointillism	1		specific	chance a pixel is bare
+lumenary:pointillism	2	saturation-adjust,seeded-random,hue-shift		random jitter in hue, saturation, lightness
+lumenary:poisson-stippling	0	poisson-disc,importance-sampling,tone-curve		local minimum spacing from heaviness
+lumenary:poisson-stippling	1	poisson-disc		dart-throwing acceptance
+lumenary:poisson-stippling	2	importance-sampling,tone-mark-size		dot density and dot radius from heaviness
+lumenary:pop-art	0	tone-bands,tone-curve		band and position inside it after contrast
+lumenary:pop-art	1	tone-dot-lattice		dot of the next ink grows with position in band
+lumenary:pop-art	2	edge-outline		outline where gradient exceeds a threshold
+lumenary:qr-barcode-art	0		constants	finder pattern
+lumenary:qr-barcode-art	1	ordered-dither		module inked by brightness plus Bayer offset
+lumenary:qr-barcode-art	2	tone-line-screen		bar width from darkness
+lumenary:quilt-patchwork	0	coarse-grid,palette-snap		patch size and nearest fabric to the centre colour
+lumenary:quilt-patchwork	1	seeded-random		printed patch by random draw
+lumenary:rain-on-glass	0	mix-over,decay-trail		clear mask fades back to mist
+lumenary:rain-on-glass	1	particle-motion,ease-toward-target		drop speed eases to terminal speed
+lumenary:rain-on-glass	2	coordinate-warp		drop lens: inverted magnified lookup
+lumenary:ralli-patchwork	0	lattice-repeat		diagonal cell index
+lumenary:ralli-patchwork	1	sdf-shape		distance to the cut line in a cell
+lumenary:ralli-patchwork	2	sdf-shape,soft-threshold		seam distance and patch puffing
+lumenary:ralli-patchwork	3	running-stitch		dashed running stitch inset from the seam
+lumenary:reaction-diffusion	0		specific	Gray-Scott equations
+lumenary:reaction-diffusion	1		specific	discrete Laplacian and Euler step
+lumenary:reaction-diffusion	2		specific	tone steers feed and kill rates
+lumenary:retro	0	ordered-dither		4x4 ordered offset
+lumenary:retro	1	tone-bands,tone-curve		band after contrast plus dither offset
+lumenary:retro-anime	0	soft-threshold		darks toward navy, lights toward cream [also seen elsewhere but not shared: split-toning]
+lumenary:retro-anime	1	misregistration		colour bleed by channel shift
+lumenary:retro-anime	2	glow-bloom,soft-threshold		halo from blurred bright parts
+lumenary:retro-console	0	coordinate-warp		affine texture lookup in nudged triangles
+lumenary:retro-console	1	ordered-dither		Bayer dither to n levels
+lumenary:retro-console	2	mix-over		fog by height in frame [also seen elsewhere but not shared: linear-fade]
+lumenary:retro-vhs	0	coordinate-warp,seeded-random		per-scanline horizontal shift
+lumenary:retro-vhs	1	coordinate-warp		tracking band shift
+lumenary:retro-vhs	2	misregistration		colour bleed: channels at own offsets
+lumenary:ridgeline	0	tone-line-screen,tone-curve		lines displaced by blurred brightness
+lumenary:ridgeline	1	projection-3d		perspective narrowing of back lines
+lumenary:risograph	0	misregistration,tone-curve		two plates, second read at an offset
+lumenary:risograph	1	tooth-threshold,smooth-noise,seeded-random		ink coverage against a grainy noise threshold
+lumenary:risograph	2	multiply-blend		multiply of two inks on paper
+lumenary:rosemaling	0	tone-bands,tone-mark-size		motif choice and size by tone
+lumenary:rosemaling	1	parametric-curve,variable-width-stroke		tapering spiral scroll ribbon
+lumenary:rosemaling	2	star-rosette-motif		petal directions
+lumenary:rotoscope	0	tone-bands,smooth-noise		posterise with boiling noise
+lumenary:rotoscope	1	edge-outline		ink line from Sobel gradient
+lumenary:rotoscope	2	misregistration,mix-over		colour and ink read at different shifts
+lumenary:rubber-stamp	0	tooth-threshold,smooth-noise,seeded-random		inked where brightness plus noise passes the cut level
+lumenary:rubber-stamp	1	smooth-noise		ink opacity with uneven noise, wear, pinholes
+lumenary:rubber-stamp	2	multiply-blend		ink multiplied on paper
+lumenary:sashiko	0	stitch-grid,running-stitch,seeded-random		hitomezashi: each grid stitch on or off by parity bits
+lumenary:sashiko	1	stitch-grid		alternation keeps lines turning
+lumenary:sashiko	2	tone-mark-size,tone-curve		thread width and brightness from the picture
+lumenary:scanlines-crt	0	coordinate-warp		barrel distortion
+lumenary:scanlines-crt	1		specific	scanline dip by a cosine of row period [also seen elsewhere but not shared: scanlines]
+lumenary:screen-print	0	tone-bands,misregistration,soft-threshold		ink pass k covers below its tone threshold, read at its own offset, edge noise
+lumenary:screen-print	1	multiply-blend		multiply overprint with uneven ink film
+lumenary:screen-print	2	material-ground		screen mesh texture from a sine product
+lumenary:shadow-puppet	0	tone-bands,soft-threshold		figure mask at a brightness rank
+lumenary:shadow-puppet	1	lattice-repeat,dog-lines,iso-contours		punch holes at lattice points on fine-minus-wide blur or tone contour bands
+lumenary:shadow-puppet	2	colour-ramp,vignette		lamp light falling off radially through a ramp
+lumenary:sindhi-mirror-embroidery	0	lattice-repeat		brick/hex mirror lattice
+lumenary:sindhi-mirror-embroidery	1		layout	mirror radius and glass fraction
+lumenary:sindhi-mirror-embroidery	2	lattice-repeat		seed stitches at the triangle centres each lattice point owns
+lumenary:sindhi-mirror-embroidery	3	coordinate-warp,hue-shift		mirror shows the surroundings shrunk 3.4 times; second thread hue offset
+lumenary:sindhi-script	0	tone-mark-size,tone-bands		font size and weight from tone
+lumenary:sindhi-script	1	seeded-random		right-to-left word setting with random spacing
+lumenary:sindhi-script	2		layout	line positions
+lumenary:sindhi-script	3		specific	ink brightness follows tone
+lumenary:sindhi-topi	0		layout	ring widths and radii
+lumenary:sindhi-topi	1	lattice-repeat		polar lattice of cells, odd rings shifted half a cell
+lumenary:sindhi-topi	2		constants	ornament order by ring
+lumenary:sindhi-topi	3		layout	rim bead size and spacing
+lumenary:slit-scan	0		specific	slit sweep as a rounded triangle wave
+lumenary:slit-scan	1		specific	stretch from slit speed and scroll rate
+lumenary:slit-scan	2	frame-history		time warp: interpolate between past frames by lag
+lumenary:snowfall	0	seeded-random		random depth sets flake radius and opacity
+lumenary:snowfall	1	particle-motion		flake fall and sway
+lumenary:snowfall	2	ease-toward-target		wind eases toward target
+lumenary:soft-3d	0	tone-to-height,blur		inflated height from blurred non-outline mask
+lumenary:soft-3d	1	relief-shading		wrapped diffuse light from slope normals
+lumenary:soft-3d	2	specular-highlight		tight and broad highlights
+lumenary:space-colonization	0		specific	node growth toward attractors
+lumenary:space-colonization	1		specific	kill distance
+lumenary:space-colonization	2		specific	branch width from nodes fed
+lumenary:spirograph	0	parametric-curve		hypotrochoid
+lumenary:spirograph	1	parametric-curve		closure after q turns
+lumenary:spirograph	2	tone-mark-size		rosette scale in a cell from picture
+lumenary:split-flap	0	tone-bands,tone-curve		drum position from contrasted brightness
+lumenary:split-flap	1	seeded-random		start delay with hashed jitter; flaps completed
+lumenary:split-flap	2		specific	vertical scale of a turning flap [also seen elsewhere but not shared: flip-foreshorten]
+lumenary:stained-glass	0	crackle-network		lead where F2 minus F1 is small
+lumenary:stained-glass	1	voronoi-cells,soft-threshold		glass brightness from nearness to the piece centre
+lumenary:stained-glass	2	saturation-adjust		piece colour in HSL
+lumenary:sticker	0		specific	subject score from border colour and centre
+lumenary:sticker	1	dilate,blur		sticker border: mask grown by blurring and a low cut
+lumenary:sticker	2	coordinate-warp		peel: reflection in the fold line
+lumenary:strange-attractors	0		specific	Clifford and de Jong maps [also seen elsewhere but not shared: iterated-map]
+lumenary:strange-attractors	1		specific	drifting parameters
+lumenary:strange-attractors	2	tone-curve		log-density tone map
+lumenary:string-art	0	tone-curve		next nail by darkest line [also seen elsewhere but not shared: greedy-path]
+lumenary:string-art	1		specific	target used up along the chosen line [also seen elsewhere but not shared: greedy-path]
+lumenary:string-art	2	multiply-blend		light surviving k overlapping threads
+lumenary:surreal	0	coordinate-warp,smooth-noise,soft-threshold		melt: pixels pulled down by noise
+lumenary:surreal	1	mix-over		tint and sky colour grade
+lumenary:swiss-design	0	tone-line-screen		bar height per column from darkness
+lumenary:swiss-design	1		layout	title size
+lumenary:talavera	0	tone-bands		tile ground by brightness band
+lumenary:talavera	1	star-rosette-motif		eight-pointed star vertices
+lumenary:talavera	2		specific	warm-or-cool lead colour rule
+lumenary:tapestry-weave	0	cylinder-shading		rounded weft brightness across row and cell
+lumenary:tapestry-weave	1	soft-threshold		warp showing at row edges
+lumenary:thermal-camera	0	tone-curve		heat from blurred brightness with contrast
+lumenary:thermal-camera	1		constants	temperature readout
+lumenary:ticker-text	0	scroll-loop		character position scrolls and wraps
+lumenary:ticker-text	1	tone-curve		letter intensity from brightness
+lumenary:tilt-shift	0	soft-threshold		blur level from distance to the focus band
+lumenary:tilt-shift	1	blur		interpolate between blur levels
+lumenary:tilt-shift	2	saturation-adjust,tone-curve		model-making saturation and contrast boost
+lumenary:tiny-planet	0	coordinate-warp		radial mapping curve
+lumenary:tiny-planet	1	coordinate-warp		polar lookup
+lumenary:tiny-planet	2	blur		samples averaged round a circle
+lumenary:truchet-tiles	0	tone-line-screen		tile line width from darkness
+lumenary:truchet-tiles	1		specific	quadtree split by variance [also seen elsewhere but not shared: adaptive-split]
+lumenary:truchet-tiles	2	seeded-random		tile flip by position hash
+lumenary:truck-art	0	palette-snap		redmean distance to enamel colours
+lumenary:truck-art	1	mix-over		outline width and strength
+lumenary:truck-art	2	soft-threshold,lattice-repeat		chrome gloss in bright places, banded
+lumenary:truck-art	3		layout	frame width
+lumenary:ukiyo-e	0	palette-snap,saturation-adjust		nearest pigment to the boosted blurred colour
+lumenary:ukiyo-e	1	mode-filter		majority filter
+lumenary:ukiyo-e	2	label-boundary,edge-outline		key line on colour boundaries and strong edges
+lumenary:ukiyo-e	3	mix-over,smooth-noise		bokashi fade from the top [also seen elsewhere but not shared: linear-fade]
+lumenary:underwater	0	coordinate-warp		sinusoidal swell lookup
+lumenary:underwater	1	multiply-blend		per-channel absorption with depth
+lumenary:underwater	2		specific	caustic net from bent sine ripples
+lumenary:vaporwave	0	projection-3d		perspective spacing of floor grid lines
+lumenary:vaporwave	1	misregistration		colour shift
+lumenary:vaporwave	2		specific	Unicode full-width form
+lumenary:vector-art	0	kmeans-palette		k-means step
+lumenary:vector-art	1	saturation-adjust		saturation about grey
+lumenary:victorian	0	tone-line-screen		engraved line thickness from darkness
+lumenary:victorian	1	tone-line-screen		line waver
+lumenary:victorian	2	tone-line-screen		cross-hatch layer on dark places
+lumenary:voronoi-mosaic	0	voronoi-cells,importance-sampling		cell labels; seeds accepted by importance
+lumenary:voronoi-mosaic	1	importance-sampling		importance from edge strength
+lumenary:voronoi-mosaic	2		specific	weighted Lloyd relaxation [also seen elsewhere but not shared: lloyd-relaxation]
+lumenary:warli	0	importance-sampling,tone-curve		chance a grid position holds a figure, from tone
+lumenary:warli	1	importance-sampling		expected number of figures
+lumenary:warli	2	tone-mark-size		figure size from tone
+lumenary:warli	3	seeded-random		figure kind by position hash
+lumenary:warped-grid	0	coordinate-warp,image-gradient		grid displaced along the brightness gradient
+lumenary:warped-grid	1	tone-line-screen,tone-curve,soft-threshold		ridge lines displaced by brightness, tapered at the sides
+lumenary:watercolour	0	tone-bands		channels pulled toward seven levels
+lumenary:watercolour	1	soft-threshold,image-gradient		pigment amount: highlight lift, edge pooling
+lumenary:watercolour	2	multiply-blend		pigment darkens the paper
+lumenary:wave-function-collapse	0	seeded-random		lowest-entropy cell with random tie-break
+lumenary:wave-function-collapse	1	importance-sampling		tile weight from heaviness
+lumenary:wave-function-collapse	2		specific	adjacency rule on side bits
+lumenary:whiteboard	0		specific	glare band across the board
+lumenary:whiteboard	1	edge-outline		outline from edge strength
+lumenary:whiteboard	2	palette-snap		marker colour chosen by chroma and hue
+lumenary:wireframe-3d	0	projection-3d,tone-to-height		terrain height from brightness, yaw and pitch
+lumenary:wireframe-3d	1	projection-3d		perspective projection
+lumenary:wool-crochet	0	stitch-grid		stitch width and rows
+lumenary:wool-crochet	1	stitch-grid		two strands of one stitch
+lumenary:wool-crochet	2	stitch-grid		five stitches fanned into a shell
+lumenary:x-ray	0	unsharp-mask,image-gradient,tone-curve		structure boost, bright edges, gamma
+lumenary:x-ray	1	grain-overlay		mottle noise
+lumenary:x-ray	2	colour-ramp,tone-curve		film base to full density with per-channel curves
+lumenary:y2k	0	colour-ramp,tone-curve		brightness through the colour ramp
+lumenary:y2k	1	importance-sampling,seeded-random		sparkles kept only on bright places

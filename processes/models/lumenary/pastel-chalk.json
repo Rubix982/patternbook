@@ -58,18 +58,35 @@
   "Pastel is used on toned paper. The paper’s own colour supplies the shadows and middle tones, and the chalk goes on mostly for the lights. The program paints a layer of short, wide strokes, in two passes (the second half the size and covering about half the grid) along a main direction, which is the angle slider plus a spread of ±0.35 radians. Each stroke takes the colour of the blurred picture beneath it, with saturation raised by 12% and lightness set to 0.9 l + 0.1, so chalk comes out brighter and softer than the photograph.",
   "How much chalk actually stays on the paper depends on two things. First, how light the picture is there: the amount is (0.15 + 1.05 L) times the pressure times a slow noise, with L a heavily blurred lightness, so shadows are left to the paper. Second, the grain. The paper tooth is a mix of smooth and white noise, and the amount has to beat a threshold that rises with the tooth slider, which breaks every stroke into a spatter of dots. A few specks of loose dust (about 1%) are added, and the final colour is the paper and the chalk mixed by the coverage."
  ],
+ "primitives": [
+  "mix-over",
+  "smooth-noise",
+  "tooth-threshold"
+ ],
  "equations": [
   {
    "tex": "\\text{amt}=\\operatorname{clip}\\!\\Big[(0.15+1.05\\,L_s)\\,P\\,(0.8+0.4\\,n)\\Big],\\qquad P=0.35+0.9\\,\\text{pressure}",
-   "note": "Chalk offered to the paper: L_s is the blurred lightness, n slow noise."
+   "note": "Chalk offered to the paper: L_s is the blurred lightness, n slow noise.",
+   "primitives": [
+    "smooth-noise"
+   ],
+   "bespoke": null
   },
   {
    "tex": "m=\\alpha\\ \\operatorname{smoothstep}\\!\\Big(1.1\\,\\tau q-0.12(1-q)-0.05,\\ \\ 1.1\\,\\tau q+0.2+0.1(1-q),\\ \\ \\text{amt}\\Big)",
-   "note": "Coverage: α is the stroke layer’s own alpha, τ the paper tooth noise, q the tooth slider."
+   "note": "Coverage: α is the stroke layer’s own alpha, τ the paper tooth noise, q the tooth slider.",
+   "primitives": [
+    "tooth-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=C_{\\text{paper}}\\,(1-m)+C_{\\text{chalk}}\\,m",
-   "note": "Chalk over toned paper."
+   "note": "Chalk over toned paper.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

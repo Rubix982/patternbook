@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: watercolour, relation: same}
-primitives: []
+primitives: [image-gradient, multiply-blend, soft-threshold, tone-bands]
 sources: []
 status: listed
 ---

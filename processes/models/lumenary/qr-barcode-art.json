@@ -58,18 +58,32 @@
   "A QR code is a square of black and white modules with three large squares in the corners that tell a scanner where it is. This treatment keeps those finder patterns, a smaller alignment pattern and the alternating timing lines, so it looks like a code at a glance, and fills every other module from the picture. A module is black when the picture’s brightness there, shifted by a Bayer threshold, is below a half. The shifted threshold is an ordered dither, so mid-greys come out as a regular mix of black and white. It is not a working code and will not scan.",
   "In barcode mode the picture is a stack of thin bands. In each band the bars are placed at a fixed spacing along the width, and the width of each bar follows the darkness of the picture at that point, so dark places have thick bars and light places thin ones. A row of digits is printed under it."
  ],
+ "primitives": [
+  "ordered-dither",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "\\text{finder}(a,b)=\\begin{cases}1&m=3\\ \\text{or}\\ m\\le1\\\\0&m=2\\end{cases},\\qquad m=\\max(\\lvert a-3\\rvert,\\lvert b-3\\rvert)",
-   "note": "The 7 × 7 finder pattern: a ring, a gap and a centre block."
+   "note": "The 7 × 7 finder pattern: a ring, a gap and a centre block.",
+   "primitives": [],
+   "bespoke": "constants"
   },
   {
    "tex": "\\text{module}=1\\ \\Leftrightarrow\\ L+0.9\\,(B_{ij}-\\tfrac12)<\\tfrac12",
-   "note": "Ink when the brightness plus a Bayer offset is below a half."
+   "note": "Ink when the brightness plus a Bayer offset is below a half.",
+   "primitives": [
+    "ordered-dither"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w=u\\,\\big(0.12+0.88\\,(1-L)\\big)",
-   "note": "Bar width in barcode mode, for a unit width u."
+   "note": "Bar width in barcode mode, for a unit width u.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

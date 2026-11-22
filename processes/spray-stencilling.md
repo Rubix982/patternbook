@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: graffiti, relation: analogous}
-primitives: []
+primitives: [blur, mix-over, tone-bands]
 sources: []
 status: listed
 ---

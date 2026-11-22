@@ -58,18 +58,38 @@
   "Batik is a way of keeping dye out of cloth. Hot wax is drawn on with a canting, a small copper cup with a spout, and where the wax lies the cloth stays the colour it was. Dyeing then proceeds from light to dark, with more wax added between baths. Java’s courts developed strict patterns in soga brown and indigo, and the coast favoured brighter colours. The program matches your picture to a cream (the undyed cloth) and six dyes, cleans the regions with a majority filter, and then adds what the wax-worker does by hand.",
   "Outlines are cream, the wax-resist line, and there are two zones around every boundary: a thin continuous line and a wider zone that holds a lattice of dots, as canting dots do. Each dye region is filled with its own small mark (dots, dashes, crosses, rings, waves or triangles, chosen by the dye), a filling called isen-isen. Finally the wax cracks. Cracks are found with a Worley cellular noise: the difference between the distances to the nearest and second nearest seed points is small along cell borders, and where it is below the vein width the dye is let in."
  ],
+ "primitives": [
+  "crackle-network",
+  "lattice-repeat",
+  "mix-over",
+  "resist-mask"
+ ],
  "equations": [
   {
    "tex": "g=F_2(\\mathbf x)-F_1(\\mathbf x),\\qquad \\text{vein where } g<w=(0.7+1.2\\,c)\\,\\mathrm{sc}",
-   "note": "Crackle: F₁ and F₂ are the distances to the nearest and second nearest seed. g is zero on the boundary between two cells."
+   "note": "Crackle: F₁ and F₂ are the distances to the nearest and second nearest seed. g is zero on the boundary between two cells.",
+   "primitives": [
+    "crackle-network"
+   ],
+   "bespoke": null
   },
   {
    "tex": "q=0.8\\Big(1-\\frac{g}{w}\\Big),\\qquad C\\leftarrow C+q\\,(C_{\\text{dark}}-C)",
-   "note": "Dye creeping in: darkest in the middle of the crack and fading to nothing at its edge. It only applies where slow noise exceeds 0.62 − 0.4c."
+   "note": "Dye creeping in: darkest in the middle of the crack and fading to nothing at its edge. It only applies where slow noise exceeds 0.62 − 0.4c.",
+   "primitives": [
+    "crackle-network",
+    "mix-over",
+    "resist-mask"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\Big\\lVert\\operatorname{frac}\\!\\big(\\tfrac{\\mathbf x}{q}\\big)-\\tfrac12\\Big\\rVert<0.17",
-   "note": "The simplest isen-isen mark: a dot in every square of side q. The others are similar conditions on the same coordinates."
+   "note": "The simplest isen-isen mark: a dot in every square of side q. The others are similar conditions on the same coordinates.",
+   "primitives": [
+    "lattice-repeat"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: thermal-camera, relation: same}
-primitives: []
+primitives: [tone-curve]
 sources: []
 status: listed
 ---

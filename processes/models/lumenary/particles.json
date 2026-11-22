@@ -58,18 +58,34 @@
   "The picture is divided into a grid, and every cell becomes one particle with a home position (its “target”) near the cell centre, nudged by a random jitter of up to 0.35 of a cell so the dots do not look like a lattice. In original-colour mode each particle takes the colour of its cell, reduced to 4 bits per channel (at most 4096 colours) so that thousands of particles can be drawn in a few dozen batches instead of changing paint thousands of times. In white mode the colour is fixed and brightness is carried by the dot’s size instead.",
   "Motion is a damped spring simulation. Each particle is pulled toward its target with a spring of stiffness 60. When the cursor is inside the canvas, any particle within 16% of the width is pushed away, hardest at the centre of the cursor and fading smoothly to nothing at its edge. Velocity is multiplied by an exponential damping factor every frame so the particles settle rather than oscillate forever. Clicking gives each nearby particle a random impulse. The step size is clamped, so a slow frame can never make the simulation explode."
  ],
+ "primitives": [
+  "particle-motion",
+  "tone-dot-lattice"
+ ],
  "equations": [
   {
    "tex": "\\mathbf a_i \\;=\\; k\\,(\\mathbf T_i-\\mathbf x_i)\\;+\\;A\\Big(1-\\frac{d}{R}\\Big)^{2}\\,\\hat{\\mathbf d},\\qquad d<R=0.16\\,W",
-   "note": "Spring toward the target T plus repulsion from the cursor; d is the distance to the cursor, d-hat the direction away from it. k = 60."
+   "note": "Spring toward the target T plus repulsion from the cursor; d is the distance to the cursor, d-hat the direction away from it. k = 60.",
+   "primitives": [
+    "particle-motion"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf v\\leftarrow(\\mathbf v+\\mathbf a\\,\\Delta t)\\,e^{-\\gamma\\Delta t},\\qquad \\mathbf x\\leftarrow\\mathbf x+\\mathbf v\\,\\Delta t,\\quad\\gamma=11",
-   "note": "Semi-implicit Euler step with exponential damping."
+   "note": "Semi-implicit Euler step with exponential damping.",
+   "primitives": [
+    "particle-motion"
+   ],
+   "bespoke": null
   },
   {
    "tex": "r_i=\\tfrac12\\,s\\,\\sigma\\,\\big(0.12+0.95\\sqrt{L_i}\\big)",
-   "note": "White mode: dot radius from cell size s, size slider σ and brightness. The square root makes dot area, not radius, track brightness."
+   "note": "White mode: dot radius from cell size s, size slider σ and brightness. The square root makes dot area, not radius, track brightness.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

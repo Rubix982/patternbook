@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: knitted-pattern, relation: same}
-primitives: []
+primitives: [stitch-grid]
 sources: []
 status: listed
 ---

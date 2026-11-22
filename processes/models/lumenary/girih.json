@@ -58,22 +58,31 @@
   "Girih, from the Persian for knot, is the strapwork of Islamic buildings: bands that appear to weave over and under to make stars and polygons. The medieval method, as far as we can tell from scrolls kept in Topkapı Palace, was to divide the plane into a few tile shapes and draw lines across them. In 1925 Ernest Hankin gave a rule for the lines that is easy to compute: from the middle of every edge of a polygon, two lines go inward at the same angle to the edge, and each meets the line from the neighbouring edge. In 2007 Peter Lu and Paul Steinhardt showed that the girih at the Darb-i Imam shrine in Isfahan (1453) comes very close to a Penrose tiling, which never repeats.",
   "The program uses that connection. It builds a Penrose tiling of two rhombs by de Bruijn’s pentagrid method and then draws the strapwork on each rhomb (this uses two shapes, and not the five girih tiles of the scrolls). Five families of parallel lines are laid across the plane, family i being the set of points z with z · eᵢ + γᵢ a whole number, where eᵢ is a unit vector at angle 2πi/5 and the offsets γᵢ add up to zero. Where a line of family r crosses a line of family s there is one rhomb, whose corners are found by rounding up z · eᵢ + γᵢ for the other families. If r and s are neighbouring directions the rhomb is the wide one, otherwise the narrow one. The random offsets are the “patch of the tiling” (shuffle). Each rhomb is then given Hankin’s lines at the chosen contact angle, which splits it into four kites and a central star, each coloured from your picture, a classic lapis or turquoise and ivory scheme, or both, with the lines drawn in gold."
  ],
+ "primitives": [],
  "equations": [
   {
    "tex": "\\mathbf z\\cdot\\mathbf e_i+\\gamma_i\\in\\mathbb Z,\\qquad \\mathbf e_i=\\Big(\\cos\\tfrac{2\\pi i}{5},\\ \\sin\\tfrac{2\\pi i}{5}\\Big),\\qquad \\sum_{i=0}^{4}\\gamma_i=0",
-   "note": "The pentagrid: five families of lines. The condition on the offsets γᵢ makes the dual a Penrose tiling."
+   "note": "The pentagrid: five families of lines. The condition on the offsets γᵢ makes the dual a Penrose tiling.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "K_i=\\lceil\\mathbf z\\cdot\\mathbf e_i+\\gamma_i\\rceil,\\qquad \\mathbf v=\\sum_{i=0}^{4}q_i\\,\\mathbf e_i,\\quad q_i=\\begin{cases}k_r+\\{0,1\\}&i=r\\\\ k_s+\\{0,1\\}&i=s\\\\ K_i&\\text{otherwise}\\end{cases}",
-   "note": "Corners of the rhomb for the crossing of line k_r of family r and line k_s of family s. The four choices of 0 or 1 give its four corners."
+   "note": "Corners of the rhomb for the crossing of line k_r of family r and line k_s of family s. The four choices of 0 or 1 give its four corners.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\mathbf m_i+t\\,\\mathbf d_1=\\mathbf m_{i+1}+u\\,\\mathbf d_2,\\qquad \\mathbf d_1=R_{\\theta}(\\mathbf b-\\mathbf a),\\quad \\mathbf d_2=R_{-\\theta}(\\mathbf b-\\mathbf c)",
-   "note": "Hankin’s rule for an edge ab followed by bc: the lines leaving the midpoints m_i and m_{i+1} at the contact angle θ meet where t and u are both positive. R_θ is a rotation by θ. If they do not meet, the point halfway between the midpoints is used."
+   "note": "Hankin’s rule for an edge ab followed by bc: the lines leaving the midpoints m_i and m_{i+1} at the contact angle θ meet where t and u are both positive. R_θ is a rotation by θ. If they do not meet, the point halfway between the midpoints is used.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "t=\\frac{(\\mathbf m_{i+1}-\\mathbf m_i)\\times\\mathbf d_2}{\\mathbf d_1\\times\\mathbf d_2},\\qquad \\frac{N_{\\text{wide}}}{N_{\\text{narrow}}}\\to\\varphi=\\frac{1+\\sqrt5}{2}",
-   "note": "The parameter t, using the 2D cross product, and a famous property of Penrose tilings: wide rhombs outnumber narrow ones by the golden ratio."
+   "note": "The parameter t, using the 2D cross product, and a famous property of Penrose tilings: wide rhombs outnumber narrow ones by the golden ratio.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

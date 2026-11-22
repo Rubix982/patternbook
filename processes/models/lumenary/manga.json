@@ -59,18 +59,37 @@
   "The picture is first given a local contrast boost, T = l + 0.9 (l - l_bar), where l_bar is a heavy blur about W/28 pixels wide, so that faces and folds keep their shape in only a few tones. T is then cut into bands. Below a black threshold s (0.07 to 0.3 from the solid-black slider) it is solid ink; above that come cross-hatching, hatching, coarse dots (a quarter of the cell inked, 0.34), fine dots (0.13) and bare paper, with the band edges at about 0.33, 0.48, 0.63 and 0.8.",
   "A dot screen lies on a lattice turned by 45 degrees. With u = (x + y)/(sqrt(2) p) and v = (x - y)/(sqrt(2) p) for a dot spacing p, the distance from the nearest lattice point is d = sqrt(du^2 + dv^2), and a dot covering a share delta of its cell has radius r = sqrt(delta/pi); the coverage is clamp((r - d) p + 1/2), an anti-aliased edge one pixel wide. Hatching is the same idea in one dimension. Speed lines are drawn in 132 sectors around the centre, each with its own width and jitter, or as horizontal bands for rushing sideways, and are allowed only where the picture is both light (T above 0.58) and flat (its blurred gradient below 0.06), so they pass behind a face instead of across it."
  ],
+ "primitives": [
+  "image-gradient",
+  "soft-threshold",
+  "tone-dot-lattice",
+  "unsharp-mask"
+ ],
  "equations": [
   {
    "tex": "T=\\ell+0.9\\,(\\ell-\\bar\\ell)",
-   "note": "Local contrast: l is the brightness and its bar a wide blur."
+   "note": "Local contrast: l is the brightness and its bar a wide blur.",
+   "primitives": [
+    "unsharp-mask"
+   ],
+   "bespoke": null
   },
   {
    "tex": "u=\\frac{x+y}{\\sqrt2\\,p},\\quad v=\\frac{x-y}{\\sqrt2\\,p},\\qquad c=\\operatorname{clamp}\\Big(\\big(\\sqrt{\\delta/\\pi}-\\sqrt{\\Delta u^{2}+\\Delta v^{2}}\\big)\\,p+\\tfrac12\\Big)",
-   "note": "A screentone dot: du and dv are the offsets from the nearest lattice point, and delta the share of the cell that is inked."
+   "note": "A screentone dot: du and dv are the offsets from the nearest lattice point, and delta the share of the cell that is inked.",
+   "primitives": [
+    "tone-dot-lattice"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{ink}=\\max\\Big(\\text{tone},\\ \\text{rays}\\cdot S_{0.58,0.72}(T)\\big(1-S_{0.018,0.06}(\\overline{|\\nabla T|})\\big),\\ \\text{line}\\Big)",
-   "note": "Speed lines fill only light, flat places; the outline is drawn over everything. S is smoothstep."
+   "note": "Speed lines fill only light, flat places; the outline is drawn over everything. S is smoothstep.",
+   "primitives": [
+    "soft-threshold",
+    "image-gradient"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

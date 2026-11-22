@@ -58,18 +58,34 @@
   "A Lissajous curve is the path of a point that swings horizontally with frequency a and vertically with frequency b: x = A sin(a t + φ), y = B sin(b t). When a and b are whole numbers the curve closes and forms loops and knots; the ratio a : b gives the number of lobes along each side, and the phase φ opens or closes the figure from a line to an ellipse. If a and b share a factor g, the curve repeats after 2π/g.",
   "Two layouts are offered. The knot is one large curve, drawn as 2,600 short segments, with the chosen number of ribbons: copies with the phase advanced by 0.22 radians each, nested like a twisted band. Each segment takes the colour of the picture at its midpoint, and its width follows the darkness, from half to twice the line width. The table is the classic Lissajous chart: a grid in which the cell in column i and row j holds the curve of frequencies (i + 1, j + 1). The cell’s curve is sized by the tone beneath it, R = 0.42 c (0.55 + 0.45 √(0.2 + h)), where c is the cell width and h the heaviness (darkness), and coloured by the picture."
  ],
+ "primitives": [
+  "parametric-curve",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "x(t)=A\\sin(a\\,t+\\varphi),\\qquad y(t)=B\\sin(b\\,t),\\qquad t\\in[0,2\\pi]",
-   "note": "The curve; A and B are 47% of the width and height in the knot layout."
+   "note": "The curve; A and B are 47% of the width and height in the knot layout.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "T=\\frac{2\\pi}{\\gcd(a,\\,b)}",
-   "note": "The period of the curve for whole-number frequencies."
+   "note": "The period of the curve for whole-number frequencies.",
+   "primitives": [
+    "parametric-curve"
+   ],
+   "bespoke": null
   },
   {
    "tex": "(a,\\ b)_{ij}=(i+1,\\ j+1),\\qquad R_{ij}=0.42\\,c\\,\\big(0.55+0.45\\sqrt{0.2+h_{ij}}\\big)",
-   "note": "The table: frequencies for the cell at column i, row j, and its size from the picture’s heaviness h."
+   "note": "The table: frequencies for the cell at column i, row j, and its size from the picture’s heaviness h.",
+   "primitives": [
+    "tone-mark-size"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

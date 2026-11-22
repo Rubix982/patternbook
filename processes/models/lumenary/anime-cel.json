@@ -59,18 +59,39 @@
   "A cel is painted in flat areas, so the first job is to remove everything that is not an area. The picture is smoothed with a filter that keeps edges: each pixel becomes the average of the neighbours in its row, then its column, weighted by how close they are to it in colour. Similar neighbours count fully and different ones hardly at all, so skin evens out while the outline of a face stays put. A palette is then found by k-means. Distances are measured on brightness plus two colour differences, with the colour differences weighted up, which keeps a pale skin tone apart from a grey wall of the same brightness.",
   "Each paint gets a second, shadow tone: darker and mixed a little toward violet, as cel painters mix it. The shadow is one hard step, taken where the picture is darker than its wider surroundings. Lines come from three sources and the strongest wins: places where the smoothed picture is darker than its own blur (the dark side of every edge), boundaries between two paints that differ a lot, and small dark features such as eyes taken from the unsmoothed picture. Shine is white, placed only where a spot is both very bright and brighter than its surroundings. A soft glow is the frame shrunk, enlarged and screened over itself."
  ],
+ "primitives": [
+  "bilateral-smooth",
+  "dog-lines",
+  "kmeans-palette",
+  "palette-snap",
+  "soft-threshold"
+ ],
  "equations": [
   {
    "tex": "p'_i=\\frac{\\sum_j w_{ij}\\,p_j}{\\sum_j w_{ij}},\\qquad w_{ij}=\\exp\\!\\Big(-\\frac{\\lVert p_i-p_j\\rVert_1^{2}}{2\\,\\sigma^{2}}\\Big),\\quad\\sigma=76.5",
-   "note": "Edge-keeping smoothing over the pixels j within the reach of pixel i, along one row or column at a time."
+   "note": "Edge-keeping smoothing over the pixels j within the reach of pixel i, along one row or column at a time.",
+   "primitives": [
+    "bilateral-smooth"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf f=\\big(Y,\\ 1.7\\,(B-Y),\\ 1.7\\,(R-Y)\\big),\\qquad Y=0.299R+0.587G+0.114B",
-   "note": "The space in which paints are found and matched."
+   "note": "The space in which paints are found and matched.",
+   "primitives": [
+    "palette-snap",
+    "kmeans-palette"
+   ],
+   "bespoke": null
   },
   {
    "tex": "s=S_{\\tau,\\,\\tau+0.014}\\big(L_{16}-L_{2}\\big),\\qquad \\tau=\\operatorname{lerp}(0.12,\\ 0.02,\\ \\text{shadow})",
-   "note": "The cel shadow: L with a wide blur minus L with a narrow one, cut to a hard step."
+   "note": "The cel shadow: L with a wide blur minus L with a narrow one, cut to a hard step.",
+   "primitives": [
+    "dog-lines",
+    "soft-threshold"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,14 +58,28 @@
   "The program fills the picture with circles that never overlap, each as large as the room allows. It tries random points, and at each one asks how big a circle could be. The answer is the smallest of four things: the radius the picture asks for, the distances to the four walls, and the distance to every neighbouring circle minus its radius and the gap. If the answer is at least the smallest allowed radius, the circle is placed. A grid with cells the size of the largest circle means only the nine nearest cells need to be searched, and the number of attempts grows with the area divided by the smallest circle’s area.",
   "The picture decides the radius it asks for. With size following the light or the dark, the wanted radius is r_min × 1.6 + (r_max − 1.6 r_min) f^0.9, where f is the tone (or one minus it), so large circles gather in the chosen tones and small ones fill everything else. Each circle takes the picture’s colour at its centre. Circles can be drawn as flat discs, as rings whose stroke is 0.28 of the radius, or as glossy beads with a radial gradient lit from the upper left, brightened ×1.4 + 50 at the highlight and darkened to 0.62 at the rim."
  ],
+ "primitives": [
+  "poisson-disc",
+  "tone-curve",
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "r=\\min\\Big(r_{\\text{want}},\\ x,\\ W-x,\\ y,\\ H-y,\\ \\min_k\\big[\\lVert\\mathbf p-\\mathbf p_k\\rVert-r_k-g\\big]\\Big),\\qquad \\text{accept if } r\\ge r_{\\min}",
-   "note": "The largest circle that fits at point p, given the other circles (centres p_k, radii r_k) and the gap g."
+   "note": "The largest circle that fits at point p, given the other circles (centres p_k, radii r_k) and the gap g.",
+   "primitives": [
+    "poisson-disc"
+   ],
+   "bespoke": null
   },
   {
    "tex": "r_{\\text{want}}=1.6\\,r_{\\min}+\\big(r_{\\max}-1.6\\,r_{\\min}\\big)\\,f^{0.9}",
-   "note": "The radius the picture asks for; f is the tone, or 1 − tone when the dark parts should be large."
+   "note": "The radius the picture asks for; f is the tone, or 1 − tone when the dark parts should be large.",
+   "primitives": [
+    "tone-mark-size",
+    "tone-curve"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

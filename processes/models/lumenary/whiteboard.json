@@ -59,18 +59,32 @@
   "The board is almost white: slightly grey toward the corners, crossed by a soft band of glare shaped like a bell curve, and tinted in places by smears of ink that were never quite wiped off. Those ghost marks are two fractal noises, each stretched hard in one direction and cut at a threshold. Outlines are found on a copy of the picture blurred twice, because a marker cannot draw hair, only shapes. The edge strength is cut at a threshold divided by the tip size, so a broader tip simply accepts weaker edges and the line fattens.",
   "Shading is done in strokes. The position of a pixel across the stroke direction, divided by the stroke spacing, says whether it lies in a stroke or in the gap between two. A stroke is drawn only where the picture is dark enough, and a slow noise along its length makes it run dry and stop. The darkest areas get a second set of strokes across the first. Colour is chosen per pixel from the smoothed picture: black when the colour is dull or very dark, otherwise red, green or blue by hue. A colour has to be clearly a colour to earn a coloured marker."
  ],
+ "primitives": [
+  "edge-outline",
+  "palette-snap"
+ ],
  "equations": [
   {
    "tex": "\\text{glare}=0.035\\,\\exp\\!\\Big(-\\Big(\\frac{0.8u+0.6v-0.62}{0.14}\\Big)^{2}\\Big)",
-   "note": "The band of light across the board; u and v are the position from 0 to 1."
+   "note": "The band of light across the board; u and v are the position from 0 to 1.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\alpha_{\\text{line}}=S_{\\theta/\\tau,\\ 1.5\\theta/\\tau}(E),\\qquad \\tau=\\operatorname{lerp}(0.9,\\ 2.6,\\ \\text{tip})",
-   "note": "Outline from the edge strength E of the blurred picture; τ is the tip size."
+   "note": "Outline from the edge strength E of the blurred picture; τ is the tip size.",
+   "primitives": [
+    "edge-outline"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{marker}=\\begin{cases}\\text{black}&\\max(R,G,B)-\\min(R,G,B)<62\\ \\text{or}\\ D>0.86\\\\ \\text{red, green or blue}&\\text{by hue otherwise}\\end{cases}",
-   "note": "Choice of marker from the smoothed colour; D is the darkness of the picture."
+   "note": "Choice of marker from the smoothed colour; D is the darkness of the picture.",
+   "primitives": [
+    "palette-snap"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

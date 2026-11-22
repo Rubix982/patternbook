@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: cross-processed, relation: same}
-primitives: []
+primitives: [saturation-adjust, tone-curve]
 sources: []
 status: listed
 ---

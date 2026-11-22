@@ -58,18 +58,32 @@
   "A flat photograph has no depth, so the program invents one. Depth is a mix of two guesses: brighter things are nearer (or the reverse, if you choose), and things lower in the frame are nearer, which is true of most landscapes and tables. The brightness is blurred twice so that depth changes smoothly, not with every speck of texture.",
   "To look at the picture from a slightly different place, each point is moved sideways in proportion to how far its depth is from the focus plane, in the direction of the camera, so near and far things shift by different amounts, which is parallax. The shift is found by looking up the depth where the pixel lands, twice, because the first guess lands on a different depth than the pixel started on. The camera follows the cursor with smooth easing, or drifts on a slow figure-of-eight when the cursor is away. The warp runs on a smaller copy of the picture, which is then enlarged, to stay fast on a phone."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "ease-toward-target"
+ ],
  "equations": [
   {
    "tex": "D=0.62\\,L_b+0.38\\,\\frac{y}{H}",
-   "note": "The invented depth, between 0 (far) and 1 (near)."
+   "note": "The invented depth, between 0 (far) and 1 (near).",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\mathbf s=\\mathbf x-\\mathbf c\\odot\\big(\\kappa,\\ 0.55\\,\\kappa\\big)\\,(D-f),\\qquad \\kappa=\\text{depth}\\cdot0.075\\,W_b",
-   "note": "Where the output pixel x reads from; c is the camera position from −1 to 1 and f the focus plane."
+   "note": "Where the output pixel x reads from; c is the camera position from −1 to 1 and f the focus plane.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf c\\leftarrow\\mathbf c+(\\mathbf c^{*}-\\mathbf c)\\,\\big(1-e^{-6\\Delta t}\\big)",
-   "note": "Easing of the camera towards its target c*."
+   "note": "Easing of the camera towards its target c*.",
+   "primitives": [
+    "ease-toward-target"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

@@ -58,18 +58,25 @@
   "Alan Turing proposed in 1952 that two chemicals that react and spread at different speeds can organise themselves into spots and stripes. This is the Gray-Scott model. A food chemical U is fed in at rate f. An activator V turns U into more V (the reaction U + 2V → 3V, which gives the term u v²) and is removed at rate f + k. Both spread, the food faster than the activator (Dᵤ = 0.21, Dᵥ = 0.105 in grid units). Depending on f and k the same rules grow coral, worms, spots, mazes or cells that divide; the preset sets the pair, and each step is one explicit Euler step on a grid about 1/2.8 of the picture’s width with a five-point Laplacian and clamped edges.",
   "The picture steers the chemistry. f and k are not constants but vary from cell to cell by the picture’s tone, f = f₀ + s (tone − ½) × 0.02 and k = k₀ + s (tone − ½) × 0.005, so bright and dark regions sit at different places in the pattern map and grow different textures, spots on one side and stripes on the other, and the picture emerges from the growth. The grid starts as U = 1 with scattered 3 × 3 patches (2% of cells) where U = 0.5 and V ≈ 0.25. Pressing and dragging seeds the same kind of patch under the pointer. V is shown through a smoothstep as ink, as an ember colour ramp, or as the picture’s own colours."
  ],
+ "primitives": [],
  "equations": [
   {
    "tex": "\\begin{aligned}\\frac{\\partial u}{\\partial t}&=D_u\\nabla^{2}u-u\\,v^{2}+f\\,(1-u)\\\\[2pt] \\frac{\\partial v}{\\partial t}&=D_v\\nabla^{2}v+u\\,v^{2}-(f+k)\\,v\\end{aligned}",
-   "note": "The Gray-Scott equations; D_u = 0.21 and D_v = 0.105."
+   "note": "The Gray-Scott equations; D_u = 0.21 and D_v = 0.105.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\nabla^{2}u\\approx u_N+u_S+u_E+u_W-4\\,u,\\qquad u\\leftarrow u+\\Delta t\\,\\dot u,\\ \\ \\Delta t=1",
-   "note": "The discrete Laplacian on the grid and the Euler step."
+   "note": "The discrete Laplacian on the grid and the Euler step.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "f=f_0+0.02\\,s\\,\\big(\\tau-\\tfrac12\\big),\\qquad k=k_0+0.005\\,s\\,\\big(\\tau-\\tfrac12\\big)",
-   "note": "The picture’s steering: τ is the tone (0 to 1), s the steering slider."
+   "note": "The picture’s steering: τ is the tone (0 to 1), s the steering slider.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

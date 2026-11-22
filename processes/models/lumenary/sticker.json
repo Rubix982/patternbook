@@ -59,18 +59,34 @@
   "There is no trained model here to find the subject, so it is guessed from two cheap clues. The colour of the frame’s border is averaged over a band 4% wide, and every pixel is scored by how unlike that colour it is, plus a little for being near the middle. The score is blurred and cut at a threshold set by the slider. Of the patches that survive, the largest connected one is kept, found by flood fill, and its holes are closed by flooding the outside from the border and keeping whatever the flood could not reach. If the patch is under 5% or over 90% of the frame the guess has failed, and a rounded square is used.",
   "The white border is the shape grown outward. Blurring the shape and taking a low level of the blur does that, and rounds every notch on the way, which is how a cutting plotter treats a sticker too. The artwork is the flat-colour cartoon of the picture, with a dark keyline where it meets the border. The sticker is built on a sheet larger than the picture, so the border has room where the subject runs off the frame. Gloss is a slanted band of light kept to the sticker’s own pixels, and the peel is a true reflection: everything beyond a diagonal line is removed and drawn again mirrored in that line, in grey."
  ],
+ "primitives": [
+  "blur",
+  "coordinate-warp",
+  "dilate"
+ ],
  "equations": [
   {
    "tex": "\\text{score}=0.8\\,\\operatorname{clamp}\\!\\Big(\\frac{\\lVert C-C_{\\text{edge}}\\rVert_{1}}{300}\\Big)+0.2\\,\\big(1-\\operatorname{clamp}(u^{2}+v^{2})\\big)",
-   "note": "How likely a pixel is to be subject: distance of its colour C from the border’s average, and closeness to the centre (u, v from −1 to 1)."
+   "note": "How likely a pixel is to be subject: distance of its colour C from the border’s average, and closeness to the centre (u, v from −1 to 1).",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\text{border}=S_{0.035,\\,0.075}\\!\\Big(B_{b}^{2}\\,B_{4}^{2}\\,M\\Big)",
-   "note": "The sticker’s outline: the mask M blurred, then blurred again by the border width b, and cut at a low level."
+   "note": "The sticker’s outline: the mask M blurred, then blurred again by the border width b, and cut at a low level.",
+   "primitives": [
+    "dilate",
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "(x,\\ y)\\ \\mapsto\\ (c-y,\\ c-x)",
-   "note": "The peel: reflection in the fold line x + y = c."
+   "note": "The peel: reflection in the fold line x + y = c.",
+   "primitives": [
+    "coordinate-warp"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

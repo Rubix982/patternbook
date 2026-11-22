@@ -58,18 +58,41 @@
   "Charcoal is a powder that sticks to the bumps of the paper and slides off the hollows, so darkness alone does not decide whether a pixel turns black. The paper’s tooth does too. The program models the tooth as a mix of smooth and white noise (55% and 45%) and compares the stick’s pressure with it. The pressure itself is the darkness of the lightly blurred picture, multiplied by the pressure slider and by streaks: noise stretched along the 45 degree diagonal, which gives the direction of a hand shading back and forth. Where the pressure is high the stick reaches the hollows and the pixel is solid; where it is low only the peaks catch, and the grain shows.",
   "The outlines are drawn more than once, the way a sketcher restates a contour. The edge map is read three times at places displaced by slow noise (2 to 12 px, from the sketchy-outlines slider) and the strongest reading wins, so lines wander and double. Smudging is a heavily blurred copy of the picture: dark regions dust the paper a little grey, as if a thumb had dragged the powder around. Four media are only different ink colours (charcoal, conté, sanguine and graphite), mixed over the paper by the final coverage."
  ],
+ "primitives": [
+  "coordinate-warp",
+  "edge-outline",
+  "mix-over",
+  "seeded-random",
+  "smooth-noise",
+  "tooth-threshold"
+ ],
  "equations": [
   {
    "tex": "\\text{cov}=\\operatorname{smoothstep}\\big(0.6\\,\\tau-0.25,\\ 0.6\\,\\tau+0.35,\\ a_0\\big),\\qquad \\tau=0.55\\,n+0.45\\,r",
-   "note": "The paper tooth τ (smooth noise n, white noise r) decides which pressure values a_0 stick."
+   "note": "The paper tooth τ (smooth noise n, white noise r) decides which pressure values a_0 stick.",
+   "primitives": [
+    "tooth-threshold",
+    "smooth-noise",
+    "seeded-random"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\ell=\\max_{k=1,2,3}\\ \\operatorname{smoothstep}\\big(0.045,\\ 0.16,\\ E(\\mathbf x+\\boldsymbol\\delta_k)\\big)",
-   "note": "The redrawn outline: the edge strength E sampled at three noise-shifted positions."
+   "note": "The redrawn outline: the edge strength E sampled at three noise-shifted positions.",
+   "primitives": [
+    "edge-outline",
+    "coordinate-warp"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=(1-a)\\,C_{\\text{paper}}\\,(1-0.55\\,w)+a\\,C_{\\text{ink}}",
-   "note": "a is the final coverage, w the smudge dusting taken from a blurred copy of the picture."
+   "note": "a is the final coverage, w the smudge dusting taken from a blurred copy of the picture.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

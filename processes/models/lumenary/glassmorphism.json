@@ -58,18 +58,32 @@
   "Frosted glass is a blurred copy of the picture shown through a window. To get a smooth blur without an expensive convolution, the picture is shrunk by a factor that depends on the frost slider and then enlarged back in successive doublings with smoothing on. Each shrink throws away fine detail, and each smooth enlargement spreads what is left, which is a low-pass filter: the more it shrinks, the lower the cutoff and the stronger the frost.",
   "Each panel is then built in layers. A soft shadow is drawn first. The panel shape is a rounded rectangle, used as a clip, inside which the blurred picture is drawn, then a translucent tint (white for light glass, near-black for smoke) mixed in by the “over” operator, then a diagonal sheen gradient that fades from bright to nothing, and finally a one-pixel border whose brightness varies along the diagonal so the glass seems to catch light on two corners. The panels’ positions are a fixed layout nudged by a seeded random offset, so “Rearrange” always gives a new but reproducible composition."
  ],
+ "primitives": [
+  "blur",
+  "mix-over"
+ ],
  "equations": [
   {
    "tex": "f=\\frac{1}{1.5+b/5}",
-   "note": "Down-scale factor for frost amount b (0 to 100). The blurred layer is built at f × the picture size."
+   "note": "Down-scale factor for frost amount b (0 to 100). The blurred layer is built at f × the picture size.",
+   "primitives": [
+    "blur"
+   ],
+   "bespoke": null
   },
   {
    "tex": "C=\\alpha_{\\text{tint}}\\,C_{\\text{tint}}+(1-\\alpha_{\\text{tint}})\\,C_{\\text{blur}}",
-   "note": "Tint over blur, with α = opacity × 0.55 for light glass."
+   "note": "Tint over blur, with α = opacity × 0.55 for light glass.",
+   "primitives": [
+    "mix-over"
+   ],
+   "bespoke": null
   },
   {
    "tex": "r=\\frac{\\text{radius}}{100}\\cdot0.2\\cdot\\min(W,H)",
-   "note": "Corner radius is a fraction of the shorter side."
+   "note": "Corner radius is a fraction of the shorter side.",
+   "primitives": [],
+   "bespoke": "layout"
   }
  ],
  "dials": [

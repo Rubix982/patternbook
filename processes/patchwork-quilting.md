@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: quilt-patchwork, relation: same}
   - {by: lumenary, id: ralli-patchwork, relation: same}
-primitives: []
+primitives: [coarse-grid, lattice-repeat, palette-snap, running-stitch, sdf-shape, seeded-random, soft-threshold]
 sources: []
 status: listed
 ---

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: slit-scan, relation: same}
-primitives: []
+primitives: [frame-history]
 sources: []
 status: listed
 ---

@@ -58,14 +58,23 @@
   "The board colour is the picture itself, tinted and darkened, so the picture is still in the soldermask. In the darkest areas a diagonal hatching of copper is added, like the ground plane of a real board. Over it, copper traces are drawn on a grid. In each cell the edge direction is measured with the Sobel operator on a blurred brightness map; the trace follows the edge, so its direction is perpendicular to the gradient, and it is snapped to the nearest of four angles (horizontal, vertical or the two diagonals), because circuit boards use 45° routing.",
   "Where traces are crowded, round pads with holes and small vias are added at random. Chips are rectangles with pins on their long sides, placed on calm parts of the picture and never overlapping each other, and silk-screen part numbers (R12, C7) are placed on empty cells."
  ],
+ "primitives": [
+  "edge-tangent-field"
+ ],
  "equations": [
   {
    "tex": "\\theta=\\operatorname{atan2}(G_y,G_x)+\\tfrac{\\pi}{2},\\qquad q=\\operatorname{round}\\!\\Big(\\frac{\\theta}{\\pi/4}\\Big)\\bmod 4",
-   "note": "The trace is along the tangent of the edge; q picks one of four directions."
+   "note": "The trace is along the tangent of the edge; q picks one of four directions.",
+   "primitives": [
+    "edge-tangent-field"
+   ],
+   "bespoke": null
   },
   {
    "tex": "w=w_0\\,\\big(0.55+0.75\\min(1,\\,1.6\\,m)\\big)",
-   "note": "Trace width grows with the edge strength m, relative to the strongest edge."
+   "note": "Trace width grows with the edge strength m, relative to the strongest edge.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

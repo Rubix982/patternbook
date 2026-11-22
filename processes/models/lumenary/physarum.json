@@ -58,18 +58,31 @@
   "The slime mould Physarum polycephalum has no brain, and yet it finds short routes between food sources and builds networks that resemble railway maps. Jeff Jones (2010) modelled it with agents that follow one another’s scent. Each agent has a position and a heading. It senses the trail map at three points a distance d ahead: straight on, and 28 degrees to the left and to the right. If the middle reading is the highest it goes straight on. If both sides are higher than the middle it turns at random one way or the other by the turning angle. If one side is higher it turns toward that side. Then it steps one cell forward and deposits 0.3 units of chemical there.",
   "The trail map is a field in its own right. After every step it is blurred with the kernel (1 1 1 / 1 4 1 / 1 1 1) divided by 12, which spreads the scent a little, and multiplied by a decay factor, so old trails fade. What the agents sense is the trail plus 0.7 × the attraction slider × a food map, and the food map is the picture’s tone stretched to the full range (light or dark, your choice). The picture is the landscape of nutrients, and the mould builds its channels toward it. Two steps are made per frame, the agents are as many as a share of the grid cells, and pressing and dragging drops a burst of chemical, which agents follow."
  ],
+ "primitives": [
+  "blur",
+  "decay-trail"
+ ],
  "equations": [
   {
    "tex": "S_{\\pm}=T\\big(\\mathbf x+d\\,(\\cos(\\alpha\\pm\\beta),\\ \\sin(\\alpha\\pm\\beta))\\big)+\\kappa\\,F,\\qquad \\beta=28^{\\circ}",
-   "note": "The left and right sensor readings (and the centre one with β = 0); T is the trail, F the food map and κ = 0.7 × the attraction slider."
+   "note": "The left and right sensor readings (and the centre one with β = 0); T is the trail, F the food map and κ = 0.7 × the attraction slider.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\alpha'=\\begin{cases}\\alpha&S_0>S_{-},\\,S_{+}\\\\ \\alpha\\pm\\tau\\ (\\text{random sign})&S_0<S_{-},\\,S_{+}\\\\ \\alpha\\pm\\tau\\ (\\text{toward the larger})&\\text{otherwise}\\end{cases}",
-   "note": "The steering rule; τ is the sharpness of turns."
+   "note": "The steering rule; τ is the sharpness of turns.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "T\\ \\leftarrow\\ \\delta\\;\\frac{\\big(\\begin{smallmatrix}1&1&1\\\\1&4&1\\\\1&1&1\\end{smallmatrix}\\big)\\ast T}{12}",
-   "note": "Diffusion and decay of the trail map after each step; δ is the trail-length slider."
+   "note": "Diffusion and decay of the trail map after each step; δ is the trail-length slider.",
+   "primitives": [
+    "blur",
+    "decay-trail"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

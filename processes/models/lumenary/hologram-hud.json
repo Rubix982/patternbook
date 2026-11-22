@@ -58,18 +58,35 @@
   "The picture is turned into a layer of coloured light. Its opacity at a pixel grows with the brightness there and with the edge strength (blur, then Sobel), so outlines are the most solid part, and the colour is pushed toward white along the same outlines. The layer is added to a near-black ground, since light adds. The whole layer flickers as the product of two sine waves of unrelated frequency, and fourteen times a second a hash decides whether it drops to 45% for an instant.",
   "Tearing is done nine times a second: up to three horizontal bands are drawn a second time, shifted sideways. Scan lines are one small strip of pattern tiled down the frame and slid upward at a steady speed, and a brighter band sweeps down every few seconds. The instruments are plain strokes: corner brackets, a reticle that eases toward the cursor (and wanders on a figure of eight when left alone), rings of ticks turning at different speeds and a row of bars whose heights follow value noise in time."
  ],
+ "primitives": [
+  "ease-toward-target",
+  "flicker",
+  "image-gradient"
+ ],
  "equations": [
   {
    "tex": "\\alpha=\\operatorname{clamp}\\big(0.1+0.75\\,L+k\\,\\lvert\\nabla L\\rvert\\big),\\qquad k=2.6\\cdot\\text{outline}",
-   "note": "Opacity of the hologram layer at a pixel."
+   "note": "Opacity of the hologram layer at a pixel.",
+   "primitives": [
+    "image-gradient"
+   ],
+   "bespoke": null
   },
   {
    "tex": "a(t)=\\big(1-0.14f+0.14f\\,\\sin 31t\\,\\sin 7.3t\\big)\\cdot d(t)",
-   "note": "Brightness of the whole layer: f is the flicker slider, d is 0.45 during a dropout and 1 otherwise."
+   "note": "Brightness of the whole layer: f is the flicker slider, d is 0.45 during a dropout and 1 otherwise.",
+   "primitives": [
+    "flicker"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf r\\leftarrow\\mathbf r+(\\mathbf r^{*}-\\mathbf r)\\,\\min(1,\\,6\\,\\Delta t)",
-   "note": "The reticle r eases toward its target r*, the cursor or the idle path."
+   "note": "The reticle r eases toward its target r*, the cursor or the idle path.",
+   "primitives": [
+    "ease-toward-target"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

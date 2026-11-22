@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: anime-cel, relation: analogous}
   - {by: lumenary, id: retro-anime, relation: analogous}
-primitives: []
+primitives: [bilateral-smooth, dog-lines, glow-bloom, kmeans-palette, misregistration, palette-snap, soft-threshold]
 sources: []
 status: listed
 ---

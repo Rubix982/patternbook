@@ -58,18 +58,31 @@
   "The picture is turned into a mesh of triangles. First points are chosen: some along the frame, so the mesh covers the whole picture, and the rest by random trial. A trial point is kept with a probability that rises with the edge strength there, and it must be at least a minimum distance from every point already kept, with a smaller minimum near edges, so triangles are small where the picture changes quickly and large on flat ground.",
   "The points are joined by Delaunay triangulation, the unique mesh in which no point lies inside the circumscribed circle of any triangle, which avoids long thin triangles. It is built by the Bowyer-Watson method: add the points one at a time; remove every triangle whose circle contains the new point; and join the new point to the edges of the hole. Each triangle is filled with the average of four samples of the picture and a small random brightness change."
  ],
+ "primitives": [
+  "importance-sampling",
+  "poisson-disc"
+ ],
  "equations": [
   {
    "tex": "P_{\\text{keep}}=(1-\\beta)\\,0.55+\\beta\\,(0.06+0.94\\,e),\\qquad r=b\\,(0.95-0.62\\,\\beta\\,e)",
-   "note": "Acceptance probability and minimum spacing r; β is “follow edges”, e the edge strength 0 to 1 and b = √(WH/N)."
+   "note": "Acceptance probability and minimum spacing r; β is “follow edges”, e the edge strength 0 to 1 and b = √(WH/N).",
+   "primitives": [
+    "importance-sampling",
+    "poisson-disc"
+   ],
+   "bespoke": null
   },
   {
    "tex": "(x-u_x)^2+(y-u_y)^2<R^2",
-   "note": "Point (x, y) is inside the circumcircle of a triangle with centre u and radius R."
+   "note": "Point (x, y) is inside the circumcircle of a triangle with centre u and radius R.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\begin{aligned}u_x&=\\frac{a^2(b_y-c_y)+b^2(c_y-a_y)+c^2(a_y-b_y)}{D}\\\\u_y&=\\frac{a^2(c_x-b_x)+b^2(a_x-c_x)+c^2(b_x-a_x)}{D}\\end{aligned},\\quad D=2\\big(a_x(b_y-c_y)+b_x(c_y-a_y)+c_x(a_y-b_y)\\big)",
-   "note": "Circumcentre of triangle a, b, c, where a² means a_x² + a_y². The circumradius follows from the distance to any corner."
+   "note": "Circumcentre of triangle a, b, c, where a² means a_x² + a_y². The circumradius follows from the distance to any corner.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

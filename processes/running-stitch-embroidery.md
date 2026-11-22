@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: sashiko, relation: same}
-primitives: []
+primitives: [running-stitch, seeded-random, stitch-grid, tone-curve, tone-mark-size]
 sources: []
 status: listed
 ---

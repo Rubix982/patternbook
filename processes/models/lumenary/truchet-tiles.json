@@ -58,18 +58,32 @@
   "In 1704 the Dominican Sébastien Truchet noticed that one square tile, divided by its diagonal into a light and a dark half, makes endless patterns when the copies are turned at random. In the arc version used here each tile carries two quarter circles of radius s/2, centred on opposite corners, which meet the midpoints of the sides. The tile is placed in one of two orientations, chosen by a hash of its position, and because every arc ends at a side midpoint, arcs of neighbouring tiles always join into winding paths. Quarter discs and plain diagonals use the same grid.",
   "The picture decides how heavy each tile is. Its darkness under the tile, averaged over a radius of 0.45 tile widths, scales the line width (or the disc radius), from a hairline in the lights to a bold stroke in the shadows. The picture shows through slider mixes between a uniform weight and the full tonal weight, and on the night paper the roles reverse (light is heavy). Colour comes from the picture, a little darker than the original, or from a single ink. With smaller tiles in detail on, a tile whose four quarters differ strongly in tone, with variance above 0.006, is replaced by four half-size tiles."
  ],
+ "primitives": [
+  "seeded-random",
+  "tone-line-screen"
+ ],
  "equations": [
   {
    "tex": "w=s\\,\\big(0.06+0.5\\,\\hat t\\big),\\qquad \\hat t=(1-\\beta)\\,\\tfrac12+\\beta\\,t",
-   "note": "Line width of a tile of side s: t is the picture’s darkness under it (1 minus lightness on light paper), β the picture-shows-through slider."
+   "note": "Line width of a tile of side s: t is the picture’s darkness under it (1 minus lightness on light paper), β the picture-shows-through slider.",
+   "primitives": [
+    "tone-line-screen"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\sigma^{2}=\\sum_{i=1}^{4}\\big(t_i-\\bar t\\big)^{2}>0.006\\ \\Longrightarrow\\ \\text{split into four tiles of side } s/2",
-   "note": "The quadtree rule: t_i is the tone of the i-th quarter of the tile."
+   "note": "The quadtree rule: t_i is the tone of the i-th quarter of the tile.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\text{flip}=\\big[\\,h(\\text{tile}_x,\\ \\text{tile}_y,\\ \\text{seed})\\ge\\tfrac12\\,\\big]",
-   "note": "The random orientation of each tile comes from a hash h of its position, so the pattern is the same each time you redraw with the same seed."
+   "note": "The random orientation of each tile comes from a hash h of its position, so the pattern is the same each time you redraw with the same seed.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

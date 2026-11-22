@@ -58,18 +58,29 @@
   "In a sunflower the seeds are packed in spirals that run both ways, and the number of spirals is nearly always two neighbouring Fibonacci numbers, such as 34 and 55. Helmut Vogel showed in 1979 that this follows from one simple rule: seed number i is placed at the angle iα from the centre and at the distance c√(i + ½), where α is the golden angle, 2π/φ² ≈ 137.5°. The square root puts the seeds at equal density, since the area inside radius r_i is π r_i² = π c² (i + ½), which grows by the same amount for each seed.",
   "The golden angle is the most irrational of all angles, in the sense that its continued fraction [0; 2, 1, 1, 1, …] is the slowest to approximate by a fraction. No two seeds line up along a ray for long, and the spirals are only the near-alignments, which come at Fibonacci counts. The constant c is chosen so that the n seeds reach the corner of the picture: c = R/√n, with R half the diagonal. The turn between seeds slider lets you leave the golden angle and see the spiral give way to rays, which shows how special it is. Each seed is a disc, a square turned with its angle or an elliptical petal, with a size set by the spacing and by the picture’s tone, and it takes the picture’s colour."
  ],
+ "primitives": [
+  "tone-mark-size"
+ ],
  "equations": [
   {
    "tex": "\\theta_i=i\\,\\alpha,\\qquad r_i=c\\sqrt{i+\\tfrac12},\\qquad \\alpha=\\frac{2\\pi}{\\varphi^{2}}\\approx137.5^{\\circ}",
-   "note": "Vogel’s model: seed i in polar coordinates."
+   "note": "Vogel’s model: seed i in polar coordinates.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "c=\\frac{R}{\\sqrt n},\\qquad \\bar d=c\\sqrt{\\pi}",
-   "note": "The scale that makes n seeds fill the radius R, and the mean spacing between seeds."
+   "note": "The scale that makes n seeds fill the radius R, and the mean spacing between seeds.",
+   "primitives": [],
+   "bespoke": "layout"
   },
   {
    "tex": "\\rho_i=\\tfrac12\\,\\bar d\\;\\sigma\\;1.35\\,\\big[\\,(1-f)+f\\,(0.15+h_i)\\,\\big]",
-   "note": "Seed radius: σ is the seed size slider, f the size-follows-picture slider, h_i the heaviness of the picture at the seed."
+   "note": "Seed radius: σ is the seed size slider, f the size-follows-picture slider, h_i the heaviness of the picture at the seed.",
+   "primitives": [
+    "tone-mark-size"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

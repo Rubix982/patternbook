@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: x-ray, relation: same}
-primitives: []
+primitives: [colour-ramp, grain-overlay, image-gradient, tone-curve, unsharp-mask]
 sources: []
 status: listed
 ---

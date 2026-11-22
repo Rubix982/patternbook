@@ -58,18 +58,34 @@
   "Metaballs are blobs defined by a field, not by a surface. Each ball contributes a smooth field that falls to zero at a finite radius, f(r) = (1 − r²/R²)³ for r < R, with R = 2.6 times the ball’s radius. The fields of all the balls are added into one field F, and the body of the shape is wherever F is above a level. Where two balls are far apart each stands alone; as they come close the fields add up in between and the two bodies join with a smooth neck. The how-readily-they-merge slider moves the level between 0.95 (balls stay apart) and 0.28 (they melt together).",
   "Balls are placed by rejection sampling. A random point is accepted with probability 0.04 + 0.96 w^1.3, where w is the picture’s tone there (for light places), its complement (for dark places) or 1 (anywhere), and the ball’s radius also grows with w. The surface is lit by treating F as a height: its gradient gives a normal n = (−∂ₓF, −∂ᵧF, 0.22/(0.3 + level)), normalised, with a diffuse term from a light at upper left and a tight specular highlight (power 22). The colour of the ball is the picture’s own, multiplied by 0.45 to 1.15 with the light. The edge is antialiased with a smoothstep of ±0.03 around the level."
  ],
+ "primitives": [
+  "relief-shading",
+  "soft-threshold",
+  "specular-highlight"
+ ],
  "equations": [
   {
    "tex": "f(r)=\\Big(1-\\frac{r^{2}}{R^{2}}\\Big)^{3}\\ \\ (r<R),\\qquad F(\\mathbf x)=\\sum_i f_i\\big(\\lVert\\mathbf x-\\mathbf p_i\\rVert\\big)",
-   "note": "The kernel of one ball and the total field."
+   "note": "The kernel of one ball and the total field.",
+   "primitives": [],
+   "bespoke": "specific"
   },
   {
    "tex": "\\text{inside}=\\operatorname{smoothstep}\\big(\\lambda-0.03,\\ \\lambda+0.03,\\ F\\big),\\qquad \\lambda=0.95-0.67\\,g",
-   "note": "The body: g is the merge slider."
+   "note": "The body: g is the merge slider.",
+   "primitives": [
+    "soft-threshold"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf n=\\frac{(-F_x,\\ -F_y,\\ \\nu)}{\\lVert(-F_x,\\ -F_y,\\ \\nu)\\rVert},\\quad \\nu=\\frac{0.22}{0.3+\\lambda},\\qquad C=C_{\\text{pic}}\\,(0.45+0.7\\,\\mathbf n\\cdot\\mathbf l)+178\\,G\\,(\\mathbf n\\cdot\\mathbf h)^{22}",
-   "note": "Shading from the field’s gradient; l and h are the light and highlight directions, G the gloss slider."
+   "note": "Shading from the field’s gradient; l and h are the light and highlight directions, G the gloss slider.",
+   "primitives": [
+    "relief-shading",
+    "specular-highlight"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

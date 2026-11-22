@@ -7,7 +7,7 @@ makes: []
 models:
   - {by: lumenary, id: tapestry-weave, relation: same}
   - {by: lumenary, id: navajo-weave, relation: same}
-primitives: []
+primitives: [cylinder-shading, lattice-repeat, seeded-random, soft-threshold, symmetry-fold]
 sources: []
 status: listed
 ---

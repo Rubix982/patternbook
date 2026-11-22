@@ -58,14 +58,28 @@
   "A quilt is a grid of fabric patches. The picture is divided into squares, or each square into two triangles along a randomly chosen diagonal, and each patch takes the nearest of k fabric colours (from k-means, slightly softened) to the colour of the picture at its centre. A chosen fraction of patches, set by the printed-fabrics slider, also gets a pattern in a lighter or darker shade of its own colour: dots, stripes, a check, florets or diagonal lines.",
   "Quilting makes each patch puff up. That is faked with a radial gradient: white at 20% opacity near the middle and black at 30% at the rim, so the patch looks lit from above and shadowed at the seams. The seam is a thin dark line, and the running stitch is a dashed light line on a copy of the patch outline shrunk to 82% about its centre. A little grain finishes the cloth."
  ],
+ "primitives": [
+  "coarse-grid",
+  "palette-snap",
+  "seeded-random"
+ ],
  "equations": [
   {
    "tex": "s=\\frac{W}{n},\\qquad \\text{patch colour}=\\arg\\min_{f\\in F}\\big\\lVert \\bar P(\\text{centre})-f\\big\\rVert",
-   "note": "Patch size for n patches across, and its fabric."
+   "note": "Patch size for n patches across, and its fabric.",
+   "primitives": [
+    "coarse-grid",
+    "palette-snap"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{pattern}\\iff h<\\pi,\\qquad \\text{kind}=\\Big\\lfloor \\frac{5\\,h}{\\pi}\\Big\\rfloor",
-   "note": "A patch is printed when its random number h is below the printed-fabrics slider π (0 to 1); the kind of print is chosen from five."
+   "note": "A patch is printed when its random number h is below the printed-fabrics slider π (0 to 1); the kind of print is chosen from five.",
+   "primitives": [
+    "seeded-random"
+   ],
+   "bespoke": null
   }
  ],
  "dials": [

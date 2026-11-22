@@ -58,18 +58,32 @@
   "Talavera de Puebla is tin-glazed earthenware with a protected name. It descends from Spanish majolica, and its palette of cobalt, yellow, green and orange is limited by what survives the kiln. The tiles are painted by hand, so no two are quite alike: the motif is a little off-centre, a little tilted, and the line wavers. The program makes a tile for every cell of a grid and chooses the ground by brightness, from cobalt in the shadows through green, orange and yellow to white glaze in the lights.",
   "Two accent colours are painted on each ground, chosen to contrast: yellow and white on cobalt, for example, and cobalt with orange on white. Which of the two leads is decided by the warmth of the picture at that tile (red above blue means warm), so the hues of your picture reach the tile in a small way. A tile carries either an eight-petal flower with four leaves in its corners, or two eight-pointed stars with four round bosses. A thin painted border runs inside the edge, and a glaze shine covers the lot."
  ],
+ "primitives": [
+  "star-rosette-motif",
+  "tone-bands"
+ ],
  "equations": [
   {
    "tex": "g=\\min\\big(4,\\ \\lfloor 5\\,t\\rfloor\\big)\\ \\in\\ \\{\\text{cobalt, green, orange, yellow, glaze}\\}",
-   "note": "The ground of a tile from its blurred brightness t."
+   "note": "The ground of a tile from its blurred brightness t.",
+   "primitives": [
+    "tone-bands"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\mathbf v_k=r_k\\,\\Big(\\cos\\tfrac{k\\pi}{8},\\ \\sin\\tfrac{k\\pi}{8}\\Big),\\qquad r_k=\\begin{cases}R_1&k\\ \\text{even}\\\\ R_2&k\\ \\text{odd}\\end{cases}",
-   "note": "The vertices of an eight-pointed star: tips at R₁ and notches at R₂ (0.85 u and 0.42 u for the large star, 0.5 u and 0.26 u for the small one)."
+   "note": "The vertices of an eight-pointed star: tips at R₁ and notches at R₂ (0.85 u and 0.42 u for the large star, 0.5 u and 0.26 u for the small one).",
+   "primitives": [
+    "star-rosette-motif"
+   ],
+   "bespoke": null
   },
   {
    "tex": "\\text{lead colour}=\\begin{cases}\\text{fg}_1&R>B\\\\ \\text{fg}_2&\\text{otherwise}\\end{cases}",
-   "note": "The warm-or-cool rule: R and B are the red and blue values of the picture’s boosted colour at the tile."
+   "note": "The warm-or-cool rule: R and B are the red and blue values of the picture’s boosted colour at the tile.",
+   "primitives": [],
+   "bespoke": "specific"
   }
  ],
  "dials": [

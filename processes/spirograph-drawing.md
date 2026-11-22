@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: spirograph, relation: same}
-primitives: []
+primitives: [parametric-curve, tone-mark-size]
 sources: []
 status: listed
 ---

@@ -6,7 +6,7 @@ materials: []
 makes: []
 models:
   - {by: lumenary, id: pencil-hatching, relation: same}
-primitives: []
+primitives: [seeded-random, smooth-noise, tone-line-screen]
 sources: []
 status: listed
 ---
