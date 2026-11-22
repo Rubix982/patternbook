@@ -463,4 +463,3 @@ reliably taking real ones for generated. Candidates: other judges who haven't se
 in the same pick (real beside real, generated beside generated) to show a judge's lean; asking "which is real?" in half
 the rows; and a reading of the real screens' irregularity at the scale of several repeats, so the generator can carry it.
 **Answer:** —
-\n
