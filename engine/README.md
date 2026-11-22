@@ -14,6 +14,8 @@ on it: process models where no style covers an operation, and styles of its own 
   (`chain-stitch`, C-022), `field.js` and `kantha.js` (`contour-rows`, `quilt-ripple`, C-023), `dye.js` (`dye-baths`,
   C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026), `inlay.js` (`inlay-cut`, C-027),
   `jali.js` (`thick-screen`, C-028).
+- `service.js`, `cli.mjs`, `png.js`: the engine as a service (below); `picture-style.js` and `core/picture.js`: what
+  patternbook's picture styles share (a picture's palette, regions and their shapes).
 - `studio.js`: the studio API over the styles (list, render, renderAsync, animate, applyImageData, sample), used by
   `../treatments/studio.html` and by pages through `treatments.js`.
 - `engine.js`: the whole engine in one plain script that sets `window.PatternbookEngine` (`.weave`, `.kantha`, ... for
@@ -23,6 +25,42 @@ on it: process models where no style covers an operation, and styles of its own 
 - `check/`: each card's read-back check, run with Node (`node engine/check/weave.mjs`), the sheets
   (`node engine/check/weave-sheet.mjs runs/c019/weave-sheet.png`), and the shared read-back code (`readback.mjs`).
 - `demo/`: a page per process model with every dial. They open straight from disk.
+
+## The service
+
+`service.js` is one contract for every style: images and dials in, images out (C-029).
+
+- **In a browser**, every style: load `engine.js`, then
+  `PatternbookEngine.service.treat('kantha', imageData, { rowGap: 5 })` returns
+  `{ image, params, unknown, clamped, invalid, ms }`; `treatMany` takes several images with the same dials;
+  `list()` and `resolve(id, params)` say what a style takes.
+- **In Node**, patternbook's nine (section P), from code (`createService(styles)`) or the command line:
+
+  ```
+  node engine/cli.mjs list                                   every style, its section, where it runs
+  node engine/cli.mjs describe kantha                        its dials
+  node engine/cli.mjs kantha photo.png --out kantha.png rowGap=5
+  node engine/cli.mjs shisha a.png b.png --out out/ --max 1200
+  ```
+- **What it promises**, checked in C-029 (`check/service.mjs`, `check/service-browser.mjs`): the same image, dials and
+  seed give the same bytes, in Node and in a browser alike; every dial renders from its minimum to its maximum; dial
+  names it doesn't know are listed and not used, values out of range are clamped and listed, unreadable values fall
+  back to the default and are listed; any size renders, the output's long side the smaller of the input's and the
+  style's limit (900 px for the nine; `maxSide` or `--max` sets another), its aspect kept; a batch gives one output per
+  image, in order. Through the service, Lumenary's styles give exactly the studio's pixels.
+- **Limits:** in Node it reads and writes PNG only, and Lumenary's styles, which draw on a canvas, run in a browser.
+
+| Style | Craft | Model | What the picture decides |
+|---|---|---|---|
+| `kantha` | kantha quilting | `core/kantha.js` | regions by colour; rows echo each outline, closer where darker |
+| `ajrak-baths` | ajrak block printing and dyeing | `core/dye.js` | each block cell's tone: which blocks print resist, alum, iron |
+| `shisha` | mirror work | `core/mirror.js` | each mirror's thread colour and what its glass reflects |
+| `kashi-tile` | Multani blue pottery | `core/glaze.js` | cobalt, turquoise or white slip by tone; outlines at the edges |
+| `parchin-kari` | pietra dura inlay | `core/inlay.js` | pieces from regions, each from the nearest stone; marble where light |
+| `jali-light` | pierced stone screen | `core/jali.js` | each opening's size by brightness; the light on the wall |
+| `jamdani` | jamdani weaving | `core/supplementary.js` | where the extra weft lies, thread by thread |
+| `phulkari-darning` | phulkari and bagh | `core/darning.js` | each block's floss colour and stitch direction |
+| `aari` | aari and zalakdozi chain stitch | `core/chain.js`, `core/field.js` | contour lines by tone; rings filling the darkest |
 
 ## How a style is written
 
@@ -82,3 +120,6 @@ renders, in `../processes/`.
 - **Measure the reader's floor before setting a bar.** A perfectly sharp edge, sampled once per pixel and interpolated,
   reads 1.6 px wide (10-90 %). C-028 asked a penumbra of 0.9 px to widen threefold with distance; the floor swallowed the
   near one and the ratio read 1.97. Render the control at its sharpest first and set the bar above what it reads.
+- **A control's bar has to clear what the inputs already share.** C-029 asked each style's output to correlate at most
+  0.2 with a different picture; the five test pictures correlate 0.206 with one another (dark skies, subjects in the
+  middle), so a faithful style can't get under it. Measure the inputs against each other before setting the bar.

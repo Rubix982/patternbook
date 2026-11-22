@@ -501,3 +501,26 @@ Treatments that first find the subject of your picture, on your own device, and 
   dials: text="DREAM"; font=sans (sans|serif|hand|mono); rows=2 [1–5]; width=92 [40–100]; height=42 [0–100]; look=alternate (fill|outline|alternate); color="#f5f5f5"; dim=25 [0–70]; edge=35 [0–100]
 - **`split-treatment`** (still): Two treatments in one picture: the subject gets one, and everything behind it gets another. Keep the subject true to life and let the world around it turn into a print, a heat map or a comic.  
   dials: subject=original (original|risograph|duotone|thermal-camera|comic-book|pixel-art|neon-glow); world=risograph (original|risograph|cyanotype|pop-art|duotone|thermal-camera|comic-book|pixel-art|ascii-art|neon-glow); line=6 [0–40]; color="#f5f5f5"; edge=35 [0–100]
+
+## P. Processes
+
+
+
+- **`kantha`** (still): The picture as a kantha quilt: its shapes filled with rows of running stitch that echo each outline inward, closer where it is darker, rippling the layered cloth.  
+  dials: tones=6 [2–10]; detail=6 [1–10]; rowGap=6 [3–14]; stitch=5 [2–12]; ripple=0.5 [0–1.5]; thread=picture (picture|single); threadColour="#1f3a7a"; cloth="#efe8d8"; seed=7 (seed)
+- **`ajrak-baths`** (still): The picture block-printed and dyed as an ajrak: each block's tone decides which blocks print resist, alum or iron, and the colours come out of the baths in order.  
+  dials: blocks=22 [6–60]; dark=0.33 [0.05–0.6]; light=0.62 [0.4–0.95]; order=ajrak (ajrak|indigo first); print=50 [0–100]; seed=4 (seed)
+- **`shisha`** (still): The picture in mirror work: mirrors on a lattice, each ringed in shisha stitch in the colour beneath it, each curved glass reflecting the picture around it.  
+  dials: across=14 [4–40]; size=0.36 [0.2–0.46]; view=1.2 [0–3]; curve=0.5 [0–1.2]; tilt=0.12 [0–0.4]; cloth="#1f2a44"; seed=5 (seed)
+- **`kashi-tile`** (still): The picture as Multani blue pottery: cobalt and turquoise on white slip, outlined and lightly incised, under a clear glaze that pools, spreads the cobalt and crazes.  
+  dials: colours=cobalt and turquoise (cobalt and turquoise|cobalt); cobalt=0.3 [0.05–0.7]; turquoise=0.6 [0.2–0.95]; outline=2 [0–6]; incise=0.8 [0–3]; glaze=2.2 [0.3–6]; flow=0.55 [0–1.5]; craze=0.3 [0–1]; seed=3 (seed)
+- **`parchin-kari`** (still): The picture inlaid in stone: cut into pieces, each from the stone nearest its colour, its bands turned to run along the piece, set into polished marble.  
+  dials: colours=7 [3–12]; detail=6 [1–10]; stones=mughal (mughal|red|cool); marble=0.72 [0.3–1]; seam=0.7 [0–3]; gloss=0.28 [0–1]; seed=2 (seed)
+- **`jali-light`** (still): The picture cut as a pierced stone screen: each opening as wide as the picture is bright, shown as the sunlight it lets onto the wall, or as the screen itself.  
+  dials: view=light (light|screen); pattern=stars (stars|squares); cells=48 [8–120]; minOpen=0.02 [0–0.4]; maxOpen=0.78 [0.3–0.9]; thickness=4 [0–20]; sunAngle=15 [0–60]; azimuth=30 [0–360]; distance=120 [10–900]; seed=4 (seed)
+- **`jamdani`** (still): The picture woven into fine muslin as jamdani's extra weft: laid on the face thread by thread where the picture is dark, tied down every few ends.  
+  dials: ends=200 [60–400]; motif=dark on light (dark on light|light on dark); thread=picture (picture|single); threadColour="#3b2f6b"; ground="#ece5d4"; gamma=1 [0.4–2.5]; bind=6 [3–10]; zari=false; seed=6 (seed)
+- **`phulkari-darning`** (still): The picture darned in floss silk on khaddar: blocks of counted threads, each in the floss nearest its colour, the stitches turning with the edges so the silk shines block by block.  
+  dials: threads=200 [60–400]; block=8 [3–24]; float=5 [2–10]; palette=picture (picture|phulkari); cover=bagh (bagh|phulkari); bare=0.18 [0–0.6]; khaddar="#6e2a1f"; sheen=0.45 [0–1]; seed=8 (seed)
+- **`aari`** (still): The picture embroidered in chain stitch with the hook: its tones drawn as contour lines in the colour of each tone, the darkest filled with rings as in Kashmiri zalakdozi.  
+  dials: lines=7 [2–12]; smooth=2.5 [0.5–8]; link=6 [3–14]; fill=true; cloth="#efe6d2"; seed=9 (seed)

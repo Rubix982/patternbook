@@ -168,6 +168,8 @@ Need poppler (`pdffonts`, `pdftoppm`) and ImageMagick (`magick`): `brew install 
 - `python3 -I tools/inline-treatment.py <page> <out> --treatment press` — a copy of a page with a
   treatment applied to its drawings.
 - `node engine/build.mjs` — rebuild the engine bundle; `node engine/catalog.mjs` — regenerate its style catalogue.
+- `node engine/cli.mjs <style> <in.png> --out <out.png> [key=value ...]` — the engine as a service, for PNG files
+  (`list` and `describe <style>` show what there is; see `engine/README.md`, "The service").
 - `python3 -I tools/words.py <pages>` — words outside drawings.
 - `python3 -I tools/css-profile.py <pages>` — background, text, accent hues, fonts, radii, shadows, gradients.
 

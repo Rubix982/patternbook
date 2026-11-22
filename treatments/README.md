@@ -17,9 +17,10 @@ The engine's styles (`../engine/styles/`) take a picture and render it in a styl
 through a process modelled in `../engine/core/`. Every style's theory, as a model filed under the process it imitates,
 is in `../processes/`, and Lumenary's as received in `../processes/sources/`.
 
-- `studio.html` (live: https://rubix982.github.io/patternbook/treatments/studio.html): pick any style and turn its
-  dials, or open the **contact sheet** to see every still style on one picture (the built-in still life, our router
-  drawing, or your own file). `lumenary.html` now forwards there.
+- `studio.html` (live: https://rubix982.github.io/patternbook/treatments/studio.html): pick any style, Lumenary's or
+  patternbook's own (section P: Kantha, Ajrak Baths, Shisha, Kashi Tile, Parchin Kari, Jali Light, Jamdani, Phulkari
+  Darning, Aari), and turn its dials, or open the **contact sheet** to see every still style on one picture (the
+  built-in still life, our router drawing, or your own file). `lumenary.html` forwards there.
 - `../engine/engine.js`: the whole engine in one script, which sets `window.PatternbookEngine`; the studio API is
   `PatternbookEngine.studio`. Rebuild with `node engine/build.mjs` (uses `npx esbuild@0.24.0`).
 - Lumenary's theory pages with every equation as TeX, and `MAP.md`, which links each treatment's theory to its code,

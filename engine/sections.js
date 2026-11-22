@@ -5,5 +5,6 @@
 import { SECTIONS as RECEIVED, slugify } from '../processes/sources/data/sections.js';
 
 export { slugify };
-export const OWN = { id: 'processes', letter: 'P', title: 'Processes', items: [] };
+export const OWN = { id: 'processes', letter: 'P', title: 'Processes', enabled: true,
+  items: ['Kantha', 'Ajrak Baths', 'Shisha', 'Kashi Tile', 'Parchin Kari', 'Jali Light', 'Jamdani', 'Phulkari Darning', 'Aari'] };
 export const SECTIONS = [...RECEIVED, OWN];

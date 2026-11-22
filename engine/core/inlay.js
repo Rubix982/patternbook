@@ -27,6 +27,10 @@ export const STONES = {
   jasper: { base: '#9c3525', band: '#5f1d15', vein: '#d27a5c', bands: 0.65, period: 6, warp: 0.8, veins: 0.15 },
   malachite: { base: '#22895a', band: '#0c4c2c', vein: '#47b57d', bands: 1, period: 5, warp: 0.6, veins: 0 },
   agate: { base: '#d6c7aa', band: '#7d5d3f', vein: '#efe4cf', bands: 0.85, period: 4.5, warp: 0.7, veins: 0.05 },
+  // added for the picture style (C-029): black, yellow and white stones also used in parchin kari
+  onyx: { base: '#26221f', band: '#3b3530', vein: '#5a524a', bands: 0.4, period: 9, warp: 0.8, veins: 0.1 },
+  'yellow-jasper': { base: '#c99a3e', band: '#a8772a', vein: '#e3c27a', bands: 0.55, period: 6, warp: 0.9, veins: 0.1 },
+  'mother-of-pearl': { base: '#efece6', band: '#dfe3e8', vein: '#f6e9ef', bands: 0.5, period: 3.5, warp: 0.6, veins: 0.05 },
 };
 
 // A stone's colour at (u, v) in its own coordinates.

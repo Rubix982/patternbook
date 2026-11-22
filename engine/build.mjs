@@ -2,7 +2,8 @@
 // Bundles the whole engine into one classic script, engine/engine.js, which sets window.PatternbookEngine:
 //   - the process models in core/ (PatternbookEngine.weave, .kantha, .dye, ...), as engine/index.js exports them;
 //   - every style in styles/ (picture in, treated picture out), with the studio API over them
-//     (PatternbookEngine.studio: list, render, renderAsync, animate, applyImageData, sample; see studio.js).
+//     (PatternbookEngine.studio: list, render, renderAsync, animate, applyImageData, sample; see studio.js);
+//   - the service over every style (PatternbookEngine.service: list, resolve, treat, treatMany; see service.js).
 // A classic script, so pages opened straight from disk (file://) load it; browsers won't load ES modules there.
 //
 //   node engine/build.mjs        (uses npx esbuild@0.24.0)
@@ -26,11 +27,19 @@ import { SECTIONS, slugify } from './sections.js';
 import { fitSize, scaleCanvas } from './utils.js';
 import { makeSample } from './sample.js';
 import { bridge } from './studio.js';
+import { createService } from './service.js';
 export * from './index.js';
 
 const ALL = [${files.map((_, i) => `s${i}`).join(', ')}];
 registerStyles(ALL);
 export const studio = typeof document === 'undefined' ? null : bridge({ ALL, SECTIONS, slugify, fitSize, scaleCanvas, makeSample });
+const sections = new Map(SECTIONS.flatMap((sec) => sec.items.map((n) => [slugify(n), { id: sec.id, letter: sec.letter, title: sec.title }])));
+// Lumenary's styles draw on a canvas: in a browser the service runs them through the studio, at the size given
+const canvasRender = studio && ((id, img, params, opts) => {
+  const out = studio.applyImageData(new ImageData(new Uint8ClampedArray(img.data), img.width, img.height), id, params, opts);
+  return { width: out.width, height: out.height, data: out.data };
+});
+export const service = createService(ALL, { canvasRender, sectionOf: (id) => sections.get(id) || null });
 `;
 writeFileSync(join(here, 'entry.generated.js'), entry);
 

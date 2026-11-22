@@ -14,6 +14,107 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-029 · Can the nine process models each take a picture and render it through their craft, behind one stable service (images and parameters in, images out), so that the picture comes through and the service behaves the same every time?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+The engine is one folder: Lumenary's 214 styles take any picture (`engine/styles/`, through `engine/studio.js` in a
+browser), and patternbook's nine process models (`engine/core/`: kantha, dye baths, mirror inset, glaze, inlay, thick
+screen, supplementary weft, darning, chain stitch, C-019 to C-028) each render a design they are given, not a picture.
+The studio's section P is empty. Nothing can be called from Node, or with several images at once, or relied on to
+answer the same way twice.
+
+**2. What we are doing.**
+Write `engine/service.js`, one contract for every style: the styles, their dials, and `treat(style, images, params)`
+returning images, with parameters checked against each style's dials. Write nine styles in `engine/styles/`, each a
+picture turned into the plan its craft needs (regions, block cells, a mirror lattice, a tone map at thread scale)
+and rendered by its model in `engine/core/`: Kantha, Ajrak Baths, Shisha, Kashi Tile, Parchin Kari, Jali Light,
+Jamdani, Phulkari Darning, Aari. Add a command line (`engine/cli.mjs`) over the service for PNG files. Then measure.
+
+**3. Why.**
+We don't know whether the models built to read back their crafts can carry a picture through them, or whether the
+engine can be called as a service (the same answer every time, any size, any dial, many images) without the studio
+page around it. Both decide whether it can be offered to anyone for design work.
+
+**4. What is affected.**
+- `engine/service.js`, `engine/cli.mjs`, `engine/png.js`, `engine/core/picture.js`; nine files in `engine/styles/`;
+  `engine/sections.js` (section P); the bundle; the studio shows section P.
+- `engine/core/` models may gain small hooks (a reflection callback for the mirror, per-cell masks), checked against
+  their cards' outputs, which must not change.
+- `processes/primitives.md` and the process pages: a pointer to each picture style.
+
+**5. Conclusion.**
+On five test pictures (public domain, different subjects), each style at its default dials, from the outputs alone:
+- likeness: the output's brightness, blurred to 2 % of the picture's long side, correlates with the input's at r of
+  at least 0.5 (median over the five pictures), for each of the nine styles; against a different picture's input, the
+  same correlation is at most 0.2 (median over the pairs);
+- determinism: the same images, dials and seed give byte-identical outputs, for every style and picture;
+- dials: every dial at its minimum, its maximum and its default (and each option of a choice) renders without error
+  on one picture; unknown dial names come back listed and unused; values out of range come back clamped and listed;
+- sizes: inputs of 40 x 40, 1200 x 300 and 900 x 1600 render, the output's aspect within one pixel of the input's
+  and its long side the smaller of the input's and the style's limit; a batch returns one output per image, in order,
+  each identical to that image rendered alone;
+- speed: at 600 px on the long side, the median time per picture is at most 3 s for each style, in Node on this laptop;
+- one door: in a browser, the service gives the same pixels as the studio for all 178 of Lumenary's still styles.
+- **If** all hold → we claim *a stable picture service over all the engine's styles, nine of them through
+  patternbook's crafts*.
+- **If** likeness fails for some styles → those styles don't carry a picture yet; the card names them and why.
+- **If** determinism, dials or sizes fail → it is not yet a service, whatever the pictures look like.
+
+**6. If not done.**
+The process models stay demos of hand-given designs, and the engine can't be used outside its own pages.
+
+**Limits (known before running):** in Node the command line reads and writes PNG only, and Lumenary's styles need a
+canvas, so in Node only the nine run (all of them run in a browser). Likeness by brightness says the picture comes
+through, not that it looks like the craft; that is a later blind pick. Five pictures are few.
+
+**Result (2026-11-22):** everything holds except the likeness check's control, which fails as written for five of the
+nine styles because the test pictures already resemble each other as much as the bar allowed. **On five NASA pictures
+(NASA material is generally not under copyright; a portrait, Earthrise, a rocket on its pad at sunset, the India-Pakistan border at night, Saturn's
+rings), each output's brightness, blurred to 2 % of its long side, correlates with its picture's at a median r of
+0.94 (Kantha), 0.79 (Ajrak Baths), 0.98 (Shisha), 0.92 (Kashi Tile), 0.90 (Parchin Kari), 0.98 (Jali Light), 0.94
+(Jamdani), 0.97 (Phulkari Darning) and 0.80 (Aari), against at least 0.5 set.** Against a different picture the
+medians are 0.10 to 0.25; for Kantha, Ajrak Baths, Shisha, Parchin Kari and Jali Light they are 0.205 to 0.254, above
+the 0.2 set. The pictures themselves correlate 0.206 with one another (dark skies, subjects in the middle), so a
+faithful style can't get under that bar; the control was set without measuring the inputs, and the result is not
+changed to meet it. Aari's per-picture likeness is low on two pictures (0.35 on the rocket, 0.40 on the portrait),
+where its contour lines carry the edges but not the large areas of tone.
+
+**The service, as set:** every style gives byte-identical outputs from the same picture, dials and seed, for all five
+pictures; every dial at its minimum, maximum and default (each option, both states of a switch, two seeds, two
+colours) renders without error; unknown dial names come back listed and unused, values out of range clamped and
+listed, unreadable ones defaulted and listed; inputs of 40 x 40, 1200 x 300 and 900 x 1600 come out at 40 x 40,
+900 x 225 and 506 x 900; a batch of three gives one output each, in order, identical to each alone; the median time
+per picture at 600 px is 0.13 to 2.09 s (Shisha and Aari slowest; Aari takes 5.7 s on Earthrise, with its many
+contours). In a browser, all 178 of Lumenary's still styles give the studio's exact pixels through the service, and
+the nine give the same pixels in the browser as in Node.
+
+**Before the run, from looking at the sheets:** Ajrak Baths first left its middle-tone stars unresisted, so their alum
+dyed violet under the indigo; real ajrak resists the alum, and now it does. Kantha first let the cloth dominate; its
+rows now close up (and its thread thickens) where the picture is darker, as an embroiderer shades. Ajrak Baths, Kashi
+Tile, Jali Light, Jamdani and Aari read the picture's tones after Lumenary's own stretch (`helpers.stretch`), so dark
+pictures use the whole range. The model code under them changed only by hooks (the mirror's reflection and thread
+colour, kantha's quilting step, three more stones); C-023's, C-025's and C-027's checks give the same outputs.
+
+**Claim:** the engine is a stable picture service over all 223 of its styles (in a browser; the nine in Node too), and
+patternbook's nine render any picture through their crafts with the picture coming through (r 0.79 to 0.98). How each
+looks against the real craft is a later blind pick.
+
+**Changes made:**
+- `engine/service.js`, `engine/cli.mjs`, `engine/png.js`, `engine/picture-style.js`, `engine/core/picture.js`;
+  nine styles in `engine/styles/`; `engine/sections.js` (section P); the bundle (`PatternbookEngine.service`).
+- Hooks in `engine/core/mirror.js` (`reflect`, `colourOf`), `engine/core/kantha.js` (`quilt`, a group's `weight`),
+  `engine/core/inlay.js` (onyx, yellow jasper, mother-of-pearl).
+- `engine/check/service.mjs`, `service-browser.mjs`, `service-sheet.mjs`; `engine/check/pictures/` (five NASA
+  pictures, credited in `CREDITS.md`).
+- `engine/README.md` ("The service", one lesson), `processes/primitives.md`, the READMEs; `runs/c029/`.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-028 · Can a pierced screen be given thickness, so that its walls narrow the sunlight through it, its cast light softens with distance, and its openings show their inner walls when seen at an angle?
 
 **Status:** closed

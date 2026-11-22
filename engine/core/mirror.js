@@ -53,6 +53,8 @@ export function openingRadius(n, pull, a0, mean) {
 //                rowKind 'running' makes them running stitch)
 //   curve, tilt  how curved the glass is, and how far each disc tilts at random; light: where the lamp's reflection
 //                falls (x, y); glint: how large it is; room, ceiling, lamp: what the glass reflects
+//   reflect(m, rx, ry)   optional: the colour (0..1) mirror m reflects along the ray's sideways part (rx, ry), in place
+//                of the room; colourOf(m): optional, mirror m's thread colour (C-029's picture style uses both)
 //   roundness, offset, turn, jitter, wanderLeg, tarnish   the hand's variations (shares of a radius, degrees, shares
 //                of a stitch, the silvering's wear)
 export function mirrored(opts) {
@@ -84,12 +86,12 @@ export function mirrored(opts) {
       const up = smooth(-1, 1, -ry * 2.2); // rays leaving upward (towards the image's top) see the ceiling
       const g = Math.exp(-((rx - o.light[0]) ** 2 + (ry - o.light[1]) ** 2) / (2 * o.glint ** 2));
       const wear = (1 - 0.3 * smooth(0.88, 1, d / Ra)) * (1 - o.tarnish * (0.5 + 0.5 * noise2(x / 5, y / 5, seed + 223 + m)));
-      const p = (y * W + x) * 3;
-      for (let c = 0; c < 3; c++) img.rgb[p + c] = Math.min(1, 0.88 * wear * ((room[c] * (1 - up) + ceiling[c] * up) * (1 - g) + lamp[c] * g));
+      const p = (y * W + x) * 3, env = o.reflect ? o.reflect(m, rx, ry) : null; // what the glass sees, if the caller says
+      for (let c = 0; c < 3; c++) img.rgb[p + c] = Math.min(1, 0.88 * wear * ((env ? env[c] : room[c] * (1 - up) + ceiling[c] * up) * (1 - g) + lamp[c] * g));
       img.top[y * W + x] = 7;
     }
     // the ring
-    const colour = Array.isArray(o.colours) && o.colours.length ? o.colours[m % o.colours.length] : o.colour;
+    const colour = o.colourOf ? o.colourOf(m) : Array.isArray(o.colours) && o.colours.length ? o.colours[m % o.colours.length] : o.colour;
     const th = o.thread, thread = { colour, thread: th, link: o.link, loop: o.loop, jitter: o.jitter, wander: 0.1, seed: seed + 307 * (m + 1) };
     const N = 600, outer = Array.from({ length: N + 1 }, (_, k) => { const a = (2 * Math.PI * k) / N; const rr = R(a) + o.reach * r; return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)]; });
     outer[N] = outer[0];

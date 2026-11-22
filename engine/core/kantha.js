@@ -83,6 +83,14 @@ export function kantha(opts) {
     const sdAll = signedDistance(inAny, W, H);
     groups.push({ colour: o.groundThread, rows: straightRows((x, y) => { const xi = Math.min(W - 1, Math.floor(x)), yi = Math.min(H - 1, Math.floor(y)); return sdAll[yi * W + xi] < -o.margin; }, W, H, o.rowGap) });
   }
+  return { ...quilt(img, groups, o), groups };
+}
+
+// Quilt a cloth: ripple it between the rows of every group ({ colour, rows }) and stitch the rows in running stitch.
+// Shared by `kantha` and the picture style (styles/kantha.js).
+export function quilt(img, groups, opts) {
+  const o = { ...KANTHA_DEFAULTS, ...opts };
+  const W = img.width, H = img.height, seed = o.seed || 1;
   // the ripple: the cloth is pulled down along every row and puffs up between rows
   if (o.ripple > 0) {
     const lines = new Uint8Array(W * H);
@@ -106,7 +114,7 @@ export function kantha(opts) {
   }
   const link = o.stitchLen + o.space;
   for (const [k, g] of groups.entries())
-    stitch(img, g.rows, { kind: 'running', link, dash: o.stitchLen / link, thread: o.thread, colour: g.colour, jitter: o.jitter ?? 0.1,
+    stitch(img, g.rows, { kind: 'running', link, dash: o.stitchLen / link, thread: o.thread * (g.weight ?? 1), colour: g.colour, jitter: o.jitter ?? 0.1,
       wander: o.wanderStitch ?? 0.15, twist: 0.2, seed: seed + k * 7 });
-  return { ...img, groups };
+  return img;
 }

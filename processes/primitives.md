@@ -606,6 +606,12 @@ Each was carried as a candidate (`c:` tag) while tagging and promoted at the end
 
 Written in patternbook's engine (`engine/core/`) for operations no Lumenary model has. Each names its card.
 
+Nine of them also render a picture, as styles in the studio's section P (`engine/styles/`, C-029): `contour-rows` and
+`quilt-ripple` as **Kantha**, `dye-baths` as **Ajrak Baths**, `mirror-inset` as **Shisha**, `glaze-layer` as **Kashi
+Tile**, `inlay-cut` as **Parchin Kari**, `thick-screen` as **Jali Light**, `supplementary-weft` as **Jamdani**,
+`counted-darning` as **Phulkari Darning** and `chain-stitch` as **Aari**. Each turns the picture into the plan its
+craft needs (regions, block cells, a mirror lattice, a tone map at thread scale) and lets the model make it.
+
 ### weave-draft
 **Name:** weave structure from a draft, and cloth drawn from it
 **Plain words:** which warp end is over the weft at each crossing, from the loom's threading, tie-up and treadling or a

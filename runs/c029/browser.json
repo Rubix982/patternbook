@@ -1,0 +1,28 @@
+{
+ "lumenaryStills": 178,
+ "differ": [],
+ "errors": [],
+ "ownSameAsNode": [
+  "kantha",
+  "ajrak-baths",
+  "shisha",
+  "kashi-tile",
+  "parchin-kari",
+  "jali-light",
+  "jamdani",
+  "phulkari-darning",
+  "aari"
+ ],
+ "studioRenders": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ],
+ "pageErrors": []
+}
