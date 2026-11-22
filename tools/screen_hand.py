@@ -212,11 +212,65 @@ def hand(path, flip=False, crop=None, thr=0.0):
     return rec
 
 
+def between_bars(path, flip=False, crop=None, thr=0.0):
+    """How much bars differ from one another (C-036): the skeleton's loops away from junctions (more than one and a half
+    bars) and from the field's edge (two bars), cut into bars; each bar's median width (twice the distance transform);
+    their spread after a linear trend in position, over their mean. And, for comparison, how much one bar varies along
+    itself (the median of each bar's own spread)."""
+    rgb, L = sm.load(path, crop)
+    stone, screen, op = sm.segment(L, flip, thr)
+    lab, n = label(op, connectivity=1, return_num=True)
+    if n:
+        mr = ndi.maximum(ndi.distance_transform_edt(op), lab, index=np.arange(1, n + 1))
+        sp = np.isin(lab, np.nonzero(2 * mr < 6)[0] + 1)
+        op, stone = op & ~sp, stone | sp
+    hull = convex_hull_image(op)
+    ds = ndi.distance_transform_edt(stone)
+    ska = skeletonize(stone)
+    inner0 = ndi.binary_erosion(hull, iterations=3)
+    bar0 = float(2 * np.median(ds[ska & inner0]))
+    sk = sm.loops(ska)
+    jc, _ = sm.junctions(sk, ds)
+    nj = np.zeros_like(sk)
+    for (y, x) in np.round(jc).astype(int):
+        nj[y, x] = True
+    nj = ndi.distance_transform_edt(~nj) <= 1.5 * bar0
+    away = sk & ~nj & (ndi.distance_transform_edt(hull) > 2 * bar0)
+    seg, ns = label(away, connectivity=2, return_num=True)
+    W, C, X = [], [], []
+    for i in range(1, ns + 1):
+        m = seg == i
+        if m.sum() < 6:
+            continue
+        t = 2 * ds[m]
+        W.append(np.median(t)); C.append(t.std() / t.mean())
+        yy, xx = np.nonzero(m); X.append((xx.mean(), yy.mean()))
+    if len(W) < 10:
+        return {"bars": len(W), "between": None, "within": None}
+    W, X = np.array(W), np.array(X)
+    A = np.c_[np.ones(len(W)), X]
+    coef, *_ = np.linalg.lstsq(A, W, rcond=None)
+    return {"bars": len(W), "between": round(float((W - A @ coef).std() / W.mean()), 4), "within": round(float(np.median(C)), 4)}
+
+
 if __name__ == "__main__":
     cmd, src = sys.argv[1], sys.argv[2]
     out = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else None
     recs = []
-    if cmd == "calibrate":
+    if cmd == "bars":  # src: a specs.json beside its images, or a piece folder with samples.tsv
+        if src.endswith(".json"):
+            for sp in json.load(open(src)):
+                r = between_bars(os.path.join(os.path.dirname(src), f"{sp['id']}.png")) | sp
+                recs.append(r); print(sp["id"], {k: r[k] for k in ("bars", "between", "within")}, flush=True)
+        else:
+            for r0 in csv.DictReader(open(os.path.join(src, "samples.tsv")), delimiter="\t"):
+                if r0.get("status", "measured") != "measured" or r0["role"] != "jali":
+                    continue
+                st = dict(kv.split("=") if "=" in kv else (kv, "1") for kv in r0["settings"].split(";") if kv)
+                crop = [int(v) for v in st["crop"].split(",")] if "crop" in st else None
+                r = between_bars(r0["image"], "flip" in st, crop, float(st.get("thr", 0))) | {"id": r0["id"]}
+                recs.append(r); print(r0["id"], {k: r[k] for k in ("bars", "between", "within")}, flush=True)
+    elif cmd == "calibrate":
         for s in json.load(open(os.path.join(src, "specs.json"))):
             r = hand(os.path.join(src, f"{s['id']}.png")) | s
             recs.append(r)

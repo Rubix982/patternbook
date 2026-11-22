@@ -1,0 +1,104 @@
+[
+ {
+  "bars": 66,
+  "between": 0.0626,
+  "within": 0.0246,
+  "id": "vam-O40073"
+ },
+ {
+  "bars": 121,
+  "between": 0.0766,
+  "within": 0.0578,
+  "id": "vam-O40067"
+ },
+ {
+  "bars": 116,
+  "between": 0.1218,
+  "within": 0.0458,
+  "id": "vam-O40065"
+ },
+ {
+  "bars": 82,
+  "between": 0.3206,
+  "within": 0.1572,
+  "id": "vam-O470734"
+ },
+ {
+  "bars": 148,
+  "between": 0.5303,
+  "within": 0.1025,
+  "id": "vam-O15488"
+ },
+ {
+  "bars": 356,
+  "between": 0.1005,
+  "within": 0.0491,
+  "id": "vam-O167205"
+ },
+ {
+  "bars": 34,
+  "between": 0.061,
+  "within": 0.0172,
+  "id": "vam-O40068"
+ },
+ {
+  "bars": 42,
+  "between": 0.0597,
+  "within": 0.0381,
+  "id": "vam-O40069"
+ },
+ {
+  "bars": 38,
+  "between": 0.052,
+  "within": 0.0219,
+  "id": "vam-O40077"
+ },
+ {
+  "bars": 103,
+  "between": 0.1429,
+  "within": 0.0579,
+  "id": "vam-O40071"
+ },
+ {
+  "bars": 71,
+  "between": 0.067,
+  "within": 0.032,
+  "id": "vam-O40070"
+ },
+ {
+  "bars": 92,
+  "between": 0.3584,
+  "within": 0.0345,
+  "id": "vam-O40078"
+ },
+ {
+  "bars": 535,
+  "between": 0.5027,
+  "within": 0.1179,
+  "id": "vam-O442441"
+ },
+ {
+  "bars": 657,
+  "between": 0.854,
+  "within": 0.1843,
+  "id": "met-453343"
+ },
+ {
+  "bars": 438,
+  "between": 0.8405,
+  "within": 0.1033,
+  "id": "met-453344"
+ },
+ {
+  "bars": 157,
+  "between": 0.3524,
+  "within": 0.1965,
+  "id": "vam-O73674"
+ },
+ {
+  "bars": 131,
+  "between": 0.2769,
+  "within": 0.1119,
+  "id": "met-453241"
+ }
+]

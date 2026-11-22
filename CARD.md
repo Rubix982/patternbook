@@ -14,6 +14,70 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-036 · Do bars cut one by one, from uneven stone, and worn by time, make generated jalis harder to tell from real ones?
+
+**Status:** open
+**Opened:** 2026-11-22 (drafted at C-035's opening from the writer's note; fields 2 to 6 written now)
+
+**1. Where we are.**
+How much bars differ from one another, each read by its median width (a check before C-035, 2026-11-22):
+
+| What's compared | How much bars differ from one another |
+|---|---|
+| The generator's exact designs | 1 to 6 % |
+| The clean 19th-century V&A panels | 5 to 14 % |
+| The two 16th-century Met screens | about 85 % |
+
+The two Met screens stood in buildings for centuries, which fits the writer's point that time wears them further. It
+isn't proof: they also have the finest bars in the smallest photos, which inflates the reading. Along a single bar the
+clean real ones are fairly even (2 to 6 %). The generator's `hand` dial varies width smoothly across neighbouring bars;
+at its strongest it reaches about 9 % between bars. C-035: shown as blurred masks of five repeats, the writer picked the
+generated one in 5 of 12, at chance, so this card's pick must show more.
+
+**2. What we are doing.**
+Give the generator three new dials and run one blind pick that holds both generators:
+1. **Cutting** (`barSpread`): every line between two meeting points gets its own half-width, drawn round the bar's
+   (a normal spread, clipped at 2.5 spreads). Set so the octagram's bars differ from one another as much as the median
+   of the V&A's nine 19th-century Agra panels (vam-O400xx), read the same way.
+2. **The stone** (`bedding`, a hypothesis): horizontal layers, softer and harder, so wear comes in bands; 0.5 by default,
+   acting only through age.
+3. **Age** (`age`, 0 to 1, a guess labelled as one): every edge retreats by up to a quarter of a bar at age 1, more
+   near the top than the bottom, more in soft layers, unevenly along the edge; stone corners round with it. Read on the
+   octagram against the two Met screens' between-bar spread, to say what age they correspond to, if any.
+
+The pick: 24 rows, each a generated design beside a real jali. Twelve rows (A) hold C-035's 12 designs as they were;
+twelve (B) hold the same 12 designs redrawn with `barSpread` as set and `age` drawn evenly from 0 to 1 (seed 36). The real
+jalis are C-035's 12, each shown twice from different places (A round the field's centre, B two repeats up and left).
+Each crop is eight repeats square (or the largest that fits, the generated crop cut to the same number of repeats as
+its real partner), scaled to 480 px, blurred only by 0.8 px to remove the photo's pixel noise, and thresholded; solid
+dark, open light. Within A and within B, the generated design is on the left in six rows and on the right in six; the
+24 rows are shuffled together (seed 36).
+
+**3. Why.**
+We don't know whether uneven bars and wear are part of what tells a jali from a generated one once a picture shows
+enough to see them.
+
+**4. What is affected.**
+- `engine/core/jali-design.js` (`barSpread`, `bedding`, `age`), its calibration (`engine/check/jali-age.mjs`), the
+  between-bar reading in `tools/screen_hand.py`, the pick in `tools/jali_blind.py`; `runs/c036/`.
+- `pieces/jali/grammar.md`, `processes/primitives.md` (`carving-errors`); C-035's designs stay as they were.
+
+**5. Conclusion.**
+- **If** the writer picks out B's generated designs at least 3 fewer times than A's → bars cut one by one and worn make
+  generated jalis harder to tell from real ones, at this level.
+- **If** B is picked out as often as A, or more → they don't help, or the way they're drawn gives the designs away; the
+  card records what the writer saw.
+- **Between** (1 or 2 fewer) → inconclusive with one judge and 12 rows each.
+- And for each of A and B: 10 or more of 12 means that generator's designs give themselves away at this level.
+
+**6. If not done.**
+Every generated bar stays as even as the next, and the writer's point about stone and time stays untested.
+
+**Limits (known before running):** one judge, who has now seen these real screens in C-035 too; the age model and the
+bedding are guesses, and the age scale's top is a guess; real crops still carry some of a photo's shading in their edges.
+
+---
+
 ## C-035 · Can the writer tell the generator's patterns from real jalis' when the photograph, the labels and the frame are taken away?
 
 **Status:** closed
@@ -89,40 +153,6 @@ composition.
 measures, `inside.json`, `result.json`; the pick page and its real crops stay local in `runs/c035/blind/`).
 
 **Closed:** 2026-11-22
-
----
-
-## C-036 · Do bars cut one by one, from uneven stone, and worn by time, make generated jalis harder to tell from real ones?
-
-**Status:** drafted. Opens after C-035, with its count as the starting point: 5 of 12, at chance, so its pick must show
-more than C-035's did (see C-035's result).
-
-**1. Where we are.**
-How much bars differ from one another, each read by its median width (a check before this card, 2026-11-22):
-
-| What's compared | How much bars differ from one another |
-|---|---|
-| The generator's exact designs | 1 to 6 % |
-| The clean 19th-century V&A panels | 5 to 14 % |
-| The two 16th-century Met screens | about 85 % |
-
-The two Met screens stood in buildings for centuries, which fits the writer's point that time wears them further. It
-isn't proof: they also have the finest bars in the smallest photos, which inflates the reading. Along a single bar the
-clean real ones are fairly even (2 to 6 %). The generator's `hand` dial varies width smoothly across neighbouring bars;
-at its strongest it reaches about 9 % between bars.
-
-**2. What we are doing.** (To be written at opening.) Model unevenness as three processes, each with its own dial:
-1. **Cutting: each bar its own width.** Every bar between two meeting points gets its own width, drawn round the bar
-   width with a spread of roughly 8 to 12 %, from the clean panels. Every screen comes out different and can still be
-   remade from its seed.
-2. **The stone itself.** Sandstone has softer and harder layers, so it wears in bands running one way. A hypothesis,
-   not measured.
-3. **Age.** Erosion follows exposure: thin bars and edges go first, the top and outer face more than the inside, dirt
-   gathers in hollows. One `age` dial from freshly cut, like the 19th-century panels, to centuries in place, like the
-   Met screens; with only two or three old screens it is a weak first calibration, and labelled as one.
-Then the same blind pick as C-035, on designs drawn with them.
-
-**3 to 6.** Written at opening, with C-035's count.
 
 ---
 

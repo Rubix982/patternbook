@@ -111,6 +111,83 @@ def score(run, code):
     print(f"picked the generated one in {res['correct']} of {res['of']}")
 
 
+# ---- C-036: two generators in one pick, larger and sharper crops, sides balanced ----
+def crop_at(op, repeat, reps, offset=(0.0, 0.0), side=480, blur=0.8):
+    """A square of `reps` repeats round the openings' hull's centre moved by `offset` repeats (x, y), smaller if it
+    doesn't fit inside the hull; scaled to `side` px, blurred by `blur` px, thresholded. Returns (image, repeats shown)."""
+    hull = convex_hull_image(op)
+    cy, cx = ndi.center_of_mass(hull)
+    cx, cy = int(round(cx + offset[0] * repeat)), int(round(cy + offset[1] * repeat))
+    half = int(round(reps * repeat / 2))
+    while half > 10:
+        y0, y1, x0, x1 = cy - half, cy + half, cx - half, cx + half
+        if y0 >= 0 and x0 >= 0 and y1 <= hull.shape[0] and x1 <= hull.shape[1] and hull[y0:y1, x0:x1].all():
+            break
+        half -= 2
+    m = op[cy - half:cy + half, cx - half:cx + half].astype(np.uint8) * 255
+    im = Image.fromarray(m).resize((side, side), Image.BILINEAR).filter(ImageFilter.GaussianBlur(blur))
+    a = np.asarray(im) >= 128
+    rgb = np.where(a[..., None], np.array([236, 230, 220], np.uint8), np.array([43, 38, 34], np.uint8))
+    return Image.fromarray(rgb.astype(np.uint8)), round(half * 2 / repeat, 2)
+
+
+def make2(run):
+    samples = {r["id"]: r for r in csv.DictReader(open("pieces/jali/samples.tsv"), delimiter="\t")}
+    c031 = {r["id"]: r for r in json.load(open("runs/c031/measures.json"))}
+    geo = sorted(i for i, r in c031.items() if r["role"] == "jali" and r["family"] == "geometric")
+    real = random.Random(32).sample(geo, 12)
+    genA = json.load(open("runs/c035/inside.json"))["first12"]
+    mA = {r["id"]: r for r in json.load(open("runs/c035/measure/measures.json"))}
+    mB = {r["id"]: r for r in json.load(open(os.path.join(run, "measure", "measures.json")))}
+    rnd = random.Random(36)
+    rows, imgs = [], {}
+    for group, gens, meas, folder, offset in (("A", genA, mA, "runs/c035/designs", (0.0, 0.0)), ("B", [g + "-b" for g in genA], mB, os.path.join(run, "designs"), (-2.0, -2.0))):
+        g, r = gens[:], real[:]
+        rnd.shuffle(g)
+        rnd.shuffle(r)
+        sides = ["L"] * 6 + ["R"] * 6
+        rnd.shuffle(sides)
+        for gi, ri, sd in zip(g, r, sides):
+            st = dict(kv.split("=") if "=" in kv else (kv, "1") for kv in samples[ri]["settings"].split(";") if kv)
+            rop, gop = openings_of(samples[ri]["image"], st), openings_of(os.path.join(folder, f"{gi}.png"), {})
+            rrep, grep = c031[ri]["opening_px"] + c031[ri]["bar_px"], meas[gi]["opening_px"] + meas[gi]["bar_px"]
+            _, gmax = crop_at(gop, grep, 8)  # the most the design can show, so both crops show the same repeats
+            rim, shown = crop_at(rop, rrep, min(8, gmax), offset)
+            gim, gshown = crop_at(gop, grep, shown)
+            rows.append({"group": group, "generated_id": gi, "real_id": ri, "generated": sd, "real_repeats": shown, "generated_repeats": gshown})
+            imgs[(group, gi)] = gim
+            imgs[(group, ri)] = rim
+    rnd.shuffle(rows)
+    os.makedirs(os.path.join(run, "blind"), exist_ok=True)
+    json.dump({"rows": rows}, open(os.path.join(run, "blind", "key.json"), "w"), indent=1)
+    html_rows = []
+    for k, row in enumerate(rows):
+        gi, ri = imgs[(row["group"], row["generated_id"])], imgs[(row["group"], row["real_id"])]
+        left, right = (gi, ri) if row["generated"] == "L" else (ri, gi)
+        html_rows.append(f'<div class="pair" data-i="{k}"><div class="n">{k + 1}</div>'
+                         f'<button data-side="L"><img alt="" src="data:image/png;base64,{b64(left)}"></button>'
+                         f'<button data-side="R"><img alt="" src="data:image/png;base64,{b64(right)}"></button></div>')
+    html = PAGE.replace("{{ROWS}}", "\n".join(html_rows)).replace("of 12 picked", "of 24 picked").replace("n===12", "n===24") \
+        .replace("[...Array(12).keys()]", "[...Array(24).keys()]").replace("When all twelve are picked", "When all twenty-four are picked") \
+        .replace("max-width:820px", "max-width:1040px")
+    open(os.path.join(run, "blind", "pick.html"), "w").write(html)
+    print(f"{len(rows)} rows -> {os.path.join(run, 'blind', 'pick.html')}")
+
+
+def score2(run, code):
+    key = json.load(open(os.path.join(run, "blind", "key.json")))["rows"]
+    code = code.strip().upper()
+    assert len(code) == len(key) and set(code) <= {"L", "R"}, "the code is one L or R per row"
+    res = {"code": code, "rows": [], "by_group": {}}
+    for k, (c, row) in enumerate(zip(code, key)):
+        res["rows"].append({"row": k + 1, **row, "picked": c, "correct": c == row["generated"]})
+    for gname in ("A", "B"):
+        rs = [x for x in res["rows"] if x["group"] == gname]
+        res["by_group"][gname] = {"correct": sum(x["correct"] for x in rs), "of": len(rs), "picked_left": sum(x["picked"] == "L" for x in rs)}
+    json.dump(res, open(os.path.join(run, "result.json"), "w"), indent=1)
+    print({g: f"{v['correct']} of {v['of']}" for g, v in res["by_group"].items()})
+
+
 PAGE = """<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Jali blind pick</title><style>
 :root{--bg:#f6f3ee;--ink:#231f1b;--mute:#6b645c;--line:#d8d1c7;--pick:#b5532c}
@@ -151,5 +228,9 @@ if __name__ == "__main__":
     run = sys.argv[sys.argv.index("--run") + 1]
     if cmd == "make":
         make(run)
+    elif cmd == "make2":
+        make2(run)
+    elif cmd == "score2":
+        score2(run, sys.argv[-1])
     else:
         score(run, sys.argv[-1])

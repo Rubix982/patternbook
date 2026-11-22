@@ -1,0 +1,62 @@
+[
+ {
+  "id": "octagram-spread-0-age-0",
+  "barSpread": 0,
+  "age": 0,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0.05-age-0",
+  "barSpread": 0.05,
+  "age": 0,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0.1-age-0",
+  "barSpread": 0.1,
+  "age": 0,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0.15-age-0",
+  "barSpread": 0.15,
+  "age": 0,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0.2-age-0",
+  "barSpread": 0.2,
+  "age": 0,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0.3-age-0",
+  "barSpread": 0.3,
+  "age": 0,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0-age-0.25",
+  "barSpread": 0,
+  "age": 0.25,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0-age-0.5",
+  "barSpread": 0,
+  "age": 0.5,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0-age-0.75",
+  "barSpread": 0,
+  "age": 0.75,
+  "bar": 12.11
+ },
+ {
+  "id": "octagram-spread-0-age-1",
+  "barSpread": 0,
+  "age": 1,
+  "bar": 12.11
+ }
+]

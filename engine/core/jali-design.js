@@ -12,7 +12,7 @@
 //
 // The dials and their ranges for a jali come from C-031's measures (`pieces/jali/grammar.md`).
 import { distanceTo, signedDistance } from './field.js';
-import { noise2, hash2 } from './random.js';
+import { noise1, noise2, hash2 } from './random.js';
 
 const S3 = Math.sqrt(3), TAU = 2 * Math.PI;
 const poly = (cx, cy, n, R, rot) => Array.from({ length: n }, (_, k) => [cx + R * Math.cos(rot + (k * TAU) / n), cy + R * Math.sin(rot + (k * TAU) / n)]);
@@ -101,8 +101,15 @@ export function frameField(kind, x0, y0, x1, y1) {
 //   wear    the edges eroded unevenly, rougher where the stone is soft (bar widths).
 // drift and jitter default to what C-033 read on 10 real jalis (medians, read back jointly through the calibration;
 // upper bounds, since a photograph adds its own distortion); round and wear stay 0 (not calibrated, or not seen).
+// Bars cut one by one, from uneven stone, worn by time (C-036), each 0 by default:
+//   barSpread  every line between two meeting points its own half-width, a normal spread round the bar's (clipped at
+//              2.5 spreads), as each bar was cut on its own;
+//   age        0 freshly cut to 1: edges retreat, at most a quarter of a bar at 1, more near the top (rain), more in
+//              soft layers, unevenly along the edge, and stone corners round as they go (a guess, labelled one);
+//   bedding    how much the stone's horizontal layers differ in softness (0 even to 1), acting only through age (a
+//              hypothesis, not measured).
 export const DESIGN_DEFAULTS = { width: 1100, height: 1400, margin: 90, border: 70, frame: 'rect', tiling: '4.8.8', kind: 'strands', angle: 67.5,
-  across: 7, barOverOpening: 0.45, hand: 0.15, thickness: 3.5, seed: 1, drift: 0.16, jitter: 0.048, round: 0, wear: 0 };
+  across: 7, barOverOpening: 0.45, hand: 0.15, thickness: 3.5, seed: 1, drift: 0.16, jitter: 0.048, round: 0, wear: 0, barSpread: 0, age: 0, bedding: 0.5 };
 
 export function designJali(options = {}) {
   const o = { ...DESIGN_DEFAULTS, ...options }, W = o.width, H = o.height;
@@ -145,8 +152,13 @@ export function designJali(options = {}) {
   const d0 = distanceTo(L, W, H), D = faceWidth(d0, W, H, inField);
   const r = o.barOverOpening, bar = (2 * D * r) / (1 + r), opening = 2 * D - bar;
   // the cut, exactly, near the lines; the hand varies each bar's width smoothly along it
-  const half = (bar / 2) * (1 + 0.5 * o.hand) + 2, dmin = new Float32Array(W * H).fill(Infinity);
-  for (const s of segs) {
+  // each line's own half-width (barSpread): dmin holds the distance less the line's extra half-width, so a pixel is stone
+  // where some line's own bar covers it; with barSpread 0 it is the plain distance
+  const gauss = (k) => Math.max(-2.5, Math.min(2.5, 2 * (hash2(k, 1, o.seed + 41) + hash2(k, 2, o.seed + 43) + hash2(k, 3, o.seed + 47) - 1.5)));
+  const extra = segs.map((_, k) => (o.barSpread ? (bar / 2) * o.barSpread * gauss(k) : 0));
+  const half = (bar / 2) * (1 + 0.5 * o.hand + 2.5 * o.barSpread) + 2, dmin = new Float32Array(W * H).fill(Infinity);
+  for (let k = 0; k < segs.length; k++) {
+    const s = segs[k], ek = extra[k];
     const xa = Math.max(sx0, Math.floor(Math.min(s[0], s[2]) - half)), xb = Math.min(sx1 - 1, Math.ceil(Math.max(s[0], s[2]) + half));
     const ya = Math.max(sy0, Math.floor(Math.min(s[1], s[3]) - half)), yb = Math.min(sy1 - 1, Math.ceil(Math.max(s[1], s[3]) + half));
     if (xa > xb || ya > yb) continue;
@@ -154,7 +166,7 @@ export function designJali(options = {}) {
     for (let y = ya; y <= yb; y++) for (let x = xa; x <= xb; x++) {
       const px = x + 0.5, py = y + 0.5;
       let t = ((px - s[0]) * ex + (py - s[1]) * ey) / LL; t = t < 0 ? 0 : t > 1 ? 1 : t;
-      const qx = s[0] + t * ex - px, qy = s[1] + t * ey - py, d = Math.sqrt(qx * qx + qy * qy), p = y * W + x;
+      const qx = s[0] + t * ex - px, qy = s[1] + t * ey - py, d = Math.sqrt(qx * qx + qy * qy) - ek, p = y * W + x;
       if (d < dmin[p]) dmin[p] = d;
     }
   }
@@ -166,6 +178,30 @@ export function designJali(options = {}) {
     if (!inField(px, py)) { stone[p] = 1; continue; }
     const wl = bar * (1 + o.hand * (0.35 * noise2(px / S, py / S, o.seed) + 0.12 * noise2((px * 5) / S, (py * 5) / S, o.seed + 7)));
     if (dmin[p] <= wl / 2) stone[p] = 1;
+  }
+  // age: every edge in the field retreats by e, at most a quarter of a bar at age 1, deeper near the top, in soft layers
+  // and unevenly along the edge; then the stone's corners round with a disc of half the deepest retreat
+  if (o.age > 0) {
+    const sd = signedDistance((x, y) => stone[Math.floor(y) * W + Math.floor(x)] === 1, W, H), Hf = fy1 - fy0;
+    const peak = 1.6 * (1 + o.bedding) * 1.5, depth = (0.25 * bar * o.age) / peak, lam = Math.max(3, 0.8 * bar);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const p = y * W + x, px = x + 0.5, py = y + 0.5;
+      if (!slab[p] || !inField(px, py)) continue;
+      const top = 1 + 0.6 * (1 - Math.min(1, Math.max(0, (py - fy0) / Hf)));
+      const soft = 1 + o.bedding * noise1(py / (0.7 * a), o.seed + 51);
+      const along = 1 + 0.5 * noise2(px / lam, py / lam, o.seed + 53);
+      stone[p] = sd[p] > depth * top * soft * along ? 1 : 0;
+    }
+    const rc = 0.125 * bar * o.age;
+    if (rc > 0.5) {
+      const sd2 = signedDistance((x, y) => stone[Math.floor(y) * W + Math.floor(x)] === 1, W, H), core = new Uint8Array(W * H);
+      for (let p = 0; p < W * H; p++) core[p] = stone[p] && sd2[p] > rc ? 1 : 0;
+      const toCore = distanceTo(core, W, H);
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const p = y * W + x;
+        if (stone[p] && inField(x + 0.5, y + 0.5) && toCore[p] > rc + 0.5) stone[p] = 0;
+      }
+    }
   }
   // the chisel's radius rounds each opening's corners (an opening of the open area by a disc); wear roughens every
   // edge, unevenly, by moving it along its own distance field by smooth noise
