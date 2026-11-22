@@ -428,3 +428,25 @@ relief sketch made muddy domes. Read the section's shape from photos taken at an
 render it with real light, as geometry, rather than shading a flat mask.
 **Answer:** —
 
+### T-044 · How large is real jalis' jitter, once bars' evenness constrains it too?
+
+**Status:** open
+**Parent:** C-036
+**Opened:** 2026-11-22
+**Question:** C-033 read meeting points off a lattice by 0.048 of a step (an upper bound) and made it the default; C-036
+found that jitter alone makes generated bars differ from one another by 0.17, against 0.067 in the V&A's Agra panels.
+Fit jitter, drift and per-bar spread together to both readings (lattice error and between-bar spread), so that neither
+overshoots.
+**Answer:** —
+
+### T-045 · What does the writer read as "generated"?
+
+**Status:** open
+**Parent:** C-036
+**Opened:** 2026-11-22
+**Question:** Over C-035 and C-036 the writer picked the generated jali in 12 of 36 rows, below chance, taking real
+screens for generated ones, and said they could see "where we are periodically adding chaos". If the cue is a photo
+mask's ragged edge, a pick with the real crops' edges smoothed like the designs' should bring the count back to chance
+or above; if it isn't, the cue is in the pattern.
+**Answer:** —
+

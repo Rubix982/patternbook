@@ -16,7 +16,7 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ## C-036 · Do bars cut one by one, from uneven stone, and worn by time, make generated jalis harder to tell from real ones?
 
-**Status:** open
+**Status:** closed
 **Opened:** 2026-11-22 (drafted at C-035's opening from the writer's note; fields 2 to 6 written now)
 
 **1. Where we are.**
@@ -75,6 +75,36 @@ Every generated bar stays as even as the next, and the writer's point about ston
 
 **Limits (known before running):** one judge, who has now seen these real screens in C-035 too; the age model and the
 bedding are guesses, and the age scale's top is a guess; real crops still carry some of a photo's shading in their edges.
+
+**How it ran.** The calibration on the octagram, with the generator's other defaults, found its bars already differing
+from one another by 0.23 (the V&A's nine Agra panels: median 0.067), and per-bar spread only raises it (0.29 to 0.38 at
+0.15 to 0.3); read one dial at a time, the cause is C-033's jitter (0.17 alone, 0.18 at half), which collapses small
+openings and merges bars into knots (`runs/c036/spread.json`, `real-bars.json`). So the rule set `barSpread` to 0, and
+the pick tested age alone. Age moved the reading away from the Met screens' 0.85, not towards it (0.23 at age 0 to 0.11
+at age 1: wear opens the knots up), so no age matches them; either their reading is the photographs', or real
+weathering is patchier than this model. The pick builder first let a generated crop show fewer repeats than its real
+partner (up to 3.6 fewer) where a design's openings were large; fixed before the page was shown, so each row shows the
+same repeats on both sides (within 0.03; 2.2 to 8 repeats, where fields allowed).
+
+**Result (2026-11-22): the writer picked the generated one in 4 of 12 rows with C-035's designs (A) and in 3 of 12 with
+the same designs worn by age (B). One fewer is inconclusive by the card's rule, and neither gives itself away.** The
+writer: "I can identify where we are periodically adding chaos ..." (`runs/c036/result.json`).
+
+**Below chance, which the rule didn't ask about.** 7 of 24 overall, where guessing gives 12 (about 1 in 30 by chance,
+one-sided); with C-035's 5 of 12, 12 of 36. The writer took the real screen for the generated one in 17 of 24 rows. A
+likely reason, untested: a real crop's mask keeps its photograph's ragged edges, the designs' edges are clean with a
+gentle wobble, so the writer's cue for "generated chaos" picks out the real ones. Until a pick tests that (the real
+crops' edges smoothed alike, say), these picks say the generated patterns aren't picked out, not that they look real.
+
+**Claim:** with eight repeats shown and the generated design on each side equally often, the writer picked the
+generated jali in 4 of 12 rows and its aged version in 3 of 12; age, as modelled, made no difference that one judge and
+12 rows can show. C-033's jitter makes generated bars more uneven from one another than real 19th-century panels'.
+
+**Changes made:** `engine/core/jali-design.js` (`barSpread`, `age`, `bedding`, all 0 by default except `bedding` 0.5,
+which acts only through age), `engine/check/jali-age.mjs`, `engine/check/jali-blind2.mjs`, `tools/screen_hand.py`
+(`between_bars`), `tools/jali_blind.py` (`make2`, `score2`), `runs/c036/`; `threads.md` (T-044, T-045).
+
+**Closed:** 2026-11-22
 
 ---
 
