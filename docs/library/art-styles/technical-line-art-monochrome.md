@@ -1,7 +1,7 @@
 ---
 art_style: technical line art, monochrome
 source: IKEA assembly instructions (BILLY, POÄNG, MALM, SKAFTET), visual facts only
-source_entry: library/step-by-step-instructions/ikea-assembly-instructions.md
+source_entry: docs/library/step-by-step-instructions/ikea-assembly-instructions.md
 derived_in: C-008
 tested_in: [C-008]
 best_example: runs/c008/arm-b.html

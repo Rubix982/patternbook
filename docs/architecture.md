@@ -29,7 +29,7 @@ Three things it does, in this order:
 
 ## 2. What stays
 
-- The pages shelf: `library/` problem entries and art styles, the cards C-001 to C-014, their runs and results.
+- The pages shelf: `docs/library/` problem entries and art styles, the cards C-001 to C-014, their runs and results.
   They stay as they are, and the subcontinent's work can feed it (a page built with a look is a fair test of the
   look).
 - `METHOD.md`, the card protocol (`CARD.md`), `threads.md`, the blind pick, the judge's checklist.
@@ -324,7 +324,7 @@ engine/                     + our generators (Lumenary's conventions)
   cli/                      Node: batch renders, sheets, exports
 studio/                     + the GitHub Pages studio: browse the catalogue, run generators, compose looks
 references/references.md    + the one bibliography, with rights
-library/                    the pages shelf, unchanged
+docs/library/               the pages shelf (problem entries and art styles)
 treatments/                 the treatments that apply looks to pages; their theory moved into processes/ (pointers left)
 engine/                     the engine: Lumenary's as the base (files unchanged), patternbook's styles and core/
 NOTICE.md                   what came from other projects and where it is

@@ -61,7 +61,7 @@ _Model `processes/models/letterpress.json`; as captured from his site, `processe
 _The theory of patternbook's own `press` treatment (`treatments/treatments.js`), "Two-colour press", moved here from `treatments/theory/press.md` on 2026-11-22 so it sits with the process it models._
 
 **For:** drawings (vector SVG) on a page that uses a two-ink style, such as
-`library/art-styles/hand-inked-two-colour-field-magazine.md`.
+`docs/library/art-styles/hand-inked-two-colour-field-magazine.md`.
 **Comes from:** letterpress and offset magazine printing in two inks, black plus one spot
 colour. PS Magazine (1950s–60s) is the reference.
 **Works best on:** line art, flat colour areas and light tints.

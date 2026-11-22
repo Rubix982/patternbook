@@ -72,7 +72,7 @@ Use it for both layers. For an art-style file, steps 1–3 say what the page sho
 
 ## 3. Write the entry
 
-Copy `library/_template.md` to `library/<problem>/<source>.md`. The template says what
+Copy `docs/library/_template.md` to `docs/library/<problem>/<source>.md`. The template says what
 each section needs. Things to check before calling it done:
 
 - Every fact in section 2 says how it was measured.
@@ -108,7 +108,7 @@ An entry isn't trusted until it beats something in a blind pick. Open a card in
 
 A page is built in two layers, and each fixes different tells:
 
-1. **Guides (bottom):** the problem entries and art-style files in `library/`. They set
+1. **Guides (bottom):** the problem entries and art-style files in `docs/library/`. They set
    structure, layout, palette, type and voice. Four of the five judge's tells below live
    here: empty space, a missing header, enthusiastic copy, too much text. No filter fixes these.
 2. **Treatments (top):** procedures applied to the page's photos and drawings (ink,

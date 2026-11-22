@@ -3,10 +3,10 @@ source: <what it is, specifically — e.g. "IKEA assembly instructions (BILLY bo
 source_family: <maker or tradition — e.g. IKEA, Haynes, NASA>
 source_docs:
   - <URL or archive reference for every document you looked at>
-problem: <folder name under library/ — the problem this solves>
+problem: <folder name under docs/library/ — the problem this solves>
 also_teaches: [<other problems this source shows, which may get their own entries>]
 patterns: [<short kebab-case names for reusable ideas — reuse existing names where they fit>]
-art_style: <path to a file in library/art-styles/ if one fits, else free text>
+art_style: <path to a file in docs/library/art-styles/ if one fits, else free text>
 tested_in: [<card IDs, or empty>]
 best_example: <path to the page that won a blind pick using this entry, or empty>
 ---

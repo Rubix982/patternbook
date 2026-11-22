@@ -20,9 +20,9 @@ Magazine hand-inked style (C-011), which beat the left one in a blind pick.*
 ## For an agent using the library
 
 1. Pick two things separately:
-   - a **problem entry**: the folder in `library/` that matches what your page has to do
+   - a **problem entry**: the folder in `docs/library/` that matches what your page has to do
      (`step-by-step-instructions/`, `troubleshooting-by-symptom/`);
-   - an **art style** from `library/art-styles/` for how it looks. Three styles so far:
+   - an **art style** from `docs/library/art-styles/` for how it looks. Three styles so far:
      PS Magazine hand-inked (C-011) beat IKEA line art, which had beaten the default (C-008);
      NASA typographic (C-009) didn't help. Check a style's `tested_in` before relying on it.
 2. Read the entry. Follow **section 4 (rules)**, and check **section 5** to see whether
@@ -89,8 +89,8 @@ work yet, on the live site or locally. Everything else opens straight from disk.
 ## Layout
 
 ```
-library/<problem>/<source>.md   problem entries (template: library/_template.md)
-library/art-styles/<style>.md   art styles, used alongside any problem entry
+docs/library/<problem>/         problem entries, one file per source (template: docs/library/_template.md)
+docs/library/art-styles/        art styles, used alongside any problem entry
 METHOD.md                       how an entry is made and tested
 CARD.md                         the open card, and closed ones with results
 threads.md                      open questions, not yet worked on
