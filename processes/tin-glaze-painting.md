@@ -16,6 +16,9 @@ status: listed
 
 # Tin-glaze painting
 
+patternbook's own model of a glaze with thickness, and pigment painted under or into it, is `glaze-layer`
+(`processes/primitives.md`; `engine/core/glaze.js`, C-026).
+
 Listed by C-017 from the models filed under it. Sections 1-7 and 9 of `_template.md` (the process, its constraints, its imperfections, the maths, dials, variants, what it makes, sources) are not written yet.
 
 ## 8. Models

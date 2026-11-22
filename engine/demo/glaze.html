@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glaze layer</title>
+<style>
+  :root { --bg: #f4f1ea; --ink: #1d1b17; --muted: #6b655b; --line: #d8d1c4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { color: var(--muted); margin: 0 0 16px; max-width: 72ch; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  fieldset { border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 12px; }
+  legend { color: var(--muted); font-size: 13px; }
+  label { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+  label.wide { grid-template-columns: 90px 1fr; }
+  input[type=text], select { width: 100%; font: inherit; font-size: 13px; padding: 3px 5px; }
+  output { font-variant-numeric: tabular-nums; color: var(--muted); }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Glaze layer</h1>
+  <p class="lede">The primitive <code>glaze-layer</code> (card C-026): a red clay body under white slip, painted in cobalt
+    and turquoise, with a ring cut through the slip to the clay, under a transparent glaze. The melted glaze levels
+    itself, so it lies thick in hollows and thin over ridges, smooths over the body's fine texture, and carries the
+    gloss; in the firing the pigment spreads into it, more where it lies thick. Set the levelling to 0 to see a glaze that
+    only follows the body.</p>
+  <div class="wrap">
+    <canvas id="c" width="480" height="480"></canvas>
+    <form id="f">
+      <fieldset><legend>Piece</legend>
+        <label class="wide">design <select name="design"><option value="tile">kashi-like tile</option><option value="grooves">grooves and ridges</option><option value="lines">lines, glaze thin to thick</option></select></label>
+        <label class="wide">slip, clay <input type="text" name="ground" value="#f3efe6 #9a4a2e"></label>
+        <label class="wide">cobalt, fill <input type="text" name="pigments" value="#1d3f9a #33a9a3"></label>
+        <label>groove depth <input type="range" name="depth" min="0" max="5" step="0.1" value="1.6"><output></output></label>
+        <label>brush <input type="range" name="brush" min="0" max="0.8" step="0.01" value="0.15"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Glaze</legend>
+        <label>thickness <input type="range" name="amount" min="0.2" max="6" step="0.1" value="2.2"><output></output></label>
+        <label>levelling <input type="range" name="level" min="0" max="20" step="0.5" value="6"><output></output></label>
+        <label>tint <input type="range" name="tint" min="0" max="4" step="0.05" value="1"><output></output></label>
+        <label>spread <input type="range" name="flow" min="0" max="1.5" step="0.05" value="0.55"><output></output></label>
+        <label>gloss <input type="range" name="gloss" min="0" max="1" step="0.01" value="0.55"><output></output></label>
+        <label>light <input type="range" name="light" min="0" max="360" step="5" value="230"><output></output></label>
+      </fieldset>
+      <fieldset><legend>The kiln and the hand</legend>
+        <label>uneven <input type="range" name="uneven" min="0" max="0.6" step="0.01" value="0.12"><output></output></label>
+        <label>runs <input type="range" name="run" min="0" max="1.5" step="0.05" value="0"><output></output></label>
+        <label>crazing <input type="range" name="craze" min="0" max="1" step="0.01" value="0.3"><output></output></label>
+        <label>craze cell <input type="range" name="crazeCell" min="8" max="80" step="1" value="26"><output></output></label>
+        <label>pinholes <input type="range" name="pinholes" min="0" max="0.002" step="0.0001" value="0.0001"><output></output></label>
+        <label>seed <input type="range" name="seed" min="1" max="99" step="1" value="3"><output></output></label>
+      </fieldset>
+    </form>
+  </div>
+</main>
+<script src="../engine.js"></script>
+<script>
+  const { paint } = PatternbookEngine.weave;
+  const { glazed, GLAZE_DEFAULTS } = PatternbookEngine.glaze;
+  const { SHAPES } = PatternbookEngine.kantha;
+  const { signedDistance } = PatternbookEngine.field;
+  const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
+  const colours = (s, d) => { const v = s.split(/[\s,]+/).filter((x) => /^#?[0-9a-f]{6}$/i.test(x)).map((x) => (x[0] === '#' ? x : '#' + x)); return v.length >= d.length ? v : d; };
+  let cache = null;
+  function design(name, T, depth) {
+    if (name === 'grooves') return { body: (x, y) => { const k = Math.round((y - 30) / 44), d = y - (30 + 44 * k); return (k % 2 ? 1 : -1) * depth * 1.9 * (Math.abs(d) < 5 ? Math.cos((Math.PI * d) / 10) ** 2 : 0); } };
+    if (name === 'lines') return { paint: (cob) => [{ mask: (x) => (Math.abs(((x % 24) + 24) % 24 - 12) < 1.5 ? 1 : 0), colour: cob }], amountAt: (x) => 0.4 + 1.6 * (x / T) };
+    if (!cache || cache.T !== T) { const lotus = SHAPES.lotus(T / 2, T / 2, T * 0.36, 8); cache = { T, sd: signedDistance(lotus, T, T) }; }
+    const at = (x, y) => cache.sd[Math.min(T - 1, Math.floor(y)) * T + Math.min(T - 1, Math.floor(x))];
+    const ring = (x, y) => Math.abs(Math.hypot(x - T / 2, y - T / 2) - T * 0.45);
+    return { body: (x, y) => -depth * Math.max(0, 1 - ring(x, y) / 1.6), cut: (x, y) => (ring(x, y) < 1.3 ? 1 : 0),
+      paint: (cob, fill) => [{ mask: (x, y) => (at(x, y) > 1.2 ? 1 : 0), colour: fill }, { mask: (x, y) => (Math.abs(at(x, y)) <= 1.2 ? 1 : 0), colour: cob },
+        { mask: (x, y) => (Math.hypot(x - T / 2, y - T / 2) < T * 0.07 ? 1 : 0), colour: cob }] };
+  }
+  function draw() {
+    const v = Object.fromEntries(new FormData(f));
+    for (const o of f.querySelectorAll('output')) o.value = o.previousElementSibling.value;
+    const T = c.width, [slip, clay] = colours(v.ground, ['#f3efe6', '#9a4a2e']), [cob, fill] = colours(v.pigments, ['#1d3f9a', '#33a9a3']);
+    const d = design(v.design, T, +v.depth), a = (+v.light * Math.PI) / 180;
+    const img = glazed({ ...GLAZE_DEFAULTS, width: T, height: T, seed: +v.seed, slip, clay, body: d.body, cut: d.cut,
+      paint: d.paint ? d.paint(cob, fill) : [], amountAt: d.amountAt, amount: +v.amount, level: +v.level,
+      tint: GLAZE_DEFAULTS.tint.map((t) => t * +v.tint), flow: +v.flow, gloss: +v.gloss, light: [0.78 * Math.cos(a), 0.78 * Math.sin(a), 0.62],
+      uneven: +v.uneven, run: +v.run, craze: +v.craze, crazeCell: +v.crazeCell, pinholes: +v.pinholes, brush: +v.brush });
+    paint(ctx, img);
+  }
+  f.addEventListener('input', draw);
+  draw();
+</script>
+</body>
+</html>

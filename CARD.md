@@ -14,6 +14,92 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-026 · Can a glaze be given thickness, so that it pools in hollows and thins over ridges, levels the body's fine texture, and blurs the pigment beneath it more where it lies thick?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-018 found glaze in the primitives only as flat layers: `mix-over` for a cobalt wash over glaze, `crackle-network`
+for crazing, `tone-bands` for glaze grounds; no primitive gives a glaze a thickness, and Hala and Multani blue pottery's
+cobalt under clear glaze is drawn as a flat wash. Sources on Multani kashigari (Ceramic Arts Network, "Blue Kashi
+Tiles"; two AIC-IAC documents) describe a red clay body covered with a white engobe (*astar*), the design pounced
+through perforated paper, outlined in cobalt and filled with other colours (copper for turquoise), sometimes cut
+through the slip as sgraffito, then a transparent glaze sprayed to about 1 mm and fired, either a lead glaze at about
+850 °C or a frit of soda, borax and silica up to about 1,020 °C.
+
+**2. What we are doing.**
+Write `engine/core/glaze.js`: a body with relief, a slip, underglaze pigment painted on it, and a glaze laid over all of
+it whose top surface is the body's relief smoothed (a melted glaze levels itself), so its thickness is that surface less
+the body; the glaze tints by its thickness, its surface carries the gloss, and in firing the pigment spreads into it by
+an amount that grows with its thickness. Then read the pooling, the levelling and the pigment's spread back from the
+image.
+
+**3. Why.**
+We don't know whether one smoothed surface over the body is enough to give a glaze the three things a thickness
+should: deeper colour where it pools, a smooth gloss over a rough body, and softer painting where it lies thick, each
+measurable from the image.
+
+**4. What is affected.**
+- `engine/core/glaze.js`, its check, sheet and demo; the engine bundle.
+- `processes/primitives.md`: a `glaze-layer` entry; `processes/tin-glaze-painting.md` and `slip-painting.md`: pointers.
+- The atlas's Multani and Hala blue pottery and kashi tiles, Jaipur blue pottery, and glazed tile work more widely.
+
+**5. Conclusion.**
+At the defaults, from the image alone (the body's relief and the painted design are the plan, which a reader knows):
+- pooling: under a tinted glaze over white slip, the tint's density (read from the ratio of the channels it absorbs most
+  and least, so the lighting cancels) is at least 1.3 times its flat value at the bottom of hollows and at most 0.8 times
+  it on the tops of ridges; with the glaze following the body at an even thickness (the control), within 5 % of flat at
+  both;
+- levelling: on a body with a broad dome and a fine texture, the fine texture's share of the brightness (its standard
+  deviation, after removing everything broader than 4 px) is at most half of what the bare body shows, while the dome's
+  share is at least 0.7 of it; with the glaze following the body (the control), the fine texture keeps at least 0.8 of
+  it;
+- spread: cobalt lines under a glaze laid thin on one side and thick on the other have edges at least 1.5 times as wide
+  (10-90 %) where the glaze is thick; with no spreading in firing, within 10 %.
+- **If** all hold → we claim *a glaze with thickness is covered*: pooling, levelling and the pigment's spread.
+- **If** pooling and levelling hold and spread doesn't → the glaze's surface is right and its firing is not.
+- **If** pooling fails → one smoothed surface is not enough to give a glaze its thickness, and the card says why.
+
+**6. If not done.**
+Blue pottery and glazed tile, among the atlas's best documented crafts in Sindh and Punjab, stay a flat wash with a
+crackle on top.
+
+**Limits (known before running):** the glaze's surface is a blur of the body's, not a flow simulation; runs and drips on
+upright pieces are only a thickness gradient; the pigment's spread is a blur whose size grows with thickness, not
+diffusion in time at a firing temperature; the tint's absorbance is set by eye. Likeness to real kashi is a later blind
+pick.
+
+**Result (2026-11-22):** all three hold. **From the image alone at the defaults: under a tinted glaze, the tint is 1.97
+times as dense at the bottom of hollows as on the flat and 0.12 times on the tops of ridges, against 0.99 and 1.02 for a
+glaze of even thickness; on a body with a broad dome and a fine texture, the fine texture keeps 0.26 of the share of
+brightness it has on the bare body, and the dome 1.40, while a glaze that only follows the body keeps 1.05 of the
+texture; cobalt lines' edges widen from 1.8 px where the glaze is thinnest to 3.9 px where it is thickest (2.2 times;
+1.00 with no spreading).** All three hold with the imperfections off and at two and three times them; the fine
+texture's share rises to 0.37 at three times, as the brush's texture grows.
+
+**Run 1, and what changed before run 2.** Run 1 read the glaze of even thickness (the pooling control) as 0.90 in
+hollows and 0.93 on ridges, outside the 5 % allowed. The tint was read from the ratio of blue to red so the lighting
+would cancel; on slopes facing the lamp the red channel saturated, so it didn't, and half the pixels in each groove
+are such slopes. With the spraying even, the median happened to fall on the unsaturated half (1.00); with it uneven,
+it didn't. Pixels with a channel at full brightness are now left out. The model was not changed. Run 1's output is
+`runs/c026/check-run1.json`. Before the first run, the pinholes were made four times rarer, from looking at the first
+sheet; they don't enter any of the measures.
+
+**Claim:** a glaze with thickness is covered: it pools in hollows and thins over ridges, levels the body's fine texture
+while keeping its broad form, and spreads the pigment under it more where it lies thick. The three dials that set how
+much are set by eye (T-028).
+
+**Changes made:**
+- `engine/core/glaze.js`; `engine/check/glaze.mjs`, `glaze-sheet.mjs`; `engine/demo/glaze.html`; the engine bundle.
+- `processes/primitives.md`: `glaze-layer`; `processes/tin-glaze-painting.md` and `slip-painting.md`: pointers;
+  `engine/README.md`: one lesson.
+- `runs/c026/`; thread T-028.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-025 · Can a mirror be held to cloth by a grid of holding threads and a ring of shisha stitch, so that the opening, the ring's stitches, the grid's shape and the glass's reflection all read back?
 
 **Status:** closed

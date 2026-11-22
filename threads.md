@@ -255,3 +255,13 @@ harmonics in photographs of Sindhi, Kutch and Baloch mirror work once the atlas 
 glinting mirrors and their glints' scatter in photographs of mirror work, and set `tilt`, `curve` and the lamp from
 them (older blown-glass mirrors and machine-cut ones separately, if photographs allow).
 **Answer:** —
+
+### T-028 · How thick does glaze lie in real kashi's hollows, and how far does its cobalt spread?
+
+**Status:** open
+**Parent:** C-026
+**Opened:** 2026-11-22
+**Question:** `glaze-layer`'s levelling distance (6 px), tint, and spread (0.55 px per px of thickness) were set by eye.
+In close photographs of Multani and Hala tiles, measure how much deeper the glaze's colour is in sgraffito grooves than
+on the flat, and how soft the cobalt outlines are where the glaze is thick and thin; set the three dials from them.
+**Answer:** —

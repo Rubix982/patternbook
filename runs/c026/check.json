@@ -1,0 +1,184 @@
+{
+ "size": 360,
+ "defaults": {
+  "slip": "#f3efe6",
+  "clay": "#9a4a2e",
+  "amount": 2.2,
+  "level": 6,
+  "thin": 0.25,
+  "tint": [
+   0.02,
+   0.03,
+   0.09
+  ],
+  "flow": 0.55,
+  "light": [
+   -0.5,
+   -0.6,
+   0.62
+  ],
+  "relief": 1,
+  "gloss": 0.55,
+  "shine": 60,
+  "uneven": 0.12,
+  "run": 0,
+  "craze": 0.3,
+  "crazeCell": 26,
+  "pinholes": 0.0001,
+  "brush": 0.15
+ },
+ "results": [
+  {
+   "label": "default",
+   "pooling": {
+    "flat": 0.1519,
+    "hollow": 1.968,
+    "ridge": 0.115
+   },
+   "poolingControl": {
+    "flat": 0.1516,
+    "hollow": 0.993,
+    "ridge": 1.016
+   },
+   "levelling": {
+    "fine": 0.255,
+    "broad": 1.399,
+    "followFine": 1.054,
+    "bare": {
+     "fine": 0.1436,
+     "broad": 0.0264
+    }
+   },
+   "spread": {
+    "thin": 1.79,
+    "thick": 3.92,
+    "ratio": 2.196
+   },
+   "spreadControl": {
+    "thin": 0.81,
+    "thick": 0.8,
+    "ratio": 0.998
+   },
+   "checks": {
+    "pooling": true,
+    "levelling": true,
+    "spread": true
+   },
+   "pass": true
+  },
+  {
+   "label": "off",
+   "pooling": {
+    "flat": 0.1537,
+    "hollow": 1.96,
+    "ridge": 0.114
+   },
+   "poolingControl": {
+    "flat": 0.1537,
+    "hollow": 1.002,
+    "ridge": 1.002
+   },
+   "levelling": {
+    "fine": 0.224,
+    "broad": 1.398,
+    "followFine": 1.051,
+    "bare": {
+     "fine": 0.142,
+     "broad": 0.0263
+    }
+   },
+   "spread": {
+    "thin": 1.79,
+    "thick": 3.98,
+    "ratio": 2.218
+   },
+   "spreadControl": {
+    "thin": 0.8,
+    "thick": 0.8,
+    "ratio": 1
+   },
+   "checks": {
+    "pooling": true,
+    "levelling": true,
+    "spread": true
+   },
+   "pass": true
+  },
+  {
+   "label": "x2",
+   "pooling": {
+    "flat": 0.1501,
+    "hollow": 1.975,
+    "ridge": 0.117
+   },
+   "poolingControl": {
+    "flat": 0.1496,
+    "hollow": 0.982,
+    "ridge": 1.028
+   },
+   "levelling": {
+    "fine": 0.309,
+    "broad": 1.41,
+    "followFine": 1.056,
+    "bare": {
+     "fine": 0.1484,
+     "broad": 0.0267
+    }
+   },
+   "spread": {
+    "thin": 1.77,
+    "thick": 3.94,
+    "ratio": 2.222
+   },
+   "spreadControl": {
+    "thin": 0.81,
+    "thick": 0.81,
+    "ratio": 0.997
+   },
+   "checks": {
+    "pooling": true,
+    "levelling": true,
+    "spread": true
+   },
+   "pass": true
+  },
+  {
+   "label": "x3",
+   "pooling": {
+    "flat": 0.1483,
+    "hollow": 1.982,
+    "ridge": 0.118
+   },
+   "poolingControl": {
+    "flat": 0.1478,
+    "hollow": 0.97,
+    "ridge": 1.04
+   },
+   "levelling": {
+    "fine": 0.368,
+    "broad": 1.432,
+    "followFine": 1.058,
+    "bare": {
+     "fine": 0.156,
+     "broad": 0.0271
+    }
+   },
+   "spread": {
+    "thin": 1.79,
+    "thick": 3.98,
+    "ratio": 2.228
+   },
+   "spreadControl": {
+    "thin": 0.81,
+    "thick": 0.81,
+    "ratio": 0.999
+   },
+   "checks": {
+    "pooling": true,
+    "levelling": true,
+    "spread": true
+   },
+   "pass": true
+  }
+ ]
+}

@@ -6,7 +6,7 @@ patternbook's own primitives, written where no Lumenary model covers an operatio
 - `core/`: the primitives, as ES modules with no dependencies: `random.js` (seeded randomness and noise),
   `weave.js` (`weave-draft`, C-019), `supplementary.js` (`supplementary-weft`, C-020), `darning.js`
   (`counted-darning`, C-021), `chain.js` (`chain-stitch`, C-022), `field.js` and `kantha.js` (`contour-rows`,
-  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024), `mirror.js` (`mirror-inset`, C-025).
+  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026).
 - `check/`: each card's read-back check, run with Node (`node engine/check/weave.mjs`), the sheets
   (`node engine/check/weave-sheet.mjs runs/c019/weave-sheet.png`), and the shared read-back code (`readback.mjs`).
 - `demo/`: a page per primitive with every dial. They open straight from disk.
@@ -39,3 +39,6 @@ patternbook's own primitives, written where no Lumenary model covers an operatio
   read 23° from radial where at least 45° was set. Look at the control up close before trusting its number.
 - **Don't ask every instance to show what an imperfection can hide.** C-025 asked every mirror to glint; the discs'
   tilt, which the same card wanted to see, moves some glints under the ring.
+- **A saturated pixel carries no ratio.** C-026 read a glaze's tint from the ratio of two channels, so the lighting would
+  cancel; on slopes facing the lamp the red channel sat at full brightness, and half the pixels in a groove read too
+  little tint. Leave out any pixel with a channel at its limit before taking a ratio.
