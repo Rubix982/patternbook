@@ -1,0 +1,248 @@
+{
+ "size": 384,
+ "sett": 8,
+ "defaults": {
+  "sett": 8,
+  "slub": 0.25,
+  "beat": 0.2,
+  "wobble": 0.25,
+  "gap": 0.12,
+  "round": 0.55,
+  "dip": 0.35,
+  "fibre": 0.25,
+  "float": 5,
+  "pickup": 1,
+  "stagger": 1,
+  "row": 1,
+  "spread": 1,
+  "sheen": 0.45,
+  "light": 0,
+  "streak": 0.5,
+  "tension": 0.2,
+  "miscount": 0.02,
+  "aligned": true,
+  "width": 384,
+  "height": 384,
+  "ground": {
+   "ends": 2,
+   "picks": 2
+  },
+  "warp": [
+   "#7a2a1f"
+  ],
+  "weft": [
+   "#86301f"
+  ],
+  "floss": [
+   "#e8b423"
+  ],
+  "seed": 21
+ },
+ "results": [
+  {
+   "label": "default",
+   "stitches": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0,
+    "stitches": 285
+   },
+   "freeGrid": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0.25,
+    "stitches": 262
+   },
+   "blocks": {
+    "blocks": 8,
+    "direction": 1,
+    "hOverV": 1.207,
+    "bare": 0.175
+   },
+   "noSheen": {
+    "blocks": 8,
+    "direction": 1,
+    "hOverV": 1.007,
+    "bare": 0.175
+   },
+   "bagh": {
+    "blocks": 16,
+    "direction": 1,
+    "hOverV": 1.209,
+    "bare": 0.179
+   },
+   "checks": {
+    "counts": true,
+    "alignment": true,
+    "direction": true,
+    "sheen": true,
+    "coverage": false
+   },
+   "pass": false
+  },
+  {
+   "label": "off",
+   "stitches": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0,
+    "stitches": 288
+   },
+   "freeGrid": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0,
+    "stitches": 288
+   },
+   "blocks": {
+    "blocks": 8,
+    "direction": 1,
+    "hOverV": 1.219,
+    "bare": 0.17
+   },
+   "noSheen": {
+    "blocks": 8,
+    "direction": 1,
+    "hOverV": 1.015,
+    "bare": 0.17
+   },
+   "bagh": {
+    "blocks": 16,
+    "direction": 1,
+    "hOverV": 1.214,
+    "bare": 0.17
+   },
+   "checks": {
+    "counts": true,
+    "alignment": false,
+    "direction": true,
+    "sheen": true,
+    "coverage": false
+   },
+   "pass": false
+  },
+  {
+   "label": "x1.5",
+   "stitches": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0.111,
+    "stitches": 282
+   },
+   "freeGrid": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0.333,
+    "stitches": 259
+   },
+   "blocks": {
+    "blocks": 10,
+    "direction": 1,
+    "hOverV": 1.209,
+    "bare": 0.182
+   },
+   "noSheen": {
+    "blocks": 10,
+    "direction": 1,
+    "hOverV": 1.006,
+    "bare": 0.182
+   },
+   "bagh": {
+    "blocks": 20,
+    "direction": 1,
+    "hOverV": 1.226,
+    "bare": 0.18
+   },
+   "checks": {
+    "counts": true,
+    "alignment": true,
+    "direction": true,
+    "sheen": true,
+    "coverage": false
+   },
+   "pass": false
+  },
+  {
+   "label": "x2",
+   "stitches": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0.111,
+    "stitches": 292
+   },
+   "freeGrid": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0.286,
+    "stitches": 261
+   },
+   "blocks": {
+    "blocks": 10,
+    "direction": 1,
+    "hOverV": 1.213,
+    "bare": 0.186
+   },
+   "noSheen": {
+    "blocks": 10,
+    "direction": 1,
+    "hOverV": 1.008,
+    "bare": 0.186
+   },
+   "bagh": {
+    "blocks": 20,
+    "direction": 1,
+    "hOverV": 1.218,
+    "bare": 0.184
+   },
+   "checks": {
+    "counts": true,
+    "alignment": true,
+    "direction": true,
+    "sheen": true,
+    "coverage": false
+   },
+   "pass": false
+  },
+  {
+   "label": "x3",
+   "stitches": {
+    "float": 5,
+    "pickup": 1,
+    "medianEnd": 0.125,
+    "stitches": 378
+   },
+   "freeGrid": {
+    "float": 4,
+    "pickup": 1,
+    "medianEnd": 0.2,
+    "stitches": 378
+   },
+   "blocks": {
+    "blocks": 8,
+    "direction": 1,
+    "hOverV": 1.212,
+    "bare": 0.23
+   },
+   "noSheen": {
+    "blocks": 8,
+    "direction": 1,
+    "hOverV": 1.009,
+    "bare": 0.23
+   },
+   "bagh": {
+    "blocks": 16,
+    "direction": 1,
+    "hOverV": 1.19,
+    "bare": 0.189
+   },
+   "checks": {
+    "counts": true,
+    "alignment": false,
+    "direction": true,
+    "sheen": true,
+    "coverage": false
+   },
+   "pass": false
+  }
+ ]
+}

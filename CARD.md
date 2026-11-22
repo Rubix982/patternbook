@@ -14,6 +14,90 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-021 · Can darning stitches be laid on the ground cloth's own threads, so that their counts, their alignment to the threads and their direction all read back?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+Lumenary's phulkari model darns on a grid of picture cells, not on the threads of a cloth, because nothing wove the
+cloth (C-018). `weave-draft` now does (C-019). Sources describe phulkari as darning in untwisted floss silk (pat) on
+hand-woven cotton (khaddar), worked from the back so the long floats show on the face, in horizontal, vertical and
+diagonal darning that forms geometric patterns, and bagh as covering the whole ground; none of those read describes
+counting the ground's threads, though darning follows them by its nature.
+
+**2. What we are doing.**
+Write `engine/core/darning.js`: floss stitches laid along the ground's own picks (horizontal) or ends (vertical),
+each float over a set number of ground threads and each pick-up under a set number, staggered row to row, in blocks
+with their own direction, with untwisted floss's spread and its sheen, which depends on the stitch's direction
+against the light; then read the counts, the alignment, the direction and the coverage back from the image.
+
+**3. Why.**
+We don't know whether stitches tied to the cloth's threads can be told, from the image alone, from stitches laid on a
+grid that ignores them (as Lumenary's are), or whether the direction-dependent sheen that phulkari is known for comes
+through as a measurable difference between blocks.
+
+**4. What is affected.**
+- `engine/core/darning.js`, its check, sheet and demo; the engine bundle.
+- `processes/primitives.md`: a `counted-darning` entry; the darning-stitch processes' pages.
+- The atlas's phulkari and bagh, and darned embroideries elsewhere.
+
+**5. Conclusion.**
+Read from images only, at the default imperfections:
+- counts: the most common float and pick-up, in ground threads, equal the plan, for horizontal and vertical blocks;
+- alignment: the median distance from a stitch's end to the nearest ground-thread boundary (threads counted in the
+  image) is at most 0.15 of a thread, and a control with stitches on a free grid, as Lumenary's are, is above 0.2;
+- direction: at least 95 % of blocks read back with their planned direction;
+- sheen: under side light, horizontal blocks are at least 15 % brighter than vertical ones, and within 5 % with the
+  sheen off;
+- coverage: in a bagh the ground shows through at most 5 % of the covered area.
+- **If** all hold → we claim *darning on the cloth's own threads is covered*.
+- **If** everything but alignment holds → the stitches don't follow the threads closely enough to tell from a free
+  grid, and the card says by how much.
+- **If** the sheen difference doesn't show → the floss's sheen is modelled without its dependence on direction.
+
+**6. If not done.**
+Phulkari and bagh, the atlas's most named embroidery after chikankari, stay stitched on picture cells, and the
+direction-dependent light their makers worked for stays unmeasured.
+
+**Limits (known before running):** the floss is a layer over the ground, as in C-020; the back (short pick-ups) is
+drawn for completeness, not measured; "15 % brighter" is a property of the model's light, not a measurement of real
+pat silk; likeness to a real phulkari is a later blind pick.
+
+**Result (2026-11-22):** none of the three branches as written: four of the five criteria hold and the fifth, which
+no branch anticipated, fails. **At the default imperfections, from the image alone: floats and pick-ups read back as
+planned (5 and 1); stitch ends sit on the ground's threads (median 0.0 of a thread, against 0.25 for the free-grid
+control); all 8 blocks read back with their direction; under side light horizontal blocks are 21 % brighter than
+vertical ones, and 1 % with the sheen off. But a bagh leaves 18 % of its ground bare, against the 5 % allowed.**
+
+**Why the bagh fails.** With a float of 5 and a pick-up of 1, a sixth of every row is pick-up, where the ground shows:
+the 18 % follows from the counts. Sources describe bagh as covering the ground entirely. Two explanations, untested:
+bagh's floats are much longer than its pick-ups, on finer khaddar; or the floss spreads over the pick-ups. The defaults
+were not changed to pass; T-022 is the measurement against real bagh.
+
+**Checks on the checks.** The alignment control only differs from aligned stitches when the threads are uneven: with
+the imperfections off both read 0.0, as they should. Two bugs in the check were found and fixed before these numbers:
+blocks had no stable identity (fixed in `blocks()`, which now returns the same object for the same block), and the
+pick-up count was limited to gaps between two whole stitches clear of a block's edges, which a 6-thread repeat in a
+12-thread block rarely allows. Sweep: counts, direction and sheen hold at three times the default imperfections;
+alignment holds at twice (aligned 0.111 against 0.286) and fails at three times, where the control falls to 0.2.
+
+**Claim:** darning on the cloth's own threads is covered: its counts, its alignment to the threads, its direction and
+its direction-dependent sheen all read back, and it can be told from stitches laid on a grid. A bagh's full coverage
+is not covered yet.
+
+**Changes made:**
+- `engine/core/darning.js` (`darned`, `blocks`, `PLANS`); the engine bundle rebuilt with it.
+- `engine/check/darning.mjs`, `darning-sheet.mjs`; `engine/demo/darning.html` (checked by running its script against
+  the bundle: it paints).
+- `processes/primitives.md`: the `counted-darning` entry, with what it doesn't cover.
+- `threads.md`: T-022, the bagh's coverage.
+- `runs/c021/check.json`, `runs/c021/darning-sheet.png`.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-020 · Can a supplementary weft lie over the woven ground so that motif, binding and ground all read back, and the back tells continuous from discontinuous?
 
 **Status:** closed

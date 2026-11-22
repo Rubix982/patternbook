@@ -194,3 +194,15 @@ Kashmir GIs. The atlas names regions historically and by modern country together
 claimed by two registers, stated neutrally, with both registrations recorded and neither preferred.
 **Answer:** —
 
+### T-022 · What lets a bagh cover its ground entirely, when darning leaves its pick-ups bare?
+
+**Status:** open
+**Parent:** C-021
+**Opened:** 2026-11-22
+**Question:** `counted-darning` with a float of 5 and a pick-up of 1 leaves 18 % of a bagh's ground bare, where sources
+describe bagh as covering the ground entirely. Two explanations, not yet tested: bagh's floats are much longer than its
+pick-ups, on a finer khaddar; or untwisted floss spreads along the stitch over the pick-up. Measure both in photographs
+of real bagh once the atlas has samples (float and pick-up lengths in ground threads; how much ground shows), then
+model the floss's spread if the counts alone don't explain it.
+**Answer:** —
+

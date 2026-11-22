@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counted darning</title>
+<style>
+  :root { --bg: #f4f1ea; --ink: #1d1b17; --muted: #6b655b; --line: #d8d1c4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { color: var(--muted); margin: 0 0 16px; max-width: 72ch; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  fieldset { border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 12px; }
+  legend { color: var(--muted); font-size: 13px; }
+  label { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+  label.wide { grid-template-columns: 90px 1fr; }
+  input[type=text], select { width: 100%; font: inherit; font-size: 13px; padding: 3px 5px; }
+  output { font-variant-numeric: tabular-nums; color: var(--muted); }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Counted darning</h1>
+  <p class="lede">The primitive <code>counted-darning</code> (card C-021): floss stitches laid along the ground cloth's own
+    picks or ends, over a number of its threads and under a few, row after row, staggered so the pick-ups make
+    diagonals, in blocks of their own direction, as in phulkari and bagh. Untwisted floss shines along its filaments,
+    so blocks darned across the light shine and blocks darned along it don't: move the light to see them swap. Turn
+    "on the cloth's threads" off to see stitches on an even grid instead.</p>
+  <div class="wrap">
+    <canvas id="c" width="560" height="560"></canvas>
+    <form id="f">
+      <fieldset><legend>Plan</legend>
+        <label class="wide">plan <select name="plan"><option>diamond</option><option>bagh</option><option>sparse</option></select></label>
+        <label class="wide">side <select name="side"><option>face</option><option>back</option></select></label>
+        <label>float <input type="range" name="float" min="2" max="12" step="1" value="5"><output></output></label>
+        <label>pick-up <input type="range" name="pickup" min="1" max="3" step="1" value="1"><output></output></label>
+        <label>stagger <input type="range" name="stagger" min="-2" max="2" step="1" value="1"><output></output></label>
+        <label class="wide"><span>on the cloth's threads</span> <input type="checkbox" name="aligned" checked></label>
+      </fieldset>
+      <fieldset><legend>Threads and light</legend>
+        <label class="wide">ground warp <input type="text" name="warp" value="#7a2a1f"></label>
+        <label class="wide">ground weft <input type="text" name="weft" value="#86301f"></label>
+        <label class="wide">floss <input type="text" name="floss" value="#e8b423 #f4efe2 #d9541e"></label>
+        <label>sheen <input type="range" name="sheen" min="0" max="1" step="0.01" value="0.45"><output></output></label>
+        <label>light <input type="range" name="light" min="0" max="180" step="5" value="0"><output></output></label>
+        <label>spread <input type="range" name="spread" min="0.5" max="1" step="0.01" value="1"><output></output></label>
+        <label>sett <input type="range" name="sett" min="4" max="14" step="1" value="6"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Imperfections</legend>
+        <label>tension <input type="range" name="tension" min="0" max="1" step="0.01" value="0.2"><output></output></label>
+        <label>miscount <input type="range" name="miscount" min="0" max="0.3" step="0.01" value="0.02"><output></output></label>
+        <label>streak <input type="range" name="streak" min="0" max="1" step="0.01" value="0.5"><output></output></label>
+        <label>slub <input type="range" name="slub" min="0" max="1" step="0.01" value="0.35"><output></output></label>
+        <label>beat <input type="range" name="beat" min="0" max="1" step="0.01" value="0.25"><output></output></label>
+        <label>seed <input type="range" name="seed" min="1" max="99" step="1" value="3"><output></output></label>
+      </fieldset>
+    </form>
+  </div>
+</main>
+<script src="../engine.js"></script>
+<script>
+  const { STRUCTURES, paint, DEFAULTS } = PatternbookEngine.weave;
+  const { darned, PLANS } = PatternbookEngine.darning;
+  const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
+  const colours = (s, d) => { const v = s.split(/[\s,]+/).filter((x) => /^#?[0-9a-f]{6}$/i.test(x)).map((x) => (x[0] === '#' ? x : '#' + x)); return v.length ? v : d; };
+  function draw() {
+    const v = Object.fromEntries(new FormData(f));
+    for (const o of f.querySelectorAll('output')) o.value = o.previousElementSibling.value;
+    const img = darned({ ...DEFAULTS, width: c.width, height: c.height, ground: STRUCTURES.plain, plan: PLANS[v.plan], side: v.side,
+      float: +v.float, pickup: +v.pickup, stagger: +v.stagger, aligned: v.aligned === 'on', warp: colours(v.warp, ['#7a2a1f']),
+      weft: colours(v.weft, ['#86301f']), floss: colours(v.floss, ['#e8b423']), sheen: +v.sheen, light: +v.light, spread: +v.spread,
+      sett: +v.sett, tension: +v.tension, miscount: +v.miscount, streak: +v.streak, slub: +v.slub, beat: +v.beat, seed: +v.seed });
+    paint(ctx, img);
+  }
+  f.addEventListener('input', draw);
+  draw();
+</script>
+</body>
+</html>
