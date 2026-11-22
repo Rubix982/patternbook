@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weave from a draft</title>
+<style>
+  :root { --bg: #f4f1ea; --ink: #1d1b17; --muted: #6b655b; --line: #d8d1c4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { color: var(--muted); margin: 0 0 16px; max-width: 70ch; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  fieldset { border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 12px; }
+  legend { color: var(--muted); font-size: 13px; }
+  label { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+  label.wide { grid-template-columns: 90px 1fr; }
+  input[type=text], select { width: 100%; font: inherit; font-size: 13px; padding: 3px 5px; }
+  output { font-variant-numeric: tabular-nums; color: var(--muted); }
+  pre { font-size: 12px; line-height: 1.15; margin: 6px 0 0; letter-spacing: 2px; }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Weave from a draft</h1>
+  <p class="lede">The primitive <code>weave-draft</code> (card C-019): which warp end is over the weft at each crossing,
+    and cloth drawn from it with the imperfections of hand weaving. Colour orders repeat across the ends and down the
+    picks, so stripes and checks come from the order alone. Served pages only: open it from GitHub Pages or a local
+    server (<code>python3 -m http.server</code>), since it loads the engine as a module.</p>
+  <div class="wrap">
+    <canvas id="c" width="560" height="560"></canvas>
+    <form id="f">
+      <fieldset><legend>Structure</legend>
+        <label class="wide">structure <select name="structure"></select></label>
+        <pre id="dd" aria-label="drawdown: # warp over, . weft over"></pre>
+      </fieldset>
+      <fieldset><legend>Threads</legend>
+        <label class="wide">warp order <input type="text" name="warp" value="#22305a"></label>
+        <label class="wide">weft order <input type="text" name="weft" value="#ece3cc"></label>
+        <label>sett <input type="range" name="sett" min="4" max="16" step="1" value="9"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Imperfections</legend>
+        <label>slub <input type="range" name="slub" min="0" max="1" step="0.01" value="0.25"><output></output></label>
+        <label>beat <input type="range" name="beat" min="0" max="1" step="0.01" value="0.2"><output></output></label>
+        <label>wobble <input type="range" name="wobble" min="0" max="1" step="0.01" value="0.25"><output></output></label>
+        <label>gap <input type="range" name="gap" min="0" max="0.4" step="0.01" value="0.12"><output></output></label>
+        <label>round <input type="range" name="round" min="0" max="1" step="0.01" value="0.55"><output></output></label>
+        <label>dip <input type="range" name="dip" min="0" max="1" step="0.01" value="0.35"><output></output></label>
+        <label>fibre <input type="range" name="fibre" min="0" max="1" step="0.01" value="0.25"><output></output></label>
+        <label>seed <input type="range" name="seed" min="1" max="99" step="1" value="3"><output></output></label>
+      </fieldset>
+    </form>
+  </div>
+</main>
+<script type="module">
+  import { STRUCTURES, cloth, paint, drawdown } from '../core/weave.js';
+  const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
+  const sel = f.elements.structure;
+  for (const n of Object.keys(STRUCTURES)) sel.add(new Option(n, n));
+  const colours = (s) => s.split(/[\s,]+/).filter((x) => /^#?[0-9a-f]{6}$/i.test(x)).map((x) => (x[0] === '#' ? x : '#' + x));
+  function draw() {
+    const v = Object.fromEntries(new FormData(f));
+    for (const o of f.querySelectorAll('output')) o.value = o.previousElementSibling.value;
+    const unit = STRUCTURES[v.structure];
+    document.getElementById('dd').textContent = drawdown(unit).map((r) => r.map((x) => (x ? '#' : '.')).join('')).join('\n');
+    const img = cloth({ unit, width: c.width, height: c.height, sett: +v.sett, warp: colours(v.warp).length ? colours(v.warp) : ['#22305a'],
+      weft: colours(v.weft).length ? colours(v.weft) : ['#ece3cc'], seed: +v.seed, slub: +v.slub, beat: +v.beat, wobble: +v.wobble,
+      gap: +v.gap, round: +v.round, dip: +v.dip, fibre: +v.fibre });
+    paint(ctx, img);
+  }
+  f.addEventListener('input', draw);
+  draw();
+</script>
+</body>
+</html>

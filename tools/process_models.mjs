@@ -184,7 +184,7 @@ if (existsSync(primPath)) {
       ? `**Applied by:** ${u.models.size} model${u.models.size === 1 ? '' : 's'} (${u.eqs} equation${u.eqs === 1 ? '' : 's'})` +
         `${u.models.size >= 3 ? ', shared' : ''}: ${[...u.models].sort().join(', ')}.` +
         (u.procs.size ? ` Processes: ${[...u.procs].sort().map((q) => `[${q}](${q}.md)`).join(', ')}.` : '')
-      : '**Applied by:** no written equation (it may still be used in code).'), '');
+      : '**Applied by:** no Lumenary model\'s equations apply it (it may be used in code, or implemented in `engine/core/`).'), '');
     cur = null;
   };
   for (const l of lines) {

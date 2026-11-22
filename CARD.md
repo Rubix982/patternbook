@@ -14,6 +14,78 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-019 · Can one primitive weave plain, twill, basket and satin from a draft, and keep the structure readable through the cloth's imperfections?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-018 found no primitive for weave structure: Lumenary's three weaving models (tapestry, Navajo, kente) shade rounded
+threads and repeat cells, but nothing takes a draft (which warp end is up at each crossing). Supplementary weft
+(jamdani, brocade) and darning on the cloth's own threads (phulkari) can't be built until one does.
+
+**2. What we are doing.**
+Write `engine/core/weave.js`: a drawdown from a weaving draft (threading, tie-up, treadling) or a named structure,
+and cloth rendered from it with seeded imperfections (yarn thickness, uneven beating, wavy threads, gaps between
+threads), then check the structure by reading it back from the rendered image alone.
+
+**3. Why.**
+We don't know whether one draft-driven primitive can carry the four basic structures, or whether its imperfections,
+which are what keep it from reading as a filter (C-012, C-013), would blur the structure a weaver would recognise.
+
+**4. What is affected.**
+- `engine/core/weave.js`, `engine/check/weave.mjs`, `engine/demo/weave.html`, new; the first code in `engine/`.
+- `processes/primitives.md`: a `weave-draft` entry; the weaving processes' pages.
+- Cards for supplementary weft and darning, which build on it.
+
+**5. Conclusion.**
+The read-back uses only the image and the nominal thread spacing a weaver would know (ends and picks per unit): float
+lengths along warp and weft, and how the pattern repeats along the two diagonals.
+- **If** all four structures read back correctly with the imperfections at their defaults → we claim *weave structure
+  is covered*: the primitive is the base for supplementary weft and darning.
+- **If** they read back only with the imperfections off → we claim *the imperfections, as modelled, destroy the
+  structure*: the defaults are cut until they don't, and the card records where that line is.
+- **If** a structure doesn't read back even with the imperfections off → the drawdown or the read-back is wrong for
+  it, and the card says which.
+
+**6. If not done.**
+Every woven element in the atlas (about 80 named handloom weaves, khes, sussi, mashru, dhurries) stays a picture
+filter with stripes, and jamdani and phulkari have nothing to sit on.
+
+**Limits (known before running):** the read-back checks structure, not likeness: whether the cloth looks like a real
+mashru or khes is a later blind pick against photographs. The draft notation is the standard four-part one; double
+cloth and other multi-layer weaves are out of scope.
+
+**Result (2026-11-22):** first branch. **All seven structures (plain; twill 2/2, 3/1 and 1/3; basket 2/2; five-end
+satin and sateen) read back correctly from the rendered cloth alone, with the imperfections off and at their
+defaults: float lengths exact, and 100 % agreement on how the pattern repeats along the diagonals.** A four-part draft
+(straight draw on four shafts, 2/2 twill tie-up, treadles in order) gives the same drawdown as the named 2/2 twill.
+
+**Can the check fail?** Read against every other structure's expectations, 0 of 42 wrong pairs pass. The first
+version let twill 2/2 pass as basket 2/2, because it only checked the offsets strong in the *expected* structure, and
+basket's are a subset of twill's; the check now also requires that offsets strong in the image are predicted. The
+fault was in the read-back, not the weave.
+
+**Where the imperfections start to hide the structure:** all seven read back at 1.5 times the default slub, beat,
+wobble and fibre; at twice, plain weave fails (6 of 7); at three times, 2 of 7; at four, none. The defaults have about
+half again of headroom.
+
+**Claim:** weave structure is covered. `weave-draft` is the base for supplementary weft and for darning on the cloth's
+own threads. What the check doesn't show is likeness: whether a satin with striped warp looks like a real mashru, or a
+coarse plain weave like khaddar, is for a blind pick against photographs once the atlas has samples of them.
+
+**Changes made:**
+- `engine/core/weave.js`, `engine/core/random.js`: the first code in patternbook's engine.
+- `engine/check/weave.mjs` (the read-back, the confusion test, the sweep), `weave-sheet.mjs` and `png.mjs` (a PNG
+  writer with no dependencies); `engine/demo/weave.html`, a page with the structure's drawdown and every dial.
+- `processes/primitives.md`: the `weave-draft` entry, and a note under the gaps that warp and weft is now covered.
+- `tools/process_models.mjs`: the generated line for a primitive no Lumenary model applies now says so plainly.
+- `runs/c019/check.json`, `runs/c019/weave-sheet.png`.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-018 · How much of Lumenary's maths is shared operations, and how much is written once per treatment?
 
 **Status:** closed
