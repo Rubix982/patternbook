@@ -14,6 +14,51 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-042 · Can an open image-to-3D model rebuild a jali, its openings cut through and its depth, from one photo?
+
+**Status:** open
+**Opened:** 2026-11-23
+
+**1. Where we are.**
+The arc's 3D step builds a jali by grammar: the generator's openings cut through a slab of measured depth. The North
+Star rules out building what an open model already does well enough, once measured; this is that measurement, fourth
+of six trials (T-050). TripoSR (stabilityai/TripoSR, MIT) runs here; TRELLIS.2 would need an NVIDIA GPU or uploading
+photos to a hosted demo, and isn't tried without the writer's yes.
+
+**2. What we are doing.**
+Run TripoSR (its official code, at its marching-cubes resolution of 256, with scikit-image's marching cubes in place of
+torchmcubes) on four images, each with everything outside the screen's stone set to grey as its own background removal
+would (the stone from C-040's tiled BiRefNet masks): a control, one generated design drawn as front-lit relief, whose
+openings are known; and the Met's three readable public-domain jalis. On each mesh: its thin axis (the least spread of
+its vertices); its silhouette seen along that axis, compared with the image's openings inside the screen's outline
+(intersection over union of the open areas, the best of the eight flips and turns, the outlines matched by their
+boxes); and its thickness over its width, against the catalogue's depth over width where listed (met-453343 0.068,
+met-453241 0.104).
+
+**3. Why.**
+We don't know whether an open model already rebuilds a pierced screen from one photo, which decides whether the 3D
+step's grammar build is needed or only an option.
+
+**4. What is affected.**
+- `tools/screen_3d.py`, `runs/c042/` (meshes of the control and the Met screens, their silhouettes, the numbers);
+  `.vendor-models/` (TripoSR's code, git-ignored); `requirements-models.txt`.
+
+**5. Conclusion.**
+- **If** the openings come back (overlap 0.5 or more) on the control and on at least 2 of the 3 Met photos → an open
+  model already rebuilds jalis' openings from one photo, and the grammar build must earn its place by what it lets one
+  change, not by doing what nothing else can.
+- **If** they don't (0.2 or less on all four) → it fills them; pierced pieces need the grammar build.
+- **Between** → partial; the card says where.
+- **Depth:** within a factor of two of the catalogue's ratio → plausible; else not.
+
+**6. If not done.**
+The 3D step is built without knowing whether an open model already does it.
+
+**Limits (known before running):** one model; one view each; the masks for the background are a model's; TripoSR was
+trained on objects, mostly not flat screens.
+
+---
+
 ## C-041 · Does taking the shading out of a jali photo keep its bars whole in a mask, and give the stone's own colour?
 
 **Status:** closed
