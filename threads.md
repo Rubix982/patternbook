@@ -509,7 +509,8 @@ keep bars whole where a mask from brightness breaks them, and does the albedo gi
 **Question:** Fourth of six. TripoSR (MIT, runs here), TRELLIS.2 (MIT, likely needs an NVIDIA GPU or a hosted demo, which
 means uploading the photo: asked first), Hunyuan3D-2 (a custom licence with territory limits). On public-domain photos:
 does the model come back with openings cut through, at a measured depth, or does it fill them?
-**Answer:** —
+**Answer:** C-042, TripoSR: fills them (overlap at most 0.007) and builds a block 8 to 12 times a jali's depth. TRELLIS.2
+and Hunyuan3D not tried (an NVIDIA GPU, or uploading photos to a hosted demo, which waits on the writer's yes).
 
 ### T-051 · Can StarVector read a jali's mask back into lines a grammar could fit?
 

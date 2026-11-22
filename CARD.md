@@ -16,7 +16,7 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ## C-042 · Can an open image-to-3D model rebuild a jali, its openings cut through and its depth, from one photo?
 
-**Status:** open
+**Status:** closed
 **Opened:** 2026-11-23
 
 **1. Where we are.**
@@ -56,6 +56,31 @@ The 3D step is built without knowing whether an open model already does it.
 
 **Limits (known before running):** one model; one view each; the masks for the background are a model's; TripoSR was
 trained on objects, mostly not flat screens.
+
+**How it ran.** TripoSR's weights loaded only after renaming its vision encoder's keys from transformers 4.35's names to
+transformers 5's (`encoder.layer.N.attention.attention.query` to `layers.N.attention.q_proj`, and so on), checked
+strictly: 549 tensors, none left missing or unused but the pooler the encoder no longer has. `rembg`, imported by its
+helpers and never called here, was replaced by a stand-in that fails if called. Each mesh took about a minute on the
+Mac's GPU.
+
+**Result (2026-11-23): TripoSR fills the openings. Seen along its thinnest axis, each mesh's openings overlap the
+image's at 0.000 to 0.007 (0.2 or less on all four, the control included); its meshes are 0 to 1 % open where the
+images are 19 to 36 %. Pierced pieces need the grammar build.** (`runs/c042/result.json`)
+
+**What it makes instead.** Not a slab: the meshes are 0.65 to 0.83 as thick as their shorter side, 8 to 12 times the
+catalogue's depth over width (met-453343 11.7, met-453241 8.0). Looked at along each of the three axes, the control is
+a block about 0.8 by 0.8 by 1.0 whose faces carry a ghost of the pattern (dimples, a few shallow holes, 0.1 to 13 %
+open depending on the side) and nothing cut through; the Met screens are solid from every side.
+
+**Claim:** from one photo or one rendered relief, TripoSR returns a solid block 8 to 12 times as deep as a jali, with
+none of its openings cut through (overlap at most 0.007), so on this evidence an open model doesn't already do the 3D
+step's job for pierced screens. TRELLIS.2 and Hunyuan3D, stronger and not tried here, might do better.
+
+**Changes made:** `tools/screen_3d.py` (TripoSR's checkpoint keys renamed and checked; scikit-image's marching cubes;
+the measures); `runs/c042/` (inputs, silhouettes, the numbers; the meshes stay local, the tool remakes them in a few
+minutes); `requirements-models.txt`.
+
+**Closed:** 2026-11-23
 
 ---
 

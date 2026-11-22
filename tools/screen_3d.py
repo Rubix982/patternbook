@@ -93,6 +93,39 @@ def compare(sil, stone):
             "image_open_share": round(float(i_open.sum() / max(1, outline.sum())), 4)}
 
 
+def load_tsr():
+    """TripoSR, its checkpoint's vision-encoder keys renamed from transformers 4.35's ViT to transformers 5's (the rest
+    unchanged), loaded strictly: nothing may be left missing or unused but the pooler, which the encoder no longer has."""
+    import re
+    import torch
+    from huggingface_hub import hf_hub_download
+    from omegaconf import OmegaConf
+    from tsr.system import TSR
+    cfg = OmegaConf.load(hf_hub_download("stabilityai/TripoSR", "config.yaml"))
+    OmegaConf.resolve(cfg)
+    model = TSR(cfg)
+    ck = torch.load(hf_hub_download("stabilityai/TripoSR", "model.ckpt"), map_location="cpu")  # weights only (torch's default)
+    ren = [(r"encoder\.layer\.(\d+)\.attention\.attention\.query", r"layers.\1.attention.q_proj"),
+           (r"encoder\.layer\.(\d+)\.attention\.attention\.key", r"layers.\1.attention.k_proj"),
+           (r"encoder\.layer\.(\d+)\.attention\.attention\.value", r"layers.\1.attention.v_proj"),
+           (r"encoder\.layer\.(\d+)\.attention\.output\.dense", r"layers.\1.attention.o_proj"),
+           (r"encoder\.layer\.(\d+)\.intermediate\.dense", r"layers.\1.mlp.fc1"),
+           (r"encoder\.layer\.(\d+)\.output\.dense", r"layers.\1.mlp.fc2"),
+           (r"encoder\.layer\.(\d+)\.layernorm_", r"layers.\1.layernorm_")]
+    want, new = model.state_dict(), {}
+    for k, v in ck.items():
+        for a, b in ren:
+            k = re.sub(a, b, k)
+        if k.startswith("image_tokenizer.model.pooler") and k not in want:
+            continue
+        new[k] = v
+    missing, unused = sorted(set(want) - set(new)), sorted(set(new) - set(want))
+    assert not missing and not unused, f"missing {missing[:5]}, unused {unused[:5]}"
+    model.load_state_dict(new, strict=True)
+    print("TripoSR loaded:", len(new), "tensors, the vision encoder's keys renamed", flush=True)
+    return model
+
+
 def main(run):
     import torch
     from tsr.system import TSR
@@ -102,7 +135,7 @@ def main(run):
     sr = importlib.util.module_from_spec(spec); spec.loader.exec_module(sr)
     sm = sr.sm
     dev = "mps" if torch.backends.mps.is_available() else "cpu"
-    model = TSR.from_pretrained("stabilityai/TripoSR", config_name="config.yaml", weight_name="model.ckpt")
+    model = load_tsr()
     model.renderer.set_chunk_size(8192)
     try:
         model.to(dev)

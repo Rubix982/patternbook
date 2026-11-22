@@ -1,0 +1,48 @@
+[
+ {
+  "name": "control",
+  "thickness_over_short_side": 0.694,
+  "vertices": 124659,
+  "faces": 249648,
+  "openings_iou": 0.0068,
+  "orientation": 7,
+  "mesh_open_share": 0.0104,
+  "image_open_share": 0.3631,
+  "catalogue_depth_over_width": null
+ },
+ {
+  "name": "met-453343",
+  "thickness_over_short_side": 0.7982,
+  "vertices": 133309,
+  "faces": 266666,
+  "openings_iou": 0.0,
+  "orientation": 7,
+  "mesh_open_share": 0.0,
+  "image_open_share": 0.2676,
+  "catalogue_depth_over_width": 0.0685,
+  "depth_factor": 11.66
+ },
+ {
+  "name": "met-453344",
+  "thickness_over_short_side": 0.6519,
+  "vertices": 82097,
+  "faces": 164226,
+  "openings_iou": 0.0,
+  "orientation": 7,
+  "mesh_open_share": 0.0,
+  "image_open_share": 0.2322,
+  "catalogue_depth_over_width": null
+ },
+ {
+  "name": "met-453241",
+  "thickness_over_short_side": 0.8285,
+  "vertices": 76951,
+  "faces": 154054,
+  "openings_iou": 0.0011,
+  "orientation": 6,
+  "mesh_open_share": 0.0003,
+  "image_open_share": 0.1913,
+  "catalogue_depth_over_width": 0.1038,
+  "depth_factor": 7.98
+ }
+]
