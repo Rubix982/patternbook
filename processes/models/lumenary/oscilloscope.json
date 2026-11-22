@@ -11,7 +11,7 @@
   "section": "B. Digital and technical",
   "kind": "still",
   "blurb": "Your picture drawn as stacked phosphor waveforms on a graticule, brighter pixels, taller peaks.",
-  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
   "code": "vendor/lumenary/src/engine/styles/oscilloscope.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

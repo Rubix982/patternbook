@@ -11,7 +11,7 @@
   "section": "I. Geometric and generative",
   "kind": "live",
   "blurb": "Thousands of slime mould cells follow the scent trails of the others. They lay down a living transport network, drawn toward the light of your picture.",
-  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
   "code": "vendor/lumenary/src/engine/styles/physarum.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

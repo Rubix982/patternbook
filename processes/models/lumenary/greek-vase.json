@@ -11,7 +11,7 @@
   "section": "K. World cultural",
   "kind": "still",
   "blurb": "The picture painted onto the side of an ancient Greek vase. In black-figure the shapes are glossy black glaze on orange clay, with fine lines scratched through to the clay; in red-figure it is the other way round. Meander borders, the curve of the pot and the cracks of two thousand years finish it.",
-  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
   "code": "vendor/lumenary/src/engine/styles/greek-vase.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

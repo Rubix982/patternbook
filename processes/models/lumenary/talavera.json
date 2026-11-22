@@ -11,7 +11,7 @@
   "section": "K. World cultural",
   "kind": "still",
   "blurb": "Hand-painted tin-glazed tiles from Puebla, Mexico. Each tile takes its ground from the light in your picture, from cobalt through green and orange to white, and carries a four-way flower in contrasting colours.",
-  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
   "code": "vendor/lumenary/src/engine/styles/talavera.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

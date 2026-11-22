@@ -11,7 +11,7 @@
   "section": "I. Geometric and generative",
   "kind": "still",
   "blurb": "Scatter points, give every pixel to its nearest one, and paint each cell its average colour. More points gather where the picture has detail.",
-  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
   "code": "vendor/lumenary/src/engine/styles/voronoi-mosaic.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

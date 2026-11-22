@@ -11,7 +11,7 @@
   "section": "L. Sindhi design",
   "kind": "still",
   "blurb": "A stamp seal from Mohenjo-daro, about four thousand years old: a row of signs above a figure cut in lines. Your picture is the figure, and the signs read from right to left.",
-  "theory_page": "treatments/lumenary/theory/12-sindhi.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/12-sindhi.md",
   "code": "vendor/lumenary/src/engine/styles/indus-seal.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

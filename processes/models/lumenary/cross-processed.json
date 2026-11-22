@@ -11,7 +11,7 @@
   "section": "H. Photographic and optical",
   "kind": "still",
   "blurb": "Film developed in the wrong chemistry: each colour channel follows its own curve, so shadows turn one hue, highlights another and contrast jumps.",
-  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/08-optical.md",
   "code": "vendor/lumenary/src/engine/styles/cross-processed.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

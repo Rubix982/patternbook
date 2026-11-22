@@ -11,7 +11,7 @@
   "section": "F. Print and craft",
   "kind": "still",
   "blurb": "A hand-woven wall hanging: wool passes laid row on row over hidden warp threads, in a few earthy yarns, with a fringe.",
-  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
   "code": "vendor/lumenary/src/engine/styles/tapestry-weave.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

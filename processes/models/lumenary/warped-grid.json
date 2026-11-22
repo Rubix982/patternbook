@@ -11,7 +11,7 @@
   "section": "I. Geometric and generative",
   "kind": "still",
   "blurb": "A plain grid, or a stack of horizontal ridges, pushed around by the light and shadow of your picture until the picture appears in the lines.",
-  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
   "code": "vendor/lumenary/src/engine/styles/warped-grid.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

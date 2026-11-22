@@ -11,7 +11,7 @@
   "section": "I. Geometric and generative",
   "kind": "still",
   "blurb": "Circles that never overlap, each as large as the room allows. The picture decides how big they may grow and what colour they take.",
-  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
   "code": "vendor/lumenary/src/engine/styles/circle-packing.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

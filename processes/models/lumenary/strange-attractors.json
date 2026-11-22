@@ -11,7 +11,7 @@
   "section": "I. Geometric and generative",
   "kind": "live",
   "blurb": "Four numbers, one tiny formula, repeated without end. The point never repeats itself and never leaves a narrow band, and the band breathes as the numbers drift.",
-  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
   "code": "vendor/lumenary/src/engine/styles/strange-attractors.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

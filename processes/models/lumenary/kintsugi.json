@@ -11,7 +11,7 @@
   "section": "K. World cultural",
   "kind": "still",
   "blurb": "The Japanese art of mending broken pottery with gold lacquer. Your picture is the glaze of a shattered piece, put back together a little out of line, with every crack left shining.",
-  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
   "code": "vendor/lumenary/src/engine/styles/kintsugi.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

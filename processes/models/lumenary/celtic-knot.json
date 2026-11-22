@@ -11,7 +11,7 @@
   "section": "K. World cultural",
   "kind": "still",
   "blurb": "Interlace from the Book of Kells and the high crosses of Ireland: ribbons that pass over and under one another without end. Each length of ribbon takes the colour of the picture beneath it.",
-  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
   "code": "vendor/lumenary/src/engine/styles/celtic-knot.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

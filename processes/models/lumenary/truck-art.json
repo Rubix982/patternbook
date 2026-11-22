@@ -11,7 +11,7 @@
   "section": "M. South Asian and Islamic",
   "kind": "still",
   "blurb": "The painted lorries of Pakistan: flat, loud colour, heavy black outlines, a gloss of chrome light and a frame of flowers and chains.",
-  "theory_page": "treatments/lumenary/theory/13-southasia.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/13-southasia.md",
   "code": "vendor/lumenary/src/engine/styles/truck-art.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

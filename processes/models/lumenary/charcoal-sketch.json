@@ -11,7 +11,7 @@
   "section": "G. Painterly and drawn",
   "kind": "still",
   "blurb": "A quick study in charcoal: dark tones catch on the tooth of the paper, thumbs smudge them, and the outlines are drawn twice.",
-  "theory_page": "treatments/lumenary/theory/07-painterly.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
   "code": "vendor/lumenary/src/engine/styles/charcoal-sketch.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

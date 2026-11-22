@@ -11,7 +11,7 @@
   "section": "C. Typographic",
   "kind": "live",
   "blurb": "An airport departures board that flips its way to your picture, then flips away.",
-  "theory_page": "treatments/lumenary/theory/03-type.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/03-type.md",
   "code": "vendor/lumenary/src/engine/styles/split-flap.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

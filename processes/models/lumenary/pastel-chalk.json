@@ -11,7 +11,7 @@
   "section": "G. Painterly and drawn",
   "kind": "still",
   "blurb": "Soft pastel dragged across toned paper: the lights go on thick, the shadows are left to the paper, and the grain breaks every stroke.",
-  "theory_page": "treatments/lumenary/theory/07-painterly.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
   "code": "vendor/lumenary/src/engine/styles/pastel-chalk.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

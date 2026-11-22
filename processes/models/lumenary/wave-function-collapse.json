@@ -11,7 +11,7 @@
   "section": "I. Geometric and generative",
   "kind": "still",
   "blurb": "Every cell starts as every possible tile. The most constrained cell settles first, and its neighbours must agree, until the whole sheet is one connected drawing.",
-  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
   "code": "vendor/lumenary/src/engine/styles/wave-function-collapse.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

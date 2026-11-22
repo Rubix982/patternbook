@@ -11,7 +11,7 @@
   "section": "F. Print and craft",
   "kind": "still",
   "blurb": "Your picture cut into pieces of coloured glass set in dark lead, lit from behind.",
-  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
   "code": "vendor/lumenary/src/engine/styles/stained-glass.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

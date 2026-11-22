@@ -11,7 +11,7 @@
   "section": "F. Print and craft",
   "kind": "still",
   "blurb": "A poster pulled through silk screens, one flat colour per pass. Where inks overlap they mix, and no pass sits quite where it should.",
-  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
   "code": "vendor/lumenary/src/engine/styles/screen-print.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

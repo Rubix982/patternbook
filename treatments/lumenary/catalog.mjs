@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const src = join(here, '..', '..', 'vendor', 'lumenary', 'src');
-const { SECTIONS, slugify } = await import(pathToFileURL(join(here, '..', '..', 'data', 'sections.js')).href);
+const { SECTIONS, slugify } = await import(pathToFileURL(join(here, '..', '..', 'processes', 'sources', 'lumenary', 'data', 'sections.js')).href);
 const byId = {};
 for (const f of readdirSync(join(src, 'engine', 'styles')).filter((f) => f.endsWith('.js'))) {
   const s = (await import(pathToFileURL(join(src, 'engine', 'styles', f)).href)).default;

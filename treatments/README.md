@@ -2,7 +2,8 @@
 
 The top layer of the two-layer model (`METHOD.md`): procedures that make a page's drawings and
 photos look printed or inked, not machine-drawn. Each treatment is derived from the process
-that made the look (`METHOD.md` step 2c), with the maths written out in `theory/`.
+that made the look (`METHOD.md` step 2c), with the maths written out on the page of the process each one models in
+`../processes/` (all of patternbook's knowledge of how looks are made sits there).
 
 The approach, especially writing out the maths the code actually runs, is learned from
 **Lumenary** by Mursal Furqan Kumbhar (lumenary-studio.vercel.app). The code and notes here are
@@ -11,15 +12,16 @@ our own.
 ## Lumenary, inside our tooling
 
 All 214 of **Lumenary**'s treatments, by Mursal Furqan Kumbhar, run here too, used with his
-permission. His engine, unchanged and trimmed of the website, is in `../vendor/lumenary/`, and his theory data in `../data/`
+permission. His engine, unchanged and trimmed of the website, is in `../vendor/lumenary/`; his theory, as models filed under the
+processes they imitate, is in `../processes/`, and as received in `../processes/sources/lumenary/`
 (see its `NOTICE.md` for what was kept), and `lumenary/` holds our bridge:
 
 - `lumenary.html` (live: https://rubix982.github.io/patternbook/treatments/lumenary.html): pick any of his treatments and turn its dials, or open the **contact sheet** to see every
   still treatment on one picture (Lumenary's still life, our router drawing, or your own file).
 - `lumenary/lumenary.js`: his engine bundled into one script, which sets `window.Lumenary`. Rebuild with
   `node treatments/lumenary/build.mjs` (uses `npx esbuild@0.24.0`).
-- `lumenary/theory/`: his theory pages with every equation as TeX, plus `MAP.md`, which links each treatment's
-  theory to its code.
+- His theory pages with every equation as TeX, and `MAP.md`, which links each treatment's theory to its code, are in
+  `../processes/sources/lumenary/theory-pages/`; each process page in `../processes/` carries his models in full.
 - On a page: load `lumenary/lumenary.js` and `treatments.js`, then
   `Treatments.treatAll('svg[role=img]', { treatment: 'lumenary:halftone', params: { angle: 45 } })`.
 
@@ -52,13 +54,13 @@ the way ink sits on paper.
 
 | Treatment | Use on | Theory |
 |---|---|---|
-| `press` | drawings in a two-ink style | `theory/press.md` |
-| `riso` | drawings in a two-ink style (Lumenary's risograph ink model) | `theory/riso.md` |
-| `halftone` | photos | `theory/halftone.md` |
-| `hatch` | photos | `theory/hatch.md` |
+| `press` | drawings in a two-ink style | `../processes/letterpress.md` |
+| `riso` | drawings in a two-ink style (Lumenary's risograph ink model) | `../processes/risograph-printing.md` |
+| `halftone` | photos | `../processes/halftone-screening.md` |
+| `hatch` | photos | `../processes/pen-and-ink-drawing.md` |
 
 Shared pieces (brightness, seeded noise, blur, edges, tone, multiply) are in
-`theory/foundations.md`.
+`../processes/foundations.md`.
 
 Or treat pixels directly: `Treatments.apply(imageData, 'halftone', { screen: 6 })` returns a
 new `ImageData`.

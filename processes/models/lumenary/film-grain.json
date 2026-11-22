@@ -11,7 +11,7 @@
   "section": "H. Photographic and optical",
   "kind": "still",
   "blurb": "Silver halide, up close: grain that is strongest in the mid-tones, a soft shoulder in the highlights, halation, dust and a scratch or two.",
-  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/08-optical.md",
   "code": "vendor/lumenary/src/engine/styles/film-grain.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

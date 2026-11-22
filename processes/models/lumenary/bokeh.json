@@ -11,7 +11,7 @@
   "section": "H. Photographic and optical",
   "kind": "still",
   "blurb": "The picture goes out of focus and every bright point swells into a disc of light, soft in the middle and brighter at the rim.",
-  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/08-optical.md",
   "code": "vendor/lumenary/src/engine/styles/bokeh.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

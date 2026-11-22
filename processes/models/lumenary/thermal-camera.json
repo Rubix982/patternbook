@@ -11,7 +11,7 @@
   "section": "B. Digital and technical",
   "kind": "still",
   "blurb": "A heat-camera view: false colour from brightness, a coarse sensor, a hot-spot reading and a scale bar.",
-  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
   "code": "vendor/lumenary/src/engine/styles/thermal-camera.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

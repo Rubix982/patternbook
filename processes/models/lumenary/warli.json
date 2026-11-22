@@ -11,7 +11,7 @@
   "section": "M. South Asian and Islamic",
   "kind": "still",
   "blurb": "White rice-paste drawings on a mud wall, from Maharashtra: triangles for bodies, circles for heads, and a crowd that gathers where your picture is darkest.",
-  "theory_page": "treatments/lumenary/theory/13-southasia.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/13-southasia.md",
   "code": "vendor/lumenary/src/engine/styles/warli.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

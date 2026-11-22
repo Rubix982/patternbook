@@ -11,7 +11,7 @@
   "section": "E. Physical and 3D feel",
   "kind": "live",
   "blurb": "The desk toy of a thousand loose metal pins. Each pin slides out as far as the picture is bright, so the picture stands up as a relief of shining heads. Press into it with the cursor and the pins sink, then spring back. On video the pins follow every frame.",
-  "theory_page": "treatments/lumenary/theory/05-physical.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/05-physical.md",
   "code": "vendor/lumenary/src/engine/styles/pin-art.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

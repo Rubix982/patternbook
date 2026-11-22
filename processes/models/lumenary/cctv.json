@@ -11,7 +11,7 @@
   "section": "B. Digital and technical",
   "kind": "live",
   "blurb": "Seen by a security camera: a wide lens, a few frames a second, blocky video compression, a clock that keeps counting, and a box that locks onto whatever moves. A still picture is watched too, and the detector picks out the busiest part of it.",
-  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
   "code": "vendor/lumenary/src/engine/styles/cctv.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

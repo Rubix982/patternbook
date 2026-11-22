@@ -11,7 +11,7 @@
   "section": "I. Geometric and generative",
   "kind": "still",
   "blurb": "Follow each point’s orbit under z² + c. When it passes through a window in the plane, the picture shows the colour found there.",
-  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
   "code": "vendor/lumenary/src/engine/styles/mandelbrot-fill.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

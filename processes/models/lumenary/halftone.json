@@ -11,7 +11,7 @@
   "section": "F. Print and craft",
   "kind": "still",
   "blurb": "Print-shop dots: one ink, four inks, or colour on black.",
-  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
   "code": "vendor/lumenary/src/engine/styles/halftone.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

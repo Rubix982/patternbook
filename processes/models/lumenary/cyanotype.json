@@ -11,7 +11,7 @@
   "section": "F. Print and craft",
   "kind": "still",
   "blurb": "A sun print on hand-coated paper: Prussian blue where the light struck, bare paper where it did not, with a brushed edge.",
-  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
   "code": "vendor/lumenary/src/engine/styles/cyanotype.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

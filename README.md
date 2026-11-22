@@ -48,7 +48,8 @@ read as less AI-made, and the judge also said the drawings looked filtered (C-01
 
 The top layer also includes **[Lumenary](https://github.com/mursalfk/lumenary)** by **Mursal Furqan
 Kumbhar**: 214 browser-only image treatments, each with a theory page giving the equations its code
-runs. Its engine is in `vendor/lumenary/` and its theory data in `data/`, used with his permission (see their
+runs. Its engine is in `vendor/lumenary/`, and its theory with the rest of patternbook's knowledge in `processes/`
+(as received in `processes/sources/lumenary/`), used with his permission (see their
 `NOTICE.md`), and run inside our tooling through `treatments/lumenary/`. The method in `METHOD.md`
 step 2c, deriving a look from the process that made it, was learned from his theory pages.
 
@@ -94,9 +95,11 @@ METHOD.md                       how an entry is made and tested
 CARD.md                         the open card, and closed ones with results
 threads.md                      open questions, not yet worked on
 runs/<card>/                    test prompts, generated pages, blind keys
-treatments/                     the picture layer: our treatments, theory notes, demos
-treatments/lumenary/            bridge to the Lumenary engine, its catalogue and theory
-data/                           Lumenary's theory data (Mursal Furqan Kumbhar), moved out of vendor/ (data/README.md)
+processes/                      all knowledge of how looks are made: process pages (every model in full), primitives,
+                                foundations, models; Lumenary as received in processes/sources/lumenary/
+engine/                         patternbook's own primitives (code), their checks and demo pages
+treatments/                     the picture layer that applies treatments to pages, and its demos
+treatments/lumenary/            bridge to the Lumenary engine, and its catalogue
 vendor/lumenary/                Lumenary's engine (Mursal Furqan Kumbhar)
 tools/                          measuring and blind-test scripts
 docs/images/                    pictures in this README

@@ -11,7 +11,7 @@
   "section": "E. Physical and 3D feel",
   "kind": "still",
   "blurb": "A relief in a gallery: the picture carved shallow into veined marble, polished, hung on a dark wall under one spotlight, with a brass plate beneath it.",
-  "theory_page": "treatments/lumenary/theory/05-physical.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/05-physical.md",
   "code": "vendor/lumenary/src/engine/styles/marble-museum.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

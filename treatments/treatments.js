@@ -2,7 +2,7 @@
  *
  * The top layer of the two-layer model in METHOD.md. Each treatment is derived from the
  * physical process that made the look (METHOD.md step 2c), with the maths written out in
- * treatments/theory/. The approach is learned from Lumenary
+ * processes/ (each treatment's theory is in the process page it models). The approach is learned from Lumenary
  * (lumenary-studio.vercel.app, Mursal Furqan Kumbhar); the code here is written from
  * scratch.
  *
@@ -13,7 +13,7 @@
 (function (global) {
   'use strict';
 
-  // ---------- foundations (theory/foundations.md) ----------
+  // ---------- foundations (processes/foundations.md) ----------
 
   function clamp(x, a, b) {
     if (a === undefined) { a = 0; b = 1; }
@@ -144,7 +144,7 @@
     return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
   }
 
-  // ---------- the press: one ink plate (theory/press.md) ----------
+  // ---------- the press: one ink plate (processes/letterpress.md) ----------
   // Turns an intended coverage field into ink actually laid down, with the press's
   // imperfections: ink spread (dot gain), wobbly plate edges, misregistration, a dot
   // screen for tints, grain at the threshold, and ink starvation in solids.

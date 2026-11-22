@@ -11,7 +11,7 @@
   "section": "G. Painterly and drawn",
   "kind": "live",
   "blurb": "Traced by hand, frame by frame, as in A Scanner Darkly. Each drawing has its own few flat tones and its own shaky ink line, and the colour never quite stays inside the lines. On video a new drawing is made every second frame; on a still picture it keeps being redrawn, so the lines boil.",
-  "theory_page": "treatments/lumenary/theory/07-painterly.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
   "code": "vendor/lumenary/src/engine/styles/rotoscope.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

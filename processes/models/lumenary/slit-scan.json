@@ -11,7 +11,7 @@
   "section": "H. Photographic and optical",
   "kind": "live",
   "blurb": "The camera trick behind the stargate in 2001 and the finish-line photo: not the whole frame, only a narrow slit of it, taken again and again. Either the slits are laid side by side as the seconds pass, or every row of the picture is taken from a different moment. A still picture is scanned back and forth so you can see it stretch.",
-  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/08-optical.md",
   "code": "vendor/lumenary/src/engine/styles/slit-scan.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

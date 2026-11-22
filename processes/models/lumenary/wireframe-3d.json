@@ -11,7 +11,7 @@
   "section": "B. Digital and technical",
   "kind": "live",
   "blurb": "Brightness becomes terrain. Drag across it, or let it turn on its own.",
-  "theory_page": "treatments/lumenary/theory/02-digital.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
   "code": "vendor/lumenary/src/engine/styles/wireframe-3d.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

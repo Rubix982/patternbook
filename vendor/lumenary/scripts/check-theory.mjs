@@ -8,8 +8,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const src = join(dirname(fileURLToPath(import.meta.url)), '..', 'src');
 const load = (p) => import(pathToFileURL(join(src, p)).href);
-// patternbook moved src/data/ to the repository root as data/ (2026-11-22; see ../NOTICE.md)
-const dataDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'data');
+// patternbook keeps src/data/ at processes/sources/lumenary/data/ (2026-11-22; see ../NOTICE.md)
+const dataDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'processes', 'sources', 'lumenary', 'data');
 const loadData = (p) => import(pathToFileURL(join(dataDir, p)).href);
 const { EXTRA } = await loadData('theory-extra/index.js');
 const { acceptsValue } = await load('utils/presets.js');

@@ -11,7 +11,7 @@
   "section": "F. Print and craft",
   "kind": "still",
   "blurb": "A quilt: your picture cut into squares or triangles of printed cotton, puffed by the wadding and held with running stitches.",
-  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
   "code": "vendor/lumenary/src/engine/styles/quilt-patchwork.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

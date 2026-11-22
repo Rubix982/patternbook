@@ -11,7 +11,7 @@
   "section": "J. Motion and live",
   "kind": "live",
   "blurb": "Drops of ink released into still water curl and bloom along slow currents. Each wisp carries the colour of the picture where it was released. Drag across the water to add ink.",
-  "theory_page": "treatments/lumenary/theory/10-motion.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/10-motion.md",
   "code": "vendor/lumenary/src/engine/styles/ink-in-water.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

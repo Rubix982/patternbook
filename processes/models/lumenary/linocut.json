@@ -11,7 +11,7 @@
   "section": "F. Print and craft",
   "kind": "still",
   "blurb": "Carved lino printed in one colour: solid black where the cutter left the block, gouged lines of changing width for the tones.",
-  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
   "code": "vendor/lumenary/src/engine/styles/linocut.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

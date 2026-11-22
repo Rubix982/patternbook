@@ -11,7 +11,7 @@
   "section": "D. Light, colour and glass",
   "kind": "live",
   "blurb": "The picture dissolved into a slow, soft field of its own colours.",
-  "theory_page": "treatments/lumenary/theory/04-light.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/04-light.md",
   "code": "vendor/lumenary/src/engine/styles/gradient-mesh.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

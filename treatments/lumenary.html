@@ -40,7 +40,7 @@
 <p class="lede">All of <a href="https://github.com/mursalfk/lumenary">Lumenary</a>'s treatments, by Mursal Furqan
 Kumbhar, running inside our tooling (copy in <code>vendor/lumenary/</code>, bridge in <code>lumenary/</code>). Pick one and
 turn its dials, or switch to the contact sheet to see every still treatment on one picture. Its theory, with the
-maths, is in <code>lumenary/theory/</code>.</p>
+maths, is in <code>processes/sources/lumenary/theory-pages/</code>, and each treatment's model, filed under the process it imitates, in <code>processes/</code>.</p>
 
 <div class="bar">
   <label>Mode
@@ -178,7 +178,7 @@ maths, is in <code>lumenary/theory/</code>.</p>
     var file = THEORY[t.section.id];
     $('about').innerHTML = '<strong>' + t.name + '</strong> · ' + t.section.letter + '. ' + t.section.title +
       (t.kind === 'live' ? ' · live' : ' · still') + '<br>' + (t.blurb || '') +
-      (file ? '<br><span class="k">Theory and maths: <code>treatments/lumenary/theory/' + file + '</code></span>' : '');
+      (file ? '<br><span class="k">Theory and maths: <code>processes/sources/lumenary/theory-pages/' + file + '</code></span>' : '');
     var snippet = t.kind === 'live'
       ? "// Live treatments run as animations:\nLumenary.animate('" + t.id + "', sourceCanvas, " + JSON.stringify(params) + ", targetCanvas);"
       : "// On a patternbook page, after loading lumenary/lumenary.js and treatments.js:\nTreatments.treatAll('svg[role=img]', { treatment: 'lumenary:" + t.id + "', params: " + JSON.stringify(params) + " });";

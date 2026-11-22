@@ -4,7 +4,7 @@
 import { readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { SECTIONS, slugify } from '../../../data/sections.js';
+import { SECTIONS, slugify } from '../../../processes/sources/lumenary/data/sections.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const stylesDir = join(root, 'src', 'engine', 'styles');

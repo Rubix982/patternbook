@@ -11,7 +11,7 @@
   "section": "K. World cultural",
   "kind": "still",
   "blurb": "A Japanese woodblock print: a few flat colours pressed one block at a time, a black key line, and the soft fade of bokashi in the sky. Wood grain and paper fibre show through the ink.",
-  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
   "code": "vendor/lumenary/src/engine/styles/ukiyo-e.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

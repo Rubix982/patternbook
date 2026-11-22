@@ -11,7 +11,7 @@
   "section": "K. World cultural",
   "kind": "still",
   "blurb": "Sunk relief as it was cut in the temples of the Nile: signs incised into columns of limestone and then painted in lapis, ochre and malachite. The signs grow fuller and the pigment stronger where your picture is bright.",
-  "theory_page": "treatments/lumenary/theory/11-world.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
   "code": "vendor/lumenary/src/engine/styles/hieroglyphs.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

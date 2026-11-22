@@ -11,7 +11,7 @@
   "section": "F. Print and craft",
   "kind": "still",
   "blurb": "A sampler: your picture counted out in coloured thread, one X per square of the cloth, using a limited box of flosses.",
-  "theory_page": "treatments/lumenary/theory/06-craft.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
   "code": "vendor/lumenary/src/engine/styles/cross-stitch.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

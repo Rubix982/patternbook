@@ -11,7 +11,7 @@
   "section": "D. Light, colour and glass",
   "kind": "live",
   "blurb": "Iridescent foil that shifts with a moving light band. Hover to steer it.",
-  "theory_page": "treatments/lumenary/theory/04-light.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/04-light.md",
   "code": "vendor/lumenary/src/engine/styles/holographic.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

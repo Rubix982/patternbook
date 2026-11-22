@@ -23,8 +23,8 @@ The engine and data of **Lumenary** by **Mursal Furqan Kumbhar**: https://github
   (https://github.com/xuebinqin/U-2-Net, Apache-2.0), used by the two subject-aware treatments.
 - Fonts are npm dependencies (`@fontsource/*`, OFL) and are not included here.
 
-- **Moved (2026-11-22):** `src/data/` now lives at the repository root as `data/` (see `../../data/README.md`), so
-  patternbook's theory sits with the rest of the project. File contents are unchanged except `theoryGroups.js`'s import
+- **Moved (2026-11-22):** `src/data/` now lives at `processes/sources/lumenary/data/` (see
+  `../../processes/sources/lumenary/README.md`), with the rest of patternbook's knowledge of how looks are made. File contents are unchanged except `theoryGroups.js`'s import
   path; `scripts/check-theory.mjs` and `scripts/catalogue.mjs` here were repointed to it.
 
 Please credit Mursal Furqan Kumbhar and link the repository wherever this code or its theory is used.

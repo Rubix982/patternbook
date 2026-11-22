@@ -11,7 +11,7 @@
   "section": "H. Photographic and optical",
   "kind": "still",
   "blurb": "A lens cannot bend every colour by the same amount. Red, green and blue land in slightly different places, and the edges split into colour.",
-  "theory_page": "treatments/lumenary/theory/08-optical.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/08-optical.md",
   "code": "vendor/lumenary/src/engine/styles/chromatic-aberration.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

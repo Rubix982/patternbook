@@ -11,7 +11,7 @@
   "section": "I. Geometric and generative",
   "kind": "still",
   "blurb": "A point hops between a few folded transforms a couple of million times. Where it lands often, the picture glows; where it lands rarely, it fades.",
-  "theory_page": "treatments/lumenary/theory/09-generative.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
   "code": "vendor/lumenary/src/engine/styles/fractal-flame.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

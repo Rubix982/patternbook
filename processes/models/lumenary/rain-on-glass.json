@@ -11,7 +11,7 @@
   "section": "J. Motion and live",
   "kind": "live",
   "blurb": "A misted window with drops that run down it. Each drop turns the scene upside down, and every trail clears the fog. Move across the glass to wipe it with a finger.",
-  "theory_page": "treatments/lumenary/theory/10-motion.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/10-motion.md",
   "code": "vendor/lumenary/src/engine/styles/rain-on-glass.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

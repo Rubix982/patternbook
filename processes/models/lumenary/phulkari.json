@@ -11,7 +11,7 @@
   "section": "M. South Asian and Islamic",
   "kind": "still",
   "blurb": "The picture embroidered in the Punjabi way: long silk stitches darned across rough hand-woven cloth, running one way in some blocks and the other in the next so the light catches them differently. A zigzag border closes it, as on a bride’s shawl.",
-  "theory_page": "treatments/lumenary/theory/13-southasia.md",
+  "theory_page": "processes/sources/lumenary/theory-pages/13-southasia.md",
   "code": "vendor/lumenary/src/engine/styles/phulkari.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },

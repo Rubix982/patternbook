@@ -211,14 +211,14 @@ listed in `processes/primitives.md`.
 - **patternbook's own treatments and generators.** The theory notes for `press`, `riso`, `halftone` and `hatch` move
   into the process pages for letterpress, risograph, halftone screening and hatching as those pages are written, each
   leaving a pointer where it was.
-- **Lumenary** (Mursal Furqan Kumbhar). `data/` (moved from `vendor/lumenary/src/data` on 2026-11-22) holds the maths behind 212 of his 214 treatments
+- **Lumenary** (Mursal Furqan Kumbhar). `processes/sources/lumenary/data/` (moved out of `vendor/lumenary/src/data` on 2026-11-22) holds the maths behind 212 of his 214 treatments
   (610 equations with notes, 426 paragraphs), a fuller account of all 214 (where each look comes from, why it looks
   that way, how it is made, its history, uses, presets, terms and related treatments) and six foundation pages on the
   tools they share. His entries are models of physical processes: resist dyeing, running stitch, painting on tin glaze
   and its crackle, cut paper, pierced and lit hide, stone relief under a moving light, tesserae, block printing and
-  its registration, dot fields. Process pages cite the entry they draw on and link his theory as rendered in
-  `treatments/lumenary/theory/`. His text stays attributed in that one place, his data in `data/` stays unchanged in content,
-  and anything that improves on his work is offered back to him.
+  its registration, dot fields. Each process page carries his models in full, credited; his theory data and his theory
+  pages as captured from his site stay unchanged in `processes/sources/lumenary/`, and anything that improves on his
+  work is offered back to him. All of this sits in `processes/`, the one place for knowledge of how looks are made.
 - **Papers and books**, through `references/references.md`.
 
 **How the rest of patternbook uses it:**
@@ -311,7 +311,9 @@ subcontinent/               + the entries
   styles/<id>.md
   palettes/<id>.md          (+ <id>.json, the colours)
   _templates/<kind>.md
-processes/                  + the process library (section 7b): one page per process, primitives.md, index.md (generated)
+processes/                  + all knowledge of how looks are made (section 7b): process pages carrying every model in
+                              full, primitives.md, foundations.md, index.md, models/, and Lumenary as received in
+                              sources/lumenary/ (his theory data and theory pages)
 looks/<id>.md               + looks, each with <id>.tokens.json
 engine/                     + our generators (Lumenary's conventions)
   core/                     symmetry groups, margin functions, seeded noise, SVG writer, layers
@@ -321,8 +323,7 @@ engine/                     + our generators (Lumenary's conventions)
 studio/                     + the GitHub Pages studio: browse the catalogue, run generators, compose looks
 references/references.md    + the one bibliography, with rights
 library/                    the pages shelf, unchanged
-treatments/                 unchanged; theory notes move into processes/ as their pages are written
-data/                       Lumenary's theory data, moved here from vendor/lumenary/src/data (2026-11-22)
+treatments/                 the treatments that apply looks to pages; their theory moved into processes/ (pointers left)
 vendor/lumenary/            Lumenary's engine, unchanged
 runs/, tools/, sources/     unchanged (sources/ stays git-ignored)
 ```
