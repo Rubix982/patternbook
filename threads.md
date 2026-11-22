@@ -131,7 +131,9 @@ value is just *any* specific instruction, not human sources.
 and the Maldives 9, all from English Wikipedia. Re-enumerate the thinnest countries from other sources (the official
 geographical-indication registers, national craft bodies, museum collections searched by country, Wikipedias in Urdu,
 Sindhi, Punjabi, Bengali, Nepali and Sinhala) and see how much each count moves.
-**Answer:** —
+**Answer:** partly, by C-016: English Wikipedia undercounts Pakistan's textiles and dress by at least 56 % (45 elements
+from other sources, 41 of them outside the regional Wikipedias). Whether India's lead is the sources' or the subject's
+waits on the same sweep for India (T-020).
 
 ### T-017 · Do the first-pass items C-015 never queried exist under other names?
 
@@ -141,4 +143,40 @@ Sindhi, Punjabi, Bengali, Nepali and Sinhala) and see how much each count moves.
 **Question:** About 40 first-pass items found no source (`atlas/unattested.md`), and some were never queried for lack
 of budget (railway stations, teak, painted facades, surahi, cinema hoardings). Query each by its other names before
 calling it unattested.
+**Answer:** —
+
+### T-018 · Does a language model's unaided knowledge of the subcontinent's made things fall off outside India, beyond what the sources already lack?
+
+**Status:** open
+**Parent:** C-015
+**Opened:** 2026-11-22
+**Question:** The atlas now has a source-backed list of elements per country. Ask models with no tools to list one
+domain's elements for each country (textiles and dress for India, Pakistan, Bangladesh, Nepal, Bhutan, Sri Lanka),
+score their recall against the atlas, and correct for how much each country's sources hold (C-016). A recall gap that
+survives the correction is evidence about the model, not the encyclopedia. The planned "unguided default" card
+(`docs/architecture.md` section 9) is its image-side twin. Literature to check first, cited from memory: benchmarks of
+everyday cultural knowledge such as BLEnD (2024), and studies of stereotyping in image generators.
+**Answer:** —
+
+### T-020 · Run C-016's sweep for India, so the India-to-Pakistan ratio can be compared before and after
+
+**Status:** open
+**Parent:** C-016
+**Opened:** 2026-11-22
+**Question:** C-016 had no control arm. Re-enumerate India's textiles and dress from the same kinds of sources (India's
+GI register of 822, the textile and dress entries in its official list; Hindi, Bengali, Tamil, Gujarati and other
+Indian-language Wikipedias; colonial district gazetteers and provincial monographs for places now in India), class
+each element new / newly Indian / confirmed / unclear as C-016 did, and compare India's rise with Pakistan's 56-62 %.
+If India rises by about as much, the lean is mostly the subject's (or every source's); if by much less, English
+Wikipedia was the main cause.
+**Answer:** —
+
+### T-021 · How should the atlas show a craft that both sides of a border have notified or registered?
+
+**Status:** open
+**Parent:** C-016
+**Opened:** 2026-11-22
+**Question:** Azad Kashmir's notified GIs (pashmina, sozni, kani, papier-mâché) carry the same names as India's
+Kashmir GIs. The atlas names regions historically and by modern country together; it needs a rule for one element
+claimed by two registers, stated neutrally, with both registrations recorded and neither preferred.
 **Answer:** —

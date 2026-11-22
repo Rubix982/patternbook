@@ -1,0 +1,129 @@
+https://ipindia.gov.in/registered-gls.htm
+https://www.ipindia.gov.in/
+https://search.ipindia.gov.in/GIRPublic/
+https://ipindia.gov.in/geographical-indications-track-application-list-of-registered-geographical-indications-and-authorised-users-part-a-register-list-of-registered-gi-of-india
+https://ipindia.gov.in/storage/uploads/docs-operator/acd84122-0241-40e2-ac65-131946fb7bb4.pdf
+https://ipindia.gov.in/storage/uploads/docs-operator/d15963f9-69c6-4e66-8f8f-3004991c6db8.pdf
+https://ipo.gov.pk/
+https://ipo.gov.pk/gi
+https://ipo.gov.pk/gi_registeredGIsPK
+https://ipo.gov.pk/system/files/20241030-ListofNotifiedGIs.pdf
+https://ipo.gov.pk/system/files/18-Non-exhaustive%20List%20of%20Prospective%20GIs%20%28Corrigendum%29.pdf
+http://www.dpdt.gov.bd/
+https://dpdt.gov.bd/pages/static-pages/6922dc71933eb65569e10685
+https://dpdt.gov.bd/pages/static-pages/6922deab933eb65569e1c7b8
+https://dpdt.gov.bd/pages/static-pages/6922e0ff933eb65569e297d6
+https://dpdt.gov.bd/pages/static-pages/6922e110933eb65569e29f56
+https://dpdt.gov.bd/pages/static-pages/6922dff0933eb65569e24bcf
+https://dpdt.gov.bd/pages/static-pages/6922e04d933eb65569e2666d
+https://asi.nic.in/
+https://asi.nic.in/alphabetical-list-of-monuments/
+https://archive.org/wayback/available?url=asi.nic.in/alphabetical-list-of-monuments/
+https://web.archive.org/web/2024/https://asi.nic.in/alphabetical-list-of-monuments/
+https://web.archive.org/web/20230926084524/https://asi.nic.in/alphabetical-list-of-monuments/
+https://web.archive.org/web/2023id_/https://asi.nic.in/wp-content/uploads/2021/08/Goa-Goa-Circle.pdf
+https://web.archive.org/web/2025/https://asi.nic.in/pages/Monuments
+https://doam.gov.pk/
+https://archaeology.punjab.gov.pk/
+https://kparchaeology.gov.pk/
+https://culture.sindh.gov.pk/
+https://doam.gov.pk/heritage-sites
+https://doam.gov.pk/public/heritage-sites
+http://kparchaeology.gkp.pk/
+https://doam.gov.pk/public/heritage-sites/668
+https://kparchaeology.gkp.pk/sites-and-monuments/
+https://culture.gos.pk/
+https://www.sindhculture.gov.pk/
+https://heritage.pakistan.gov.pk/
+https://antiquities.sindhculture.gov.pk/
+https://antiquities.sindhculture.gov.pk/heritage-buildings/
+https://archaeology.gov.bd/
+https://archaeology.gov.bd/pages/static-pages/6922de18933eb65569e1833a
+https://archaeology.khulnadiv.gov.bd/pages/static-pages/69812043a31054345f1e099d
+https://www.archaeology.gov.lk/
+https://doa.gov.np/
+https://archaeology.gov.lk/
+https://heritage.gov.np/
+https://archive.org/wayback/available?url=archaeology.gov.lk
+https://web.archive.org/web/20261022184104/https://archaeology.gov.lk/
+https://www.arcgis.com/sharing/rest/content/items/f46193fc96c44eadaa43bae6ab708766/data?f=json
+https://www.arcgis.com/sharing/rest/content/items/36b3224452854adeb4bee9e18b9d754f/data?f=json
+https://services6.arcgis.com/s3bdyMBJtaczQLc3/arcgis/rest/services/Archaeological_Stes_Public/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+https://services6.arcgis.com/s3bdyMBJtaczQLc3/arcgis/rest/services/Archaeological_Stes_Public/FeatureServer/0/query?where=1%3D1&outFields=*&resultRecordCount=2&returnGeometry=false&f=json
+https://services6.arcgis.com/s3bdyMBJtaczQLc3/arcgis/rest/services/Archaeological_Stes_Public/FeatureServer?f=json
+https://www.arcgis.com/sharing/rest/content/items/9dec3ca3374b476ab5476d272c260e9f?f=json
+https://services6.arcgis.com/s3bdyMBJtaczQLc3/arcgis/rest/services/Archaeological_Stes_Public/FeatureServer/0/query?where=1%3D1&outFields=Type&groupByFieldsForStatistics=Type&outStatistics=%5B%7B%22statisticType%22%3A%22count%22%2C%22onStatisticField%22%3A%22OBJECTID%22%2C%22outStatisticFieldName%22%3A%22n%22%7D%5D&orderByFields=n+DESC&f=json
+https://www.indembassyhanoi.gov.in/page/gi-digital-catalogue-featuring-419-registered-indian-gis/ (WebFetch)
+https://asi.nic.in/alphabetical-list-of-monuments/ (WebFetch: ECONNREFUSED)
+https://ipindia.gov.in/storage/uploads/docs-operator/acd84122-0241-40e2-ac65-131946fb7bb4.pdf (re-read)
+https://whc.unesco.org/en/syndication/
+https://whc.unesco.org/en/list/xls/
+https://ich.unesco.org/en/lists
+https://whc.unesco.org/en/syndication/ (WebFetch: 403)
+https://web.archive.org/web/2026/https://whc.unesco.org/en/syndication/
+https://web.archive.org/web/2026id_/https://whc.unesco.org/en/list/xml/
+https://web.archive.org/web/2026/https://whc.unesco.org/en/syndication/ (licence)
+https://lokvirsa.org.pk/
+https://www.folkartbd.gov.bd/
+https://www.craftscouncil.gov.lk/
+https://www.nizc.gov.bt/
+https://www.apic.gov.bt/
+https://fhan.org.np/
+https://www.craftscouncilofindia.in/
+https://lokvirsa.org.pk/programs/research-and-publications/
+http://craftscouncil.gov.lk/crafts-map/
+https://archive.org/wayback/available?url=fhan.org.np
+https://archive.org/wayback/available?url=nizc.gov.bt
+https://archive.org/wayback/available?url=folkartbd.gov.bd
+https://ichinventory.com.pk/
+https://web.archive.org/web/20260613122244/http://www.fhan.org.np/
+https://ichinventory.com.pk/ich-inventory
+http://nepalhandicraft.org.np/
+https://archive.org/advancedsearch.php?q=title%3A%28mediaeval+sinhalese+art%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&fl%5B%5D=licenseurl&fl%5B%5D=rights&rows=10&output=json
+https://archive.org/advancedsearch.php?q=title%3A%28%22journal+of+indian+art%22%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&fl%5B%5D=volume&rows=100&output=json
+https://archive.org/metadata/india.history.resource.99996
+https://archive.org/metadata/sim_journal-of-indian-art-and-industries_1913-01_15_117-121
+https://archive.org/metadata/tdl.26010-the-journal-of-indian-art-and-industry
+https://catalog.hathitrust.org/Search/Home?lookfor=%22journal+of+indian+art%22&type=title
+https://archive.org/advancedsearch.php?q=collection%3Apub_journal-of-indian-art-and-industries&fl%5B%5D=identifier&fl%5B%5D=date&rows=500&output=json
+https://archive.org/advancedsearch.php?q=title%3A%28monograph%29+AND+%28title%3Apunjab+OR+title%3Asind+OR+title%3Abengal+OR+title%3Aassam+OR+title%3Aburma%29+AND+date%3A%5B1880-01-01+TO+1915-12-31%5D&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&rows=60&output=json
+https://openlibrary.org/search.json?q=colours+of+the+indus+askari+crill&fields=key,title,author_name,first_publish_year,ia,ebook_access,isbn&limit=5
+https://www.googleapis.com/books/v1/volumes?q=isbn:1858940451
+https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&titles=Category:Handicrafts|Category:Textiles|Category:Clothing|Category:Architecture|Category:Crafts&props=sitelinks&sitefilter=urwiki|sdwiki|pnbwiki|bnwiki|newiki|siwiki|pswiki&format=json
+https://ur.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&list=search&srnamespace=14&srsearch=%D8%AF%D8%B3%D8%AA%DA%A9%D8%A7%D8%B1%DB%8C+OR+%DA%A9%DA%91%DA%BE%D8%A7%D8%A6%DB%8C&srlimit=8&srprop=&format=json&formatversion=2&prop=categoryinfo&titles=%D8%B2%D9%85%D8%B1%DB%81%3A%D9%81%D9%86%DB%8C%D8%A7%D8%AA+%D9%88+%D8%AD%D8%B1%D9%81%DB%8C%D8%A7%D8%AA%7C%D8%B2%D9%85%D8%B1%DB%81%3A%D9%BE%D8%A7%D8%B1%DA%86%DB%92%7C%D8%B2%D9%85%D8%B1%DB%81%3A%D9%84%D8%A8%D8%A7%D8%B3%7C%D8%B2%D9%85%D8%B1%DB%81%3A%D9%85%D8%B9%D9%85%D8%A7%D8%B1%DB%8C%7C%D8%B2%D9%85%D8%B1%DB%81%3A%D8%AD%D8%B1%D9%81%DB%8C%D8%A7%D8%AA
+https://sd.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&list=search&srnamespace=14&srsearch=%D9%84%D8%A8%D8%A7%D8%B3+OR+%DA%80%D8%B1%D8%AA+OR+%D9%87%D9%86%D8%B1+OR+%DA%AA%D9%BE%DA%99%D8%A7&srlimit=8&srprop=&format=json&formatversion=2&prop=categoryinfo&titles=%D8%B2%D9%85%D8%B1%D9%88%3A%D9%81%D9%86+%D8%AA%D8%B9%D9%85%D9%8A%D8%B1
+https://pnb.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&list=search&srnamespace=14&srsearch=%D9%84%D8%A8%D8%A7%D8%B3+OR+%DA%A9%D9%BE%DA%91%DB%92+OR+%D8%B9%D9%85%D8%A7%D8%B1%D8%AA%D8%A7%DA%BA+OR+%D9%81%D9%86&srlimit=8&srprop=&format=json&formatversion=2
+https://bn.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&list=search&srnamespace=14&srsearch=%E0%A6%A4%E0%A6%BE%E0%A6%81%E0%A6%A4+OR+%E0%A6%A8%E0%A6%95%E0%A6%B6%E0%A6%BF&srlimit=8&srprop=&format=json&formatversion=2&prop=categoryinfo&titles=%E0%A6%AC%E0%A6%BF%E0%A6%B7%E0%A6%AF%E0%A6%BC%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A7%87%E0%A6%A3%E0%A7%80%3A%E0%A6%B9%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%B6%E0%A6%BF%E0%A6%B2%E0%A7%8D%E0%A6%AA%7C%E0%A6%AC%E0%A6%BF%E0%A6%B7%E0%A6%AF%E0%A6%BC%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A7%87%E0%A6%A3%E0%A7%80%3A%E0%A6%AC%E0%A6%AF%E0%A6%BC%E0%A6%A8%E0%A6%95%E0%A7%83%E0%A6%A4+%E0%A6%89%E0%A6%AA%E0%A6%BE%E0%A6%A6%E0%A6%BE%E0%A6%A8%7C%E0%A6%AC%E0%A6%BF%E0%A6%B7%E0%A6%AF%E0%A6%BC%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A7%87%E0%A6%A3%E0%A7%80%3A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A7%8D%E0%A6%B0%7C%E0%A6%AC%E0%A6%BF%E0%A6%B7%E0%A6%AF%E0%A6%BC%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A7%87%E0%A6%A3%E0%A7%80%3A%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE%E0%A6%AA%E0%A6%A4%E0%A7%8D%E0%A6%AF%7C%E0%A6%AC%E0%A6%BF%E0%A6%B7%E0%A6%AF%E0%A6%BC%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A7%87%E0%A6%A3%E0%A7%80%3A%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%81%E0%A6%B6%E0%A6%BF%E0%A6%B2%E0%A7%8D%E0%A6%AA
+https://ne.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&list=search&srnamespace=14&srsearch=%E0%A4%B9%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%95%E0%A4%B2%E0%A4%BE+OR+%E0%A4%95%E0%A4%AA%E0%A4%A1%E0%A4%BE&srlimit=8&srprop=&format=json&formatversion=2&prop=categoryinfo&titles=%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%A3%E0%A5%80%3A%E0%A4%AA%E0%A4%B9%E0%A4%BF%E0%A4%B0%E0%A4%A8%E0%A4%B9%E0%A4%B0%E0%A5%82%7C%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%A3%E0%A5%80%3A%E0%A4%B5%E0%A4%BE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%E0%A4%95%E0%A4%B2%E0%A4%BE
+https://si.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&list=search&srnamespace=14&srsearch=%E0%B7%81%E0%B7%92%E0%B6%BD%E0%B7%8A%E0%B6%B4+OR+%E0%B6%BB%E0%B7%99%E0%B6%AF%E0%B7%92&srlimit=8&srprop=&format=json&formatversion=2&prop=categoryinfo&titles=%E0%B6%B4%E0%B7%8A%E2%80%8D%E0%B6%BB%E0%B7%80%E0%B6%BB%E0%B7%8A%E0%B6%9C%E0%B6%BA%3A%E0%B6%87%E0%B6%B3%E0%B7%94%E0%B6%B8%E0%B7%8A%7C%E0%B6%B4%E0%B7%8A%E2%80%8D%E0%B6%BB%E0%B7%80%E0%B6%BB%E0%B7%8A%E0%B6%9C%E0%B6%BA%3A%E0%B6%9C%E0%B7%98%E0%B7%84+%E0%B6%B1%E0%B7%92%E0%B6%BB%E0%B7%8A%E0%B6%B8%E0%B7%8F%E0%B6%AB+%E0%B7%81%E0%B7%92%E0%B6%BD%E0%B7%8A%E0%B6%B4%E0%B6%BA
+https://ps.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=statistics&list=search&srnamespace=14&srsearch=%D8%AC%D8%A7%D9%85%DB%90+OR+%D9%85%D8%B9%D9%85%D8%A7%D8%B1%D9%8A+OR+%D8%B5%D9%86%D8%A7%D9%8A%D8%B9+OR+%D9%84%D8%A8%D8%A7%D8%B3&srlimit=8&srprop=&format=json&formatversion=2
+https://collectionapi.metmuseum.org/public/collection/v1/search?geoLocation=Pakistan&hasImages=true&q=*
+https://collectionapi.metmuseum.org/public/collection/v1/search?q=Sindh
+https://collectionapi.metmuseum.org/public/collection/v1.1/search?q=Sindh&limit=5
+https://collectionapi.metmuseum.org/public/collection/v1.1/search?geoLocation=Pakistan&hasImages=true&q=*&limit=5
+https://collectionapi.metmuseum.org/public/collection/v1/objects/126637
+https://openaccess-api.clevelandart.org/api/artworks/?q=Pakistan&has_image=1&cc0=1&limit=1
+https://api.artic.edu/api/v1/artworks/search?query%5Bterm%5D%5Bplace_of_origin%5D=Pakistan&limit=2&fields=id,title,place_of_origin,is_public_domain,image_id
+https://api.si.edu/openaccess/api/v1.0/search?q=Pakistan
+https://api.vam.ac.uk/v2/objects/search?q_place_name=Sindh&images_exist=1&page_size=1
+https://api.artic.edu/api/v1/artworks/search?q=Pakistan&limit=2&fields=id,title,place_of_origin,is_public_domain
+https://data.rijksmuseum.nl/search/collection?description=Ceylon
+https://archnet.org/sites?country=Pakistan
+https://web.archive.org/web/20250619070553/http://www.nizc.gov.bt/
+https://commons.wikimedia.org/w/api.php?action=query&list=allcategories&acprefix=Images+from+Wiki+Loves+Monuments+20&aclimit=500&acprop=size&format=json&formatversion=2
+https://collections.lacma.org/search/site/Pakistan
+https://commons.wikimedia.org/w/api.php?action=query&list=allcategories&acprefix=Images+from+Wiki+Loves+Monuments+20&aclimit=500&acprop=size&format=json&formatversion=2
+https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=14&srsearch=intitle%3A%22Images+from+Wiki+Loves+Monuments%22+%28Pakistan+OR+Bangladesh+OR+Nepal+OR+%22Sri+Lanka%22+OR+India+OR+Bhutan+OR+Maldives%29&srlimit=100&srprop=&format=json&formatversion=2
+https://www.wikidata.org (via wbgetentities above)
+https://commons.wikimedia.org/w/api.php?...WebFetch (ETIMEDOUT)
+https://meta.wikimedia.org/wiki/Content_Partnerships_Hub/Strategic_data_uploads/Wiki_Loves_Monuments_on_Wikidata (WebFetch, 2 reads)
+https://www.flickr.com/photos/britishlibrary/
+WebSearch: Intellectual Property India registered geographical indications list state-wise PDF
+WebSearch: IPO Pakistan geographical indications registered list ...
+WebSearch: DPDT Bangladesh list of registered GI products ...
+WebSearch: Pakistan Department of Archaeology and Museums list of protected monuments ...
+WebSearch: archaeology.gov.bd protected antiquities list division-wise
+WebSearch: Wiki Loves Monuments Pakistan Bangladesh Nepal Sri Lanka India ...
+WebSearch: archnet.org terms of use images ...
+WebSearch: British Library India Office Records photographs Flickr Commons ...
+WebSearch: British Museum collection online images licence; V&A API image terms

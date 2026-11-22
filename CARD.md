@@ -14,6 +14,107 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-016 · Is the atlas's lean toward India Wikipedia's, or the subject's? (Pakistan's textiles and dress)
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-015 found 227 elements in Textiles and dress from English Wikipedia alone: 73 of them attested for Pakistan, 92
+attested for India and no other country.
+
+**2. What we are doing.**
+Re-enumerate Pakistan's textiles and dress from sources other than English Wikipedia (Pakistan's geographical-indication
+register, Lok Virsa, UNESCO's intangible-heritage lists, public-domain colonial surveys such as the *Journal of Indian
+Art and Industry* and the provincial monographs and district gazetteers, *Colours of the Indus* as a study-only source,
+and the Urdu, Sindhi, Punjabi (Shahmukhi) and Pashto Wikipedias), each element with a source, and compare with C-015's
+73. Pashto is added to the list because Khyber Pakhtunkhwa's dress would otherwise have no source in its own language.
+
+Alongside it, not as part of the measure: every source on the list of other sources (registers, monument lists,
+UNESCO, craft institutions, books, regional Wikipedias, ArchNet, Wiki Loves Monuments, open museum collections, old
+photograph archives) is checked for what it covers, how it can be reached and what may be reused, and recorded in
+`references/sources.md`.
+
+**3. Why.**
+We don't know whether English Wikipedia undercounts Pakistan, or whether the subcontinent's textiles really lean
+toward India in what is named and documented. The answer decides whether each country needs its own sources before
+its permutation passes.
+
+**4. What is affected.**
+- T-016's answer, and the atlas's source plan per country.
+- `atlas/textiles-and-dress.md`: elements and Pakistani attestations the new sources add, each with its source.
+- `atlas/coverage.md`'s country counts.
+- `references/sources.md`, new: where the atlas looks, and what each source allows.
+
+**5. Conclusion.**
+Counted as Pakistan's textile elements after the pass: C-015's 73, plus elements new to the atlas, plus atlas elements
+newly attested for Pakistan.
+- **If** that rises by at least 50 % (37 or more) → we claim *English Wikipedia is the bottleneck for Pakistan*, and
+  every country gets its own source list before its permutation passes.
+- **If** it rises by less than 20 % (under 15) → we claim *English Wikipedia was a fair first net for Pakistan's
+  textiles*; the lean is mostly the subject's, or shared by every source we can reach.
+- **Between** → English Wikipedia undercounts, not decisively; own sources for the thinnest countries and domains
+  only.
+- Recorded either way: how many of C-015's 73 the new sources confirm.
+
+**6. If not done.**
+The atlas treats one encyclopedia's skew as the shape of the subcontinent, and every sample inherits it.
+
+**Limits (known before running):** one country, one domain; the sources differ in kind (a register lists products, a
+survey lists crafts by district, an encyclopedia lists what volunteers wrote); Urdu, Sindhi, Punjabi and Pashto pages
+are read through machine reading; whether a name is a new element or another name for one already listed is a
+judgment, recorded each time.
+
+**Result (2026-11-22):** first branch on the card's own measure. **Sources other than English Wikipedia add 45
+textile and dress elements for Pakistan to C-015's 73 (+62 %): 38 new to the atlas, 7 already in it but not attested
+for Pakistan.** Four of the 45 (jablo, polko, kanjri, paro) rest only on Sindhi Wikipedia, which may draw on English
+Wikipedia; without them the rise is 41 (+56 %), still past the threshold. 51 of the 73 were confirmed; the other 22 were
+not found in what was read, which is not the same as absent. 10 more names may be other names for listed elements
+(`atlas/judgment-calls.md`).
+
+Where the 45 came from (a row counts once for each source it cites): Pakistan's list of notified geographical
+indications (30 October 2024) 45, Sindhi Wikipedia 23, the Peshawar district gazetteer (1897-98) 21, Baden-Powell's
+hand-book of Punjab manufactures (1872) 20, the Sind gazetteer (1907) 18, Urdu Wikipedia 16, the Hazara gazetteer
+(1907) 12, the V&A's collection 9, the Baluchistan gazetteer (1908) 8, the Chitral report (1928) 7, and a few others.
+UNESCO's lists have no textile or dress element for Pakistan. Among the additions: hand block printing in Sindh
+(attested by the 1907 gazetteer at Tatta, Karachi and Hyderabad; C-015 had it for India only), the chogha and shoqa
+coats, pattu woollens of Chitral and Gilgit-Baltistan, the Kalasha dress and its shushut headdress, and the Kashmir
+shawl, pashmina and sozni, which Azad Kashmir has notified.
+
+**What the card did not answer, and why (design fault).** Its title asks whether the atlas's lean toward India is
+Wikipedia's or the subject's. Its measure answers a narrower question: does English Wikipedia undercount Pakistan?
+Yes, by at least 56 %. The same sweep would add Indian elements too (India's GI register lists 822, against the part
+English Wikipedia shows; Indian-language Wikipedias; India's gazetteers), and no Indian arm was run, so the
+India-to-Pakistan ratio after both sweeps is unknown. The card needed a control arm and didn't have one; the
+reviewing agent named it. T-020 is that arm.
+
+**The source register.** 41 sources checked (23 listed and 4 found along the way, some split into several rows):
+14 usable now, 12 usable with effort, 9 study-only, 6 not reachable. The most useful for the thin countries: Sri
+Lanka's Department of Archaeology map service (2,842 sites with Sinhala, Tamil and English names, period, district and
+coordinates, through a public ArcGIS service that needs no key); Pakistan's notified GI list (194 entries, 108 of
+them crafts and textiles, by province; only 17 GIs are registered, 5 of them crafts); Bangladesh's GI register (67
+registered, about 16 crafts or textiles, in Bengali). Nothing found serves the Maldives; Nepal and Bhutan stay thin.
+Along the way: the Met's search API was retired on 1 October 2026 and its replacement is paginated; UNESCO's World
+Heritage data forbids scraping and modification (study-only); the Archaeological Survey of India refused automated
+access (its lists came from archived copies); Wikimedia Commons timed out for the whole pass; Lok Virsa's national
+inventory of intangible heritage (52 entries) is marked "All Rights Reserved". ArchNet's, the British Museum's and the
+V&A's licence terms came from search-result quotes and are unconfirmed.
+
+**Changes made:**
+- `atlas/textiles-and-dress.md`: 38 elements added in a section of their own, not yet placed in families; 7 rows gain
+  Pakistan with their sources; 51 rows gain their confirming sources. The atlas has 793 elements.
+- `atlas/judgment-calls.md`: the 10 possible other names.
+- `references/sources.md`, new: the register, and the keys the new rows cite.
+- `tools/atlas_coverage.py`, new: coverage regenerated from the domain files (Pakistan 165 → 210 elements; India
+  alone 334 → 329).
+- `runs/c016/`: both passes' full output and request logs.
+- T-016 partly answered. T-020 opened: the Indian arm. T-021 opened: the same craft notified on both sides of a
+  border.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-015 · How much of the subcontinent's made world does a memory sketch miss?
 
 **Status:** closed

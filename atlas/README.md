@@ -47,7 +47,10 @@ The passes' full output, their request logs and the sketch they checked are in `
 
 ## Numbers
 
-- **755 elements** in 10 domains and 94 families; **796 candidate branches**.
+C-015 found 755 elements; C-016 added 38 for Pakistan from sources other than English Wikipedia (and Pakistan to 7
+more). `coverage.md` has the current counts.
+
+- At C-015: **755 elements** in 10 domains and 94 families; **796 candidate branches**.
 - **533 (71 %) were found only by the sources;** 222 were in the first pass. About 40 first-pass items found no
   source (`unattested.md`).
 - **Countries the sources name:** India 504, Pakistan 165, Sri Lanka 69, Bangladesh 65, Nepal 53, Bhutan 31,
@@ -83,6 +86,8 @@ Read these before relying on a row.
 
 ## Next
 
+0. C-016 showed English Wikipedia undercounts Pakistan's textiles and dress by at least 56 %; the same check for India
+   (T-020) says how much of the lean toward India is the sources'. `references/sources.md` lists where else to look.
 1. Correct the sources' bias: the official geographical-indication registers, national craft bodies, museum
    collections searched by country, and Wikipedias in the region's languages, thin countries first (T-016).
 2. Sample the jharokha, the first element to get its own page with samples (`docs/atlas.md`, worked example).

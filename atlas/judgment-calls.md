@@ -95,3 +95,22 @@ _C-015, 2026-11-22. Where element, branch and sample were hard to tell apart, an
 - **Manjusha** placed in Ritual (painted temple-shaped boxes for Bishahari puja) though https://en.wikipedia.org/wiki/Indian_painting lists it as "Manjusha painting".
 - **India GI list is truncated**: the Wikipedia table stops at serial 643 (2023–24) while the page says 822 GIs exist; later GI handicrafts are missing. No Pakistan GI list exists on Wikipedia (searched), so Pakistani items come from craft articles only.
 - **Religious and ritual items** are described by use and form only.
+
+## C-016: Pakistan's textiles and dress
+
+Names from sources other than English Wikipedia that may be other names for elements already listed. Not added to the domain file until resolved.
+
+| name | region | sources | possibly the same as |
+|---|---|---|---|
+| Mochari (shoes) | Balochistan; Pakistan | GI-N #125 | possibly Mojari: the name is close, but the GI list gives no description |
+| Norzee chappal | Balochistan; Pakistan | GI-N #126 | possibly a branch of Kheri (Peshawari chappal), or a distinct sandal |
+| Kakari kameez | Balochistan; Pakistan | GI-N #121 | possibly a regional branch of Pashtun dress or of Shalwar kameez |
+| Chikandozi | Hyderabad (Sindh); Pakistan | SG1907 p. 396 | Zardozi by description (gold, silver and silk thread on silk or velvet); the name resembles Chikankari |
+| Chuni (embroidered petticoat cloth) | Thar and Parkar (Sindh); Pakistan | SG1907 p. 397 | Shisha (mirror-work) made up as Lehenga / ghagra; the name could be confused with chunri (tie-dye) |
+| Akhri | Sindh; Pakistan | SDWP اکڙي | Chadar: a way of wrapping a chadar or ajrak as a full veil; the same word names chaukundi embroidery |
+| Kilim (Balochistan) | Balochistan; Pakistan | TDAP list item 9 | Jajim (listed with "gelim") or Dhurrie |
+| Patka | Peshawar, Hazara (KP); Pakistan | PDG1898 ch. IV-B; HDG1907 p. 46 | Pagri (both sources gloss it as turban) or Patuka (waist sash) |
+| Perni (shirt) | Hazara (KP); Pakistan | HDG1907 p. 46 | Kurta |
+| Khalka / khilka (front-opening coat) | Peshawar, Hazara (KP); Pakistan | PDG1898 ch. III; HDG1907 p. 46 | Angarkha or Jama (coat) |
+
+The pass's own judgment calls (the attestation rule for undivided Punjab, notified against registered GIs, OCR readings, time depth, the independence of the Sindhi and Urdu Wikipedias) are in `runs/c016/pass-pakistan-textiles.md`.
