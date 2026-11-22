@@ -1,0 +1,26 @@
+{
+ "groups": {
+  "marble": 3,
+  "red": 3,
+  "buff": 10
+ },
+ "median_lab": {
+  "marble": [
+   81.27,
+   1.01,
+   14.18
+  ],
+  "red": [
+   59.74,
+   8.4,
+   23.63
+  ],
+  "buff": [
+   81.52,
+   0.74,
+   12.5
+  ]
+ },
+ "marble_minus_sandstone_L": 1.29,
+ "red_minus_buff_a": 7.66
+}

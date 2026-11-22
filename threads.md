@@ -498,7 +498,8 @@ SAM 3 is gated and wasn't tried.
 **Opened:** 2026-11-22
 **Question:** Third of six. Marigold's intrinsic model (albedo against shading, OpenRAIL++): does a mask from the albedo
 keep bars whole where a mask from brightness breaks them, and does the albedo give the stone's colour for building?
-**Answer:** —
+**Answer:** C-041: no on both: the albedo gives the backdrop through the openings a colour of its own (agreement 9 of
+17), and buff sandstone comes out as light as marble; it does tell red sandstone from buff.
 
 ### T-050 · Can an open image-to-3D model rebuild a jali, through-holes and depth, from one photo?
 

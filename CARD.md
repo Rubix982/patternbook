@@ -16,7 +16,7 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ## C-041 · Does taking the shading out of a jali photo keep its bars whole in a mask, and give the stone's own colour?
 
-**Status:** open
+**Status:** closed
 **Opened:** 2026-11-23
 
 **1. Where we are.**
@@ -54,6 +54,29 @@ Bars stay unreadable under shading, and the build's stone colours stay picked by
 
 **Limits (known before running):** albedo is the model's estimate, with no measured colour to check it against; a tile's
 colours can shift from its neighbours'; the materials are the catalogues' words.
+
+**How it ran.** 19 photos in about 25 minutes on the Mac's GPU (about 4.5 s a tile after the first). The model returns
+albedo, shading and a residual; its albedo is linear and was turned to sRGB.
+
+**Result (2026-11-23): the albedo is no way into masks, and it doesn't separate the three stones. Its openings agree
+with brightness's on 9 of 17 (14 needed); the Met screens' bars read 0.585 and 0.468 (between the two bars, so neither
+branch); marble's median lightness is only 1.3 above sandstone's (10 needed), though red sandstone is 7.7 redder than
+buff (5 needed).** (`runs/c041/agreement.json`, `met-bars.json`, `colours.json`, `colour-test.json`)
+
+**Why the masks fail.** The model gives the backdrop seen through an opening a surface colour of its own, so openings
+stop being dark: vam-O15488 falls to 0.29 and met-453241 to 0.11, the Met screens to 0.54 and 0.56; the clean V&A
+panels still agree (0.87 to 0.95). **Why the colours don't separate.** The V&A's buff Agra panels (L* 81.5) come out as
+light as the marble screens (81.3); the red sandstone ones (L* 59.7, a* 8.4) stand apart. Whether those panels are that
+pale, or lit and photographed to look it, this card can't say.
+
+**Claim:** Marigold's intrinsic albedo, run here over tiles, loses jali openings that brightness keeps (agreement 9 of
+17) and puts the V&A's buff sandstone panels as light as marble (L* 81.5 against 81.3); it tells red sandstone from buff
+by redness (a* 7.7 apart).
+
+**Changes made:** `tools/screen_albedo.py`; `runs/c041/` (the Met's albedos and stones, the checks, the colours; the
+V&A's stay local).
+
+**Closed:** 2026-11-23
 
 ---
 

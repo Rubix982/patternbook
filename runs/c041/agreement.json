@@ -1,0 +1,101 @@
+{
+ "summary": {
+  "iou": [
+   0.9482,
+   0.8849,
+   0.8712,
+   0.5371,
+   0.2881,
+   0.925,
+   0.9316,
+   0.9527,
+   0.8445,
+   0.8931,
+   0.9159,
+   0.8778,
+   0.6721,
+   0.5418,
+   0.5574,
+   0.8371,
+   0.1074
+  ],
+  "at_085": 9,
+  "of": 17
+ },
+ "per_screen": {
+  "vam-O40073": {
+   "status": "measured",
+   "iou": 0.9482
+  },
+  "vam-O40067": {
+   "status": "measured",
+   "iou": 0.8849
+  },
+  "vam-O40065": {
+   "status": "measured",
+   "iou": 0.8712
+  },
+  "vam-O470734": {
+   "status": "measured",
+   "iou": 0.5371
+  },
+  "vam-O15488": {
+   "status": "measured",
+   "iou": 0.2881
+  },
+  "vam-O167205": {
+   "status": "measured",
+   "iou": 0.925
+  },
+  "vam-O40068": {
+   "status": "measured",
+   "iou": 0.9316
+  },
+  "vam-O40069": {
+   "status": "measured",
+   "iou": 0.9527
+  },
+  "vam-O40077": {
+   "status": "measured",
+   "iou": 0.8445
+  },
+  "vam-O40071": {
+   "status": "measured",
+   "iou": 0.8931
+  },
+  "vam-O40070": {
+   "status": "measured",
+   "iou": 0.9159
+  },
+  "vam-O40078": {
+   "status": "measured",
+   "iou": 0.8778
+  },
+  "vam-O442441": {
+   "status": "measured",
+   "iou": 0.6721
+  },
+  "met-453343": {
+   "status": "measured",
+   "iou": 0.5418
+  },
+  "met-453344": {
+   "status": "measured",
+   "iou": 0.5574
+  },
+  "met-453261": {
+   "status": "left out: the white marble's carving shadows and the grey backdrop share one brightness range; no threshold or crop separates them"
+  },
+  "vam-O73674": {
+   "status": "measured",
+   "iou": 0.8371
+  },
+  "met-453241": {
+   "status": "measured",
+   "iou": 0.1074
+  },
+  "vam-O472032": {
+   "status": "left out: the carving in shade reads as open across the vase, the birds and many leaves"
+  }
+ }
+}
