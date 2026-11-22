@@ -14,6 +14,81 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-039 · Can SAM 2.1 or BiRefNet give a jali photo's openings where brightness can't?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-031's reader splits a photo into stone and openings by brightness. It failed on two of 19 jalis (white marble on a
+grey backdrop; a tree screen in deep relief) and on two mashrabiyyas, and C-033 and C-036 found bar widths it reads
+dominated by shading (the Met screens' bars differing from one another by 0.85). Second of six open-model trials
+(T-048); SAM 3 is gated on the Hub (access granted by its owner to an account) and isn't tried.
+
+**2. What we are doing.**
+Run SAM 2.1 (facebook/sam2.1-hiera-large, Apache-2.0, through transformers; prompted with one box round the whole
+photo, the best of its three masks taken) and BiRefNet (onnx-community/BiRefNet-ONNX, MIT, through onnxruntime) on the
+17 jalis C-031 measured and the 2 it left out, each giving the screen's stone; the openings are the stone's holes.
+Compare each with C-031's masks where those were accepted, look at the two hard ones on a sheet, and read the Met
+screens' bars with them (C-036's between-bar measure).
+
+**3. Why.**
+We don't know whether an open segmentation model sees a carved screen's openings better than brightness does, which
+decides whether the screens and bar readings C-031 to C-036 couldn't use can be used.
+
+**4. What is affected.**
+- `tools/screen_masks.py`, `tools/screen_measure.py` (a sample can name a model's mask in its settings), `runs/c039/`
+  (masks of the Met's photos; the V&A's stay local); `pieces/jali/samples.tsv`, `measures.tsv` and the C-031 ranges if
+  the two screens rejoin (the old ones kept).
+
+**5. Conclusion.**
+- **Agreement:** a model agrees with brightness where brightness works if its openings overlap C-031's (intersection
+  over union, inside the openings' hull) at 0.85 or more on at least 14 of the 17.
+- **Hard photos:** a model reads them if its masks for the two left-out jalis pass by eye on a sheet, and C-031's reader
+  can measure them.
+- **If** a model does both → it becomes the reader's mask where brightness fails, the two screens rejoin C-031's set,
+  and C-031's ranges are recomputed (the old ones kept). **If** neither does → T-038 stays open.
+- **Bars:** **if** the two Met screens' bars, read on the model's masks, differ from one another by under 0.3 → the 0.85
+  was the brightness mask's doing; **if** still over 0.6 → it wasn't.
+
+**6. If not done.**
+Marble and deeply carved screens stay out of every measure, and bar widths stay unreadable on photos with shading.
+
+**Limits (known before running):** the agreement is with masks that are themselves brightness's, checked only by eye;
+"passes by eye" is the agent's reading, shown to the writer; one prompt for SAM.
+
+**How it ran.** BiRefNet ran from its ONNX file through onnxruntime on the CPU, SAM 2.1 through transformers on the
+Mac's GPU, both on all 19 jalis (about nine minutes). C-031's reader took a model's stone mask in place of brightness
+(`tools/screen_measure.py`, `segment(..., stone_mask=)`).
+
+**Result (2026-11-22): neither model does both. SAM 2.1, prompted with a box round the whole photo, doesn't give the
+screen (0 of 17 at 0.85; overlap 0 to 0.61). BiRefNet agrees with brightness on 11 of 17 (14 needed) and reads both
+screens brightness lost, by eye; so as written the two don't rejoin C-031's set and T-038 stays open.**
+(`runs/c039/agreement.json`)
+
+**Where each fails.** BiRefNet agrees with brightness at 0.87 to 0.97 on the clean V&A panels and falls to 0.67 to 0.78
+on the fine lattices (the two Met sandstone screens, vam-O470734, vam-O442441) and the marble met-453241. Side by side,
+the fault on the fine lattices is BiRefNet's: it works on a 1024 px copy, and there it thickens thin bars and closes
+small openings. On the white marble screen on grey (met-453261) brightness floods the bars and shadows and BiRefNet
+marks only the through-holes; on the tree in deep relief (vam-O472032) brightness opens the whole carving and BiRefNet
+opens only the gaps between leaves and birds. Each reads what the other can't (T-053).
+
+**Bars.** Read on BiRefNet's masks, met-453344's bars differ from one another by 0.295 (under 0.3: its 0.84 was the
+brightness mask's doing) and met-453343's by 0.717 (over 0.6: not). Split, and both readings are weakened by BiRefNet
+thickening fine bars.
+
+**Claim:** BiRefNet, run here from its ONNX file, finds the openings of a white marble screen on a grey backdrop and of
+a tree screen in deep relief, both of which brightness can't; at 1024 px it thickens fine bars, so it agrees with
+brightness on only 11 of 17 screens. SAM 2.1 with a box prompt doesn't find the screen.
+
+**Changes made:** `tools/screen_masks.py`; `tools/screen_measure.py` (`stone_mask`, `load_stone`, `measure(..., mask=)`);
+`requirements-models.txt` (onnxruntime); `runs/c039/` (the Met's masks from both models, the agreement, the bars; the
+V&A's masks stay local); `threads.md` (T-048 answered, T-053).
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-038 · Can depth and normal models read a jali bar's section and the carving's depth from one museum photo?
 
 **Status:** closed

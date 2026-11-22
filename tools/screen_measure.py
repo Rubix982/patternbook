@@ -69,7 +69,14 @@ def load(path, crop):
     return a, 0.2126 * a[..., 0] + 0.7152 * a[..., 1] + 0.0722 * a[..., 2]
 
 
-def segment(L, flip=False, thr_offset=0.0):
+def segment(L, flip=False, thr_offset=0.0, stone_mask=None):
+    if stone_mask is not None:  # a model's mask of the stone (C-039), instead of brightness
+        solid = remove_small_holes(remove_small_objects(stone_mask.astype(bool), max_size=64), max_size=30)
+        lab = label(solid, connectivity=2)
+        big = np.argmax(np.bincount(lab.ravel())[1:]) + 1
+        stone = lab == big
+        screen = ndi.binary_fill_holes(stone)
+        return stone, screen, screen & ~stone
     Ls = gaussian(L, 1.0)
     t = threshold_otsu(Ls) + thr_offset
     hi = Ls > t
@@ -249,9 +256,15 @@ def local_order(open_mask, centres, r_lo, r_hi, tau=0.8, gap=0.3, rings=40):
     return out
 
 
-def measure(path, flip=False, crop=None, thr_offset=0.0, width_mm=None, depth_mm=None, overlay=None):
+def load_stone(mask_path, shape):
+    m = np.asarray(Image.open(mask_path).convert("L")) >= 128
+    assert m.shape == shape, f"{mask_path}: {m.shape} against the photo's {shape}"
+    return m
+
+
+def measure(path, flip=False, crop=None, thr_offset=0.0, width_mm=None, depth_mm=None, overlay=None, mask=None):
     rgb, L = load(path, crop)
-    stone, screen, openings = segment(L, flip, thr_offset)
+    stone, screen, openings = segment(L, flip, thr_offset, load_stone(mask, L.shape) if mask else None)
     # specks: openings under 6 px across (below the smallest opening the read-back tested) are stone texture
     lab, n = label(openings, connectivity=1, return_num=True)
     if n:

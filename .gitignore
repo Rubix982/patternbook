@@ -22,3 +22,4 @@ runs/c037/look/*.png
 .venv-models/
 runs/c038/*.npy
 runs/c038/*-crop.png
+runs/c039/masks/*/vam-*

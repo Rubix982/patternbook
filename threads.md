@@ -485,7 +485,9 @@ StableNormal not tried.
 **Question:** Second of six. SAM 2.1 (Apache-2.0), SAM 3 (a custom Meta licence), BiRefNet (MIT, made for fine
 structures): masks for the two jalis C-031 left out (white marble on grey, a tree in deep relief), checked by eye and on
 C-031's synthetic screens; and whether bar width's spread (C-033) can then be read back.
-**Answer:** —
+**Answer:** C-039: SAM 2.1 with a box prompt doesn't find the screen (0 of 17). BiRefNet (ONNX) reads the marble and the
+deep-relief screens brightness lost, but at 1024 px thickens fine bars (agreement 11 of 17); bars split (0.295, 0.717).
+SAM 3 is gated and wasn't tried.
 
 ### T-049 · Can an intrinsic split take the shading out of a jali photo?
 
@@ -522,5 +524,15 @@ real ones, how close are the lines it returns to the pattern's, and could a tili
 **Opened:** 2026-11-22
 **Question:** Sixth of six. DINOv2 or SigLIP features (Apache-2.0) with a small real-against-generated test on top: if it
 can tell them apart, which crops does it find easiest, and does that match the writer's reversed picks?
+**Answer:** —
+
+### T-053 · Does BiRefNet, run in tiles at the photo's own resolution, read fine lattices as well as brightness does?
+
+**Status:** open
+**Parent:** C-039
+**Opened:** 2026-11-22
+**Question:** At 1024 px BiRefNet thickens fine bars, while it reads marble and deep relief that brightness can't. Run
+over overlapping tiles at the photo's resolution, does it agree with brightness on the fine lattices too (so one mask
+serves all 19 screens, and the two left out rejoin), and what do the Met screens' bars read then?
 **Answer:** —
 

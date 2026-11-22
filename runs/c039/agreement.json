@@ -1,0 +1,154 @@
+{
+ "birefnet": {
+  "vam-O40073": {
+   "open_share_of_photo": 0.2492,
+   "iou": 0.9513
+  },
+  "vam-O40067": {
+   "open_share_of_photo": 0.2617,
+   "iou": 0.8909
+  },
+  "vam-O40065": {
+   "open_share_of_photo": 0.2169,
+   "iou": 0.8843
+  },
+  "vam-O470734": {
+   "open_share_of_photo": 0.0765,
+   "iou": 0.7768
+  },
+  "vam-O15488": {
+   "open_share_of_photo": 0.1126,
+   "iou": 0.8675
+  },
+  "vam-O167205": {
+   "open_share_of_photo": 0.2457,
+   "iou": 0.9103
+  },
+  "vam-O40068": {
+   "open_share_of_photo": 0.1943,
+   "iou": 0.9452
+  },
+  "vam-O40069": {
+   "open_share_of_photo": 0.1979,
+   "iou": 0.9727
+  },
+  "vam-O40077": {
+   "open_share_of_photo": 0.1107,
+   "iou": 0.8951
+  },
+  "vam-O40071": {
+   "open_share_of_photo": 0.188,
+   "iou": 0.9011
+  },
+  "vam-O40070": {
+   "open_share_of_photo": 0.1913,
+   "iou": 0.9172
+  },
+  "vam-O40078": {
+   "open_share_of_photo": 0.1582,
+   "iou": 0.8878
+  },
+  "vam-O442441": {
+   "open_share_of_photo": 0.1279,
+   "iou": 0.7744
+  },
+  "met-453343": {
+   "open_share_of_photo": 0.2286,
+   "iou": 0.7036
+  },
+  "met-453344": {
+   "open_share_of_photo": 0.1824,
+   "iou": 0.6667
+  },
+  "met-453261": {
+   "open_share_of_photo": 0.0875
+  },
+  "vam-O73674": {
+   "open_share_of_photo": 0.2442,
+   "iou": 0.8461
+  },
+  "met-453241": {
+   "open_share_of_photo": 0.1313,
+   "iou": 0.7699
+  },
+  "vam-O472032": {
+   "open_share_of_photo": 0.0281
+  }
+ },
+ "sam21": {
+  "vam-O40073": {
+   "open_share_of_photo": 0.8181,
+   "iou": 0.5968
+  },
+  "vam-O40067": {
+   "open_share_of_photo": 0.8254,
+   "iou": 0.6014
+  },
+  "vam-O40065": {
+   "open_share_of_photo": 0.8206,
+   "iou": 0.5044
+  },
+  "vam-O470734": {
+   "open_share_of_photo": 0.4206,
+   "iou": 0.2042
+  },
+  "vam-O15488": {
+   "open_share_of_photo": 0.5752,
+   "iou": 0.461
+  },
+  "vam-O167205": {
+   "open_share_of_photo": 0.8271,
+   "iou": 0.5987
+  },
+  "vam-O40068": {
+   "open_share_of_photo": 0.7918,
+   "iou": 0.5665
+  },
+  "vam-O40069": {
+   "open_share_of_photo": 0.8111,
+   "iou": 0.5179
+  },
+  "vam-O40077": {
+   "open_share_of_photo": 0.8096,
+   "iou": 0.3976
+  },
+  "vam-O40071": {
+   "open_share_of_photo": 0.8262,
+   "iou": 0.6061
+  },
+  "vam-O40070": {
+   "open_share_of_photo": 0.8221,
+   "iou": 0.6029
+  },
+  "vam-O40078": {
+   "open_share_of_photo": 0.8205,
+   "iou": 0.5536
+  },
+  "vam-O442441": {
+   "open_share_of_photo": 0.5614,
+   "iou": 0.3192
+  },
+  "met-453343": {
+   "open_share_of_photo": 0.8505,
+   "iou": 0.4195
+  },
+  "met-453344": {
+   "open_share_of_photo": 0.0,
+   "iou": 0.0
+  },
+  "met-453261": {
+   "open_share_of_photo": 0.006
+  },
+  "vam-O73674": {
+   "open_share_of_photo": 0.002,
+   "iou": 0.0
+  },
+  "met-453241": {
+   "open_share_of_photo": 0.6628,
+   "iou": 0.3481
+  },
+  "vam-O472032": {
+   "open_share_of_photo": 0.0154
+  }
+ }
+}
