@@ -1,0 +1,22 @@
+id	role	family	frame	material	open_share	bar_px	opening_px	bar_over_opening	thickness_over_opening	per_junction	rotation	mirrors	star	points	junction_degree	repeats_across	opening_mm	bar_mm	openings	error
+vam-O40073	jali	geometric	rectangular	sandstone	0.6041	26.0	72.24	0.3599		0.5105	2	True	6	3	3.0	9.9			70	
+vam-O40067	jali	geometric	rectangular	sandstone	0.5954	18.0	56.64	0.3178		0.7523	4	True	4	3	3.208	9.0			104	
+vam-O40065	jali	geometric	rectangular	sandstone	0.4788	22.0	24.0	0.9167		1.5252	6	True	6	2	3.873	14.6			139	
+vam-O470734	jali	geometric	rectangular		0.2569	30.46	10.77	2.8284	6.3229	1.7144	4	True	4	4	3.856	20.7	7.59	21.47	787	
+vam-O15488	jali	geometric	rectangular	pink sandstone	0.4863	10.0	26.0	0.3846	2.7552	1.2663	4	True	4	2	3.714	19.3	14.52	5.58	236	
+vam-O167205	jali	geometric	rectangular	sandstone	0.5955	13.42	45.12	0.2973		0.7165	4	True	3	2	3.434	18.3			273	
+vam-O40068	jali	geometric	arched	sandstone	0.5806	26.76	50.26	0.5324		0.5063	6	True	6	6	3.0	8.9			58	
+vam-O40069	jali	geometric	arched	sandstone	0.5016	28.64	54.53	0.5251		1.0711	6	True	6	5	3.342	8.4			70	
+vam-O40077	jali	geometric	arched	sandstone	0.3943	32.25	41.62	0.7749		1.0998	6	True	6	2	3.737	9.7			81	
+vam-O40071	jali	geometric	arched	sandstone	0.6119	21.54	70.77	0.3044		0.4963	2	True	4	4	3.0	8.5			78	
+vam-O40070	jali	geometric	arched	sandstone	0.5776	26.0	71.0	0.3662		1.093	4	True	4	4	3.66	8.3			58	
+vam-O40078	jali	geometric	arched	sandstone	0.5454	22.8	52.8	0.4319		0.7422	6	True	3	2	3.254	10.2			65	
+vam-O442441	jali	geometric	arched		0.3281	16.12	10.0	1.6125	4.3618	1.3125	4	True	8	2	3.801	30.7	6.88	11.09	1352	
+met-453343	jali	geometric	arched	red sandstone	0.4463	7.21	15.23	0.4734	4.1939	1.0015	2	True	10	7	3.288	37.4	21.46	10.16	990	
+met-453344	jali	geometric	arched	red sandstone	0.3855	14.42	16.97	0.8498		1.0698	4	True	8	6	3.558	28.9	20.4	17.34	1197	
+vam-O73674	jali	floral	rectangular	marble	0.5654	18.11	49.29	0.3674		0.8055	2	True	2	5	3.329	13.0	23.57	8.66	126	
+met-453241	jali	floral	rectangular	marble	0.3422	18.0	24.08	0.7474	3.2815	1.3337	4	True	4	3	3.79	16.0	21.3	15.92	333	
+met-471451	control	iron grille	rectangular	iron	0.7192	18.0	8.71	2.0655		0.7938	2	True	4	2	3.233	44.4	9.69	20.02	94	
+met-201939	control	iron window guard	rectangular	iron	0.7746	12.0	40.0	0.3		0.8813	2	True	4	2	3.612	18.4	68.49	20.55	81	
+met-544719	control	pierced stone window, Egypt	rectangular	sandstone	0.3617	30.59	5.66	5.4083	25.5084	1.551	2	True	2	4	4.628	27.1	5.72	30.96	258	
+met-322929	control	stucco window screen, Iran	rectangular	stucco	0.4687	50.0	38.42	1.3014		0.5812	2	False	3	3	3.132	5.7			99	

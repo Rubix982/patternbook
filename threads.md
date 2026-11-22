@@ -286,7 +286,9 @@ or colour alone), and check it in close photographs of the Taj Mahal's and Agra'
 gives a thickness. Museum catalogue entries (the Met's and the V&A's jali panels) list depth with height and width:
 collect the proportions, and compare the narrowing and softening they predict with photographs of jali light at
 Fatehpur Sikri and Ahmedabad.
-**Answer:** —
+**Answer:** half, from C-031: five jalis with a catalogue depth are 2.7 to 5.1 openings deep (median 3.55), about seven
+times C-028's guess. Still open: whether a catalogue's depth is the pierced field's or the frame's, and how soft the
+light is on the floor.
 
 ### T-031 · Can star fields that never repeat (cosines in 8, 10 or 12 directions) make screens that read as jali?
 
@@ -347,4 +349,35 @@ and another in the evening, and does a carvable screen exist for useful pairs?
 **Opened:** 2026-11-22
 **Question:** Topology optimisation (Bendsøe and Sigmund 2003) finds where a stone slab needs material to hold its own
 weight at a target open share. Compare what it leaves open with real jalis on C-031's measures.
+**Answer:** —
+
+### T-037 · Does turning symmetry tell a jali from other pierced screens?
+
+**Status:** open
+**Parent:** C-031
+**Opened:** 2026-11-22
+**Question:** In C-031, 13 of 17 jalis turn by a quarter or a sixth and none of 4 controls by more than a half; the
+card's percentile rule could not count it. Written before measuring, with at least ten controls, including the jali's
+nearest cousins (mashrabiyya, qamariyya windows, Chinese lattice windows) photographed well enough to read: is the
+share of screens turning by more than a half higher among jalis, and by how much?
+**Answer:** —
+
+### T-038 · Can a reader split white marble from a pale backdrop, and carving in shade from an opening?
+
+**Status:** open
+**Parent:** C-031
+**Opened:** 2026-11-22
+**Question:** Two of C-031's jalis were left out because brightness alone could not tell what is cut through: a marble
+screen on grey, and a tree screen carved in deep relief. Colour, the photo's own shading, or a photo with light behind
+the screen might; marble and tree screens are the families C-031 has fewest of.
+**Answer:** —
+
+### T-039 · Should the star reader count a single rosette at a screen's centre?
+
+**Status:** open
+**Parent:** C-031
+**Opened:** 2026-11-22
+**Question:** The reader counts a star only where it is found at two points, against noise. vam-O167205 has one large
+rosette of 16 at its centre, found once and not counted, so the screen reads 3. Is a centred medallion a different
+thing from a repeating star (a layout, not a pattern), and should C-032's grammar treat it as one?
 **Answer:** —

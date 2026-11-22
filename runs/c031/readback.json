@@ -1,0 +1,248 @@
+{
+ "squares": {
+  "read": {
+   "open_share": 0.5612,
+   "bar_px": 16.0,
+   "per_junction": 0.9964,
+   "opening_px": 48.0,
+   "rotation": 4,
+   "mirrors": true,
+   "points": 4,
+   "star": 4,
+   "star_counts": {
+    "4": 243
+   },
+   "junction_degree": 4.0
+  },
+  "drawn": {
+   "open_share": 0.5573,
+   "bar_px": 16,
+   "per_junction": 1,
+   "opening_px": 48,
+   "rotation": 4,
+   "mirrors": true,
+   "points": 4,
+   "star": 4
+  },
+  "checks": {
+   "open_share": true,
+   "bar_px": true,
+   "per_junction": true,
+   "opening_px": true,
+   "rotation": true,
+   "mirrors": true,
+   "star": true,
+   "points": true
+  }
+ },
+ "hexagons": {
+  "read": {
+   "open_share": 0.6485,
+   "bar_px": 14.0,
+   "per_junction": 0.4989,
+   "opening_px": 57.31,
+   "rotation": 6,
+   "mirrors": true,
+   "points": 6,
+   "star": 6,
+   "star_counts": {
+    "3": 224,
+    "6": 112
+   },
+   "junction_degree": 3.0
+  },
+  "drawn": {
+   "open_share": 0.6447,
+   "bar_px": 14,
+   "per_junction": 0.5,
+   "opening_px": 58,
+   "rotation": 6,
+   "mirrors": true,
+   "points": 6,
+   "star": 6
+  },
+  "checks": {
+   "open_share": true,
+   "bar_px": true,
+   "per_junction": true,
+   "opening_px": true,
+   "rotation": true,
+   "mirrors": true,
+   "star": true,
+   "points": true
+  }
+ },
+ "triangles": {
+  "read": {
+   "open_share": 0.6135,
+   "bar_px": 12.0,
+   "per_junction": 2.0164,
+   "opening_px": 42.94,
+   "rotation": 6,
+   "mirrors": true,
+   "points": 3,
+   "star": 6,
+   "star_counts": {
+    "3": 144,
+    "6": 71
+   },
+   "junction_degree": 5.274
+  },
+  "drawn": {
+   "open_share": 0.614,
+   "bar_px": 12,
+   "per_junction": 2,
+   "opening_px": 43.4256,
+   "rotation": 6,
+   "mirrors": true,
+   "points": 3,
+   "star": 6
+  },
+  "checks": {
+   "open_share": true,
+   "bar_px": true,
+   "per_junction": true,
+   "opening_px": true,
+   "rotation": true,
+   "mirrors": true,
+   "star": true,
+   "points": true
+  }
+ },
+ "pythagorean": {
+  "read": {
+   "open_share": 0.6746,
+   "bar_px": 12.0,
+   "per_junction": 0.4997,
+   "rotation": 4,
+   "mirrors": false,
+   "points": 4,
+   "star": 4,
+   "star_counts": {
+    "1": 236,
+    "4": 118
+   },
+   "junction_degree": 3.0
+  },
+  "drawn": {
+   "open_share": 0.6759,
+   "bar_px": 12,
+   "per_junction": 0.5,
+   "rotation": 4,
+   "mirrors": false,
+   "points": 4,
+   "star": 4
+  },
+  "checks": {
+   "open_share": true,
+   "bar_px": true,
+   "per_junction": true,
+   "rotation": true,
+   "mirrors": true,
+   "star": true,
+   "points": true
+  }
+ },
+ "stars8": {
+  "read": {
+   "open_share": 0.3376,
+   "per_junction": 1.005,
+   "opening_px": 53.85,
+   "rotation": 4,
+   "mirrors": true,
+   "points": 8,
+   "star": 8,
+   "star_counts": {
+    "4": 48,
+    "8": 45
+   },
+   "junction_degree": 4.0
+  },
+  "drawn": {
+   "open_share": 0.3366,
+   "per_junction": 1,
+   "opening_px": 54.0,
+   "rotation": 4,
+   "mirrors": true,
+   "points": 8,
+   "star": 8
+  },
+  "checks": {
+   "open_share": true,
+   "per_junction": true,
+   "opening_px": true,
+   "rotation": true,
+   "mirrors": true,
+   "star": true,
+   "points": true
+  }
+ },
+ "stars12": {
+  "read": {
+   "open_share": 0.5013,
+   "per_junction": 0.4989,
+   "opening_px": 72.14,
+   "rotation": 6,
+   "mirrors": true,
+   "points": 12,
+   "star": 12,
+   "star_counts": {
+    "3": 72,
+    "12": 41
+   },
+   "junction_degree": 3.0
+  },
+  "drawn": {
+   "open_share": 0.492,
+   "per_junction": 0.5,
+   "opening_px": 72,
+   "rotation": 6,
+   "mirrors": true,
+   "points": 12,
+   "star": 12
+  },
+  "checks": {
+   "open_share": true,
+   "per_junction": true,
+   "opening_px": true,
+   "rotation": true,
+   "mirrors": true,
+   "star": true,
+   "points": true
+  }
+ },
+ "rosettes": {
+  "read": {
+   "open_share": 0.3076,
+   "opening_px": 10.0,
+   "rotation": 6,
+   "mirrors": true,
+   "points": 2,
+   "star": 12,
+   "star_counts": {
+    "1": 12,
+    "2": 863,
+    "3": 132,
+    "12": 71
+   },
+   "junction_degree": 9.081
+  },
+  "drawn": {
+   "open_share": 0.3026,
+   "opening_px": 10,
+   "rotation": 6,
+   "mirrors": true,
+   "points": 2,
+   "star": 12
+  },
+  "checks": {
+   "open_share": true,
+   "opening_px": true,
+   "rotation": true,
+   "mirrors": true,
+   "star": true,
+   "points": true
+  }
+ },
+ "pass": true
+}

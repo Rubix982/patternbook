@@ -16,7 +16,7 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ## C-031 · What do real jalis share, measured, and does any of it set them apart from other pierced screens?
 
-**Status:** open
+**Status:** closed
 **Opened:** 2026-11-22
 
 **1. Where we are.**
@@ -81,15 +81,93 @@ output.
 the 19th century, few from buildings still standing. Photos are not always square-on. Depth is not listed for every
 piece. Licence notes are not legal advice.
 
+**How it ran.** 561 objects came back from the Met's and the V&A's APIs (`pieces/jali/candidates.json`); 19 jalis and 5
+controls were chosen from a contact sheet. The controls are an iron window grille (Spanish), an iron window guard, a
+pierced stone window from Egypt (Ramesses III's palace) and a stucco window screen from Iran; no Chinese lattice window
+came back with a public-domain image. Masks failed by eye on two jalis (a white marble screen on a grey backdrop; a
+tree screen whose carving in shade reads as open) and on three controls (two mashrabiyyas whose openings are a few
+pixels, a grating photographed in pieces); the replacements were named before they were measured, and with 4 controls
+the rule reads "at most one inside", as "at least 4 of 5" did. So: 17 jalis (15 geometric, 2 floral; 8 rectangular, 9
+arched) and 4 controls. The reader was rebuilt in seven steps before it read back every synthetic screen, three of them
+added along the way (eight- and twelve-point star slabs, a twelve-petal rosette); each step is in
+`runs/c031/readback-notes.md`. One change came after the real screens were measured: run 1 (kept,
+`runs/c031/measures-run1.json`, `result-run1.json`) let specks in two controls' surfaces set their opening widths.
+
+**Result (2026-11-22): no measure is a jali test.** On every measure, the jalis' 10th to 90th percentile takes in at
+least two of the four controls:
+
+| Measure | Jalis, 10th to 90th (median) | Controls (grille, guard, Egyptian window, stucco) | Outside |
+|---|---|---|---|
+| open share | 0.34 to 0.60 (0.50) | 0.74, 0.79, 0.37, 0.48 | 2 of 4 |
+| bar over opening | 0.30 to 0.85 (0.37) | 0.22, 0.18, 0.54, 0.55 | 2 of 4 |
+| openings per junction | 0.51 to 1.40 (1.06) | 0.82, 0.79, 1.29, 0.58 | 0 of 4 |
+| turns by | 2 to 6 (4) | 2, 2, 2, 2 | 0 of 4 |
+| largest star | 3 to 8 (4) | 4, 4, 1, 6 | 1 of 4 |
+| thickness over opening (5 jalis) | 2.85 to 4.65 (3.55) | the Egyptian window 2.29 (the only control with a depth) | 1 of 1 |
+
+So, as written: proportions don't tell a jali from other pierced screens; the pattern itself does, and C-032's designs
+are checked by family, in a blind pick.
+
+**The symmetry, seen and not tested.** None of the four controls turns by more than a half; 13 of the 17 jalis turn by a
+quarter or a sixth. The card's rule, on percentiles, can't count this (four jalis also turn only by a half), so it is a
+thread (T-037), not a result.
+
+**Strands or cells.** The geometric jalis' median is 1.06 openings per junction, within 0.1 of 1, so by the rule as
+written they are strands. Their spread says the rule's premise, one kind, was wrong: 3 read near 0.5 (bars meeting in
+threes: cells), 3 near 0.75, 5 near 1 (strands crossing in pairs) and 4 above 1.15 (hubs where more bars meet). C-032
+needs both constructions: Hankin's method for the strands, a tiling's faces for the cells.
+
+**Thickness.** Five jalis with a catalogue depth are 2.7 to 5.1 openings deep (median 3.55); C-028's checks used half an
+opening. Whether a catalogue's depth is the pierced field's or the frame's, the records don't say (T-030).
+
+**Run 1, kept.** With opening widths taken as the median by count, the grille's and the Egyptian window's surface specks
+made their openings 8.7 and 5.7 px, their bar over opening 2.07 and 5.41, and bar over opening read as the jali test,
+all four controls outside. Weighting by area and taking openings under 6 px as stone (the read-back's smallest opening
+is 10 px) put both inside. The fix was made after seeing run 1, and it removed a positive result.
+
+**Defaults (field 4).** C-028's checked lattice (openings 24 px, bars 12) is open 0.44 and 0.5 bar over opening, both
+inside; its stone, half an opening deep, is far outside. Jali Light's stone depth moved from 4 to 28 (3.5 openings at a
+mid-tone opening) and its sun from 15° to 4°, since a stone that deep lets the sun through only near straight on; the
+old values are kept as a direction (the dials still reach them), and Jali Light's likeness in C-029's check is 0.987 at
+the new defaults (at least 0.5 set). `JALI_DEFAULTS.thickness` (12 px) is left: C-028's checks are about the model's
+light at a given thickness, and the measured proportion goes to C-032's dials. Lumenary's Mughal Jali can't reach the
+measured depth within its own dial (about 0.45 of an opening at most), and his code is kept as received: recorded, not
+moved.
+
+**Limits (after running).** 13 of the 17 jalis are 19th-century V&A panels from Agra; floral jalis are 2 and tree
+screens none. Thickness rests on 5. The star reader needs a star at two points: vam-O167205's one rosette of 16, at its
+centre, was found once and isn't counted (T-039). The junction degree, a side reading, runs low at many-bar junctions.
+
+**Claim:** measured on 17 museum jalis against 4 other pierced screens, no proportion (open share, bar over opening,
+openings per junction, thickness) sets a jali apart; on each, the jalis' middle 80 % takes in at least two of the four.
+Geometric jalis come in two kinds, bars crossing in pairs (about one opening per junction) and cells (about one per two
+junctions). Real jalis are 2.7 to 5.1 openings deep, about seven times the depth C-028 assumed.
+
+**Changes made:**
+- `engine/core/pattern.js` (symmetry folds, line networks cut into bars of one width, stars and rosettes cut from a
+  slab), `engine/check/screens.mjs`; `processes/primitives.md` (`symmetry-fold`, `line-cut`, `pierced-slab`);
+  `engine/README.md` (the module, two lessons).
+- `tools/museum.py`, `tools/screen_measure.py`, `tools/screen_readback.py`, `tools/screen_samples.py`,
+  `tools/screen_compare.py`; `requirements.txt` and `.venv/` (numpy, scipy, scikit-image, Pillow).
+- `pieces/jali/` (`README.md`, `candidates.json`, `samples.tsv`, `measures.tsv`, the Met's images); `runs/c031/` (the
+  synthetic screens, read-backs, measures, results, the Met samples' overlays; the V&A's overlays and the sheets stay
+  local, as their photos do).
+- `engine/styles/jali-light.js` (defaults), `engine/engine.js` (rebuilt).
+
+**Closed:** 2026-11-22
+
 ---
 
 ## C-032 · Can a generator built from a pattern's symmetry and the measured ranges make new jali designs that measure, and read, like real ones?
 
-**Status:** drafted. Opens when C-031 closes; fields 1, 4 and 5 are rewritten then with C-031's numbers.
+**Status:** drafted. Opens at the next slot; fields 2, 4 and 5 are rewritten then with what C-031 found.
 
 **1. Where we are.**
-(From C-031: each family's measured ranges, the jali test if there is one, and whether geometric jalis are strands or
-cells.)
+C-031 measured 17 jalis: geometric ones are open 0.36 to 0.60, bars 0.31 to 0.89 of an opening, 2.9 to 4.8 openings
+deep (4 with a depth), and of two kinds, bars crossing in pairs and cells (`pieces/jali/README.md`). No proportion sets
+a jali apart from other pierced screens, so there is no jali test to pass; the blind pick carries the claim. The
+generator needs both constructions (Hankin's method for strands, a tiling's faces for cells), which field 2 doesn't
+yet say.
 
 **2. What we are doing.**
 Write `engine/core/jali-design.js`, a generator in layers: a frame (rectangle, pointed arch, cusped arch); a symmetry

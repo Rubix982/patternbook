@@ -1,0 +1,7 @@
+{
+ "note": "Run 1 of the read-back, kept as it came. Bars and openings read 1 px low: the reader took twice the distance less one pixel, and twice the distance is right. Open share was compared with the infinite pattern's, but the frame cuts the pattern, so the field's own share is the reference; the reader also grew the field by half a bar, which a frame cutting the openings does not need. Both fixed before any real screen was measured.",
+ "squares":     {"open_share": 0.5419, "bar_px": 15.0, "opening_px": 47.0,  "per_junction": 1.037,  "rotation": 4, "mirrors": true,  "points": 4},
+ "hexagons":    {"open_share": 0.6279, "bar_px": 13.0, "opening_px": 56.27, "per_junction": 0.5,    "rotation": 6, "mirrors": true,  "points": 6},
+ "triangles":   {"open_share": 0.597,  "bar_px": 11.0, "opening_px": 41.94, "per_junction": 2.0704, "rotation": 6, "mirrors": true,  "points": 3},
+ "pythagorean": {"open_share": 0.6573, "bar_px": 11.0, "opening_px": 23.0,  "per_junction": 0.5057, "rotation": 4, "mirrors": false, "points": 4}
+}

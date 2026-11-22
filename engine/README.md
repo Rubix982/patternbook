@@ -14,6 +14,8 @@ on it: process models where no style covers an operation, and styles of its own 
   (`chain-stitch`, C-022), `field.js` and `kantha.js` (`contour-rows`, `quilt-ripple`, C-023), `dye.js` (`dye-baths`,
   C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026), `inlay.js` (`inlay-cut`, C-027),
   `jali.js` (`thick-screen`, C-028).
+- `core/pattern.js`: patterns as lines and slabs (C-031): symmetry folds, line networks cut into bars of one width,
+  stars and rosettes cut from a slab. The functions a pierced screen is drawn with; C-032's generator builds on them.
 - `service.js`, `cli.mjs`, `png.js`: the engine as a service (below); `picture-style.js` and `core/picture.js`: what
   patternbook's picture styles share (a picture's palette, regions and their shapes).
 - `studio.js`: the studio API over the styles (list, render, renderAsync, animate, applyImageData, sample), used by
@@ -123,3 +125,11 @@ renders, in `../processes/`.
 - **A control's bar has to clear what the inputs already share.** C-029 asked each style's output to correlate at most
   0.2 with a different picture; the five test pictures correlate 0.206 with one another (dark skies, subjects in the
   middle), so a faithful style can't get under it. Measure the inputs against each other before setting the bar.
+- **A synthetic control is only as good as its drawing.** C-031's first star screens were lines of two overlapping
+  squares and two overlapping hexagons; the lattice cut the squares' points and fused the hexagons' edges, so the
+  pictures weren't the stars they claimed, and the reader was right to disagree. Drawn as holes cut from a slab, and at
+  a real screen's density (about ten repeats across, not six), they read back exactly.
+- **A median by count lets the specks vote.** In C-031's first run, a stone window's cut-out figures read 5.7 px wide,
+  because hundreds of specks in the stone's surface outnumbered them, and two controls fell outside the jalis' range by
+  that alone. Weighting each opening by its area, and taking anything under the read-back's smallest opening as stone,
+  put both controls back inside, and the jali test disappeared.

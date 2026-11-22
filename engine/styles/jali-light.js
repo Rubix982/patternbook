@@ -44,8 +44,11 @@ export default pictureStyle({
     { key: 'cells', label: 'Openings across', type: 'range', min: 8, max: 120, step: 1, default: 48 },
     { key: 'minOpen', label: 'Darkest opening', type: 'range', min: 0, max: 0.4, step: 0.01, default: 0.02 },
     { key: 'maxOpen', label: 'Brightest opening', type: 'range', min: 0.3, max: 0.9, step: 0.01, default: 0.78 },
-    { key: 'thickness', label: 'Stone depth', type: 'range', min: 0, max: 20, step: 0.5, default: 4 },
-    { key: 'sunAngle', label: 'Sun angle', type: 'range', min: 0, max: 60, step: 1, default: 15 },
+    // C-031 measured real jalis at 2.8 to 4.7 openings deep (median 3.5): 28 puts a mid-tone opening at 3.5. So
+    // deep a stone lets the sun through only near straight on, hence 4 degrees. C-028's guess, half an opening deep
+    // (4) with the sun at 15 degrees, is kept as a direction: set those two dials.
+    { key: 'thickness', label: 'Stone depth', type: 'range', min: 0, max: 40, step: 0.5, default: 28 },
+    { key: 'sunAngle', label: 'Sun angle', type: 'range', min: 0, max: 60, step: 1, default: 4 },
     { key: 'azimuth', label: 'Sun from', type: 'range', min: 0, max: 360, step: 5, default: 30 },
     { key: 'distance', label: 'Wall distance', type: 'range', min: 10, max: 900, step: 10, default: 120 },
     { key: 'seed', label: 'New stone', type: 'shuffle', default: 4 },

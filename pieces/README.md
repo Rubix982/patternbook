@@ -72,4 +72,4 @@ by layer. References are named from memory and checked when a card uses them.
 
 | Piece | Kind | Cards |
 |---|---|---|
-| jali | pattern | C-031 samples and measures (open); C-032 grammar, generator and creatives sheet (drafted) |
+| jali | pattern | C-031 samples and measures (closed: no proportion sets a jali apart; geometric jalis are strands or cells; 2.7 to 5.1 openings deep); C-032 grammar, generator and creatives sheet (drafted) |

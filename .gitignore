@@ -2,3 +2,10 @@ runs/**/blind/
 .DS_Store
 sources/
 node_modules/
+.venv/
+pieces/*/images-local/
+runs/c031/overlays/vam-*
+runs/c031/sheet-*.jpg
+runs/c031/synthetic/*.png
+runs/c031/overlays/*.png
+tools/__pycache__/

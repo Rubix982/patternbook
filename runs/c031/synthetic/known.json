@@ -1,0 +1,79 @@
+{
+ "squares": {
+  "bar": 16,
+  "openShare": 0.5625,
+  "opening": 48,
+  "perJunction": 1,
+  "rotation": 4,
+  "mirrors": true,
+  "points": 4,
+  "star": 4,
+  "openShareField": 0.5572744539411206
+ },
+ "hexagons": {
+  "bar": 14,
+  "openShare": 0.6489197530864198,
+  "opening": 58,
+  "perJunction": 0.5,
+  "rotation": 6,
+  "mirrors": true,
+  "points": 6,
+  "star": 6,
+  "openShareField": 0.6446747388414055
+ },
+ "triangles": {
+  "bar": 12,
+  "openShare": 0.6138622981077808,
+  "opening": 43.42562584220408,
+  "perJunction": 2,
+  "rotation": 6,
+  "mirrors": true,
+  "points": 3,
+  "star": 6,
+  "openShareField": 0.6139529914529914
+ },
+ "pythagorean": {
+  "bar": 12,
+  "openShare": 0.6756756756756757,
+  "opening": null,
+  "perJunction": 0.5,
+  "rotation": 4,
+  "mirrors": false,
+  "points": 4,
+  "star": 4,
+  "openShareField": 0.6759413580246914
+ },
+ "stars8": {
+  "bar": null,
+  "openShare": null,
+  "opening": 53.99999999999999,
+  "perJunction": 1,
+  "rotation": 4,
+  "mirrors": true,
+  "points": 8,
+  "star": 8,
+  "openShareField": 0.3366286799620133
+ },
+ "stars12": {
+  "bar": null,
+  "openShare": null,
+  "opening": 72,
+  "perJunction": 0.5,
+  "rotation": 6,
+  "mirrors": true,
+  "points": 12,
+  "star": 12,
+  "openShareField": 0.4919895536562203
+ },
+ "rosettes": {
+  "bar": null,
+  "openShare": null,
+  "opening": 10,
+  "perJunction": null,
+  "rotation": 6,
+  "mirrors": true,
+  "points": 2,
+  "star": 12,
+  "openShareField": 0.3026234567901235
+ }
+}
