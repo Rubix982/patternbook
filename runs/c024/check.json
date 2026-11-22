@@ -1,0 +1,493 @@
+{
+ "size": 336,
+ "defaults": {
+  "sett": 3,
+  "slub": 0.15,
+  "beat": 0.2,
+  "wobble": 0.25,
+  "gap": 0.12,
+  "round": 0.55,
+  "dip": 0.35,
+  "fibre": 0.25,
+  "cloth": "#f4efe4",
+  "impression": 0.25,
+  "spread": 0.6,
+  "reg": 1.2,
+  "wick": 1.2,
+  "mottle": 0.12,
+  "crackWidth": 0.9,
+  "width": 336,
+  "height": 336,
+  "seed": 23
+ },
+ "results": [
+  {
+   "label": "default",
+   "colours": {
+    "ajrak": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "blue",
+      "red"
+     ]
+    },
+    "ajrak, indigo first": {
+     "regions": 108,
+     "match": 0.667,
+     "misses": {
+      "violet read as blue": 36
+     },
+     "families": [
+      "blue",
+      "violet"
+     ]
+    },
+    "double dabu": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "light blue",
+      "blue",
+      "white"
+     ]
+    },
+    "bagru": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "white",
+      "red"
+     ]
+    }
+   },
+   "cracks": {
+    "veins": 0.262,
+    "noCracks": 0.0009
+   },
+   "registration": {
+    "planned3": 3.22,
+    "planned0": 0.22
+   },
+   "wick": {
+    "axis": 2.26,
+    "diagonal": 2.33,
+    "ratio": 0.973,
+    "reach": {
+     "axis": 0.84,
+     "diagonal": 0.81,
+     "ratio": 1.037
+    }
+   },
+   "noWick": {
+    "axis": 1.8,
+    "diagonal": 1.94,
+    "ratio": 0.928,
+    "reach": {
+     "axis": 0.34,
+     "diagonal": 0.59,
+     "ratio": 0.574
+    }
+   },
+   "checks": {
+    "colours": false,
+    "cracks": false,
+    "registration": true,
+    "wicking": false
+   },
+   "pass": false,
+   "extra": {
+    "swapOneIndigo": {
+     "regions": 108,
+     "match": 0.944,
+     "misses": {
+      "light blue read as blue": 6
+     },
+     "families": [
+      "light blue",
+      "violet"
+     ]
+    },
+    "violetHue": {
+     "pixels": 2448,
+     "hue": 241.571,
+     "sat": 0.762,
+     "lum": 0.031
+    },
+    "violetHueOneIndigo": {
+     "pixels": 2448,
+     "hue": 299.726,
+     "sat": 0.555,
+     "lum": 0.08
+    },
+    "overlap": {
+     "black": 4096
+    },
+    "crackDensity": {
+     "0.2": 0.192,
+     "0.4": 0.228,
+     "0.8": 0.313
+    }
+   }
+  },
+  {
+   "label": "off",
+   "colours": {
+    "ajrak": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "blue",
+      "red"
+     ]
+    },
+    "ajrak, indigo first": {
+     "regions": 108,
+     "match": 0.667,
+     "misses": {
+      "violet read as blue": 36
+     },
+     "families": [
+      "blue",
+      "violet"
+     ]
+    },
+    "double dabu": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "light blue",
+      "blue",
+      "white"
+     ]
+    },
+    "bagru": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "white",
+      "red"
+     ]
+    }
+   },
+   "cracks": {
+    "veins": 0.274,
+    "noCracks": 0.0084
+   },
+   "registration": {
+    "planned3": 2.99,
+    "planned0": -0.01
+   },
+   "wick": {
+    "axis": 1.86,
+    "diagonal": 2.1,
+    "ratio": 0.887,
+    "reach": {
+     "axis": 2.09,
+     "diagonal": 1.69,
+     "ratio": 1.234
+    }
+   },
+   "noWick": {
+    "axis": 0.4,
+    "diagonal": 0.4,
+    "ratio": 1.002,
+    "reach": {
+     "axis": 0.35,
+     "diagonal": 0.1,
+     "ratio": 3.514
+    }
+   },
+   "checks": {
+    "colours": false,
+    "cracks": false,
+    "registration": true,
+    "wicking": false
+   },
+   "pass": false,
+   "extra": {
+    "swapOneIndigo": {
+     "regions": 108,
+     "match": 0.407,
+     "misses": {
+      "light blue read as blue": 64
+     },
+     "families": [
+      "light blue",
+      "violet"
+     ]
+    },
+    "violetHue": {
+     "pixels": 2448,
+     "hue": 241.992,
+     "sat": 0.761,
+     "lum": 0.028
+    },
+    "violetHueOneIndigo": {
+     "pixels": 2448,
+     "hue": 301.924,
+     "sat": 0.551,
+     "lum": 0.074
+    },
+    "overlap": {
+     "black": 4096
+    },
+    "crackDensity": {
+     "0.2": 0.202,
+     "0.4": 0.237,
+     "0.8": 0.323
+    }
+   }
+  },
+  {
+   "label": "x2",
+   "colours": {
+    "ajrak": {
+     "regions": 108,
+     "match": 0.972,
+     "misses": {
+      "red read as violet": 3
+     },
+     "families": [
+      "blue",
+      "red"
+     ]
+    },
+    "ajrak, indigo first": {
+     "regions": 108,
+     "match": 0.667,
+     "misses": {
+      "violet read as blue": 36
+     },
+     "families": [
+      "blue",
+      "violet"
+     ]
+    },
+    "double dabu": {
+     "regions": 108,
+     "match": 0.806,
+     "misses": {
+      "white read as ?": 8,
+      "light blue read as blue": 8,
+      "white read as light blue": 5
+     },
+     "families": [
+      "light blue",
+      "blue",
+      "white"
+     ]
+    },
+    "bagru": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "white",
+      "red"
+     ]
+    }
+   },
+   "cracks": {
+    "veins": 0.408,
+    "noCracks": 0.1663
+   },
+   "registration": {
+    "planned3": 3.91,
+    "planned0": 0.91
+   },
+   "wick": {
+    "axis": 3.55,
+    "diagonal": 3.44,
+    "ratio": 1.031,
+    "reach": {
+     "axis": 2.31,
+     "diagonal": 0.86,
+     "ratio": 2.683
+    }
+   },
+   "noWick": {
+    "axis": 3.38,
+    "diagonal": 3.42,
+    "ratio": 0.987,
+    "reach": {
+     "axis": 0.56,
+     "diagonal": 0.79,
+     "ratio": 0.711
+    }
+   },
+   "checks": {
+    "colours": false,
+    "cracks": false,
+    "registration": false,
+    "wicking": false
+   },
+   "pass": false,
+   "extra": {
+    "swapOneIndigo": {
+     "regions": 108,
+     "match": 0.917,
+     "misses": {
+      "light blue read as blue": 8,
+      "violet read as blue": 1
+     },
+     "families": [
+      "light blue",
+      "violet"
+     ]
+    },
+    "violetHue": {
+     "pixels": 2448,
+     "hue": 239.371,
+     "sat": 0.773,
+     "lum": 0.034
+    },
+    "violetHueOneIndigo": {
+     "pixels": 2448,
+     "hue": 290.611,
+     "sat": 0.546,
+     "lum": 0.087
+    },
+    "overlap": {
+     "black": 4017,
+     "?": 74,
+     "red": 5
+    },
+    "crackDensity": {
+     "0.2": 0.345,
+     "0.4": 0.37,
+     "0.8": 0.449
+    }
+   }
+  },
+  {
+   "label": "x3",
+   "colours": {
+    "ajrak": {
+     "regions": 108,
+     "match": 0.889,
+     "misses": {
+      "red read as violet": 8,
+      "red read as ?": 3,
+      "red read as blue": 1
+     },
+     "families": [
+      "blue",
+      "red"
+     ]
+    },
+    "ajrak, indigo first": {
+     "regions": 108,
+     "match": 0.667,
+     "misses": {
+      "violet read as blue": 36
+     },
+     "families": [
+      "blue",
+      "violet"
+     ]
+    },
+    "double dabu": {
+     "regions": 108,
+     "match": 0.574,
+     "misses": {
+      "light blue read as blue": 24,
+      "white read as light blue": 19,
+      "white read as ?": 3
+     },
+     "families": [
+      "light blue",
+      "blue",
+      "white"
+     ]
+    },
+    "bagru": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "white",
+      "red"
+     ]
+    }
+   },
+   "cracks": {
+    "veins": 0.536,
+    "noCracks": 0.3339
+   },
+   "registration": {
+    "planned3": 4.54,
+    "planned0": 1.69
+   },
+   "wick": {
+    "axis": 6.4,
+    "diagonal": 4.74,
+    "ratio": 1.35,
+    "reach": {
+     "axis": 2.44,
+     "diagonal": 2.08,
+     "ratio": 1.172
+    }
+   },
+   "noWick": {
+    "axis": 4.91,
+    "diagonal": 4.85,
+    "ratio": 1.012,
+    "reach": {
+     "axis": 2.32,
+     "diagonal": 2,
+     "ratio": 1.162
+    }
+   },
+   "checks": {
+    "colours": false,
+    "cracks": false,
+    "registration": false,
+    "wicking": true
+   },
+   "pass": false,
+   "extra": {
+    "swapOneIndigo": {
+     "regions": 108,
+     "match": 0.815,
+     "misses": {
+      "light blue read as blue": 14,
+      "violet read as blue": 6
+     },
+     "families": [
+      "light blue",
+      "violet"
+     ]
+    },
+    "violetHue": {
+     "pixels": 2448,
+     "hue": 236.374,
+     "sat": 0.802,
+     "lum": 0.04
+    },
+    "violetHueOneIndigo": {
+     "pixels": 2448,
+     "hue": 276.74,
+     "sat": 0.535,
+     "lum": 0.101
+    },
+    "overlap": {
+     "black": 3557,
+     "?": 463,
+     "red": 76
+    },
+    "crackDensity": {
+     "0.2": 0.486,
+     "0.4": 0.504,
+     "0.8": 0.567
+    }
+   }
+  }
+ ]
+}

@@ -14,6 +14,107 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-024 · Can a cloth's colours come from dye baths taken in sequence, so that the colours follow the dyes' rules, change when the order changes, and carry the resist's cracks, the blocks' registration and the dye's wicking?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-018 found that Lumenary's ajrak gives each block a finished colour from fixed palettes, with no sequence of baths and
+no overdyeing; the resist mask is in two models only. Sources describe ajrak as harda (myrobalan) mordanting, resist
+printing, indigo dyeing and then alizarin (madder), which turns crimson where the paste carried alum, with washing
+throughout; Bagru's black (syahi) as iron fermented with molasses on harda-treated cloth; and dabu as a mud resist whose
+cracks let indigo through as veins, repeated for double and triple dabu with washing after every dyeing.
+
+**2. What we are doing.**
+Write `engine/core/dye.js`: a cloth carried through steps in order (harda, block prints of resist, alum or iron
+mordant, a crack of the mud resist, an indigo or madder bath, a wash), each print by repeated block impressions that
+land a little off and press unevenly, each bath taken up where the resist allows and wicking along the threads; then
+read the colours, the cracks, the registration and the wicking back from the image.
+
+**3. Why.**
+We don't know whether a sequence of baths, written from the dyes' rules, gives the colours those rules predict on its
+own, including when the order changes, or whether the process's marks (veins, offset blocks, wicking) come through
+measurably.
+
+**4. What is affected.**
+- `engine/core/dye.js`, its check, sheet and demo; the engine bundle.
+- `processes/primitives.md`: a `dye-baths` entry; the resist-dyeing process page.
+- The atlas's ajrak, dabu, Bagru and Sanganer prints, bandhani and leheriya later.
+
+**5. Conclusion.**
+The dyes' rules, written in the check independently of the code: madder over iron is black; madder over alum is red
+with no indigo before it and violet after it; with no mordant, madder washes out, and the cloth is white, light blue or
+blue by the number of indigo baths it took (0, 1, 2 or more). At the defaults, from the image alone:
+- colours: in an ajrak-like, a double-dabu and a Bagru-like sequence, each design region's main colour is the one the
+  rules predict, in at least 95 % of regions; with the ajrak sequence's indigo moved before its resist, the predictions
+  change (red to violet, white to blue) and the image follows them, in at least 95 % of regions;
+- cracks: with the mud resist cracking, blue veins cover 2 to 20 % of the resisted areas, at least 5 times their share
+  with cracking off;
+- registration: a fill block printed a planned 3 px off its outline block reads back as shifted by 3 px (centre to
+  centre, within half a pixel), and by under half a pixel when printed true;
+- wicking: an edge spreads at least 1.2 times as far along the warp and weft as along the diagonal with wicking on, and
+  within 5 % of it with wicking off.
+- **If** all hold → we claim *dyeing in baths in sequence is covered*, with its marks.
+- **If** the colours hold and the marks don't → the sequence is right and its imperfections aren't modelled well enough
+  to read.
+- **If** the colours fail → the colour model doesn't follow the dyes' rules, and the card says which.
+
+**6. If not done.**
+Ajrak, dabu and Bagru, three of the atlas's best-documented crafts, stay a palette of finished colours with no process
+behind them.
+
+**Limits (known before running):** colour is modelled as each dye's absorbance adding up, not as the chemistry of
+mordants; the rules are written from the sources read, which differ on step order by workshop; one cloth side only
+(ajrak is printed on both). Likeness to real ajrak is a later blind pick.
+
+**Result (2026-11-22):** the colours fail on one rule, and two of the three marks fail as written. **From the image
+alone at the defaults, in the ajrak-like, double-dabu and Bagru-like sequences every design region's main colour is the
+one the rules predict (108 of 108 regions in each). With the ajrak's two indigo baths moved before its resist, the
+predictions change and the image follows them everywhere except where the rules call for violet: madder over alum after
+two indigo baths reads dark blue (hue 242, brightness 0.03), so that check matched 67 % of regions.** After one indigo
+bath it reads violet (hue 300), and the one-bath swap matches 94 % (not counted; light blue read as blue in 6 regions).
+In this model, two baths of indigo absorb more red light than one madder bath absorbs blue. Whether real cloth goes the
+same way depends on depths of dye I haven't measured (T-023).
+
+Of the marks: **a fill block printed a planned 3 px off reads back 3.22 px off, and 0.22 px off when printed true.** The
+cracks' veins cover 26 % of the resisted area, above the 20 % set (nearly 300 times their share with cracking off, 0.09 %); at
+the lowest density they still cover 19 %, so each vein's width, not how many there are, sets the share (T-024).
+Wicking reads 0.97 times as wide along the threads as across, against at least 1.2 set, with the control at 0.93
+against 1 ± 0.05: both fail. The wicking blurs along the warp and along the weft and averages the two, which spreads
+the dye by the same variance in every direction; only its far edge reaches further along the threads, and a 10-90 %
+width reads such an edge as slightly narrower there (0.93 in theory; 0.89 measured with the other imperfections off).
+The criterion asked a width to see something that lives in the tail (T-025).
+
+**Run 1, and what changed before run 2.** Run 1 read registration as 9.45 px for 3 planned: the fill block sat flush
+inside its outline, so a shift laid alum over iron on one side and the outline clipped the fill; the reader measured
+the overlap, not the shift. The fill now has 10 px of room on every side. That overlap also showed that madder over
+alum and iron together read dark red, where the rules say madder over iron is black; in the model, iron now takes the
+dye first, and that overlap reads black in every pixel. Run 1 also read wicking from rays rounded to the pixel grid,
+which reads every diagonal edge 1.4 times wider (the control gave 0.73); every pixel now counts at its exact distance.
+The colour results are the same in both runs. Run 1's output is `runs/c024/check-run1.json`.
+
+**At more variation** (the block's slip, uneven pressing, the paste's spread and the bath's unevenness all scaled):
+at twice the defaults the ajrak keeps 97 % of its regions and the double dabu 81 %, because pressing that uneven lets
+indigo through the resist (17 % of a resist turns blue with no cracks at all); registration reads 3.91 and 0.91. At
+three times, the ajrak keeps 89 % and the double dabu 57 %. Wicking then reads 1.35 with its control at 1.01, which I
+can't explain yet.
+
+**Claim:** dyeing in baths in sequence is covered for its colours where the rules are unambiguous, and the order of the
+baths changes the colours as the rules say, except violet under deep indigo. Of its marks, the blocks' registration
+reads back; the cracks are too wide; wicking is in the model but this card's measure can't see it.
+
+**Changes made:**
+- `engine/core/dye.js`; `engine/check/dye.mjs`, `dye-designs.mjs`, `dye-sheet.mjs`; `engine/demo/dye.html`; the engine
+  bundle (all six demo pages' scripts run against it and paint).
+- `processes/primitives.md`: `dye-baths`; `processes/resist-dyeing.md`: a pointer to it; `engine/README.md`: three
+  lessons (room around the effect, exact distances, widths and tails).
+- `runs/c024/` (the check's two runs and the sheet).
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-023 · Can running stitch follow a motif's contour in rows, as in kantha, so that the rows' direction, their spacing, the stitch lengths and the quilting's ripple all read back?
 
 **Status:** closed

@@ -1,0 +1,315 @@
+{
+ "size": 336,
+ "defaults": {
+  "sett": 3,
+  "slub": 0.15,
+  "beat": 0.2,
+  "wobble": 0.25,
+  "gap": 0.12,
+  "round": 0.55,
+  "dip": 0.35,
+  "fibre": 0.25,
+  "cloth": "#f4efe4",
+  "impression": 0.25,
+  "spread": 0.6,
+  "reg": 1.2,
+  "wick": 1.2,
+  "mottle": 0.12,
+  "crackWidth": 0.9,
+  "width": 336,
+  "height": 336,
+  "seed": 23
+ },
+ "results": [
+  {
+   "label": "default",
+   "colours": {
+    "ajrak": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "blue",
+      "red"
+     ]
+    },
+    "ajrak, indigo first": {
+     "regions": 108,
+     "match": 0.667,
+     "misses": {
+      "violet read as blue": 36
+     },
+     "families": [
+      "blue",
+      "violet"
+     ]
+    },
+    "double dabu": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "light blue",
+      "blue",
+      "white"
+     ]
+    },
+    "bagru": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "white",
+      "red"
+     ]
+    }
+   },
+   "cracks": {
+    "veins": 0.262,
+    "noCracks": 0.0009
+   },
+   "registration": {
+    "planned3": 9.45,
+    "planned0": 0.96
+   },
+   "wick": {
+    "axis": 2.08,
+    "diagonal": 3.04,
+    "ratio": 0.684
+   },
+   "noWick": {
+    "axis": 1.81,
+    "diagonal": 2.47,
+    "ratio": 0.731
+   },
+   "checks": {
+    "colours": false,
+    "cracks": false,
+    "registration": false,
+    "wicking": false
+   },
+   "pass": false
+  },
+  {
+   "label": "off",
+   "colours": {
+    "ajrak": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "blue",
+      "red"
+     ]
+    },
+    "ajrak, indigo first": {
+     "regions": 108,
+     "match": 0.667,
+     "misses": {
+      "violet read as blue": 36
+     },
+     "families": [
+      "blue",
+      "violet"
+     ]
+    },
+    "double dabu": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "light blue",
+      "blue",
+      "white"
+     ]
+    },
+    "bagru": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "white",
+      "red"
+     ]
+    }
+   },
+   "cracks": {
+    "veins": 0.274,
+    "noCracks": 0.0084
+   },
+   "registration": {
+    "planned3": 7.48,
+    "planned0": 0.02
+   },
+   "wick": {
+    "axis": 1.7,
+    "diagonal": 2.12,
+    "ratio": 0.804
+   },
+   "noWick": {
+    "axis": 0.48,
+    "diagonal": 0.93,
+    "ratio": 0.516
+   },
+   "checks": {
+    "colours": false,
+    "cracks": false,
+    "registration": false,
+    "wicking": false
+   },
+   "pass": false
+  },
+  {
+   "label": "x2",
+   "colours": {
+    "ajrak": {
+     "regions": 108,
+     "match": 0.972,
+     "misses": {
+      "red read as violet": 3
+     },
+     "families": [
+      "blue",
+      "red"
+     ]
+    },
+    "ajrak, indigo first": {
+     "regions": 108,
+     "match": 0.667,
+     "misses": {
+      "violet read as blue": 36
+     },
+     "families": [
+      "blue",
+      "violet"
+     ]
+    },
+    "double dabu": {
+     "regions": 108,
+     "match": 0.806,
+     "misses": {
+      "white read as ?": 8,
+      "light blue read as blue": 8,
+      "white read as light blue": 5
+     },
+     "families": [
+      "light blue",
+      "blue",
+      "white"
+     ]
+    },
+    "bagru": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "white",
+      "red"
+     ]
+    }
+   },
+   "cracks": {
+    "veins": 0.408,
+    "noCracks": 0.1663
+   },
+   "registration": {
+    "planned3": 10.89,
+    "planned0": 2.22
+   },
+   "wick": {
+    "axis": 3.3,
+    "diagonal": 4.28,
+    "ratio": 0.769
+   },
+   "noWick": {
+    "axis": 3.16,
+    "diagonal": 4.04,
+    "ratio": 0.782
+   },
+   "checks": {
+    "colours": false,
+    "cracks": false,
+    "registration": false,
+    "wicking": false
+   },
+   "pass": false
+  },
+  {
+   "label": "x3",
+   "colours": {
+    "ajrak": {
+     "regions": 108,
+     "match": 0.889,
+     "misses": {
+      "red read as violet": 8,
+      "red read as ?": 3,
+      "red read as blue": 1
+     },
+     "families": [
+      "blue",
+      "red"
+     ]
+    },
+    "ajrak, indigo first": {
+     "regions": 108,
+     "match": 0.667,
+     "misses": {
+      "violet read as blue": 36
+     },
+     "families": [
+      "blue",
+      "violet"
+     ]
+    },
+    "double dabu": {
+     "regions": 108,
+     "match": 0.574,
+     "misses": {
+      "light blue read as blue": 24,
+      "white read as light blue": 19,
+      "white read as ?": 3
+     },
+     "families": [
+      "light blue",
+      "blue",
+      "white"
+     ]
+    },
+    "bagru": {
+     "regions": 108,
+     "match": 1,
+     "misses": {},
+     "families": [
+      "white",
+      "red"
+     ]
+    }
+   },
+   "cracks": {
+    "veins": 0.536,
+    "noCracks": 0.3339
+   },
+   "registration": {
+    "planned3": 11.12,
+    "planned0": 3.73
+   },
+   "wick": {
+    "axis": 4.9,
+    "diagonal": 5.96,
+    "ratio": 0.822
+   },
+   "noWick": {
+    "axis": 4.89,
+    "diagonal": 5.8,
+    "ratio": 0.842
+   },
+   "checks": {
+    "colours": false,
+    "cracks": false,
+    "registration": false,
+    "wicking": false
+   },
+   "pass": false
+  }
+ ]
+}

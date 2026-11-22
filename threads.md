@@ -206,3 +206,32 @@ of real bagh once the atlas has samples (float and pick-up lengths in ground thr
 model the floss's spread if the counts alone don't explain it.
 **Answer:** —
 
+### T-023 · How deep must indigo be before madder over alum on it reads blue rather than violet?
+
+**Status:** open
+**Parent:** C-024
+**Opened:** 2026-11-22
+**Question:** `dye-baths` gives violet (hue 300) after one indigo bath and dark blue (hue 242) after two, because its
+absorbances were set by eye. Find measured absorbance of indigo and of alizarin on alum (reflectance curves of dyed
+cotton), set `ABSORB` from them, and compare with photographs of cloth overdyed in that order.
+**Answer:** —
+
+### T-024 · What sets the share of a dabu's resist that its cracks let indigo into?
+
+**Status:** open
+**Parent:** C-024
+**Opened:** 2026-11-22
+**Question:** the model's veins cover 19 % of the resist at its lowest crack density and 31 % at its highest, so each
+vein's width (the crack's width plus wicking) sets the share more than the number of cracks. Measure vein width and
+spacing in photographs of dabu once the atlas has samples, and set both from them.
+**Answer:** —
+
+### T-025 · What measure would see dye running further along the threads than across them?
+
+**Status:** open
+**Parent:** C-024
+**Opened:** 2026-11-22
+**Question:** wicking along the warp and the weft spreads dye by the same variance in every direction, and only its far
+edge differs; a 10-90 % width can't see that, and a 5 % reach was too noisy to use. Candidates: the reach of warp-top and
+weft-top pixels separately, or the area dye covers past the edge per unit of edge. Decide before the next dyeing card.
+**Answer:** —

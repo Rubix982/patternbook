@@ -14,6 +14,9 @@ status: listed
 
 # Resist dyeing
 
+patternbook's own model of dyeing in baths, with resist and mordants printed between them, is `dye-baths`
+(`processes/primitives.md`; `engine/core/dye.js`, C-024).
+
 Listed by C-017 from the models filed under it. Sections 1-7 and 9 of `_template.md` (the process, its constraints, its imperfections, the maths, dials, variants, what it makes, sources) are not written yet.
 
 ## 8. Models

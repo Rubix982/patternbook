@@ -6,3 +6,4 @@ export * as darning from './core/darning.js';
 export * as chain from './core/chain.js';
 export * as field from './core/field.js';
 export * as kantha from './core/kantha.js';
+export * as dye from './core/dye.js';

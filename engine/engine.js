@@ -16,13 +16,14 @@ var PatternbookEngine = (() => {
     }
     return to;
   };
-  var __toCommonJS = (mod4) => __copyProps(__defProp({}, "__esModule", { value: true }), mod4);
+  var __toCommonJS = (mod5) => __copyProps(__defProp({}, "__esModule", { value: true }), mod5);
 
   // engine/index.js
   var engine_exports = {};
   __export(engine_exports, {
     chain: () => chain_exports,
     darning: () => darning_exports,
+    dye: () => dye_exports,
     field: () => field_exports,
     kantha: () => kantha_exports,
     random: () => random_exports,
@@ -909,5 +910,134 @@ var PatternbookEngine = (() => {
       });
     return { ...img, groups };
   }
+
+  // engine/core/dye.js
+  var dye_exports = {};
+  __export(dye_exports, {
+    ABSORB: () => ABSORB,
+    BLOCKS: () => BLOCKS,
+    DYE_DEFAULTS: () => DYE_DEFAULTS,
+    dyed: () => dyed
+  });
+  var hexRgb5 = (h) => {
+    const n = parseInt(String(h).replace("#", ""), 16);
+    return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255];
+  };
+  var ABSORB = {
+    harda: [0.01, 0.04, 0.16],
+    indigo: [1.6, 0.9, 0.25],
+    madderAlum: [0.15, 1.6, 1.3],
+    madderIron: [1.8, 1.8, 1.6],
+    madderStain: [0.05, 0.25, 0.2]
+  };
+  var DYE_DEFAULTS = { cloth: "#f4efe4", impression: 0.25, spread: 0.6, reg: 1.2, wick: 1.2, mottle: 0.12, crackWidth: 0.9 };
+  function wickBlur(f, W, H, r) {
+    if (r <= 0) return f;
+    const R = Math.max(1, Math.round(r * 2)), out = new Float32Array(W * H);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      let sx = 0, nx = 0, sy = 0, ny = 0;
+      for (let k = -R; k <= R; k++) {
+        const w = Math.exp(-(k * k) / (2 * r * r));
+        if (x + k >= 0 && x + k < W) {
+          sx += w * f[y * W + x + k];
+          nx += w;
+        }
+        if (y + k >= 0 && y + k < H) {
+          sy += w * f[(y + k) * W + x];
+          ny += w;
+        }
+      }
+      out[y * W + x] = 0.5 * (sx / nx + sy / ny);
+    }
+    return out;
+  }
+  function printLayer(field, W, H, step, o, seed) {
+    const [tw, th] = step.tile || [64, 64], [ox, oy] = step.offset || [0, 0];
+    const sp = o.spread, samples = sp > 0 ? [[0, 0], [sp, 0], [-sp, 0], [0, sp], [0, -sp]] : [[0, 0]];
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const tx = Math.floor(x / tw), ty = Math.floor(y / th);
+      const jx = o.reg * (hash2(tx, ty, seed + 3) * 2 - 1), jy = o.reg * (hash2(tx, ty, seed + 5) * 2 - 1);
+      let c = 0;
+      for (const [dx, dy] of samples) c = Math.max(c, step.mask(x - ox - jx + dx, y - oy - jy + dy));
+      const press = 1 - o.impression * Math.max(0, noise2(x / 9, y / 9, seed + 7)) - o.impression * 0.5 * hash2(tx, ty, seed + 11);
+      const v = Math.max(0, Math.min(1, c * Math.min(1, press * 1.25)));
+      field[y * W + x] = Math.max(field[y * W + x], v);
+    }
+  }
+  function crackLines(W, H, density, width, seed) {
+    const cell = 9 + 10 * (1 - density), out = new Uint8Array(W * H);
+    const pt = (i, j) => [(i + 0.15 + 0.7 * hash2(i, j, seed + 13)) * cell, (j + 0.15 + 0.7 * hash2(i, j, seed + 17)) * cell];
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const ci = Math.floor(x / cell), cj = Math.floor(y / cell);
+      let d1 = Infinity, d2 = Infinity;
+      for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) {
+        const [px, py] = pt(ci + a, cj + b), d = Math.hypot(x + 0.5 - px, y + 0.5 - py);
+        if (d < d1) {
+          d2 = d1;
+          d1 = d;
+        } else if (d < d2) d2 = d;
+      }
+      if (d2 - d1 < width) out[y * W + x] = 1;
+    }
+    return out;
+  }
+  function dyed(opts) {
+    const o = { ...DYE_DEFAULTS, ...opts };
+    const W = o.width, H = o.height, N = W * H, seed = o.seed || 1;
+    const R = new Float32Array(N), A = new Float32Array(N), F = new Float32Array(N), OD = [new Float32Array(N), new Float32Array(N), new Float32Array(N)];
+    const stain = [new Float32Array(N), new Float32Array(N), new Float32Array(N)];
+    let tannin = 0, k = 0;
+    for (const step of o.steps || []) {
+      k++;
+      if (step.op === "harda") {
+        tannin = 1;
+        for (let c = 0; c < 3; c++) for (let p = 0; p < N; p++) OD[c][p] += ABSORB.harda[c] * (step.amount ?? 1);
+      } else if (step.op === "print") printLayer(step.layer === "resist" ? R : step.layer === "alum" ? A : F, W, H, step, o, seed + k * 101);
+      else if (step.op === "crack") {
+        const cr = crackLines(W, H, step.density ?? 0.5, o.crackWidth, seed + k * 101);
+        for (let p = 0; p < N; p++) if (cr[p]) R[p] *= 0.1;
+      } else if (step.op === "dye") {
+        const Rw = wickBlur(R, W, H, o.wick), s = step.strength ?? 1;
+        const Aw = step.bath === "madder" ? wickBlur(A, W, H, o.wick) : null, Fw = step.bath === "madder" ? wickBlur(F, W, H, o.wick) : null;
+        for (let p = 0; p < N; p++) {
+          const x = p % W, y = p / W | 0;
+          const take = (1 - Math.min(1, Rw[p])) * s * (1 + o.mottle * noise2(x / 7, y / 7, seed + k * 31));
+          if (step.bath === "indigo") for (let c = 0; c < 3; c++) OD[c][p] += ABSORB.indigo[c] * take;
+          else {
+            const ir = Math.min(1, Fw[p]) * (tannin ? 1 : 0.6), al = Math.min(1, Aw[p]) * (1 - ir), none = Math.max(0, 1 - al - ir);
+            for (let c = 0; c < 3; c++) {
+              OD[c][p] += take * (ABSORB.madderAlum[c] * al + ABSORB.madderIron[c] * ir);
+              stain[c][p] += take * ABSORB.madderStain[c] * none;
+            }
+          }
+        }
+      } else if (step.op === "wash") {
+        R.fill(0);
+        for (const s of stain) s.fill(0);
+      }
+    }
+    const img = cloth({ ...o, unit: o.ground || STRUCTURES.plain, seed, warp: ["#ffffff"], weft: ["#f7f7f7"], ground: "#bdbdbd" });
+    const base = hexRgb5(o.cloth);
+    for (let p = 0; p < N; p++) for (let c = 0; c < 3; c++)
+      img.rgb[p * 3 + c] = Math.min(1, img.rgb[p * 3 + c] * base[c] * Math.exp(-(OD[c][p] + stain[c][p])));
+    return { ...img, fields: { resist: R, alum: A, iron: F } };
+  }
+  var mod4 = (a, n) => (a % n + n) % n;
+  var BLOCKS = {
+    // a lattice of circles, `cell` apart, radius r (an inner ring from r0 if given)
+    dots: (cell, r, r0 = 0) => (x, y) => {
+      const u = mod4(x, cell) - cell / 2, v = mod4(y, cell) - cell / 2, d = Math.hypot(u, v);
+      return d < r && d >= r0 ? 1 : 0;
+    },
+    // an eight-point star lattice (ajrak's), star radius r in each cell
+    stars: (cell, r) => (x, y) => {
+      const u = mod4(x, cell) - cell / 2, v = mod4(y, cell) - cell / 2, a = Math.atan2(v, u), d = Math.hypot(u, v);
+      const rr = r * (0.62 + 0.38 * Math.abs(Math.cos(4 * a)) ** 0.6);
+      return d < rr ? 1 : 0;
+    },
+    rect: (x0, y0, x1, y1) => (x, y) => x >= x0 && x < x1 && y >= y0 && y < y1 ? 1 : 0,
+    frame: (x0, y0, x1, y1, w) => (x, y) => x >= x0 && x < x1 && y >= y0 && y < y1 && !(x >= x0 + w && x < x1 - w && y >= y0 + w && y < y1 - w) ? 1 : 0,
+    union: (...ms) => (x, y) => Math.max(...ms.map((m) => m(x, y)))
+  };
   return __toCommonJS(engine_exports);
 })();

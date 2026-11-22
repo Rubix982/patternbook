@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dye baths</title>
+<style>
+  :root { --bg: #f4f1ea; --ink: #1d1b17; --muted: #6b655b; --line: #d8d1c4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { color: var(--muted); margin: 0 0 16px; max-width: 72ch; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  fieldset { border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 12px; }
+  legend { color: var(--muted); font-size: 13px; }
+  label { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+  label.wide { grid-template-columns: 90px 1fr; }
+  input[type=text], select { width: 100%; font: inherit; font-size: 13px; padding: 3px 5px; }
+  output { font-variant-numeric: tabular-nums; color: var(--muted); }
+  ol.steps { font-size: 13px; color: var(--muted); margin: 4px 0 0; padding-left: 20px; }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Dye baths</h1>
+  <p class="lede">The primitive <code>dye-baths</code> (card C-024): the cloth goes through its steps in order, and its
+    colours come from that order. Blocks print a resist where dye must not go, and alum or iron where madder must take.
+    Indigo dyes blue wherever no resist lies, darker with each dip. Madder dyes red over alum and black over iron, and
+    only stains the rest, which washing removes. Move the indigo before the resist to see the red go dark; crack the mud
+    resist to let indigo in as veins.</p>
+  <div class="wrap">
+    <canvas id="c" width="560" height="560"></canvas>
+    <form id="f">
+      <fieldset><legend>Sequence</legend>
+        <label class="wide">cloth <select name="seq">
+          <option value="ajrak">ajrak: harda, alum, iron, resist, indigo, wash, madder, wash</option>
+          <option value="swap">ajrak with the indigo before the resist</option>
+          <option value="dabu2">double dabu: resist, indigo, wash, resist, indigo, wash</option>
+          <option value="bagru">Bagru: harda, iron, alum, madder, wash</option>
+          <option value="dabu">dabu with cracks: resist, crack, indigo, wash</option>
+        </select></label>
+        <label>indigo dips <input type="range" name="dips" min="1" max="4" step="1" value="2"><output></output></label>
+        <label>block cell <input type="range" name="cell" min="32" max="112" step="4" value="64"><output></output></label>
+        <label>cracks <input type="range" name="density" min="0" max="1" step="0.05" value="0.6"><output></output></label>
+        <ol class="steps" id="steps"></ol>
+      </fieldset>
+      <fieldset><legend>The hand and the cloth</legend>
+        <label>slip <input type="range" name="reg" min="0" max="4" step="0.1" value="1.2"><output></output></label>
+        <label>pressing <input type="range" name="impression" min="0" max="0.9" step="0.01" value="0.25"><output></output></label>
+        <label>spread <input type="range" name="spread" min="0" max="2" step="0.1" value="0.6"><output></output></label>
+        <label>wicking <input type="range" name="wick" min="0" max="4" step="0.1" value="1.2"><output></output></label>
+        <label>uneven bath <input type="range" name="mottle" min="0" max="0.5" step="0.01" value="0.12"><output></output></label>
+        <label class="wide">cloth <input type="text" name="cloth" value="#f4efe4"></label>
+        <label>seed <input type="range" name="seed" min="1" max="99" step="1" value="4"><output></output></label>
+      </fieldset>
+    </form>
+  </div>
+</main>
+<script src="../engine.js"></script>
+<script>
+  const { paint, DEFAULTS } = PatternbookEngine.weave;
+  const { dyed, BLOCKS, DYE_DEFAULTS } = PatternbookEngine.dye;
+  const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
+  function sequence(v) {
+    const C = +v.cell, k = C / 56, n = +v.dips;
+    const red = BLOCKS.dots(C, 11 * k), black = BLOCKS.dots(C, 18 * k, 12.5 * k), resist = BLOCKS.dots(C, 24.5 * k);
+    const stars = BLOCKS.stars(C, 20 * k), second = BLOCKS.union(BLOCKS.dots(C, 8 * k), (x, y) => BLOCKS.dots(C, 9 * k)(x + C / 2, y + C / 2));
+    const indigo = Array.from({ length: n }, () => ({ op: 'dye', bath: 'indigo' }));
+    const mordants = [{ op: 'harda' }, { op: 'print', layer: 'alum', mask: red }, { op: 'print', layer: 'iron', mask: black }];
+    return {
+      ajrak: [...mordants, { op: 'print', layer: 'resist', mask: resist }, ...indigo, { op: 'wash' }, { op: 'dye', bath: 'madder' }, { op: 'wash' }],
+      swap: [...mordants, ...indigo, { op: 'print', layer: 'resist', mask: resist }, { op: 'wash' }, { op: 'dye', bath: 'madder' }, { op: 'wash' }],
+      dabu2: [{ op: 'print', layer: 'resist', mask: stars }, ...indigo, { op: 'wash' }, { op: 'print', layer: 'resist', mask: second }, ...indigo, { op: 'wash' }],
+      bagru: [{ op: 'harda' }, { op: 'print', layer: 'iron', mask: black }, { op: 'print', layer: 'alum', mask: red }, { op: 'dye', bath: 'madder' }, { op: 'wash' }],
+      dabu: [{ op: 'print', layer: 'resist', mask: stars }, { op: 'crack', density: +v.density }, ...indigo, { op: 'wash' }],
+    }[v.seq];
+  }
+  const label = (s) => s.op === 'print' ? `print ${s.layer}` : s.op === 'dye' ? `${s.bath} bath` : s.op === 'crack' ? 'crack the mud' : s.op;
+  function draw() {
+    const v = Object.fromEntries(new FormData(f));
+    for (const o of f.querySelectorAll('output')) o.value = o.previousElementSibling.value;
+    const steps = sequence(v), W = c.width;
+    document.getElementById('steps').innerHTML = steps.map((s) => `<li>${label(s)}</li>`).join('');
+    const cloth = /^#?[0-9a-f]{6}$/i.test(v.cloth.trim()) ? (v.cloth.trim()[0] === '#' ? v.cloth.trim() : '#' + v.cloth.trim()) : DYE_DEFAULTS.cloth;
+    const img = dyed({ ...DEFAULTS, ...DYE_DEFAULTS, width: W, height: W, sett: 4, slub: 0.15, steps, cloth,
+      reg: +v.reg, impression: +v.impression, spread: +v.spread, wick: +v.wick, mottle: +v.mottle, seed: +v.seed });
+    paint(ctx, img);
+  }
+  f.addEventListener('input', draw);
+  draw();
+</script>
+</body>
+</html>
