@@ -1,0 +1,14 @@
+{
+  "name": "patternbook-service",
+  "private": true,
+  "type": "module",
+  "description": "patternbook's engine as an MCP server: find crafts and knowledge, render scenes and pictures through any style, explore very different ones.",
+  "scripts": {
+    "start": "node mcp.mjs",
+    "check": "node check.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "playwright": "1.63.0"
+  }
+}

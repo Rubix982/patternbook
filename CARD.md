@@ -14,6 +14,102 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-030 · Can a request in words become several very different images through the engine, served over MCP, so that a client can find the right crafts, draw a scene, and get back finished pictures at the sizes a page needs?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+The engine is a service in code (C-029): any of its 223 styles takes an image and dials and gives an image back, the
+same every time. The covers on the writer's site were made the way a service would make them, by hand: a scene drawn
+for each post as SVG, then printed through a craft chosen for what the piece is about. Nothing yet lets a client (an
+agent such as Claude) ask for that in words: find crafts and knowledge that fit, draw the scene, see several very
+different results at once, and save the one it wants at the page's size.
+
+**2. What we are doing.**
+Write `service/`, an MCP server over the engine, run in headless Chromium so every style runs and any SVG or photo can
+be read: tools to find styles and search patternbook's knowledge (atlas, process pages), to render a source (an SVG
+scene, an image file, or an earlier result) through a style at a preset size, to explore several very different
+styles at once on a contact sheet, and to chain one craft through another. Then use it for one post's cover.
+
+**3. Why.**
+We don't know whether picking styles for difference, from 223, gives candidates that are measurably more different
+from one another than one style's own variations, while each still carries the scene, fast enough to work with in a
+conversation; or whether the server holds the MCP contract a client relies on.
+
+**4. What is affected.**
+- `service/` (the server, its renderer page, its check, its README, a `package.json` for Playwright and the MCP SDK);
+  `.gitignore`.
+- The engine is used as it is; `engine/engine.js` is loaded, not changed.
+- `~/code/open-concept-lab/.mcp.json` (not committed there by this card): the server, for the writer's site.
+
+**5. Conclusion.**
+With a test client speaking MCP over stdio, from the server's answers alone:
+- contract: `tools/list` returns every tool with an input schema; every tool answers a valid call; an invalid call
+  (a missing source, an unknown style, a bad size) comes back as a tool error with a message, and the server keeps
+  answering;
+- difference: `explore` with 8 candidates on one SVG scene returns 8 different styles from at least 5 sections, and
+  the median distance between its candidates (mean absolute difference of their 64 x 64 colour thumbnails) is at
+  least twice the median distance between 8 seeds of one style on the same scene;
+- likeness: each candidate's brightness, blurred to 2 % of its long side, correlates with the scene's at r of at least
+  0.4 (median over the 8);
+- sizes: every preset comes back at exactly its size (cover 1100 x 770, square 1080 x 1080, portrait 1080 x 1350,
+  story 1080 x 1920, card 1200 x 630, banner 1500 x 500);
+- determinism: the same render call twice gives identical bytes; the same explore call twice, the same styles and
+  identical bytes;
+- speed: one render at cover size within 10 s, an explore of 8 within 90 s, on this laptop.
+- **If** all hold → we claim *a working MCP image service over the engine, whose explore gives genuinely different
+  candidates that still carry the scene*.
+- **If** difference fails → picking by section isn't enough to make candidates differ; the card says by how much.
+- **If** the contract fails → it is not yet something another client can rely on.
+
+**6. If not done.**
+Every cover stays a hand-run session, and nothing outside this machine's sessions can use the engine.
+
+**Limits (known before running):** the server needs Chromium (Playwright's) on the machine. Whether candidates fit a
+request's meaning is the client's judgement and the writer's, not measured here; that is a blind pick later. Distance
+between thumbnails is a crude measure of difference.
+
+**Result (2026-11-22):** all hold. **A test client speaking MCP over stdio found seven tools, each with an input schema;
+every valid call answered; a call with no source, an unknown style, an unknown size and an SVG with no viewBox each
+came back as a tool error saying what was wrong, and the server went on answering. An explore of 8 on one drawn scene
+(dusk, a moon, a tree, a figure at a lit window) returned 8 styles from 6 sections whose median distance from one
+another was 0.316 (mean absolute difference of 64 x 64 colour thumbnails), against 0.033 between 8 seeds of Kantha on
+the same scene: 9.6 times, against at least 2 set.** The candidates' brightness follows the scene's at a median r of
+0.54 (at least 0.4 set), but not every candidate's: QR Barcode Art (0.07), Sindhi Topi (0.11) and Warli (-0.63, the
+scene's tones reversed) generate their own pattern and keep little of the scene. Every preset came back at exactly its
+size, Kantha at story size too; the same render twice and the same explore twice gave identical bytes; the explore
+took 3.4 to 3.6 s and single renders at cover size 0.24 to 2.4 s.
+
+**After the run:** `explore` gained `min_likeness`, which leaves out styles whose small trial doesn't follow the
+source's brightness. It is off unless asked for; the check, rerun with it in place, gives the same numbers.
+
+**Used for one post** (the writer's "Attachment", about walking a road whose length you can't see toward a north star
+you fix for yourself): a scene drawn for it (a night road winding into hills, a walker, a broken wall, an eight-point
+star; `runs/c030/attachment-scene.svg`); `search_knowledge` brought back the night-sky and ajrak models for "north
+star, road, journey"; an explore over the world, Sindhi, South Asian, patternbook's, print and painted sections, with
+`min_likeness` 0.3, gave Kente, Whiteboard, Chinese Paper Cut, Jamdani, Manga, Screen Print, Ralli Patchwork and
+Halftone (`runs/c030/attachment-explore.png`); covers in Ajrak Baths, Shisha, Kantha and Kashi Tile printed through Jali
+Light came back at 1100 x 770 in 1.4 to 2.2 s each. The road, the hills and the star's glow came through every craft;
+the small walker and the walls were lost in most, so scenes for crafts are best drawn large and plain
+(`service/README.md`).
+
+**Claim:** a working MCP image service over the engine: a client can find crafts and knowledge, draw a scene, see very
+different candidates at once (9.6 times as different as one style's own variations) and save finished pictures at the
+page's size, the same every time. Whether the candidates fit a request's meaning is the client's and the writer's
+judgement, not measured here.
+
+**Changes made:**
+- `service/` (`mcp.mjs`, `renderer.mjs`, `page.html`, `knowledge.mjs`, `check.mjs`, `README.md`, `package.json`);
+  `.gitignore` (node_modules).
+- `runs/c030/` (the check, the explore sheets, the post's scene).
+- Outside this repository, not committed: `~/code/open-concept-lab/.mcp.json`, which starts the server for the
+  writer's site, and the four covers for "Attachment" in `~/code/open-concept-lab/web/patternbook-out/attachment/`.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-029 · Can the nine process models each take a picture and render it through their craft, behind one stable service (images and parameters in, images out), so that the picture comes through and the service behaves the same every time?
 
 **Status:** closed

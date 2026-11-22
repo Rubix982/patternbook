@@ -1,0 +1,69 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>patternbook service</title>
+<body>
+<script src="../engine/engine.js"></script>
+<script>
+// The renderer's side of the service (service/renderer.mjs drives it in headless Chromium). Images live here as
+// canvases under handles, so a result can be fed into the next style without leaving the page.
+(function () {
+  const E = window.PatternbookEngine, store = new Map();
+  let next = 1;
+  const keep = (c) => { const h = 'r' + next++; store.set(h, c); if (store.size > 300) store.delete(store.keys().next().value); return h; };
+  const get = (h) => { const c = store.get(h); if (!c) throw new Error('No image with handle ' + h + ' (handles last for the server\'s session).'); return c; };
+  const canvas = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+  // draw a picture to cover a w x h frame (cropped evenly, as a cover is)
+  function cover(img, iw, ih, w, h, bg) {
+    const c = canvas(w, h), x = c.getContext('2d');
+    if (bg) { x.fillStyle = bg; x.fillRect(0, 0, w, h); }
+    const s = Math.max(w / iw, h / ih), dw = iw * s, dh = ih * s;
+    x.imageSmoothingQuality = 'high';
+    x.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+    return c;
+  }
+  async function decode(url) { const img = new Image(); img.src = url; await img.decode(); return img; }
+  window.Bench = {
+    styles: () => E.service.list().filter((s) => s.section),
+    // a source as a handle at w x h: { svg, svgSize: [w, h] } | { dataUrl } | { handle }
+    async load(src, w, h) {
+      if (src.handle) { const c = get(src.handle); return keep(c.width === w && c.height === h ? c : cover(c, c.width, c.height, w, h)); }
+      if (src.svg) {
+        const img = await decode('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(src.svg));
+        return keep(cover(img, src.svgSize[0], src.svgSize[1], w, h, '#ffffff'));
+      }
+      const img = await decode(src.dataUrl);
+      return keep(cover(img, img.naturalWidth, img.naturalHeight, w, h, '#ffffff'));
+    },
+    treat(h, id, params, maxSide) {
+      const c = get(h), x = c.getContext('2d', { willReadFrequently: true });
+      const r = E.service.treat(id, x.getImageData(0, 0, c.width, c.height), params, { maxSide });
+      const o = canvas(r.image.width, r.image.height);
+      o.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(r.image.data), r.image.width, r.image.height), 0, 0);
+      // a style that worked smaller than asked is brought back to the frame's size
+      const out = o.width === c.width && o.height === c.height ? o : cover(o, o.width, o.height, c.width, c.height);
+      return { handle: keep(out), params: r.params, unknown: r.unknown, clamped: r.clamped, invalid: r.invalid, ms: r.ms };
+    },
+    size: (h) => { const c = get(h); return [c.width, c.height]; },
+    encode: (h, type, quality) => get(h).toDataURL(type, quality),
+    // a small copy, longest side `side`, as PNG
+    thumb(h, side) { const c = get(h), s = Math.min(1, side / Math.max(c.width, c.height)), t = canvas(Math.max(1, Math.round(c.width * s)), Math.max(1, Math.round(c.height * s))); const x = t.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(c, 0, 0, t.width, t.height); return t.toDataURL('image/png'); },
+    // RGBA bytes of a w x h copy, for measuring
+    pixels(h, w, hh) { const c = get(h), t = canvas(w, hh), x = t.getContext('2d', { willReadFrequently: true }); x.imageSmoothingQuality = 'high'; x.drawImage(c, 0, 0, w, hh); return Array.from(x.getImageData(0, 0, w, hh).data); },
+    // a contact sheet: the handles in a grid, each labelled
+    sheet(handles, labels, cols, cell) {
+      const rows = Math.ceil(handles.length / cols), pad = 10, lab = 22, c = canvas(cols * (cell + pad) + pad, rows * (cell + lab + pad) + pad), x = c.getContext('2d');
+      x.fillStyle = '#f4f1ea'; x.fillRect(0, 0, c.width, c.height);
+      handles.forEach((h, i) => {
+        const im = get(h), s = Math.min(cell / im.width, cell / im.height), w = im.width * s, hh = im.height * s;
+        const cx = pad + (i % cols) * (cell + pad), cy = pad + Math.floor(i / cols) * (cell + lab + pad);
+        x.drawImage(im, cx + (cell - w) / 2, cy + (cell - hh) / 2, w, hh);
+        x.fillStyle = '#1d1b17'; x.font = '13px system-ui, sans-serif'; x.fillText((i + 1) + '. ' + labels[i], cx, cy + cell + 16);
+      });
+      return c.toDataURL('image/png');
+    },
+    drop(hs) { for (const h of hs) store.delete(h); },
+  };
+  window.__ready = true;
+})();
+</script>
+</body>

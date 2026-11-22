@@ -1,0 +1,149 @@
+{
+ "tools": [
+  {
+   "name": "find_styles",
+   "hasSchema": true
+  },
+  {
+   "name": "describe_style",
+   "hasSchema": true
+  },
+  {
+   "name": "search_knowledge",
+   "hasSchema": true
+  },
+  {
+   "name": "render",
+   "hasSchema": true
+  },
+  {
+   "name": "explore",
+   "hasSchema": true
+  },
+  {
+   "name": "chain",
+   "hasSchema": true
+  },
+  {
+   "name": "save",
+   "hasSchema": true
+  }
+ ],
+ "contract": {
+  "valid": {
+   "find_styles": true,
+   "describe_style": true,
+   "search_knowledge": true,
+   "render": true,
+   "chain": true,
+   "save": true
+  },
+  "invalid": {
+   "noSource": {
+    "isError": true,
+    "message": "Give exactly one of source.svg, source.image_path or source.handle."
+   },
+   "unknownStyle": {
+    "isError": true,
+    "message": "Unknown style \"nonesuch\". Use find_styles to look for one."
+   },
+   "badSize": {
+    "isError": true,
+    "message": "Unknown preset \"enormous\". Presets: cover (1100 x 770), square (1080 x 1080), portrait (1080 x 1350), story (1080 x 1920"
+   },
+   "badSvg": {
+    "isError": true,
+    "message": "An SVG scene needs a viewBox (or width and height) so its shape is known."
+   }
+  },
+  "stillAnswers": true
+ },
+ "difference": {
+  "styles": [
+   "dithering",
+   "y2k",
+   "qr-barcode-art",
+   "warli",
+   "sindhi-topi",
+   "papel-picado",
+   "crayon-cartoon",
+   "chalkboard"
+  ],
+  "sections": [
+   "B. Digital and technical",
+   "A. Design movements and styles",
+   "M. South Asian and Islamic",
+   "L. Sindhi design",
+   "K. World cultural",
+   "G. Painterly and drawn"
+  ],
+  "explore": 0.3157,
+  "seedsOfOne": 0.0328
+ },
+ "likeness": {
+  "perCandidate": [
+   0.686,
+   0.753,
+   0.072,
+   -0.631,
+   0.105,
+   0.688,
+   0.902,
+   0.543
+  ],
+  "median": 0.543
+ },
+ "sizes": {
+  "cover": [
+   1100,
+   770
+  ],
+  "square": [
+   1080,
+   1080
+  ],
+  "portrait": [
+   1080,
+   1350
+  ],
+  "story": [
+   1080,
+   1920
+  ],
+  "card": [
+   1200,
+   630
+  ],
+  "banner": [
+   1500,
+   500
+  ],
+  "story (kantha)": [
+   1080,
+   1920
+  ]
+ },
+ "determinism": {
+  "render": true,
+  "explore": true
+ },
+ "speed": {
+  "explore8": 3360,
+  "renders": {
+   "kantha": 1377,
+   "shisha": 2419,
+   "aari": 2168,
+   "linocut": 303,
+   "watercolour": 445,
+   "phulkari": 354
+  }
+ },
+ "checks": {
+  "contract": true,
+  "difference": true,
+  "likeness": true,
+  "sizes": true,
+  "determinism": true,
+  "speed": true
+ }
+}

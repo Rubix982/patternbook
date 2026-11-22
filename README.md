@@ -100,6 +100,7 @@ processes/                      all knowledge of how looks are made: process pag
 engine/                         the engine: styles (picture in, treated picture out; Lumenary's and ours), the process
                                 models in core/, the studio API, one bundle (engine.js), checks and demo pages
 treatments/                     the picture layer that applies styles to pages, the studio page, and its demos
+service/                        the engine as an MCP server, for agents (C-030)
 NOTICE.md                       what came from other projects (Lumenary, by Mursal Furqan Kumbhar) and where it is
 tools/                          measuring and blind-test scripts
 docs/images/                    pictures in this README
@@ -168,6 +169,8 @@ Need poppler (`pdffonts`, `pdftoppm`) and ImageMagick (`magick`): `brew install 
 - `python3 -I tools/inline-treatment.py <page> <out> --treatment press` — a copy of a page with a
   treatment applied to its drawings.
 - `node engine/build.mjs` — rebuild the engine bundle; `node engine/catalog.mjs` — regenerate its style catalogue.
+- `node service/mcp.mjs` — the engine as an MCP server (find crafts and knowledge, render scenes and pictures, explore
+  very different styles at once); set up and hook-up in `service/README.md`.
 - `node engine/cli.mjs <style> <in.png> --out <out.png> [key=value ...]` — the engine as a service, for PNG files
   (`list` and `describe <style>` show what there is; see `engine/README.md`, "The service").
 - `python3 -I tools/words.py <pages>` — words outside drawings.
