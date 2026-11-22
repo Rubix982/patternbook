@@ -8,10 +8,7 @@ foundation pages on the tools they share (`theory.js`), and the list of treatmen
 ## Credit and permission
 
 This is **Lumenary**'s data, by **Mursal Furqan Kumbhar** (https://github.com/mursalfk/lumenary), copied on 2026-11-16
-at commit `0493e555edcba40adadcff4502c573cd0bcbf5d6`. He told Saif on 2026-11-16 that the project is "totally open
-source" and free to use, and asked to be credited, with a link to his repository, wherever its code or theory is
-used. His repository had no licence file then; if one is added, it replaces this note. The rest of Lumenary (its
-engine and the files it needs) stays in `vendor/lumenary/`, described in its `NOTICE.md`.
+at commit `0493e555edcba40adadcff4502c573cd0bcbf5d6`. His repository had no licence file then; if one is added, it replaces this note. The rest of Lumenary (its engine and the files it needs) stays in `vendor/lumenary/`, described in its `NOTICE.md`.
 
 ## What changed when it moved here
 
