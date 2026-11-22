@@ -265,3 +265,14 @@ them (older blown-glass mirrors and machine-cut ones separately, if photographs 
 In close photographs of Multani and Hala tiles, measure how much deeper the glaze's colour is in sgraffito grooves than
 on the flat, and how soft the cobalt outlines are where the glaze is thick and thin; set the three dials from them.
 **Answer:** —
+
+### T-029 · Do parchin kari cutters turn each piece so the stone's bands run along it, or choose it for shading?
+
+**Status:** open
+**Parent:** C-027
+**Opened:** 2026-11-22
+**Question:** `inlay-cut` turns every piece so its bands run along its long axis, which is C-018's premise; the sources
+read for C-027 say only that the joins are almost invisible. Look for a workshop account or a conservation study of
+Agra or Mughal inlay that says how a piece's patch of stone is chosen (bands along the petal, shading from base to tip,
+or colour alone), and check it in close photographs of the Taj Mahal's and Agra's inlay.
+**Answer:** —

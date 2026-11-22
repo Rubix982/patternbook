@@ -1,0 +1,120 @@
+{
+ "size": 400,
+ "defaults": {
+  "ground": "makrana",
+  "seam": 0.7,
+  "adhesive": "#4d443c",
+  "seamTone": 0.55,
+  "cut": "fitted",
+  "cell": 9,
+  "turn": "along",
+  "turnErr": 5,
+  "seamVary": 0.4,
+  "chips": 0.012,
+  "gloss": 0.28,
+  "sheen": [
+   0.35,
+   0.3
+  ],
+  "sheenSize": 0.4,
+  "polish": 0.25
+ },
+ "results": [
+  {
+   "label": "default",
+   "bands": {
+    "pieces": 44,
+    "median": 3.6
+   },
+   "bandsRandom": {
+    "pieces": 44,
+    "median": 39.7
+   },
+   "fit": {
+    "points": 3044,
+    "share": 0.921
+   },
+   "fitCells": {
+    "points": 3044,
+    "share": 0.302
+   },
+   "checks": {
+    "bands": true,
+    "fit": true
+   },
+   "pass": true
+  },
+  {
+   "label": "off",
+   "bands": {
+    "pieces": 44,
+    "median": 3.5
+   },
+   "bandsRandom": {
+    "pieces": 44,
+    "median": 39.8
+   },
+   "fit": {
+    "points": 3044,
+    "share": 0.921
+   },
+   "fitCells": {
+    "points": 3044,
+    "share": 0.302
+   },
+   "checks": {
+    "bands": true,
+    "fit": true
+   },
+   "pass": true
+  },
+  {
+   "label": "x2",
+   "bands": {
+    "pieces": 44,
+    "median": 5.2
+   },
+   "bandsRandom": {
+    "pieces": 44,
+    "median": 39.5
+   },
+   "fit": {
+    "points": 3044,
+    "share": 0.923
+   },
+   "fitCells": {
+    "points": 3044,
+    "share": 0.299
+   },
+   "checks": {
+    "bands": true,
+    "fit": true
+   },
+   "pass": true
+  },
+  {
+   "label": "x3",
+   "bands": {
+    "pieces": 44,
+    "median": 7.8
+   },
+   "bandsRandom": {
+    "pieces": 44,
+    "median": 39.5
+   },
+   "fit": {
+    "points": 3044,
+    "share": 0.921
+   },
+   "fitCells": {
+    "points": 3044,
+    "share": 0.3
+   },
+   "checks": {
+    "bands": true,
+    "fit": true
+   },
+   "pass": true
+  }
+ ]
+}

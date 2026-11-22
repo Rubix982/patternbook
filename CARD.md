@@ -14,6 +14,81 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-027 · Can inlay pieces be cut from banded stone so each piece's bands run along it, and fitted to recesses the motif's own shape, so that both read back?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-018 found inlay covered only by Voronoi regions, a fixed palette and a crackle for seams; no primitive cuts a piece
+from a patch of stone chosen and turned for it, or fits pieces along a motif's own outline. Sources on parchin kari
+(Wikipedia, "Pietra dura"; India's handicrafts portal on Agra marble inlay; Fodor's on Agra's inlay workshops)
+describe Makrana marble carved to make space for the inlay, stones such as lapis lazuli, malachite and carnelian sliced
+and cut to shape and fitted so precisely that the joins are practically invisible, and the surface scrubbed, buffed and
+polished; floral, geometric and arabesque designs.
+
+**2. What we are doing.**
+Write `engine/core/inlay.js`: a marble ground with its own faint veins; stones as banded textures in their own
+coordinates; each piece of a design (petals, leaves, a centre) cut from its stone at an offset, turned so the stone's
+bands run along the piece's long axis, set into a recess its own shape with a hair-thin seam; the polished surface's
+sheen over all of it. Then read the bands' direction and the pieces' edges back from the image.
+
+**3. Why.**
+We don't know whether choosing and turning a patch of stone per piece gives bands a reader can see running along each
+piece, or whether pieces fitted to the motif's outline can be told, from the image alone, from pieces cut as Voronoi
+cells as the existing models do.
+
+**4. What is affected.**
+- `engine/core/inlay.js`, its check, sheet and demo; the engine bundle.
+- `processes/primitives.md`: an `inlay-cut` entry; the process page that covers stone inlay, a pointer.
+- The atlas's parchin kari, Mughal and Agra marble inlay, and inlay in wood and bone where it uses the same cutting.
+
+**5. Conclusion.**
+At the defaults, on a floral panel, from the image alone (the design's pieces, their outlines and stones are the plan,
+which a reader knows):
+- bands: in pieces of banded stone, the bands' direction (the structure tensor of brightness inside the piece, away
+  from its edge) lies within 15° of the piece's long axis (median over pieces); with each piece turned at random (the
+  control), at least 35°;
+- fit: along every piece's planned outline, the strongest change in brightness across the outline lies within 1 px of
+  it at at least 90 % of points; with the same design cut as Voronoi cells (the control), at at most 50 %.
+- **If** both hold → we claim *inlay cut from chosen stone and fitted to the motif is covered*.
+- **If** fit holds and bands don't → the pieces fit, but the stone's bands don't read as chosen.
+- **If** fit fails → the edges don't follow the motif closely enough to tell from cells, and the card says why.
+
+**6. If not done.**
+Parchin kari, the inlay of the Taj Mahal and of Agra's workshops today, stays a Voronoi mosaic in a fixed palette.
+
+**Limits (known before running):** that a cutter turns each piece so the stone's bands run along it is C-018's premise
+and is not sourced; sources say only that the joins are almost invisible. Stones are banded textures, not photographs
+of stone. The recess and the adhesive are not modelled apart from the seam. Likeness to real inlay is a later blind
+pick.
+
+**Result (2026-11-22):** both hold. **On a panel of four flowers, from the image alone at the defaults: in 44 pieces of
+banded stone the bands run 3.6° from the piece's long axis (median), against 39.7° with the pieces turned at random;
+along the pieces' planned outlines, the strongest change in brightness lies within 1 px of the outline at 92.1 % of
+3,044 points, against 30.2 % for the same design cut as Voronoi cells.** Fit is close to its bar. Of the 240 points
+missed, 195 lie within 5 px of another piece and 153 are on the stems, which are about 5 px wide and cut from a
+strongly banded agate, so a band inside the stem is as strong an edge as its outline. With the imperfections off the
+fit is the same (92.1 %); at three times them, the bands read 7.8° and the fit 92.1 %.
+
+**Before the run, from looking at the first sheet:** the marble's veins were a crackle of short wiggles; each stone now
+has its own vein scale, and the marble's are broad and sparse. The fitted pieces' edges were first blended in a way that
+put the stone's edge most of a pixel inside the outline; they now take marble, seam and stone by coverage, with the
+recess on the outline and the piece smaller by the seam. Both before any check ran.
+
+**Claim:** inlay cut from chosen stone and fitted to the motif's outline is covered, measurably apart from Voronoi
+cutting and from random turning. That real cutters turn bands along a piece is the model's premise, not a sourced
+fact (T-029).
+
+**Changes made:**
+- `engine/core/inlay.js`; `engine/check/inlay.mjs`, `inlay-sheet.mjs`; `engine/demo/inlay.html`; the engine bundle.
+- `processes/primitives.md`: `inlay-cut`; `processes/mosaic-setting.md`: a pointer.
+- `runs/c027/`; thread T-029.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-026 · Can a glaze be given thickness, so that it pools in hollows and thins over ridges, levels the body's fine texture, and blurs the pigment beneath it more where it lies thick?
 
 **Status:** closed

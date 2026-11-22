@@ -6,7 +6,7 @@ patternbook's own primitives, written where no Lumenary model covers an operatio
 - `core/`: the primitives, as ES modules with no dependencies: `random.js` (seeded randomness and noise),
   `weave.js` (`weave-draft`, C-019), `supplementary.js` (`supplementary-weft`, C-020), `darning.js`
   (`counted-darning`, C-021), `chain.js` (`chain-stitch`, C-022), `field.js` and `kantha.js` (`contour-rows`,
-  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026).
+  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026), `inlay.js` (`inlay-cut`, C-027).
 - `check/`: each card's read-back check, run with Node (`node engine/check/weave.mjs`), the sheets
   (`node engine/check/weave-sheet.mjs runs/c019/weave-sheet.png`), and the shared read-back code (`readback.mjs`).
 - `demo/`: a page per primitive with every dial. They open straight from disk.

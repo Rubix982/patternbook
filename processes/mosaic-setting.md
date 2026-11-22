@@ -13,6 +13,9 @@ status: listed
 
 # Mosaic setting
 
+In the same family, patternbook's own model of stone inlay cut to a motif (parchin kari, pietra dura) is `inlay-cut`
+(`processes/primitives.md`; `engine/core/inlay.js`, C-027).
+
 Listed by C-017 from the models filed under it. Sections 1-7 and 9 of `_template.md` (the process, its constraints, its imperfections, the maths, dials, variants, what it makes, sources) are not written yet.
 
 ## 8. Models
