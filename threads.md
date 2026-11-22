@@ -367,6 +367,8 @@ share of screens turning by more than a half higher among jalis, and by how much
 **Status:** open
 **Parent:** C-031
 **Opened:** 2026-11-22
+**Note (C-040):** tiled BiRefNet reads both screens by eye; what's missing is a reference mask that is neither method's
+(a few crops traced by hand, or a photograph-like render with a known mask) to say which is right where they differ.
 **Question:** Two of C-031's jalis were left out because brightness alone could not tell what is cut through: a marble
 screen on grey, and a tree screen carved in deep relief. Colour, the photo's own shading, or a photo with light behind
 the screen might; marble and tree screens are the families C-031 has fewest of. C-033 adds two more reasons: shading
@@ -534,5 +536,7 @@ can tell them apart, which crops does it find easiest, and does that match the w
 **Question:** At 1024 px BiRefNet thickens fine bars, while it reads marble and deep relief that brightness can't. Run
 over overlapping tiles at the photo's resolution, does it agree with brightness on the fine lattices too (so one mask
 serves all 19 screens, and the two left out rejoin), and what do the Met screens' bars read then?
-**Answer:** —
+**Answer:** C-040: 11 of 17 again (fine lattices up, some clean panels down); by eye the tiled masks look as right as
+brightness's on the fine lattices, but brightness is the only reference, so which is wrong where they differ is open
+(T-038: a reference that is neither is needed). Bars about 0.85 on both.
 

@@ -16,7 +16,7 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ## C-040 · Does BiRefNet, run in tiles at the photo's own resolution, read fine lattices as well as brightness does?
 
-**Status:** open
+**Status:** closed
 **Opened:** 2026-11-22
 
 **1. Where we are.**
@@ -50,6 +50,33 @@ Each photo needs the one method that reads it, chosen by eye, and the two screen
 
 **Limits (known before running):** the same as C-039's; a tile sees only part of the screen, which a model trained on
 whole objects may read differently.
+
+**How it ran.** 19 photos in about an hour on the CPU (16.6 s a tile; CoreML compiled for over ten minutes without
+finishing and was stopped). The checks are a tool now (`tools/mask_compare.py`). Its first bar reading put the model's
+mask on its own copy of the reader while the bar reader used another, and so read brightness's bars again (0.854 and
+0.8405, C-036's exact numbers); fixed and reread.
+
+**Result (2026-11-23): agreement with brightness on 11 of 17, as at 1024 px (14 needed); so the fault on fine lattices
+isn't only the copy's size, the two screens don't rejoin, and T-038 stays open. The two left-out screens read by eye,
+as in C-039. The Met screens' bars differ from one another by 0.870 and 0.852 on the tiled masks (over 0.6).**
+(`runs/c040/agreement.json`, `met-bars.json`)
+
+**What moved.** Tiling raised the fine lattices where C-039 had thickened bars (vam-O442441 0.77 to 0.85, met-453344
+0.67 to 0.76, vam-O470734 0.78 to 0.80) and lowered some clean panels (vam-O40077 0.90 to 0.83, vam-O40073 0.95 to
+0.90); met-453343 (0.69) and met-453241 (0.74) stayed low. Side by side on the fine lattices the tiled masks keep thin
+bars and small openings and look at least as right as brightness's; the agreement measure takes brightness as the
+reference, and brightness was never checked at a bar's precision there, so where they differ this card can't say which
+is wrong (T-038). On the bars: two different methods, brightness and tiled BiRefNet, now read the Met screens' bars as
+differing from one another by about 0.85; C-039's 0.295 came from the 1024 px copy smoothing them.
+
+**Claim:** run over tiles at the photo's own resolution, BiRefNet keeps fine bars thin and still reads the marble and
+deep-relief screens brightness can't, but agrees with brightness on 11 of 17 screens, the same count as at 1024 px; on
+its masks the Met screens' bars differ from one another as much as on brightness's.
+
+**Changes made:** `tools/screen_masks.py` (tiled), `tools/mask_compare.py`; `runs/c040/` (the Met's tiled masks, the
+agreement, the bars; the V&A's masks and the sheet stay local).
+
+**Closed:** 2026-11-23
 
 ---
 

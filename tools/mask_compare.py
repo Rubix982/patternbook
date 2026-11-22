@@ -62,13 +62,15 @@ for k, row in enumerate(sheet_rows):
     for j, t in enumerate(row):
         s.paste(t, (j * 304, k * 304))
 s.save(os.path.join(run, "blind", "sheet.jpg"), quality=86)
-orig, bars = sm.segment, {}
+# screen_hand reads through its own copy of screen_measure (sh.sm): the model's mask has to be put there (C-040's
+# first reading put it on this file's copy and read brightness's bars again)
+orig, bars = sh.sm.segment, {}
 for i in ("met-453343", "met-453344"):
     path = f"pieces/jali/images/{i}.jpg"
-    _, L = sm.load(path, None)
-    m = sm.load_stone(os.path.join(masks, f"{i}.png"), L.shape)
-    sm.segment = lambda L_, flip=False, thr=0.0, _m=m: orig(L_, stone_mask=_m)
+    _, L = sh.sm.load(path, None)
+    m = sh.sm.load_stone(os.path.join(masks, f"{i}.png"), L.shape)
+    sh.sm.segment = lambda L_, flip=False, thr=0.0, _m=m: orig(L_, stone_mask=_m)
     bars[i] = sh.between_bars(path)
-    sm.segment = orig
+    sh.sm.segment = orig
     print(i, "bars on the model's mask:", bars[i])
 json.dump(bars, open(os.path.join(run, "met-bars.json"), "w"), indent=1)
