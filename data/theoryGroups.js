@@ -1,6 +1,6 @@
 // src/data/theoryGroups.js
 // The groups of the theory pages: the foundations first, then one group per enabled section.
-import { SECTION_LIST } from '../engine/styles/index.js';
+import { SECTION_LIST } from '../vendor/lumenary/src/engine/styles/index.js';
 import { FOUNDATIONS } from './theory.js';
 
 export const THEORY_GROUPS = [

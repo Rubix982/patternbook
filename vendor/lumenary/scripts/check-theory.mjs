@@ -8,9 +8,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const src = join(dirname(fileURLToPath(import.meta.url)), '..', 'src');
 const load = (p) => import(pathToFileURL(join(src, p)).href);
-const { EXTRA } = await load('data/theory-extra/index.js');
+// patternbook moved src/data/ to the repository root as data/ (2026-11-22; see ../NOTICE.md)
+const dataDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'data');
+const loadData = (p) => import(pathToFileURL(join(dataDir, p)).href);
+const { EXTRA } = await loadData('theory-extra/index.js');
 const { acceptsValue } = await load('utils/presets.js');
-const { SECTIONS, slugify } = await load('data/sections.js');
+const { SECTIONS, slugify } = await loadData('sections.js');
 
 const stylesDir = join(src, 'engine/styles');
 const byId = new Map();

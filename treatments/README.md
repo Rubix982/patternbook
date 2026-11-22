@@ -11,7 +11,7 @@ our own.
 ## Lumenary, inside our tooling
 
 All 214 of **Lumenary**'s treatments, by Mursal Furqan Kumbhar, run here too, used with his
-permission. His engine and theory data, unchanged and trimmed of the website, are in `../vendor/lumenary/`
+permission. His engine, unchanged and trimmed of the website, is in `../vendor/lumenary/`, and his theory data in `../data/`
 (see its `NOTICE.md` for what was kept), and `lumenary/` holds our bridge:
 
 - `lumenary.html` (live: https://rubix982.github.io/patternbook/treatments/lumenary.html): pick any of his treatments and turn its dials, or open the **contact sheet** to see every

@@ -48,7 +48,7 @@ read as less AI-made, and the judge also said the drawings looked filtered (C-01
 
 The top layer also includes **[Lumenary](https://github.com/mursalfk/lumenary)** by **Mursal Furqan
 Kumbhar**: 214 browser-only image treatments, each with a theory page giving the equations its code
-runs. Its engine and theory data are in `vendor/lumenary/`, used with his permission (see its
+runs. Its engine is in `vendor/lumenary/` and its theory data in `data/`, used with his permission (see their
 `NOTICE.md`), and run inside our tooling through `treatments/lumenary/`. The method in `METHOD.md`
 step 2c, deriving a look from the process that made it, was learned from his theory pages.
 
@@ -96,7 +96,8 @@ threads.md                      open questions, not yet worked on
 runs/<card>/                    test prompts, generated pages, blind keys
 treatments/                     the picture layer: our treatments, theory notes, demos
 treatments/lumenary/            bridge to the Lumenary engine, its catalogue and theory
-vendor/lumenary/                Lumenary's engine and theory data (Mursal Furqan Kumbhar)
+data/                           Lumenary's theory data (Mursal Furqan Kumbhar), moved out of vendor/ (data/README.md)
+vendor/lumenary/                Lumenary's engine (Mursal Furqan Kumbhar)
 tools/                          measuring and blind-test scripts
 docs/images/                    pictures in this README
 sources/                        local copies of source documents (git-ignored)

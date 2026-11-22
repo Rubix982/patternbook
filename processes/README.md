@@ -32,7 +32,7 @@ Any implementation of a process is a model of it, credited to whoever made it:
 - **patternbook's own treatments and generators** (`treatments/`, `engine/`). Their theory notes move into the
   process pages as those pages are written, each leaving a pointer where it was.
 - **Lumenary** by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary). His engine and theory data are
-  vendored unchanged in `vendor/lumenary/` (see its `NOTICE.md`), and his theory pages are rendered in
+  in `vendor/lumenary/` (engine, see its `NOTICE.md`) and `data/` (theory, see its `README.md`), and his theory pages are rendered in
   `treatments/lumenary/theory/`. A process page cites the entry it draws on and links his page there. His text
   stays attributed in that one place; improvements are offered back to him.
 - **Papers and books**, cited through `references/references.md`.

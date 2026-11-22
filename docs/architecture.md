@@ -211,13 +211,13 @@ listed in `processes/primitives.md`.
 - **patternbook's own treatments and generators.** The theory notes for `press`, `riso`, `halftone` and `hatch` move
   into the process pages for letterpress, risograph, halftone screening and hatching as those pages are written, each
   leaving a pointer where it was.
-- **Lumenary** (Mursal Furqan Kumbhar). `vendor/lumenary/src/data` holds the maths behind 212 of his 214 treatments
+- **Lumenary** (Mursal Furqan Kumbhar). `data/` (moved from `vendor/lumenary/src/data` on 2026-11-22) holds the maths behind 212 of his 214 treatments
   (610 equations with notes, 426 paragraphs), a fuller account of all 214 (where each look comes from, why it looks
   that way, how it is made, its history, uses, presets, terms and related treatments) and six foundation pages on the
   tools they share. His entries are models of physical processes: resist dyeing, running stitch, painting on tin glaze
   and its crackle, cut paper, pierced and lit hide, stone relief under a moving light, tesserae, block printing and
   its registration, dot fields. Process pages cite the entry they draw on and link his theory as rendered in
-  `treatments/lumenary/theory/`. His text stays attributed in that one place, his data in `vendor/` stays unchanged,
+  `treatments/lumenary/theory/`. His text stays attributed in that one place, his data in `data/` stays unchanged in content,
   and anything that improves on his work is offered back to him.
 - **Papers and books**, through `references/references.md`.
 
@@ -322,7 +322,8 @@ studio/                     + the GitHub Pages studio: browse the catalogue, run
 references/references.md    + the one bibliography, with rights
 library/                    the pages shelf, unchanged
 treatments/                 unchanged; theory notes move into processes/ as their pages are written
-vendor/lumenary/            unchanged
+data/                       Lumenary's theory data, moved here from vendor/lumenary/src/data (2026-11-22)
+vendor/lumenary/            Lumenary's engine, unchanged
 runs/, tools/, sources/     unchanged (sources/ stays git-ignored)
 ```
 

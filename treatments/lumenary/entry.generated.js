@@ -214,7 +214,7 @@ import s211 from "./../../vendor/lumenary/src/engine/styles/wool-crochet.js";
 import s212 from "./../../vendor/lumenary/src/engine/styles/x-ray.js";
 import s213 from "./../../vendor/lumenary/src/engine/styles/y2k.js";
 import { registerStyles } from "./../../vendor/lumenary/src/engine/registry.js";
-import { SECTIONS, slugify } from "./../../vendor/lumenary/src/data/sections.js";
+import { SECTIONS, slugify } from "./../../data/sections.js";
 import { fitSize, scaleCanvas } from "./../../vendor/lumenary/src/engine/utils.js";
 import { makeSample } from "./../../vendor/lumenary/src/engine/sample.js";
 import { bridge } from './bridge.js';

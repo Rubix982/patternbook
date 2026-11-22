@@ -3,8 +3,9 @@
 //
 //   node tools/process_models.mjs
 //
-// Reads, never writes: vendor/lumenary/src (Lumenary by Mursal Furqan Kumbhar, https://github.com/mursalfk/lumenary,
-// used with his permission; see vendor/lumenary/NOTICE.md), and processes/models/lumenary-map.tsv (patternbook's own
+// Reads, never writes: data/ (Lumenary's theory data, moved from vendor/lumenary/src/data on 2026-11-22) and
+// vendor/lumenary/src/engine (Lumenary by Mursal Furqan Kumbhar, https://github.com/mursalfk/lumenary, used with his
+// permission; see data/NOTICE.md and vendor/lumenary/NOTICE.md), and processes/models/lumenary-map.tsv (patternbook's own
 // classification: which physical process each treatment models, or what it is instead).
 // Writes:
 //   processes/models/lumenary/<id>.json   one model per treatment: its story, steps, equations, dials, presets, credit
@@ -24,9 +25,10 @@ const src = join(root, 'vendor', 'lumenary', 'src');
 const out = process.env.PROCESSES_OUT ? resolve(process.env.PROCESSES_OUT) : join(root, 'processes');
 const imp = (p) => import(pathToFileURL(p).href);
 
-const { SECTIONS, slugify } = await imp(join(src, 'data', 'sections.js'));
-const { THEORY } = await imp(join(src, 'data', 'theory.js'));
-const { EXTRA } = await imp(join(src, 'data', 'theory-extra', 'index.js'));
+const data = join(root, 'data');
+const { SECTIONS, slugify } = await imp(join(data, 'sections.js'));
+const { THEORY } = await imp(join(data, 'theory.js'));
+const { EXTRA } = await imp(join(data, 'theory-extra', 'index.js'));
 const styles = {};
 for (const f of readdirSync(join(src, 'engine', 'styles')).filter((f) => f.endsWith('.js'))) {
   const s = (await imp(join(src, 'engine', 'styles', f))).default;
