@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "Warm air rising bends the light that passes through it. The picture shimmers upward from the heat, tinted a little warmer where it is hottest. The cursor is a flame.",
   "theory_page": "processes/sources/lumenary/theory-pages/10-motion.md",
-  "code": "vendor/lumenary/src/engine/styles/heat-haze.js",
+  "code": "engine/styles/heat-haze.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

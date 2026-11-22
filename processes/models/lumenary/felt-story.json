@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A picture for a felt board: a few soft colours cut from wool felt, fuzzy at the edges, laid one over another with small shadows and sewn down with running stitch.",
   "theory_page": "processes/sources/lumenary/theory-pages/05-physical.md",
-  "code": "vendor/lumenary/src/engine/styles/felt-story.js",
+  "code": "engine/styles/felt-story.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

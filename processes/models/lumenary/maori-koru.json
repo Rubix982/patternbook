@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "The koru, an unfurling silver fern frond, repeated in the way of kowhaiwhai rafter painting. Spirals grow larger and whiter in the light and fade to red and then to bare ground in the shade.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/maori-koru.js",
+  "code": "engine/styles/maori-koru.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

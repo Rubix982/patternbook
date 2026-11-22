@@ -51,6 +51,6 @@ _Reflecting a coordinate back into the picture of width (or height) L._ (primiti
 
 **History:** Sir David Brewster invented the kaleidoscope in Scotland in 1816 and patented it in 1817. The name comes from Greek words meaning beautiful form to see. It was a sensation within a few years, with hundreds of thousands sold in London in months, and the same mirror symmetry underlies the patterns of tiles, textiles and mandalas.
 
-_Model `processes/models/lumenary/kaleidoscope.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `vendor/lumenary/src/engine/styles/kaleidoscope.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/kaleidoscope.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/kaleidoscope.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "The strapwork of Islamic architecture. Every edge of a tiling sends two lines inward at a fixed angle, and the lines weave stars out of rhombs.",
   "theory_page": "processes/sources/lumenary/theory-pages/13-southasia.md",
-  "code": "vendor/lumenary/src/engine/styles/girih.js",
+  "code": "engine/styles/girih.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

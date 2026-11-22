@@ -9,24 +9,28 @@ The approach, especially writing out the maths the code actually runs, is learne
 **Lumenary** by Mursal Furqan Kumbhar (lumenary-studio.vercel.app). The code and notes here are
 our own.
 
-## Lumenary, inside our tooling
+## The studio: every style in the engine
 
-All 214 of **Lumenary**'s treatments, by Mursal Furqan Kumbhar, run here too, used with his
-permission. His engine, unchanged and trimmed of the website, is in `../vendor/lumenary/`; his theory, as models filed under the
-processes they imitate, is in `../processes/`, and as received in `../processes/sources/lumenary/`
-(see its `NOTICE.md` for what was kept), and `lumenary/` holds our bridge:
+The engine's styles (`../engine/styles/`) take a picture and render it in a style. Sections A to N are **Lumenary**'s
+214, by Mursal Furqan Kumbhar, used with his permission: his engine, its files unchanged, is the base of `../engine/`
+(see `../vendor/lumenary/NOTICE.md` for what was received). Section P is patternbook's own, each rendering a picture
+through a process modelled in `../engine/core/`. Every style's theory, as a model filed under the process it imitates,
+is in `../processes/`, and Lumenary's as received in `../processes/sources/lumenary/`.
 
-- `lumenary.html` (live: https://rubix982.github.io/patternbook/treatments/lumenary.html): pick any of his treatments and turn its dials, or open the **contact sheet** to see every
-  still treatment on one picture (Lumenary's still life, our router drawing, or your own file).
-- `lumenary/lumenary.js`: his engine bundled into one script, which sets `window.Lumenary`. Rebuild with
-  `node treatments/lumenary/build.mjs` (uses `npx esbuild@0.24.0`).
-- His theory pages with every equation as TeX, and `MAP.md`, which links each treatment's theory to its code, are in
-  `../processes/sources/lumenary/theory-pages/`; each process page in `../processes/` carries his models in full.
-- On a page: load `lumenary/lumenary.js` and `treatments.js`, then
-  `Treatments.treatAll('svg[role=img]', { treatment: 'lumenary:halftone', params: { angle: 45 } })`.
+- `studio.html` (live: https://rubix982.github.io/patternbook/treatments/studio.html): pick any style and turn its
+  dials, or open the **contact sheet** to see every still style on one picture (the built-in still life, our router
+  drawing, or your own file). `lumenary.html` now forwards there.
+- `../engine/engine.js`: the whole engine in one script, which sets `window.PatternbookEngine`; the studio API is
+  `PatternbookEngine.studio`. Rebuild with `node engine/build.mjs` (uses `npx esbuild@0.24.0`). Pages that load the old
+  `lumenary/lumenary.js` still work: it now loads `engine/engine.js` and names its studio `window.Lumenary`.
+- Lumenary's theory pages with every equation as TeX, and `MAP.md`, which links each treatment's theory to its code,
+  are in `../processes/sources/lumenary/theory-pages/`; each process page in `../processes/` carries his models in full.
+- On a page: load `../engine/engine.js` and `treatments.js`, then
+  `Treatments.treatAll('svg[role=img]', { treatment: 'style:halftone', params: { angle: 45 } })` (`lumenary:halftone`
+  still works).
 
-**For agents building a page:** `runs/c014/lumenary-for-agents.md` explains how to use it, and
-`lumenary/CATALOG.md` lists all 214 treatments with their dials (regenerate with `node treatments/lumenary/catalog.mjs`).
+**For agents building a page:** `runs/c014/lumenary-for-agents.md` explains how to use it, and `../engine/CATALOG.md`
+lists every style with its dials (regenerate with `node engine/catalog.mjs`).
 In C-014, pages built with it were the ones the judge would rather spend time on (3 of 3), but they
 read as less AI-made in only 1 of 3: the pictures change and the page around them doesn't.
 

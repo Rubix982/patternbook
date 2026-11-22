@@ -51,6 +51,6 @@ _The model-making boost: saturation k_s and contrast k_c._ (primitives: saturati
 
 **History:** Tilt and shift movements on view cameras were used in the nineteenth and twentieth centuries to control perspective in architecture, using principles described by Theodor Scheimpflug in 1904. In the early 2000s photographers such as Olivo Barbieri used them on cities seen from above, and the miniature look became a popular effect in photography and video.
 
-_Model `processes/models/lumenary/tilt-shift.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `vendor/lumenary/src/engine/styles/tilt-shift.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/tilt-shift.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/tilt-shift.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

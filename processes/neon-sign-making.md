@@ -51,6 +51,6 @@ _Flicker brightness; multiplied by 0.45 when (0.37 t) mod 1 > 0.965._ (primitive
 
 **History:** Georges Claude showed neon lighting at the Paris Motor Show in 1910, and neon signs reached the United States in the early 1920s. Their colours dominated city nights for fifty years and still say “open late” to most of us. The glow trick used here is related to the mipmap pyramid, introduced by Lance Williams in 1983.
 
-_Model `processes/models/lumenary/neon-glow.json`; as captured from his site, `processes/sources/lumenary/theory-pages/04-light.md`; code `vendor/lumenary/src/engine/styles/neon-glow.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/neon-glow.json`; as captured from his site, `processes/sources/lumenary/theory-pages/04-light.md`; code `engine/styles/neon-glow.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Paper folded into a sheet of small pyramids; each facet catches light differently and takes its colour from your picture.",
   "theory_page": "processes/sources/lumenary/theory-pages/05-physical.md",
-  "code": "vendor/lumenary/src/engine/styles/origami-folds.js",
+  "code": "engine/styles/origami-folds.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

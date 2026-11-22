@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A curved tube television: phosphor stripes, scanlines, glow and a dark bezel.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/scanlines-crt.js",
+  "code": "engine/styles/scanlines-crt.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

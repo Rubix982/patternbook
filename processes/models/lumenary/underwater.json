@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "The picture seen from below the surface: it sways with the swell, red drains away with depth, nets of light slide over everything, sun rays slant down and bubbles rise. The cursor lets out more bubbles.",
   "theory_page": "processes/sources/lumenary/theory-pages/10-motion.md",
-  "code": "vendor/lumenary/src/engine/styles/underwater.js",
+  "code": "engine/styles/underwater.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Your picture cast in liquid metal: bright parts rise, and the surface mirrors a sky and a horizon.",
   "theory_page": "processes/sources/lumenary/theory-pages/04-light.md",
-  "code": "vendor/lumenary/src/engine/styles/chrome.js",
+  "code": "engine/styles/chrome.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

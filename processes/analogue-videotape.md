@@ -51,6 +51,6 @@ _Colour bleed: each channel sampled at its own horizontal offset c._ (primitives
 
 **History:** JVC introduced VHS in Japan in 1976, and it won the format battle against Sony’s Betamax in the 1980s. Rental shops and camcorders made it the way a generation recorded birthdays, holidays and television. Each copy lost a little quality, which is why smeared colour and tracking noise now stand for nostalgia.
 
-_Model `processes/models/lumenary/retro-vhs.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `vendor/lumenary/src/engine/styles/retro-vhs.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/retro-vhs.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `engine/styles/retro-vhs.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Few colours, many dots: ordered, Floyd-Steinberg and Atkinson dithering in old-computer palettes.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/dithering.js",
+  "code": "engine/styles/dithering.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

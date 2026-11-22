@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Japanese running stitch on indigo cloth, in the hitomezashi style. Rows and columns of stitches start on or off the beat, and a lattice of squares, diamonds and crosses appears from nothing. Thread is thicker and brighter in the light.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/sashiko.js",
+  "code": "engine/styles/sashiko.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

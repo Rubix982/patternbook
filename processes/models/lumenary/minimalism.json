@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A few flat tones, soft shapes and a lot of empty paper.",
   "theory_page": "processes/sources/lumenary/theory-pages/01-design.md",
-  "code": "vendor/lumenary/src/engine/styles/minimalism.js",
+  "code": "engine/styles/minimalism.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

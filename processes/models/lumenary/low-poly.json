@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A mesh of flat-shaded triangles that gathers around the edges in your picture.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/low-poly.js",
+  "code": "engine/styles/low-poly.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

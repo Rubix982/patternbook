@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A shadow play: the dark half of the picture becomes one figure cut from hide, pierced with rows of small holes that let the lamp through, held on rods against a glowing cloth.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/shadow-puppet.js",
+  "code": "engine/styles/shadow-puppet.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

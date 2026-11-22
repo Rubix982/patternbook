@@ -51,6 +51,6 @@ _Parallax shift (minus for A, plus for B; P the parallax slider) and the shine m
 
 **History:** Lenticular imaging developed in the early twentieth century, and flip images and 3D cards became common novelties in the 1950s and 60s, found in cereal packets, on postcards and on album covers. The same principle is used in some glasses-free 3D displays.
 
-_Model `processes/models/lumenary/lenticular.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `vendor/lumenary/src/engine/styles/lenticular.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/lenticular.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/lenticular.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

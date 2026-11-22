@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "What a camera sees just beyond red: leaves glow white or pink, skies sink to black and a dreamy halo spreads from the highlights.",
   "theory_page": "processes/sources/lumenary/theory-pages/08-optical.md",
-  "code": "vendor/lumenary/src/engine/styles/infrared.js",
+  "code": "engine/styles/infrared.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

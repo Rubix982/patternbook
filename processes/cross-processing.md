@@ -51,6 +51,6 @@ _Saturation s around the luminance l, then faded blacks f._ (primitives: saturat
 
 **History:** Slide film is developed in a process called E-6 and colour negative film in C-41, and swapping them was a trick of photographers and labs for decades. It became a signature of fashion and music photography in the 1990s and was taken up by lomography fans who liked its unpredictable colour. Many phone filters imitate it.
 
-_Model `processes/models/lumenary/cross-processed.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `vendor/lumenary/src/engine/styles/cross-processed.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/cross-processed.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/cross-processed.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

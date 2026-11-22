@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "In the style of the Western Desert painters: the picture is laid down as rings of small dots following its contours, in the ochres of the country, on dark ground.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/aboriginal-dot-painting.js",
+  "code": "engine/styles/aboriginal-dot-painting.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

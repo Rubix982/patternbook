@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "A chain of turning circles, each riding on the rim of the last, traces one outline of your picture. More circles bring more of the detail.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/fourier-epicycles.js",
+  "code": "engine/styles/fourier-epicycles.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Your picture as a level from a sixteen-bit platform game: the dark parts become solid blocks, every ledge grows grass, coins hang above it and a score bar runs along the top.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/pixel-platformer.js",
+  "code": "engine/styles/pixel-platformer.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

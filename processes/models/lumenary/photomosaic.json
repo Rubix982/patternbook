@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "The picture rebuilt from hundreds of small pieces of itself. Every tile is a crop of the same photograph, picked because its colours fit the spot it has to fill; seen from a step back the pieces melt into the whole.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/photomosaic.js",
+  "code": "engine/styles/photomosaic.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

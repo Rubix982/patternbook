@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A pierced marble screen, as in the tombs and forts of the Mughals. Your picture is the view behind it, and the stone throws its shadow across the scene.",
   "theory_page": "processes/sources/lumenary/theory-pages/13-southasia.md",
-  "code": "vendor/lumenary/src/engine/styles/mughal-jali.js",
+  "code": "engine/styles/mughal-jali.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

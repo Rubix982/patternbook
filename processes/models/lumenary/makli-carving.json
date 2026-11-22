@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Relief cut into the soft stone of the Makli hills near Thatta: rosettes and lozenges raised from the ground, worn by centuries of sun, rain and salt.",
   "theory_page": "processes/sources/lumenary/theory-pages/12-sindhi.md",
-  "code": "vendor/lumenary/src/engine/styles/makli-carving.js",
+  "code": "engine/styles/makli-carving.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

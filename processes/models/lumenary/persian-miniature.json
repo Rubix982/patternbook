@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Flat jewel colour with no cast shadows, fine ink outlines, tufts of grass and a gilded frame, as in a page from an illuminated manuscript.",
   "theory_page": "processes/sources/lumenary/theory-pages/13-southasia.md",
-  "code": "vendor/lumenary/src/engine/styles/persian-miniature.js",
+  "code": "engine/styles/persian-miniature.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

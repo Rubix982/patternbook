@@ -51,6 +51,6 @@ _Light that survives k overlapping threads of opacity a, the reason overlapping 
 
 **History:** Mary Everest Boole, a mathematics teacher, introduced curve stitching with cards and thread in the 1860s to teach geometry. Nail and thread pictures became a craft in the twentieth century. In 2016 the artist Petros Vrellis published a portrait made with a single thread around a circular loom, which started a wave of programs that find the thread path.
 
-_Model `processes/models/lumenary/string-art.json`; as captured from his site, `processes/sources/lumenary/theory-pages/09-generative.md`; code `vendor/lumenary/src/engine/styles/string-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/string-art.json`; as captured from his site, `processes/sources/lumenary/theory-pages/09-generative.md`; code `engine/styles/string-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

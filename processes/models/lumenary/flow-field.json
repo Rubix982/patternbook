@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Evenly spaced streamlines that follow a drifting field. Near the edges of your picture they turn to run along it.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/flow-field.js",
+  "code": "engine/styles/flow-field.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

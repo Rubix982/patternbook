@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "Noise bends the map that tells each pixel where to look in your picture, then noise bends that map again. The picture flows like marbled ink.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/domain-warp.js",
+  "code": "engine/styles/domain-warp.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

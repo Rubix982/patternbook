@@ -259,7 +259,7 @@
   }
 
   // Two-ink risograph for vector art. Plates come from the same colour separation as press(); the ink is laid with
-  // the risograph model from Lumenary (Mursal Furqan Kumbhar, vendor/lumenary/src/engine/styles/risograph.js):
+  // the risograph model from Lumenary (Mursal Furqan Kumbhar, engine/styles/risograph.js):
   // a grain threshold mixing white and smooth noise, broad patches of thicker and thinner ink, the second plate
   // shifted (7, -4.5) px per 800 px of width at full misregistration, and a faint paper fibre. Constants are his.
   function riso(img, o) {
@@ -391,13 +391,19 @@
 
   var TREATMENTS = { press: press, riso: riso, halftone: halftone, hatch: hatch };
 
-  // "lumenary:<id>" runs one of Mursal Furqan Kumbhar's Lumenary treatments, if lumenary/lumenary.js is loaded.
+  // "style:<id>" (or "lumenary:<id>", as before) runs any style in the engine, if engine/engine.js is loaded.
   // Its own dials go in o.params; o.frames sets how long a live one runs before its frame is kept.
+  function styleOf(name) {
+    var n = String(name);
+    return n.indexOf('style:') === 0 ? n.slice(6) : n.indexOf('lumenary:') === 0 ? n.slice(9) : null;
+  }
   function apply(imageData, name, o) {
-    if (String(name).indexOf('lumenary:') === 0) {
-      if (!global.Lumenary) throw new Error('Load treatments/lumenary/lumenary.js to use ' + name);
+    var styleId = styleOf(name);
+    if (styleId) {
+      var studio = (global.PatternbookEngine && global.PatternbookEngine.studio) || global.Lumenary;
+      if (!studio) throw new Error('Load engine/engine.js to use ' + name);
       o = o || {};
-      return global.Lumenary.applyImageData(imageData, name.slice(9), o.params, { frames: o.frames });
+      return studio.applyImageData(imageData, styleId, o.params, { frames: o.frames });
     }
     if (!TREATMENTS[name]) throw new Error('Unknown treatment: ' + name);
     return TREATMENTS[name](imageData, o);
@@ -500,8 +506,8 @@
       canvas.style.height = rect.height + 'px';
       canvas.style.maxWidth = '100%';
       canvas.style.display = cs.display === 'inline' ? 'inline-block' : cs.display;
-      // Our print treatments sit on the page like ink (multiply). Lumenary's make their own whole picture.
-      var blend = o.blend || (String(name).indexOf('lumenary:') === 0 ? 'normal' : 'multiply');
+      // The print treatments here sit on the page like ink (multiply). The engine's styles make their own whole picture.
+      var blend = o.blend || (styleOf(name) ? 'normal' : 'multiply');
       if (blend !== 'normal') canvas.style.mixBlendMode = blend;
       if (el.getAttribute('class')) canvas.setAttribute('class', el.getAttribute('class'));
       canvas.setAttribute('role', 'img');

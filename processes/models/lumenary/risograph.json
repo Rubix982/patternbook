@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Two spot-colour inks printed one after the other, slightly off register, with the grainy fill of a stencil duplicator.",
   "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
-  "code": "vendor/lumenary/src/engine/styles/risograph.js",
+  "code": "engine/styles/risograph.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

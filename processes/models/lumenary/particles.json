@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "Thousands of points assemble into your image and scatter away from the cursor.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/particles.js",
+  "code": "engine/styles/particles.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

@@ -52,7 +52,7 @@ _Multiply blend of the two inks I_k on the paper; δ_k is the ink density slider
 
 **History:** The Japanese company Riso Kagaku developed the Risograph as a fast, cheap duplicator for schools and offices, and it reached the market in the 1980s. Illustrators and small presses adopted it in the 2000s for its soft colour, grain and low cost, and riso zines and prints are now a recognisable look.
 
-_Model `processes/models/lumenary/risograph.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `vendor/lumenary/src/engine/styles/risograph.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/risograph.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/risograph.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->
 

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A corrupted signal: sliced rows, split colour channels, stolen blocks and static.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/glitch.js",
+  "code": "engine/styles/glitch.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

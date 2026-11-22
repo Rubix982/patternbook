@@ -47,6 +47,6 @@ _The scanline dip: σ is the scanline slider and p the line period in pixels._ (
 
 **History:** Karl Ferdinand Braun built the first cathode-ray tube in 1897. Television sets from the 1930s used them, colour sets from the 1950s added three phosphors and a shadow mask, and CRT monitors served computers and consoles into the 2000s before flat panels replaced them. Retro games are still designed around CRT blur and scanlines.
 
-_Model `processes/models/lumenary/scanlines-crt.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `vendor/lumenary/src/engine/styles/scanlines-crt.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/scanlines-crt.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `engine/styles/scanlines-crt.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Thick oil paint laid on with a loaded brush: ridged strokes that catch the light from one side.",
   "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
-  "code": "vendor/lumenary/src/engine/styles/oil-impasto.js",
+  "code": "engine/styles/oil-impasto.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

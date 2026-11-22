@@ -15,7 +15,10 @@ The engine and data of **Lumenary** by **Mursal Furqan Kumbhar**: https://github
   `mediabunny.js`), the Vite-only `src/engine/styles/index.js`, the build and hosting config, `index.html`,
   `public/` images and sitemap, `instructions.md` and `lumenary_batch.py`. The full project is at the link above.
 - `README.md` describes the whole app, including the parts removed here.
-- Our integration lives in `../../treatments/lumenary/`. To check the theory data against the treatments:
+- **Moved, 2026-11-22:** `src/engine/` (every file unchanged) is now patternbook's `engine/`, the base its own styles and
+  process models build on, and `public/models/` is `engine/models/`; `src/data/` is in `processes/sources/lumenary/data/`.
+  The bundle, studio and catalogue that patternbook had in `treatments/lumenary/` are `engine/build.mjs`,
+  `engine/studio.js` and `engine/catalog.mjs`. To check the theory data against the treatments:
   `cd vendor/lumenary && node scripts/check-theory.mjs`.
 - **Permission:** the author told Saif on 2026-11-16 that the project is "totally open source" and free to use.
   The repository has no LICENSE file yet; if one is added, it replaces this note.

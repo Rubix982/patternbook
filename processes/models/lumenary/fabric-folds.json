@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Cloth hung in soft folds, the folds bent into the shape of your picture. Printed or plain, with a woven grain.",
   "theory_page": "processes/sources/lumenary/theory-pages/05-physical.md",
-  "code": "vendor/lumenary/src/engine/styles/fabric-folds.js",
+  "code": "engine/styles/fabric-folds.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

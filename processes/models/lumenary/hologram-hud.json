@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "A projected hologram: the picture in translucent scan lines that flicker, tear and drift, framed by brackets, dials and readouts. The reticle follows your cursor.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/hologram-hud.js",
+  "code": "engine/styles/hologram-hud.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

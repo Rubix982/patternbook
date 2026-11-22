@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "Every edge becomes a glowing tube on a dark wall.",
   "theory_page": "processes/sources/lumenary/theory-pages/04-light.md",
-  "code": "vendor/lumenary/src/engine/styles/neon-glow.js",
+  "code": "engine/styles/neon-glow.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

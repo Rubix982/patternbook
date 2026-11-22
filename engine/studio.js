@@ -1,13 +1,13 @@
-// treatments/lumenary/bridge.js
-// Our side of the Lumenary integration: a small API over Mursal Furqan Kumbhar's style modules
-// (vendor/lumenary/src/engine/styles), so patternbook pages and tools can run any of them.
+// engine/studio.js
+// The studio: a small API over every style in styles/, so pages and tools can run any of them
+// (PatternbookEngine.studio once engine.js is loaded).
 //
-//   Lumenary.list()                            every treatment: id, name, blurb, kind, section, params
-//   Lumenary.render(id, source, params)        a canvas with the treatment applied (still, or one frame of a live one)
-//   Lumenary.renderAsync(id, source, params)   the same, waiting for treatments that load a model first
-//   Lumenary.animate(id, source, params, cv)   runs a live treatment into a canvas; returns { stop, setParams }
-//   Lumenary.applyImageData(imageData, id, p)  ImageData in, ImageData of the same size out
-//   Lumenary.sample(w, h)                      Lumenary's own test still life, as a canvas
+//   studio.list()                            every style: id, name, blurb, kind, section, params
+//   studio.render(id, source, params)        a canvas with the style applied (still, or one frame of a live one)
+//   studio.renderAsync(id, source, params)   the same, waiting for styles that load a model first
+//   studio.animate(id, source, params, cv)   runs a live style into a canvas; returns { stop, setParams }
+//   studio.applyImageData(imageData, id, p)  ImageData in, ImageData of the same size out
+//   studio.sample(w, h)                      the built-in test still life, as a canvas
 //
 // `source` is any canvas, image or ImageBitmap.
 
@@ -28,7 +28,7 @@ export function bridge({ ALL, SECTIONS, slugify, fitSize, scaleCanvas, makeSampl
 
   const style = (id) => {
     const s = byId.get(id);
-    if (!s) throw new Error('Unknown Lumenary treatment: ' + id);
+    if (!s) throw new Error('Unknown style: ' + id);
     return s;
   };
   const isLive = (s) => s.kind !== 'still';
@@ -136,6 +136,6 @@ export function bridge({ ALL, SECTIONS, slugify, fitSize, scaleCanvas, makeSampl
     list, defaults, render, renderAsync, animate, applyImageData,
     sample: (w, h) => makeSample(env, w || 800, h || 1000),
     count: () => list().length,
-    credit: 'Lumenary by Mursal Furqan Kumbhar, https://github.com/mursalfk/lumenary',
+    credit: 'Sections A to N: Lumenary by Mursal Furqan Kumbhar, https://github.com/mursalfk/lumenary (see engine/NOTICE.md); P: patternbook',
   };
 }

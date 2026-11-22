@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Screen-print colour in four panels: flat inks, bold outlines and Ben-Day dots.",
   "theory_page": "processes/sources/lumenary/theory-pages/01-design.md",
-  "code": "vendor/lumenary/src/engine/styles/pop-art.js",
+  "code": "engine/styles/pop-art.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A wall of carved stone tablets in the Mexica manner: a square plate for every glyph, the spiral of the wind, the sun, the flint, the serpent, still holding a trace of pigment. Brighter parts of your picture stand higher out of the stone.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/aztec-glyphs.js",
+  "code": "engine/styles/aztec-glyphs.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

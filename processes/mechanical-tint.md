@@ -52,6 +52,6 @@ _Speed lines fill only light, flat places; the outline is drawn over everything.
 
 **History:** Modern manga took shape in the postwar years with Osamu Tezuka, whose cinematic panels and large-eyed faces set the style from 1947. Early pages were shaded by hand with ink. From the 1960s, adhesive sheets printed with dots and lines, cut to shape with a craft knife and pressed onto the page, let artists cover large areas quickly, and by the 1980s there were hundreds of patterns to choose from. Today most tone is laid digitally, but the dot patterns are the same ones.
 
-_Model `processes/models/lumenary/manga.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/manga.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/manga.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/manga.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

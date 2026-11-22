@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Pink and cyan dusk, a striped sun, a perspective grid and wide-set type.",
   "theory_page": "processes/sources/lumenary/theory-pages/01-design.md",
-  "code": "vendor/lumenary/src/engine/styles/vaporwave.js",
+  "code": "engine/styles/vaporwave.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

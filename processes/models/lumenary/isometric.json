@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A city of blocks: height follows brightness, colour follows the picture.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/isometric.js",
+  "code": "engine/styles/isometric.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

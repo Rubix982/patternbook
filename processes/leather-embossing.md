@@ -51,6 +51,6 @@ _Diffuse shading; the second bracket is the tone factor, 1.1 where the picture i
 
 **History:** Embossed and tooled leather has covered books, saddles and furniture for centuries, and gold tooling on bookbindings spread through the Islamic world and Europe from the Middle Ages. The cellular noise used for the grain was described by Steven Worley in 1996, and it is closely related to the Voronoi diagrams of the early twentieth century.
 
-_Model `processes/models/lumenary/embossed-leather.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `vendor/lumenary/src/engine/styles/embossed-leather.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/embossed-leather.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/embossed-leather.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

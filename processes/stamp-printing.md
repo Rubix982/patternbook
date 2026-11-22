@@ -52,7 +52,7 @@ _Multiply blend of ink and paper._ (primitives: multiply-blend)
 
 **History:** Seals pressed into clay or wax are thousands of years old. The rubber stamp became practical after Charles Goodyear’s vulcanisation of rubber in 1839 and was in common office use by the late nineteenth century, to date, approve and file. Today stamps are a staple of crafts, scrapbooking and printmaking.
 
-_Model `processes/models/lumenary/rubber-stamp.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `vendor/lumenary/src/engine/styles/rubber-stamp.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/rubber-stamp.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/rubber-stamp.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Adinkra (`lumenary:adinkra`, a style that rests on this process)
 
@@ -90,6 +90,6 @@ _A multiply blend with strength β = 0.7 × the tint slider, which dyes light cl
 
 **History:** Adinkra cloth was first worn at funerals, and the word is often given as meaning goodbye. Symbols are carved into pieces of calabash and stamped on cotton with a dark dye boiled from tree bark. Tradition links the name to Nana Kwadwo Agyemang Adinkra, a king of Gyaman. Symbols such as Sankofa, which says to go back and fetch what you forgot, are now used on buildings, jewellery and logos.
 
-_Model `processes/models/lumenary/adinkra.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/adinkra.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/adinkra.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/adinkra.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

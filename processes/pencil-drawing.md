@@ -51,6 +51,6 @@ _Ink coverage at the pixel; π_k is the random pressure (0.62 to 1) of its strok
 
 **History:** Hatching and cross-hatching were developed in drawing and engraving long before photography, by artists such as Albrecht Dürer, who used them to model form in prints. Graphite was found at Borrowdale in England in the 1560s, and the modern pencil followed. Today hatching is used in comics, manga, technical illustration and architectural sketches.
 
-_Model `processes/models/lumenary/pencil-hatching.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/pencil-hatching.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/pencil-hatching.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/pencil-hatching.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

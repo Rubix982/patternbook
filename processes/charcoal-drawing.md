@@ -51,6 +51,6 @@ _a is the final coverage, w the smudge dusting taken from a blurred copy of the 
 
 **History:** Charcoal is among the oldest drawing materials, used on cave walls for tens of thousands of years. Renaissance artists drew studies in red chalk, or sanguine, and Nicolas-Jacques Conté invented the conté crayon in 1795. Charcoal remains the standard material for quick figure studies, because it can be rubbed out and redrawn in a moment.
 
-_Model `processes/models/lumenary/charcoal-sketch.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/charcoal-sketch.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/charcoal-sketch.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/charcoal-sketch.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

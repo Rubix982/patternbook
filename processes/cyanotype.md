@@ -52,7 +52,7 @@ _Linear mix of paper and ink._ (primitives: mix-over)
 
 **History:** The cyanotype process, invented by Sir John Herschel in 1842, made white lines on a deep blue ground and let engineers copy drawings cheaply. Anna Atkins used it in the 1840s for her botanical books. Architects and engineers relied on blueprints from the 1870s until diazo prints and then computer drawing replaced them, and the name stuck for any detailed plan.
 
-_Model `processes/models/lumenary/blueprint.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `vendor/lumenary/src/engine/styles/blueprint.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/blueprint.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `engine/styles/blueprint.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Cyanotype (`lumenary:cyanotype`, models this process)
 
@@ -86,6 +86,6 @@ _Darkening where the liquid pooled along the edge._ (primitives: multiply-blend,
 
 **History:** Sir John Herschel invented the cyanotype in 1842. In 1843 Anna Atkins used it to publish photographic records of seaweeds, often called the first book illustrated with photographs. Engineers later copied their drawings with it, producing the original blueprints, and artists and schoolchildren still make sun prints with the same chemistry.
 
-_Model `processes/models/lumenary/cyanotype.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `vendor/lumenary/src/engine/styles/cyanotype.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/cyanotype.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/cyanotype.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

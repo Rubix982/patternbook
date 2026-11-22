@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Chalk on a school board: dusty outlines, the light areas rubbed in with the side of the stick, eraser smears across the slate and a wooden frame with a tray.",
   "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
-  "code": "vendor/lumenary/src/engine/styles/chalkboard.js",
+  "code": "engine/styles/chalkboard.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

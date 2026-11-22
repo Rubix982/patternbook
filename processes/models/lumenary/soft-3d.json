@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A toy-like render: every shape swells like soft vinyl, is lit from above, throws a small shadow on its neighbour and carries a sheen, in the pale colours of a studio set.",
   "theory_page": "processes/sources/lumenary/theory-pages/05-physical.md",
-  "code": "vendor/lumenary/src/engine/styles/soft-3d.js",
+  "code": "engine/styles/soft-3d.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

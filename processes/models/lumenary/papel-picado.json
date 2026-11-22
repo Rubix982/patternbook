@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Tissue-paper banners strung across a Mexican street, each one punched with holes. Your picture shows through the openings, which grow wider where the light is strong.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/papel-picado.js",
+  "code": "engine/styles/papel-picado.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

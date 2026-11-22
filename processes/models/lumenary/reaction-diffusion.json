@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "Two chemicals feed and kill each other while they spread. Spots, stripes and coral grow on their own, and your picture steers which one appears where.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/reaction-diffusion.js",
+  "code": "engine/styles/reaction-diffusion.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

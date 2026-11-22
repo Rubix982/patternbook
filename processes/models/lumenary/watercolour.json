@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Thin washes of pigment on rough paper: soft bleeds, darker rims where the colour dried, and a little granulation.",
   "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
-  "code": "vendor/lumenary/src/engine/styles/watercolour.js",
+  "code": "engine/styles/watercolour.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

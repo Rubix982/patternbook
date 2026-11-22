@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Video compression gone wrong: blocks of the picture keep sliding on old motion and smear into each other.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/datamosh.js",
+  "code": "engine/styles/datamosh.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

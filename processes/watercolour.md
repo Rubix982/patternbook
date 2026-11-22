@@ -51,6 +51,6 @@ _The pigment only darkens the paper beneath it, channel by channel._ (primitives
 
 **History:** Painting with water-based colour is ancient, but the English school of the eighteenth and nineteenth centuries, with artists such as Thomas Girtin and J. M. W. Turner, made it a major art of landscape. Albrecht Dürer had already painted detailed watercolour studies of plants and animals around 1500. Portable paint boxes later put watercolour in the hands of travellers and amateurs.
 
-_Model `processes/models/lumenary/watercolour.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/watercolour.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/watercolour.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/watercolour.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

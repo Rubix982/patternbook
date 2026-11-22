@@ -51,7 +51,7 @@ _Title size: c is the column width and w₁₀₀ the title’s measured width a
 
 **History:** The International Typographic Style grew in Switzerland in the 1940s and 50s through designers such as Josef Müller-Brockmann, Armin Hofmann and Emil Ruder. The typeface Helvetica appeared in 1957, and the journal Neue Grafik spread the ideas worldwide. Its principles, grid, sans-serif type and objective photography, still underpin much of modern graphic design.
 
-_Model `processes/models/lumenary/swiss-design.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `vendor/lumenary/src/engine/styles/swiss-design.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/swiss-design.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `engine/styles/swiss-design.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Comic book (`lumenary:comic-book`, a style that rests on this process)
 
@@ -85,7 +85,7 @@ _Ink: edge strength darkens toward black._ (primitives: edge-outline)
 
 **History:** Comic books took their classic form in the late 1930s, when Superman appeared in Action Comics in 1938. Their four-colour printing could not make smooth gradients, so artists and printers used flat colour and dot patterns instead. Pop artists such as Roy Lichtenstein later enlarged those dots into fine art in the early 1960s.
 
-_Model `processes/models/lumenary/comic-book.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `vendor/lumenary/src/engine/styles/comic-book.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/comic-book.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `engine/styles/comic-book.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Newspaper (`lumenary:newspaper`, a style that rests on this process)
 
@@ -119,7 +119,7 @@ _Masthead font size: the text measured at 100 px has width w₁₀₀, and is sc
 
 **History:** The first halftone photograph in a daily newspaper appeared in the New York Daily Graphic in 1880, made by Stephen Horgan. Frederic Ives patented a halftone process in 1881, and crossed-line screens soon made it routine. By the early twentieth century newspapers printed photographs every day, and the dot became so familiar that artists later made it into pop art.
 
-_Model `processes/models/lumenary/newspaper.json`; as captured from his site, `processes/sources/lumenary/theory-pages/03-type.md`; code `vendor/lumenary/src/engine/styles/newspaper.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/newspaper.json`; as captured from his site, `processes/sources/lumenary/theory-pages/03-type.md`; code `engine/styles/newspaper.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Halftone (`lumenary:halftone`, models this process)
 
@@ -153,7 +153,7 @@ _RGB to CMYK separation (channels in 0 to 1)._ (written for this model: specific
 
 **History:** Stephen Horgan printed the first halftone photograph in a daily newspaper in 1880, and Frederic Ives patented a halftone process in 1881. Four colour offset printing through the twentieth century made the dot the basis of nearly every magazine, and it is why a close look at a printed photograph shows rosettes.
 
-_Model `processes/models/lumenary/halftone.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `vendor/lumenary/src/engine/styles/halftone.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/halftone.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/halftone.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->
 

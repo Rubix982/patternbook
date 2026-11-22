@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Jianzhi: a single sheet of red paper cut with a small knife. Dark areas stay solid, midtones are cut into fine slits and crescents, and the light is cut away completely.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/chinese-paper-cut.js",
+  "code": "engine/styles/chinese-paper-cut.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

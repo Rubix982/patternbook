@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "Worn tape: colour bleed, tracking glitches, scanlines and a PLAY stamp.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/retro-vhs.js",
+  "code": "engine/styles/retro-vhs.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

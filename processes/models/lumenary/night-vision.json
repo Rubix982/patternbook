@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "An image-intensifier view: green phosphor, amplified noise, a lens mask and a HUD.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/night-vision.js",
+  "code": "engine/styles/night-vision.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

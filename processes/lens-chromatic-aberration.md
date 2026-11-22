@@ -51,6 +51,6 @@ _Full-spectrum mode: t_k = k/6; t_c = 1, ½, 0 and γ_c = 1.7, 2.3, 1.7 for red,
 
 **History:** Isaac Newton showed in 1666 that a prism splits white light into colours, and he built the first reflecting telescope in 1668 partly to avoid the coloured fringes of lenses. Chester Moore Hall and John Dollond developed achromatic lenses, which combine two glasses to cancel much of the fringing, in the eighteenth century. Today it is a flaw that photographers correct, and an effect designers add on purpose.
 
-_Model `processes/models/lumenary/chromatic-aberration.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `vendor/lumenary/src/engine/styles/chromatic-aberration.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/chromatic-aberration.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/chromatic-aberration.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

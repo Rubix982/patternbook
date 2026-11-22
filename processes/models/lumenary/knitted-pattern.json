@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A jumper knitted from your picture: rows of V-shaped stitches in a handful of yarn colours, with an optional Fair Isle border.",
   "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
-  "code": "vendor/lumenary/src/engine/styles/knitted-pattern.js",
+  "code": "engine/styles/knitted-pattern.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

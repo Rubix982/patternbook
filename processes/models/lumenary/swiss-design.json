@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "International style: a strict grid, a line-screen photograph, one red shape and bold sans type.",
   "theory_page": "processes/sources/lumenary/theory-pages/01-design.md",
-  "code": "vendor/lumenary/src/engine/styles/swiss-design.js",
+  "code": "engine/styles/swiss-design.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

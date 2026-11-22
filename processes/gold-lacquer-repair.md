@@ -55,6 +55,6 @@ _Lit gold: b is zero on the crack and on the seam’s edge and highest between, 
 
 **History:** A story, which may be a legend, says that the shogun Ashikaga Yoshimasa sent a broken tea bowl to China in the fifteenth century and it came back mended with ugly metal staples, which led Japanese craftsmen to look for a more beautiful repair. The lacquer used is urushi, and kintsugi is often linked to the idea of wabi-sabi, finding beauty in what is imperfect. Worley cells were described by Steven Worley in 1996.
 
-_Model `processes/models/lumenary/kintsugi.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/kintsugi.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/kintsugi.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/kintsugi.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

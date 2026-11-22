@@ -47,6 +47,6 @@ _Each square takes the floss in the set F nearest to the average colour of its p
 
 **History:** Counted thread embroidery has been worked for many centuries. Samplers, in which girls recorded stitches, alphabets and mottoes, were made from the sixteenth century onward, and printed charts of the nineteenth century, such as Berlin wool work, spread patterns widely. Today cross-stitch is a hobby for people who enjoy slow, careful making.
 
-_Model `processes/models/lumenary/cross-stitch.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `vendor/lumenary/src/engine/styles/cross-stitch.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/cross-stitch.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/cross-stitch.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

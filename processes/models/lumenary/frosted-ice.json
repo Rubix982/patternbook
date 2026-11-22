@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A frozen window: the picture blurs behind crystals, with one wiped patch where it shows clearly.",
   "theory_page": "processes/sources/lumenary/theory-pages/04-light.md",
-  "code": "vendor/lumenary/src/engine/styles/frosted-ice.js",
+  "code": "engine/styles/frosted-ice.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A drawing made with a pen of light on a dark page: every outline is gone over twice by an unsteady hand, shadows are hatched in, and the lines glow.",
   "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
-  "code": "vendor/lumenary/src/engine/styles/glow-sketch.js",
+  "code": "engine/styles/glow-sketch.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A die-cut vinyl sticker: the subject in flat cartoon colour, cut out with a thick white border, a soft shadow, a sweep of gloss and one corner starting to peel.",
   "theory_page": "processes/sources/lumenary/theory-pages/05-physical.md",
-  "code": "vendor/lumenary/src/engine/styles/sticker.js",
+  "code": "engine/styles/sticker.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

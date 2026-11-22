@@ -47,6 +47,6 @@ _The temperature shown for heat h between 0 and 1._ (written for this model: con
 
 **History:** William Herschel discovered infrared radiation in 1800 by placing a thermometer beyond the red end of a sunlit spectrum. Thermal imaging cameras reached industry and the military in the second half of the twentieth century, and cheaper uncooled sensors in the 1990s took them into firefighting, building inspection and wildlife work. The ironbow palette is a common choice for showing heat.
 
-_Model `processes/models/lumenary/thermal-camera.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `vendor/lumenary/src/engine/styles/thermal-camera.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/thermal-camera.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `engine/styles/thermal-camera.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

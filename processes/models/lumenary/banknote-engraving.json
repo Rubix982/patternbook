@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A portrait in engraved lines, as on a banknote: each line swells where the picture is dark, framed by guilloche rosettes.",
   "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
-  "code": "vendor/lumenary/src/engine/styles/banknote-engraving.js",
+  "code": "engine/styles/banknote-engraving.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

@@ -53,7 +53,7 @@ _Ray width at distance r from the origin: never wider than its slice Δα·r._ (
 
 **History:** The style takes its name from the 1925 Exposition internationale des arts décoratifs et industriels modernes in Paris. In the 1920s and 30s it spread through posters, cinemas, ocean liners and skyscrapers, and its stepped silhouettes and sunbursts still mark cities from New York to Mumbai. The thick and thin engraved lines used for the metal come from banknote and certificate printing, where fine line work was prized because it was hard to copy.
 
-_Model `processes/models/lumenary/art-deco.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `vendor/lumenary/src/engine/styles/art-deco.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/art-deco.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `engine/styles/art-deco.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Victorian (`lumenary:victorian`, a style that rests on this process)
 
@@ -87,7 +87,7 @@ _Cross-hatching is only drawn on dark places._ (primitives: tone-line-screen)
 
 **History:** Steel replaced copper for engraving plates in the 1820s because it lasted for far longer print runs. Steel-engraved portraits, book illustrations and banknotes were everywhere in the Victorian era (1837 to 1901), before photography and halftone printing took over. The wandering line and cross-hatching used here are the engraver’s tools for building tone from nothing but black ink.
 
-_Model `processes/models/lumenary/victorian.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `vendor/lumenary/src/engine/styles/victorian.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/victorian.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `engine/styles/victorian.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Banknote Engraving (`lumenary:banknote-engraving`, models this process)
 
@@ -121,6 +121,6 @@ _The guilloche curve (hypotrochoid), traced over eight turns of t._ (primitives:
 
 **History:** Engraved banknotes grew from the engraving of plates for books and bank bills, and the early nineteenth century saw intricate machine-turned patterns added against forgery. The first postage stamp, the Penny Black of 1840, had an engine-turned background for the same reason. Today’s banknotes still combine engraving and guilloche with newer security features. The wording in this treatment is invented, and the note is not real money.
 
-_Model `processes/models/lumenary/banknote-engraving.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `vendor/lumenary/src/engine/styles/banknote-engraving.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/banknote-engraving.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/banknote-engraving.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

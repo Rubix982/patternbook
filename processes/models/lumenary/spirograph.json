@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A small wheel rolling inside a larger ring, with a pen through one of its holes. The picture colours every line.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/spirograph.js",
+  "code": "engine/styles/spirograph.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

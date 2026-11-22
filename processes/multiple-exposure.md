@@ -52,7 +52,7 @@ _The base b (the toned photograph) with the scene inside the window, plus a scre
 
 **History:** Double exposures happened by accident in the earliest photographs and were used on purpose in the 1860s by spirit photographers who printed ghostly figures over portraits. Filmmakers such as Georges Méliès used them for early special effects. The portrait-with-a-landscape version became a design trend in the 2010s, and it was widely seen in the title sequence of the TV series True Detective in 2014.
 
-_Model `processes/models/lumenary/double-exposure.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `vendor/lumenary/src/engine/styles/double-exposure.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/double-exposure.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/double-exposure.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Chronophotograph (`lumenary:chronophotograph`, models this process)
 
@@ -87,6 +87,6 @@ _The path a still picture is swung along, so that there is motion to record._ (p
 
 **History:** Étienne-Jules Marey, a French physiologist, wanted to measure how bodies move. In 1882 he built a camera shaped like a gun that took twelve exposures a second on one rotating plate, and soon after he moved to a fixed plate with a single lens, dressing his subjects in black with white lines on the limbs so that their paths showed as lines. His pictures influenced the Futurists and Duchamp’s Nude Descending a Staircase (1912). Harold Edgerton’s flash photographs, from the 1930s, brought the method into modern science and the studio.
 
-_Model `processes/models/lumenary/chronophotograph.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `vendor/lumenary/src/engine/styles/chronophotograph.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/chronophotograph.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/chronophotograph.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

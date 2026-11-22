@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "A flock with three rules: keep apart, fly the same way, stay close. Each bird paints in the colour beneath it, so the flock slowly paints your picture.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/boids.js",
+  "code": "engine/styles/boids.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

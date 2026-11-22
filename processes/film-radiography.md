@@ -52,6 +52,6 @@ _From film base b to full density f; t is the eased value 0.35 S(v) + 0.65 v._ (
 
 **History:** Wilhelm Röntgen discovered X-rays in Würzburg in November 1895 while experimenting with a cathode-ray tube, and within weeks made the famous image of his wife Anna Bertha’s hand with her ring. He received the first Nobel Prize in Physics in 1901. Hospitals adopted the method within a year. Film gave way to digital detectors from the 1980s onward, but the convention of pale bone on a dark ground has stayed.
 
-_Model `processes/models/lumenary/x-ray.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `vendor/lumenary/src/engine/styles/x-ray.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/x-ray.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `engine/styles/x-ray.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

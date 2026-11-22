@@ -53,7 +53,7 @@ _Compositing one layer; δ is the shadow slider and c_i the colour of paper i._ 
 
 **History:** Paper cutting is a folk art in China, Poland, Mexico and many other places. In the 1940s and 1950s Henri Matisse, limited by illness, cut and arranged painted paper in large works such as The Snail, and Lotte Reiniger made silhouette animated films from cut paper in the 1920s. Layered paper shadow boxes are now a popular craft.
 
-_Model `processes/models/lumenary/paper-cut-out.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `vendor/lumenary/src/engine/styles/paper-cut-out.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/paper-cut-out.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/paper-cut-out.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Papel Picado (`lumenary:papel-picado`, models this process)
 
@@ -87,7 +87,7 @@ _The tissue is a little see-through: σ is the see-through slider._ (primitives:
 
 **History:** Paper cutting in Mexico has roots in the bark paper (amate) of the Aztecs and in tissue that crossed the Pacific on the Manila galleons from the sixteenth century. The banners are made today by stacking fifty or so sheets and tapping steel chisels through them with a mallet. Papel picado is a symbol of Día de Muertos, on the first and second of November, when it decorates altars for the dead.
 
-_Model `processes/models/lumenary/papel-picado.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/papel-picado.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/papel-picado.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/papel-picado.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Chinese Paper Cut (`lumenary:chinese-paper-cut`, models this process)
 
@@ -121,6 +121,6 @@ _Teeth: rows of triangles whose height grows with k._ (primitives: lattice-repea
 
 **History:** Paper was invented in China, and the oldest surviving paper-cuts, found in tombs at Turpan, date from about the sixth century. Windows are decorated with paper-cuts at the Spring Festival, and the character for double happiness is cut for weddings. Chinese paper-cut was added to UNESCO’s list of intangible cultural heritage in 2009.
 
-_Model `processes/models/lumenary/chinese-paper-cut.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/chinese-paper-cut.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/chinese-paper-cut.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/chinese-paper-cut.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

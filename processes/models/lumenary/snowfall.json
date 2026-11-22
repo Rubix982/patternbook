@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "Flakes drift down in three depths, the near ones large and soft, the far ones small and sharp, while a cold light settles on your picture. Move the cursor to steer the wind.",
   "theory_page": "processes/sources/lumenary/theory-pages/10-motion.md",
-  "code": "vendor/lumenary/src/engine/styles/snowfall.js",
+  "code": "engine/styles/snowfall.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

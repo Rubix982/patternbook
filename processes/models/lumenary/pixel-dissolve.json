@@ -12,7 +12,7 @@
   "kind": "live",
   "blurb": "The picture breaks into square pixels that lift away like sand in a wind, drift, and then find their way back, over and over. The cursor blows a hole in it.",
   "theory_page": "processes/sources/lumenary/theory-pages/10-motion.md",
-  "code": "vendor/lumenary/src/engine/styles/pixel-dissolve.js",
+  "code": "engine/styles/pixel-dissolve.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

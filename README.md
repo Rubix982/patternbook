@@ -48,14 +48,14 @@ read as less AI-made, and the judge also said the drawings looked filtered (C-01
 
 The top layer also includes **[Lumenary](https://github.com/mursalfk/lumenary)** by **Mursal Furqan
 Kumbhar**: 214 browser-only image treatments, each with a theory page giving the equations its code
-runs. Its engine is in `vendor/lumenary/`, and its theory with the rest of patternbook's knowledge in `processes/`
-(as received in `processes/sources/lumenary/`), used with his permission (see their
-`NOTICE.md`), and run inside our tooling through `treatments/lumenary/`. The method in `METHOD.md`
+runs. His engine is the base of patternbook's `engine/`, where patternbook's own styles and process models build on
+it, and his theory sits with the rest of patternbook's knowledge in `processes/` (as received in
+`processes/sources/lumenary/`), used with his permission (see `vendor/lumenary/NOTICE.md`). The method in `METHOD.md`
 step 2c, deriving a look from the process that made it, was learned from his theory pages.
 
 ![The Lumenary studio in patternbook, showing the risograph treatment with its dials](docs/images/lumenary-studio.jpg)
 
-*`treatments/lumenary.html`: pick any of the 214 treatments and turn its dials. This is his
+*`treatments/studio.html`: pick any style and turn its dials. This is his
 risograph on his test still life.*
 
 ![Contact sheet of Lumenary's 24 design-movement treatments on one picture](docs/images/lumenary-contact-sheet.jpg)
@@ -72,14 +72,14 @@ them didn't.*
 
 **Try them live** (GitHub Pages, served from `main`):
 
-- [Lumenary treatments](https://rubix982.github.io/patternbook/treatments/lumenary.html): all 214, with their dials.
-- [Contact sheet](https://rubix982.github.io/patternbook/treatments/lumenary.html?mode=sheet): every still treatment on one picture.
+- [Studio](https://rubix982.github.io/patternbook/treatments/studio.html): every style, with its dials.
+- [Contact sheet](https://rubix982.github.io/patternbook/treatments/studio.html?mode=sheet): every still style on one picture.
 - [Our print treatments](https://rubix982.github.io/patternbook/treatments/demo.html): `press`, `riso`, `halftone`, `hatch`.
 - [All demos](https://rubix982.github.io/patternbook/), including the C-008 and C-011 winning pages.
 
-Or clone the repo and open the same files from disk: `treatments/lumenary.html`, `treatments/demo.html`.
-- On a page: load `treatments/lumenary/lumenary.js` and `treatments/treatments.js`, then
-  `Treatments.treatAll('svg[role=img]', { treatment: 'lumenary:halftone' })`, or
+Or clone the repo and open the same files from disk: `treatments/studio.html`, `treatments/demo.html`.
+- On a page: load `engine/engine.js` and `treatments/treatments.js`, then
+  `Treatments.treatAll('svg[role=img]', { treatment: 'style:halftone' })`, or
   `{ treatment: 'press' }` for one of ours. More in `treatments/README.md`.
 
 The two subject-aware Lumenary treatments (Type Behind, Split Treatment) load a model, so from disk they
@@ -97,10 +97,10 @@ threads.md                      open questions, not yet worked on
 runs/<card>/                    test prompts, generated pages, blind keys
 processes/                      all knowledge of how looks are made: process pages (every model in full), primitives,
                                 foundations, models; Lumenary as received in processes/sources/lumenary/
-engine/                         patternbook's own primitives (code), their checks and demo pages
-treatments/                     the picture layer that applies treatments to pages, and its demos
-treatments/lumenary/            bridge to the Lumenary engine, and its catalogue
-vendor/lumenary/                Lumenary's engine (Mursal Furqan Kumbhar)
+engine/                         the engine: styles (picture in, treated picture out; Lumenary's and ours), the process
+                                models in core/, the studio API, one bundle (engine.js), checks and demo pages
+treatments/                     the picture layer that applies styles to pages, the studio page, and its demos
+vendor/lumenary/                what else was kept of Lumenary (Mursal Furqan Kumbhar): its NOTICE, README, scripts
 tools/                          measuring and blind-test scripts
 docs/images/                    pictures in this README
 sources/                        local copies of source documents (git-ignored)
@@ -167,8 +167,7 @@ Need poppler (`pdffonts`, `pdftoppm`) and ImageMagick (`magick`): `brew install 
 - `tools/blind.sh <run-dir> <a.html> <b.html>` — random order, key, opens both, prints their links.
 - `python3 -I tools/inline-treatment.py <page> <out> --treatment press` — a copy of a page with a
   treatment applied to its drawings.
-- `node treatments/lumenary/build.mjs` — rebuild the Lumenary bundle; `node treatments/lumenary/catalog.mjs` —
-  regenerate its catalogue.
+- `node engine/build.mjs` — rebuild the engine bundle; `node engine/catalog.mjs` — regenerate its style catalogue.
 - `python3 -I tools/words.py <pages>` — words outside drawings.
 - `python3 -I tools/css-profile.py <pages>` — background, text, accent hues, fonts, radii, shadows, gradients.
 

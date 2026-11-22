@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Tone built the way an illustrator does it: parallel strokes first, then a second set across them, darker passes where the shadows are deepest.",
   "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
-  "code": "vendor/lumenary/src/engine/styles/pencil-hatching.js",
+  "code": "engine/styles/pencil-hatching.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

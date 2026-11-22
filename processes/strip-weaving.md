@@ -51,6 +51,6 @@ _The cell colour: the blurred picture colour with saturation raised by 1.5, matc
 
 **History:** Tradition connects kente with Bonwire, where two hunters are said to have learned to weave by watching a spider. The cloth was long worn by Asante kings and other royalty, and each pattern and colour carries a meaning. Kente is now worn at weddings, graduations and festivals in Ghana and by people across the African diaspora. The word is said to come from kenten, the Asante word for basket.
 
-_Model `processes/models/lumenary/kente.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/kente.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/kente.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/kente.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

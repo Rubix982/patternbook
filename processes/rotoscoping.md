@@ -51,6 +51,6 @@ _The colour and the ink are read at different shifts, so they never agree exactl
 
 **History:** The rotoscope was patented in 1917 by Max Fleischer, who had filmed his brother Dave in a clown suit and traced the frames to make Koko the Clown. Disney studied live-action film for Snow White (1937). In 1978 Ralph Bakshi made The Lord of the Rings largely over live action, and in 2001 Richard Linklater’s Waking Life used a computer to paint over video, a method refined for A Scanner Darkly (2006). Because every frame is drawn again, boil comes with the method, and is now often added on purpose.
 
-_Model `processes/models/lumenary/rotoscope.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/rotoscope.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/rotoscope.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/rotoscope.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

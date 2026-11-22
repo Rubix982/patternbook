@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "The picture rebuilt from typed characters, light to heavy.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/ascii-art.js",
+  "code": "engine/styles/ascii-art.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

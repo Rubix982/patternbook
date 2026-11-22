@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A mosaic of plastic bricks: every cell is one brick colour with a round stud on top.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/lego-voxel.js",
+  "code": "engine/styles/lego-voxel.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

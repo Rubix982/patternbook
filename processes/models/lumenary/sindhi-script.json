@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Your picture written out in Sindhi, right to left. Words and letters grow and thicken where the light is strong, so the page reads as a calligraphic portrait.",
   "theory_page": "processes/sources/lumenary/theory-pages/12-sindhi.md",
-  "code": "vendor/lumenary/src/engine/styles/sindhi-script.js",
+  "code": "engine/styles/sindhi-script.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

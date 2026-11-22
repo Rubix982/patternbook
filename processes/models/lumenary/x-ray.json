@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A radiograph on a light box: tones turned over into pale blue on black, edges shining like dense bone, a mottle of grain, the shadow of the collimator and a lead marker in the corner.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/x-ray.js",
+  "code": "engine/styles/x-ray.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

@@ -52,7 +52,7 @@ _Chalk over toned paper._ (primitives: mix-over)
 
 **History:** Artists drew with dry coloured chalks as early as the fifteenth and sixteenth centuries, and pastel portraiture flourished in the eighteenth century with painters such as Rosalba Carriera and Jean-Étienne Liotard. Edgar Degas used pastel boldly in the 1870s to 1890s. Its soft, powdery finish is still prized for portraits and skies.
 
-_Model `processes/models/lumenary/pastel-chalk.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/pastel-chalk.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/pastel-chalk.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/pastel-chalk.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Chalkboard (`lumenary:chalkboard`, models this process)
 
@@ -87,6 +87,6 @@ _Outlines, broken by the tooth of the board._ (primitives: edge-outline, tooth-t
 
 **History:** James Pillans, a headmaster in Edinburgh, is credited with hanging a large slate on the classroom wall around 1801 so that a whole class could see one lesson. By the mid nineteenth century blackboards were in almost every school. Green boards of enamelled steel arrived in the twentieth century because they were lighter and easier on the eyes. School “chalk” has long been made of gypsum, not true chalk.
 
-_Model `processes/models/lumenary/chalkboard.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/chalkboard.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/chalkboard.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/chalkboard.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A closed loop that keeps adding points. Neighbours pull together, strangers push apart, and the line folds into coral. Shadows fold tighter than lights.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/differential-growth.js",
+  "code": "engine/styles/differential-growth.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

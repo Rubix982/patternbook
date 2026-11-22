@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A copper plate roughened all over so it prints velvet black, then burnished smooth wherever the picture is light.",
   "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
-  "code": "vendor/lumenary/src/engine/styles/mezzotint.js",
+  "code": "engine/styles/mezzotint.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

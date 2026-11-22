@@ -47,6 +47,6 @@ _The random rotation of each piece._ (primitives: seeded-random)
 
 **History:** The word collage comes from the French coller, to glue. Pablo Picasso and Georges Braque began pasting paper into their paintings around 1912, and Dada artists such as Hannah Höch used cut photographs to make sharp social commentary in Berlin from 1919. Kurt Schwitters built whole works out of scraps, and Henri Matisse’s late paper cut-outs gave the idea a joyful colour.
 
-_Model `processes/models/lumenary/collage-art.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `vendor/lumenary/src/engine/styles/collage-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/collage-art.json`; as captured from his site, `processes/sources/lumenary/theory-pages/01-design.md`; code `engine/styles/collage-art.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

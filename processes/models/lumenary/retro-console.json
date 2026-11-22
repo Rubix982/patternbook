@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A frame from an early 3D games console: a few hundred lines of picture, a small colour depth held together by dithering, textures that swim across wobbling polygons, and fog in the distance.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/retro-console.js",
+  "code": "engine/styles/retro-console.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

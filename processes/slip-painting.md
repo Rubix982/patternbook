@@ -54,6 +54,6 @@ _A net of cracks from a Voronoi pattern: d_1 and d_2 are the distances to the ne
 
 **History:** Black-figure pottery began in Corinth about 700 BC and was perfected in Athens, where painters drew figures in a slip that turned black in a three-stage firing and scratched details through to the clay. Around 530 BC the Andokides Painter and his circle reversed it: red-figure left the figures the colour of the clay and painted the ground, so that details could be drawn with a brush. The meander, or Greek key, is a running hook pattern and among the oldest decorations of the Greek world.
 
-_Model `processes/models/lumenary/greek-vase.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/greek-vase.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/greek-vase.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/greek-vase.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

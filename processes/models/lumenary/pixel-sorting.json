@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Streaks of pixels re-ordered by brightness, so highlights melt into long smears.",
   "theory_page": "processes/sources/lumenary/theory-pages/02-digital.md",
-  "code": "vendor/lumenary/src/engine/styles/pixel-sorting.js",
+  "code": "engine/styles/pixel-sorting.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

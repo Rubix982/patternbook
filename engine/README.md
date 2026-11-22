@@ -1,18 +1,28 @@
 # engine
 
-patternbook's own primitives, written where no Lumenary model covers an operation (`processes/primitives.md`,
-"patternbook's own primitives").
+One engine. Its base is Lumenary's engine, by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary, used with
+his permission; see `../vendor/lumenary/NOTICE.md`), its files unchanged: the styles that take a picture and render it
+(`styles/`), and the code they share (`utils.js`, `helpers.js`, `culture.js`, `registry.js`, `runtime.js`,
+`sample.js`, `toon.js`, `retro.js`, `history.js`, `subject/`, and the subject model in `models/`). patternbook builds
+on it: process models where no style covers an operation, and styles of its own in section P.
 
-- `core/`: the primitives, as ES modules with no dependencies: `random.js` (seeded randomness and noise),
-  `weave.js` (`weave-draft`, C-019), `supplementary.js` (`supplementary-weft`, C-020), `darning.js`
-  (`counted-darning`, C-021), `chain.js` (`chain-stitch`, C-022), `field.js` and `kantha.js` (`contour-rows`,
-  `quilt-ripple`, C-023), `dye.js` (`dye-baths`, C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026), `inlay.js` (`inlay-cut`, C-027), `jali.js` (`thick-screen`, C-028).
+- `styles/`: every style, picture in and treated picture out; each is `still({ id, name, blurb, params, render })`
+  (see `utils.js`). Sections A to N came from Lumenary; section P is patternbook's (`sections.js` lists them).
+- `core/`: patternbook's process models (`processes/primitives.md`, "patternbook's own primitives"), as ES modules
+  with no dependencies: `random.js` (seeded randomness and noise), `weave.js` (`weave-draft`, C-019),
+  `supplementary.js` (`supplementary-weft`, C-020), `darning.js` (`counted-darning`, C-021), `chain.js`
+  (`chain-stitch`, C-022), `field.js` and `kantha.js` (`contour-rows`, `quilt-ripple`, C-023), `dye.js` (`dye-baths`,
+  C-024), `mirror.js` (`mirror-inset`, C-025), `glaze.js` (`glaze-layer`, C-026), `inlay.js` (`inlay-cut`, C-027),
+  `jali.js` (`thick-screen`, C-028).
+- `studio.js`: the studio API over the styles (list, render, renderAsync, animate, applyImageData, sample), used by
+  `../treatments/studio.html` and by pages through `treatments.js`.
+- `engine.js`: the whole engine in one plain script that sets `window.PatternbookEngine` (`.weave`, `.kantha`, ... for
+  `core/`; `.studio` for the styles), which is what pages load (browsers won't load ES modules from a page opened from
+  disk). Rebuild it after any change: `node engine/build.mjs`. `CATALOG.md` lists every style with its dials
+  (`node engine/catalog.mjs`).
 - `check/`: each card's read-back check, run with Node (`node engine/check/weave.mjs`), the sheets
   (`node engine/check/weave-sheet.mjs runs/c019/weave-sheet.png`), and the shared read-back code (`readback.mjs`).
-- `demo/`: a page per primitive with every dial. They open straight from disk.
-- `engine.js`: `core/` bundled into one plain script that sets `window.PatternbookEngine`, which is what the demo pages
-  load (browsers won't load ES modules from a page opened from disk). Rebuild it after changing `core/`:
-  `node engine/build.mjs`.
+- `demo/`: a page per process model with every dial. They open straight from disk.
 
 ## What the checks have taught
 

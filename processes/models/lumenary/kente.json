@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Ghanaian strip weaving. Narrow bands are woven on a loom, each one a run of vertical threads broken by blocks of horizontal float, then sewn edge to edge. Colours are snapped to the traditional few.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/kente.js",
+  "code": "engine/styles/kente.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

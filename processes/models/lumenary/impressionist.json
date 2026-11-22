@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Broken colour in short, visible brushstrokes: big ones first for the light, small ones only where the picture has detail.",
   "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
-  "code": "vendor/lumenary/src/engine/styles/impressionist.js",
+  "code": "engine/styles/impressionist.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

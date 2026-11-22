@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Mithila painting from Bihar: flat natural pigments, a heavy black line around every shape, and no space left empty, so each colour is filled with its own pattern.",
   "theory_page": "processes/sources/lumenary/theory-pages/13-southasia.md",
-  "code": "vendor/lumenary/src/engine/styles/madhubani.js",
+  "code": "engine/styles/madhubani.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

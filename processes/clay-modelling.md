@@ -52,7 +52,7 @@ _Diffuse × ambient occlusion, plus the specular highlight._ (primitives: relief
 
 **History:** Modelling in clay is as old as pottery, and clay animation brought it to the screen in the twentieth century; the word Claymation was coined by Will Vinton’s studio in 1978. The shading used here goes back to Johann Lambert’s eighteenth century law of diffuse light and to Bui Tuong Phong’s 1973 highlight model, later simplified by Jim Blinn.
 
-_Model `processes/models/lumenary/clay-3d.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `vendor/lumenary/src/engine/styles/clay-3d.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/clay-3d.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/clay-3d.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Plasticine (`lumenary:plasticine`, models this process)
 
@@ -86,6 +86,6 @@ _Gloss highlight; g is the gloss slider and m the half vector between light and 
 
 **History:** Plasticine was invented by William Harbutt in Bath, England, in 1897 and sold as a non-drying modelling material for schools. It later became the favourite of stop-motion animators, notably at Aardman Animations, whose character Morph appeared on British television in the 1970s and whose Wallace and Gromit films followed in 1989.
 
-_Model `processes/models/lumenary/plasticine.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `vendor/lumenary/src/engine/styles/plasticine.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/plasticine.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/plasticine.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

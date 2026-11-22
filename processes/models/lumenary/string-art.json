@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "One long thread wound between nails. At each turn the next nail is the one whose straight run covers the darkest part still unpainted.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/string-art.js",
+  "code": "engine/styles/string-art.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

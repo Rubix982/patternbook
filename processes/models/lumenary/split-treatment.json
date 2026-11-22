@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Two treatments in one picture: the subject gets one, and everything behind it gets another. Keep the subject true to life and let the world around it turn into a print, a heat map or a comic.",
   "theory_page": null,
-  "code": "vendor/lumenary/src/engine/styles/split-treatment.js",
+  "code": "engine/styles/split-treatment.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

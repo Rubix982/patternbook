@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A magazine cover: masthead, cover lines, issue line and a barcode.",
   "theory_page": "processes/sources/lumenary/theory-pages/01-design.md",
-  "code": "vendor/lumenary/src/engine/styles/editorial.js",
+  "code": "engine/styles/editorial.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

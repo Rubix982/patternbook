@@ -28,7 +28,7 @@ All of patternbook's knowledge of how looks are made sits in this folder, and no
 - `sources/lumenary/`: Lumenary as received, unchanged and credited: his theory data (`data/`) and his theory pages as
   captured from his site (`theory-pages/`). The upstream archive; read the process pages instead.
 
-The code that runs these lives elsewhere: patternbook's primitives in `engine/`, Lumenary's engine in `vendor/lumenary/`,
+The code that runs these lives elsewhere: the engine in `engine/` (its base is Lumenary's engine; patternbook's process models are in `engine/core/`),
 the treatments that apply looks to pages in `treatments/`.
 
 ## Where models come from
@@ -37,7 +37,7 @@ Any implementation of a process is a model of it, credited to whoever made it:
 
 - **patternbook's own treatments and primitives** (`treatments/`, `engine/`). Their theory is on the process pages and
   in `primitives.md`; `treatments/theory/` keeps one-line pointers to where each note went.
-- **Lumenary** by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary). His engine is in `vendor/lumenary/`
+- **Lumenary** by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary). His engine is the base of `engine/`
   (see its `NOTICE.md`); his theory data and theory pages are in `sources/lumenary/`, as received. Each process page
   carries his models in full, credited; improvements are offered back to him.
 - **Papers and books**, cited through `references/references.md`.

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "The key pattern painted around Athenian pots. Rows of unbroken fret run across the clay, and the line is drawn thicker where your picture is darker and thinner where it is light.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/greek-meander.js",
+  "code": "engine/styles/greek-meander.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

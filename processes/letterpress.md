@@ -52,7 +52,7 @@ _Final colour: paper P toward ink I by the ink amount k; h is 0.55 on worn speck
 
 **History:** Johannes Gutenberg’s movable type press of around 1450 made letterpress the main way of printing for centuries. Offset printing replaced it in the twentieth century, but from the late 1990s designers rediscovered the deep impression on cotton stock, and it became a favourite for wedding invitations and business cards.
 
-_Model `processes/models/lumenary/letterpress.json`; as captured from his site, `processes/sources/lumenary/theory-pages/03-type.md`; code `vendor/lumenary/src/engine/styles/letterpress.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/letterpress.json`; as captured from his site, `processes/sources/lumenary/theory-pages/03-type.md`; code `engine/styles/letterpress.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->
 

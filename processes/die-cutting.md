@@ -52,6 +52,6 @@ _The peel: reflection in the fold line x + y = c._ (primitives: coordinate-warp)
 
 **History:** R. Stanton Avery built the first machine for self-adhesive labels in Los Angeles in 1935. Bumper stickers followed in the 1940s. Printed vinyl and computer-driven cutting plotters made custom shapes cheap in the 1980s, and stickers became part of skateboarding and street art. Messaging apps turned them digital around 2011, when large sticker sets joined the emoji.
 
-_Model `processes/models/lumenary/sticker.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `vendor/lumenary/src/engine/styles/sticker.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/sticker.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/sticker.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Glass and gold tesserae set into wet plaster as in the churches of Ravenna and Constantinople. The rows of tiny cubes follow the contours of the picture, and the brightest parts are set in gold leaf glass.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/byzantine-mosaic.js",
+  "code": "engine/styles/byzantine-mosaic.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

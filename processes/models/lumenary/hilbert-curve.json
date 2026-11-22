@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "One unbroken line that visits every cell of a square grid and never crosses itself. Each turn of the line takes the colour beneath it.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/hilbert-curve.js",
+  "code": "engine/styles/hilbert-curve.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

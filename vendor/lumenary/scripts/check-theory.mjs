@@ -15,10 +15,11 @@ const { EXTRA } = await loadData('theory-extra/index.js');
 const { acceptsValue } = await load('utils/presets.js');
 const { SECTIONS, slugify } = await loadData('sections.js');
 
-const stylesDir = join(src, 'engine/styles');
+// patternbook keeps src/engine/ at engine/ (2026-11-22; see ../NOTICE.md)
+const stylesDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'engine', 'styles');
 const byId = new Map();
 for (const f of readdirSync(stylesDir).filter((n) => n.endsWith('.js') && n !== 'index.js')) {
-  const def = (await load(`engine/styles/${f}`)).default;
+  const def = (await import(pathToFileURL(join(stylesDir, f)).href)).default;
   byId.set(def.id, def);
 }
 

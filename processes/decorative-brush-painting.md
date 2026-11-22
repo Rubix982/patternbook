@@ -51,6 +51,6 @@ _The directions of the n petals of a flower, starting from the top._ (primitives
 
 **History:** The painted style spread across valleys such as Telemark, Hallingdal and Gudbrandsdalen, each with its own manner, and flourished from around the middle of the eighteenth century. After a decline it was revived in Norway, and Norwegian immigrants carried it to the American Midwest, where Per Lysne and others kept it alive at places such as Vesterheim in Iowa.
 
-_Model `processes/models/lumenary/rosemaling.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/rosemaling.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/rosemaling.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/rosemaling.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

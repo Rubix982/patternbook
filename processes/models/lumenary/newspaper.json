@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A front page: masthead, headline, columns of text and your picture as a coarse halftone photograph.",
   "theory_page": "processes/sources/lumenary/theory-pages/03-type.md",
-  "code": "vendor/lumenary/src/engine/styles/newspaper.js",
+  "code": "engine/styles/newspaper.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

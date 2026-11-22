@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A sacred circle in the Buddhist and Hindu tradition: rings built outward from a centre, each with its own repeating shape, picked out in gold line. The colours of every petal come from your picture.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/mandala.js",
+  "code": "engine/styles/mandala.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

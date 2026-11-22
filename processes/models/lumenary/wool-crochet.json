@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A crocheted blanket: the picture worked in rows of chunky stitches, each a small knot of two strands with its own highlight, in a handful of wool colours and with a shell border.",
   "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
-  "code": "vendor/lumenary/src/engine/styles/wool-crochet.js",
+  "code": "engine/styles/wool-crochet.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

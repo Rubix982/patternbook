@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A three-colour spray stencil on a brick wall, with overspray, drips and a tag.",
   "theory_page": "processes/sources/lumenary/theory-pages/01-design.md",
-  "code": "vendor/lumenary/src/engine/styles/graffiti.js",
+  "code": "engine/styles/graffiti.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

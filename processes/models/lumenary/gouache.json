@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Flat, opaque, matte paint in a handful of colours, with hand-wobbled edges, thin gaps of bare paper and the drag of a wide brush.",
   "theory_page": "processes/sources/lumenary/theory-pages/07-painterly.md",
-  "code": "vendor/lumenary/src/engine/styles/gouache.js",
+  "code": "engine/styles/gouache.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

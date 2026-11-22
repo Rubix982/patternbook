@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Dutch Delftware: cobalt painted onto white tin glaze with a fine brush. The strokes follow the form, darker where the picture is darker, and the whole glaze is hair-cracked with age.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/delft-blue.js",
+  "code": "engine/styles/delft-blue.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

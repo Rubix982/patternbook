@@ -51,6 +51,6 @@ _The time warp: F_a is the frame a steps back and f the lag, from 0 to 1._ (prim
 
 **History:** The slit camera was first used to settle photo finishes at race tracks in the 1940s: film moved past a slit aimed at the finish line, so the picture showed who crossed first, with time running along the film. In 1968 Douglas Trumbull used a much larger version to make the psychedelic stargate corridor in 2001: A Space Odyssey, moving artwork past a slit while the camera shutter stayed open. The same trick is now a standard video effect, and finish-line cameras record thousands of lines a second.
 
-_Model `processes/models/lumenary/slit-scan.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `vendor/lumenary/src/engine/styles/slit-scan.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/slit-scan.json`; as captured from his site, `processes/sources/lumenary/theory-pages/08-optical.md`; code `engine/styles/slit-scan.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

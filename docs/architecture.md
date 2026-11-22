@@ -33,9 +33,11 @@ Three things it does, in this order:
   They stay as they are, and the subcontinent's work can feed it (a page built with a look is a fair test of the
   look).
 - `METHOD.md`, the card protocol (`CARD.md`), `threads.md`, the blind pick, the judge's checklist.
-- `treatments/` (ours: press, riso, halftone, hatch) and the Lumenary bridge.
-- `vendor/lumenary/`, unchanged. Lumenary is Mursal Furqan Kumbhar's work; patternbook extends it in its own folders,
-  credits it wherever its code or theory is used, and offers improvements back to him rather than changing his files.
+- `treatments/` (ours: press, riso, halftone, hatch) and the studio page.
+- `engine/`: Lumenary's engine, its files unchanged, as the base, with patternbook's own styles and process models
+  (`engine/core/`) built on it; `vendor/lumenary/` keeps the rest of what was received. Lumenary is Mursal Furqan
+  Kumbhar's work; patternbook credits it wherever its code or theory is used, and offers improvements back to him
+  rather than changing his files.
 
 ## 3. What it is not
 
@@ -324,7 +326,8 @@ studio/                     + the GitHub Pages studio: browse the catalogue, run
 references/references.md    + the one bibliography, with rights
 library/                    the pages shelf, unchanged
 treatments/                 the treatments that apply looks to pages; their theory moved into processes/ (pointers left)
-vendor/lumenary/            Lumenary's engine, unchanged
+engine/                     the engine: Lumenary's as the base (files unchanged), patternbook's styles and core/
+vendor/lumenary/            the rest of what was received from Lumenary: NOTICE, README, scripts
 runs/, tools/, sources/     unchanged (sources/ stays git-ignored)
 ```
 

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A leaf from an old manuscript: the picture drawn in iron-gall ink and hatched like an engraving, inside a red and gold border on stained vellum, with a drop capital and lines of script below.",
   "theory_page": "processes/sources/lumenary/theory-pages/06-craft.md",
-  "code": "vendor/lumenary/src/engine/styles/parchment.js",
+  "code": "engine/styles/parchment.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

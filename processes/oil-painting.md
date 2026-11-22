@@ -52,7 +52,7 @@ _Diffuse shading plus a specular glint. l is the unit light direction (l_z = 0.7
 
 **History:** Oil paint became the main medium of European painting in the fifteenth century, and Rembrandt used thick paint to make highlights rise from a flat ground. Impasto was pushed much further by Vincent van Gogh in the 1880s. The collapsible metal paint tube, patented by John Goffe Rand in 1841, let painters carry colours outdoors.
 
-_Model `processes/models/lumenary/oil-impasto.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/oil-impasto.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/oil-impasto.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/oil-impasto.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Impressionist (`lumenary:impressionist`, a style that rests on this process)
 
@@ -86,6 +86,6 @@ _Shadow colour: dark hues slide toward violet (0.72 of the colour wheel); g is t
 
 **History:** The movement is named after Claude Monet’s Impression, Sunrise, shown in 1874 at the first independent exhibition of the group in Paris. Cheap paint tubes let painters work outdoors, and the group’s short strokes of broken colour replaced the smooth finish of the academies. The layered stroke method used here was described by Aaron Hertzmann at SIGGRAPH in 1998.
 
-_Model `processes/models/lumenary/impressionist.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/impressionist.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/impressionist.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/impressionist.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

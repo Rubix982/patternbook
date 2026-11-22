@@ -54,7 +54,7 @@ _N₁ and N₂ are warped fractal noises at two scales; the fold makes a ridge w
 
 **History:** Relief is among the oldest forms of sculpture, from Egyptian tomb walls to the marble frieze of the Parthenon, carved around 440 BC. In fifteenth-century Florence Donatello developed rilievo schiacciato, “flattened relief”, in which a scene is modelled in a depth of millimetres. White marble from Carrara in Tuscany has been quarried since Roman times and was the stone of Michelangelo.
 
-_Model `processes/models/lumenary/marble-museum.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `vendor/lumenary/src/engine/styles/marble-museum.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/marble-museum.json`; as captured from his site, `processes/sources/lumenary/theory-pages/05-physical.md`; code `engine/styles/marble-museum.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Aztec Glyphs (`lumenary:aztec-glyphs`, a style that rests on this process)
 
@@ -88,7 +88,7 @@ _Occlusion: where the height H is below its own blur H̄ (a groove) the surface 
 
 **History:** The Sun Stone, often called the Aztec calendar, was found in Mexico City in 1790. The 260-day count, the tonalpohualli, combined twenty day signs with thirteen numbers. Mexica carvers decorated temples, altars and sculpture, and the glyphs are still studied by archaeologists and honoured by Nahua communities today.
 
-_Model `processes/models/lumenary/aztec-glyphs.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/aztec-glyphs.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/aztec-glyphs.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/aztec-glyphs.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Hieroglyphs (`lumenary:hieroglyphs`, a style that rests on this process)
 
@@ -122,7 +122,7 @@ _Lit as in the Aztec relief: with the light from the chosen direction and an occ
 
 **History:** The Rosetta Stone, found in 1799, carried the same decree in hieroglyphs, Demotic and Greek. Jean-François Champollion announced the decipherment in 1822. Egyptian writing was used for more than three thousand years, and the last known inscription, at Philae, dates from 394 CE.
 
-_Model `processes/models/lumenary/hieroglyphs.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/hieroglyphs.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/hieroglyphs.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/hieroglyphs.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Makli Carving (`lumenary:makli-carving`, models this process)
 
@@ -156,6 +156,6 @@ _Lighting by the slope s = −k∇H (k = 70 × depth) against the light directio
 
 **History:** Makli, near Thatta, is a UNESCO World Heritage Site, inscribed in 1981. Its tombs and mausoleums were built from the fourteenth to the eighteenth centuries under the Samma, Arghun, Tarkhan and Mughal rulers. Visitors are struck by the stone carving and by the glazed tile, and conservation work continues against the weather, salt and neglect.
 
-_Model `processes/models/lumenary/makli-carving.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `vendor/lumenary/src/engine/styles/makli-carving.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/makli-carving.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `engine/styles/makli-carving.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -48,7 +48,7 @@ _The warp showing through at the edges of a row; ω is the visible-warp slider, 
 
 **History:** Woven tapestries hung in medieval castles and cathedrals. The Gobelins manufactory in Paris was established in the seventeenth century, and the Renaissance painter Raphael designed cartoons in 1515 and 1516 for tapestries for the Sistine Chapel. In the twentieth century the Bauhaus weaving workshop, with artists such as Anni Albers, made tapestry a modern art.
 
-_Model `processes/models/lumenary/tapestry-weave.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `vendor/lumenary/src/engine/styles/tapestry-weave.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/tapestry-weave.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/tapestry-weave.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Navajo Weave (`lumenary:navajo-weave`, models this process)
 
@@ -82,6 +82,6 @@ _Yarn: two ridges of weft per cell (y_c is the position across the cell) with a 
 
 **History:** Diné tradition says that Spider Woman taught the people to weave. Regional styles are known by their wool and colour: the red grounds of Ganado, whose style was encouraged by trader John Lorenzo Hubbell, and the natural greys and browns of Two Grey Hills. Weavers still work today, and the best way to honour the tradition is to buy from Diné weavers directly.
 
-_Model `processes/models/lumenary/navajo-weave.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/navajo-weave.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/navajo-weave.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/navajo-weave.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

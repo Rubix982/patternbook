@@ -55,7 +55,7 @@ _The simplest isen-isen mark: a dot in every square of side q. The others are si
 
 **History:** Wax-resist dyeing is found in several parts of the world, but Java developed it into a refined art. The courts of Yogyakarta and Surakarta kept strict patterns, such as parang, in soga brown and indigo, while coastal towns favoured brighter colours. The copper stamp (cap) made batik quicker in the nineteenth century. UNESCO listed Indonesian batik as intangible heritage in 2009, and Indonesia marks National Batik Day on 2 October.
 
-_Model `processes/models/lumenary/batik.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/batik.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/batik.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/batik.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Ajrak (`lumenary:ajrak`, models this process)
 
@@ -89,6 +89,6 @@ _Misregistration: the block zone map Z is read twice, the second time shifted by
 
 **History:** Ajrak is the block-printed cloth of Sindh, pressed onto cotton by carved wooden blocks in stages. Many Sindhis point to the trefoil-patterned shawl on the Mohenjo-daro bust as a distant ancestor, a story told with affection and not proved. The shawl is given as a gift of honour to guests, worn on the shoulder, and worn on Sindhi Cultural Day, which is celebrated on the first Sunday of December. Printing families in Sindh and across the border in Kutch have kept the craft alive.
 
-_Model `processes/models/lumenary/ajrak.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `vendor/lumenary/src/engine/styles/ajrak.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/ajrak.json`; as captured from his site, `processes/sources/lumenary/theory-pages/12-sindhi.md`; code `engine/styles/ajrak.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "The block-printed shawl of Sindh: madder red and indigo, a lattice of eight-pointed stars, and white lines where the resist paste held the dye back.",
   "theory_page": "processes/sources/lumenary/theory-pages/12-sindhi.md",
-  "code": "vendor/lumenary/src/engine/styles/ajrak.js",
+  "code": "engine/styles/ajrak.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

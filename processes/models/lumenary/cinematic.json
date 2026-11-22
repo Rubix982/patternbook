@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A frame from a feature film: shadows pulled toward teal and skin toward orange, a soft bloom, blue streaks drawn sideways from the brightest lights, grain and black bars.",
   "theory_page": "processes/sources/lumenary/theory-pages/08-optical.md",
-  "code": "vendor/lumenary/src/engine/styles/cinematic.js",
+  "code": "engine/styles/cinematic.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

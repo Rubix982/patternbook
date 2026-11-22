@@ -52,7 +52,7 @@ _Ink coverage a at the pixel._ (primitives: tone-line-screen)
 
 **History:** Linoleum was patented by Frederick Walton in the 1860s as a floor covering. By the early 1900s printmakers, among them the German expressionists of Die Brücke, were carving it because it was softer than wood. Pablo Picasso made a famous series of colour linocuts in the 1950s, and the technique remains popular in schools and studios.
 
-_Model `processes/models/lumenary/linocut.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `vendor/lumenary/src/engine/styles/linocut.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/linocut.json`; as captured from his site, `processes/sources/lumenary/theory-pages/06-craft.md`; code `engine/styles/linocut.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Ukiyo-e (`lumenary:ukiyo-e`, a style that rests on this process)
 
@@ -90,6 +90,6 @@ _Bokashi at the top: b is the slider and n a slow noise that makes the edge of t
 
 **History:** Ukiyo-e means pictures of the floating world, the pleasure districts and theatres of Edo. Suzuki Harunobu produced the first full colour prints in 1765, and Katsushika Hokusai and Utagawa Hiroshige made landscapes famous in the early nineteenth century, including Hokusai’s Great Wave. Prussian blue, imported in the 1820s, gave the skies and seas of that period their depth. The prints reached Europe in the nineteenth century and influenced artists such as Monet and Van Gogh.
 
-_Model `processes/models/lumenary/ukiyo-e.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/ukiyo-e.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/ukiyo-e.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/ukiyo-e.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -47,6 +47,6 @@ _The side of the stud is drawn at 74% of the brick colour and the top at 107%._ 
 
 **History:** The LEGO brick in its modern interlocking form was patented in 1958 in Denmark. Mosaics from plates of single-colour studs became a hobby of their own, and LEGO later sold sets that build art from them. A voxel is a pixel with volume, and games such as Minecraft turned the idea of a world made of cubes into mainstream culture.
 
-_Model `processes/models/lumenary/lego-voxel.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `vendor/lumenary/src/engine/styles/lego-voxel.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/lego-voxel.json`; as captured from his site, `processes/sources/lumenary/theory-pages/02-digital.md`; code `engine/styles/lego-voxel.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

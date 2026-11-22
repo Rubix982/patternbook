@@ -56,4 +56,4 @@ Not captured: section N (Subject aware, 2 treatments). Its theory page throws
 
 ## Studying it
 
-`MAP.md` links each treatment's theory to its code in `vendor/lumenary/`, and ends with an exercise. To see any treatment run, open `treatments/lumenary.html`.
+`MAP.md` links each treatment's theory to its code in `engine/`, and ends with an exercise. To see any treatment run, open `treatments/studio.html`.

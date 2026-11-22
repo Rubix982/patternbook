@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "A honeycomb of tiles. Each cell takes the average colour beneath it, as flat glazed tiles, shrinking cells or tumbling blocks.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/hexagon-mosaic.js",
+  "code": "engine/styles/hexagon-mosaic.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

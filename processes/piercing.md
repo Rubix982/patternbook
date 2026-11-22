@@ -56,7 +56,7 @@ _The lit cloth; R is 62% of the frame’s diagonal._ (primitives: colour-ramp, v
 
 **History:** Shadow theatre is old across Asia. In Java and Bali, wayang kulit figures are cut from buffalo hide, pierced with fine chisels and painted, and a single puppeteer, the dalang, performs epics through the night by the light of an oil lamp; UNESCO recognised it in 2003. Chinese shadow puppetry flourished in the Song dynasty and uses translucent coloured hide. India has several leather puppet traditions, and Turkey has Karagöz.
 
-_Model `processes/models/lumenary/shadow-puppet.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `vendor/lumenary/src/engine/styles/shadow-puppet.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/shadow-puppet.json`; as captured from his site, `processes/sources/lumenary/theory-pages/11-world.md`; code `engine/styles/shadow-puppet.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Mughal Jali (`lumenary:mughal-jali`, models this process)
 
@@ -94,6 +94,6 @@ _How bright the scene is behind an opening: g is the light slider._ (written for
 
 **History:** Jali screens are found in Shah Jahan’s marble screen round the cenotaphs at the Taj Mahal and in the windows of Salim Chishti’s tomb at Fatehpur Sikri, and the tradition continued in the Rajput palaces such as the Hawa Mahal in Jaipur, built in 1799. They served as ventilation, privacy and decoration at once, and they cooled interiors by softening the sun. Modern architects have returned to the idea for facades in hot climates.
 
-_Model `processes/models/lumenary/mughal-jali.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `vendor/lumenary/src/engine/styles/mughal-jali.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/mughal-jali.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `engine/styles/mughal-jali.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Flowing script in layers: the letters grow large and overlap on the dark parts, so the ink builds the tones.",
   "theory_page": "processes/sources/lumenary/theory-pages/03-type.md",
-  "code": "vendor/lumenary/src/engine/styles/calligraphy-portrait.js",
+  "code": "engine/styles/calligraphy-portrait.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

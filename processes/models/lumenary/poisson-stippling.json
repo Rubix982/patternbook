@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Dots placed no closer than a set distance, the distance shrinking in the shadows. The result is even in texture and dense where it is dark.",
   "theory_page": "processes/sources/lumenary/theory-pages/09-generative.md",
-  "code": "vendor/lumenary/src/engine/styles/poisson-stippling.js",
+  "code": "engine/styles/poisson-stippling.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

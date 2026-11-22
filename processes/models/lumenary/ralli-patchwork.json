@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "The ralli quilt of Sindh: bright scraps cut into squares and triangles, set on the diagonal, stitched down with rows of running thread.",
   "theory_page": "processes/sources/lumenary/theory-pages/12-sindhi.md",
-  "code": "vendor/lumenary/src/engine/styles/ralli-patchwork.js",
+  "code": "engine/styles/ralli-patchwork.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

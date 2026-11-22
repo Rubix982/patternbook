@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Bogolan from Mali. Hand-woven cotton is painted with fermented river mud, which stains it black. Each shade of your picture is given its own motif, from bare cloth to dots, zigzags and crosses to solid mud.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/mudcloth.js",
+  "code": "engine/styles/mudcloth.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

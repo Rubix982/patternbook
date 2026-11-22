@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "The painted tiles of Portugal and Spain: cobalt on white glaze, one square at a time. Your picture is the wash, and a rosette is painted at every corner, so four tiles together make a whole flower.",
   "theory_page": "processes/sources/lumenary/theory-pages/11-world.md",
-  "code": "vendor/lumenary/src/engine/styles/azulejo.js",
+  "code": "engine/styles/azulejo.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {

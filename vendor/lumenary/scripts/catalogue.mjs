@@ -7,7 +7,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SECTIONS, slugify } from '../../../processes/sources/lumenary/data/sections.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const stylesDir = join(root, 'src', 'engine', 'styles');
+// patternbook keeps src/engine/ at engine/ (2026-11-22; see ../NOTICE.md)
+const stylesDir = join(root, '..', '..', 'engine', 'styles');
 const SITE = 'https://lumenary-studio.vercel.app';
 
 // One line for each treatment that is planned but not built yet. Built ones use their own `blurb`.

@@ -4,7 +4,7 @@
 //   node tools/process_models.mjs
 //
 // Reads, never writes: processes/sources/lumenary/data/ (Lumenary's theory data, kept there since 2026-11-22) and
-// vendor/lumenary/src/engine (Lumenary by Mursal Furqan Kumbhar, https://github.com/mursalfk/lumenary, used with his
+// engine/styles (the styles that came from Lumenary, by Mursal Furqan Kumbhar, https://github.com/mursalfk/lumenary, used with his
 // permission; see processes/sources/lumenary/README.md and vendor/lumenary/NOTICE.md), and processes/models/lumenary-map.tsv (patternbook's own
 // classification: which physical process each treatment models, or what it is instead).
 // Writes:
@@ -21,7 +21,6 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const src = join(root, 'vendor', 'lumenary', 'src');
 const out = process.env.PROCESSES_OUT ? resolve(process.env.PROCESSES_OUT) : join(root, 'processes');
 const imp = (p) => import(pathToFileURL(p).href);
 
@@ -30,9 +29,12 @@ const { SECTIONS, slugify } = await imp(join(data, 'sections.js'));
 const { THEORY } = await imp(join(data, 'theory.js'));
 const { EXTRA } = await imp(join(data, 'theory-extra', 'index.js'));
 const styles = {};
-for (const f of readdirSync(join(src, 'engine', 'styles')).filter((f) => f.endsWith('.js'))) {
-  const s = (await imp(join(src, 'engine', 'styles', f))).default;
-  styles[s.id] = s;
+// the styles that came from Lumenary: every style in engine/styles/ that his sections name (patternbook's own, in
+// section P, are not his and have no model here)
+const received = new Set(SECTIONS.flatMap((sec) => sec.items.map((n) => slugify(n))));
+for (const f of readdirSync(join(root, 'engine', 'styles')).filter((f) => f.endsWith('.js') && f !== 'index.js')) {
+  const s = (await imp(join(root, 'engine', 'styles', f))).default;
+  if (received.has(s.id)) styles[s.id] = s;
 }
 const notice = readFileSync(join(root, 'vendor', 'lumenary', 'NOTICE.md'), 'utf8');
 const commit = (notice.match(/commit `([0-9a-f]{40})`/) || [])[1] || null;
@@ -102,7 +104,7 @@ for (const sec of SECTIONS.filter((s) => s.enabled)) {
         kind: s.kind === 'still' ? 'still' : 'live',
         blurb: s.blurb || null,
         theory_page: THEORY_PAGE[sec.letter] ? `processes/sources/lumenary/theory-pages/${THEORY_PAGE[sec.letter]}.md` : null,
-        code: `vendor/lumenary/src/engine/styles/${s.id}.js`,
+        code: `engine/styles/${s.id}.js`,
         commit,
       },
       facts: x.facts || null,

@@ -52,7 +52,7 @@ _The gap of paper between two flat areas; g is the gaps slider in pixels and n f
 
 **History:** The word comes from the Italian guazzo. Opaque water-based paint was used in medieval manuscripts and in Indian and Persian miniature painting, and gouache became the favourite of poster artists and illustrators in the twentieth century. Henri Matisse painted sheets of paper with gouache to make his cut-outs, and mid-century concept artists such as Mary Blair used it for bold colour.
 
-_Model `processes/models/lumenary/gouache.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `vendor/lumenary/src/engine/styles/gouache.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/gouache.json`; as captured from his site, `processes/sources/lumenary/theory-pages/07-painterly.md`; code `engine/styles/gouache.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 ### Persian Miniature (`lumenary:persian-miniature`, a style that rests on this process)
 
@@ -90,6 +90,6 @@ _The frame. It is dropped when m is under 8 px._ (written for this model: layout
 
 **History:** The pigments included lapis lazuli from the mines of Badakhshan, vermilion, malachite green, turmeric yellow and burnished gold leaf. Painting for books flourished at the courts of Tabriz, Herat and Isfahan, with masters such as Kamal ud-Din Behzad in the fifteenth century, and illustrated epics such as the Shahnameh. The Mughal court developed its own school, blending Persian and Indian traditions.
 
-_Model `processes/models/lumenary/persian-miniature.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `vendor/lumenary/src/engine/styles/persian-miniature.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
+_Model `processes/models/lumenary/persian-miniature.json`; as captured from his site, `processes/sources/lumenary/theory-pages/13-southasia.md`; code `engine/styles/persian-miniature.js`. Lumenary by Mursal Furqan Kumbhar (https://github.com/mursalfk/lumenary), used with his permission; see vendor/lumenary/NOTICE.md. Converted to patternbook's model format by tools/process_models.mjs; his text and maths are unchanged._
 
 <!-- models:end -->

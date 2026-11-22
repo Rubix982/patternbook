@@ -12,7 +12,7 @@
   "kind": "still",
   "blurb": "Every tone mapped onto a blend between two colours: darks one, lights the other.",
   "theory_page": "processes/sources/lumenary/theory-pages/04-light.md",
-  "code": "vendor/lumenary/src/engine/styles/duotone.js",
+  "code": "engine/styles/duotone.js",
   "commit": "0493e555edcba40adadcff4502c573cd0bcbf5d6"
  },
  "facts": {
