@@ -1,0 +1,396 @@
+{
+ "size": 360,
+ "defaults": {
+  "link": 9,
+  "loop": 6.5,
+  "thread": 2.4,
+  "jitter": 0.08,
+  "wander": 0.2,
+  "swell": 0.08,
+  "twist": 0.35,
+  "round": 0.55,
+  "colour": "#d33a2c",
+  "side": "face",
+  "kind": "chain"
+ },
+ "results": [
+  {
+   "label": "default",
+   "path": "line",
+   "paths": 1,
+   "planned": 35,
+   "eyes": 34,
+   "cv": 0.059,
+   "continuity": 1,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 1,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "default",
+   "path": "wave",
+   "paths": 1,
+   "planned": 43,
+   "eyes": 42,
+   "cv": 0.054,
+   "continuity": 1,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 1,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "default",
+   "path": "circle",
+   "paths": 1,
+   "planned": 46,
+   "eyes": 45,
+   "cv": 0.044,
+   "continuity": 1,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 1,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "default",
+   "path": "spiral",
+   "paths": 1,
+   "planned": 68,
+   "eyes": 67,
+   "cv": 0.046,
+   "continuity": 1,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 1,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "default",
+   "path": "rings",
+   "paths": 14,
+   "planned": 869,
+   "eyes": 862,
+   "cv": 0.067,
+   "continuity": 1,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 1,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "off",
+   "path": "line",
+   "paths": 1,
+   "planned": 35,
+   "eyes": 34,
+   "cv": 0.043,
+   "continuity": 0.99,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 0.99,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "off",
+   "path": "wave",
+   "paths": 1,
+   "planned": 43,
+   "eyes": 42,
+   "cv": 0.024,
+   "continuity": 0.992,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 0.992,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "off",
+   "path": "circle",
+   "paths": 1,
+   "planned": 46,
+   "eyes": 46,
+   "cv": 0.028,
+   "continuity": 1,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 1,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "off",
+   "path": "spiral",
+   "paths": 1,
+   "planned": 68,
+   "eyes": 67,
+   "cv": 0.023,
+   "continuity": 1,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 0.995,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  },
+  {
+   "label": "off",
+   "path": "rings",
+   "paths": 14,
+   "planned": 869,
+   "eyes": 869,
+   "cv": 0.054,
+   "continuity": 1,
+   "runningEyes": 0,
+   "backEyes": 0,
+   "backContinuity": 1,
+   "checks": {
+    "eyes": true,
+    "spacing": true,
+    "continuity": true,
+    "control": true,
+    "back": true
+   },
+   "pass": true
+  }
+ ],
+ "limit": [
+  {
+   "ring": 0,
+   "tightestRadius": 80.7,
+   "radiusOverLink": 8.96,
+   "planned": 91,
+   "eyes": 90,
+   "cv": 0.067,
+   "continuity": 1
+  },
+  {
+   "ring": 1,
+   "tightestRadius": 74.6,
+   "radiusOverLink": 8.29,
+   "planned": 87,
+   "eyes": 86,
+   "cv": 0.059,
+   "continuity": 1
+  },
+  {
+   "ring": 2,
+   "tightestRadius": 68.7,
+   "radiusOverLink": 7.63,
+   "planned": 82,
+   "eyes": 81,
+   "cv": 0.058,
+   "continuity": 1
+  },
+  {
+   "ring": 3,
+   "tightestRadius": 62.8,
+   "radiusOverLink": 6.97,
+   "planned": 78,
+   "eyes": 77,
+   "cv": 0.057,
+   "continuity": 1
+  },
+  {
+   "ring": 4,
+   "tightestRadius": 56.9,
+   "radiusOverLink": 6.32,
+   "planned": 73,
+   "eyes": 72,
+   "cv": 0.055,
+   "continuity": 1
+  },
+  {
+   "ring": 5,
+   "tightestRadius": 51.1,
+   "radiusOverLink": 5.68,
+   "planned": 69,
+   "eyes": 69,
+   "cv": 0.056,
+   "continuity": 1
+  },
+  {
+   "ring": 6,
+   "tightestRadius": 45.4,
+   "radiusOverLink": 5.05,
+   "planned": 64,
+   "eyes": 63,
+   "cv": 0.056,
+   "continuity": 1
+  },
+  {
+   "ring": 7,
+   "tightestRadius": 39.8,
+   "radiusOverLink": 4.42,
+   "planned": 60,
+   "eyes": 60,
+   "cv": 0.052,
+   "continuity": 1
+  },
+  {
+   "ring": 8,
+   "tightestRadius": 34.3,
+   "radiusOverLink": 3.81,
+   "planned": 55,
+   "eyes": 55,
+   "cv": 0.047,
+   "continuity": 1
+  },
+  {
+   "ring": 9,
+   "tightestRadius": 29,
+   "radiusOverLink": 3.22,
+   "planned": 51,
+   "eyes": 51,
+   "cv": 0.049,
+   "continuity": 1
+  },
+  {
+   "ring": 10,
+   "tightestRadius": 23.8,
+   "radiusOverLink": 2.65,
+   "planned": 46,
+   "eyes": 46,
+   "cv": 0.054,
+   "continuity": 1
+  },
+  {
+   "ring": 11,
+   "tightestRadius": 18.9,
+   "radiusOverLink": 2.1,
+   "planned": 42,
+   "eyes": 42,
+   "cv": 0.056,
+   "continuity": 1
+  },
+  {
+   "ring": 12,
+   "tightestRadius": 14.2,
+   "radiusOverLink": 1.58,
+   "planned": 38,
+   "eyes": 38,
+   "cv": 0.044,
+   "continuity": 1
+  },
+  {
+   "ring": 13,
+   "tightestRadius": 9.9,
+   "radiusOverLink": 1.1,
+   "planned": 33,
+   "eyes": 33,
+   "cv": 0.051,
+   "continuity": 1
+  },
+  {
+   "ring": 14,
+   "tightestRadius": 6.1,
+   "radiusOverLink": 0.68,
+   "planned": 29,
+   "eyes": 29,
+   "cv": 0.05,
+   "continuity": 1
+  },
+  {
+   "ring": 15,
+   "tightestRadius": 3,
+   "radiusOverLink": 0.33,
+   "planned": 25,
+   "eyes": 25,
+   "cv": 0.049,
+   "continuity": 1
+  },
+  {
+   "ring": 16,
+   "tightestRadius": 0.8,
+   "radiusOverLink": 0.09,
+   "planned": 21,
+   "eyes": 20,
+   "cv": 0.254,
+   "continuity": 1
+  }
+ ],
+ "sweep": [
+  {
+   "factor": 2,
+   "passed": 5,
+   "of": 5,
+   "failed": []
+  },
+  {
+   "factor": 3,
+   "passed": 5,
+   "of": 5,
+   "failed": []
+  },
+  {
+   "factor": 4,
+   "passed": 3,
+   "of": 5,
+   "failed": [
+    "wave (spacing)",
+    "rings (spacing)"
+   ]
+  }
+ ]
+}

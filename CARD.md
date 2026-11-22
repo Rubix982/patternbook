@@ -14,6 +14,84 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-022 · Can chain stitch be laid along any path, straight or curved, so that each link's eye, the links' spacing and the chain's continuity read back, and the back shows straight stitches?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-018 found no primitive for chain stitch: the path (`streamline-trace`), one loop (`sdf-shape`) and a rounded thread
+(`cylinder-shading`) exist separately, but no line of interlocking loops. Sources describe aari as a hook worked from
+above a stretched frame with the thread fed from below, each loop pulled up through the one before, and Kashmiri
+zalakdozi as chain stitch alone, in concentric rings that fill a shape. Nothing specific was found on Kutch's mochi
+work.
+
+**2. What we are doing.**
+Write `engine/core/chain.js`: chain stitch along a path, each link a loop from one hole to the next, pinched where the
+thread goes into the cloth and rounded at the front where the next link comes up through it, with the eye of each loop
+open to the ground, over a `weave-draft` ground; its back as straight stitches end to end; and helpers for paths
+(lines, waves, circles, spirals, concentric rings). Then read the eyes, their spacing and the chain's continuity back
+from the image, against a running stitch on the same paths as the control.
+
+**3. Why.**
+We don't know whether one loop shape, repeated along a path, keeps its eyes and its continuity on tight curves, or
+whether the eye alone is enough to tell chain stitch from other line stitches in an image.
+
+**4. What is affected.**
+- `engine/core/chain.js`, its check, sheet and demo; the engine bundle.
+- `processes/primitives.md`: a `chain-stitch` entry; the gap list.
+- The atlas's aari, zalakdozi, Kutch and Sindh chain embroidery, and the chain-stitch outlines of many others.
+
+**5. Conclusion.**
+On five paths (a straight line, a wave, a circle, a spiral, concentric rings filling an ellipse), from the image alone
+at the default imperfections:
+- eyes: the number of enclosed eyes on each path within 10 % of the links planned;
+- spacing: the eyes' spacing along the path varies by at most 15 % (coefficient of variation);
+- continuity: thread present along at least 98 % of each path's length;
+- control: a running stitch on the same paths shows at most 5 % as many eyes;
+- back: the back shows at most 5 % as many eyes, and is continuous along at least 98 % of each path.
+- **If** all hold → we claim *chain stitch is covered*, on straight and curved paths and in concentric fill.
+- **If** eyes are lost or merge on the curves → the loop's shape doesn't follow curvature, and the card says where.
+- **If** the running stitch also shows eyes → the eye doesn't tell chain stitch apart, and the measure is wrong.
+
+**6. If not done.**
+Aari and zalakdozi, and every chain-stitch outline in the atlas's embroideries, stay without a primitive.
+
+**Limits (known before running):** paths are given, as a design drawn on the cloth is; tracing a design from a photo
+is a different card. Each link is drawn as a loop over the ground, not as a thread passing through it. Likeness to
+real aari or zalakdozi is a later blind pick.
+
+**Result (2026-11-22):** first branch, after a fault in the test set was found and fixed. **On a line, a wave, a
+circle, a spiral and concentric rings filling an ellipse, from the image alone at the default variation: eyes within
+3 % of the links planned on every path (862 of 869 across the rings), their spacing varying by at most 7 %, the chain
+unbroken (1.0); a running stitch on the same paths shows no eyes; the back shows no eyes and is unbroken.** It holds
+at two and three times the default hand variation; at four, the wave and the rings lose even spacing.
+
+**The fault, recorded.** The first runs failed on the rings' spacing (25 %). Per ring, the cause was the innermost
+rings: the ring helper kept shrinking the ellipse until its tightest curve had a radius of 0.8 pixels, against a link
+9 pixels long, which no chain can follow (each link is a chord) and no embroiderer would stitch. `PATHS.rings` now
+stops where the tightest curve is tighter than one link. Evening out a closed ring's stitches so the last one closes it
+(as an embroiderer does) was tried first, on the guess that the short closing link was the cause; it wasn't, and it is
+kept because it is how a ring is closed. Before the fix, the 'off' run also failed on the rings, for the same reason.
+
+**The limit, measured.** Every ring, kept or not, measured on its own: the eyes' spacing holds (variation about 5 %)
+on curves whose tightest radius is down to a third of the link length, and breaks only at a tenth (25 %). The helper's
+stopping point, one link, leaves a margin.
+
+**Claim:** chain stitch is covered, on straight and curved paths and in concentric fill; the eye tells it from a
+running stitch, and its back reads as straight stitches.
+
+**Changes made:**
+- `engine/core/chain.js` (`chained`, `stitch`, `holes`, `PATHS`); the engine bundle rebuilt with it.
+- `engine/check/chain.mjs` (with the per-ring limit), `chain-sheet.mjs`; `engine/demo/chain.html` (its script runs
+  against the bundle and paints).
+- `processes/primitives.md`: the `chain-stitch` entry, with its limit.
+- `runs/c022/check.json`, `runs/c022/chain-sheet.png`.
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-021 · Can darning stitches be laid on the ground cloth's own threads, so that their counts, their alignment to the threads and their direction all read back?
 
 **Status:** closed

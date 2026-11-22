@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chain stitch</title>
+<style>
+  :root { --bg: #f4f1ea; --ink: #1d1b17; --muted: #6b655b; --line: #d8d1c4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  p.lede { color: var(--muted); margin: 0 0 16px; max-width: 72ch; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  fieldset { border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 12px; }
+  legend { color: var(--muted); font-size: 13px; }
+  label { display: grid; grid-template-columns: 90px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+  label.wide { grid-template-columns: 90px 1fr; }
+  input[type=text], select { width: 100%; font: inherit; font-size: 13px; padding: 3px 5px; }
+  output { font-variant-numeric: tabular-nums; color: var(--muted); }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Chain stitch</h1>
+  <p class="lede">The primitive <code>chain-stitch</code> (card C-022): a line of interlocking loops along a path, each
+    link pinched where the thread goes into the cloth, open in its middle (the eye) and rounded at its front, where the
+    next link comes up through it, as an aari hook makes it from above a stretched frame. Kashmiri zalakdozi fills a
+    shape with concentric rings of it. The back shows straight stitches end to end; a running stitch on the same path
+    shows no eyes.</p>
+  <div class="wrap">
+    <canvas id="c" width="560" height="560"></canvas>
+    <form id="f">
+      <fieldset><legend>Design</legend>
+        <label class="wide">paths <select name="paths"><option value="lines">line, wave, circle, spiral</option><option value="rings">concentric rings (zalakdozi)</option><option value="vine">vine with flowers</option></select></label>
+        <label class="wide">stitch <select name="kind"><option value="chain">chain</option><option value="running">running (no eyes)</option></select></label>
+        <label class="wide">side <select name="side"><option>face</option><option>back</option></select></label>
+        <label>link <input type="range" name="link" min="4" max="18" step="0.5" value="9"><output></output></label>
+        <label>loop <input type="range" name="loop" min="3" max="12" step="0.5" value="6.5"><output></output></label>
+        <label>thread <input type="range" name="thread" min="1" max="4" step="0.1" value="2.4"><output></output></label>
+      </fieldset>
+      <fieldset><legend>Colours</legend>
+        <label class="wide">thread <input type="text" name="colour" value="#d33a2c"></label>
+        <label class="wide">ground warp <input type="text" name="warp" value="#1d2a4a"></label>
+        <label class="wide">ground weft <input type="text" name="weft" value="#22305a"></label>
+      </fieldset>
+      <fieldset><legend>The hand</legend>
+        <label>jitter <input type="range" name="jitter" min="0" max="0.6" step="0.01" value="0.08"><output></output></label>
+        <label>wander <input type="range" name="wander" min="0" max="1.5" step="0.01" value="0.2"><output></output></label>
+        <label>swell <input type="range" name="swell" min="0" max="0.6" step="0.01" value="0.08"><output></output></label>
+        <label>twist <input type="range" name="twist" min="0" max="1" step="0.01" value="0.35"><output></output></label>
+        <label>seed <input type="range" name="seed" min="1" max="99" step="1" value="3"><output></output></label>
+      </fieldset>
+    </form>
+  </div>
+</main>
+<script src="../engine.js"></script>
+<script>
+  const { paint, DEFAULTS } = PatternbookEngine.weave;
+  const { chained, PATHS } = PatternbookEngine.chain;
+  const f = document.getElementById('f'), c = document.getElementById('c'), ctx = c.getContext('2d');
+  const colours = (s, d) => { const v = s.split(/[\s,]+/).filter((x) => /^#?[0-9a-f]{6}$/i.test(x)).map((x) => (x[0] === '#' ? x : '#' + x)); return v.length ? v : d; };
+  const designs = (v) => {
+    const W = c.width;
+    if (v.paths === 'rings') return PATHS.rings(W / 2, W / 2, W * 0.42, W * 0.3, +v.loop, +v.link);
+    if (v.paths === 'vine') {
+      const out = [PATHS.wave(30, W / 2, W - 30, W * 0.12, 1.5)];
+      for (let k = 0; k < 4; k++) { const x = 90 + k * (W - 180) / 3, y = W / 2 + (k % 2 ? -1 : 1) * W * 0.24; out.push(...PATHS.rings(x, y, 38, 38, +v.loop, +v.link)); }
+      return out;
+    }
+    return [PATHS.line(30, 60, W - 30, 60), PATHS.wave(30, 200, W - 30, 40, 2), PATHS.circle(150, 400, 100), PATHS.spiral(410, 400, 20, 110, 2.2)];
+  };
+  function draw() {
+    const v = Object.fromEntries(new FormData(f));
+    for (const o of f.querySelectorAll('output')) o.value = o.previousElementSibling.value;
+    const img = chained({ ...DEFAULTS, width: c.width, height: c.height, sett: 5, paths: designs(v), kind: v.kind, side: v.side,
+      link: +v.link, loop: +v.loop, thread: +v.thread, colour: colours(v.colour, ['#d33a2c'])[0], warp: colours(v.warp, ['#1d2a4a']),
+      weft: colours(v.weft, ['#22305a']), jitter: +v.jitter, wander: +v.wander, swell: +v.swell, twist: +v.twist, seed: +v.seed });
+    paint(ctx, img);
+  }
+  f.addEventListener('input', draw);
+  draw();
+</script>
+</body>
+</html>
