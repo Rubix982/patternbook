@@ -1,0 +1,1001 @@
+{
+ "crops": {
+  "real": 120,
+  "generated": 288
+ },
+ "cv": {
+  "dinov2": {
+   "accuracy": 0.9261,
+   "folds": [
+    0.818,
+    1.0,
+    1.0,
+    0.9,
+    0.912
+   ]
+  },
+  "siglip": {
+   "accuracy": 0.923,
+   "folds": [
+    0.852,
+    0.988,
+    1.0,
+    0.925,
+    0.85
+   ]
+  }
+ },
+ "rows": [
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 1,
+   "p_left": 1.0,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 2,
+   "p_left": 1.0,
+   "p_right": 0.993,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 3,
+   "p_left": 0.002,
+   "p_right": 0.195,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 4,
+   "p_left": 0.899,
+   "p_right": 0.11,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 5,
+   "p_left": 1.0,
+   "p_right": 0.001,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 6,
+   "p_left": 0.996,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 7,
+   "p_left": 1.0,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 8,
+   "p_left": 0.957,
+   "p_right": 0.011,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 9,
+   "p_left": 1.0,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 10,
+   "p_left": 0.003,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 11,
+   "p_left": 0.999,
+   "p_right": 0.063,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-035",
+   "row": 12,
+   "p_left": 0.998,
+   "p_right": 0.012,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 1,
+   "p_left": 1.0,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 2,
+   "p_left": 0.854,
+   "p_right": 0.845,
+   "rated_more_generated": "L",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 3,
+   "p_left": 0.308,
+   "p_right": 0.365,
+   "rated_more_generated": "R",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 4,
+   "p_left": 1.0,
+   "p_right": 0.007,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 5,
+   "p_left": 0.998,
+   "p_right": 0.537,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 6,
+   "p_left": 0.965,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 7,
+   "p_left": 0.154,
+   "p_right": 0.22,
+   "rated_more_generated": "R",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 8,
+   "p_left": 0.001,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 9,
+   "p_left": 0.001,
+   "p_right": 0.999,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 10,
+   "p_left": 0.892,
+   "p_right": 0.934,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 11,
+   "p_left": 0.0,
+   "p_right": 0.998,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 12,
+   "p_left": 1.0,
+   "p_right": 0.156,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 13,
+   "p_left": 0.98,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 14,
+   "p_left": 1.0,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 15,
+   "p_left": 0.073,
+   "p_right": 0.003,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 16,
+   "p_left": 0.0,
+   "p_right": 0.988,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 17,
+   "p_left": 0.955,
+   "p_right": 0.002,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 18,
+   "p_left": 0.0,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 19,
+   "p_left": 0.1,
+   "p_right": 0.977,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 20,
+   "p_left": 0.001,
+   "p_right": 0.997,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 21,
+   "p_left": 0.0,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 22,
+   "p_left": 0.0,
+   "p_right": 0.047,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 23,
+   "p_left": 0.061,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-036",
+   "row": 24,
+   "p_left": 0.998,
+   "p_right": 0.001,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 15,
+   "p_left": 1.0,
+   "p_right": 0.003,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 16,
+   "p_left": 0.998,
+   "p_right": 0.34,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 17,
+   "p_left": 1.0,
+   "p_right": 0.001,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 18,
+   "p_left": 0.0,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 19,
+   "p_left": 0.96,
+   "p_right": 0.972,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 20,
+   "p_left": 0.999,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 21,
+   "p_left": 0.177,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 22,
+   "p_left": 1.0,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 23,
+   "p_left": 0.136,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 24,
+   "p_left": 0.0,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 25,
+   "p_left": 0.004,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "dinov2",
+   "card": "C-037",
+   "row": 26,
+   "p_left": 0.001,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 1,
+   "p_left": 1.0,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 2,
+   "p_left": 0.998,
+   "p_right": 0.998,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 3,
+   "p_left": 0.0,
+   "p_right": 0.991,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 4,
+   "p_left": 0.606,
+   "p_right": 0.216,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 5,
+   "p_left": 0.997,
+   "p_right": 0.002,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 6,
+   "p_left": 1.0,
+   "p_right": 0.045,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 7,
+   "p_left": 1.0,
+   "p_right": 0.001,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 8,
+   "p_left": 0.981,
+   "p_right": 0.986,
+   "rated_more_generated": "R",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 9,
+   "p_left": 0.998,
+   "p_right": 0.007,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 10,
+   "p_left": 0.079,
+   "p_right": 0.985,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 11,
+   "p_left": 1.0,
+   "p_right": 0.54,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-035",
+   "row": 12,
+   "p_left": 1.0,
+   "p_right": 0.01,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 1,
+   "p_left": 0.84,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 2,
+   "p_left": 0.971,
+   "p_right": 0.934,
+   "rated_more_generated": "L",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 3,
+   "p_left": 0.924,
+   "p_right": 0.529,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 4,
+   "p_left": 0.99,
+   "p_right": 0.755,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 5,
+   "p_left": 1.0,
+   "p_right": 0.803,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 6,
+   "p_left": 1.0,
+   "p_right": 0.279,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 7,
+   "p_left": 0.989,
+   "p_right": 0.907,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 8,
+   "p_left": 0.295,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 9,
+   "p_left": 0.231,
+   "p_right": 0.999,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 10,
+   "p_left": 0.788,
+   "p_right": 0.997,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 11,
+   "p_left": 0.0,
+   "p_right": 0.991,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 12,
+   "p_left": 1.0,
+   "p_right": 0.874,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 13,
+   "p_left": 0.997,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 14,
+   "p_left": 1.0,
+   "p_right": 0.007,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 15,
+   "p_left": 1.0,
+   "p_right": 0.9,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 16,
+   "p_left": 0.0,
+   "p_right": 0.999,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 17,
+   "p_left": 0.914,
+   "p_right": 0.001,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 18,
+   "p_left": 0.703,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 19,
+   "p_left": 0.307,
+   "p_right": 0.995,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 20,
+   "p_left": 0.155,
+   "p_right": 0.998,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 21,
+   "p_left": 0.001,
+   "p_right": 0.996,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 22,
+   "p_left": 0.731,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 23,
+   "p_left": 0.847,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-036",
+   "row": 24,
+   "p_left": 1.0,
+   "p_right": 0.999,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 15,
+   "p_left": 0.996,
+   "p_right": 0.38,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 16,
+   "p_left": 0.999,
+   "p_right": 0.584,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "R"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 17,
+   "p_left": 1.0,
+   "p_right": 0.003,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 18,
+   "p_left": 0.056,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 19,
+   "p_left": 0.287,
+   "p_right": 0.898,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 20,
+   "p_left": 0.955,
+   "p_right": 0.0,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 21,
+   "p_left": 0.258,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 22,
+   "p_left": 1.0,
+   "p_right": 0.546,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 23,
+   "p_left": 1.0,
+   "p_right": 0.689,
+   "rated_more_generated": "L",
+   "generated": "L",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 24,
+   "p_left": 0.0,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 25,
+   "p_left": 0.0,
+   "p_right": 0.997,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  },
+  {
+   "model": "siglip",
+   "card": "C-037",
+   "row": 26,
+   "p_left": 0.974,
+   "p_right": 1.0,
+   "rated_more_generated": "R",
+   "generated": "R",
+   "writer_picked": "L"
+  }
+ ],
+ "dinov2": {
+  "rows": 48,
+  "rates_generated_higher": 45,
+  "agrees_with_writer": 17
+ },
+ "siglip": {
+  "rows": 48,
+  "rates_generated_higher": 46,
+  "agrees_with_writer": 18
+ },
+ "writer_right": 16
+}

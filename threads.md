@@ -458,6 +458,8 @@ the real screen for the generated one in most rows (T-046).
 ### T-046 · How should realism be judged, once one judge's cue runs backwards?
 
 **Status:** open
+**Note (C-043):** a linear model on DINOv2 or SigLIP features is a second judge that tells them apart (45 to 46 of the
+writer's 48 rows); it needs T-054 before its cue can be called the design's.
 **Parent:** C-037
 **Opened:** 2026-11-22
 **Question:** Over C-035 to C-037 the writer picked the generated jali in 19 of 62 rows (about 1 in 600 by chance),
@@ -531,7 +533,9 @@ call.
 **Opened:** 2026-11-22
 **Question:** Sixth of six. DINOv2 or SigLIP features (Apache-2.0) with a small real-against-generated test on top: if it
 can tell them apart, which crops does it find easiest, and does that match the writer's reversed picks?
-**Answer:** —
+**Answer:** C-043: yes, 0.926 (DINOv2) and 0.923 (SigLIP) grouped by screen; on the writer's 48 rows it rates the
+generated one higher in 45 and 46, where the writer picked it in 16. Its cue may be the photograph rather than the design
+(T-054).
 
 ### T-053 · Does BiRefNet, run in tiles at the photo's own resolution, read fine lattices as well as brightness does?
 
@@ -544,4 +548,15 @@ serves all 19 screens, and the two left out rejoin), and what do the Met screens
 **Answer:** C-040: 11 of 17 again (fine lattices up, some clean panels down); by eye the tiled masks look as right as
 brightness's on the fine lattices, but brightness is the only reference, so which is wrong where they differ is open
 (T-038: a reference that is neither is needed). Bars about 0.85 on both.
+
+### T-054 · Does a feature model still tell generated jalis from real ones once both have been through a camera?
+
+**Status:** open
+**Parent:** C-043
+**Opened:** 2026-11-23
+**Question:** C-043's models tell masks of the generator's designs from masks of photographed jalis at 0.92 to 0.93, but
+the photographed ones carry the camera and the generated ones don't. Render generated designs as carved slabs in light
+(the 3D step), photograph them as a museum would, read them with C-031's reader, and probe again: if the accuracy falls
+to chance, the models were seeing the camera; if it stays, they see the design.
+**Answer:** —
 

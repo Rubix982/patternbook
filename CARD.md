@@ -16,7 +16,7 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ## C-043 · Can image features tell the generator's jalis from real ones, and is their cue the writer's?
 
-**Status:** open
+**Status:** closed
 **Opened:** 2026-11-23
 
 **1. Where we are.**
@@ -52,6 +52,31 @@ Realism stays judged by one person whose cue runs backwards.
 
 **Limits (known before running):** 15 real screens, so the model may learn which screens rather than what makes one
 real (the grouped folds are against that); masks only, no stone or light; a linear model on general-purpose features.
+
+**How it ran.** 120 real crops from 15 screens and 288 generated from 36 designs; both models on the Mac's GPU, the whole
+run about seven minutes. SigLIP's combined processor loads a text tokenizer that needs a library not installed; only its
+image processor is used.
+
+**Result (2026-11-23): image features tell the generator's jalis from real ones. Grouped five-fold accuracy 0.926
+(DINOv2) and 0.923 (SigLIP), 0.75 needed. On the 48 rows the writer saw, a model trained without each row's two
+screens rated the truly generated image the more generated in 45 (DINOv2) and 46 (SigLIP); the writer picked it in 16,
+and the models agreed with the writer's pick in only 17 and 18.** (`runs/c043/result.json`)
+
+**What it changes.** C-035 to C-037 found that the writer can't tell the generator's patterns from real ones and leans
+the wrong way; this card finds that a model can, nearly every time, on the very images the writer saw. So the earlier
+picks say nothing about the designs looking real, and the writer's cue and the models' run opposite ways. What the
+models see isn't settled here: a mask made from a photograph carries the camera (perspective, lens, how carved stone
+records) and a mask drawn by the generator doesn't, and grouped folds keep the models from learning particular screens
+but not from learning that difference (T-054).
+
+**Claim:** shown the same black-and-white masks, a linear model on DINOv2 or SigLIP features tells the generator's
+jalis from real ones at 0.92 to 0.93 (grouped by screen), and picks the generated one in 45 to 46 of the 48 rows the
+writer picked 16 of; whether its cue is the design or the photograph is the next question.
+
+**Changes made:** `tools/jali_probe.py`; `requirements-models.txt` (scikit-learn); `runs/c043/result.json` (the crops
+stay local); `threads.md` (T-052 answered, T-046 noted, T-054).
+
+**Closed:** 2026-11-23
 
 ---
 
