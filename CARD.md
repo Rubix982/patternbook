@@ -14,6 +14,81 @@ Closes with a number, or a sentence that could have come out the other way.
 
 ---
 
+## C-034 · What is a jali's composition beyond its pattern, and do a few layouts cover most real screens?
+
+**Status:** closed
+**Opened:** 2026-11-22
+
+**1. Where we are.**
+C-032's designs are one repeat clipped by a frame, and C-033 gave them a measured hand; next to a real screen they still
+lack its composition: the Met's red sandstone jali has a border band of diamonds, a moulded arch, spandrels and rosettes
+among smaller stars (`runs/c033/look/sheet.jpg`). The generator has no layer for any of that.
+
+**2. What we are doing.**
+Read the composition of C-031's 19 jalis (the 17 measured and the 2 whose masks failed, since composition is read from
+the photo, not the mask) into `pieces/jali/composition.tsv`: by eye, each with its reason, the border (none, plain,
+patterned with a band of its own), the field's outline (rectangle, pointed, cusped or multifoil arch), an arch moulding
+(a band following the arch), the spandrels (plain, carved, pierced), the field's layout (one repeat, two or more panels,
+a central medallion, rosettes at more than one size), how the pattern meets its frame (cut, or fitted with whole units),
+and whether the whole is mirror-symmetric about its vertical axis; and by code, from the masks where they exist, the
+border's width over the field's width and an arch's rise over its width.
+
+**3. Why.**
+We don't know whether real jalis share a few layouts that a grammar can name, or whether each is composed freely, and
+the generator's next layer depends on which.
+
+**4. What is affected.**
+- `pieces/jali/composition.tsv`, `tools/screen_compose.py`, `runs/c034/`; `pieces/jali/grammar.md` (the composition
+  layer, its types and proportions); T-039 (the centred rosette), T-041.
+- The next card: the generator's assembly layer, built from what this one finds.
+
+**5. Conclusion.**
+- **If** at most four layouts (a layout: border, outline, moulding, spandrels and field together) cover at least 15 of
+  the 19 → the grammar's composition layer is those layouts, with their measured proportions, and the next card draws
+  them.
+- **If** they don't → real jalis are composed more freely than a few named layouts allow; the composition layer is a
+  set of rules for splitting a frame (a shape grammar: border, field, panels, medallion), and the next card writes those
+  rules instead.
+- Either way, the border's width and the arch's rise give the layer its ranges.
+
+**6. If not done.**
+Generated screens stay one pattern in a box, the largest difference the writer sees from real ones.
+
+**Limits (known before running):** the reading is by eye, by the agent, with a reason for each row; 13 of the 19 are
+one group of 19th-century V&A panels from Agra, which may share a workshop's habits; most are panels made to be seen
+alone, not screens still in a building.
+
+**Result (2026-11-22): four layouts cover 15 of the 19, exactly the bar, so the composition layer is those four; the
+result is fragile, since one row read the other way would move it to 14 or 16.** (`pieces/jali/composition.tsv`,
+`runs/c034/proportions.json`.)
+
+| Layout | What it is | Jalis | Margin over the slab's width | Arch |
+|---|---|---|---|---|
+| A | plain wide border, rectangle, one repeat cut by the frame | 5 | 0.13 to 0.15 (one skewed photo 0.07) | |
+| B | plain border, pointed arch with a finial and a band following it, spandrels carved in relief, one repeat | 7 | 0.145 to 0.167 at the sides and bottom, 0.23 to 0.30 at the top | rises 0.39 to 0.44 of its width above where it narrows to 95 % |
+| C | a pierced band of small motifs between plain margins, a moulded pointed arch, pierced spandrels, rosettes at more than one size | 2 | 0.04 to 0.08 outside the band | |
+| D | a band of small motifs round a rectangle, one fine repeat | 1 | 0.02 outside the band | |
+| own | a centred sixteen-point medallion; a mirrored floral arabesque; a tree under a cusped arch; a repeat with a small door cut in it | 4 | | |
+
+Every one of the 19 is mirror-symmetric about its vertical axis. 14 cut their repeat at the frame; 5 fit whole units or
+are composed on the centre.
+
+**What it changes.** The generator's arch is too tall: its radius, 0.85 of the field's width, rises 0.57 by the same
+measure, and real B arches need a radius of about 0.55 to 0.63. Layout B is 6 of one V&A series and one Gujarat screen,
+so its proportions may be a workshop's. The four screens of their own are the composed kind (a medallion, an arabesque,
+a tree): the shape-grammar branch is still needed for them, later (T-033, T-039).
+
+**Claim:** of 19 museum jalis, 15 follow four layouts (a plain rectangle; a moulded pointed arch with carved spandrels;
+a pierced border with pierced spandrels; a patterned band round a rectangle), with plain borders of 0.13 to 0.17 of the
+slab's width round the first two; the other 4 are composed on their centre and follow no layout.
+
+**Changes made:** `pieces/jali/composition.tsv`; `tools/screen_compose.py`; `runs/c034/proportions.json`;
+`pieces/jali/grammar.md` (the composition layer).
+
+**Closed:** 2026-11-22
+
+---
+
 ## C-033 · How irregular are real jalis, and can the generator's carving errors be set from them?
 
 **Status:** closed

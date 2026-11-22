@@ -62,3 +62,19 @@ photographs. Sketches (`runs/c032/hand-sketch/`, amplitudes guessed) put what is
 3. **The hand.** Drift, jitter, uneven bars, the chisel's radius and wear are dials. C-033 measured jitter and drift on
    real jalis and made them the defaults (0.048 and 0.16 lattice steps); the other three can't be read back from these
    photographs. A first guess at the chisel's radius, 0.6 of a bar, had rounded the eight-point stars into blobs.
+
+## Composition (C-034)
+
+A real screen is composed round its pattern. Four layouts cover 15 of C-031's 19 jalis (`composition.tsv`):
+
+| Layout | Border | Outline | Moulding | Spandrels | Field |
+|---|---|---|---|---|---|
+| A (5) | plain, 0.13 to 0.15 of the slab's width | rectangle | | | one repeat, cut at the frame |
+| B (7) | plain, 0.145 to 0.167; the top 0.23 to 0.30 | pointed arch with a finial, rising 0.39 to 0.44 of its width above where it narrows to 95 % (a radius of about 0.55 to 0.63 of the width) | a band following the arch | carved in relief | one repeat |
+| C (2) | a pierced band of small motifs between plain margins (0.04 to 0.08) | pointed arch | raised | pierced | rosettes at more than one size |
+| D (1) | a band of small motifs, a plain edge of 0.02 | rectangle | | | one fine repeat |
+
+All 19 are mirror-symmetric about the vertical axis. The four that follow no layout are composed on their centre: a
+medallion, an arabesque, a tree, a repeat with a door. The generator's frames (`rect`, `pointed`, `cusped`) have none of
+the border band, moulding, finial or spandrels yet, and its pointed arch (radius 0.85 of the width) is taller than any
+measured one.

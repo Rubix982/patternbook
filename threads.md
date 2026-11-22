@@ -405,7 +405,8 @@ doesn't calibrate on hexagons; those three wait on a photo reader that can see c
 **Question:** The real screens are composed: a border band with its own small pattern, a moulded arch, spandrels,
 rosettes at more than one size, a centred medallion (T-039). Describe and measure the composition on C-031's samples
 (how wide the border, what fills it, how the field's pattern meets the frame) as the assembly layer of the grammar.
-**Answer:** —
+**Answer:** C-034: four layouts cover 15 of 19 (exactly the bar, so fragile); proportions in `pieces/jali/grammar.md`.
+Drawing them is the next card.
 
 ### T-042 · Can the cut hit open share and bar over opening together?
 
