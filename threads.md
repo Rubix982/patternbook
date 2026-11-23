@@ -491,7 +491,8 @@ structures): masks for the two jalis C-031 left out (white marble on grey, a tre
 C-031's synthetic screens; and whether bar width's spread (C-033) can then be read back.
 **Answer:** C-039: SAM 2.1 with a box prompt doesn't find the screen (0 of 17). BiRefNet (ONNX) reads the marble and the
 deep-relief screens brightness lost, but at 1024 px thickens fine bars (agreement 11 of 17); bars split (0.295, 0.717).
-SAM 3 is gated and wasn't tried.
+SAM 3 is gated and wasn't tried. 2026-11-23: the writer has asked Meta for access; once granted, SAM 3 runs on C-040's 17
+screens against the same agreement test.
 
 ### T-049 · Can an intrinsic split take the shading out of a jali photo?
 
@@ -512,7 +513,8 @@ keep bars whole where a mask from brightness breaks them, and does the albedo gi
 means uploading the photo: asked first), Hunyuan3D-2 (a custom licence with territory limits). On public-domain photos:
 does the model come back with openings cut through, at a measured depth, or does it fill them?
 **Answer:** C-042, TripoSR: fills them (overlap at most 0.007) and builds a block 8 to 12 times a jali's depth. TRELLIS.2
-and Hunyuan3D not tried (an NVIDIA GPU, or uploading photos to a hosted demo, which waits on the writer's yes).
+and Hunyuan3D not tried (an NVIDIA GPU, or uploading photos to a hosted demo, which waits on the writer's yes). 2026-11-23: no
+NVIDIA GPU is coming for a long time, so a hosted demo is the only route to either.
 
 ### T-051 · Can StarVector read a jali's mask back into lines a grammar could fit?
 
@@ -524,7 +526,7 @@ real ones, how close are the lines it returns to the pattern's, and could a tili
 **Answer:** — Parked: its model code (read: harmless) imports a `starvector` package whose pyproject pins torch 2.5.1,
 transformers 4.49 and flash_attn 2.7.3 (NVIDIA only), none of which install on this machine's Python 3.13 stack. Trying
 it needs a separate environment on Python 3.12 with flash attention patched out, or an NVIDIA machine; the writer's
-call.
+call. 2026-11-23: no NVIDIA machine is coming, so the separate Python 3.12 environment is the only route.
 
 ### T-052 · Can image features tell generated jalis from real ones, and on what?
 
